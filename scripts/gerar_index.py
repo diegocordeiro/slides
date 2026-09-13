@@ -395,13 +395,12 @@ def gerar_html(aulas: list, gerado_em: datetime | None = None) -> str:
         '<meta charset="UTF-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
         '<meta name="color-scheme" content="light">\n'
-        "<title>Slides das aulas · IFPI Campus Barras</title>\n"
+        "<title>Slides das aulas</title>\n"
         "<style>" + ESTILO + "</style>\n"
         "</head>\n"
         "<body>\n"
         '<header class="topo">\n'
         '  <div class="wrap">\n'
-        '    <span class="rot">IFPI · Campus Barras</span>\n'
         "    <h1>Slides das aulas</h1>\n"
         '    <div class="linhas">\n'
         "      <p>Material pedagógico produzido por: <strong>Professor Diego Cordeiro de Oliveira</strong></p>\n"
