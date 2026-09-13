@@ -59,6 +59,68 @@ body {
 
 .topo p { margin-top: 10px; max-width: 62ch; color: #E4F0E9 }
 
+.topo .linhas {
+    margin-top: 14px;
+    display: grid;
+    gap: 2px;
+    max-width: 70ch;
+    color: #E4F0E9
+}
+
+.topo .linhas strong { color: #FFF }
+
+.topo .linhas a { color: #FFF; font-weight: 700 }
+
+.aviso {
+    margin: clamp(20px, 3vw, 30px) 0 0;
+    background: var(--papel);
+    border: 1px solid var(--linha);
+    border-left: 6px solid var(--ve);
+    border-radius: 0 12px 12px 0;
+    padding: 16px clamp(16px, 2vw, 22px)
+}
+
+.aviso h2 {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: 1rem;
+    color: var(--vee);
+    margin-bottom: 10px
+}
+
+.aviso ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 5px 26px
+}
+
+.aviso li {
+    position: relative;
+    padding-left: 16px;
+    font-size: .9rem;
+    color: var(--tinta-2)
+}
+
+.aviso li::before {
+    content: '•';
+    position: absolute;
+    left: 2px;
+    color: var(--ve);
+    font-weight: 700
+}
+
+.aviso kbd {
+    font-family: inherit;
+    font-size: .86em;
+    font-weight: 700;
+    color: var(--vee);
+    background: var(--ves);
+    border: 1px solid var(--linha);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+    padding: 0 5px
+}
+
 .bloco { margin: clamp(24px, 4vw, 40px) 0 }
 
 .bloco > h2 {
@@ -146,10 +208,27 @@ body {
   <div class="wrap">
     <span class="rot">IFPI · Campus Barras</span>
     <h1>Slides das aulas</h1>
-    <p>Materiais de <strong>Informática Aplicada</strong> do Técnico em Meio Ambiente. Clique em uma aula para abrir a apresentação — depois use o botão <strong>Apresentação</strong> (janela dedicada) ou a tecla <strong>F</strong> para tela cheia.</p>
+    <div class="linhas">
+      <p>Material pedagógico produzido por: <strong>Professor Diego Cordeiro de Oliveira</strong></p>
+      <p>Plataforma de estudos: <a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a></p>
+    </div>
   </div>
 </header>
 <main class="wrap">
+  <section class="aviso">
+    <h2>Instruções de uso</h2>
+    <ul>
+      <li>Clique no cartão de uma aula para abrir a apresentação.</li>
+      <li>Para projetar: use <strong>Apresentação</strong> (abre em janela dedicada — libere os pop-ups se o navegador bloquear) ou tecle <kbd>F</kbd> para tela cheia.</li>
+      <li>Avançar e voltar: <kbd>→</kbd> <kbd>←</kbd>, <kbd>PageDown</kbd>/<kbd>PageUp</kbd> ou <kbd>Espaço</kbd>; <kbd>Home</kbd> volta ao primeiro slide e <kbd>End</kbd> vai ao último.</li>
+      <li>Ir direto a um slide: clique nos números (bolinhas) ou nas setas laterais.</li>
+      <li>Tamanho do texto: <strong>A−</strong> e <strong>A+</strong> (de 80% a 180%).</li>
+      <li>Tema da tela: <strong>◉ Projetor</strong> (mais contraste, para sala) e <strong>◐ Leitura</strong> (tela do computador).</li>
+      <li>Passagem automática: <kbd>P</kbd> ou o botão <strong>▶</strong> (troca de slide a cada 4 segundos).</li>
+      <li>Fotos com a lupa 🔍: clique para ver a imagem inteira; <kbd>Esc</kbd> ou um clique fora fecha.</li>
+      <li>No celular ou tablet, deslize o dedo para o lado para trocar de slide.</li>
+    </ul>
+  </section>
   <section class="bloco">
     <h2>Meio Ambiente · Informática Aplicada</h2>
     <div class="grade">
