@@ -45,6 +45,42 @@ python3 -m http.server 8000           # abre http://localhost:8000
 Os slides também podem ser abertos direto no navegador (duplo clique no `.html`), mas o
 servidor local é mais fiel ao que é publicado.
 
+## Automação com `make`
+
+O `Makefile` da raiz automatiza todo o ciclo. **Nenhum alvo conhece nomes de aulas** — a
+descoberta é feita pelo `scripts/gerar_index.py`, então pastas e **disciplinas novas entram
+automaticamente** em todos os comandos.
+
+| Comando | O que faz |
+|---|---|
+| `make` | mostra a ajuda com os alvos disponíveis |
+| `make listar` | lista as aulas detectadas, agrupadas por área/disciplina |
+| `make index` | regenera o `index.html` (rodapé sem data, para não criar diff à toa) |
+| `make checar` | valida as referências de **todas** as aulas: arquivo faltando, maiúscula/minúscula diferente, caminho absoluto — e se o índice cita todas elas |
+| `make servir` | gera o índice e serve em <http://localhost:8000> (`make servir PORTA=9000` muda a porta) |
+| `make publicar` | `index` → `checar` → commit (só se houver mudança) → push · `MSG="Aula 03"` personaliza a mensagem |
+| `make acompanhar` | acompanha o deploy no GitHub Actions até terminar |
+| `make site` | abre a URL publicada no navegador |
+| `make status` | branch atual, pendências locais e último deploy |
+| `make limpar` | remove `_site/`, `scripts/__pycache__/` e arquivos `.DS_Store` |
+
+### Receita: publicar uma aula nova
+
+```bash
+# 1. crie a pasta e o arquivo:
+#    meio_ambiente/informatica_aplicada/aula-03/  (aula03.html, aula03.css, aula03.js, img/)
+
+make listar      # confirma que a aula nova foi detectada
+make servir      # opcional: pré-visualiza em http://localhost:8000
+make checar      # valida imagens, CSS e JS antes de subir
+make publicar    # gera o índice, commita e faz push
+make acompanhar  # opcional: segue o deploy até o fim / make site abre o resultado
+```
+
+> `make index` grava o rodapé **sem data** de propósito: rodar duas vezes não gera diferença no
+> git. No deploy, o GitHub Actions regenera o índice **com** a data de publicação — é a rede de
+> segurança: mesmo esquecendo o `make index`, o site publicado fica correto.
+
 ## Como a publicação funciona
 
 `.github/workflows/publicar-pages.yml`, a cada push na `main`:

@@ -251,8 +251,8 @@ def procurar_aulas(raiz: str) -> list:
     return aulas
 
 
-def gerar_html(aulas: list, gerado_em: datetime) -> str:
-    """Monta o HTML final do índice."""
+def gerar_html(aulas: list, gerado_em: datetime | None = None) -> str:
+    """Monta o HTML final do índice (sem `gerado_em`, o rodapé sai sem a data)."""
     grupos = {}
     for aula in aulas:
         grupos.setdefault((aula["area"], aula["disciplina"]), []).append(aula)
@@ -298,7 +298,18 @@ def gerar_html(aulas: list, gerado_em: datetime) -> str:
             "  </section>"
         )
 
-    carimbo = gerado_em.strftime("%d/%m/%Y às %H:%M")
+    if gerado_em is not None:
+        carimbo = "Página gerada automaticamente em {} por <code>scripts/gerar_index.py</code>.".format(
+            gerado_em.strftime("%d/%m/%Y às %H:%M")
+        )
+    else:
+        carimbo = "Página gerada automaticamente por <code>scripts/gerar_index.py</code>."
+
+    rodape = (
+        "  <p>" + carimbo + " Para publicar uma aula nova, crie a pasta "
+        "<code>aula-NN/</code> e envie para o GitHub — o índice se atualiza sozinho.</p>\n"
+    )
+
     return (
         "<!DOCTYPE html>\n"
         '<html lang="pt-BR">\n'
@@ -320,35 +331,66 @@ def gerar_html(aulas: list, gerado_em: datetime) -> str:
         "  </div>\n"
         "</header>\n"
         '<main class="wrap">\n' + "\n".join(blocos) + "\n</main>\n"
-        '<footer class="rodape wrap">\n'
-        "  <p>Página gerada automaticamente em {carimbo} por "
-        "<code>scripts/gerar_index.py</code>. Para publicar uma aula nova, crie a pasta "
-        "<code>aula-NN/</code> e envie para o GitHub — o índice se atualiza sozinho.</p>\n"
-        "</footer>\n"
+        '<footer class="rodape wrap">\n' + rodape + "</footer>\n"
         "</body>\n"
         "</html>\n"
-    ).replace("{carimbo}", carimbo)
+    )
+
+
+def listar(aulas: list) -> None:
+    """Imprime as aulas agrupadas por área/disciplina (não escreve arquivo)."""
+    atual = None
+    grupos = 0
+    for aula in aulas:
+        grupo = (aula["area"], aula["disciplina"])
+        if grupo != atual:
+            grupos += 1
+            titulo = (
+                "{} · {}".format(aula["area"], aula["disciplina"])
+                if aula["area"] != "Geral" else aula["disciplina"]
+            )
+            print(titulo)
+            atual = grupo
+        print("  - {} — {} slides -> {}".format(
+            titulo_amigavel(aula["pasta"]) or aula["arquivo"], aula["slides"], aula["rel"]
+        ))
+    if not aulas:
+        print("Nenhuma aula encontrada. Crie a pasta <área>/<disciplina>/aula-NN/ com um .html que tenha slides.")
+    else:
+        print("\n{} aula(s) em {} grupo(s).".format(len(aulas), grupos))
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Gera o index.html com a lista das aulas.")
     parser.add_argument("--raiz", default=".", help="pasta raiz do site (padrão: .)")
     parser.add_argument("--saida", default="index.html", help="arquivo de saída (padrão: index.html)")
+    parser.add_argument("--listar", action="store_true",
+                        help="apenas lista as aulas encontradas (não escreve o índice)")
+    parser.add_argument("--sem-data", action="store_true",
+                        help="gera o rodapé sem a data (saída estável para o git)")
     args = parser.parse_args()
 
     raiz = os.path.abspath(args.raiz)
     aulas = procurar_aulas(raiz)
+
+    if args.listar:
+        listar(aulas)
+        return
+
     destino = os.path.abspath(args.saida)
     pasta_saida = os.path.dirname(destino)
     if pasta_saida:
         os.makedirs(pasta_saida, exist_ok=True)
+    carimbo = None if args.sem_data else datetime.now()
     with open(destino, "w", encoding="utf-8") as arquivo:
-        arquivo.write(gerar_html(aulas, datetime.now()))
+        arquivo.write(gerar_html(aulas, carimbo))
 
     print("{} aula(s) encontrada(s):".format(len(aulas)))
     for aula in aulas:
         print("  - {} ({} slides) -> {}".format(aula["pasta"] or "aula", aula["slides"], aula["rel"]))
-    print("index gerado em {}".format(os.path.relpath(destino, os.getcwd())))
+    print("index gerado em {} {}".format(
+        os.path.relpath(destino, os.getcwd()), "(sem data)" if args.sem_data else ""
+    ).rstrip())
 
 
 if __name__ == "__main__":
