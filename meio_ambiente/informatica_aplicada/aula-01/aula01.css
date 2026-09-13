@@ -1,0 +1,1382 @@
+/* ============================================================
+   Informática Básica · Aula 01 — IFPI Campus Barras
+   Layout totalmente responsivo + passador de slides
+   Base: apresentacao/apresentacao_suap.css (pasta modelo)
+   ============================================================ */
+
+:root {
+    /* —— superfícies (sem brilho, evita glare) —— */
+    --papel: #F3F4EF;
+    --sup: #FFFFFF;
+    --bg: #F6F7F3;
+    /* —— texto —— */
+    --tinta-1: #24282B;
+    --tinta-2: #4A5651;
+    --p: #24282B;
+    /* —— verde IFPI suavizado (dessaturado) —— */
+    --ve: #34805C;
+    --ves: #EAF3EE;
+    --vee: #1C5A3E;
+    --veex: #1E4D38;
+    --veex-2: #24513C;
+    --veex-3: #173E2E;
+    --verde-ln: #8FA89B;
+    --mk: #DCEBE0;
+    /* —— alerta em terracota (sem vermelho puro) —— */
+    --vm: #9E4A3E;
+    --vmc: #FBEFEC;
+    /* —— linhas e foco —— */
+    --linha: #828F88;
+    --linha-s: #D7DDD8;
+    --foco: #1C5A3E;
+    color-scheme: light;
+    /* Fonte base fluida — escala com a tela */
+    --fs: clamp(14px, 1.8vw + 4px, 22px);
+    --fz: 1;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+}
+
+html, body {
+    height: 100%
+}
+
+body {
+    font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+    background: var(--papel);
+    color: var(--p);
+    overflow: hidden;
+    height: 100vh; /* fallback */
+    height: 100dvh;
+    display: flex;
+    flex-direction: column
+}
+
+img {
+    max-width: 100%;
+    height: auto
+}
+
+/* ---------- Barra superior ---------- */
+.tb {
+    background: linear-gradient(90deg, var(--veex-3), var(--veex-2));
+    color: #fff;
+    padding: clamp(8px, 1.2vw, 14px) clamp(14px, 3vw, 32px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-shrink: 0
+}
+
+.tb h2 {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(14px, 1.6vw + 4px, 21px);
+    font-weight: 700;
+    line-height: 1.2
+}
+
+.tb-right {
+    display: flex;
+    align-items: center;
+    gap: clamp(6px, 1vw, 12px)
+}
+
+.tb .ct {
+    background: rgba(255, 255, 255, .16);
+    border: 1px solid rgba(255, 255, 255, .4);
+    border-radius: 18px;
+    padding: 3px 14px;
+    font-weight: 700;
+    font-size: var(--fs);
+    white-space: nowrap
+}
+
+.fz {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: rgba(255, 255, 255, .14);
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 8px;
+    padding: 3px
+}
+
+.fz button {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    font-size: var(--fs);
+    cursor: pointer;
+    padding: 4px 9px;
+    border-radius: 6px;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    line-height: 1
+}
+
+.fz button:hover {
+    background: rgba(255, 255, 255, .28)
+}
+
+.fz span {
+    min-width: 46px;
+    text-align: center;
+    font-size: calc(var(--fs) * .72);
+    font-weight: 700
+}
+
+.fita {
+    height: 5px;
+    background: linear-gradient(90deg, var(--ve), var(--vm));
+    flex-shrink: 0
+}
+
+/* ---------- Container de slides ---------- */
+.sc {
+    flex: 1;
+    display: flex;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    min-height: 0
+}
+
+.sl {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: var(--sup);
+    overflow: auto;
+    font-size: calc(var(--fs) * var(--fz));
+    scroll-behavior: smooth;
+    scroll-padding-top: 76px
+}
+
+.sl.ac {
+    display: flex;
+    flex-direction: column
+}
+
+.slhd {
+    background: linear-gradient(90deg, var(--veex-3), var(--veex-2));
+    color: #fff;
+    border-bottom: 3px solid var(--verde-ln);
+    padding: clamp(12px, 1.8vw, 20px) clamp(14px, 3vw, 30px);
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1.2vw, 16px);
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 5
+}
+
+.slhd .num {
+    background: #fff;
+    color: var(--ve);
+    border-radius: 8px;
+    min-width: clamp(34px, 4vw, 44px);
+    height: clamp(34px, 4vw, 44px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-weight: 800;
+    font-size: 1.05em;
+    box-shadow: 0 1px 3px rgba(16, 32, 24, .28);
+    flex-shrink: 0
+}
+
+.slhd h2 {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(1.2em, 3vw, 1.65em);
+    font-weight: 700;
+    line-height: 1.15
+}
+
+.slbd {
+    padding: clamp(14px, 2vw + 6px, 26px) clamp(14px, 3vw, 30px) clamp(16px, 2vw, 22px);
+    margin-top: 0;
+    margin-bottom: auto
+}
+
+/* ---------- Tipografia do conteúdo ---------- */
+.sl h3 {
+    color: var(--vee);
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: 1.05em;
+    margin: 12px 0 6px
+}
+
+.sl p,
+.sl li {
+    font-size: 1em;
+    line-height: 1.6;
+    margin: 5px 0
+}
+
+.sl ul {
+    list-style: none;
+    margin-left: 2px
+}
+
+.sl ul>li {
+    padding-left: 20px;
+    position: relative
+}
+
+.sl ul>li::before {
+    content: "❑";
+    color: var(--ve);
+    font-size: .72em;
+    position: absolute;
+    left: 0;
+    top: 6px
+}
+
+.mk {
+    background: linear-gradient(transparent 55%, var(--mk) 55%);
+    font-weight: 600
+}
+
+.bd {
+    display: inline-block;
+    background: var(--ve);
+    color: #fff;
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-weight: 700;
+    font-size: .85em;
+    margin-right: 4px
+}
+
+.bd.vm {
+    background: var(--vm)
+}
+
+/* ---------- Cartões / caixas ---------- */
+.cd {
+    background: var(--ves);
+    border-left: 6px solid var(--ve);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0
+}
+
+.cd h3 {
+    color: var(--vee)
+}
+
+.ca {
+    background: var(--vmc);
+    border-left: 6px solid var(--vm);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0
+}
+
+.ca h3 {
+    color: var(--vm)
+}
+
+.bege {
+    background: var(--bg);
+    border: 1px solid var(--linha);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    box-shadow: 0 1px 2px rgba(16, 32, 24, .04), 0 4px 12px rgba(16, 32, 24, .05)
+}
+
+.bege h3 {
+    color: var(--vee);
+    margin-top: 0
+}
+
+.dc {
+    background: var(--ves);
+    border-left: 6px solid var(--linha);
+    padding: 8px 12px;
+    margin: 8px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: .92em
+}
+
+/* ---------- Imagem + texto (flex) ---------- */
+.fg {
+    display: flex;
+    gap: clamp(10px, 1.8vw, 20px);
+    align-items: center;
+    flex-wrap: wrap
+}
+
+.fg .foto {
+    width: min(45%, 400px);
+    height: auto;
+    max-height: 48vh;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: var(--sup);
+    border: 1px solid var(--linha);
+    padding: 6px
+}
+
+.ftx {
+    flex: 1;
+    min-width: 260px
+}
+
+/* ---------- Grid de 2 colunas (responsiva) ---------- */
+.c2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: clamp(10px, 1.5vw, 16px);
+    margin: 12px 0
+}
+
+/* ---------- Tabela ---------- */
+.tb2 {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: .9em;
+    display: block;
+    overflow-x: auto
+}
+
+.tb2 th {
+    background: var(--ves);
+    color: var(--vee);
+    border-bottom: 2px solid var(--ve);
+    padding: 9px 12px;
+    text-align: left;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: .94em
+}
+
+.tb2 td {
+    border: 1px solid var(--linha);
+    padding: 9px 12px;
+    vertical-align: top
+}
+
+.tb2 tr:nth-child(even) td {
+    background: var(--bg)
+}
+
+/* ---------- Lista numerada de passos ---------- */
+.passos {
+    counter-reset: ps;
+    list-style: none;
+    margin-left: 0
+}
+
+.passos li {
+    position: relative;
+    padding: 6px 0 6px 40px;
+    margin: 4px 0
+}
+
+.passos li::before {
+    counter-increment: ps;
+    content: counter(ps);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    background: var(--ve);
+    color: #fff;
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-weight: 800;
+    font-size: .85em;
+    font-family: 'Montserrat', Arial, sans-serif
+}
+
+/* ---------- Abas / painéis interativos ---------- */
+.abas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 10px 0
+}
+
+.abas button {
+    border: 2px solid var(--ve);
+    background: #fff;
+    color: var(--ve);
+    border-radius: 8px;
+    padding: 7px 16px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: .86em;
+    transition: background .15s, color .15s
+}
+
+.abas button.on {
+    background: var(--ve);
+    color: #fff
+}
+
+.painel {
+    display: none;
+    background: var(--bg);
+    border: 2px solid var(--linha);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 2px
+}
+
+.painel.on {
+    display: block
+}
+
+/* ---------- Caixa "Reforçar / Revelar" ---------- */
+.rev {
+    cursor: pointer;
+    background: var(--bg);
+    border: 2px dashed var(--linha);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-weight: 700;
+    color: var(--vee);
+    text-align: center;
+    margin: 8px 0;
+    transition: transform .15s
+}
+
+.rev:hover {
+    transform: scale(1.01)
+}
+
+.rev .resp {
+    display: none;
+    margin-top: 8px;
+    font-weight: 400;
+    color: var(--p);
+    font-size: .9em;
+    text-align: left
+}
+
+.rev.rv {
+    cursor: default;
+    border-style: solid;
+    border-color: var(--ve)
+}
+
+.rev.rv .resp {
+    display: block
+}
+
+/* ---------- Referência de consulta ---------- */
+.ref {
+    margin-top: auto;
+    padding: 12px 16px;
+    background: var(--ves);
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    font-size: .85em;
+    color: var(--tinta-2);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px
+}
+
+.ref a {
+    color: var(--vee);
+    font-weight: 700;
+    word-break: break-word;
+    text-decoration: underline
+}
+
+.ref .rt {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-weight: 800;
+    color: var(--vee);
+    margin-right: 4px
+}
+
+
+/* ---------- Capa ---------- */
+.capa {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    min-height: 50vh
+}
+
+.capa .esq {
+    background: linear-gradient(135deg, var(--veex-3), var(--veex-2));
+    color: #fff;
+    padding: clamp(22px, 4vw, 44px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+}
+
+.capa .esq h1 {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(1.9em, 5vw, 3.2em);
+    line-height: 1.15;
+    margin: 6px 0 4px
+}
+
+.capa .esq .rot {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(.7em, 1.6vw, .95em);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #CFE6D9
+}
+
+.capa .esq .sub {
+    font-size: clamp(1em, 2.2vw, 1.35em);
+    opacity: .92;
+    margin-top: 6px
+}
+
+.capa .esq .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: .82em;
+    font-weight: 700
+}
+
+.capa .esq .meta span {
+    background: rgba(255, 255, 255, .14);
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 6px;
+    padding: 4px 12px
+}
+
+.capa .faixa {
+    height: 5px;
+    background: linear-gradient(90deg, var(--ve), var(--vm));
+    margin-top: 20px
+}
+
+.capa .dir {
+    background: var(--ves);
+    border-left: 6px solid var(--ve);
+    color: var(--vee);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(18px, 3vw, 34px);
+    text-align: center;
+    gap: 12px
+}
+
+.capa .dir .selo {
+    font-size: clamp(2.2em, 6vw, 4.4em);
+    font-weight: 800;
+    font-family: 'Montserrat', Arial, sans-serif;
+    line-height: 1
+}
+
+.capa .dir h2 {
+    font-family: 'Montserrat', Arial, sans-serif;
+    margin-top: 6px;
+    font-size: clamp(1em, 2vw, 1.35em)
+}
+
+.capa .dir p {
+    opacity: 1;
+    color: var(--tinta-2);
+    font-size: .9em
+}
+
+.capa .dir img {
+    max-height: 30vh;
+    width: auto
+}
+
+/* ---------- Encerramento ---------- */
+.divisor {
+    position: relative;
+    flex: 1;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    border-radius: 14px;
+    overflow: hidden
+}
+
+.divisor .ov {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(23, 62, 46, .97), rgba(36, 81, 60, .94))
+}
+
+.divisor .in {
+    position: relative;
+    padding: clamp(22px, 4vw, 40px);
+    max-width: 840px
+}
+
+.divisor .in .rot {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(.7em, 1.5vw, .9em);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #CFE6D9
+}
+
+.divisor h1 {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(2em, 5vw, 3.2em);
+    line-height: 1.2;
+    margin-top: 6px
+}
+
+.divisor p {
+    font-size: clamp(1em, 2.2vw, 1.3em);
+    margin-top: 10px
+}
+
+/* ---------- Controles do passador ---------- */
+.ctrl-wrap {
+    flex-shrink: 0;
+    background: var(--sup);
+    border-top: 2px solid var(--linha-s)
+}
+
+.progress-wrap {
+    height: 6px;
+    background: var(--linha-s)
+}
+
+.progress {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--ve), var(--vm));
+    transition: width .25s ease
+}
+
+.ctr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(6px, 1vw, 10px);
+    padding: clamp(8px, 1.4vw, 12px);
+    background: #fff
+}
+
+.dots {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-right: 4px
+}
+
+.dot {
+    min-width: 28px;
+    height: 28px;
+    padding: 0 7px;
+    border: 2px solid var(--vee);
+    border-radius: 8px;
+    background: var(--sup);
+    color: var(--vee);
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: calc(var(--fs) * .66);
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s, color .15s, transform .15s
+}
+
+.dot:hover {
+    transform: translateY(-1px)
+}
+
+.dot.on,
+.dot[aria-current="true"] {
+    background: var(--vee);
+    color: #FFFFFF
+}
+
+.ctr button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .15s;
+    min-height: 42px
+}
+
+.ctr button:hover {
+    transform: scale(1.04)
+}
+
+.ctr button.sq {
+    min-width: 48px;
+    padding: 10px 12px
+}
+
+.bv {
+    background: var(--veex);
+    color: #fff
+}
+
+.bz {
+    background: var(--vee);
+    color: #fff
+}
+
+.bn {
+    background: var(--ves);
+    color: var(--vee);
+    border: 2px solid var(--ve) !important
+}
+
+/* ---------- Setas laterais flutuantes ---------- */
+.swipe {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: clamp(34px, 4vw, 46px);
+    height: clamp(34px, 4vw, 46px);
+    border: none;
+    border-radius: 50%;
+    background: rgba(30, 77, 56, .92);
+    color: #fff;
+    font-size: 1.6em;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .82;
+    transition: opacity .15s, transform .15s
+}
+
+.swipe:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.08)
+}
+
+.swipe.next {
+    right: 10px
+}
+
+.swipe.prev {
+    left: 10px
+}
+
+body.pres-mode .tb,
+body.pres-mode .fita,
+body.pres-mode .ctrl-wrap,
+body.pres-mode .swipe {
+    display: none
+}
+
+body.pres-mode .sc {
+    padding: 0
+}
+
+body.pres-mode .sl {
+    font-size: calc(var(--fs) * var(--fz) * 1.05)
+}
+
+
+/* ============================================================
+   RESPONSIVO — múltiplas resoluções
+   ============================================================ */
+
+/* Até 900px: empilha grades e layout imagem+texto */
+@media (max-width: 900px) {
+    .capa {
+        grid-template-columns: 1fr
+    }
+
+    .capa .dir {
+        min-height: 200px;
+        border-left: none;
+        border-top: 6px solid var(--ve)
+    }
+
+    .fg .foto {
+        width: 100%;
+        max-height: 34vh
+    }
+
+    .swipe {
+        width: 40px;
+        height: 40px;
+        font-size: 1.4em
+    }
+
+    .swipe.next {
+        right: 6px
+    }
+
+    .swipe.prev {
+        left: 6px
+    }
+}
+
+/* Até 720px: ajustes de cabeçalho e controles */
+@media (max-width: 720px) {
+    .tb h2 {
+        font-size: clamp(12px, 3.6vw, 16px)
+    }
+
+    .tb .ct {
+        font-size: .85em;
+        padding: 2px 10px
+    }
+
+    .fz span {
+        min-width: 34px
+    }
+
+    .dan, .ctr .bn {
+        display: none
+    }
+
+    .ctr button {
+        padding: 8px 12px;
+        min-height: 40px;
+        font-size: .92em
+    }
+
+    .ctr button.sq {
+        min-width: 42px
+    }
+
+    .slhd h2 {
+        font-size: clamp(1.1em, 4.4vw, 1.4em)
+    }
+
+    .slbd {
+        padding: 12px 14px 16px
+    }
+
+    .dot {
+        min-width: 24px;
+        height: 24px;
+        padding: 0 5px
+    }
+
+    .ref {
+        font-size: .78em
+    }
+}
+
+/* Até 480px: telas menores (celulares) */
+@media (max-width: 480px) {
+    :root {
+        --fs: clamp(13px, 4.6vw, 17px);
+    }
+    .tb {
+        padding: 6px 10px
+    }
+
+    .tb-right {
+        gap: 6px
+    }
+
+    .fz button {
+        padding: 3px 7px
+    }
+
+    .ctrl-wrap .ctr {
+        gap: 5px
+    }
+
+    .ctr button {
+        padding: 7px 10px;
+        min-height: 38px
+    }
+
+    .ctr button.sq {
+        min-width: 38px
+    }
+
+    .swipe {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2em
+    }
+
+    .capa .esq h1 {
+        font-size: clamp(1.5em, 9vw, 2.2em)
+    }
+
+    .slhd .num {
+        min-width: 32px;
+        height: 32px;
+        font-size: 1em
+    }
+
+    .c2 {
+        grid-template-columns: 1fr
+    }
+}
+
+/* Muita largura (projetores grandes) */
+@media (min-width: 1400px) {
+    :root {
+        --fs: clamp(19px, 1.6vw, 24px);
+    }
+    .slhd h2 {
+        font-size: clamp(1.4em, 2.4vw, 1.8em)
+    }
+
+    .capa .esq h1 {
+        font-size: clamp(2.6em, 4vw, 4em)
+    }
+
+    .fg .foto {
+        max-height: 54vh
+    }
+}
+
+@media (min-width: 1920px) {
+    :root {
+        --fs: clamp(22px, 1.4vw, 28px);
+    }
+    .fg .foto {
+        max-height: 60vh
+    }
+}
+
+/* Sombreamentos / transições suaves */
+.sl .nt {
+    display: none;
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: var(--ves);
+    border: 1px solid var(--linha);
+    border-radius: 10px;
+    font-size: .88em;
+    color: var(--tinta-2)
+}
+
+.sl .nt strong {
+    color: var(--vee)
+}
+
+.tga {
+    display: inline-block;
+    background: var(--bg);
+    color: var(--vee);
+    border: 1px solid var(--linha);
+    border-radius: 6px;
+    padding: 2px 12px;
+    font-size: .78em;
+    font-weight: 700;
+    margin-right: 6px
+}
+
+/* ---------- Conteúdo Programático: tabela numerada ---------- */
+.slbd.fill {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0
+}
+
+.prog {
+    display: table;
+    width: 100%;
+    flex: 1;
+    margin: 0 0 12px;
+    font-size: .88em
+}
+
+.prog th,
+.prog td {
+    padding: 10px 14px
+}
+
+body.projetor .prog th,
+body.projetor .prog td {
+    padding: 13px 16px
+}
+
+/* Variante densa para tabelas com muitas linhas */
+.prog.denso {
+    font-size: .84em
+}
+
+.prog.denso th,
+.prog.denso td,
+body.projetor .prog.denso th,
+body.projetor .prog.denso td {
+    padding: 6px 12px
+}
+
+/* Em telas estreitas a tabela volta a rolar na horizontal */
+@media (max-width: 900px) {
+    .prog {
+        display: block;
+        overflow-x: auto
+    }
+}
+
+.cod {
+    font-weight: 700;
+    color: var(--tinta-2);
+    margin-right: 6px;
+    font-size: .92em
+}
+
+/* Imagens dentro de listas exibidas como blocos (capturas do diário) */
+.sl li img.foto,
+.sl li img {
+    display: block;
+    width: min(100%, 420px);
+    height: auto;
+    max-height: 42vh;
+    object-fit: contain;
+    margin: 10px auto 4px;
+    border-radius: 10px;
+    background: var(--sup);
+    border: 1px solid var(--linha);
+    padding: 6px
+}
+
+/* ============================================================
+   ACESSIBILIDADE — foco visível · movimento · contraste · impressão
+   ============================================================ */
+
+/* Botão de tema projetor / leitura (fica na barra superior) */
+.cz {
+    background: rgba(255, 255, 255, .14);
+    border: 1px solid rgba(255, 255, 255, .38);
+    color: #fff;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-weight: 700;
+    font-size: calc(var(--fs) * .78);
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    cursor: pointer;
+    min-height: 32px;
+    white-space: nowrap
+}
+
+.cz:hover {
+    background: rgba(255, 255, 255, .28)
+}
+
+.cz[aria-pressed="true"] {
+    background: #fff;
+    border-color: #fff;
+    color: var(--vee)
+}
+
+/* Anel de foco bem visível para navegação por teclado */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+.rev:focus-visible,
+.dot:focus-visible,
+.abas button:focus-visible {
+    outline: 3px solid var(--foco);
+    outline-offset: 2px;
+    border-radius: 8px
+}
+
+/* Sobre superfícies escuras o anel precisa ser claro */
+.tb :focus-visible,
+.slhd :focus-visible,
+.capa .esq :focus-visible,
+.capa .dir :focus-visible,
+.divisor :focus-visible,
+.swipe:focus-visible {
+    outline-color: #EAF3EE
+}
+
+/* Alvos de toque confortáveis (WCAG 2.5.8 — mínimo 24×24px) */
+.fz button {
+    min-width: 34px;
+    min-height: 30px
+}
+
+/* Seleção de texto suave sem perder contraste */
+::selection {
+    background: var(--mk);
+    color: var(--tinta-1)
+}
+
+/* ============================================================
+   TEMA PROJETOR (padrão) — data show de baixa luminosidade
+   Fundo branco puro + tinta quase preta + traços grossos.
+   O modo "Leitura" (sem esta classe) mantém a paleta suave.
+   ============================================================ */
+body.projetor {
+    /* superfícies: branco puro = máxima luz do projetor */
+    --papel: #FFFFFF;
+    --sup: #FFFFFF;
+    --bg: #FFFFFF;
+    /* texto quase preto */
+    --tinta-1: #0F1417;
+    --tinta-2: #2A3236;
+    --p: #0F1417;
+    /* verde profundo, sem saturação */
+    --ve: #1E5C3F;
+    --ves: #FFFFFF;
+    --vee: #0E3D28;
+    --veex: #0B2E1F;
+    --veex-2: #123B29;
+    --veex-3: #0B2E1F;
+    --verde-ln: #DCEBE0;
+    --mk: #CFE3D6;
+    /* alerta em terracota escuro */
+    --vm: #6F2A22;
+    --vmc: #FFFFFF;
+    /* linhas: borda escura forte — preenchimento claro não separa nada */
+    --linha: #1E5C3F;
+    --linha-s: #C9D3CC;
+    --foco: #0E3D28;
+    /* tipografia maior para projeção */
+    --fs: clamp(16px, 2.1vw + 5px, 26px)
+}
+
+/* Traços mais grossos: linha fina borra e desaparece no projetor */
+body.projetor .sl p,
+body.projetor .sl li {
+    font-weight: 500
+}
+
+body.projetor .sl h3 {
+    font-weight: 800
+}
+
+/* Agrupamento por borda, nunca por preenchimento claro */
+body.projetor .bege,
+body.projetor .ref,
+body.projetor .painel,
+body.projetor .tga,
+body.projetor .tb2 td {
+    border-width: 2px
+}
+
+body.projetor .tb2 th {
+    border-bottom-width: 3px
+}
+
+body.projetor .bege,
+body.projetor .ref {
+    box-shadow: none
+}
+
+/* Callouts: contorno + barra lateral espessa (a cor não depende do fundo) */
+body.projetor .cd,
+body.projetor .ca {
+    background: #FFFFFF;
+    border: 2px solid var(--linha);
+    border-left-width: 10px;
+    box-shadow: none;
+    padding: 12px 18px
+}
+
+body.projetor .cd {
+    border-left-color: var(--vee)
+}
+
+body.projetor .ca {
+    border-left-color: var(--vm)
+}
+
+/* Badge de unidade bem escuro para leitura à distância */
+body.projetor .bd {
+    background: var(--vee);
+    border: 2px solid var(--vee)
+}
+
+body.projetor .bd.vm {
+    background: var(--vm);
+    border-color: var(--vm)
+}
+
+/* Filete do cabeçalho mais grosso e claro */
+body.projetor .slhd {
+    border-bottom-width: 4px
+}
+
+body.projetor .slhd .num {
+    border: 2px solid var(--verde-ln)
+}
+
+/* Controles sem transparência (rgba "lava" no projetor) */
+body.projetor .tb .ct,
+body.projetor .fz {
+    background: #123B29;
+    border-color: #DCEBE0
+}
+
+body.projetor .fz button:hover {
+    background: #1E5C3F
+}
+
+body.projetor .cz[aria-pressed="false"] {
+    background: #123B29;
+    border-color: #DCEBE0;
+    color: #FFFFFF
+}
+
+body.projetor .cz[aria-pressed="true"] {
+    background: #FFFFFF;
+    border-color: #FFFFFF;
+    color: #0E3D28
+}
+
+/* Navegação maior e mais firme */
+body.projetor .dot {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 9px;
+    font-size: calc(var(--fs) * .6)
+}
+
+/* Em telas pequenas o paginador cai para 24px (alvo mínimo WCAG) */
+@media (max-width: 720px) {
+    body.projetor .dot {
+        min-width: 24px;
+        height: 24px;
+        padding: 0 5px
+    }
+}
+
+body.projetor .progress-wrap {
+    height: 8px
+}
+
+body.projetor .swipe {
+    background: rgba(11, 46, 31, .95);
+    opacity: .95
+}
+
+/* Encerramento com painel mais profundo */
+body.projetor .divisor .ov {
+    background: linear-gradient(135deg, rgba(11, 46, 31, .98), rgba(18, 59, 41, .96))
+}
+
+/* Tipografia ainda maior nas telas de projeção largas */
+@media (min-width: 1200px) {
+    body.projetor {
+        --fs: clamp(20px, 1.9vw, 28px)
+    }
+}
+
+@media (min-width: 1600px) {
+    body.projetor {
+        --fs: clamp(24px, 1.7vw, 32px)
+    }
+}
+
+/* Respeita quem pediu menos movimento */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important
+    }
+
+    .sl {
+        scroll-behavior: auto
+    }
+
+    .dot:hover,
+    .ctr button:hover,
+    .rev:hover,
+    .swipe:hover {
+        transform: none
+    }
+}
+
+/* Respeita quem precisa de mais contraste por padrão */
+@media (prefers-contrast: more) {
+
+    :root,
+    body.projetor {
+        --p: #12171A;
+        --tinta-1: #12171A;
+        --tinta-2: #2A3236;
+        --vee: #103D29;
+        --ve: #1E5C3F;
+        --vm: #7A3229;
+        --ves: #FFFFFF;
+        --vmc: #FFFFFF;
+        --bg: #FFFFFF;
+        --linha: #4E6F5F;
+        --mk: #CFE3D6
+    }
+
+    .bege,
+    .ref,
+    .painel,
+    .tb2 td {
+        border-width: 2px
+    }
+}
+
+/* Impressão / apostila: um slide por página, sem controles */
+@media print {
+    html,
+    body {
+        height: auto;
+        overflow: visible;
+        background: #fff
+    }
+
+    .tb,
+    .fita,
+    .ctrl-wrap,
+    .swipe {
+        display: none !important
+    }
+
+    .sc {
+        display: block;
+        overflow: visible
+    }
+
+    .sl {
+        display: block !important;
+        height: auto;
+        overflow: visible;
+        page-break-after: always;
+        break-after: page
+    }
+
+    .slhd {
+        position: static
+    }
+
+    .ref {
+        margin-top: 12px
+    }
+}
+
+

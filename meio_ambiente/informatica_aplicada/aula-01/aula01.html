@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Informática Básica · Aula 01 — Apresentação da Disciplina</title>
+<link rel="stylesheet" href="aula01.css">
+</head>
+<body class="projetor">
+<header class="tb">
+  <h2>Informática Básica · IFPI — Campus Barras</h2>
+  <div class="tb-right">
+    <div class="fz" aria-label="Tamanho do texto">
+      <button onclick="fz(-1)" title="Diminuir tamanho da fonte">A−</button>
+      <span id="fzpct">100%</span>
+      <button onclick="fz(1)" title="Aumentar tamanho da fonte">A+</button>
+    </div>
+    <button class="cz" id="cz" type="button" onclick="toggleProjetor()" title="Tema projetor ativo — clique para o tema de leitura" aria-pressed="true">◉ Projetor</button>
+    <span class="ct" id="ctr">1 / 17</span>
+  </div>
+</header>
+<div class="fita"></div>
+<div class="sc">
+
+  <!-- SLIDE 1 - CAPA -->
+  <div class="sl ac" id="s1">
+    <div class="capa">
+      <div class="esq">
+        <div class="rot">Aula 01 · Apresentação da Disciplina</div>
+        <h1>Informática Aplicada</h1>
+        <p class="sub">Técnico em Meio Ambiente — Concomitante/Subsequente</p>
+        <p class="sub">1º Módulo · Ano/Período 2026/2</p>
+        <p class="sub">Prof. Diego Cordeiro de Oliveira</p>
+        <div class="faixa"></div>
+      </div>
+      <div class="dir">
+        <img src="logo.png" alt="Logo do IFPI">
+        <h2>Instituto Federal do Piauí</h2>
+        <p>Promover uma educação de excelência, direcionada às demandas sociais.</p>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a></div>
+  </div>
+
+  <!-- SLIDE 2 - AGENDA DA AULA -->
+  <div class="sl" id="s_agenda">
+    <div class="slhd"><span class="num">2</span><h2>Agenda da Aula</h2></div>
+    <div class="slbd">
+      <p>Roteiro de hoje — apresentação da disciplina e dos caminhos do semestre:</p>
+      <ul>
+        <li><strong>1.</strong> Sobre o professor e a disciplina</li>
+        <li><strong>2.</strong> Objetivos, competências e habilidades</li>
+        <li><strong>3.</strong> Conteúdo programático (8 unidades)</li>
+        <li><strong>4.</strong> Metodologia e recursos didáticos</li>
+        <li><strong>5.</strong> Avaliação da aprendizagem</li>
+        <li><strong>6.</strong> Bibliografia</li>
+        <li><strong>7.</strong> Próximos passos e canais de contato</li>
+      </ul>
+      <div class="cd"><h3>Como aproveitar</h3><p>Anote suas dúvidas: os <strong>ambientes virtuais</strong> (<a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a> e <strong>SUAP</strong>) concentram materiais, atividades e avisos ao longo do semestre.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a></div>
+  </div>
+
+  <!-- SLIDE 3 - SOBRE O PROFESSOR -->
+  <div class="sl" id="s_prof">
+    <div class="slhd"><span class="num">3</span><h2>Sobre o Professor</h2></div>
+    <div class="slbd">
+      <div class="c2">
+        <div class="bege">
+          <h3>Formação Acadêmica</h3>
+          <ul>
+            <li><strong>Bacharel</strong> em Ciência da Computação</li>
+            <li><strong>Especialista</strong> em Engenharia de Sistemas</li>
+          </ul>
+        </div>
+        <div class="bege">
+          <h3>Interesses e Tecnologias</h3>
+          <ul>
+            <li>Pesquisa e <strong>desenvolvimento</strong> de software</li>
+            <li>Linguagens de interesse: <strong>Python</strong> e <strong>Ruby</strong></li>
+            <li>Tecnologias: <strong>Docker</strong>, <strong>CI/CD</strong> e <strong>GIT</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="cd"><h3>Contato</h3><p>E-mail: <a href="mailto:diego.cordeiro@ifpi.edu.br">diego.cordeiro@ifpi.edu.br</a> — use também o <strong>Comunicador</strong> e o <strong>SUAP</strong> para as demandas da disciplina.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a></div>
+  </div>
+
+  <!-- SLIDE 4 - EXPERIÊNCIA ACADÊMICA E PROFISSIONAL -->
+  <div class="sl" id="s_exp">
+    <div class="slhd"><span class="num">4</span><h2>Experiência Acadêmica e Profissional</h2></div>
+    <div class="slbd">
+      <div class="c2">
+        <div class="bege">
+          <h3>Experiência Acadêmica</h3>
+          <ul>
+            <li>Professor no curso de <strong>TI</strong> — campus Angical <span class="tga">2013</span></li>
+            <li>Professor no curso de <strong>Computação</strong> — UNIP <span class="tga">2022</span></li>
+          </ul>
+        </div>
+        <div class="bege">
+          <h3>Serviço Público Federal</h3>
+          <ul>
+            <li><strong>Técnico</strong> de Laboratório de Informática <span class="tga">2014–2015</span></li>
+            <li><strong>Analista</strong> de Tecnologia da Informação <span class="tga">2016–2024</span></li>
+            <li><strong>Diretor</strong> de Tecnologia da Informação <span class="tga">2023–2024</span></li>
+            <li>Professor <strong>EBTT</strong> <span class="tga">2025</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a></div>
+  </div>
+
+  <!-- SLIDE 5 - OBJETIVOS DA DISCIPLINA -->
+  <div class="sl" id="s_obj">
+    <div class="slhd"><span class="num">5</span><h2>Objetivos da Disciplina</h2></div>
+    <div class="slbd">
+      <p><strong>Objetivo geral:</strong> capacitar o estudante a compreender os conceitos básicos de informática — desde o seu surgimento e evolução histórica até a aplicação no dia a dia — e a <span class="mk">utilizar o computador como instrumento de gestão, monitoramento e tomada de decisão ambiental</span>.</p>
+      <div class="c2">
+        <div class="bege">
+          <h3>Competências</h3>
+          <ul>
+            <li>Compreender a <strong>importância da informática</strong> na sociedade.</li>
+            <li>Entender a <strong>funcionalidade básica</strong> dos computadores digitais.</li>
+            <li>Desenvolver <strong>habilidades práticas</strong> no uso do computador, da Internet, dos serviços Web e dos aplicativos de escritório.</li>
+          </ul>
+        </div>
+        <div class="bege">
+          <h3>Ementa</h3>
+          <p>Evolução da informática e sua relação com as <strong>ciências ambientais</strong>; utilização do pacote Office como ferramenta de elaboração de documentos técnicos, análises de dados e apresentações; introdução e prática com <strong>softwares da área ambiental</strong> (localização, imagens de satélite e estatística básica); ética, responsabilidade e inovação digital.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Informática Básica 2026/2</a></div>
+  </div>
+
+  <!-- SLIDE 6 - COMPETÊNCIAS E HABILIDADES -->
+  <div class="sl" id="s_hab">
+    <div class="slhd"><span class="num">6</span><h2>Competências e Habilidades</h2></div>
+    <div class="slbd">
+      <p>Ao final da disciplina, espera-se que o estudante seja capaz de:</p>
+      <ul>
+        <li><strong>Identificar</strong> os componentes básicos de um computador: entrada, processamento, saída e armazenamento.</li>
+        <li><strong>Identificar</strong> os tipos de software, tanto para uso pessoal quanto profissional.</li>
+        <li><strong>Relacionar e descrever</strong> soluções de software para escritório.</li>
+        <li><strong>Operar</strong> softwares utilitários.</li>
+        <li><strong>Operar</strong> softwares aplicativos, despertando para o uso da informática na sociedade.</li>
+        <li><strong>Operar</strong> softwares na área ambiental.</li>
+      </ul>
+      <div class="ca"><h3>Atenção</h3><p>As habilidades são construídas de forma <strong>cumulativa</strong>: cada unidade do conteúdo programático retoma e amplia a anterior.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Informática Básica 2026/2</a></div>
+  </div>
+
+  <!-- SLIDE 7 - CONTEÚDO PROGRAMÁTICO · CONCEITOS INICIAIS (UNIDADES 1 A 3) -->
+  <div class="sl" id="s_cp1">
+    <div class="slhd"><span class="num">7</span><h2>Conteúdo Programático — Conceitos Iniciais</h2></div>
+    <div class="slbd fill">
+      <table class="tb2 prog denso">
+        <tr>
+          <th><span class="bd">1</span> Introdução à Informática</th>
+          <th><span class="bd">2</span> Segurança da Informação</th>
+          <th><span class="bd">3</span> Sistemas Operacionais</th>
+        </tr>
+        <tr>
+          <td><span class="cod">1.1</span> Histórico dos computadores</td>
+          <td>Conceitos básicos</td>
+          <td><span class="cod">3.1</span> Fundamentos e funções</td>
+        </tr>
+        <tr>
+          <td><span class="cod">1.1.1</span> Hardware</td>
+          <td>Proteção de dados</td>
+          <td><span class="cod">3.2</span> Sistemas operacionais existentes</td>
+        </tr>
+        <tr>
+          <td><span class="cod">1.1.2</span> Software</td>
+          <td>Boas práticas</td>
+          <td><span class="cod">3.3</span> Utilização de um sistema operacional</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><span class="cod">3.3.1</span> Ligar e desligar o computador</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><span class="cod">3.3.2</span> Interfaces de interação</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><span class="cod">3.3.3</span> Área de trabalho</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><span class="cod">3.3.4</span> Gerenciamento de pastas e arquivos</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><span class="cod">3.3.5</span> Ferramentas de sistema e configurações pessoais</td>
+        </tr>
+      </table>
+      <div class="cd"><h3>Aplicação na área ambiental</h3><p>Organização dos <strong>arquivos de campo</strong>, uso seguro dos dados coletados e configuração do computador de trabalho.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Conteúdo Programático (1 a 3)</a></div>
+  </div>
+
+  <!-- SLIDE 8 - CONTEÚDO PROGRAMÁTICO · INTERNET (UNIDADE 4) -->
+  <div class="sl" id="s_cp2">
+    <div class="slhd"><span class="num">8</span><h2>Conteúdo Programático — Internet</h2></div>
+    <div class="slbd fill">
+      <table class="tb2 prog">
+        <tr>
+          <th><span class="bd">4</span> Fundamentos e serviços</th>
+          <th>Recursos e boas práticas</th>
+        </tr>
+        <tr>
+          <td><span class="cod">4.1</span> Histórico e fundamentos</td>
+          <td><span class="cod">4.2.1.3</span> Pesquisa de informações</td>
+        </tr>
+        <tr>
+          <td><span class="cod">4.2.1</span> World Wide Web</td>
+          <td><span class="cod">4.2.1.4</span> Download de arquivos</td>
+        </tr>
+        <tr>
+          <td><span class="cod">4.2.1.1</span> Navegadores</td>
+          <td><span class="cod">4.2.1.5</span> Correio eletrônico</td>
+        </tr>
+        <tr>
+          <td><span class="cod">4.2.1.2</span> Sistema acadêmico</td>
+          <td><span class="cod">4.2.1.6</span> Boas práticas de comportamento</td>
+        </tr>
+      </table>
+      <div class="cd"><h3>Aplicação na área ambiental</h3><p>Pesquisa de <strong>legislação e dados ambientais</strong>, download de bases públicas, uso do sistema acadêmico e comunicação técnica por e-mail.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Conteúdo Programático (4)</a></div>
+  </div>
+
+  <!-- SLIDE 9 - CONTEÚDO PROGRAMÁTICO · EDITOR DE TEXTO (UNIDADE 5) -->
+  <div class="sl" id="s_cp3">
+    <div class="slhd"><span class="num">9</span><h2>Conteúdo Programático — Editor de Texto</h2></div>
+    <div class="slbd fill">
+      <table class="tb2 prog">
+        <tr>
+          <th><span class="bd">5</span> Funcionalidades básicas</th>
+          <th>Formatação e recursos</th>
+        </tr>
+        <tr>
+          <td><span class="cod">5.1</span> Visão geral</td>
+          <td><span class="cod">5.6</span> Inserção de quebra de página</td>
+        </tr>
+        <tr>
+          <td><span class="cod">5.2</span> Digitação e movimentação de texto</td>
+          <td><span class="cod">5.7</span> Recuos, tabulação, parágrafos, espaçamentos e margens</td>
+        </tr>
+        <tr>
+          <td><span class="cod">5.3</span> Nomear, gravar e encerrar sessão</td>
+          <td><span class="cod">5.8</span> Listas, marcadores e numeradores</td>
+        </tr>
+        <tr>
+          <td><span class="cod">5.4</span> Controles de exibição</td>
+          <td><span class="cod">5.9</span> Modelos</td>
+        </tr>
+        <tr>
+          <td><span class="cod">5.5</span> Correção ortográfica e dicionário</td>
+          <td><span class="cod">5.10</span> Figuras e objetos</td>
+        </tr>
+      </table>
+      <div class="cd"><h3>Aplicação na área ambiental</h3><p>Elaboração de <strong>relatórios técnicos</strong>, laudos e documentos de licenciamento com formatação padronizada.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Conteúdo Programático (5)</a></div>
+  </div>
+
+  <!-- SLIDE 10 - CONTEÚDO PROGRAMÁTICO · PLANILHA ELETRÔNICA -->
+  <div class="sl" id="s_cp4">
+    <div class="slhd"><span class="num">10</span><h2>Conteúdo Programático — Planilha Eletrônica</h2></div>
+    <div class="slbd fill">
+      <table class="tb2 prog">
+        <tr>
+          <th><span class="bd">6</span> Fundamentos</th>
+          <th>Análise de dados</th>
+        </tr>
+        <tr>
+          <td><span class="cod">6.1</span> Visão geral</td>
+          <td><span class="cod">6.4</span> Classificando e filtrando dados</td>
+        </tr>
+        <tr>
+          <td><span class="cod">6.2</span> Fórmulas e funções</td>
+          <td><span class="cod">6.5</span> Formatação condicional</td>
+        </tr>
+        <tr>
+          <td><span class="cod">6.3</span> Formatando células</td>
+          <td><span class="cod">6.6</span> Gráficos</td>
+        </tr>
+      </table>
+      <div class="cd"><h3>Aplicação na área ambiental</h3><p>Tabulação de <strong>dados de monitoramento</strong>, indicadores e séries históricas, com gráficos que apoiam a análise e a tomada de decisão.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Conteúdo Programático (6)</a></div>
+  </div>
+
+  <!-- SLIDE 11 - CONTEÚDO PROGRAMÁTICO · SOFTWARE DE APRESENTAÇÃO -->
+  <div class="sl" id="s_cp5">
+    <div class="slhd"><span class="num">11</span><h2>Conteúdo Programático — Software de Apresentação</h2></div>
+    <div class="slbd fill">
+      <table class="tb2 prog">
+        <tr>
+          <th><span class="bd">7</span> Conceitos básicos</th>
+          <th>Recursos avançados</th>
+        </tr>
+        <tr>
+          <td><span class="cod">7.1</span> Visão geral do software</td>
+          <td><span class="cod">7.5</span> Listas, textos, desenhos, figuras e som</td>
+        </tr>
+        <tr>
+          <td><span class="cod">7.2</span> Assistente de criação</td>
+          <td><span class="cod">7.6</span> Vídeo, gráficos, organogramas, cores e plano de fundo</td>
+        </tr>
+        <tr>
+          <td><span class="cod">7.3</span> Modos de exibição de slides</td>
+          <td><span class="cod">7.7</span> Anotações de apresentação</td>
+        </tr>
+        <tr>
+          <td><span class="cod">7.4</span> Impressão de apresentações, anotações e folhetos</td>
+          <td><span class="cod">7.8</span> Transição de slides, efeitos e animação</td>
+        </tr>
+      </table>
+      <div class="cd"><h3>Aplicação na área ambiental</h3><p>Apresentação de <strong>resultados de projetos</strong> e defesa técnica de dados para a comunidade escolar e órgãos ambientais.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Conteúdo Programático (7)</a></div>
+  </div>
+
+  <!-- SLIDE 12 - CONTEÚDO PROGRAMÁTICO · SOFTWARES NA ÁREA AMBIENTAL (UNIDADE 8) -->
+  <div class="sl" id="s_cp6">
+    <div class="slhd"><span class="num">12</span><h2>Conteúdo Programático — Softwares na Área Ambiental</h2></div>
+    <div class="slbd fill">
+      <table class="tb2 prog">
+        <tr>
+          <th><span class="bd">8</span> Aplicações ambientais</th>
+          <th>Temas transversais</th>
+        </tr>
+        <tr>
+          <td>Ferramentas de localização</td>
+          <td>Ética e responsabilidade digital</td>
+        </tr>
+        <tr>
+          <td>Gerenciamento de imagens de satélite</td>
+          <td>Segurança e qualidade das informações</td>
+        </tr>
+        <tr>
+          <td>Estatística básica</td>
+          <td>Sustentabilidade</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Inovação digital</td>
+        </tr>
+      </table>
+      <div class="cd"><h3>Aplicação na área ambiental</h3><p>Uso de <strong>imagens de satélite</strong> e de análises estatísticas no monitoramento ambiental e na elaboração de relatórios técnicos.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Conteúdo Programático (8)</a></div>
+  </div>
+
+  <!-- SLIDE 13 - METODOLOGIA -->
+  <div class="sl" id="s_met">
+    <div class="slhd"><span class="num">13</span><h2>Metodologia</h2></div>
+    <div class="slbd">
+      <p>Aulas <strong>expositivas e dialogadas</strong>, articulando teoria e atividades práticas contextualizadas à área de Ciências Ambientais, com base em <strong>três momentos pedagógicos</strong>:</p>
+      <ol class="passos">
+        <li><strong>Problematização inicial:</strong> levantamento dos conhecimentos prévios e apresentação de situações-problema reais sobre o uso da informática no cotidiano e nas Ciências Ambientais.</li>
+        <li><strong>Organização do conhecimento:</strong> aulas dialogadas e atividades práticas em laboratório com o pacote Office e ferramentas da área ambiental, com o professor como <strong>mediador</strong> da aprendizagem.</li>
+        <li><strong>Aplicação do conhecimento:</strong> atividades e projetos práticos — documentos técnicos, análise de dados, gráficos e apresentações — que podem resultar em <strong>relatórios e apresentações de resultados</strong>.</li>
+      </ol>
+      <div class="cd"><h3>Orientação</h3><p>As atividades práticas são sempre acompanhadas de <strong>orientação individual ou coletiva</strong>, com resolução de problemas reais.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Metodologia</a></div>
+  </div>
+
+  <!-- SLIDE 14 - RECURSOS DIDÁTICOS -->
+  <div class="sl" id="s_rec">
+    <div class="slhd"><span class="num">14</span><h2>Recursos Didáticos</h2></div>
+    <div class="slbd">
+      <div class="c2">
+        <div class="bege">
+          <h3>Presenciais</h3>
+          <ul>
+            <li>Datashow</li>
+            <li>Notebook e apresentação de slides</li>
+            <li>Quadro branco, pincel e apagador</li>
+            <li>Laboratório de Informática</li>
+          </ul>
+        </div>
+        <div class="bege">
+          <h3>Ambientes Virtuais</h3>
+          <ul>
+            <li><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a></li>
+            <li><strong>SUAP</strong> — diário, materiais e atividades</li>
+          </ul>
+          <p>Todo o material, as atividades semanais e os avisos ficam concentrados nesses dois ambientes.</p>
+        </div>
+      </div>
+      <div class="cd"><h3>Organização das aulas</h3><p>As aulas práticas acontecem no <strong>Laboratório de Informática</strong>; as exposições teóricas utilizam o <strong>datashow</strong> e o quadro branco.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a></div>
+  </div>
+
+  <!-- SLIDE 15 - AVALIAÇÃO DE APRENDIZAGEM -->
+  <div class="sl" id="s_aval">
+    <div class="slhd"><span class="num">15</span><h2>Avaliação de Aprendizagem</h2></div>
+    <div class="slbd">
+      <p>A avaliação é <strong>contínua</strong>, priorizando os aspectos <strong>qualitativos</strong> sobre os quantitativos, conforme o <strong>Art. 58</strong> da Organização Didática. Além da prova escrita bimestral, são aplicados ao menos <strong>quatro instrumentos</strong> de naturezas distintas por bimestre.</p>
+      <table class="tb2">
+        <tr><th>Bimestre</th><th>Instrumento</th><th>Critérios / Data</th><th>Valor</th></tr>
+        <tr>
+          <td><strong>1º</strong></td>
+          <td>Atividades complementares ao conteúdo</td>
+          <td>Compreensão, interpretação e resolução de problemas — plataformas <strong>professordiegocordeiro.com.br</strong> e <strong>SUAP</strong>; entrega <strong>semanal</strong></td>
+          <td>2 pts por atividade</td>
+        </tr>
+        <tr>
+          <td><strong>1º</strong></td>
+          <td>Prova escrita</td>
+          <td>Domínio dos conteúdos, raciocínio lógico e clareza nas respostas — conforme <strong>calendário</strong></td>
+          <td>8 pts</td>
+        </tr>
+        <tr>
+          <td><strong>2º</strong></td>
+          <td>Atividades complementares ao conteúdo</td>
+          <td>Compreensão, interpretação e resolução de problemas — plataformas <strong>professordiegocordeiro.com.br</strong> e <strong>SUAP</strong>; entrega <strong>semanal</strong></td>
+          <td>2 pts por atividade</td>
+        </tr>
+        <tr>
+          <td><strong>2º</strong></td>
+          <td>Prova escrita</td>
+          <td>Compreensão dos conteúdos, capacidade de interpretação e resolução de problemas</td>
+          <td>8 pts</td>
+        </tr>
+      </table>
+      <div class="cd"><h3>Ponto qualitativo</h3><p>Serão atribuídos <strong>2 pontos</strong> qualitativos às avaliações (mensais e bimestrais), considerando <strong>participação em sala</strong>, <strong>comportamento</strong> e <strong>assiduidade</strong> nas atividades propostas.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Avaliação de Aprendizagem</a></div>
+  </div>
+
+  <!-- SLIDE 16 - BIBLIOGRAFIA -->
+  <div class="sl" id="s_bib">
+    <div class="slhd"><span class="num">16</span><h2>Bibliografia</h2></div>
+    <div class="slbd">
+      <div class="c2">
+        <div class="bege">
+          <h3>Básica</h3>
+          <ul>
+            <li>LONGO, W. P. <strong>Informática: conceitos básicos.</strong> São Paulo: Pearson, 2019.</li>
+            <li>MICROSOFT. <strong>Guias de Word, Excel e PowerPoint.</strong> Microsoft, 2024.</li>
+            <li>SILVA, J. F. <strong>Estatística aplicada às ciências ambientais.</strong> Rio de Janeiro: LTC, 2020.</li>
+          </ul>
+        </div>
+        <div class="bege">
+          <h3>Complementar</h3>
+          <ul>
+            <li>MANZANO, J. A. N. G.; MANZANO, A. L. N. G. <strong>Estudo dirigido de Microsoft Office Excel 2010 avançado.</strong> São Paulo: Érica, 2010.</li>
+            <li>MANZANO, A. L. N. G. <strong>Estudo dirigido de Microsoft Office PowerPoint 2007.</strong> São Paulo: Érica, 2007.</li>
+            <li>MCFEDRIES, P. <strong>Fórmulas e funções com Microsoft Office Excel 2007.</strong> São Paulo: Pearson Prentice Hall, 2009.</li>
+            <li>MORGADO, F. <strong>Formatando teses e monografias com BrOffice.</strong> Rio de Janeiro: Ciência Moderna, 2008.</li>
+            <li>SILVA, M. G. da. <strong>Informática: terminologia básica.</strong> 5. ed. São Paulo: Érica, 2011.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Bibliografia</a></div>
+  </div>
+
+  <!-- SLIDE 17 - PRÓXIMOS PASSOS / ENCERRAMENTO -->
+  <div class="sl" id="s_fim">
+    <div class="slhd"><span class="num">17</span><h2>Próximos Passos</h2></div>
+    <div class="slbd">
+      <div class="divisor">
+        <div class="ov"></div>
+        <div class="in">
+          <div class="rot">Informática Básica · Aula 01</div>
+          <br />
+          <p>O conteúdo da disciplina estará disponível na plataforma <strong>SUAP</strong> e no site <a href="https://professordiegocordeiro.com.br/" style="color:#fff">professordiegocordeiro.com.br</a></p>
+          <p><strong>Dúvidas?</strong> Prof. Diego Cordeiro de Oliveira — <a href="mailto:diego.cordeiro@ifpi.edu.br" style="color:#fff">diego.cordeiro@ifpi.edu.br</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a></div>
+  </div>
+</div><!-- /.sc -->
+
+<div class="ctrl-wrap">
+  <div class="progress-wrap"><div id="progress" class="progress"></div></div>
+  <nav class="ctr">
+    <div id="dots" class="dots"></div>
+    <button class="bn" onclick="openPresentation()" title="Abrir em janela de apresentação">Apresentação</button>
+    <button class="bz sq" onclick="pv()" title="Slide anterior">‹</button>
+    <button class="bz sq" id="play" type="button" title="Reproduzir automaticamente">▶</button>
+    <button class="bz sq" id="full" type="button" title="Tela cheia">⛶</button>
+    <button class="bv sq" onclick="nx()" title="Próximo slide">›</button>
+  </nav>
+</div>
+
+<script src="aula01.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

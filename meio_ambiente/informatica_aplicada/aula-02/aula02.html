@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Informática Aplicada · Aula 02 — Introdução à Informática</title>
+<link rel="stylesheet" href="aula02.css">
+</head>
+<body class="projetor">
+<header class="tb">
+  <h2>Informática Aplicada · IFPI — Campus Barras</h2>
+  <div class="tb-right">
+    <div class="fz" aria-label="Tamanho do texto">
+      <button onclick="fz(-1)" title="Diminuir tamanho da fonte">A−</button>
+      <span id="fzpct">100%</span>
+      <button onclick="fz(1)" title="Aumentar tamanho da fonte">A+</button>
+    </div>
+    <button class="cz" id="cz" type="button" onclick="toggleProjetor()" title="Tema projetor ativo — clique para o tema de leitura" aria-pressed="true">◉ Projetor</button>
+    <span class="ct" id="ctr">1 / 14</span>
+  </div>
+</header>
+<div class="fita"></div>
+<div class="sc">
+
+  <!-- SLIDE 1 - CAPA -->
+  <div class="sl ac" id="s1">
+    <div class="capa">
+      <div class="esq">
+        <div class="rot">Aula 02 · Informática Aplicada</div>
+        <h1>Introdução à Informática</h1>
+        <p class="sub">Do ábaco à era moderna: história, máquinas e conceitos</p>
+        <p class="sub">Técnico em Meio Ambiente · 1º Módulo · 2026/2</p>
+        <p class="sub">Prof. Diego Cordeiro de Oliveira</p>
+        <div class="faixa"></div>
+      </div>
+      <div class="dir">
+        <img src="logo.png" alt="Logo do IFPI">
+        <h2>Instituto Federal do Piauí</h2>
+        <p>Promover uma educação de excelência, direcionada às demandas sociais.</p>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a></div>
+  </div>
+
+  <!-- SLIDE 2 - AGENDA -->
+  <div class="sl" id="s_agenda">
+    <div class="slhd"><span class="num">2</span><h2>O que vamos explorar hoje?</h2></div>
+    <div class="slbd">
+      <div class="c2">
+        <div class="bege">
+          <h3>1. Histórico dos computadores</h3>
+          <p>Aprenderemos sobre as <strong>origens</strong> e os primeiros conceitos que moldaram a computação.</p>
+        </div>
+        <div class="bege">
+          <h3>2. Dispositivos e máquinas pioneiras</h3>
+          <p>Descobriremos os primeiros <strong>dispositivos de cálculo</strong> e os computadores eletrônicos iniciais.</p>
+        </div>
+        <div class="bege">
+          <h3>3. Componentes e conceitos-chave</h3>
+          <p>Exploraremos a evolução dos componentes e entenderemos <strong>bits, bytes</strong> e sistemas numéricos.</p>
+        </div>
+        <div class="bege">
+          <h3>4. A era moderna e o futuro</h3>
+          <p>Analisaremos a jornada do <strong>mainframe</strong> até as tendências atuais da tecnologia.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a></div>
+  </div>
+
+  <!-- SLIDE 3 - COMO ERAM OS COMPUTADORES NO INÍCIO -->
+  <div class="sl" id="s_inicio">
+    <div class="slhd"><span class="num">3</span><h2>Como eram os computadores no início?</h2></div>
+    <div class="slbd">
+      <p>Os primeiros computadores eram <strong>enormes máquinas</strong> que ocupavam salas inteiras, consumiam muita energia e tinham capacidade de processamento limitada se comparada aos padrões atuais.</p>
+      <div class="fg">
+        <img class="foto" src="img/computadores-iniciais.jpg" alt="Computador de grande porte ocupando uma sala inteira">
+        <div class="ftx">
+          <h3>De onde vem a palavra "computador"?</h3>
+          <p>Do latim <strong>computare</strong> — <em>calcular ou contar</em>. Inicialmente referia-se às <strong>pessoas</strong> que realizavam cálculos matemáticos.</p>
+          <p>Com o tempo, o termo passou a designar as <strong>máquinas que automatizavam</strong> os cálculos, evoluindo para os dispositivos eletrônicos que conhecemos hoje.</p>
+        </div>
+      </div>
+      <div class="cd"><h3>Para que serviam</h3><p>Eram utilizados principalmente para <strong>cálculos científicos e militares</strong> — uma operação complexa que exigia conhecimentos técnicos específicos.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 02 · Introdução à Informática</a></div>
+  </div>
+
+  <!-- SLIDE 4 - VISÃO DA SOCIEDADE E PREVISÕES EQUIVOCADAS -->
+  <div class="sl" id="s_previsoes">
+    <div class="slhd"><span class="num">4</span><h2>O que a sociedade pensava (e errou)</h2></div>
+    <div class="slbd">
+      <div class="fg">
+        <div class="ftx">
+          <div class="dc">"No futuro, os computadores não podem pesar mais do que 1,5 tonelada"<span class="aut">Edição de 1949 da Revista Popular Mechanics</span></div>
+          <div class="dc">"Penso que há talvez no mundo um mercado para 5 computadores"<span class="aut">Thomas Watson, presidente da IBM, 1943</span></div>
+          <div class="dc">"Viajei por todos os lados neste país e posso assegurar-lhes que o processamento de dados é uma ilusão que não perdura até o fim do ano"<span class="aut">Editor encarregado de livros técnicos da Prentice Hall, 1957</span></div>
+        </div>
+        <figure class="foto-leg">
+          <img class="foto" src="img/previsoes.png" alt="Ilustração de uma bola de cristal">
+          <figcaption>Previsões que não se cumpriram</figcaption>
+        </figure>
+      </div>
+      <div class="ca"><h3>E as previsões continuaram…</h3><p>"Não há nenhuma razão para que alguém queira ter um computador em casa." — <strong>Ken Olson</strong>, presidente e fundador da Digital Equipment Corp., 1977. Antes disso, a <strong>Atari</strong> e a <strong>Hewlett-Packard</strong> recusaram investir no projeto de <strong>Steve Jobs</strong>: a HP alegou que ele "nem havia terminado a faculdade".</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 02 · Introdução à Informática</a></div>
+  </div>
+
+  <!-- SLIDE 5 - BENEFÍCIOS DA TECNOLOGIA -->
+  <div class="sl" id="s_beneficios">
+    <div class="slhd"><span class="num">5</span><h2>Benefícios da tecnologia no nosso cotidiano</h2></div>
+    <div class="slbd">
+      <div class="c2">
+        <div class="bege">
+          <h3>Comunicação</h3>
+          <p>Facilidade de comunicação <strong>instantânea</strong> com pessoas em qualquer parte do mundo, através de dispositivos conectados à internet.</p>
+        </div>
+        <div class="bege">
+          <h3>Educação</h3>
+          <p>Acesso a informações e conhecimento de forma <strong>rápida e democrática</strong>, possibilitando o aprendizado contínuo.</p>
+        </div>
+        <div class="bege">
+          <h3>Saúde</h3>
+          <p>Avanços em <strong>diagnósticos, tratamentos e monitoramento</strong> de pacientes através de tecnologias médicas avançadas.</p>
+        </div>
+      </div>
+      <div class="fg">
+        <img class="foto" src="img/beneficios-tecnologia.jpg" alt="Profissional de saúde realizando uma teleconsulta por vídeo">
+        <div class="ftx">
+          <div class="cd"><h3>No nosso cotidiano</h3><p>A tecnologia <strong>aproxima pessoas</strong>, amplia o acesso à informação e leva serviços essenciais — como a <strong>saúde</strong> — a quem está distante.</p></div>
+          <p class="cred">Foto: Intel Free Press · Wikimedia Commons · CC BY-SA 2.0</p>
+        </div>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 02 · Introdução à Informática</a></div>
+  </div>
+
+  <!-- SLIDE 6 - VÍDEO: OS COMPUTADORES ERAM PESSOAS (substitui os antigos slides 6 e 7) -->
+  <div class="sl" id="s_video">
+    <div class="slhd"><span class="num">6</span><h2>Os computadores eram pessoas</h2></div>
+    <div class="slbd fill">
+      <p>Antes das máquinas, <strong>calcular era um trabalho humano</strong> — e foi assim que a computação começou. Assista ao episódio da série <em>Saga dos Computadores</em>:</p>
+      <div class="video">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/xajcV4lwY3Q?si=ddr7LgQOqpVwV-EV" title="Os computadores eram pessoas — Saga dos Computadores Ep.1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <p class="cred">Vídeo: <strong>Manual do Mundo</strong> · #SagaDosComputadores Ep.1 · <a href="https://www.youtube.com/watch?v=xajcV4lwY3Q" target="_blank" rel="noopener" title="Abrir o vídeo em nova aba caso o player não carregue">youtube.com/watch?v=xajcV4lwY3Q</a></p>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.youtube.com/watch?v=xajcV4lwY3Q" target="_blank" rel="noopener">YouTube · Manual do Mundo — Saga dos Computadores Ep.1</a></div>
+  </div>
+
+  <!-- SLIDE 8 - PRIMEIROS COMPUTADORES ELETRÔNICOS -->
+  <div class="sl" id="s_eletronicos">
+    <div class="slhd"><span class="num">7</span><h2>Primeiros computadores eletrônicos</h2></div>
+    <div class="slbd fill">
+      <table class="tb2 prog">
+        <tr>
+          <th>Ano</th>
+          <th>Máquina</th>
+          <th>Características</th>
+        </tr>
+        <tr>
+          <td><span class="cod">1943</span></td>
+          <td><strong>Colossus</strong></td>
+          <td>Sob liderança de <strong>Alan Turing</strong>, o governo britânico criou máquinas para decifrar os códigos de Hitler. Cada máquina usava <strong>2.000 válvulas eletrônicas</strong> no lugar de relés eletromecânicos.</td>
+        </tr>
+        <tr>
+          <td><span class="cod">1944</span></td>
+          <td><strong>Mark I</strong></td>
+          <td>Primeiro computador <strong>eletromecânico</strong>, construído por Harvard com US$ 500 mil: 15 m de comprimento, 2,5 m de altura, 760.000 peças e 800 km de fios. Soma em 0,3 s; multiplicação em 0,4 s; divisão em 10 s.</td>
+        </tr>
+        <tr>
+          <td><span class="cod">1946</span></td>
+          <td><strong>ENIAC</strong></td>
+          <td>Considerado o primeiro computador <strong>eletrônico digital de propósito geral</strong>: 27 toneladas, 167 m² e cerca de <strong>18.000 válvulas</strong>. Fazia 5.000 adições por segundo — mil vezes mais rápido que o Mark I. Essencial para cálculos balísticos e de energia nuclear.</td>
+        </tr>
+      </table>
+      <div class="fotos3">
+        <figure><img class="foto" src="img/colossus.jpg" alt="Sala com os painéis do computador Colossus"><figcaption>Colossus (1943)</figcaption></figure>
+        <figure><img class="foto" src="img/mark1.jpg" alt="Computador Harvard Mark I, com o rótulo IBM Automatic Sequence Controlled Calculator"><figcaption>Mark I (1944)</figcaption></figure>
+        <figure><img class="foto" src="img/eniac.jpg" alt="Painéis e operadoras do computador ENIAC"><figcaption>ENIAC (1946)</figcaption></figure>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 02 · Introdução à Informática</a></div>
+  </div>
+
+  <!-- SLIDE 9 - ALAN TURING -->
+  <div class="sl" id="s_turing">
+    <div class="slhd"><span class="num">8</span><h2>Alan Turing: o pai da Ciência da Computação</h2></div>
+    <div class="slbd">
+      <div class="fg">
+        <img class="foto" src="img/turing.jpg" alt="Retrato de Alan Turing">
+        <div class="ftx">
+          <h3>Máquina de Turing</h3>
+          <p>Modelo teórico que lançou as <strong>bases para todos os computadores modernos</strong> e para a computação programável.</p>
+          <h3>Quebra de códigos</h3>
+          <p>Liderou a equipe britânica que decifrou o <strong>código Enigma</strong> nazista durante a Segunda Guerra Mundial, usando o "Colossus".</p>
+          <h3>Inteligência Artificial</h3>
+          <p>Propôs o <strong>Teste de Turing</strong> como critério para determinar se uma máquina exibe comportamento inteligente indistinguível de um humano.</p>
+          <h3>Legado duradouro</h3>
+          <p>Suas ideias visionárias moldaram a ciência da computação e a IA, sendo reconhecido como um dos maiores pensadores do século XX.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 02 · Introdução à Informática</a></div>
+  </div>
+
+  <!-- SLIDE 10 - A ERA DAS VÁLVULAS -->
+  <div class="sl" id="s_valvulas">
+    <div class="slhd"><span class="num">9</span><h2>A era das válvulas</h2></div>
+    <div class="slbd">
+      <div class="fg">
+        <img class="foto" src="img/eniac-valvulas.jpg" alt="Fileiras de válvulas a vácuo de vidro instaladas em um painel do ENIAC">
+        <div class="ftx">
+          <h3>Válvulas a vácuo</h3>
+          <p>Possuíam aproximadamente o <strong>tamanho de uma lâmpada elétrica</strong>. Geravam bastante calor, causando problemas frequentes. Quando paravam, não se sabia se estavam <strong>queimadas</strong> ou se era um reflexo do programa.</p>
+          <h3>O ENIAC (1951-1958)</h3>
+          <p>Continha <strong>19.000 válvulas</strong> e 1.500 relés, além de resistores, capacitores e indutores. Consumia cerca de <strong>200 kWatts</strong> de potência. Sua memória armazenava até 20 números de 10 dígitos e realizava <strong>5.000 adições</strong> e 360 multiplicações por segundo.</p>
+          <p class="cred">Foto: Erik Pitti · Wikimedia Commons · <a href="https://commons.wikimedia.org/wiki/File:ENIAC_Tubes_(2585374699).jpg" target="_blank" rel="noopener">CC BY 2.0</a></p>
+        </div>
+      </div>
+      <div class="cd"><h3>Compare</h3><p>O ENIAC consumia <strong>200 kW</strong> para realizar 5.000 adições por segundo. Um notebook atual consome cerca de 0,05 kW e executa bilhões de operações por segundo.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 02 · Introdução à Informática</a></div>
+  </div>
+
+  <!-- SLIDE 12 - EVOLUÇÃO DOS COMPONENTES ELETRÔNICOS -->
+  <div class="sl" id="s_componentes">
+    <div class="slhd"><span class="num">10</span><h2>Evolução dos componentes eletrônicos</h2></div>
+    <div class="slbd">
+      <div class="comp">
+        <div class="bege">
+          <figure class="amp">
+            <img class="foto" src="img/valvula.jpg" alt="Três válvulas eletrônicas de vidro (modelo 12AU7) sobre fundo claro">
+          </figure>
+          <h3>1. Válvulas <span class="tga">1940s</span></h3>
+          <p>Primeiros componentes eletrônicos: grandes, consumiam muita energia e geravam muito calor.</p>
+          <p class="cred">Foto: Mister rf · Wikimedia Commons · <a href="https://commons.wikimedia.org/wiki/File:12AU7_Tronix.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
+        </div>
+        <div class="bege">
+          <figure class="amp">
+            <img class="foto" src="img/transistor.jpg" alt="Réplica do primeiro transistor da Bell Labs ao lado de um transistor comercial">
+          </figure>
+          <h3>2. Transistores <span class="tga">1947</span></h3>
+          <p>Desenvolvidos pela <strong>Bell Labs</strong>, eram dispositivos pequenos que transferiam sinais eletrônicos, <strong>substituindo as válvulas</strong>.</p>
+          <p class="cred">Foto: Mister rf · Wikimedia Commons · <a href="https://commons.wikimedia.org/wiki/File:A_replica_of_the_first_working_transistor_02.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
+        </div>
+        <div class="bege">
+          <figure class="amp">
+            <img class="foto" src="img/circuito-integrado.jpg" alt="Réplica do primeiro circuito integrado, criado por Jack Kilby">
+          </figure>
+          <h3>3. Circuitos Integrados <span class="tga">1960</span></h3>
+          <p>A IBM lança o <strong>IBM/360</strong> com CIs — pastilhas conhecidas como <strong>chips</strong>, que integravam dezenas de transistores em circuitos complexos.</p>
+          <p class="cred">Foto: Florian Schäffer · Wikimedia Commons · <a href="https://commons.wikimedia.org/wiki/File:Replica_IC.png" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
+        </div>
+        <div class="bege">
+          <figure class="amp">
+            <img class="foto" src="img/microprocessador.jpg" alt="Processador Intel C4004, o primeiro microprocessador comercial">
+          </figure>
+          <h3>4. Microprocessadores <span class="tga">1971</span></h3>
+          <p>O primeiro microprocessador comercial foi construído pela <strong>Intel</strong>: o <strong>4004</strong>, com 4 bits, 46 instruções e 2.300 transistores.</p>
+          <p class="cred">Foto: Thomas Nguyen · Wikimedia Commons · <a href="https://commons.wikimedia.org/wiki/File:Intel_C4004.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 02 · Introdução à Informática</a></div>
+  </div>
+
+  <!-- SLIDE 13 - DECIMAL X BINÁRIO -->
+  <div class="sl" id="s_binario">
+    <div class="slhd"><span class="num">11</span><h2>Sistema Decimal × Sistema Binário</h2></div>
+    <div class="slbd">
+      <div class="c2">
+        <div class="bege">
+          <h3>Sistema Decimal</h3>
+          <ul>
+            <li>Temos <strong>10 opções</strong> de representação numérica (<strong>0 a 9</strong>).</li>
+            <li>Cada casa tem 10 algarismos possíveis e vale <strong>10× mais</strong> que a anterior (unidades, dezenas, centenas…).</li>
+            <li>Possui vários divisores inteiros, o que <strong>facilita o fracionamento</strong>: 2, 3, 4, 6, 12.</li>
+          </ul>
+        </div>
+        <div class="bege">
+          <h3>Sistema Binário</h3>
+          <ul>
+            <li>Utiliza apenas <strong>dois dígitos: 0 e 1</strong> (desligado e ligado).</li>
+            <li><strong>Perfeito para computadores</strong>, que funcionam ligando e desligando interruptores (transistores).</li>
+            <li>Cada dígito acrescentado dobra o valor: <strong>2, 4, 8, 16, 32, 64…</strong></li>
+          </ul>
+        </div>
+        <div class="bege arte">
+          <figure class="amp">
+            <img class="foto" src="img/relogio-binario.jpg" alt="Dois relógios digitais lado a lado com o mesmo horário: à esquerda em algarismos decimais e à direita com lâmpadas binárias acesas e apagadas">
+            <figcaption>Toda a informação digital é, no fundo, uma sequência de 0s e 1s</figcaption>
+          </figure>
+          <p class="cred">Foto: Julo · Wikimedia Commons · domínio público</p>
+        </div>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 02 · Introdução à Informática</a></div>
+  </div>
+
+  <!-- SLIDE 14 - BITS, BYTES E UNIDADES -->
+  <div class="sl" id="s_unidades">
+    <div class="slhd"><span class="num">12</span><h2>Bits, Bytes e unidades de informação</h2></div>
+    <div class="slbd fill">
+      <table class="tb2 prog denso">
+        <tr>
+          <th>Unidade</th>
+          <th>Equivalência</th>
+          <th>Em bits</th>
+        </tr>
+        <tr>
+          <td><strong>Bit</strong></td>
+          <td>Menor unidade de informação em computação. Representa um dígito binário (<strong>0 ou 1</strong>).</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Byte</strong></td>
+          <td>Conjunto de <strong>8 bits</strong>: pode representar 256 valores diferentes (2⁸).</td>
+          <td>8 bits</td>
+        </tr>
+        <tr>
+          <td><strong>Kilobyte (KB)</strong></td>
+          <td>1.024 bytes (aproximadamente mil bytes).</td>
+          <td>8.192 bits</td>
+        </tr>
+        <tr>
+          <td><strong>Megabyte (MB)</strong></td>
+          <td>1.024 KB (aproximadamente um milhão de bytes).</td>
+          <td>8.388.608 bits</td>
+        </tr>
+        <tr>
+          <td><strong>Gigabyte (GB)</strong></td>
+          <td>1.024 MB (aproximadamente um bilhão de bytes).</td>
+          <td>8.589.934.592 bits</td>
+        </tr>
+        <tr>
+          <td><strong>Terabyte (TB)</strong></td>
+          <td>1.024 GB (aproximadamente um trilhão de bytes).</td>
+          <td>8.796.093.022.208 bits</td>
+        </tr>
+      </table>
+      <div class="cd"><h3>Bits × Bytes na prática</h3><p>A <strong>velocidade de rede</strong> é medida em <strong>kbps</strong> (kilobits por segundo), enquanto o <strong>tamanho de arquivos</strong> usa <strong>kB/s</strong> (kilobytes por segundo) — daí a diferença entre a velocidade contratada e a velocidade real de download. <strong>Curiosidade:</strong> cada emoji é representado por <strong>4 bytes</strong>, o que permite uma grande variedade de símbolos.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 02 · Introdução à Informática</a></div>
+  </div>
+
+  <!-- SLIDE 15 - A EVOLUÇÃO CONTINUA -->
+  <div class="sl" id="s_futuro">
+    <div class="slhd"><span class="num">13</span><h2>A evolução continua: do mainframe ao futuro</h2></div>
+    <div class="slbd">
+      <ol class="passos">
+        <li><strong>Mainframes (1970s):</strong> computadores de <strong>grande porte</strong>, com velocidades de processamento, confiabilidade e capacidade de armazenamento ampliadas.</li>
+        <li><strong>Supercomputadores:</strong> máquinas que manipulam <strong>gigantescas quantidades de dados</strong>, utilizadas em pesquisa, governos e uso militar.</li>
+        <li><strong>Computadores pessoais:</strong> projetados para atender às necessidades de <strong>usuários domésticos</strong>, popularizando a tecnologia.</li>
+        <li><strong>Internet:</strong> revolução que permitiu a <strong>conexão entre computadores</strong>, hoje onipresente e impulsionada pelos smartphones.</li>
+        <li><strong>Futuro:</strong> <strong>computação quântica</strong>, dispositivos cada vez mais integrados e menores, e robôs inteligentes.</li>
+      </ol>
+      <div class="tira">
+        <figure>
+          <img class="foto" src="img/mainframe.jpg" alt="Mainframe IBM System/360 com painéis frontais e unidades de fita magnética">
+          <figcaption>1. Mainframe</figcaption>
+        </figure>
+        <figure>
+          <img class="foto" src="img/supercomputador.jpg" alt="Sala com os racks iluminados do supercomputador Summit">
+          <figcaption>2. Supercomputador</figcaption>
+        </figure>
+        <figure>
+          <img class="foto" src="img/computador-pessoal.jpg" alt="Computador pessoal IBM PC 5150 com monitor e teclado">
+          <figcaption>3. Computador pessoal</figcaption>
+        </figure>
+        <figure>
+          <img class="foto" src="img/internet.jpg" alt="Mapa visual da Internet com milhares de conexões entre redes">
+          <figcaption>4. Internet</figcaption>
+        </figure>
+        <figure>
+          <img class="foto" src="img/quantico.jpg" alt="Computador quântico IBM Quantum System One, com estrutura dourada em sala refrigerada">
+          <figcaption>5. Computação quântica</figcaption>
+        </figure>
+      </div>
+      <p class="cred cred-tira">Fotos: Erik Pitti · O.R.N.L. · Ik T · Opte Project · IBM Research · Wikimedia Commons · CC BY 2.0 / 2.5</p>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 02 · Introdução à Informática</a></div>
+  </div>
+
+  <!-- VÍDEO: COMPUTADORES QUÂNTICOS (novo slide) -->
+  <div class="sl" id="s_video_quantico">
+    <div class="slhd"><span class="num">14</span><h2>Computação quântica: o futuro já começou</h2></div>
+    <div class="slbd fill">
+      <p>O último item da nossa linha do tempo já existe em laboratório: os <strong>computadores quânticos</strong> prometem resolver em <strong>segundos</strong> problemas de <strong>medicina</strong>, <strong>energia</strong> e <strong>segurança digital</strong> que hoje levariam milhares de anos.</p>
+      <div class="video">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/e3fz3dqhN44?si=vvcuWwIoMLRSaClc" title="Quantum Computers, explained with MKBHD — Cleo Abram" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <p class="cred">Vídeo: <strong>Cleo Abram</strong> · Quantum Computers, explained with MKBHD <em>(em inglês — ative as legendas)</em> · <a href="https://www.youtube.com/watch?v=e3fz3dqhN44" target="_blank" rel="noopener" title="Abrir o vídeo em nova aba caso o player não carregue">youtube.com/watch?v=e3fz3dqhN44</a></p>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.youtube.com/watch?v=e3fz3dqhN44" target="_blank" rel="noopener">YouTube · Cleo Abram — Quantum Computers, explained with MKBHD</a></div>
+  </div>
+
+  <!-- SLIDE 16 - ENCERRAMENTO -->
+  <div class="sl" id="s_fim">
+    <div class="slhd"><span class="num">15</span><h2>Dúvidas?</h2></div>
+    <div class="slbd">
+      <div class="divisor">
+        <img class="bg" src="img/encerramento.jpg" alt="">
+        <div class="ov"></div>
+        <div class="in">
+          <div class="rot">Informática Aplicada · Aula 02</div>
+          <h1>Dúvidas?</h1>
+          <p>Estamos aqui para responder.</p>
+          <p>Prof. Diego Cordeiro de Oliveira — <a href="mailto:diego.cordeiro@ifpi.edu.br" style="color:#fff">diego.cordeiro@ifpi.edu.br</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a></div>
+  </div>
+</div><!-- /.sc -->
+
+<div class="ctrl-wrap">
+  <div class="progress-wrap"><div id="progress" class="progress"></div></div>
+  <nav class="ctr">
+    <div id="dots" class="dots"></div>
+    <button class="bn" onclick="openPresentation()" title="Abrir em janela de apresentação">Apresentação</button>
+    <button class="bz sq" onclick="pv()" title="Slide anterior">‹</button>
+    <button class="bz sq" id="play" type="button" title="Reproduzir automaticamente">▶</button>
+    <button class="bz sq" id="full" type="button" title="Tela cheia">⛶</button>
+    <button class="bv sq" onclick="nx()" title="Próximo slide">›</button>
+  </nav>
+</div>
+
+<script src="aula02.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
