@@ -1,0 +1,21 @@
+# ---- macOS ----
+.DS_Store
+._*
+.AppleDouble
+
+# ---- Windows ----
+Thumbs.db
+Desktop.ini
+
+# ---- Editores ----
+.vscode/
+.idea/
+*.swp
+*~
+
+# ---- Python (usado pelo scripts/gerar_index.py) ----
+__pycache__/
+*.pyc
+
+# ---- Saída do build do GitHub Pages ----
+_site/
