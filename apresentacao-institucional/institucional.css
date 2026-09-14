@@ -1,0 +1,3521 @@
+/* ============================================================
+   Aula Inaugural · IFPI — Campus Barras
+   Apresentação institucional (auditório) — passador de slides
+   Base: slides/meio_ambiente/informatica_aplicada/aula-02/aula02.css
+   Identidade visual: template institucional "Aula inaugural -
+   Campus Barras" (Poppins, mármore 7%, verde #359830, vermelho
+   #C90C0F, motivo de quadradinhos do logo IFPI).
+   ============================================================ */
+
+/* ---------- Fontes self-hosted (funcionam sem internet) ---------- */
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('fonts/poppins-light.woff2') format('woff2')
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/poppins-regular.woff2') format('woff2')
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('fonts/poppins-semibold.woff2') format('woff2')
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('fonts/poppins-bold.woff2') format('woff2')
+}
+
+:root {
+    /* —— superfícies (branco + textura de mármore a 7%) —— */
+    --papel: #F6F7F5;
+    --sup: #FFFFFF;
+    --bg: #F4F7F3;
+    /* —— texto —— */
+    --tinta-1: #12161A;
+    --tinta-2: #3F4A44;
+    --p: #12161A;
+    /* —— verde IFPI (logo #359830) —— */
+    --ve: #359830;
+    --ves: #EDF6EA;
+    --vee: #1E6B2A;
+    --veex: #24691F;
+    --veex-2: #1E5E1A;
+    --veex-3: #14400F;
+    --verde-ln: #A8C7A0;
+    --mk: #D8ECD2;
+    /* —— vermelho IFPI (logo #C90C0F) —— */
+    --vm: #C90C0F;
+    --vmc: #FBEDEC;
+    /* —— acentos do template institucional —— */
+    --amarelo: #F6B833;
+    --turquesa: #63D0C4;
+    --rosa: #E84CA5;
+    --azul: #1F5C8B;
+    /* —— linhas e foco —— */
+    --linha: #7C8A80;
+    --linha-s: #DDE3DB;
+    --foco: #24691F;
+    /* mármore do template (imagem com 93% de branco por cima = 7%) */
+    --textura: linear-gradient(rgba(255, 255, 255, .93), rgba(255, 255, 255, .93)), url('img/textura-fundo.jpg');
+    color-scheme: light;
+    /* Fonte base fluida — escala com a tela */
+    --fs: clamp(14px, 1.8vw + 4px, 22px);
+    --fz: 1;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+}
+
+html,
+body {
+    height: 100%
+}
+
+body {
+    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+    background: var(--papel);
+    color: var(--p);
+    overflow: hidden;
+    height: 100vh;
+    /* fallback */
+    height: 100dvh;
+    display: flex;
+    flex-direction: column
+}
+
+img {
+    max-width: 100%;
+    height: auto
+}
+
+/* ---------- Barra superior ---------- */
+.tb {
+    background: linear-gradient(90deg, var(--veex-3), var(--veex-2));
+    color: #fff;
+    padding: clamp(8px, 1.2vw, 14px) clamp(14px, 3vw, 32px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-shrink: 0
+}
+
+.tb h2 {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(14px, 1.6vw + 4px, 21px);
+    font-weight: 700;
+    line-height: 1.2
+}
+
+.tb-right {
+    display: flex;
+    align-items: center;
+    gap: clamp(6px, 1vw, 12px)
+}
+
+.tb .ct {
+    background: rgba(255, 255, 255, .16);
+    border: 1px solid rgba(255, 255, 255, .4);
+    border-radius: 18px;
+    padding: 3px 14px;
+    font-weight: 700;
+    font-size: var(--fs);
+    white-space: nowrap
+}
+
+.fz {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: rgba(255, 255, 255, .14);
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 8px;
+    padding: 3px
+}
+
+.fz button {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    font-size: var(--fs);
+    cursor: pointer;
+    padding: 4px 9px;
+    border-radius: 6px;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    line-height: 1
+}
+
+.fz button:hover {
+    background: rgba(255, 255, 255, .28)
+}
+
+.fz span {
+    min-width: 46px;
+    text-align: center;
+    font-size: calc(var(--fs) * .72);
+    font-weight: 700
+}
+
+.fita {
+    height: 5px;
+    background: linear-gradient(90deg, var(--ve), var(--vm));
+    flex-shrink: 0
+}
+
+/* ---------- Container de slides ---------- */
+.sc {
+    flex: 1;
+    display: flex;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    min-height: 0
+}
+
+.sl {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: var(--sup);
+    overflow: auto;
+    font-size: calc(var(--fs) * var(--fz));
+    scroll-behavior: smooth;
+    scroll-padding-top: 76px
+}
+
+.sl.ac {
+    display: flex;
+    flex-direction: column
+}
+
+.slhd {
+    background: linear-gradient(90deg, var(--veex-3), var(--veex-2));
+    color: #fff;
+    border-bottom: 3px solid var(--verde-ln);
+    padding: clamp(12px, 1.8vw, 20px) clamp(14px, 3vw, 30px);
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1.2vw, 16px);
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 5
+}
+
+.slhd .num {
+    background: #fff;
+    color: var(--ve);
+    border-radius: 8px;
+    min-width: clamp(34px, 4vw, 44px);
+    height: clamp(34px, 4vw, 44px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-weight: 800;
+    font-size: 1.05em;
+    box-shadow: 0 1px 3px rgba(16, 32, 24, .28);
+    flex-shrink: 0
+}
+
+.slhd h2 {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(1.2em, 3vw, 1.65em);
+    font-weight: 700;
+    line-height: 1.15
+}
+
+.slbd {
+    padding: clamp(14px, 2vw + 6px, 26px) clamp(14px, 3vw, 30px) clamp(16px, 2vw, 22px);
+    margin-top: 0;
+    margin-bottom: auto
+}
+
+/* ---------- Tipografia do conteúdo ---------- */
+.sl h3 {
+    color: var(--vee);
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: 1.05em;
+    margin: 12px 0 6px
+}
+
+.sl p,
+.sl li {
+    font-size: 1em;
+    line-height: 1.6;
+    margin: 5px 0
+}
+
+.sl ul {
+    list-style: none;
+    margin-left: 2px
+}
+
+.sl ul>li {
+    padding-left: 20px;
+    position: relative
+}
+
+.sl ul>li::before {
+    content: "❑";
+    color: var(--ve);
+    font-size: .72em;
+    position: absolute;
+    left: 0;
+    top: 6px
+}
+
+.mk {
+    background: linear-gradient(transparent 55%, var(--mk) 55%);
+    font-weight: 600
+}
+
+.bd {
+    display: inline-block;
+    background: var(--ve);
+    color: #fff;
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-weight: 700;
+    font-size: .85em;
+    margin-right: 4px
+}
+
+.bd.vm {
+    background: var(--vm)
+}
+
+/* ---------- Cartões / caixas ---------- */
+.cd {
+    background: var(--ves);
+    border-left: 6px solid var(--ve);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0
+}
+
+.cd h3 {
+    color: var(--vee)
+}
+
+.ca {
+    background: var(--vmc);
+    border-left: 6px solid var(--vm);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0
+}
+
+.ca h3 {
+    color: var(--vm)
+}
+
+.bege {
+    background: var(--bg);
+    border: 1px solid var(--linha);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    box-shadow: 0 1px 2px rgba(16, 32, 24, .04), 0 4px 12px rgba(16, 32, 24, .05)
+}
+
+.bege h3 {
+    color: var(--vee);
+    margin-top: 0
+}
+
+.dc {
+    background: var(--ves);
+    border-left: 6px solid var(--linha);
+    padding: 8px 12px;
+    margin: 8px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: .92em
+}
+
+/* ---------- Imagem + texto (flex) ---------- */
+.fg {
+    display: flex;
+    gap: clamp(10px, 1.8vw, 20px);
+    align-items: center;
+    flex-wrap: wrap
+}
+
+.fg .foto {
+    width: min(45%, 400px);
+    height: auto;
+    max-height: 48vh;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: var(--sup);
+    border: 1px solid var(--linha);
+    padding: 6px
+}
+
+.ftx {
+    flex: 1;
+    min-width: 260px
+}
+
+/* ---------- Grid de 2 colunas (responsiva) ---------- */
+.c2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: clamp(10px, 1.5vw, 16px);
+    margin: 12px 0
+}
+
+/* ---------- Tabela ---------- */
+.tb2 {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: .9em;
+    display: block;
+    overflow-x: auto
+}
+
+.tb2 th {
+    background: var(--ves);
+    color: var(--vee);
+    border-bottom: 2px solid var(--ve);
+    padding: 9px 12px;
+    text-align: left;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: .94em
+}
+
+.tb2 td {
+    border: 1px solid var(--linha);
+    padding: 9px 12px;
+    vertical-align: top
+}
+
+.tb2 tr:nth-child(even) td {
+    background: var(--bg)
+}
+
+/* ---------- Lista numerada de passos ---------- */
+.passos {
+    counter-reset: ps;
+    list-style: none;
+    margin-left: 0
+}
+
+.passos li {
+    position: relative;
+    padding: 6px 0 6px 40px;
+    margin: 4px 0
+}
+
+.passos li::before {
+    counter-increment: ps;
+    content: counter(ps);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    background: var(--ve);
+    color: #fff;
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-weight: 800;
+    font-size: .85em;
+    font-family: 'Montserrat', Arial, sans-serif
+}
+
+/* ---------- Abas / painéis interativos ---------- */
+.abas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 10px 0
+}
+
+.abas button {
+    border: 2px solid var(--ve);
+    background: #fff;
+    color: var(--ve);
+    border-radius: 8px;
+    padding: 7px 16px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: .86em;
+    transition: background .15s, color .15s
+}
+
+.abas button.on {
+    background: var(--ve);
+    color: #fff
+}
+
+.painel {
+    display: none;
+    background: var(--bg);
+    border: 2px solid var(--linha);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 2px
+}
+
+.painel.on {
+    display: block
+}
+
+/* ---------- Caixa "Reforçar / Revelar" ---------- */
+.rev {
+    cursor: pointer;
+    background: var(--bg);
+    border: 2px dashed var(--linha);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-weight: 700;
+    color: var(--vee);
+    text-align: center;
+    margin: 8px 0;
+    transition: transform .15s
+}
+
+.rev:hover {
+    transform: scale(1.01)
+}
+
+.rev .resp {
+    display: none;
+    margin-top: 8px;
+    font-weight: 400;
+    color: var(--p);
+    font-size: .9em;
+    text-align: left
+}
+
+.rev.rv {
+    cursor: default;
+    border-style: solid;
+    border-color: var(--ve)
+}
+
+.rev.rv .resp {
+    display: block
+}
+
+/* ---------- Referência de consulta ---------- */
+.ref {
+    margin-top: auto;
+    padding: 12px 16px;
+    background: var(--ves);
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    font-size: .85em;
+    color: var(--tinta-2);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px
+}
+
+.ref a {
+    color: var(--vee);
+    font-weight: 700;
+    word-break: break-word;
+    text-decoration: underline
+}
+
+.ref .rt {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-weight: 800;
+    color: var(--vee);
+    margin-right: 4px
+}
+
+
+/* ---------- Capa ---------- */
+.capa {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    min-height: 50vh
+}
+
+.capa .esq {
+    background: linear-gradient(135deg, var(--veex-3), var(--veex-2));
+    color: #fff;
+    padding: clamp(22px, 4vw, 44px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+}
+
+.capa .esq h1 {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(1.9em, 5vw, 3.2em);
+    line-height: 1.15;
+    margin: 6px 0 4px
+}
+
+.capa .esq .rot {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(.7em, 1.6vw, .95em);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #CFE6D9
+}
+
+.capa .esq .sub {
+    font-size: clamp(1em, 2.2vw, 1.35em);
+    opacity: .92;
+    margin-top: 6px
+}
+
+.capa .esq .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: .82em;
+    font-weight: 700
+}
+
+.capa .esq .meta span {
+    background: rgba(255, 255, 255, .14);
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 6px;
+    padding: 4px 12px
+}
+
+.capa .faixa {
+    height: 5px;
+    background: linear-gradient(90deg, var(--ve), var(--vm));
+    margin-top: 20px
+}
+
+.capa .dir {
+    background: var(--ves);
+    border-left: 6px solid var(--ve);
+    color: var(--vee);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(18px, 3vw, 34px);
+    text-align: center;
+    gap: 12px
+}
+
+.capa .dir .selo {
+    font-size: clamp(2.2em, 6vw, 4.4em);
+    font-weight: 800;
+    font-family: 'Montserrat', Arial, sans-serif;
+    line-height: 1
+}
+
+.capa .dir h2 {
+    font-family: 'Montserrat', Arial, sans-serif;
+    margin-top: 6px;
+    font-size: clamp(1em, 2vw, 1.35em)
+}
+
+.capa .dir p {
+    opacity: 1;
+    color: var(--tinta-2);
+    font-size: .9em
+}
+
+.capa .dir img {
+    max-height: 30vh;
+    width: auto
+}
+
+/* ---------- Encerramento ---------- */
+.divisor {
+    position: relative;
+    flex: 1;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    border-radius: 14px;
+    overflow: hidden
+}
+
+.divisor .ov {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(23, 62, 46, .97), rgba(36, 81, 60, .94))
+}
+
+.divisor .in {
+    position: relative;
+    padding: clamp(22px, 4vw, 40px);
+    max-width: 840px
+}
+
+.divisor .in .rot {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(.7em, 1.5vw, .9em);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #CFE6D9
+}
+
+.divisor h1 {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(2em, 5vw, 3.2em);
+    line-height: 1.2;
+    margin-top: 6px
+}
+
+.divisor p {
+    font-size: clamp(1em, 2.2vw, 1.3em);
+    margin-top: 10px
+}
+
+/* ---------- Controles do passador ---------- */
+.ctrl-wrap {
+    flex-shrink: 0;
+    background: var(--sup);
+    border-top: 2px solid var(--linha-s)
+}
+
+.progress-wrap {
+    height: 6px;
+    background: var(--linha-s)
+}
+
+.progress {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--ve), var(--vm));
+    transition: width .25s ease
+}
+
+.ctr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(6px, 1vw, 10px);
+    padding: clamp(8px, 1.4vw, 12px);
+    background: #fff
+}
+
+.dots {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-right: 4px
+}
+
+.dot {
+    min-width: 28px;
+    height: 28px;
+    padding: 0 7px;
+    border: 2px solid var(--vee);
+    border-radius: 8px;
+    background: var(--sup);
+    color: var(--vee);
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: calc(var(--fs) * .66);
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s, color .15s, transform .15s
+}
+
+.dot:hover {
+    transform: translateY(-1px)
+}
+
+.dot.on,
+.dot[aria-current="true"] {
+    background: var(--vee);
+    color: #FFFFFF
+}
+
+.ctr button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .15s;
+    min-height: 42px
+}
+
+.ctr button:hover {
+    transform: scale(1.04)
+}
+
+.ctr button.sq {
+    min-width: 48px;
+    padding: 10px 12px
+}
+
+.bv {
+    background: var(--veex);
+    color: #fff
+}
+
+.bz {
+    background: var(--vee);
+    color: #fff
+}
+
+.bn {
+    background: var(--ves);
+    color: var(--vee);
+    border: 2px solid var(--ve) !important
+}
+
+/* ---------- Setas laterais flutuantes ---------- */
+.swipe {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: clamp(34px, 4vw, 46px);
+    height: clamp(34px, 4vw, 46px);
+    border: none;
+    border-radius: 50%;
+    background: rgba(30, 77, 56, .92);
+    color: #fff;
+    font-size: 1.6em;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .82;
+    transition: opacity .15s, transform .15s
+}
+
+.swipe:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.08)
+}
+
+.swipe.next {
+    right: 10px
+}
+
+.swipe.prev {
+    left: 10px
+}
+
+body.pres-mode .tb,
+body.pres-mode .fita,
+body.pres-mode .ctrl-wrap,
+body.pres-mode .swipe {
+    display: none
+}
+
+body.pres-mode .sc {
+    padding: 0
+}
+
+body.pres-mode .sl {
+    font-size: calc(var(--fs) * var(--fz) * 1.05)
+}
+
+
+/* ============================================================
+   RESPONSIVO — múltiplas resoluções
+   ============================================================ */
+
+/* Até 900px: empilha grades e layout imagem+texto */
+@media (max-width: 900px) {
+    .capa {
+        grid-template-columns: 1fr
+    }
+
+    .capa .dir {
+        min-height: 200px;
+        border-left: none;
+        border-top: 6px solid var(--ve)
+    }
+
+    .fg .foto {
+        width: 100%;
+        max-height: 34vh
+    }
+
+    .swipe {
+        width: 40px;
+        height: 40px;
+        font-size: 1.4em
+    }
+
+    .swipe.next {
+        right: 6px
+    }
+
+    .swipe.prev {
+        left: 6px
+    }
+}
+
+/* Até 720px: ajustes de cabeçalho e controles */
+@media (max-width: 720px) {
+    .tb h2 {
+        font-size: clamp(12px, 3.6vw, 16px)
+    }
+
+    .tb .ct {
+        font-size: .85em;
+        padding: 2px 10px
+    }
+
+    .fz span {
+        min-width: 34px
+    }
+
+    .dan,
+    .ctr .bn {
+        display: none
+    }
+
+    .ctr button {
+        padding: 8px 12px;
+        min-height: 40px;
+        font-size: .92em
+    }
+
+    .ctr button.sq {
+        min-width: 42px
+    }
+
+    .slhd h2 {
+        font-size: clamp(1.1em, 4.4vw, 1.4em)
+    }
+
+    .slbd {
+        padding: 12px 14px 16px
+    }
+
+    .dot {
+        min-width: 24px;
+        height: 24px;
+        padding: 0 5px
+    }
+
+    .ref {
+        font-size: .78em
+    }
+}
+
+/* Até 480px: telas menores (celulares) */
+@media (max-width: 480px) {
+    :root {
+        --fs: clamp(13px, 4.6vw, 17px);
+    }
+
+    .tb {
+        padding: 6px 10px
+    }
+
+    .tb-right {
+        gap: 6px
+    }
+
+    .fz button {
+        padding: 3px 7px
+    }
+
+    .ctrl-wrap .ctr {
+        gap: 5px
+    }
+
+    .ctr button {
+        padding: 7px 10px;
+        min-height: 38px
+    }
+
+    .ctr button.sq {
+        min-width: 38px
+    }
+
+    .swipe {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2em
+    }
+
+    .capa .esq h1 {
+        font-size: clamp(1.5em, 9vw, 2.2em)
+    }
+
+    .slhd .num {
+        min-width: 32px;
+        height: 32px;
+        font-size: 1em
+    }
+
+    .c2 {
+        grid-template-columns: 1fr
+    }
+}
+
+/* Muita largura (projetores grandes) */
+@media (min-width: 1400px) {
+    :root {
+        --fs: clamp(19px, 1.6vw, 24px);
+    }
+
+    .slhd h2 {
+        font-size: clamp(1.4em, 2.4vw, 1.8em)
+    }
+
+    .capa .esq h1 {
+        font-size: clamp(2.6em, 4vw, 4em)
+    }
+
+    .fg .foto {
+        max-height: 54vh
+    }
+}
+
+@media (min-width: 1920px) {
+    :root {
+        --fs: clamp(22px, 1.4vw, 28px);
+    }
+
+    .fg .foto {
+        max-height: 60vh
+    }
+}
+
+/* Sombreamentos / transições suaves */
+.sl .nt {
+    display: none;
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: var(--ves);
+    border: 1px solid var(--linha);
+    border-radius: 10px;
+    font-size: .88em;
+    color: var(--tinta-2)
+}
+
+.sl .nt strong {
+    color: var(--vee)
+}
+
+.tga {
+    display: inline-block;
+    background: var(--bg);
+    color: var(--vee);
+    border: 1px solid var(--linha);
+    border-radius: 6px;
+    padding: 2px 12px;
+    font-size: .78em;
+    font-weight: 700;
+    margin-right: 6px
+}
+
+/* ---------- Conteúdo Programático: tabela numerada ---------- */
+.slbd.fill {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0
+}
+
+.prog {
+    display: table;
+    width: 100%;
+    flex: 1;
+    margin: 0 0 12px;
+    font-size: .88em
+}
+
+.prog th,
+.prog td {
+    padding: 10px 14px
+}
+
+body.projetor .prog th,
+body.projetor .prog td {
+    padding: 13px 16px
+}
+
+/* Variante densa para tabelas com muitas linhas */
+.prog.denso {
+    font-size: .84em
+}
+
+.prog.denso th,
+.prog.denso td,
+body.projetor .prog.denso th,
+body.projetor .prog.denso td {
+    padding: 6px 12px
+}
+
+/* Em telas estreitas a tabela volta a rolar na horizontal */
+@media (max-width: 900px) {
+    .prog {
+        display: block;
+        overflow-x: auto
+    }
+}
+
+.cod {
+    font-weight: 700;
+    color: var(--tinta-2);
+    margin-right: 6px;
+    font-size: .92em
+}
+
+/* ---------- Fotos da aula (história da computação) ---------- */
+.fotos3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: clamp(8px, 1.2vw, 14px);
+    margin: 10px 0 0
+}
+
+.fotos3 figure,
+.foto-leg {
+    margin: 0
+}
+
+/* Fotos de terceiros: object-fit evita esticar a imagem quando a largura é 100% */
+.fotos3 .foto,
+.foto-leg .foto,
+.bege .foto {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 20vh;
+    object-fit: contain
+}
+
+.bege .foto {
+    margin-bottom: 6px;
+    max-height: 17vh
+}
+
+/* Legenda dentro de um card .bege (mesmo padrão das outras legendas) */
+.bege .amp figcaption {
+    margin-top: 6px;
+    font-size: .78em;
+    line-height: 1.4;
+    color: var(--tinta-2);
+    text-align: center
+}
+
+/* Card com foto em destaque (slide Decimal × Binário) */
+.bege.arte .foto {
+    max-height: 30vh
+}
+
+.bege.arte .cred {
+    margin-top: 6px;
+    text-align: center
+}
+
+/* Compactação do tema de leitura */
+.cd,
+.ca {
+    padding: 11px 15px
+}
+
+.fg .foto {
+    max-height: 30vh
+}
+
+/* Crédito de foto (imagens de terceiros) */
+.cred {
+    font-size: .72em;
+    color: var(--tinta-2);
+    margin-top: 6px
+}
+
+/* ---------- Slide dos componentes: 4 itens, uma foto cada ---------- */
+.comp {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: clamp(10px, 1.4vw, 16px);
+    margin: 12px 0
+}
+
+.comp .bege,
+body.projetor .comp .bege {
+    margin: 0;
+    padding: 10px 12px
+}
+
+.comp .bege h3,
+body.projetor .comp .bege h3 {
+    font-size: .98em;
+    margin: 0 0 2px
+}
+
+.comp .bege p,
+body.projetor .comp .bege p {
+    font-size: .9em;
+    line-height: 1.45;
+    margin: 3px 0
+}
+
+.comp .bege .amp {
+    position: relative;
+    margin: 0 0 6px
+}
+
+.comp .bege .amp .foto {
+    display: block;
+    width: 100%;
+    height: clamp(72px, 12vh, 150px);
+    max-height: none;
+    object-fit: cover;
+    padding: 0;
+    margin: 0;
+    border-radius: 8px;
+    cursor: zoom-in;
+    transition: transform .18s ease, box-shadow .18s ease
+}
+
+.comp .bege .amp .foto:hover,
+.comp .bege .amp .foto:focus-visible {
+    transform: scale(1.04);
+    box-shadow: 0 8px 20px rgba(16, 32, 24, .32)
+}
+
+.comp .bege .amp .foto:focus-visible {
+    outline: 3px solid var(--ve);
+    outline-offset: 2px
+}
+
+/* Selo indicando que a foto pode ser ampliada */
+.comp .bege .amp::after {
+    content: '🔍';
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: rgba(11, 46, 31, .78);
+    font-size: 12px;
+    line-height: 24px;
+    text-align: center;
+    pointer-events: none
+}
+
+.comp .bege .cred,
+body.projetor .comp .bege .cred {
+    font-size: .64em;
+    line-height: 1.35;
+    margin-top: 3px
+}
+
+/* ---------- Foto ampliada (clique para ver por inteiro) ---------- */
+.amp-lg {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(12px, 3vw, 40px);
+    background: rgba(11, 46, 31, .94);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .18s ease, visibility .18s ease
+}
+
+.amp-lg.on {
+    visibility: visible;
+    opacity: 1
+}
+
+.amp-lg figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0
+}
+
+.amp-lg img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 74vh;
+    object-fit: contain;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, .45)
+}
+
+.amp-lg figcaption {
+    max-width: 92ch;
+    color: #E8F2EC;
+    font-size: clamp(.78em, 1.5vw, 1em);
+    line-height: 1.5;
+    text-align: center
+}
+
+.amp-lg figcaption .ft {
+    display: block;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 1.06em
+}
+
+.amp-lg figcaption a {
+    color: #FFF
+}
+
+.amp-lg .fch {
+    position: absolute;
+    top: clamp(10px, 1.8vw, 20px);
+    right: clamp(10px, 1.8vw, 20px);
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(255, 255, 255, .6);
+    border-radius: 50%;
+    background: rgba(11, 46, 31, .75);
+    color: #FFF;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease
+}
+
+.amp-lg .fch:hover,
+.amp-lg .fch:focus-visible {
+    background: #FFF;
+    color: var(--vee)
+}
+
+/* ---------- Tira de fotos que ilustra os itens de uma lista ---------- */
+.tira {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(8px, 1vw, 12px);
+    width: min(100%, calc(5 * 12vh * 1.5 + 4 * 12px));
+    margin: 10px auto 0
+}
+
+.tira figure {
+    margin: 0
+}
+
+.tira .foto {
+    display: block;
+    width: 100%;
+    height: clamp(72px, 12vh, 140px);
+    max-height: none;
+    object-fit: cover;
+    padding: 0;
+    border-radius: 8px;
+    border: 1px solid var(--linha)
+}
+
+.tira figcaption {
+    margin-top: 4px;
+    font-size: .62em;
+    line-height: 1.25;
+    color: var(--tinta-2);
+    text-align: center
+}
+
+/* Crédito da tira: uma linha discreta abaixo das fotos */
+.cred-tira {
+    font-size: .64em;
+    line-height: 1.35;
+    margin-top: 4px
+}
+
+/* ---------- Vídeo embutido (YouTube) em 16:9 ---------- */
+.video {
+    width: min(100%, calc(43vh * 16 / 9));
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
+    border: 2px solid var(--linha);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000
+}
+
+.video iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0
+}
+
+/* Na impressão o player não é renderizado: fica o link do crédito */
+@media print {
+    .video {
+        display: none
+    }
+
+    .amp-lg {
+        display: none !important
+    }
+}
+
+.fotos3 figcaption,
+.foto-leg figcaption {
+    font-size: .78em;
+    color: var(--tinta-2);
+    margin-top: 5px;
+    text-align: center
+}
+
+/* Atribuição das citações */
+.dc .aut {
+    display: block;
+    font-style: normal;
+    font-weight: 700;
+    color: var(--vee);
+    margin-top: 2px
+}
+
+/* Compactação leve também no tema de leitura */
+.sl h3 {
+    margin: 10px 0 4px
+}
+
+.sl p,
+.sl li {
+    margin: 4px 0
+}
+
+.slbd {
+    padding-bottom: clamp(10px, 1.4vw, 16px)
+}
+
+body.projetor .fotos3 .foto {
+    max-height: 24vh
+}
+
+body.projetor .fg .foto {
+    max-height: 38vh
+}
+
+/* Foto de fundo do slide de encerramento */
+.divisor .bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .3
+}
+
+/* ============================================================
+   PROJETOR: compacta espaçamentos verticais para o conteúdo
+   caber na tela sem rolagem (tela de 900px de altura)
+   ============================================================ */
+body.projetor .slbd {
+    padding-top: clamp(10px, 1.2vw, 16px);
+    padding-bottom: clamp(10px, 1.2vw, 16px)
+}
+
+body.projetor .sl h3 {
+    margin: 8px 0 3px
+}
+
+body.projetor .sl p,
+body.projetor .sl li {
+    margin: 4px 0
+}
+
+body.projetor .sl ul>li {
+    padding-left: 20px
+}
+
+/* Lista numerada mais compacta no projetor (libera espaço para a tira de fotos) */
+body.projetor .passos li {
+    padding: 3px 0 3px 34px;
+    margin: 2px 0
+}
+
+body.projetor .passos li::before {
+    top: 5px
+}
+
+body.projetor .bege {
+    padding: 12px 14px;
+    margin: 8px 0
+}
+
+body.projetor .cd,
+body.projetor .ca {
+    padding: 10px 16px;
+    margin: 8px 0
+}
+
+body.projetor .dc {
+    margin: 5px 0
+}
+
+body.projetor .ref {
+    padding: 8px 14px
+}
+
+body.projetor .fg .foto {
+    max-height: 32vh
+}
+
+body.projetor .fotos3 .foto {
+    max-height: 19vh
+}
+
+body.projetor .bege .foto {
+    max-height: 19vh
+}
+
+body.projetor .bege.arte .foto {
+    max-height: 34vh
+}
+
+body.projetor .foto-leg .foto {
+    max-height: 30vh
+}
+
+body.projetor .prog th,
+body.projetor .prog td {
+    padding: 10px 14px
+}
+
+body.projetor .divisor {
+    min-height: 42vh
+}
+
+body.projetor .divisor .in {
+    padding: clamp(14px, 2.5vw, 26px)
+}
+
+/* Imagens dentro de listas exibidas como blocos (capturas do diário) */
+.sl li img.foto,
+.sl li img {
+    display: block;
+    width: min(100%, 420px);
+    height: auto;
+    max-height: 42vh;
+    object-fit: contain;
+    margin: 10px auto 4px;
+    border-radius: 10px;
+    background: var(--sup);
+    border: 1px solid var(--linha);
+    padding: 6px
+}
+
+/* ============================================================
+   ACESSIBILIDADE — foco visível · movimento · contraste · impressão
+   ============================================================ */
+
+/* Botão de tema projetor / leitura (fica na barra superior) */
+.cz {
+    background: rgba(255, 255, 255, .14);
+    border: 1px solid rgba(255, 255, 255, .38);
+    color: #fff;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-weight: 700;
+    font-size: calc(var(--fs) * .78);
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    cursor: pointer;
+    min-height: 32px;
+    white-space: nowrap
+}
+
+.cz:hover {
+    background: rgba(255, 255, 255, .28)
+}
+
+.cz[aria-pressed="true"] {
+    background: #fff;
+    border-color: #fff;
+    color: var(--vee)
+}
+
+/* Anel de foco bem visível para navegação por teclado */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+.rev:focus-visible,
+.dot:focus-visible,
+.abas button:focus-visible {
+    outline: 3px solid var(--foco);
+    outline-offset: 2px;
+    border-radius: 8px
+}
+
+/* Sobre superfícies escuras o anel precisa ser claro */
+.tb :focus-visible,
+.slhd :focus-visible,
+.capa .esq :focus-visible,
+.capa .dir :focus-visible,
+.divisor :focus-visible,
+.swipe:focus-visible {
+    outline-color: #EAF3EE
+}
+
+/* Alvos de toque confortáveis (WCAG 2.5.8 — mínimo 24×24px) */
+.fz button {
+    min-width: 34px;
+    min-height: 30px
+}
+
+/* Seleção de texto suave sem perder contraste */
+::selection {
+    background: var(--mk);
+    color: var(--tinta-1)
+}
+
+/* ============================================================
+   TEMA PROJETOR (padrão) — data show de baixa luminosidade
+   Fundo branco puro + tinta quase preta + traços grossos.
+   O modo "Leitura" (sem esta classe) mantém a paleta suave.
+   ============================================================ */
+body.projetor {
+    /* superfícies: branco puro = máxima luz do projetor */
+    --papel: #FFFFFF;
+    --sup: #FFFFFF;
+    --bg: #FFFFFF;
+    /* texto quase preto */
+    --tinta-1: #0F1417;
+    --tinta-2: #2A3236;
+    --p: #0F1417;
+    /* verde profundo, sem saturação */
+    --ve: #1E5C3F;
+    --ves: #FFFFFF;
+    --vee: #0E3D28;
+    --veex: #0B2E1F;
+    --veex-2: #123B29;
+    --veex-3: #0B2E1F;
+    --verde-ln: #DCEBE0;
+    --mk: #CFE3D6;
+    /* alerta em terracota escuro */
+    --vm: #6F2A22;
+    --vmc: #FFFFFF;
+    /* linhas: borda escura forte — preenchimento claro não separa nada */
+    --linha: #1E5C3F;
+    --linha-s: #C9D3CC;
+    --foco: #0E3D28;
+    /* tipografia maior para projeção (limitada pela altura da tela) */
+    --fs: min(clamp(16px, 2.1vw + 5px, 26px), 2.6vh)
+}
+
+/* Traços mais grossos: linha fina borra e desaparece no projetor */
+body.projetor .sl p,
+body.projetor .sl li {
+    font-weight: 500
+}
+
+body.projetor .sl h3 {
+    font-weight: 800
+}
+
+/* Agrupamento por borda, nunca por preenchimento claro */
+body.projetor .bege,
+body.projetor .ref,
+body.projetor .painel,
+body.projetor .tga,
+body.projetor .tb2 td {
+    border-width: 2px
+}
+
+body.projetor .tb2 th {
+    border-bottom-width: 3px
+}
+
+body.projetor .bege,
+body.projetor .ref {
+    box-shadow: none
+}
+
+/* Callouts: contorno + barra lateral espessa (a cor não depende do fundo) */
+body.projetor .cd,
+body.projetor .ca {
+    background: #FFFFFF;
+    border: 2px solid var(--linha);
+    border-left-width: 10px;
+    box-shadow: none;
+    padding: 12px 18px
+}
+
+body.projetor .cd {
+    border-left-color: var(--vee)
+}
+
+body.projetor .ca {
+    border-left-color: var(--vm)
+}
+
+/* Badge de unidade bem escuro para leitura à distância */
+body.projetor .bd {
+    background: var(--vee);
+    border: 2px solid var(--vee)
+}
+
+body.projetor .bd.vm {
+    background: var(--vm);
+    border-color: var(--vm)
+}
+
+/* Filete do cabeçalho mais grosso e claro */
+body.projetor .slhd {
+    border-bottom-width: 4px
+}
+
+body.projetor .slhd .num {
+    border: 2px solid var(--verde-ln)
+}
+
+/* Controles sem transparência (rgba "lava" no projetor) */
+body.projetor .tb .ct,
+body.projetor .fz {
+    background: #123B29;
+    border-color: #DCEBE0
+}
+
+body.projetor .fz button:hover {
+    background: #1E5C3F
+}
+
+body.projetor .cz[aria-pressed="false"] {
+    background: #123B29;
+    border-color: #DCEBE0;
+    color: #FFFFFF
+}
+
+body.projetor .cz[aria-pressed="true"] {
+    background: #FFFFFF;
+    border-color: #FFFFFF;
+    color: #0E3D28
+}
+
+/* Navegação maior e mais firme */
+body.projetor .dot {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 9px;
+    font-size: calc(var(--fs) * .6)
+}
+
+/* Em telas pequenas o paginador cai para 24px (alvo mínimo WCAG) */
+@media (max-width: 720px) {
+    body.projetor .dot {
+        min-width: 24px;
+        height: 24px;
+        padding: 0 5px
+    }
+
+    /* Componentes: uma coluna por vez em telas estreitas */
+    .comp {
+        grid-template-columns: 1fr
+    }
+
+    .tira {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 90px), 1fr));
+        width: 100%
+    }
+}
+
+body.projetor .progress-wrap {
+    height: 8px
+}
+
+body.projetor .swipe {
+    background: rgba(11, 46, 31, .95);
+    opacity: .95
+}
+
+/* Encerramento com painel mais profundo */
+body.projetor .divisor .ov {
+    background: linear-gradient(135deg, rgba(11, 46, 31, .98), rgba(18, 59, 41, .96))
+}
+
+/* Tipografia ainda maior nas telas de projeção largas
+   (sempre limitada pela altura da tela, para nunca estourar) */
+@media (min-width: 1200px) {
+    body.projetor {
+        --fs: min(clamp(20px, 1.9vw, 28px), 2.75vh)
+    }
+}
+
+@media (min-width: 1600px) {
+    body.projetor {
+        --fs: min(clamp(24px, 1.7vw, 32px), 2.85vh)
+    }
+}
+
+/* Telas estreitas (XGA e similares): fonte e fotos menores para caber tudo */
+@media (max-width: 1200px) {
+    body.projetor {
+        --fs: min(clamp(13px, 1.7vw + 3px, 22px), 2.45vh)
+    }
+
+    body.projetor .bege .foto {
+        max-height: 14vh
+    }
+
+    body.projetor .foto-leg .foto {
+        max-height: 18vh
+    }
+
+    body.projetor .tira .foto {
+        height: 78px
+    }
+
+    body.projetor .bege.arte .foto {
+        max-height: 26vh
+    }
+
+    body.projetor .fotos3 .foto {
+        max-height: 13vh
+    }
+
+    body.projetor .fg .foto {
+        max-height: 21vh;
+        width: min(40%, 320px)
+    }
+
+    body.projetor .sl h3 {
+        margin: 6px 0 2px
+    }
+
+    body.projetor .cd,
+    body.projetor .ca {
+        padding: 8px 12px
+    }
+
+    /* Cartões cabem em 3 colunas mesmo em telas estreitas */
+    .c2 {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 275px), 1fr))
+    }
+}
+
+/* Telas baixas (720p, 768p): compacta o cabeçalho, o rodapé e os controles */
+@media (max-height: 800px) {
+    body.projetor {
+        --fs: min(clamp(14px, 1.9vw + 4px, 24px), 2.65vh)
+    }
+
+    .tb {
+        padding: 6px clamp(12px, 2vw, 22px)
+    }
+
+    .tb h2 {
+        font-size: clamp(13px, 1.5vw, 17px)
+    }
+
+    .slhd {
+        padding: 8px clamp(12px, 2vw, 22px)
+    }
+
+    .slhd h2 {
+        font-size: clamp(1.05em, 2.4vw, 1.35em)
+    }
+
+    .slhd .num {
+        min-width: 30px;
+        height: 30px;
+        font-size: .95em
+    }
+
+    .ref {
+        font-size: .78em;
+        padding: 6px 12px
+    }
+
+    .ctr {
+        padding: 4px
+    }
+
+    .ctr button {
+        padding: 6px 12px;
+        min-height: 34px;
+        font-size: .9em
+    }
+
+    .ctrl-wrap .ctr button.sq {
+        min-width: 38px
+    }
+
+    .dot {
+        min-width: 24px;
+        height: 24px;
+        padding: 0 5px
+    }
+}
+
+/* Respeita quem pediu menos movimento */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important
+    }
+
+    .sl {
+        scroll-behavior: auto
+    }
+
+    .dot:hover,
+    .ctr button:hover,
+    .rev:hover,
+    .swipe:hover {
+        transform: none
+    }
+}
+
+/* Respeita quem precisa de mais contraste por padrão */
+@media (prefers-contrast: more) {
+
+    :root,
+    body.projetor {
+        --p: #12171A;
+        --tinta-1: #12171A;
+        --tinta-2: #2A3236;
+        --vee: #103D29;
+        --ve: #1E5C3F;
+        --vm: #7A3229;
+        --ves: #FFFFFF;
+        --vmc: #FFFFFF;
+        --bg: #FFFFFF;
+        --linha: #4E6F5F;
+        --mk: #CFE3D6
+    }
+
+    .bege,
+    .ref,
+    .painel,
+    .tb2 td {
+        border-width: 2px
+    }
+}
+
+/* Impressão / apostila: um slide por página, sem controles */
+@media print {
+
+    html,
+    body {
+        height: auto;
+        overflow: visible;
+        background: #fff
+    }
+
+    .tb,
+    .fita,
+    .ctrl-wrap,
+    .swipe {
+        display: none !important
+    }
+
+    .sc {
+        display: block;
+        overflow: visible
+    }
+
+    .sl {
+        display: block !important;
+        height: auto;
+        overflow: visible;
+        page-break-after: always;
+        break-after: page
+    }
+
+    .slhd {
+        position: static
+    }
+
+    .ref {
+        margin-top: 12px
+    }
+}
+
+
+
+/* ============================================================
+   CAMADA DE IDENTIDADE IFPI — Campus Barras
+   (aplicada depois da base para não alterar a arquitetura)
+   ============================================================ */
+
+/* ---------- Tipografia: Poppins em tudo ---------- */
+.tb h2,
+.tb .fz button,
+.slhd h2,
+.slhd .num,
+.sl h3,
+.sl .bd,
+.capa .esq h1,
+.capa .esq .rot,
+.capa .dir .selo,
+.capa .dir h2,
+.divisor .in .rot,
+.divisor h1,
+.passos li::before,
+.abas button,
+.dot,
+.ref .rt,
+.tb2 th,
+.ctr button,
+.kpi .n,
+.tl b {
+    font-family: 'Poppins', 'Montserrat', 'Segoe UI', Arial, sans-serif
+}
+
+/* ---------- Fundo de mármore (7%) nos slides ---------- */
+.sl {
+    background-color: var(--sup);
+    background-image: var(--textura);
+    background-size: cover;
+    background-position: center top
+}
+
+/* ---------- Faixa de quadradinhos (motivo do logo IFPI) ---------- */
+:root {
+    --quadrinhos: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='16' viewBox='0 0 96 16'%3E%3Crect width='16' height='16' fill='%23C90C0F'/%3E%3Crect x='20' width='16' height='16' fill='%23359830'/%3E%3Crect x='40' width='16' height='16' fill='%23359830'/%3E%3Crect x='60' width='16' height='16' fill='%23359830'/%3E%3Crect x='80' width='16' height='16' fill='%23359830'/%3E%3C/svg%3E")
+}
+
+.fita {
+    height: 14px;
+    background: var(--quadrinhos) repeat-x center;
+    background-size: 96px 14px
+}
+
+.banda {
+    height: 12px;
+    margin: 14px 0 0;
+    background: var(--quadrinhos) repeat-x center;
+    background-size: 84px 12px
+}
+
+/* ---------- Barra superior: branca, com logo e faixa ---------- */
+.tb {
+    background-color: #FFFFFF;
+    background-image: var(--textura);
+    background-size: cover;
+    color: var(--p);
+    border-bottom: 1px solid var(--linha-s);
+    padding: clamp(7px, 1vw, 12px) clamp(14px, 3vw, 30px);
+    gap: 12px
+}
+
+.tb-logo {
+    height: clamp(30px, 3.4vw, 46px);
+    width: auto;
+    flex-shrink: 0
+}
+
+.tb .tb-id {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1.2vw, 14px);
+    min-width: 0
+}
+
+.tb .tb-id h2 {
+    color: var(--p);
+    line-height: 1.15
+}
+
+.tb .tb-id h2 span {
+    display: block;
+    font-size: .62em;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--vee)
+}
+
+.tb .ct,
+body.projetor .tb .ct {
+    background: var(--ves);
+    border: 1px solid var(--verde-ln);
+    color: var(--veex-3)
+}
+
+.tb .fz,
+body.projetor .tb .fz {
+    background: #fff;
+    border: 1px solid var(--verde-ln);
+    color: var(--vee)
+}
+
+.tb .fz button,
+body.projetor .tb .fz button {
+    color: var(--vee)
+}
+
+.tb .fz button:hover,
+body.projetor .tb .fz button:hover {
+    background: var(--ves)
+}
+
+.cz {
+    border: 1px solid var(--verde-ln);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--vee);
+    font-weight: 700;
+    font-size: calc(var(--fs) * .8);
+    padding: 7px 14px;
+    cursor: pointer;
+    min-height: 38px
+}
+
+.cz:hover {
+    background: var(--ves)
+}
+
+body.projetor .cz[aria-pressed="true"] {
+    background: var(--ve);
+    border-color: var(--ve);
+    color: #fff
+}
+
+body.projetor .cz[aria-pressed="false"] {
+    background: #fff;
+    border-color: var(--verde-ln);
+    color: var(--vee)
+}
+
+/* ---------- Cabeçalho do slide: verde IFPI ---------- */
+.slhd {
+    background: linear-gradient(90deg, var(--veex-3), var(--ve) 82%);
+    border-bottom: 4px solid var(--vm)
+}
+
+.slhd .num {
+    background: #fff;
+    color: var(--vee);
+    border-left: 4px solid var(--vm);
+    border-radius: 6px
+}
+
+.sl h3 {
+    color: var(--vee)
+}
+
+.sl ul>li::before {
+    content: '\25A0';
+    color: var(--ve);
+    font-size: .6em;
+    top: 8px
+}
+
+/* ---------- Capa institucional ---------- */
+.capa .esq {
+    background-color: #FFFFFF;
+    background-image: var(--textura);
+    background-size: cover;
+    color: var(--p)
+}
+
+.capa .esq h1 {
+    color: var(--tinta-1)
+}
+
+.capa .esq .rot {
+    color: var(--vee)
+}
+
+.capa .esq .sub {
+    color: var(--tinta-2);
+    opacity: 1
+}
+
+.capa .esq .meta {
+    color: var(--vee)
+}
+
+.capa .esq .meta span {
+    background: var(--ves);
+    border: 1px solid var(--verde-ln);
+    border-radius: 6px
+}
+
+.capa .faixa {
+    height: 14px;
+    background: var(--quadrinhos) repeat-x center;
+    background-size: 96px 14px;
+    margin-top: 22px
+}
+
+.capa .dir {
+    background: linear-gradient(160deg, var(--ve), var(--veex-2) 70%, var(--veex-3));
+    border-left: none;
+    color: #fff;
+    gap: clamp(8px, 1.4vw, 16px)
+}
+
+.capa .dir .selo {
+    color: #fff;
+    letter-spacing: .06em
+}
+
+.capa .dir img {
+    background: #fff;
+    padding: clamp(8px, 1.4vw, 16px);
+    border-radius: 14px;
+    max-height: 26vh;
+    box-shadow: 0 8px 24px rgba(10, 40, 8, .28)
+}
+
+.capa .dir h2 {
+    color: #fff
+}
+
+.capa .dir p {
+    color: #E9F5E4
+}
+
+
+/* ---------- Números-chave (contador animado) ---------- */
+.kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+    gap: clamp(10px, 1.3vw, 16px);
+    margin: clamp(10px, 1.6vw, 18px) 0
+}
+
+.kpi {
+    background: #fff;
+    border: 1px solid var(--linha-s);
+    border-top: 5px solid var(--ve);
+    border-radius: 12px;
+    padding: clamp(10px, 1.3vw, 16px);
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(16, 32, 24, .06)
+}
+
+.kpi .n {
+    display: block;
+    font-size: clamp(1.5em, 3.4vw, 2.5em);
+    font-weight: 700;
+    color: var(--vee);
+    line-height: 1.05;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.01em
+}
+
+.kpi .n small {
+    font-size: .5em;
+    font-weight: 600;
+    color: var(--ve);
+    margin-left: 2px
+}
+
+.kpi .r {
+    display: block;
+    margin-top: 6px;
+    font-size: .82em;
+    color: var(--tinta-2);
+    line-height: 1.35
+}
+
+.kpi.vm {
+    border-top-color: var(--vm)
+}
+
+.kpi.vm .n {
+    color: var(--vm)
+}
+
+.kpi.am {
+    border-top-color: var(--amarelo)
+}
+
+.kpi.am .n {
+    color: #A9791A
+}
+
+.kpi.tq {
+    border-top-color: var(--turquesa)
+}
+
+.kpi.tq .n {
+    color: #1E7C72
+}
+
+/* ---------- Linha do tempo animada ---------- */
+.tl {
+    position: relative;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 6px;
+    margin: clamp(16px, 2.6vw, 34px) 0 6px;
+    padding-top: 34px
+}
+
+.tl-l {
+    position: absolute;
+    top: 30px;
+    left: 3%;
+    right: 3%;
+    height: 4px;
+    background: var(--linha-s);
+    border-radius: 3px;
+    overflow: hidden
+}
+
+.tl-l i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--ve), var(--vee));
+    transition: width 2.4s ease .25s
+}
+
+.sl.ac .tl-l i {
+    width: 100%
+}
+
+.tl .it {
+    position: relative;
+    text-align: center;
+    padding-top: 22px
+}
+
+.tl .it::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    margin-left: -9px;
+    border-radius: 50%;
+    background: #fff;
+    border: 4px solid var(--ve);
+    transform: scale(.2);
+    opacity: 0;
+    transition: transform .45s cubic-bezier(.34, 1.56, .64, 1), opacity .45s;
+    z-index: 1
+}
+
+.sl.ac .tl .it::before {
+    transform: scale(1);
+    opacity: 1
+}
+
+.tl .it:nth-child(2)::before {
+    transition-delay: .2s
+}
+
+.tl .it:nth-child(3)::before {
+    transition-delay: .4s
+}
+
+.tl .it:nth-child(4)::before {
+    transition-delay: .6s
+}
+
+.tl .it:nth-child(5)::before {
+    transition-delay: .8s
+}
+
+.tl .it:nth-child(6)::before {
+    transition-delay: 1s
+}
+
+.tl .it:nth-child(7)::before {
+    transition-delay: 1.2s
+}
+
+.tl .it:nth-child(8)::before {
+    transition-delay: 1.4s
+}
+
+.tl .it:nth-child(9)::before {
+    transition-delay: 1.6s
+}
+
+.tl .it b {
+    display: block;
+    font-size: .92em;
+    color: var(--vee);
+    line-height: 1.1
+}
+
+.tl .it span {
+    display: block;
+    font-size: .7em;
+    color: var(--tinta-2);
+    line-height: 1.25;
+    margin-top: 2px
+}
+
+.tl .it.marco::before {
+    border-color: var(--vm)
+}
+
+.tl .it.marco b {
+    color: var(--vm)
+}
+
+
+
+/* ---------- Donut (gráfico em CSS puro) ---------- */
+.dono {
+    position: relative;
+    width: min(100%, 280px);
+    aspect-ratio: 1;
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: conic-gradient(var(--ve) 0 var(--d1),
+            var(--azul) var(--d1) var(--d2),
+            var(--vm) var(--d2) 100%);
+    transform: rotate(-110deg);
+    opacity: .35;
+    transition: transform 1.2s cubic-bezier(.22, 1, .36, 1), opacity .6s ease
+}
+
+.sl.ac .dono {
+    transform: rotate(0);
+    opacity: 1
+}
+
+.dono .miolo {
+    background: #fff;
+    width: 58%;
+    height: 58%;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    box-shadow: inset 0 0 0 1px var(--linha-s);
+    font-size: .8em;
+    line-height: 1.25;
+    color: var(--tinta-2)
+}
+
+.dono .miolo b {
+    display: block;
+    font-size: 1.6em;
+    color: var(--vee)
+}
+
+/* ---------- Barras comparativas animadas ---------- */
+.barras {
+    display: grid;
+    gap: clamp(6px, .9vw, 10px);
+    margin: clamp(8px, 1.2vw, 14px) 0
+}
+
+.barras .bi {
+    display: grid;
+    grid-template-columns: minmax(96px, 34%) 1fr auto;
+    align-items: center;
+    gap: 10px;
+    font-size: .86em
+}
+
+.barras .bi .bar {
+    height: 17px;
+    background: var(--linha-s);
+    border-radius: 9px;
+    overflow: hidden
+}
+
+.barras .bi .bar i {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: 9px;
+    background: linear-gradient(90deg, var(--ve), var(--vee));
+    transition: width 1.3s cubic-bezier(.22, 1, .36, 1)
+}
+
+.sl.ac .barras .bi .bar i {
+    width: var(--v, 0%)
+}
+
+.barras .bi:nth-child(2) .bar i {
+    transition-delay: .12s
+}
+
+.barras .bi:nth-child(3) .bar i {
+    transition-delay: .24s
+}
+
+.barras .bi:nth-child(4) .bar i {
+    transition-delay: .36s
+}
+
+.barras .bi:nth-child(5) .bar i {
+    transition-delay: .48s
+}
+
+.barras .bi:nth-child(6) .bar i {
+    transition-delay: .6s
+}
+
+.barras .bi b {
+    color: var(--vee);
+    font-variant-numeric: tabular-nums;
+    min-width: 3.4em;
+    text-align: right
+}
+
+.barras .bi.tq .bar i {
+    background: linear-gradient(90deg, var(--turquesa), #1E7C72)
+}
+
+.barras .bi.am .bar i {
+    background: linear-gradient(90deg, var(--amarelo), #C2891B)
+}
+
+.barras .bi.vm .bar i {
+    background: linear-gradient(90deg, var(--vm), #8F0A0C)
+}
+
+/* ---------- Citação (documento histórico) ---------- */
+.citacao {
+    background: #fff;
+    border: 1px solid var(--linha-s);
+    border-left: 6px solid var(--ve);
+    border-radius: 0 12px 12px 0;
+    padding: clamp(12px, 1.6vw, 20px) clamp(14px, 2vw, 24px);
+    margin: 12px 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: .86em;
+    line-height: 1.6;
+    color: #2B332E
+}
+
+.citacao .fonte {
+    display: block;
+    margin-top: 10px;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: .82em;
+    color: var(--vee)
+}
+
+/* ---------- Selos e etiquetas ---------- */
+.selo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ves);
+    border: 1px solid var(--verde-ln);
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-size: .76em;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--vee);
+    margin: 2px 6px 2px 0
+}
+
+.selo.vm {
+    background: var(--vmc);
+    border-color: #E4A9A9;
+    color: var(--vm)
+}
+
+.selo.am {
+    background: #FEF6E4;
+    border-color: #EBCB8B;
+    color: #A9791A
+}
+
+/* ---------- Galeria de fotos com legenda ---------- */
+.gal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 215px), 1fr));
+    gap: clamp(8px, 1.1vw, 14px);
+    margin: clamp(8px, 1.2vw, 14px) 0 0
+}
+
+.gal figure {
+    position: relative;
+    margin: 0;
+    background: #fff;
+    border: 1px solid var(--linha-s);
+    border-radius: 12px;
+    padding: 6px 6px 8px;
+    box-shadow: 0 2px 8px rgba(16, 32, 24, .07)
+}
+
+.gal .foto {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: contain;
+    background: var(--bg);
+    border-radius: 8px;
+    cursor: zoom-in;
+    transition: transform .2s ease, box-shadow .2s ease
+}
+
+.gal .foto:hover,
+.gal .foto:focus-visible {
+    transform: scale(1.02);
+    box-shadow: 0 6px 18px rgba(16, 32, 24, .22)
+}
+
+.gal .foto:focus-visible {
+    outline: 3px solid var(--ve);
+    outline-offset: 2px
+}
+
+.gal figcaption {
+    margin-top: 6px;
+    font-size: .72em;
+    line-height: 1.4;
+    color: var(--tinta-2);
+    text-align: center
+}
+
+.gal figcaption b {
+    color: var(--vee)
+}
+
+/* Foto emoldurada avulsa (com legenda) */
+.fig-leg {
+    margin: 0
+}
+
+.fig-leg img {
+    display: block;
+    width: 100%;
+    max-height: 44vh;
+    object-fit: contain;
+    background: #fff;
+    border: 1px solid var(--linha-s);
+    border-radius: 12px;
+    padding: 6px;
+    cursor: zoom-in
+}
+
+.fig-leg figcaption {
+    margin-top: 6px;
+    font-size: .74em;
+    line-height: 1.35;
+    color: var(--tinta-2);
+    text-align: center
+}
+
+/* ---------- Blocos de mídia + texto ---------- */
+.mid {
+    display: flex;
+    gap: clamp(12px, 2vw, 24px);
+    align-items: center;
+    flex-wrap: wrap;
+    margin: clamp(8px, 1.2vw, 14px) 0
+}
+
+.mid>.m {
+    flex: 1 1 320px;
+    min-width: 250px
+}
+
+.mid.rev {
+    flex-direction: row-reverse
+}
+
+.mid img.foto {
+    display: block;
+    width: 100%;
+    max-height: 44vh;
+    object-fit: contain;
+    background: #fff;
+    border: 1px solid var(--linha-s);
+    border-radius: 12px;
+    padding: 6px
+}
+
+/* ---------- Etapas em cartões (diagnóstico participativo) ---------- */
+.etapas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+    gap: clamp(10px, 1.4vw, 16px);
+    margin: clamp(10px, 1.4vw, 16px) 0
+}
+
+.etapas .et {
+    background: #fff;
+    border: 1px solid var(--linha-s);
+    border-top: 5px solid var(--ve);
+    border-radius: 12px;
+    padding: 12px 14px
+}
+
+.etapas .et .n {
+    display: inline-grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--ve);
+    color: #fff;
+    font-weight: 700;
+    font-size: .78em;
+    margin-bottom: 6px
+}
+
+.etapas .et h3 {
+    margin: 0 0 4px;
+    font-size: .95em
+}
+
+.etapas .et p {
+    font-size: .86em;
+    margin: 0;
+    color: var(--tinta-2)
+}
+
+.etapas .et.vm {
+    border-top-color: var(--vm)
+}
+
+.etapas .et.vm .n {
+    background: var(--vm)
+}
+
+/* ---------- Vídeo com capa (carrega ao clicar) ---------- */
+.vd {
+    position: relative;
+    width: min(100%, calc(40vh * 16 / 9));
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
+    border: 2px solid var(--verde-ln);
+    border-radius: 14px;
+    overflow: hidden;
+    background: #0E1A12;
+    cursor: pointer
+}
+
+.vd img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .82;
+    transition: opacity .2s ease, transform .35s ease
+}
+
+.vd:hover img,
+.vd:focus-visible img {
+    opacity: 1;
+    transform: scale(1.02)
+}
+
+.vd .play {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center
+}
+
+.vd .play b {
+    display: grid;
+    place-items: center;
+    width: clamp(54px, 8vh, 82px);
+    height: clamp(54px, 8vh, 82px);
+    border-radius: 50%;
+    background: rgba(201, 12, 15, .94);
+    color: #fff;
+    font-size: clamp(18px, 2.6vh, 28px);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, .35)
+}
+
+.vd iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0
+}
+
+.vd .vd-leg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(transparent, rgba(8, 20, 12, .88));
+    color: #fff;
+    font-size: .78em;
+    padding: 22px 14px 10px;
+    text-align: left
+}
+
+.cred {
+    font-size: .72em;
+    color: var(--tinta-2);
+    margin-top: 6px;
+    text-align: center
+}
+
+/* ---------- Assinatura / destaques ---------- */
+.destaque {
+    background: linear-gradient(135deg, var(--ves), #fff);
+    border: 1px solid var(--verde-ln);
+    border-radius: 14px;
+    padding: clamp(12px, 1.6vw, 18px)
+}
+
+.assina {
+    font-size: .74em;
+    color: var(--tinta-2);
+    text-align: right;
+    font-style: italic;
+    margin-top: 4px
+}
+
+.fonte-linha {
+    font-size: .72em;
+    color: var(--tinta-2);
+    margin-top: 8px
+}
+
+/* ---------- Ajustes do tema projetor para os novos blocos ---------- */
+body.projetor .gal figcaption {
+    font-size: .74em
+}
+
+body.projetor .tl .it span {
+    font-size: .64em
+}
+
+body.projetor .vd {
+    width: min(100%, calc(44vh * 16 / 9))
+}
+
+/* ---------- Impressão: sem player e com as fotos visíveis ---------- */
+@media print {
+    .vd {
+        display: none !important
+    }
+
+    .gal .foto,
+    .fig-leg img {
+        height: auto;
+        max-height: 60mm;
+        cursor: default
+    }
+
+    .kpi,
+    .gal figure,
+    .etapas .et {
+        break-inside: avoid
+    }
+}
+
+/* ---------- Sumário da apresentação (navegação por títulos) ---------- */
+.sumario {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: none;
+    background: rgba(9, 20, 13, .84);
+    padding: clamp(12px, 2.4vw, 36px);
+    overflow: auto
+}
+
+.sumario.on {
+    display: grid;
+    place-items: center
+}
+
+.sumario .sm-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: clamp(14px, 1.8vw, 24px);
+    width: min(1180px, 100%);
+    max-height: 100%;
+    overflow: auto;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .42)
+}
+
+.sumario h3 {
+    color: var(--vee);
+    margin-bottom: 2px
+}
+
+.sumario .sm-dica {
+    font-size: .76em;
+    color: var(--tinta-2);
+    margin-bottom: 12px
+}
+
+.sumario kbd {
+    font-family: inherit;
+    font-weight: 700;
+    font-size: .88em;
+    background: var(--ves);
+    border: 1px solid var(--verde-ln);
+    border-radius: 5px;
+    padding: 0 5px
+}
+
+.sm-grade {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 8px
+}
+
+.sm-it {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    text-align: left;
+    background: var(--bg);
+    border: 1px solid var(--linha-s);
+    border-left: 4px solid var(--ve);
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: .8em;
+    line-height: 1.3;
+    color: var(--tinta-1);
+    transition: background .14s ease, border-color .14s ease
+}
+
+.sm-it:hover,
+.sm-it:focus-visible {
+    background: var(--ves);
+    border-color: var(--ve);
+    outline: none
+}
+
+.sm-it.on {
+    background: var(--ve);
+    border-color: var(--vee);
+    color: #fff
+}
+
+.sm-it b {
+    min-width: 1.7em;
+    color: var(--vee);
+    font-variant-numeric: tabular-nums
+}
+
+.sm-it.on b {
+    color: #fff
+}
+
+.sm-fch {
+    margin-top: 14px;
+    background: var(--vee);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 700;
+    padding: 10px 22px;
+    cursor: pointer
+}
+
+.sm-fch:hover {
+    background: var(--veex-3)
+}
+
+/* ---------- Barra de controles enxuta ---------- */
+.ctrl-wrap .ctr {
+    padding: clamp(6px, .9vw, 10px);
+    gap: clamp(6px, .9vw, 10px)
+}
+
+.ctrl-wrap .ctr button {
+    padding: 8px 16px;
+    min-height: 38px;
+    font-size: .95em
+}
+
+.ctrl-wrap .ctr button.sq {
+    min-width: 42px
+}
+
+.ctrl-wrap .progress-wrap {
+    height: 5px
+}
+
+@media print {
+    .sumario {
+        display: none !important
+    }
+}
+
+/* ============================================================
+   PALCO CENTRALIZADO + ESCALA AUTOMÁTICA POR SLIDE (--aj)
+   O conteúdo de cada slide é centralizado na área útil (entre o
+   cabeçalho e a linha de fonte) e o JavaScript (fitSlides) define
+   --aj para o conteúdo ocupar ~92% da altura livre. O --fz
+   continua sendo o zoom do usuário (A− / A+).
+   ============================================================ */
+
+.sl {
+    font-size: calc(var(--fs) * var(--fz) * var(--aj, 1))
+}
+
+.slbd,
+body.projetor .slbd {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    max-width: min(100%, var(--largura-max, 1520px));
+    margin-inline: auto;
+    margin-bottom: 0;
+    padding: clamp(10px, 2vh, 26px) clamp(16px, 2.6vw, 30px)
+}
+
+/* Com o texto ampliado pelo usuário (A+), o painel volta a acompanhar o
+   conteúdo para a rolagem interna funcionar sem sobrepor a linha de fonte. */
+body.zoom-maior .slbd {
+    flex: 0 0 auto;
+    justify-content: flex-start
+}
+
+body.projetor .slhd {
+    padding: clamp(8px, 1.1vw, 14px) clamp(16px, 2.6vw, 30px)
+}
+
+body.projetor .slhd h2 {
+    font-size: clamp(1.05em, 2.1vw, 1.4em)
+}
+
+body.projetor .slhd .num {
+    min-width: clamp(28px, 3vw, 38px);
+    height: clamp(28px, 3vw, 38px);
+    font-size: .9em
+}
+
+body.projetor .sl p,
+body.projetor .sl li {
+    line-height: 1.5;
+    margin: 4px 0
+}
+
+body.projetor .bege {
+    padding: 12px 15px;
+    margin: 9px 0
+}
+
+body.projetor .cd,
+body.projetor .ca {
+    padding: 11px 15px;
+    margin: 8px 0
+}
+
+body.projetor .kpi {
+    padding: 11px 13px
+}
+
+body.projetor .divisor {
+    min-height: 34vh
+}
+
+body.projetor .tb2 {
+    font-size: .74em;
+    margin: 8px 0
+}
+
+body.projetor .tb2 th,
+body.projetor .tb2 td {
+    padding: 4px 9px
+}
+
+/* ---------- Grades com colunas explícitas por slide (--cols) ---------- */
+.kpis {
+    --col-min: 230px
+}
+
+.c2 {
+    --col-min: 300px
+}
+
+.etapas {
+    --col-min: 230px
+}
+
+.kpis,
+.c2,
+.etapas {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--col-min)), 1fr))
+}
+
+.kpis[style*="--cols"],
+.c2[style*="--cols"],
+.etapas[style*="--cols"] {
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr))
+}
+
+/* ---------- Mídia elástica: fotos, mapas e vídeo usam a área branca ---------- */
+.mid img.foto,
+.fig-leg img,
+body.projetor .mid img.foto,
+body.projetor .fig-leg img {
+    max-height: 40vh
+}
+
+/* Quadros de registro (slides 32–35): moldura retrato com a foto inteira,
+   sem corte — a proporção 2:3 é a média das fotografias. O tamanho vem da
+   largura da coluna (--cols:5) e o autofit ajusta o texto da legenda. */
+
+.dono,
+body.projetor .dono {
+    width: min(100%, var(--dono-tam, 26vh))
+}
+
+.vd,
+body.projetor .vd {
+    width: min(100%, calc(46vh * 16 / 9))
+}
+
+.kpi .n,
+body.projetor .kpi .n {
+    font-size: clamp(1.7em, 3.2vw, 2.6em)
+}
+
+.kpi .r {
+    font-size: .86em
+}
+
+.barras .bi {
+    font-size: .95em
+}
+
+.barras .bi .bar {
+    height: 1.05em
+}
+
+.passos li::before {
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em
+}
+
+/* ---------- Galeria em flex centrado (a última linha fica centralizada) ---------- */
+.gal {
+    --gap-gal: clamp(8px, 1.1vw, 14px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gap-gal)
+}
+
+.gal figure {
+    flex: 0 1 calc((100% - (var(--cols, 3) - 1) * var(--gap-gal)) / var(--cols, 3));
+    max-width: calc((100% - (var(--cols, 3) - 1) * var(--gap-gal)) / var(--cols, 3))
+}
+
+/* Texto já no tamanho máximo e ainda com sobra: distribui o respiro */
+.sl.folga .slbd {
+    justify-content: space-evenly
+}
+
+/* ---------- Estado de medição do autofit (slides fora do fluxo) ---------- */
+body.medindo .sl {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    inset: 0;
+    visibility: hidden
+}
+
+body.medindo .slbd,
+body.medindo .slbd.fill {
+    flex: 0 0 auto
+}
+
+/* ---------- Telas estreitas: volta para uma coluna e não estica o texto ---------- */
+@media (max-width: 900px) {
+
+    .kpis[style*="--cols"],
+    .c2[style*="--cols"],
+    .etapas[style*="--cols"] {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr))
+    }
+
+    .gal figure {
+        flex: 1 1 100%;
+        max-width: 100%
+    }
+
+    .slbd,
+    body.projetor .slbd {
+        max-width: 100%
+    }
+}
+
+body.projetor .sl h3 {
+    font-size: 1em;
+    margin: 8px 0 4px
+}
+
+body.projetor .bege {
+    padding: 10px 13px;
+    margin: 8px 0
+}
+
+body.projetor .bege h3 {
+    font-size: .96em
+}
+
+body.projetor .cd,
+body.projetor .ca {
+    padding: 9px 14px;
+    margin: 7px 0
+}
+
+body.projetor .ref {
+    padding: 7px 14px;
+    font-size: .74em
+}
+
+body.projetor .kpis {
+    gap: clamp(8px, 1vw, 12px);
+    margin: 8px 0
+}
+
+body.projetor .kpi {
+    padding: 9px 11px
+}
+
+body.projetor .kpi .n {
+    font-size: clamp(1.25em, 2.4vw, 2em)
+}
+
+body.projetor .kpi .r {
+    font-size: .74em;
+    margin-top: 3px
+}
+
+/* (regras de compactação antigas removidas: o autofit cuida do encaixe e
+   estes valores voltaram aos padrões do tema — galeria, mídias, etapas e tabelas) */
+
+body.projetor .dono {
+    width: min(100%, 220px)
+}
+
+body.projetor .vd {
+    width: min(100%, calc(38vh * 16 / 9))
+}
+
+body.projetor .capa .esq {
+    padding: clamp(18px, 3vw, 34px)
+}
+
+body.projetor .capa .esq h1 {
+    font-size: clamp(1.8em, 3.8vw, 3em)
+}
+
+body.projetor .capa .esq .sub {
+    font-size: clamp(.95em, 1.7vw, 1.15em)
+}
+
+body.projetor .divisor h1 {
+    font-size: clamp(1.7em, 3.6vw, 2.6em)
+}
+
+/* ---------- Telas baixas (notebooks de 900px ou menos) ----------
+   O autofit ajusta o tamanho do texto em qualquer tela; aqui só se
+   reduz o respiro para o conteúdo não ficar apertado. */
+@media (max-height: 950px) {
+
+    .slbd,
+    body.projetor .slbd {
+        padding: 8px clamp(14px, 2vw, 22px)
+    }
+
+    body.projetor .bege {
+        padding: 9px 12px;
+        margin: 7px 0
+    }
+
+    body.projetor .cd,
+    body.projetor .ca {
+        padding: 8px 12px;
+        margin: 6px 0
+    }
+
+    body.projetor .kpi {
+        padding: 8px 11px
+    }
+
+    body.projetor .divisor {
+        min-height: 28vh
+    }
+
+    body.projetor .mid img.foto,
+    body.projetor .fig-leg img {
+        max-height: 26vh
+    }
+}
+
+/* Em telas muito baixas (≤ 800px) os quadros de registro ganham um teto de
+   altura para o conjunto foto + legenda caber sem rolagem. */
+@media (max-height: 800px) {
+
+    .gal .foto,
+    body.projetor .gal .foto {
+        max-height: 30vh
+    }
+}
+
+/* ============================================================
+   IDENTIDADE IFPI NO TEMA PROJETOR (padrão da apresentação)
+   O tema projetor da base redefine os tokens com verdes próprios;
+   aqui eles voltam para a paleta oficial do IFPI (verde #359830,
+   vermelho #C90C0F, fundo branco com textura de mármore a 7%).
+   ============================================================ */
+body.projetor {
+    --papel: #FFFFFF;
+    --sup: #FFFFFF;
+    --bg: #F4F9F2;
+    --tinta-1: #0F1417;
+    --tinta-2: #2A3236;
+    --p: #0F1417;
+    --ve: #2F8C2A;
+    --ves: #EFF7ED;
+    --vee: #1B6B1F;
+    --veex: #1B6B1F;
+    --veex-2: #175C1A;
+    --veex-3: #0F3D14;
+    --verde-ln: #A8C7A0;
+    --mk: #D2EACB;
+    --vm: #A50E11;
+    --vmc: #FBEDEC;
+    --linha: #3C6B36;
+    --linha-s: #C9D3CC;
+    --foco: #1B6B1F;
+    /* tamanho base do texto na projeção — o autofit (--aj) ajusta por slide */
+    --fs: min(clamp(16px, 1.45vw, 26px), 4.2vh)
+}
+
+@media (min-width: 1600px) {
+    body.projetor {
+        --fs: min(clamp(17px, 1.2vw, 26px), 4.2vh)
+    }
+}
+
+/* Cabeçalho, topo e faixa usam a paleta IFPI */
+body.projetor .slhd {
+    background: linear-gradient(90deg, var(--veex-3), var(--ve) 82%)
+}
+
+body.projetor .tb .ct,
+body.projetor .tb .fz {
+    background: var(--ves);
+    border-color: var(--verde-ln);
+    color: var(--vee)
+}
+
+body.projetor .cz[aria-pressed="true"] {
+    background: var(--ve);
+    border-color: var(--ve);
+    color: #FFFFFF
+}
+
+body.projetor .divisor .ov {
+    background: linear-gradient(135deg, rgba(15, 61, 20, .97), rgba(47, 140, 42, .93))
+}
+
+body.projetor .swipe {
+    background: rgba(15, 61, 20, .95)
+}
+
+/* Quem pediu mais contraste continua atendido, com a paleta do IFPI */
+@media (prefers-contrast: more) {
+
+    :root,
+    body.projetor {
+        --p: #000000;
+        --tinta-1: #000000;
+        --tinta-2: #1B211D;
+        --ve: #1B6B1F;
+        --ves: #FFFFFF;
+        --vee: #0F3D14;
+        --veex: #0F3D14;
+        --veex-2: #0F3D14;
+        --veex-3: #0A2B0E;
+        --vm: #8C0A0D;
+        --vmc: #FFFFFF;
+        --bg: #FFFFFF;
+        --linha: #2F5A2C;
+        --linha-s: #B7C4B5;
+        --mk: #C7E3C1
+    }
+}
+
+/* ============================================================
+   LISTAS: marcador proporcional ao texto
+   Na base do template, `body.projetor .sl ul>li { padding-left: 20px }`
+   tem especificidade maior que `.passos li` e, com a fonte ampliada pelo
+   autofit, o marcador invadia o texto. Aqui o recuo e a caixa do número
+   passam a ser proporcionais (em), com respiro constante entre os dois.
+   ============================================================ */
+
+.sl .passos li,
+body.projetor .sl .passos li {
+    padding: .3em .2em .3em 2.6em;
+    margin: .3em 0
+}
+
+.sl .passos li::before,
+body.projetor .sl .passos li::before {
+    top: .4em;
+    left: 0;
+    width: 1.75em;
+    height: 1.75em;
+    line-height: 1.75em;
+    border-radius: .45em;
+    font-size: .95em
+}
+
+/* Marcadores simples (■) das listas comuns também ganham respiro */
+.sl ul>li,
+body.projetor .sl ul>li {
+    padding-left: 1.15em
+}
+
+.sl ul>li::before,
+body.projetor .sl ul>li::before {
+    top: .3em;
+    font-size: .8em
+}
+
+/* Em listas numeradas o marcador é o número, não o quadradinho */
+.sl .passos li::before {
+    content: counter(ps)
+}
+
+/* ============================================================
+   IMAGEM EM DESTAQUE (slides com .mid.img-grande)
+   A coluna da imagem passa a ocupar ~60% da largura e a foto pode
+   crescer até 56vh de altura (com limites menores em telas baixas),
+   dando protagonismo a documentos, mapas e retratos.
+   ============================================================ */
+
+.mid.img-grande > .m:first-child {
+    flex: 0 1 auto;
+    max-width: 100%
+}
+
+.mid.img-grande .fig-leg {
+    align-items: center
+}
+
+.mid.img-grande .fig-leg img,
+.mid.img-grande img.foto {
+    width: auto;
+    height: 64vh;
+    max-height: none;
+    max-width: 100%;
+    object-fit: contain
+}
+
+.mid.img-grande figcaption {
+    font-size: .78em
+}
+
+/* Nos slides com imagem em destaque o respiro vertical é menor para o
+   conjunto foto + legenda caber com folga na área útil. */
+.sl:has(.mid.img-grande) .slbd {
+    padding-top: clamp(4px, .8vh, 10px);
+    padding-bottom: clamp(4px, .8vh, 10px)
+}
+
+@media (max-height: 950px) {
+
+    .mid.img-grande .fig-leg img,
+    .mid.img-grande img.foto {
+        height: 52vh
+    }
+}
+
+@media (max-height: 800px) {
+
+    .mid.img-grande .fig-leg img,
+    .mid.img-grande img.foto {
+        height: 42vh
+    }
+}
+
+/* ============================================================
+   TABELAS CENTRALIZADAS (.tb2.centro)
+   A tabela deixa de ocupar a largura toda, encolhe para o conteúdo
+   e é centralizada no slide; o texto das células também centraliza.
+   ============================================================ */
+
+.tb2.centro {
+    display: table;
+    align-self: center;
+    width: auto;
+    max-width: 100%;
+    margin-inline: auto;
+    table-layout: auto
+}
+
+.tb2.centro th,
+.tb2.centro td {
+    text-align: center
+}
+
+/* As chamadas desses slides acompanham a tabela */
+#s_oferta_superior .slbd > p,
+#s_oferta_tecnico .slbd > p {
+    text-align: center
+}
+
+/* Em telas estreitas a tabela volta a rolar na horizontal */
+@media (max-width: 900px) {
+    .tb2.centro {
+        display: block;
+        width: 100%;
+        overflow-x: auto
+    }
+
+    .tb2.centro th,
+    .tb2.centro td {
+        text-align: left
+    }
+}
