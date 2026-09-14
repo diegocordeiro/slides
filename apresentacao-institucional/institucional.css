@@ -3435,7 +3435,7 @@ body.projetor .sl ul>li::before {
    dando protagonismo a documentos, mapas e retratos.
    ============================================================ */
 
-.mid.img-grande > .m:first-child {
+.mid.img-grande>.m:first-child {
     flex: 0 1 auto;
     max-width: 100%
 }
@@ -3501,8 +3501,8 @@ body.projetor .sl ul>li::before {
 }
 
 /* As chamadas desses slides acompanham a tabela */
-#s_oferta_superior .slbd > p,
-#s_oferta_tecnico .slbd > p {
+#s_oferta_superior .slbd>p,
+#s_oferta_tecnico .slbd>p {
     text-align: center
 }
 
@@ -3518,4 +3518,17 @@ body.projetor .sl ul>li::before {
     .tb2.centro td {
         text-align: left
     }
+}
+
+.grupo-imagens {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.grupo-imagens img {
+    width: 33%;
+    /* Divide o espaço igualmente entre as 3 imagens */
+    height: auto;
+    object-fit: cover;
 }
