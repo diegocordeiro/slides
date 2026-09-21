@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Informática Aplicada · Aula 03 — Hardware e Software</title>
+<link rel="stylesheet" href="aula03.css">
+</head>
+<body class="projetor">
+<header class="tb">
+  <h2>Informática Aplicada · IFPI — Campus Barras</h2>
+  <div class="tb-right">
+    <div class="fz" aria-label="Tamanho do texto">
+      <button onclick="fz(-1)" title="Diminuir tamanho da fonte">A−</button>
+      <span id="fzpct">100%</span>
+      <button onclick="fz(1)" title="Aumentar tamanho da fonte">A+</button>
+    </div>
+    <button class="cz" id="cz" type="button" onclick="toggleProjetor()" title="Tema projetor ativo — clique para o tema de leitura" aria-pressed="true">◉ Projetor</button>
+    <span class="ct" id="ctr">1 / 18</span>
+  </div>
+</header>
+<div class="fita"></div>
+<div class="sc">
+
+  <!-- SLIDE 1 - CAPA -->
+  <div class="sl ac" id="s1">
+    <div class="capa">
+      <div class="esq">
+        <div class="rot">Aula 03 · Informática Aplicada</div>
+        <h1>Hardware e Software</h1>
+        <p class="sub">As partes físicas do computador e as instruções que dão vida a elas</p>
+        <p class="sub">Técnico em Meio Ambiente · 1º Módulo · 2026/2</p>
+        <p class="sub">Prof. Diego Cordeiro de Oliveira</p>
+        <div class="faixa"></div>
+      </div>
+      <div class="dir">
+        <img src="logo.png" alt="Logo do IFPI">
+        <h2>Instituto Federal do Piauí</h2>
+        <p>Promover uma educação de excelência, direcionada às demandas sociais.</p>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a></div>
+  </div>
+
+  <!-- SLIDE 2 - AGENDA -->
+  <div class="sl" id="s_agenda">
+    <div class="slhd"><span class="num">2</span><h2>O que vamos explorar hoje?</h2></div>
+    <div class="slbd">
+      <div class="c2">
+        <div class="bege">
+          <h3>1. O computador como sistema</h3>
+          <p>Entenderemos como <strong>entrada, processamento, armazenamento e saída</strong> trabalham juntos em qualquer máquina digital.</p>
+        </div>
+        <div class="bege">
+          <h3>2. Hardware: componentes internos</h3>
+          <p>Conheceremos a <strong>placa-mãe</strong>, a <strong>CPU</strong>, as <strong>memórias</strong> e os dispositivos de <strong>armazenamento</strong>.</p>
+        </div>
+        <div class="bege">
+          <h3>3. Hardware: periféricos e conexões</h3>
+          <p>Diferenciaremos os dispositivos de <strong>entrada</strong>, de <strong>saída</strong> e os <strong>híbridos</strong>, além das principais portas e cabos.</p>
+        </div>
+        <div class="bege">
+          <h3>4. Software: o que dá vida à máquina</h3>
+          <p>Veremos os <strong>tipos de software</strong> — básico, utilitário e aplicativo — e o papel dos <strong>sistemas operacionais</strong>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a></div>
+  </div>
+  <!-- SLIDE 3 - HARDWARE X SOFTWARE -->
+  <div class="sl" id="s_hw_sw">
+    <div class="slhd"><span class="num">3</span><h2>Hardware × Software: dois lados do mesmo sistema</h2></div>
+    <div class="slbd">
+      <div class="c2">
+        <div class="bege">
+          <h3>Hardware — a parte física</h3>
+          <ul>
+            <li>Todo componente que <strong>se pode tocar</strong>: circuitos, placas, cabos e periféricos.</li>
+            <li>Reúne a <strong>placa-mãe</strong>, a <strong>CPU</strong>, as <strong>memórias</strong>, os <strong>discos</strong> e a <strong>fonte</strong>.</li>
+            <li>É o que <strong>ocupa espaço</strong>, consome energia e <strong>se desgasta</strong> com o tempo.</li>
+          </ul>
+        </div>
+        <div class="bege">
+          <h3>Software — a parte lógica</h3>
+          <ul>
+            <li>Conjunto de <strong>programas e instruções</strong> que dizem ao hardware o que fazer.</li>
+            <li>Inclui o <strong>sistema operacional</strong>, os <strong>aplicativos</strong> e os <strong>utilitários</strong>.</li>
+            <li><strong>Não se toca</strong>: é informação, que pode ser copiada e atualizada em segundos.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cd"><h3>A dupla inseparável</h3><p><strong>Hardware</strong> sem <strong>software</strong> é um conjunto de peças paradas; <strong>software</strong> sem <strong>hardware</strong> não tem onde rodar. A máquina só se torna útil quando os dois trabalham juntos — como um instrumento musical e a música que ele executa.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Conteúdo Programático (1.1.1 e 1.1.2)</a></div>
+  </div>
+
+  <!-- SLIDE 4 - O COMPUTADOR COMO SISTEMA -->
+  <div class="sl" id="s_sistema">
+    <div class="slhd"><span class="num">4</span><h2>O computador como sistema</h2></div>
+    <div class="slbd">
+      <p>Do celular ao supercomputador, toda máquina digital repete o mesmo <span class="mk">ciclo de quatro etapas</span>:</p>
+      <ol class="passos">
+        <li><strong>Entrada:</strong> os dados e os comandos chegam ao sistema — teclado, mouse, microfone, câmera, <strong>sensores</strong> e leitores de código.</li>
+        <li><strong>Processamento:</strong> a <strong>CPU</strong> interpreta as instruções e transforma os dados, fazendo cálculos, comparações e decisões.</li>
+        <li><strong>Armazenamento:</strong> o resultado é guardado de forma temporária ou permanente — <strong>memória RAM</strong>, SSD, HD ou nuvem.</li>
+        <li><strong>Saída:</strong> o resultado volta para quem usa o sistema — tela, impressora, som, <strong>plotter</strong> e relatórios.</li>
+      </ol>
+      <div class="cd"><h3>Aplicação na área ambiental</h3><p>Uma estação de monitoramento segue exatamente essa lógica: o sensor mede a <strong>qualidade da água</strong> (entrada), o programa compara o valor com os limites da legislação (processamento), registra o histórico (armazenamento) e emite o <strong>alerta</strong> ou o relatório (saída).</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 03 · Hardware e Software</a></div>
+  </div>
+
+  <!-- SLIDE 5 - ARQUITETURA DE VON NEUMANN -->
+  <div class="sl" id="s_vonneumann">
+    <div class="slhd"><span class="num">5</span><h2>Como as partes conversam: a máquina de von Neumann</h2></div>
+    <div class="slbd fill">
+      <table class="tb2 prog denso">
+        <tr>
+          <th>Bloco</th>
+          <th>Função</th>
+          <th>Exemplos</th>
+        </tr>
+        <tr>
+          <td><strong>Unidade Central de Processamento (CPU)</strong></td>
+          <td>Executa as instruções e coordena todo o sistema, com a <strong>ULA</strong>, a <strong>unidade de controle</strong> e os <strong>registradores</strong>.</td>
+          <td>Intel Core, AMD Ryzen, Apple M, ARM</td>
+        </tr>
+        <tr>
+          <td><strong>Memória principal</strong></td>
+          <td>Guarda, durante a execução, os programas e os dados que estão em uso.</td>
+          <td>Memória RAM e cache</td>
+        </tr>
+        <tr>
+          <td><strong>Dispositivos de entrada e saída (E/S)</strong></td>
+          <td>Levam dados para dentro do sistema e devolvem os resultados para fora.</td>
+          <td>Teclado, tela, sensores, impressora</td>
+        </tr>
+        <tr>
+          <td><strong>Barramentos</strong></td>
+          <td>Caminhos por onde os dados, os endereços e os sinais de controle circulam entre os blocos.</td>
+          <td>Barramento de dados, de endereços e de controle</td>
+        </tr>
+      </table>
+      <div class="ca"><h3>Programa armazenado</h3><p>A grande ideia do modelo de <strong>von Neumann</strong> (1945) é que <strong>dados e instruções ficam na mesma memória</strong>. Isso permite mudar o comportamento da máquina apenas trocando o programa, sem mexer no hardware — a base de todos os computadores atuais.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 03 · Hardware e Software</a></div>
+  </div>
+  <!-- SLIDE 6 - PLACA-MÃE -->
+  <div class="sl" id="s_placamae">
+    <div class="slhd"><span class="num">6</span><h2>A placa-mãe: onde tudo se conecta</h2></div>
+    <div class="slbd">
+      <div class="fg">
+        <img class="foto" src="img/placa-mae.jpg" alt="Placa-mãe de computador vista de cima, com socket do processador, slots de memória, conectores e circuitos">
+        <div class="ftx">
+          <ul>
+            <li><strong>A base de todo o hardware:</strong> é a placa que <strong>interliga os componentes</strong> — processador, pentes de memória, discos e placas de expansão.</li>
+            <li><strong>Chipset e circuitos:</strong> gerenciam a comunicação entre CPU, memória e periféricos, além de controlar energia e temperatura.</li>
+            <li><strong>Slots e portas:</strong> os <strong>slots</strong> recebem placas de vídeo, som e rede; as <strong>portas</strong> (USB, HDMI, rede) levam o computador ao mundo externo.</li>
+          </ul>
+          <p class="cred">Foto: Kurt Kaiser · Wikimedia Commons · <a href="https://commons.wikimedia.org/wiki/File:Computer_motherboard_6.jpg" target="_blank" rel="noopener">CC0</a></p>
+        </div>
+      </div>
+      <div class="cd"><h3>Por que isso importa</h3><p>É a placa-mãe que define o que pode ser <strong>melhorado</strong> em um computador: quantidade de memória, tipo de processador e modelos de disco aceitos.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 03 · Hardware e Software</a></div>
+  </div>
+
+  <!-- SLIDE 7 - CPU -->
+  <div class="sl" id="s_cpu">
+    <div class="slhd"><span class="num">7</span><h2>CPU: o cérebro do computador</h2></div>
+    <div class="slbd">
+      <div class="fg">
+        <img class="foto" src="img/processador.jpg" alt="Processador Intel Core i7 8700K sobre seu soquete em uma placa-mãe">
+        <div class="ftx">
+          <ul>
+            <li><strong>ULA:</strong> a <strong>Unidade Lógica e Aritmética</strong> faz os cálculos e as comparações que produzem os resultados.</li>
+            <li><strong>Unidade de controle:</strong> busca, interpreta e <strong>coordena a execução</strong> das instruções e comanda a memória e os dispositivos de E/S.</li>
+            <li><strong>Registradores e cache:</strong> memórias <strong>ultrarrápidas</strong> dentro do processador, onde os dados ficam durante a execução.</li>
+            <li><strong>Clock e núcleos:</strong> o <strong>clock (GHz)</strong> marca o ritmo, mais <strong>núcleos</strong> significam mais tarefas ao mesmo tempo e a arquitetura de <strong>32 ou 64 bits</strong> define quanto dado ele manipula por vez.</li>
+          </ul>
+          <p class="cred">Foto: ElooKoN · Wikimedia Commons · <a href="https://commons.wikimedia.org/wiki/File:Intel_i7_8700K.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
+        </div>
+      </div>
+      <div class="cd"><h3>Do 4004 até hoje</h3><p>O primeiro microprocessador comercial (<strong>Intel 4004</strong>, 1971) tinha <strong>2.300 transistores</strong> e trabalhava a 740 kHz; os processadores atuais reúnem <strong>bilhões de transistores</strong> e executam bilhões de ciclos por segundo.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 02 · Introdução à Informática (evolução dos componentes)</a></div>
+  </div>
+  <!-- SLIDE 8 - MEMÓRIAS -->
+  <div class="sl" id="s_memorias">
+    <div class="slhd"><span class="num">8</span><h2>Memórias: onde a informação fica durante o uso</h2></div>
+    <div class="slbd">
+      <div class="fg">
+        <img class="foto" src="img/memoria-ram.jpg" alt="Pente de memória RAM DDR4 com os chips de memória soldados na placa">
+        <div class="ftx">
+          <ul>
+            <li><strong>Cache — a mais rápida:</strong> guarda os dados <strong>usados com frequência</strong> bem perto da CPU; tem poucos megabytes, mas responde em poucos ciclos.</li>
+            <li><strong>RAM — a memória de trabalho:</strong> guarda os <strong>programas abertos e os dados em uso</strong>. É <strong>volátil</strong>: ao desligar, tudo se apaga, por isso o trabalho precisa ser salvo.</li>
+            <li><strong>ROM — a memória de leitura:</strong> traz as instruções <strong>gravadas de fábrica</strong> que inicializam o computador (BIOS/UEFI). É <strong>não volátil</strong>: mantém o conteúdo sem energia.</li>
+          </ul>
+          <p class="cred">Foto: ElooKoN · Wikimedia Commons · <a href="https://commons.wikimedia.org/wiki/File:RAM_Module_(SDRAM-DDR4).jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
+        </div>
+      </div>
+      <div class="cd"><h3>Pense na mesa e no armário</h3><p>A <strong>RAM</strong> é a <strong>mesa de trabalho</strong>: só cabe o que está sendo usado agora, e no fim do dia ela é limpa. O <strong>armazenamento</strong> é o <strong>armário</strong>: guarda tudo, mas leva mais tempo para abrir e fechar.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 03 · Hardware e Software</a></div>
+  </div>
+  <!-- SLIDE 9 - ARMAZENAMENTO -->
+  <div class="sl" id="s_armazenamento">
+    <div class="slhd"><span class="num">9</span><h2>Armazenamento: guardar para não perder</h2></div>
+    <div class="slbd fill">
+      <table class="tb2 prog denso">
+        <tr>
+          <th>Meio</th>
+          <th>Como funciona</th>
+          <th>Velocidade e capacidade típicas</th>
+        </tr>
+        <tr>
+          <td><strong>HD (disco rígido)</strong></td>
+          <td>Discos magnéticos girando, com uma cabeça que grava e lê os dados.</td>
+          <td>Mais lento e mais barato por GB — de 500 GB a 4 TB</td>
+        </tr>
+        <tr>
+          <td><strong>SSD</strong></td>
+          <td>Memória <strong>flash</strong>, sem partes móveis: silencioso, resistente a quedas e muito mais rápido.</td>
+          <td>De 240 GB a 2 TB; ideal para o <strong>sistema operacional</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Pendrive e cartão</strong></td>
+          <td>Flash removível, ligada por <strong>USB</strong> ou por leitor de cartões.</td>
+          <td>Portátil; ótimo para transportar e entregar trabalhos</td>
+        </tr>
+        <tr>
+          <td><strong>Nuvem</strong></td>
+          <td>Arquivos guardados em <strong>servidores</strong> acessados pela internet, com cópia de segurança.</td>
+          <td>Espaço conforme o plano; acesso de qualquer lugar</td>
+        </tr>
+      </table>
+      <div class="fotos3">
+        <figure><img class="foto" src="img/hd.jpg" alt="Disco rígido aberto, mostrando o prato magnético e o braço de leitura"><figcaption>HD: grande capacidade, partes móveis</figcaption></figure>
+        <figure><img class="foto" src="img/ssd.jpg" alt="Unidade de estado sólido com conexão SATA e seus chips de memória flash"><figcaption>SSD: rápido e silencioso</figcaption></figure>
+        <figure><img class="foto" src="img/pendrive.jpg" alt="Pendrive USB de 32 GB com conector metálico"><figcaption>Pendrive: flash removível</figcaption></figure>
+        <figure><img class="foto" src="img/servidores.jpg" alt="Fileiras de servidores iluminados em um centro de dados"><figcaption>Nuvem: servidores na internet</figcaption></figure>
+      </div>
+      <p class="cred cred-tira">Fotos: Evan-Amos · Djsumdog · Dmitry Makeev · Victor Grigas · Wikimedia Commons · CC BY-SA 3.0 / 4.0</p>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 03 · Hardware e Software</a></div>
+  </div>
+  <!-- SLIDE 10 - PERIFÉRICOS DE ENTRADA -->
+  <div class="sl" id="s_entrada">
+    <div class="slhd"><span class="num">10</span><h2>Periféricos de entrada: os dados chegam ao sistema</h2></div>
+    <div class="slbd">
+      <div class="fg">
+        <img class="foto" src="img/teclado-mouse.jpg" alt="Teclado e mouse sem fio próximos ao receptor USB">
+        <div class="ftx">
+          <ul>
+            <li><strong>Entrada de texto e comandos:</strong> <strong>teclado, mouse, touchpad e caneta</strong> digital traduzem as decisões do usuário em sinais que o computador entende.</li>
+            <li><strong>Captura de imagem e som:</strong> <strong>webcam, câmera digital, scanner e microfone</strong> convertem imagens, documentos e voz em arquivos digitais.</li>
+            <li><strong>Leitura de códigos e sensores:</strong> <strong>leitores de código de barras, GPS e sensores</strong> de temperatura, umidade e pH trazem os dados de campo para o computador.</li>
+          </ul>
+          <p class="cred">Foto: Andreas Schwarzkopf · Wikimedia Commons · <a href="https://commons.wikimedia.org/wiki/File:Wireless_computer_keyboard_with_mouse_an_USB_receiver.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
+        </div>
+      </div>
+      <div class="cd"><h3>Regra prática</h3><p>Se o dispositivo <strong>traz informação para dentro</strong> do computador, é de <strong>entrada</strong>. Se ele <strong>devolve informação para você</strong>, é de <strong>saída</strong>. Alguns fazem as duas coisas — são os <strong>híbridos</strong>.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 03 · Hardware e Software</a></div>
+  </div>
+
+  <!-- SLIDE 11 - PERIFÉRICOS DE SAÍDA -->
+  <div class="sl" id="s_saida">
+    <div class="slhd"><span class="num">11</span><h2>Periféricos de saída: o resultado volta até você</h2></div>
+    <div class="slbd fill">
+      <p>Depois do processamento, os dispositivos de <strong>saída</strong> transformam o resultado em algo que podemos <span class="mk">ver, ouvir ou levar para o papel</span>: monitores e projetores, impressoras, plotters, caixas de som e fones.</p>
+      <div class="fotos3">
+        <figure><img class="foto" src="img/monitor.jpg" alt="Monitor de tela plana ligado sobre uma mesa"><figcaption>Monitor: saída visual</figcaption></figure>
+        <figure><img class="foto" src="img/impressora.jpg" alt="Impressora jato de tinta colorida com folhas de papel"><figcaption>Impressora: relatórios e boletins</figcaption></figure>
+        <figure><img class="foto" src="img/plotter.jpg" alt="Plotter de grande formato com papel em rolo instalado"><figcaption>Plotter: mapas e plantas em formato grande</figcaption></figure>
+      </div>
+      <div class="cd"><h3>Aplicação na área ambiental</h3><p>Um <strong>plotter</strong> imprime mapas de uso do solo, plantas de recuperação e cartas temáticas em tamanho de leitura — material essencial em relatórios de licenciamento e em apresentações para a comunidade.</p></div>
+      <p class="cred cred-tira">Fotos: Andrew pmk (CC BY-SA 3.0) · Roger DeWitt (CC BY 2.0) · Luca Cavaliere (CC BY-SA 4.0) · Wikimedia Commons</p>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 03 · Hardware e Software</a></div>
+  </div>
+  <!-- SLIDE 12 - DISPOSITIVOS HÍBRIDOS E CONEXÕES -->
+  <div class="sl" id="s_conexoes">
+    <div class="slhd"><span class="num">12</span><h2>Dispositivos híbridos e formas de conexão</h2></div>
+    <div class="slbd fill">
+      <p>Alguns dispositivos fazem <strong>entrada e saída ao mesmo tempo</strong> — e todos precisam de um caminho para conversar com o computador:</p>
+      <table class="tb2 prog denso">
+        <tr>
+          <th>Dispositivo, porta ou tecnologia</th>
+          <th>Tipo</th>
+          <th>Para que serve</th>
+        </tr>
+        <tr>
+          <td><strong>Tela sensível ao toque</strong></td>
+          <td>Entrada e saída</td>
+          <td>Recebe o toque e mostra a resposta na mesma superfície.</td>
+        </tr>
+        <tr>
+          <td><strong>Modem e roteador</strong></td>
+          <td>Entrada e saída</td>
+          <td>Trazem os dados da internet e enviam os pedidos de volta à rede.</td>
+        </tr>
+        <tr>
+          <td><strong>Pendrive e HD externo</strong></td>
+          <td>Entrada e saída</td>
+          <td>Gravam e devolvem arquivos sempre que são conectados.</td>
+        </tr>
+        <tr>
+          <td><strong>Portas USB, HDMI e de rede</strong></td>
+          <td>Conexão com fio</td>
+          <td>Ligam periféricos, monitores e cabos de rede ao computador.</td>
+        </tr>
+        <tr>
+          <td><strong>Wi-Fi e Bluetooth</strong></td>
+          <td>Conexão sem fio</td>
+          <td>Conectam teclados, mouses, fones e a internet sem cabos.</td>
+        </tr>
+      </table>
+      <div class="cd"><h3>O padrão que unificou tudo</h3><p>Antes, cada periférico tinha um conector próprio. Com o <strong>USB</strong>, teclado, mouse, pendrive, impressora e celular passaram a usar o mesmo tipo de porta — e o computador reconhece cada dispositivo assim que ele é ligado.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 03 · Hardware e Software</a></div>
+  </div>
+  <!-- SLIDE 13 - TIPOS DE SOFTWARE -->
+  <div class="sl" id="s_tipos">
+    <div class="slhd"><span class="num">13</span><h2>Software: como se classificam os programas</h2></div>
+    <div class="slbd fill">
+      <table class="tb2 prog denso">
+        <tr>
+          <th>Tipo</th>
+          <th>O que faz</th>
+          <th>Exemplos</th>
+        </tr>
+        <tr>
+          <td><strong>Software básico (de sistema)</strong></td>
+          <td>Faz a máquina funcionar e serve de <strong>base para todos os demais</strong> programas.</td>
+          <td>Windows, Linux, macOS, Android, iOS</td>
+        </tr>
+        <tr>
+          <td><strong>Software utilitário</strong></td>
+          <td>Ferramentas que <strong>mantêm, protegem e otimizam</strong> o computador.</td>
+          <td>Antivírus, backup, compactadores, limpeza de disco, gerenciadores de arquivos</td>
+        </tr>
+        <tr>
+          <td><strong>Software aplicativo</strong></td>
+          <td>Resolve as <strong>tarefas do usuário</strong>: escrever, calcular, apresentar, comunicar e analisar.</td>
+          <td>Editores de texto, planilhas, navegadores, SIG, programas de estatística</td>
+        </tr>
+        <tr>
+          <td><strong>Firmware</strong></td>
+          <td>Instruções gravadas <strong>no próprio hardware</strong>, entre o software e o circuito.</td>
+          <td>BIOS/UEFI, firmware de roteadores, impressoras e celulares</td>
+        </tr>
+      </table>
+      <div class="cd"><h3>As fronteiras se misturam</h3><p>A classificação ajuda a organizar o estudo, mas na prática os tipos se combinam: muitos sistemas operacionais já trazem navegador, antivírus e até aplicativos de escritório <strong>embutidos</strong>.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Habilidades: identificar tipos de software</a></div>
+  </div>
+
+  <!-- SLIDE 14 - SISTEMAS OPERACIONAIS -->
+  <div class="sl" id="s_so">
+    <div class="slhd"><span class="num">14</span><h2>Sistemas operacionais: o software que comanda o hardware</h2></div>
+    <div class="slbd">
+      <div class="c2">
+        <div class="bege">
+          <h3>O que o sistema operacional faz</h3>
+          <ul>
+            <li><strong>Gerencia o hardware:</strong> processador, memória, discos e periféricos.</li>
+            <li><strong>Executa e organiza</strong> os programas e seus processos.</li>
+            <li><strong>Controla arquivos, pastas</strong> e permissões de acesso.</li>
+            <li>Oferece a <strong>interface</strong> de uso e cuida de <strong>atualizações e segurança</strong>.</li>
+          </ul>
+        </div>
+        <div class="bege">
+          <h3>Onde eles estão</h3>
+          <ul>
+            <li><strong>Computadores:</strong> Windows, Linux (Ubuntu, Debian, Fedora) e macOS.</li>
+            <li><strong>Celulares e tablets:</strong> Android e iOS.</li>
+            <li><strong>Servidores:</strong> Linux (Red Hat, Debian) e Windows Server.</li>
+            <li><strong>Equipamentos embarcados:</strong> Linux, Android e sistemas de tempo real em sensores e drones.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cd"><h3>Ligação com a próxima aula</h3><p>É ele que <strong>apresenta o computador ao usuário</strong> — tema da <strong>Unidade 3</strong>.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Conteúdo Programático (Unidade 3)</a></div>
+  </div>
+  <!-- SLIDE 15 - APLICATIVOS E UTILITÁRIOS -->
+  <div class="sl" id="s_aplicativos">
+    <div class="slhd"><span class="num">15</span><h2>Aplicativos e utilitários no dia a dia</h2></div>
+    <div class="slbd">
+      <div class="c2 compacto">
+        <div class="bege">
+          <h3>Escritório</h3>
+          <p><strong>Editor de texto, planilha e slides</strong> para documentos e cálculos.</p>
+        </div>
+        <div class="bege">
+          <h3>Internet e comunicação</h3>
+          <p><strong>Navegadores, e-mail e videoconferência</strong> para estudar e trabalhar em equipe.</p>
+        </div>
+        <div class="bege">
+          <h3>Segurança e manutenção</h3>
+          <p><strong>Antivírus, backup e compactadores</strong> para proteger e otimizar.</p>
+        </div>
+        <div class="bege">
+          <h3>Ambientais</h3>
+          <p><strong>QGIS</strong>, imagens de satélite e GPS no monitoramento.</p>
+        </div>
+      </div>
+      <div class="ca"><h3>Atenção ao licenciamento</h3><p>Programas <strong>proprietários</strong> exigem licença; os de <strong>código aberto</strong> seguem a licença do autor.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://www.ifpi.edu.br/" target="_blank" rel="noopener">Plano de Ensino · Softwares na área ambiental (Unidade 8)</a></div>
+  </div>
+
+  <!-- SLIDE 16 - HARDWARE E SOFTWARE NO MONITORAMENTO AMBIENTAL -->
+  <div class="sl" id="s_ambiental">
+    <div class="slhd"><span class="num">16</span><h2>Hardware e software no monitoramento ambiental</h2></div>
+    <div class="slbd">
+      <div class="fg">
+        <img class="foto" src="img/raspberry.jpg" alt="Placa Raspberry Pi 4 vista de cima, com as portas USB, HDMI, rede e os conectores de expansão">
+        <div class="ftx">
+          <ul>
+            <li><strong>Sensores e placas embarcadas:</strong> placas como <strong>Arduino</strong> e <strong>Raspberry Pi</strong> leem sensores de temperatura, umidade, pH e turbidez — hardware barato que funciona em campo.</li>
+            <li><strong>Estações e registro de dados:</strong> o software <strong>grava séries históricas</strong>, gera gráficos e envia os dados por rede ou telefonia para a equipe técnica.</li>
+            <li><strong>Drones, GPS e imagens de satélite:</strong> permitem <strong>mapear áreas de difícil acesso</strong>, acompanhar o avanço do desmatamento e comparar imagens ao longo do tempo.</li>
+          </ul>
+          <p class="cred">Foto: Laserlicht · Wikimedia Commons · <a href="https://commons.wikimedia.org/wiki/File:Raspberry_Pi_4_Model_B_-_Top.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
+        </div>
+      </div>
+      <div class="cd"><h3>Uma dupla em campo</h3><p>O <strong>sensor</strong> coleta o dado, o <strong>programa</strong> interpreta e compara com as metas, e o resultado vira <strong>decisão ambiental</strong>: um alerta de contaminação, um relatório ou um mapa. Sem um dos dois — hardware ou software — nada acontece.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 03 · Hardware e Software</a></div>
+  </div>
+  <!-- SLIDE 17 - DESAFIO RÁPIDO -->
+  <div class="sl" id="s_desafio">
+    <div class="slhd"><span class="num">17</span><h2>Desafio rápido: hardware ou software?</h2></div>
+    <div class="slbd">
+      <p>Pense antes de clicar: <span class="mk">toque em cada pergunta para revelar a resposta</span>.</p>
+      <div class="rev">1. Um pente de memória RAM de 8 GB é hardware ou software?<div class="resp">É <strong>hardware</strong>: uma peça física que guarda dados temporariamente. O <strong>programa</strong> que usa essa memória é que é software.</div></div>
+      <div class="rev">2. Um sensor de pH instalado em um rio e o programa que registra as leituras: qual é qual?<div class="resp">O <strong>sensor</strong> é hardware — um dispositivo de <strong>entrada</strong> de dados. O <strong>programa</strong> que registra, compara e gera o relatório é software.</div></div>
+      <div class="rev">3. Por que uma planilha enviada por e-mail não é hardware?<div class="resp">Porque é <strong>informação</strong>, não matéria: o arquivo é software e só existe, para nós, quando é aberto em algum hardware.</div></div>
+      <div class="ca"><h3>Atividade da semana</h3><p>No laboratório, liste <strong>5 dispositivos</strong>, classifique cada um em <strong>entrada, saída ou híbrido</strong> e indique o <strong>software</strong> usado com ele. Registre a atividade na plataforma <a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a> ou no SUAP.</p></div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">Aula 03 · Hardware e Software</a></div>
+  </div>
+
+  <!-- SLIDE 18 - ENCERRAMENTO -->
+  <div class="sl" id="s_fim">
+    <div class="slhd"><span class="num">18</span><h2>Dúvidas?</h2></div>
+    <div class="slbd">
+      <div class="divisor">
+        <img class="bg" src="img/encerramento.jpg" alt="">
+        <div class="ov"></div>
+        <div class="in">
+          <div class="rot">Informática Aplicada · Aula 03</div>
+          <h1>Dúvidas?</h1>
+          <p>Estamos aqui para responder.</p>
+          <p>Prof. Diego Cordeiro de Oliveira — <a href="mailto:diego.cordeiro@ifpi.edu.br" style="color:#fff">diego.cordeiro@ifpi.edu.br</a></p>
+          <p style="font-size:.7em; opacity:.85; margin-top:14px">Foto de fundo: De La Salle University – Dasmariñas (ICTC) · Wikimedia Commons · CC0</p>
+        </div>
+      </div>
+    </div>
+    <div class="ref"><span class="rt">📚 Referência para consulta:</span><a href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a></div>
+  </div>
+
+</div><!-- /.sc -->
+
+<div class="ctrl-wrap">
+  <div class="progress-wrap"><div id="progress" class="progress"></div></div>
+  <nav class="ctr">
+    <div id="dots" class="dots"></div>
+    <button class="bn" onclick="openPresentation()" title="Abrir em janela de apresentação">Apresentação</button>
+    <button class="bz sq" onclick="pv()" title="Slide anterior">‹</button>
+    <button class="bz sq" id="play" type="button" title="Reproduzir automaticamente">▶</button>
+    <button class="bz sq" id="full" type="button" title="Tela cheia">⛶</button>
+    <button class="bv sq" onclick="nx()" title="Próximo slide">›</button>
+  </nav>
+</div>
+
+<script src="aula03.js"></script>
+</body>
+</html>
