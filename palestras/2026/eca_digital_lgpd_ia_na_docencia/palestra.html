@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Palestra · ECA Digital, LGPD e o uso responsável de dados e imagem</title>
+  <link rel="stylesheet" href="palestra.css">
+</head>
+
+<body class="projetor">
+  <header class="tb">
+    <h2>Palestra · IFPI — Campus Barras</h2>
+    <div class="tb-right">
+      <div class="fz" aria-label="Tamanho do texto">
+        <button onclick="fz(-1)" title="Diminuir tamanho da fonte">A−</button>
+        <span id="fzpct">100%</span>
+        <button onclick="fz(1)" title="Aumentar tamanho da fonte">A+</button>
+      </div>
+      <button class="cz" id="cz" type="button" onclick="toggleProjetor()"
+        title="Tema projetor ativo — clique para o tema de leitura" aria-pressed="true">◉ Projetor</button>
+      <span class="ct" id="ctr">1 / 28</span>
+    </div>
+  </header>
+  <div class="fita"></div>
+  <div class="sc">
+
+    <!-- SLIDE 1 - CAPA -->
+    <div class="sl ac" id="s1">
+      <div class="capa">
+        <div class="esq">
+          <div class="rot">Palestra · Comissão de Extensão</div>
+          <h1>ECA Digital, LGPD e o uso responsável de dados e imagem</h1>
+          <p class="sub">Docentes · IFPI Campus Barras · 07/10/2026</p>
+          <p class="sub">Prof. Diego Cordeiro de Oliveira</p>
+          <div class="faixa"></div>
+        </div>
+        <div class="dir">
+          <img src="logo.png" alt="Logo do IFPI">
+          <h2>Instituto Federal do Piauí</h2>
+          <p>Promover uma educação de excelência, direcionada às demandas sociais.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 - O QUE VAMOS EXPLORAR HOJE? -->
+    <div class="sl" id="s_agenda">
+      <div class="slhd"><span class="num">2</span>
+        <h2>O que vamos explorar hoje?</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>1. A base legal</h3>
+            <p>Como <strong>LGPD</strong>, <strong>ECA Digital</strong>, ECA e Código Civil se somam e o que o
+              <strong>IFPI</strong> já regulamentou.</p>
+          </div>
+          <div class="bege">
+            <h3>2. Dados pessoais e sensíveis</h3>
+            <p>Onde os dados circulam na rotina docente e como <strong>coletar, guardar e compartilhar</strong> com
+              segurança.</p>
+          </div>
+          <div class="bege">
+            <h3>3. Inteligência Artificial</h3>
+            <p>O que acontece com o que digitamos e um <strong>semáforo</strong> para decidir o que pode ou não ir para
+              uma IA.</p>
+          </div>
+          <div class="bege">
+            <h3>4. Imagem de estudantes e públicos atendidos</h3>
+            <p><strong>Autorização</strong>, divulgação e registro das ações pedagógicas e de extensão, com casos
+              práticos.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 3 - TRÊS CENÁRIOS QUE ACONTECEM TODA SEMANA -->
+    <div class="sl" id="s_cenarios">
+      <div class="slhd"><span class="num">3</span>
+        <h2>Três cenários que acontecem toda semana</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>A foto da oficina</h3>
+            <p>A turma na feira de ciências vai para o perfil do projeto. <strong>Quem autorizou?</strong></p>
+          </div>
+          <div class="bege">
+            <h3>A planilha de inscritos</h3>
+            <p>Lista com CPF, endereço e e-mail em pasta aberta para <strong>“qualquer pessoa com o link”</strong>.</p>
+          </div>
+          <div class="bege">
+            <h3>O laudo no chatbot</h3>
+            <p>Relatório de um estudante, com laudo, colado em uma <strong>IA pública</strong> para redigir o parecer.
+            </p>
+          </div>
+        </div>
+        <div class="cd">
+          <h3>Pergunta</h3>
+          <p>Quem aqui já fez algo parecido? <strong>Sem constrangimento</strong>: o objetivo é aprender a fazer
+            melhor.</p>
+        </div>
+        <div class="dc">
+          <h3>Mensagem central</h3>
+          <p>Registrar e divulgar ações pedagógicas e de extensão é <strong>possível e desejável</strong>, desde que
+            saibamos <strong>o que coletar, com qual base legal, onde inserir e como divulgar</strong>.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 4 - MAPA LEGAL: TRÊS CAMADAS QUE SE SOBREPÕEM -->
+    <div class="sl" id="s_mapa">
+      <div class="slhd"><span class="num">4</span>
+        <h2>Mapa legal</h2>
+      </div>
+      <div class="slbd fill">
+        <table class="tb2 prog denso">
+          <tr>
+            <th>Norma</th>
+            <th>O que cobre</th>
+            <th>Na docência</th>
+          </tr>
+          <tr>
+            <td><strong>Constituição, art. 5º, X e LXXIX</strong></td>
+            <td>Intimidade, vida privada, imagem e proteção de dados como direito fundamental</td>
+            <td>Base de tudo; a imagem é direito fundamental</td>
+          </tr>
+          <tr>
+            <td><strong>LGPD</strong> (Lei 13.709/2018)</td>
+            <td>Tratamento de dados pessoais por qualquer pessoa ou órgão, inclusive público</td>
+            <td>Coletar, guardar, compartilhar e inserir dados em sistemas e IA</td>
+          </tr>
+          <tr>
+            <td><strong>ECA</strong> (Lei 8.069/1990), arts. 17, 18 e 100</td>
+            <td>Respeito à imagem, identidade e privacidade; melhor interesse</td>
+            <td>Divulgação de fotos de estudantes menores</td>
+          </tr>
+          <tr>
+            <td><strong>ECA Digital</strong> (Lei 15.211/2025)</td>
+            <td>Proteção de crianças e adolescentes em produtos e serviços digitais</td>
+            <td>Escolha de apps e plataformas indicados a estudantes</td>
+          </tr>
+          <tr>
+            <td><strong>Código Civil, art. 20</strong></td>
+            <td>Uso da imagem exige autorização, salvo exceções</td>
+            <td>Fundamento do termo de autorização</td>
+          </tr>
+        </table>
+        <div class="cd">
+          <p>A mesma foto é <strong>dado pessoal</strong> (LGPD), <strong>direito de imagem</strong> (CF e Código Civil)
+            e <strong>dado de criança ou adolescente</strong> (ECA e art. 14 da LGPD) ao mesmo tempo.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 5 - LGPD: OS CONCEITOS QUE USAMOS TODO DIA -->
+    <div class="sl" id="s_lgpd1">
+      <div class="slhd"><span class="num">5</span>
+        <h2>LGPD: Lei geral de proteção de dados</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2 compacto" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="bege">
+            <h3>Dado pessoal</h3>
+            <p>Informação ligada a pessoa <strong>identificada ou identificável</strong>: nome, matrícula, foto, voz,
+              e-mail.</p>
+          </div>
+          <div class="bege">
+            <h3>Dado pessoal sensível</h3>
+            <p>Origem racial ou étnica, religião, opinião política, <strong>saúde</strong>, vida sexual, dado genético
+              ou <strong>biométrico</strong>. Laudos e dados de inclusão entram aqui.</p>
+          </div>
+          <div class="bege">
+            <h3>Anonimização × pseudonimização</h3>
+            <p>Anonimizado é o dado que <strong>não permite mais identificar</strong> a pessoa. Trocar o nome por
+              iniciais ou ID, mantendo contexto raro, é só <strong>pseudonimização</strong>.</p>
+          </div>
+          <div class="bege">
+            <h3>Quem é quem (vale também no setor público)</h3>
+            <ul>
+              <li><strong>Controlador:</strong> quem decide (o IFPI).</li>
+              <li><strong>Operador:</strong> quem trata em nome do controlador.</li>
+              <li><strong>Encarregado (DPO):</strong> canal entre instituição, titulares e ANPD.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 6 - LGPD: PRINCÍPIOS E BASES LEGAIS -->
+    <div class="sl" id="s_lgpd2">
+      <div class="slhd"><span class="num">6</span>
+        <h2>LGPD: princípios e bases legais</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Princípios que mais pesam (art. 6º)</h3>
+            <ul>
+              <li><strong>Finalidade e adequação:</strong> para que coleto?</li>
+              <li><strong>Necessidade:</strong> só o indispensável.</li>
+              <li><strong>Segurança e prevenção:</strong> proteger do acesso indevido.</li>
+              <li><strong>Transparência:</strong> o titular sabe o que acontece.</li>
+              <li><strong>Não discriminação</strong> e <strong>responsabilização</strong>.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Bases legais na educação pública (arts. 7º e 11)</h3>
+            <ul>
+              <li><strong>Obrigação legal</strong>: histórico escolar, frequência.</li>
+              <li><strong>Políticas públicas</strong>: ensino, pesquisa e extensão.</li>
+              <li><strong>Estudos por órgão de pesquisa</strong>, anonimizando quando possível.</li>
+              <li><strong>Proteção da vida</strong> ou da saúde, em emergências.</li>
+              <li><strong>Consentimento</strong>: para o que passa da missão institucional.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ca">
+          <h3>Consentimento é a exceção</h3>
+          <p>Na rotina, a base costuma ser a <strong>atividade pública</strong>. O consentimento entra quando o uso
+            <strong>ultrapassa a missão</strong>, como divulgar a imagem de um estudante em rede social.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 7 - CRIANÇAS E ADOLESCENTES E DIREITOS DO TITULAR -->
+    <div class="sl" id="s_lgpd3">
+      <div class="slhd"><span class="num">7</span>
+        <h2>Crianças e adolescentes e direitos do titular</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Dados de crianças e adolescentes (art. 14)</h3>
+            <ul>
+              <li>O tratamento deve atender ao <strong>melhor interesse</strong> da criança e do adolescente.</li>
+              <li>Para crianças, o consentimento é <strong>específico e em destaque</strong>, dado por pelo menos um dos
+                pais ou responsável legal.</li>
+              <li>A ANPD admite <strong>outras bases legais</strong> além do consentimento, sempre respeitado o melhor
+                interesse (Enunciado CD/ANPD nº 1/2023).</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>O que o titular pode pedir (art. 18)</h3>
+            <ul>
+              <li>Confirmação e <strong>acesso</strong> aos dados.</li>
+              <li><strong>Correção</strong> de dados incompletos ou desatualizados.</li>
+              <li><strong>Eliminação</strong> ou anonimização de dados desnecessários.</li>
+              <li>Informação sobre <strong>compartilhamento</strong>.</li>
+              <li><strong>Revogação</strong> do consentimento.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cd">
+          <h3>Segurança e incidentes</h3>
+          <p>Medidas técnicas e administrativas são obrigatórias (art. 46). Incidente com <strong>risco ou dano
+              relevante</strong> deve ser comunicado à ANPD e ao titular (art. 48).</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 8 - O QUE O IFPI JÁ REGULAMENTOU E ONDE CONSULTAR -->
+    <div class="sl" id="s_ifpi">
+      <div class="slhd"><span class="num">8</span>
+        <h2>O que o IFPI já regulamentou e onde consultar</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Resolução Normativa nº 221/2024</h3>
+            <ul>
+              <li>Institui a <strong>Política de Privacidade e Proteção de Dados Pessoais</strong> do IFPI (23/08/2024).
+              </li>
+              <li>A <strong>Reitoria</strong> é a controladora.</li>
+              <li>A <strong>imagem</strong> é definida como dado pessoal (art. 5º, XXV).</li>
+              <li>Compartilhamento externo só com <strong>vínculo jurídico ou contratual</strong> (Anexo I, 4.1).</li>
+              <li>Incidentes relevantes são comunicados ao titular e à ANPD (Anexo III, 8).</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Encarregado, cartilhas e capacitações</h3>
+            <ul>
+              <li><strong>Encarregado:</strong> <a
+                  href="mailto:encarregadolgpd@ifpi.edu.br">encarregadolgpd@ifpi.edu.br</a></li>
+              <li><a
+                  href="https://www.ifpi.edu.br/acesso-a-informacao/lgpd/RESOLUONORMATIVAN2212024InstituiaPolticadePrivacidadenombitodoInstitutoFederaldeEducaoCinciaeTecnologiadoPiauIFPI..pdf"
+                  target="_blank" rel="noopener">Resolução Normativa nº 221/2024 (PDF)</a></li>
+              <li><a href="https://www.ifpi.edu.br/acesso-a-informacao/lgpd/cartilhas-lgpd" target="_blank"
+                  rel="noopener">Cartilhas LGPD do IFPI</a></li>
+              <li><a href="https://www.ifpi.edu.br/acesso-a-informacao/lgpd/cursos/view" target="_blank"
+                  rel="noopener">Rol de capacitações em LGPD</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="ca">
+          <h3>Onde a política é silenciosa</h3>
+          <p>O texto <strong>não traz regras específicas para menores de idade nem para IA</strong>. É nessas lacunas
+            que o bom senso do docente e esta palestra entram.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 9 - ECA DIGITAL: O QUE É E A QUEM SE DIRIGE -->
+    <div class="sl" id="s_eca1">
+      <div class="slhd"><span class="num">9</span>
+        <h2>ECA Digital: o que é e a quem se dirige</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>A lei</h3>
+            <ul>
+              <li><strong>Lei 15.211/2025</strong>, publicada em 17/09/2025.</li>
+              <li>Em vigor desde <strong>17/03/2026</strong>.</li>
+              <li>Fiscalização e regulamentação pela <strong>ANPD</strong>.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Alcance (art. 1º)</h3>
+            <p>Produtos e serviços de tecnologia da informação <strong>direcionados a crianças e adolescentes</strong>
+              ou de <strong>acesso provável por eles</strong>, onde quer que estejam sediados.</p>
+          </div>
+        </div>
+        <div class="cd">
+          <h3>Quem é obrigado?</h3>
+          <p>A obrigação direta é de <strong>plataformas, aplicativos, jogos, lojas de aplicativos e sistemas
+              operacionais</strong>. Mas o docente <strong>escolhe e indica ferramentas</strong>, e é aí que a lei o
+            alcança na prática.</p>
+        </div>
+      </div>
+      <div class="ref">Fonte: <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15211.htm"
+          target="_blank" rel="noopener">Lei 15.211/2025 · Planalto</a> · <a
+          href="https://www.gov.br/anpd/pt-br/assuntos/eca-digital" target="_blank" rel="noopener">ANPD · ECA
+          Digital</a></div>
+    </div>
+    <!-- SLIDE 10 - ECA DIGITAL: PRINCIPAIS OBRIGAÇÕES DOS PROVEDORES -->
+    <div class="sl" id="s_eca2">
+      <div class="slhd"><span class="num">10</span>
+        <h2>ECA Digital: principais obrigações dos provedores</h2>
+      </div>
+      <div class="slbd fill">
+        <table class="tb2 prog denso">
+          <tr>
+            <th>Tema</th>
+            <th>O que a lei exige</th>
+            <th>Artigos</th>
+          </tr>
+          <tr>
+            <td><strong>Verificação de idade</strong></td>
+            <td>Mecanismos confiáveis, <strong>vedada a autodeclaração</strong>; lojas de aplicativos e sistemas
+              operacionais oferecem sinal de idade</td>
+            <td>arts. 9 a 15</td>
+          </tr>
+          <tr>
+            <td><strong>Supervisão parental</strong></td>
+            <td>Ferramentas acessíveis, com configurações padrão no <strong>mais alto nível de proteção</strong></td>
+            <td>arts. 16 a 18</td>
+          </tr>
+          <tr>
+            <td><strong>Loot boxes</strong></td>
+            <td>Proibidas em jogos</td>
+            <td>art. 20</td>
+          </tr>
+          <tr>
+            <td><strong>Perfilamento para publicidade</strong></td>
+            <td>Proibido para crianças e adolescentes</td>
+            <td>art. 22</td>
+          </tr>
+          <tr>
+            <td><strong>Redes sociais</strong></td>
+            <td>Contas de menores de 16 anos vinculadas a um responsável legal</td>
+            <td>art. 24</td>
+          </tr>
+        </table>
+      </div>
+      <div class="ref">Fonte: <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15211.htm"
+          target="_blank" rel="noopener">Lei 15.211/2025 · Planalto</a></div>
+    </div>
+    <!-- SLIDE 11 - ECA DIGITAL: FISCALIZAÇÃO, SANÇÕES E CRONOGRAMA -->
+    <div class="sl" id="s_eca3">
+      <div class="slhd"><span class="num">11</span>
+        <h2>ECA Digital: fiscalização, sanções e cronograma</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Sanções (art. 35)</h3>
+            <ul>
+              <li><strong>Advertência</strong>, com prazo para correção.</li>
+              <li><strong>Multa</strong> de até 10% do faturamento do grupo econômico no Brasil, limitada a <strong>R$
+                  50 milhões por infração</strong>.</li>
+              <li><strong>Suspensão ou proibição</strong> de atividades, por via judicial.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Cronograma da ANPD</h3>
+            <ul>
+              <li><strong>Mar/2026:</strong> monitoramento de lojas de apps e sistemas operacionais.</li>
+              <li><strong>Ago/2026:</strong> monitoramento ampliado.</li>
+              <li><strong>Jan/2027:</strong> ações de fiscalização.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cd">
+          <h3>Materiais oficiais</h3>
+          <p>A ANPD já disponibiliza orientações sobre <strong>verificação de idade</strong>, perguntas e respostas e um
+            <strong>portal de denúncias</strong>.</p>
+        </div>
+      </div>
+      <div class="ref">Fonte: <a href="https://www.gov.br/anpd/pt-br/assuntos/eca-digital" target="_blank"
+          rel="noopener">ANPD · ECA Digital</a> · <a
+          href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15211.htm" target="_blank"
+          rel="noopener">Lei 15.211/2025</a></div>
+    </div>
+    <!-- SLIDE 12 - O QUE O ECA DIGITAL MUDA PARA O DOCENTE -->
+    <div class="sl" id="s_eca4">
+      <div class="slhd"><span class="num">12</span>
+        <h2>O que o ECA Digital muda para o docente</h2>
+      </div>
+      <div class="slbd">
+        <ol class="passos">
+          <li><strong>Antes de indicar</strong> um app, rede social ou IA a estudantes menores, conferir <strong>idade
+              mínima</strong>, termos e configurações de privacidade.</li>
+          <li><strong>Preferir ferramentas</strong> institucionais ou educacionais, com controles adequados.</li>
+          <li><strong>Nunca orientar</strong> a contornar a verificação de idade de uma plataforma.</li>
+          <li><strong>Tratar a lei como padrão de cuidado:</strong> mesmo que a obrigação seja do provedor, o dano ao
+            estudante também atinge a escola.</li>
+        </ol>
+        <div class="ca">
+          <p>O ECA Digital não cria nova tarefa burocrática para o docente, mas torna a <strong>escolha da
+              ferramenta</strong> uma decisão pedagógica e de proteção.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 13 - ONDE OS DADOS PASSAM NA ROTINA DOCENTE -->
+    <div class="sl" id="s_rotina">
+      <div class="slhd"><span class="num">13</span>
+        <h2>Dados: Cuidados ao manipular</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Por onde circulam</h3>
+            <ul>
+              <li>Diário de classe e <strong>sistemas acadêmicos</strong>.</li>
+              <li>Grupos de <strong>WhatsApp</strong> e e-mails.</li>
+              <li><strong>Formulários</strong> e planilhas online.</li>
+              <li>Listas de presença e <strong>relatórios de extensão</strong>.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Dados que pedem mais cuidado</h3>
+            <ul>
+              <li><strong>Laudos</strong> e dados de inclusão e acessibilidade.</li>
+              <li>Cadastros socioeconômicos.</li>
+              <li>Informações de <strong>saúde</strong>, religião ou etnia.</li>
+              <li>Imagem e voz de menores.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cd">
+          <p>Quase todo dado sensível entra por um <strong>formulário ou planilha</strong> criado sem pensar na LGPD.
+            Por isso, o cuidado começa na <strong>coleta</strong>.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 14 - CINCO REGRAS PRÁTICAS PARA COLETAR E GUARDAR -->
+    <div class="sl" id="s_regras">
+      <div class="slhd"><span class="num">14</span>
+        <h2>Dados: Cinco regras práticas para coletar e guardar</h2>
+      </div>
+      <div class="slbd">
+        <ol class="passos">
+          <li><strong>Colete só o necessário.</strong> Precisa mesmo de CPF, endereço ou religião para a oficina?</li>
+          <li><strong>Diga a finalidade</strong> no próprio formulário, em uma frase clara.</li>
+          <li><strong>Use contas e nuvem institucionais</strong>, com acesso restrito a quem precisa.</li>
+          <li><strong>Defina prazo:</strong> apague ou arquive o que não é mais necessário.</li>
+          <li><strong>Pseudonimize</strong> em relatórios, artigos e apresentações.</li>
+        </ol>
+      </div>
+
+    </div>
+    <!-- SLIDE 15 - COMPARTILHAMENTO, INCIDENTES E PESQUISA -->
+    <div class="sl" id="s_compart">
+      <div class="slhd"><span class="num">15</span>
+        <h2>Compartilhamento, incidentes e pesquisa</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Antes de compartilhar</h3>
+            <ul>
+              <li>Com <strong>quem</strong>, por qual <strong>canal</strong> e com qual <strong>finalidade</strong>?
+              </li>
+              <li>Evite dados pessoais em <strong>grupos abertos</strong> e links públicos.</li>
+              <li>Parceiros externos: só com <strong>vínculo jurídico</strong> com o IFPI.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Se houver vazamento</h3>
+            <ul>
+              <li><strong>Avise rápido</strong> a gestão e o encarregado.</li>
+              <li>O IFPI comunica ao titular e à ANPD quando há <strong>risco ou dano relevante</strong>.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Pesquisa e extensão</h3>
+            <ul>
+              <li><strong>TCLE (Termo de Consentimento Livre e Esclarecido)</strong> para adultos e <strong>TALE (Termo de Assentimento Livre e Esclarecido)</strong> para menores, com autorização dos
+                responsáveis.</li>
+              <li>Verifique a necessidade de <strong>comitê de ética</strong>.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Responsabilização</h3>
+            <p>Além das sanções da LGPD (art. 52), há <strong>responsabilidade administrativa e civil</strong>; o
+              servidor responde em caso de dolo ou culpa.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 16 - IA E DADOS PESSOAIS: ONDE ESTÁ O RISCO -->
+    <div class="sl" id="s_ia1">
+      <div class="slhd"><span class="num">16</span>
+        <h2>IA e dados pessoais: onde está o risco</h2>
+      </div>
+      <div class="slbd">
+        <ol class="passos">
+          <li><strong>Você digita</strong> um texto, anexa um arquivo ou envia uma foto.</li>
+          <li><strong>O serviço armazena</strong> o conteúdo e, às vezes, humanos revisam.</li>
+          <li><strong>Pode treinar modelos</strong>, conforme o serviço, o plano e a configuração.</li>
+          <li><strong>Pode cruzar fronteiras:</strong> processamento em outro país é transferência internacional (arts.
+            33 a 36 da LGPD).</li>
+        </ol>
+        <div class="ca">
+          <h3>Atenção</h3>
+          <p>Depois de digitado, o dado <strong>deixa de estar sob o nosso controle</strong>. Por isso a decisão vem
+            <strong>antes</strong> de colar o texto.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 17 - SEMÁFORO: O QUE PODE IR PARA UMA IA ABERTA -->
+    <div class="sl" id="s_ia2">
+      <div class="slhd"><span class="num">17</span>
+        <h2>Semáforo: o que pode ir para uma IA aberta</h2>
+      </div>
+      <div class="slbd fill">
+        <table class="tb2 prog denso">
+          <tr>
+            <th>Cor</th>
+            <th>Tipo de conteúdo</th>
+            <th>Exemplos</th>
+            <th>Pode?</th>
+          </tr>
+          <tr>
+            <td><strong>🟢 Verde</strong></td>
+            <td>Sem identificação de pessoas</td>
+            <td>Plano de aula, explicação de conceito, rubrica genérica</td>
+            <td><strong>Sim</strong></td>
+          </tr>
+          <tr>
+            <td><strong>🟡 Amarelo</strong></td>
+            <td>Contexto sem identificar pessoas</td>
+            <td>Caso descrito sem nome e sem detalhes raros; dados agregados</td>
+            <td><strong>Com cuidado</strong>, revisando antes</td>
+          </tr>
+          <tr>
+            <td><strong>🔴 Vermelho</strong></td>
+            <td>Identificável ou sensível</td>
+            <td>Nome, matrícula, CPF, notas individuais, laudos, fotos de rostos, voz</td>
+            <td><strong>Não</strong></td>
+          </tr>
+        </table>
+        <div class="cd">
+          <h3>Atenção ao “quase anonimizado”</h3>
+          <p>Turma pequena, deficiência rara ou evento local podem <strong>identificar por contexto</strong>. Nesses
+            casos, trate como vermelho.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 18 - IA: BOAS PRÁTICAS PARA A DOCÊNCIA -->
+    <div class="sl" id="s_ia3">
+      <div class="slhd"><span class="num">18</span>
+        <h2>IA: boas práticas para a docência</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Antes de usar</h3>
+            <ul>
+              <li><strong>Anonimize</strong> antes de colar.</li>
+              <li>Prefira <strong>ferramenta institucional</strong> ou contratada, com cláusulas de proteção de dados.
+              </li>
+              <li>Em conta pessoal, <strong>desative histórico e uso para treinamento</strong>, se houver essa opção.
+              </li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Durante e depois</h3>
+            <ul>
+              <li><strong>Revisão humana</strong> em notas, aprovação e encaminhamentos (direito à revisão, art. 20 da
+                LGPD).</li>
+              <li><strong>Registre</strong> onde a IA entrou no processo e avise os estudantes.</li>
+              <li>Nunca envie <strong>fotos ou vídeos de estudantes</strong> a geradores de imagem, vídeo ou voz.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cd">
+          <h3>Deepfakes</h3>
+          <p>Imagens de colegas manipuladas por IA são <strong>risco real na escola</strong>. O docente tem papel
+            educativo: conversar, prevenir e encaminhar ocorrências à gestão.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 19 - QUATRO PERGUNTAS ANTES DE USAR IA -->
+    <div class="sl" id="s_ia4">
+      <div class="slhd"><span class="num">19</span>
+        <h2>Quatro perguntas antes de usar IA</h2>
+      </div>
+      <div class="slbd">
+        <ol class="passos">
+          <li><strong>Esse dado identifica alguém?</strong> Se sim, anonimizar ou não usar.</li>
+          <li><strong>Eu teria autorização</strong> para enviar isso a um terceiro?</li>
+          <li><strong>A ferramenta é aprovada</strong> pela instituição ou tem termos adequados?</li>
+          <li><strong>Vou revisar o resultado</strong> antes de usar, avaliar ou divulgar?</li>
+        </ol>
+        <div class="ca">
+          <h3>Estudantes menores e IA</h3>
+          <p>A maioria dos serviços de IA tem <strong>idade mínima</strong> nos termos. Confira antes de pedir que a
+            turma crie conta, e prefira atividades guiadas e supervisionadas.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 20 - IMAGEM: TRÊS PROTEÇÕES AO MESMO TEMPO -->
+    <div class="sl" id="s_img1">
+      <div class="slhd"><span class="num">20</span>
+        <h2>Imagem: três proteções ao mesmo tempo</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Dado pessoal (LGPD)</h3>
+            <p>A imagem identifica a pessoa e pode virar <strong>dado biométrico</strong>. Associada a saúde,
+              deficiência ou origem, pode ser <strong>sensível</strong>.</p>
+          </div>
+          <div class="bege">
+            <h3>Direito da personalidade</h3>
+            <p><strong>Constituição</strong>, art. 5º, X, e <strong>Código Civil</strong>, art. 20: a imagem não se usa
+              sem autorização, salvo exceções.</p>
+          </div>
+          <div class="bege">
+            <h3>Criança e adolescente</h3>
+            <p><strong>ECA</strong>, arts. 17 e 100: respeito à imagem, à identidade e à privacidade, com prioridade ao
+              <strong>melhor interesse</strong>.</p>
+          </div>
+          <div class="bege">
+            <h3>Imagem de pessoas atendidas</h3>
+            <p>Idosos, pessoas com deficiência, pacientes e comunidades tradicionais exigem <strong>cuidado
+                adicional</strong> de vulnerabilidade.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 21 - REGISTRO INTERNO NÃO É DIVULGAÇÃO PÚBLICA -->
+    <div class="sl" id="s_img2">
+      <div class="slhd"><span class="num">21</span>
+        <h2>Registro interno não é divulgação pública</h2>
+      </div>
+      <div class="slbd fill">
+        <table class="tb2 prog denso">
+          <tr>
+            <th>Uso</th>
+            <th>Exemplo</th>
+            <th>Base e cuidado</th>
+          </tr>
+          <tr>
+            <td><strong>Registro interno</strong></td>
+            <td>Foto para comprovar a ação de extensão no relatório institucional</td>
+            <td>Pode se apoiar em política pública e prestação de contas; guardar com <strong>acesso restrito</strong>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Divulgação institucional</strong></td>
+            <td>Notícia no site do campus, perfil oficial</td>
+            <td>Em regra, <strong>autorização específica</strong>; avaliar também o risco ao titular</td>
+          </tr>
+          <tr>
+            <td><strong>Divulgação pessoal ou por terceiros</strong></td>
+            <td>Perfil pessoal do docente, imprensa, parceiros</td>
+            <td><strong>Autorização específica</strong>; não recomendado para imagens de menores</td>
+          </tr>
+        </table>
+        <div class="ca">
+          <h3>Atenção</h3>
+          <p>A autorização para <strong>registrar</strong> não autoriza <strong>divulgar</strong>. Cada finalidade pede
+            o seu cuidado.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 22 - AUTORIZAÇÃO VÁLIDA: O QUE O TERMO PRECISA CONTER -->
+    <div class="sl" id="s_img3">
+      <div class="slhd"><span class="num">22</span>
+        <h2>Autorização válida: o que o termo precisa conter</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Elementos do termo</h3>
+            <ul>
+              <li>Projeto, instituição e <strong>responsável</strong>.</li>
+              <li><strong>Finalidade</strong> específica e meios de divulgação (site, redes, impresso, imprensa).</li>
+              <li><strong>Prazo</strong> de uso e como <strong>revogar</strong>.</li>
+              <li>Informação sobre <strong>gratuidade</strong>, quando for o caso.</li>
+              <li>Assinatura do <strong>responsável legal</strong> e, para adolescentes, ciência do próprio estudante.
+              </li>
+              <li>Contato do <strong>encarregado</strong>.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Princípios da autorização</h3>
+            <ul>
+              <li>Deve ser <strong>livre, informada</strong> e para finalidade determinada.</li>
+              <li>A <strong>recusa não pode prejudicar</strong> a participação do estudante.</li>
+              <li>Prever alternativa: não fotografar ou posicionar fora do enquadramento.</li>
+              <li>Guardar o termo e atender <strong>pedido de remoção</strong> com rapidez.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cd">
+          <p>Peça a autorização <strong>no início do período ou do projeto</strong>, e não na hora da foto. Confira Anexo III da RESOLUÇÃO NORMATIVA CONSUP/OSUPCOL/REI/IFPI N° 221, de 23 de agosto de 2024.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 23 - BOAS PRÁTICAS AO DIVULGAR IMAGENS -->
+    <div class="sl" id="s_img4">
+      <div class="slhd"><span class="num">23</span>
+        <h2>Boas práticas ao divulgar imagens</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>O que preferir</h3>
+            <ul>
+              <li>Fotos de <strong>atividade</strong>, mãos, objetos e planos abertos, em vez de retratos.</li>
+              <li>Legenda sem <strong>nome completo</strong>, matrícula, turma, endereço ou localização em tempo real.
+              </li>
+              <li>Publicação pelo <strong>setor de comunicação</strong> ou perfil oficial.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>O que evitar</h3>
+            <ul>
+              <li>Imagens que associem a pessoa a <strong>saúde, deficiência</strong> ou vulnerabilidade social.</li>
+              <li><strong>Situações vexatórias</strong> ou constrangedoras.</li>
+              <li>Perfis pessoais para divulgar <strong>menores</strong>.</li>
+              <li>Em eventos abertos, aviso por cartaz <strong>não substitui</strong> a autorização para imagem
+                individualizada ou de menores.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 24 - CASOS PRÁTICOS (1/2): PODE OU NÃO PODE? -->
+    <div class="sl" id="s_casos1">
+      <div class="slhd"><span class="num">24</span>
+        <h2>Casos práticos (1/2): pode ou não pode?</h2>
+      </div>
+      <div class="slbd">
+        <p>Pense antes de clicar: <span class="mk">toque em cada caso para revelar a resposta</span>.</p>
+        <div class="rev">1. O docente cola uma lista de notas com nomes no ChatGPT para gerar feedback.<div
+            class="resp">Não. <strong>Anonimize</strong> antes ou use ferramenta institucional, e mantenha revisão
+            humana.</div>
+        </div>
+        <div class="rev">2. Foto da turma de 14 anos na feira de ciências, postada no perfil do projeto.<div
+            class="resp"><strong>Depende:</strong> exige <strong>autorização específica</strong> dos responsáveis para
+            divulgação, com ciência dos estudantes.</div>
+        </div>
+        <div class="rev">3. O formulário de inscrição da oficina pede CPF, endereço e religião.<div class="resp">Não.
+            Viola o princípio da <strong>necessidade</strong>: colete só o indispensável e informe a finalidade.</div>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 25 - CASOS PRÁTICOS (2/2): PODE OU NÃO PODE? -->
+    <div class="sl" id="s_casos2">
+      <div class="slhd"><span class="num">25</span>
+        <h2>Casos práticos (2/2): pode ou não pode?</h2>
+      </div>
+      <div class="slbd">
+        <p>Mais três situações do dia a dia. <span class="mk">Toque para revelar</span>.</p>
+        <div class="rev">4. Usar IA aberta para resumir o laudo de um estudante com TEA.<div class="resp">Não em IA
+            aberta: é <strong>dado sensível</strong> de criança ou adolescente. Use apenas canais institucionais.</div>
+        </div>
+        <div class="rev">5. Relatório de extensão com foto de idosos atendidos, publicado no site.<div class="resp">
+            <strong>Depende:</strong> autorização específica e atenção à <strong>vulnerabilidade</strong>; evite
+            associar a imagem a condições de saúde.</div>
+        </div>
+        <div class="rev">6. Indicar um app de edição de vídeo que exige conta com mais de 13 anos para uma turma de 12.
+          <div class="resp">Não. <strong>Confira idade mínima</strong>, termos e privacidade antes de indicar qualquer
+            ferramenta.</div>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 26 - CHECKLIST DO DOCENTE -->
+    <div class="sl" id="s_check">
+      <div class="slhd"><span class="num">26</span>
+        <h2>Checklist do docente</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Dados</h3>
+            <ul>
+              <li>Preciso mesmo deste dado? Se não, <strong>não coleto</strong>.</li>
+              <li>Informei a <strong>finalidade</strong> a quem forneceu?</li>
+              <li>Está em <strong>conta e nuvem institucionais</strong>, com acesso restrito?</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>IA e ferramentas</h3>
+            <ul>
+              <li>Antes de usar IA: removi <strong>nomes, matrículas, laudos e rostos</strong>?</li>
+              <li>O app ou rede indicado <strong>aceita a idade</strong> da turma?</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Imagem</h3>
+            <ul>
+              <li>A divulgação tem <strong>autorização específica</strong>, assinada e arquivada?</li>
+              <li>Se há menores, o <strong>responsável autorizou</strong> e o adolescente foi ouvido?</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Na dúvida</h3>
+            <ul>
+              <li>Consulte o <strong>encarregado</strong>:</li>
+              <p><a href="mailto:encarregadolgpd@ifpi.edu.br">encarregadolgpd@ifpi.edu.br</a></p>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 27 - PARA LEVAR DESTA PALESTRA -->
+    <div class="sl" id="s_levar">
+      <div class="slhd"><span class="num">27</span>
+        <h2>Para levar desta palestra</h2>
+      </div>
+      <div class="slbd">
+        <ol class="passos">
+          <li><strong>Menos dado é mais segurança:</strong> colete e compartilhe só o necessário.</li>
+          <li><strong>Crianças e adolescentes têm proteção reforçada:</strong> melhor interesse, ECA Digital e
+            autorização dos responsáveis.</li>
+          <li><strong>IA aberta não é lugar de dado identificável:</strong> anonimize ou use ferramenta institucional.
+          </li>
+          <li><strong>Foto de estudante exige autorização específica e revogável.</strong></li>
+        </ol>
+        <div class="cd">
+          <h3>Onde buscar apoio</h3>
+          <p>Encarregado do IFPI: <a href="mailto:encarregadolgpd@ifpi.edu.br">encarregadolgpd@ifpi.edu.br</a> · <a
+              href="https://www.ifpi.edu.br/acesso-a-informacao/lgpd/cartilhas-lgpd" target="_blank"
+              rel="noopener">Cartilhas LGPD</a> · <a href="https://www.ifpi.edu.br/acesso-a-informacao/lgpd/cursos/view"
+              target="_blank" rel="noopener">Capacitações</a> · <a
+              href="https://www.gov.br/anpd/pt-br/assuntos/eca-digital" target="_blank" rel="noopener">ANPD · ECA
+              Digital</a></p>
+        </div>
+      </div>
+
+    </div>
+    <!-- SLIDE 28 - ENCERRAMENTO -->
+    <div class="sl" id="s_fim">
+      <div class="slhd"><span class="num">28</span>
+        <h2>Dúvidas?</h2>
+      </div>
+      <div class="slbd">
+        <div class="divisor">
+          <div class="ov"></div>
+          <div class="in">
+            <div class="rot">ECA Digital · LGPD · Uso responsável de dados e imagem</div>
+            <h1>Dúvidas?</h1>
+            <p>Estamos aqui para responder.</p>
+            <p>Prof. Diego Cordeiro de Oliveira — <a href="mailto:diego.cordeiro@ifpi.edu.br"
+                style="color:#fff">diego.cordeiro@ifpi.edu.br</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /.sc -->
+  <div class="ctrl-wrap">
+    <div class="progress-wrap">
+      <div id="progress" class="progress"></div>
+    </div>
+    <nav class="ctr">
+      <div id="dots" class="dots"></div>
+      <button class="bn" onclick="openPresentation()" title="Abrir em janela de apresentação">Apresentação</button>
+      <button class="bz sq" onclick="pv()" title="Slide anterior">‹</button>
+      <button class="bz sq" id="play" type="button" title="Reproduzir automaticamente">▶</button>
+      <button class="bz sq" id="full" type="button" title="Tela cheia">⛶</button>
+      <button class="bv sq" onclick="nx()" title="Próximo slide">›</button>
+    </nav>
+  </div>
+  <script src="palestra.js"></script>
+</body>
+
+</html>
