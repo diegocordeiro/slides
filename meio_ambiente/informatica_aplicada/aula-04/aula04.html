@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Informática Aplicada · Aula 04 — Segurança da Informação e Sistemas Operacionais</title>
+  <link rel="stylesheet" href="aula04.css">
+</head>
+
+<body class="projetor">
+  <header class="tb">
+    <h2>Informática Aplicada · IFPI — Campus Barras</h2>
+    <div class="tb-right">
+      <div class="fz" aria-label="Tamanho do texto">
+        <button onclick="fz(-1)" title="Diminuir tamanho da fonte">A−</button>
+        <span id="fzpct">100%</span>
+        <button onclick="fz(1)" title="Aumentar tamanho da fonte">A+</button>
+      </div>
+      <button class="cz" id="cz" type="button" onclick="toggleProjetor()"
+        title="Tema projetor ativo — clique para o tema de leitura" aria-pressed="true">◉ Projetor</button>
+      <span class="ct" id="ctr">1 / 31</span>
+    </div>
+  </header>
+  <div class="fita"></div>
+  <div class="sc">
+
+    <!-- SLIDE 1 - CAPA -->
+    <div class="sl ac" id="s1">
+      <div class="capa">
+        <div class="esq">
+          <div class="rot">Aula 04 · Informática Aplicada</div>
+          <h1>Segurança da Informação e Sistemas Operacionais</h1>
+          <p class="sub">Técnico em Meio Ambiente · 1º Módulo · 2026/2</p>
+          <p class="sub">Prof. Diego Cordeiro de Oliveira</p>
+          <div class="faixa"></div>
+        </div>
+        <div class="dir">
+          <img src="logo.png" alt="Logo do IFPI">
+          <h2>Instituto Federal do Piauí</h2>
+          <p>Promover uma educação de excelência, direcionada às demandas sociais.</p>
+        </div>
+      </div>
+      <div class="ref"><span class="rt">📚 Referência para consulta:</span><a
+          href="https://professordiegocordeiro.com.br/" target="_blank" rel="noopener">professordiegocordeiro.com.br</a>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 - AGENDA -->
+    <div class="sl" id="s_agenda">
+      <div class="slhd"><span class="num">2</span>
+        <h2>O que vamos explorar hoje?</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2 g2">
+          <div class="bege">
+            <h3>1. Segurança da informação</h3>
+            <p>Por que <strong>proteger dados e contas</strong>, quais são os <strong>golpes mais comuns</strong> e
+              as atitudes que evitam a maioria dos problemas.</p>
+          </div>
+          <div class="bege">
+            <h3>2. Sistemas operacionais: fundamentos</h3>
+            <p>O que é um <strong>sistema operacional</strong>, quais são as suas <strong>funções</strong> e quais
+              sistemas existem no mercado.</p>
+          </div>
+          <div class="bege">
+            <h3>3. Usando o Windows 11 no laboratório</h3>
+            <p><strong>Ligar e desligar</strong> o mini PC <strong>Lenovo ThinkCentre</strong>, entrar no sistema,
+              conhecer as <strong>interfaces</strong> e a <strong>área de trabalho</strong>.</p>
+          </div>
+          <div class="bege">
+            <h3>4. Arquivos, ferramentas e prática</h3>
+            <p>Gerenciar <strong>pastas e arquivos</strong>, usar as <strong>ferramentas do sistema</strong>,
+              personalizar o computador e fazer a <strong>atividade no Bloco de Notas</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 - DIVISOR SEGURANÇA -->
+    <div class="sl" id="s_parte1">
+      <div class="secao">
+        <div class="divisor">
+          <div class="ov"></div>
+          <div class="in">
+            <div class="rot">Parte 1</div>
+            <h1>Segurança da informação</h1>
+            <p>Uma conversa rápida de conscientização: o que pode dar errado e como se proteger no dia a dia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 - PRECISAMOS NOS PREOCUPAR? -->
+    <div class="sl" id="s_preocupar">
+      <div class="slhd"><span class="num">4</span>
+        <h2>Precisamos nos preocupar com segurança?</h2>
+      </div>
+      <div class="slbd">
+        <div class="destaque">
+          <div class="n">516.556</div>
+          <div class="t">
+            <p><strong>incidentes de segurança</strong> foram notificados ao <strong>CERT.br</strong> em 2024 — o
+              Centro de Estudos, Resposta e Tratamento de Incidentes de Segurança no Brasil.</p>
+          </div>
+        </div>
+        <div class="c2">
+          <div class="bege">
+            <h3>A informação tem valor</h3>
+            <ul>
+              <li><strong>Seus:</strong> senhas, fotos, banco e PIX.</li>
+              <li><strong>Da escola:</strong> notas no <strong>SUAP</strong> e e-mail institucional.</li>
+              <li><strong>Do trabalho:</strong> laudos e dados de <strong>monitoramento ambiental</strong>.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Você está seguro virtualmente?</h3>
+            <ul>
+              <li>Usa a <strong>mesma senha</strong> em vários sites?</li>
+              <li>Clica em <strong>links</strong> sem conferir quem enviou?</li>
+              <li>Sai do laboratório com a <strong>conta aberta</strong>?</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cd">
+          <p><strong>Incidente de segurança</strong> é qualquer evento que prejudique os <strong>ativos</strong>
+            (sistemas, equipamentos e informações), como um acesso sem autorização.</p>
+        </div>
+      </div>
+      <div class="ref"><span class="rt">Fonte:</span><a href="https://stats.cert.br/incidentes/" target="_blank"
+          rel="noopener">CERT.br — Estatísticas de incidentes</a></div>
+    </div>
+
+    <!-- SLIDE 5 - PILARES -->
+    <div class="sl" id="s_pilares">
+      <div class="slhd"><span class="num">5</span>
+        <h2>Os três pilares da segurança da informação</h2>
+      </div>
+      <div class="slbd">
+        <div class="c3">
+          <div class="bege">
+            <h3><span class="sigla">C</span>Confidencialidade</h3>
+            <p>Só quem tem <strong>autorização</strong> pode ver a informação.</p>
+            <p class="cred">Quebra: sua senha ou suas notas vazam para outra pessoa.</p>
+          </div>
+          <div class="bege">
+            <h3><span class="sigla">I</span>Integridade</h3>
+            <p>A informação <strong>não é alterada nem destruída</strong> sem autorização.</p>
+            <p class="cred">Quebra: alguém altera os valores de um laudo de qualidade da água.</p>
+          </div>
+          <div class="bege">
+            <h3><span class="sigla">D</span>Disponibilidade</h3>
+            <p>A informação ou o serviço está <strong>acessível</strong> sempre que alguém autorizado precisa.</p>
+            <p class="cred">Quebra: o SUAP fora do ar no último dia de entrega.</p>
+          </div>
+        </div>
+        <div class="c2">
+          <div class="bege">
+            <h3>Autenticidade</h3>
+            <p>Garante a <strong>identidade</strong> de quem acessa: senha, PIN, digital, reconhecimento facial ou
+              código no celular.</p>
+          </div>
+          <div class="bege">
+            <h3>Não repúdio (responsabilização)</h3>
+            <p>Os sistemas <strong>registram as ações</strong>; quem fez algo usando a sua conta não consegue negar
+              a autoria, por isso, <strong>sua conta é responsabilidade sua</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 - AMEAÇAS -->
+    <div class="sl" id="s_ameacas">
+      <div class="slhd"><span class="num">6</span>
+        <h2>Ameaças do dia a dia</h2>
+      </div>
+      <div class="slbd fill">
+        <table class="tb2 prog denso">
+          <tr>
+            <th>Ameaça</th>
+            <th>Como funciona</th>
+            <th>Sinal de alerta</th>
+          </tr>
+          <tr>
+            <td><strong>Phishing</strong></td>
+            <td>Mensagem falsa (e-mail, SMS, WhatsApp) que imita um banco, loja ou a própria escola para
+              <strong>roubar senhas, cartões e dados bancários</strong>.</td>
+            <td>Urgência, ameaça de bloqueio, link estranho, erros de português.</td>
+          </tr>
+          <tr>
+            <td><strong>Malware</strong> (vírus, cavalo de Troia)</td>
+            <td><strong>Programa malicioso</strong> que danifica o dispositivo, espiona ou rouba informações.</td>
+            <td>Anexo inesperado, programa "crackeado", arquivo <strong>.exe</strong> disfarçado.</td>
+          </tr>
+          <tr>
+            <td><strong>Ransomware</strong></td>
+            <td>Tipo de malware que <strong>sequestra os arquivos</strong> (criptografa) e cobra resgate.</td>
+            <td>Arquivos que não abrem mais e aviso pedindo pagamento.</td>
+          </tr>
+          <tr>
+            <td><strong>Engenharia social</strong></td>
+            <td>Golpista <strong>engana a pessoa</strong>, não o computador: falso suporte técnico, falso parente
+              pedindo PIX.</td>
+            <td>Pedido de código recebido por SMS, de senha ou de transferência.</td>
+          </tr>
+          <tr>
+            <td><strong>Senhas fracas ou vazadas</strong></td>
+            <td>Senhas curtas ou repetidas são <strong>adivinhadas</strong> ou testadas com listas de vazamentos.
+            </td>
+            <td>Avisos de login desconhecido na sua conta.</td>
+          </tr>
+        </table>
+        <div class="cd">
+          <h3>Hacker × Cracker</h3>
+          <p>O <strong>hacker</strong> é quem tem profundo conhecimento técnico e pode usá-lo para
+            <strong>descobrir e corrigir falhas</strong>; o <strong>cracker</strong> usa esse conhecimento com
+            <strong>intenção maliciosa</strong> para invadir sistemas e violar a sua integridade.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 - BOAS PRÁTICAS -->
+    <div class="sl" id="s_praticas">
+      <div class="slhd"><span class="num">7</span>
+        <h2>Boas práticas que evitam a maioria dos problemas</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2 g2">
+          <div class="bege">
+            <h3>🔑 Proteja suas contas</h3>
+            <ul>
+              <li><strong>Senha longa</strong> e <strong>diferente</strong> em cada serviço.</li>
+              <li>Ative a <strong>verificação em duas etapas</strong> (2FA).</li>
+              <li><strong>Nunca compartilhe</strong> senhas ou códigos.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>💻 Proteja o computador</h3>
+            <ul>
+              <li>Sistema e programas <strong>atualizados</strong>.</li>
+              <li>Antivírus <strong>Microsoft Defender</strong> ligado.</li>
+              <li>Saiu? Bloqueie: <span class="kbd">⊞ Win</span> + <span class="kbd">L</span>.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>💾 Proteja seus dados</h3>
+            <ul>
+              <li>Faça <strong>backup</strong>: pendrive e nuvem.</li>
+              <li>Nada pessoal em <strong>computador compartilhado</strong>.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>🧐 Desconfie sempre</h3>
+            <ul>
+              <li>Confira <strong>remetente</strong> e <strong>endereço</strong> antes de clicar.</li>
+              <li>Programas <strong>só de fontes oficiais</strong>.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ca">
+          <h3>Seus dados também são protegidos por lei</h3>
+          <p>A <strong>LGPD (Lei nº 13.709/2018)</strong> regula o uso de dados pessoais por empresas e órgãos
+            públicos.</p>
+        </div>
+      </div>
+      <div class="ref"><span class="rt">Para saber mais:</span><a href="https://cartilha.cert.br/" target="_blank"
+          rel="noopener">Cartilha de Segurança para Internet (CERT.br)</a> · <a
+          href="https://www.gov.br/governodigital/pt-br/privacidade-e-seguranca" target="_blank" rel="noopener">gov.br —
+          Privacidade e Segurança</a></div>
+    </div>
+
+    <!-- SLIDE 8 - DESAFIO SEGURANÇA -->
+    <div class="sl" id="s_desafio_seg">
+      <div class="slhd"><span class="num">8</span>
+        <h2>Golpe ou não? Teste rápido</h2>
+      </div>
+      <div class="slbd">
+        <p>Pense antes de clicar: <span class="mk">toque em cada situação para revelar a resposta</span>.</p>
+        <div class="rev">1. Chega um e-mail: "Sua conta do SUAP será bloqueada em 2 horas. Clique aqui e confirme a
+          sua senha." O que fazer?<div class="resp">É <strong>phishing</strong>: urgência + pedido de senha. Não
+            clique. Acesse o SUAP <strong>digitando o endereço</strong> no navegador e, na dúvida, fale com a
+            coordenação.</div>
+        </div>
+        <div class="rev">2. Um colega pede a sua senha "só para enviar um arquivo rapidinho". Pode?<div class="resp">
+            <strong>Não.</strong> Tudo o que for feito com a sua conta fica <strong>registrado em seu nome</strong>
+            (não repúdio). Ajude-o a entrar com a conta dele.</div>
+        </div>
+        <div class="rev">3. Você recebeu o anexo <strong>boleto_outubro.pdf.exe</strong>. É um PDF?<div class="resp">
+            <strong>Não!</strong> A extensão real é a última: <strong>.exe</strong>, um programa. Abrir pode instalar
+            um <strong>malware</strong>. Apague a mensagem.</div>
+        </div>
+        <div class="ca">
+          <h3>Para explorar em casa</h3>
+          <p>Acesse o <a href="https://cybermap.kaspersky.com/stats" target="_blank" rel="noopener">mapa de ameaças
+              em tempo real</a> e descubra qual foi o <strong>malware mais detectado no Brasil</strong> no último mês.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 9 - DIVISOR SO -->
+    <div class="sl" id="s_parte2">
+      <div class="secao">
+        <div class="divisor">
+          <div class="ov"></div>
+          <div class="in">
+            <div class="rot">Parte 2</div>
+            <h1>Sistemas operacionais</h1>
+            <p>Fundamentos, funções, sistemas existentes e a prática com o Windows 11 no laboratório.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 10 - FUNDAMENTOS -->
+    <div class="sl" id="s_fundamentos">
+      <div class="slhd"><span class="num">10</span>
+        <h2>3.1 Fundamentos: o que é um sistema operacional?</h2>
+      </div>
+      <div class="slbd">
+        <p>O <strong>sistema operacional (SO)</strong> é o <span class="mk">software básico que fica entre o usuário,
+            os aplicativos e o hardware</span>: ele gerencia a máquina e oferece uma forma de usá-la.</p>
+        <div class="camadas" role="img"
+          aria-label="Camadas do computador: usuário, aplicativos, sistema operacional e hardware">
+          <div class="cm u"><b>👤 Usuário</b><span>Você: clica, digita, toca e fala.</span></div>
+          <div class="seta">▲ ▼</div>
+          <div class="cm a"><b>📱 Aplicativos</b><span>Navegador, editor de texto, planilha, QGIS.</span></div>
+          <div class="seta">▲ ▼</div>
+          <div class="cm so"><b>⚙️ Sistema operacional</b><span>Núcleo (<em>kernel</em>), drivers, serviços e
+              interface — Windows, Linux, Android…</span></div>
+          <div class="seta">▲ ▼</div>
+          <div class="cm hw"><b>🖥️ Hardware</b><span>CPU, memória RAM, SSD, teclado, monitor, rede.</span></div>
+        </div>
+        <div class="cd">
+          <h3>Pense no maestro de uma orquestra</h3>
+          <p>Cada músico (programa) quer tocar ao mesmo tempo; o <strong>SO é o maestro</strong> que decide quem usa o
+            processador, a memória e os dispositivos em cada momento, para que tudo funcione em harmonia.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 11 - FUNÇÕES -->
+    <div class="sl" id="s_funcoes">
+      <div class="slhd"><span class="num">11</span>
+        <h2>As funções de um sistema operacional</h2>
+      </div>
+      <div class="slbd fill">
+        <table class="tb2 prog denso">
+          <tr>
+            <th>Função</th>
+            <th>O que faz</th>
+            <th>Onde você vê no Windows 11</th>
+          </tr>
+          <tr>
+            <td><strong>Gerenciar processos</strong></td>
+            <td>Divide o tempo do <strong>processador</strong> entre os programas abertos.</td>
+            <td>Gerenciador de Tarefas › Processos</td>
+          </tr>
+          <tr>
+            <td><strong>Gerenciar memória</strong></td>
+            <td>Reserva e libera a <strong>RAM</strong> que cada programa usa.</td>
+            <td>Gerenciador de Tarefas › Desempenho</td>
+          </tr>
+          <tr>
+            <td><strong>Gerenciar arquivos</strong></td>
+            <td>Organiza os dados no disco em <strong>pastas e arquivos</strong>.</td>
+            <td>Explorador de Arquivos</td>
+          </tr>
+          <tr>
+            <td><strong>Gerenciar dispositivos (E/S)</strong></td>
+            <td>Controla teclado, mouse, monitor, impressora e rede por meio dos <strong>drivers</strong>.</td>
+            <td>Configurações › Bluetooth e dispositivos</td>
+          </tr>
+          <tr>
+            <td><strong>Segurança e usuários</strong></td>
+            <td>Controla <strong>contas, senhas e permissões</strong>; protege contra ameaças.</td>
+            <td>Contas · Segurança do Windows</td>
+          </tr>
+          <tr>
+            <td><strong>Interface com o usuário</strong></td>
+            <td>Oferece a forma de interação: <strong>gráfica</strong>, por <strong>texto</strong>, toque ou voz.
+            </td>
+            <td>Área de trabalho, menu Iniciar, Terminal</td>
+          </tr>
+        </table>
+        <div class="cd">
+          <p><strong>Driver</strong> é um pequeno programa que "ensina" o sistema operacional a conversar com um
+            dispositivo específico, como uma impressora ou uma placa de vídeo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 12 - SISTEMAS EXISTENTES -->
+    <div class="sl" id="s_existentes">
+      <div class="slhd"><span class="num">12</span>
+        <h2>3.2 Sistemas operacionais existentes</h2>
+      </div>
+      <div class="slbd fill">
+        <table class="tb2 prog denso">
+          <tr>
+            <th>Sistema</th>
+            <th>Quem desenvolve · licença</th>
+            <th>Onde é usado</th>
+          </tr>
+          <tr>
+            <td><strong>Windows 11</strong></td>
+            <td>Microsoft · <strong>proprietário</strong> (licença paga, em geral já vem no computador)</td>
+            <td>O mais usado em computadores pessoais e de escritório, é o do nosso laboratório.</td>
+          </tr>
+          <tr>
+            <td><strong>Linux</strong> (Ubuntu, Linux Mint, Debian, Fedora)</td>
+            <td>Comunidade e empresas · <strong>software livre</strong> e, em geral, gratuito</td>
+            <td>Servidores, nuvem, todos os supercomputadores do mundo e computadores pessoais.</td>
+          </tr>
+          <tr>
+            <td><strong>macOS</strong></td>
+            <td>Apple · proprietário</td>
+            <td>Computadores Mac.</td>
+          </tr>
+          <tr>
+            <td><strong>ChromeOS</strong></td>
+            <td>Google · proprietário, baseado em Linux</td>
+            <td>Chromebooks, muito usados em escolas.</td>
+          </tr>
+          <tr>
+            <td><strong>Android</strong></td>
+            <td>Google · base de código aberto (núcleo Linux)</td>
+            <td>Celulares, tablets, TVs e equipamentos embarcados.</td>
+          </tr>
+          <tr>
+            <td><strong>iOS / iPadOS</strong></td>
+            <td>Apple · proprietário</td>
+            <td>iPhone e iPad.</td>
+          </tr>
+        </table>
+        <div class="ca">
+          <h3>Sistema sem suporte = sistema inseguro</h3>
+          <p>O suporte do <strong>Windows 10</strong> terminou em <strong>14/10/2025</strong>: ele não recebe mais
+            correções de segurança gratuitas. Por isso os computadores do laboratório usam o
+            <strong>Windows 11</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 13 - O EQUIPAMENTO -->
+    <div class="sl" id="s_thinkcentre">
+      <div class="slhd"><span class="num">13</span>
+        <h2>Conhecendo o equipamento: Lenovo ThinkCentre Tiny</h2>
+      </div>
+      <div class="slbd">
+        <div class="scr">
+          <figure>
+            <img class="foto zoom" src="img/thinkcentre-tiny.svg"
+              alt="Ilustração de um mini PC Lenovo ThinkCentre Tiny com vista frontal (botão liga/desliga, fone, USB-C e USB-A) e traseira (fonte, vídeo, USB e rede)">
+            <figcaption>Ilustração esquemática — a posição exata das portas varia conforme o modelo</figcaption>
+          </figure>
+          <div>
+            <ul>
+              <li><strong>Mini PC</strong>: o gabinete cabe na palma da mão e costuma ficar
+                <strong>preso atrás do monitor</strong> ou sob a mesa.</li>
+              <li>A <strong>fonte é externa</strong>, como a de um notebook: confira se o cabo está conectado
+                atrás (5).</li>
+              <li>O <strong>botão liga/desliga</strong> (1) fica na <strong>frente</strong>, no canto, e acende
+                quando o computador está ligado.</li>
+              <li>Na frente ficam as portas para o seu <strong>pendrive e fone</strong>; atrás, monitor, teclado,
+                mouse e rede.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 14 - LIGAR -->
+    <div class="sl" id="s_ligar">
+      <div class="slhd"><span class="num">14</span>
+        <h2>3.3.1 Ligando o computador</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div>
+            <ol class="passos">
+              <li><strong>Ligue o monitor</strong> no botão dele (geralmente na borda inferior ou atrás).</li>
+              <li><strong>Localize o mini PC</strong> ThinkCentre — atrás do monitor ou sob a mesa — e
+                <strong>pressione uma vez</strong> o botão liga/desliga, <strong>sem segurar</strong>.</li>
+              <li><strong>Aguarde a inicialização:</strong> aparece o logotipo do fabricante e, em seguida, o Windows
+                11 é carregado.</li>
+              <li>Na <strong>tela de bloqueio</strong>, clique ou pressione qualquer tecla para
+                <strong>entrar</strong>.</li>
+            </ol>
+          </div>
+          <div class="bege">
+            <h3>O que acontece por dentro (inicialização ou <em>boot</em>)</h3>
+            <ul>
+              <li>O <strong>firmware UEFI</strong> testa o hardware: memória, discos, teclado.
+              </li>
+              <li>Ele encontra o SSD e chama o <strong>gerenciador de inicialização</strong>.</li>
+              <li>O <strong>núcleo do Windows</strong> é carregado na RAM, junto com drivers e serviços.</li>
+              <li>Por fim, aparece a <strong>tela de bloqueio</strong>.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ca">
+          <h3>Atenção</h3>
+          <p>Se nada acontecer, confira se a luz do botão acendeu e se a <strong>fonte externa</strong> está ligada
+            na tomada e no computador antes de chamar o professor.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 15 - ENTRAR -->
+    <div class="sl" id="s_entrar">
+      <div class="slhd"><span class="num">15</span>
+        <h2>Entrando no sistema (login)</h2>
+      </div>
+      <div class="slbd">
+        <figure class="foto-leg">
+          <img class="foto zoom tela" src="img/win11-entrar.svg" style="max-height:30vh"
+            alt="Tela de bloqueio do Windows 11 com o relógio e, ao lado, a tela de entrada com usuário, campo de senha, botão de entrar e opção Outro usuário">
+          <figcaption>Windows 11: tela de bloqueio → tela de entrada (ilustração esquemática)</figcaption>
+        </figure>
+        <ol class="leg duas">
+          <li data-n="1"><strong>Usuário:</strong> confira se é a conta indicada para a turma.</li>
+          <li data-n="2"><strong>Senha ou PIN:</strong> digite com atenção ao <span class="kbd">Caps Lock</span>.</li>
+          <li data-n="3"><strong>Entrar:</strong> clique na seta ou pressione <span class="kbd">Enter</span>.</li>
+          <li data-n="4"><strong>Outro usuário:</strong> para usar uma conta diferente da que aparece.</li>
+        </ol>
+        <div class="ca">
+          <h3>Segurança</h3>
+          <p><strong>Nunca compartilhe</strong> suas credenciais. Ao terminar, <strong>saia da conta</strong> ou
+            bloqueie com <span class="kbd">⊞ Win</span> + <span class="kbd">L</span>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 16 - DESLIGAR -->
+    <div class="sl" id="s_desligar">
+      <div class="slhd"><span class="num">16</span>
+        <h2>Desligando o computador corretamente</h2>
+      </div>
+      <div class="slbd">
+        <div class="scr meio">
+          <figure>
+            <img class="foto zoom" src="img/win11-desligar.svg"
+              alt="Menu Iniciar do Windows 11 com o botão Energia aberto mostrando as opções Suspender, Desligar e Reiniciar">
+            <figcaption>Windows 11: Iniciar › Energia › Desligar</figcaption>
+          </figure>
+          <div>
+            <ol class="leg">
+              <li data-n="1">Clique em <strong>Iniciar</strong>, no <strong>centro</strong> da barra de tarefas.</li>
+              <li data-n="2">Clique no ícone <strong>Energia</strong> ⏻, no canto inferior direito do menu.</li>
+              <li data-n="3">Escolha <strong>Desligar</strong> e aguarde o sistema fechar tudo.</li>
+            </ol>
+            <ul>
+              <li><strong>Suspender:</strong> pausa e economiza energia.</li>
+              <li><strong>Reiniciar:</strong> necessário após atualizações.</li>
+              <li>Atalho: <span class="kbd">⊞ Win</span> + <span class="kbd">X</span> › Desligar ou sair.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ca">
+          <p><strong>Não desligue pelo botão nem na tomada</strong>: arquivos abertos podem ser corrompidos. Só se
+            o sistema <strong>travar</strong> de vez, segure o botão por alguns segundos.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 17 - INTERFACES -->
+    <div class="sl" id="s_interfaces">
+      <div class="slhd"><span class="num">17</span>
+        <h2>3.3.2 Interfaces de interação</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2 g2 compacto">
+          <div class="bege">
+            <h3>Interface gráfica (GUI)</h3>
+            <p><strong>Janelas, ícones, menus e ponteiro</strong>: você aponta e clica. É a forma padrão no Windows,
+              no macOS e na maioria das distribuições Linux.</p>
+          </div>
+          <div class="bege">
+            <h3>Interface de texto (linha de comando)</h3>
+            <p>Comandos digitados no <strong>Terminal</strong> (PowerShell ou Prompt de Comando). Muito usada por
+              técnicos e em servidores.</p>
+            <figure class="amp">
+              <img class="foto" src="img/win11-terminal.svg"
+                alt="Janela do Terminal do Windows 11 com o comando dir listando as pastas e arquivos de Documentos">
+              <figcaption>Terminal: o comando <strong>dir</strong> lista uma pasta</figcaption>
+            </figure>
+          </div>
+          <div class="bege">
+            <h3>Toque e caneta</h3>
+            <p>Gestos na tela (tocar, arrastar, pinçar). Padrão em celulares e tablets; disponível em notebooks com
+              tela sensível ao toque.</p>
+          </div>
+          <div class="bege">
+            <h3>Voz e acessibilidade</h3>
+            <p>Ditado com <span class="kbd">⊞ Win</span> + <span class="kbd">H</span>, Narrador (leitor de tela) e
+              Lupa (<span class="kbd">⊞ Win</span> + <span class="kbd">+</span>) tornam o computador acessível a
+              todos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 18 - TECLADO E MOUSE -->
+    <div class="sl" id="s_teclado">
+      <div class="slhd"><span class="num">18</span>
+        <h2>Teclado e mouse: as principais formas de entrada</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div>
+            <table class="tb2 prog denso">
+              <tr>
+                <th>Tecla</th>
+                <th>Função</th>
+              </tr>
+              <tr>
+                <td><span class="kbd">Shift</span></td>
+                <td>Letra maiúscula ou símbolo de cima da tecla</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">Caps Lock</span></td>
+                <td>Liga/desliga maiúsculas permanentes</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">Ctrl</span> <span class="kbd">Alt</span></td>
+                <td>Combinadas com outras teclas formam atalhos</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">AltGr</span></td>
+                <td>Terceiro símbolo da tecla (ex.: / ? °)</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">⊞ Win</span></td>
+                <td>Abre o menu Iniciar</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">Enter</span></td>
+                <td>Confirma um comando ou pula linha</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">⌫</span> <span class="kbd">Del</span></td>
+                <td>Apaga à esquerda / à direita do cursor</td>
+              </tr>
+            </table>
+          </div>
+          <div>
+            <div class="bege">
+              <h3>Grupos de teclas (padrão ABNT2)</h3>
+              <ul>
+                <li><strong>Alfanuméricas:</strong> letras, números, <strong>Ç</strong> e acentos.</li>
+                <li><strong>Função:</strong> <span class="kbd">F1</span> a <span class="kbd">F12</span>
+                  (<span class="kbd">F2</span> renomeia, <span class="kbd">F5</span> atualiza).</li>
+                <li><strong>Controle e navegação:</strong> setas, Home, End, Page Up/Down.</li>
+                <li><strong>Teclado numérico:</strong> para digitar números em sequência.</li>
+              </ul>
+            </div>
+            <div class="bege">
+              <h3>Mouse</h3>
+              <ul>
+                <li><strong>Clique:</strong> seleciona · <strong>duplo clique:</strong> abre.</li>
+                <li><strong>Botão direito:</strong> menu de contexto · <strong>arrastar:</strong> move.</li>
+                <li><strong>Roda:</strong> rola a página.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 19 - ÁREA DE TRABALHO -->
+    <div class="sl denso" id="s_area">
+      <div class="slhd"><span class="num">19</span>
+        <h2>3.3.3 A área de trabalho do Windows 11</h2>
+      </div>
+      <div class="slbd">
+        <div class="scr">
+          <figure>
+            <img class="foto zoom" src="img/win11-area-de-trabalho.svg"
+              alt="Área de trabalho do Windows 11 com o menu Iniciar aberto e oito áreas numeradas: aplicativos fixados, recomendados, energia, todos os aplicativos, pesquisa, barra de tarefas, área de trabalho e área de notificação">
+            <figcaption>Ilustração esquemática — clique para ampliar</figcaption>
+          </figure>
+          <ol class="leg">
+            <li data-n="1"><strong>Menu Iniciar — Fixado:</strong> atalhos dos aplicativos favoritos.</li>
+            <li data-n="2"><strong>Recomendado:</strong> arquivos e aplicativos usados recentemente.</li>
+            <li data-n="3"><strong>Energia:</strong> suspender, desligar ou reiniciar.</li>
+            <li data-n="4"><strong>Todos:</strong> lista com todos os aplicativos instalados.</li>
+            <li data-n="5"><strong>Pesquisa:</strong> encontra aplicativos, arquivos e configurações.</li>
+            <li data-n="6"><strong>Barra de tarefas:</strong> aplicativos fixados e abertos (traço embaixo).</li>
+            <li data-n="7"><strong>Área de trabalho:</strong> tela de fundo, atalhos e a Lixeira.</li>
+            <li data-n="8"><strong>Área de notificação:</strong> rede, som, idioma do teclado, data e hora.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 20 - ATALHOS -->
+    <div class="sl" id="s_atalhos">
+      <div class="slhd"><span class="num">20</span>
+        <h2>Teclas de atalho essenciais</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div>
+            <h3>Edição (funcionam em quase todo programa)</h3>
+            <table class="tb2 prog denso">
+              <tr>
+                <td><span class="kbd">Ctrl</span>+<span class="kbd">C</span></td>
+                <td>Copiar</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">Ctrl</span>+<span class="kbd">X</span></td>
+                <td>Recortar</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">Ctrl</span>+<span class="kbd">V</span></td>
+                <td>Colar</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">Ctrl</span>+<span class="kbd">Z</span></td>
+                <td>Desfazer a última ação</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">Ctrl</span>+<span class="kbd">A</span></td>
+                <td>Selecionar tudo</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">Ctrl</span>+<span class="kbd">S</span></td>
+                <td>Salvar</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">Alt</span>+<span class="kbd">Tab</span></td>
+                <td>Alternar entre janelas abertas</td>
+              </tr>
+            </table>
+          </div>
+          <div>
+            <h3>Windows 11</h3>
+            <table class="tb2 prog denso">
+              <tr>
+                <td><span class="kbd">⊞ Win</span>+<span class="kbd">D</span></td>
+                <td>Mostrar/ocultar a área de trabalho</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">⊞ Win</span>+<span class="kbd">E</span></td>
+                <td>Abrir o Explorador de Arquivos</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">⊞ Win</span>+<span class="kbd">I</span></td>
+                <td>Abrir as Configurações</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">⊞ Win</span>+<span class="kbd">L</span></td>
+                <td>Bloquear a tela</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">⊞ Win</span>+<span class="kbd">V</span></td>
+                <td>Histórico da área de transferência</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">⊞ Win</span>+<span class="kbd">Shift</span>+<span class="kbd">S</span></td>
+                <td>Capturar parte da tela</td>
+              </tr>
+              <tr>
+                <td><span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">Esc</span></td>
+                <td>Gerenciador de Tarefas</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 21 - JANELAS -->
+    <div class="sl" id="s_janelas">
+      <div class="slhd"><span class="num">21</span>
+        <h2>Organizando janelas lado a lado</h2>
+      </div>
+      <div class="slbd">
+        <figure class="foto-leg">
+          <img class="foto zoom tela" src="img/win11-janelas-lado-a-lado.svg" style="max-height:38vh"
+            alt="Explorador de Arquivos e Bloco de Notas lado a lado e, ao lado, o menu de layouts de encaixe aberto pelo botão Maximizar">
+          <figcaption>Encaixe de janelas (Snap) no Windows 11 — ilustração esquemática</figcaption>
+        </figure>
+        <ol class="passos">
+          <li><strong>Abra duas janelas</strong>: por exemplo, o Explorador de Arquivos e o Bloco de Notas.</li>
+          <li>Na primeira, pressione <span class="kbd">⊞ Win</span> + <span class="kbd">←</span>; na segunda,
+            <span class="kbd">⊞ Win</span> + <span class="kbd">→</span>.</li>
+          <li>Ou passe o mouse sobre o botão <strong>Maximizar</strong> (ou <span class="kbd">⊞ Win</span> +
+            <span class="kbd">Z</span>) e escolha um <strong>layout</strong> com 2, 3 ou 4 janelas.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- SLIDE 22 - PASTAS E ARQUIVOS -->
+    <div class="sl" id="s_pastas">
+      <div class="slhd"><span class="num">22</span>
+        <h2>3.3.4 Pastas, arquivos e caminhos</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div>
+            <ul>
+              <li><strong>Arquivo:</strong> guarda um conteúdo e tem <strong>nome + extensão</strong>.</li>
+              <li><strong>Pasta (diretório):</strong> contêiner que <strong>organiza</strong> arquivos e outras
+                pastas.</li>
+              <li><strong>Estrutura hierárquica:</strong> pastas dentro de pastas formam uma
+                <strong>árvore</strong>, a partir da <strong>unidade</strong> (C:).</li>
+              <li><strong>Localização física:</strong> tudo fica gravado no <strong>SSD</strong>.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>A árvore de pastas</h3>
+            <ul class="arvore">
+              <li>💽 <strong>Disco Local (C:)</strong>
+                <ul>
+                  <li>📁 Usuários
+                    <ul>
+                      <li>📁 Aluno
+                        <ul>
+                          <li>📁 Documentos
+                            <ul>
+                              <li>📁 <span class="at">Informatica_Aplicada</span>
+                                <ul>
+                                  <li>📄 Exercicio_Digitacao_Aluno.txt</li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                          <li>📁 Downloads</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <span class="caminho">C:\Users\Aluno\Documentos\Informatica_Aplicada\Exercicio_Digitacao_Aluno.txt</span>
+          </div>
+        </div>
+        <div class="cd">
+          <p>O <strong>caminho</strong> é o "endereço" do arquivo: cada <strong>\</strong> separa uma pasta da
+            outra ("Usuários" aparece como <strong>Users</strong>).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 23 - EXPLORADOR -->
+    <div class="sl denso" id="s_explorador">
+      <div class="slhd"><span class="num">23</span>
+        <h2>O Explorador de Arquivos do Windows 11</h2>
+      </div>
+      <div class="slbd">
+        <div class="scr">
+          <figure>
+            <img class="foto zoom" src="img/win11-explorador.svg"
+              alt="Explorador de Arquivos do Windows 11 aberto em Documentos, com seis áreas numeradas: barra de endereços, abas, caixa de pesquisa, modos de exibição, painel de navegação e barra de comandos">
+            <figcaption>Abra com <span class="kbd">⊞ Win</span> + <span class="kbd">E</span> — ilustração
+              esquemática</figcaption>
+          </figure>
+          <ol class="leg">
+            <li data-n="1"><strong>Barra de endereços:</strong> mostra o caminho da pasta aberta.</li>
+            <li data-n="2"><strong>Abas e barra de título:</strong> várias pastas na mesma janela; arraste aqui para
+              mover a janela.</li>
+            <li data-n="3"><strong>Caixa de pesquisa:</strong> procura arquivos dentro da pasta atual.</li>
+            <li data-n="4"><strong>Modos de exibição:</strong> detalhes ou ícones grandes.</li>
+            <li data-n="5"><strong>Painel de navegação:</strong> atalhos para Documentos, Downloads, Este Computador
+              e rede.</li>
+            <li data-n="6"><strong>Barra de comandos:</strong> Novo, recortar, copiar, colar, renomear, excluir,
+              classificar e exibir.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 24 - GERENCIAR -->
+    <div class="sl" id="s_gerenciar">
+      <div class="slhd"><span class="num">24</span>
+        <h2>Criando e gerenciando pastas e arquivos</h2>
+      </div>
+      <div class="slbd fill">
+        <table class="tb2 prog denso">
+          <tr>
+            <th>Ação</th>
+            <th>Com o mouse</th>
+            <th>Pelo teclado</th>
+          </tr>
+          <tr>
+            <td><strong>Criar pasta</strong></td>
+            <td>Botão direito num espaço vazio › <strong>Novo › Pasta</strong> — ou <strong>⊕ Novo › Pasta</strong>
+            </td>
+            <td><span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">N</span></td>
+          </tr>
+          <tr>
+            <td><strong>Renomear</strong></td>
+            <td>Botão direito › <strong>Renomear</strong> (ícone Aa)</td>
+            <td><span class="kbd">F2</span></td>
+          </tr>
+          <tr>
+            <td><strong>Copiar</strong></td>
+            <td>Botão direito › Copiar, depois Colar no destino</td>
+            <td><span class="kbd">Ctrl</span>+<span class="kbd">C</span> › <span class="kbd">Ctrl</span>+<span
+                class="kbd">V</span></td>
+          </tr>
+          <tr>
+            <td><strong>Mover</strong></td>
+            <td><strong>Arrastar</strong> até a pasta de destino, ou Recortar e Colar</td>
+            <td><span class="kbd">Ctrl</span>+<span class="kbd">X</span> › <span class="kbd">Ctrl</span>+<span
+                class="kbd">V</span></td>
+          </tr>
+          <tr>
+            <td><strong>Excluir</strong></td>
+            <td>Ícone da lixeira na barra de comandos: o item vai para a <strong>Lixeira</strong></td>
+            <td><span class="kbd">Del</span> · <span class="kbd">Shift</span>+<span class="kbd">Del</span> apaga
+              sem passar pela Lixeira</td>
+          </tr>
+          <tr>
+            <td><strong>Desfazer / recuperar</strong></td>
+            <td>Abra a <strong>Lixeira</strong> › botão direito › <strong>Restaurar</strong></td>
+            <td><span class="kbd">Ctrl</span>+<span class="kbd">Z</span></td>
+          </tr>
+        </table>
+        <div class="cd">
+          <h3>Dicas para nomear</h3>
+          <p>Use nomes <strong>descritivos</strong> e, se precisar, datas no formato ano-mês-dia
+            (<em>2026-10-14_relatorio_agua</em>). O Windows <strong>não aceita</strong> os caracteres
+            <strong>\ / : * ? " &lt; &gt; |</strong> em nomes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 25 - EXTENSÕES -->
+    <div class="sl" id="s_extensoes">
+      <div class="slhd"><span class="num">25</span>
+        <h2>Extensões de arquivos e sua utilidade</h2>
+      </div>
+      <div class="slbd fill">
+        <table class="tb2 prog denso">
+          <tr>
+            <th>Extensão</th>
+            <th>Tipo de conteúdo</th>
+            <th>Abre com</th>
+          </tr>
+          <tr>
+            <td><strong>.txt</strong></td>
+            <td>Texto simples, sem formatação</td>
+            <td>Bloco de Notas</td>
+          </tr>
+          <tr>
+            <td><strong>.docx · .odt · .pdf</strong></td>
+            <td>Documentos formatados</td>
+            <td>Word, LibreOffice Writer, navegador</td>
+          </tr>
+          <tr>
+            <td><strong>.xlsx · .ods · .csv</strong></td>
+            <td>Planilhas e <strong>dados</strong></td>
+            <td>Excel, LibreOffice Calc</td>
+          </tr>
+          <tr>
+            <td><strong>.jpg · .png</strong></td>
+            <td>Imagens, fotos de campo e mapas exportados</td>
+            <td>Fotos, Paint</td>
+          </tr>
+          <tr>
+            <td><strong>.shp · .kml</strong></td>
+            <td>Dados geográficos (área ambiental)</td>
+            <td>QGIS, Google Earth</td>
+          </tr>
+          <tr>
+            <td><strong>.zip</strong></td>
+            <td>Arquivos compactados</td>
+            <td>Explorador de Arquivos</td>
+          </tr>
+          <tr>
+            <td><strong>.exe · .msi</strong></td>
+            <td><strong>Programas e instaladores</strong></td>
+            <td>Executam direto — <strong>cuidado!</strong></td>
+          </tr>
+        </table>
+        <div class="ca">
+          <h3>Mostre as extensões</h3>
+          <p>No Explorador: <strong>Exibir › Mostrar › Extensões de nomes de arquivos</strong>. Assim fica fácil
+            perceber que <em>foto.jpg<strong>.exe</strong></em> é, na verdade, um programa.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 26 - FERRAMENTAS -->
+    <div class="sl" id="s_ferramentas">
+      <div class="slhd"><span class="num">26</span>
+        <h2>3.3.5 Ferramentas do sistema</h2>
+      </div>
+      <div class="slbd fill">
+        <table class="tb2 prog denso">
+          <tr>
+            <th>Ferramenta</th>
+            <th>Para que serve</th>
+            <th>Como abrir</th>
+          </tr>
+          <tr>
+            <td><strong>Configurações</strong></td>
+            <td>Central de ajustes do computador</td>
+            <td><span class="kbd">⊞ Win</span>+<span class="kbd">I</span></td>
+          </tr>
+          <tr>
+            <td><strong>Gerenciador de Tarefas</strong></td>
+            <td>Ver o uso de CPU e memória e <strong>finalizar um programa travado</strong></td>
+            <td><span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">Esc</span></td>
+          </tr>
+          <tr>
+            <td><strong>Segurança do Windows</strong></td>
+            <td>Antivírus <strong>Microsoft Defender</strong>, firewall e verificação de ameaças</td>
+            <td>Pesquisar "Segurança do Windows"</td>
+          </tr>
+          <tr>
+            <td><strong>Windows Update</strong></td>
+            <td>Instalar <strong>atualizações</strong> e correções de segurança</td>
+            <td>Configurações › Windows Update</td>
+          </tr>
+          <tr>
+            <td><strong>Armazenamento</strong></td>
+            <td>Ver o espaço livre e <strong>limpar arquivos temporários</strong></td>
+            <td>Configurações › Sistema › Armazenamento</td>
+          </tr>
+          <tr>
+            <td><strong>Sobre</strong></td>
+            <td>Ver processador, memória RAM e versão do Windows</td>
+            <td>Configurações › Sistema › Sobre</td>
+          </tr>
+        </table>
+        <div class="cd">
+          <h3>Experimente</h3>
+          <p>Abra o <strong>Gerenciador de Tarefas</strong>, vá em <strong>Desempenho</strong> e descubra quantos
+            núcleos tem o processador e quanta memória RAM tem o ThinkCentre do laboratório.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 27 - CONFIGURAÇÕES PESSOAIS -->
+    <div class="sl denso" id="s_config">
+      <div class="slhd"><span class="num">27</span>
+        <h2>Configurações pessoais</h2>
+      </div>
+      <div class="slbd">
+        <div class="scr">
+          <figure>
+            <img class="foto zoom" src="img/win11-configuracoes.svg"
+              alt="Aplicativo Configurações do Windows 11 aberto em Personalização, com a caixa de busca, a lista de categorias e as opções de tela de fundo, cores, temas, tela de bloqueio, Iniciar e barra de tarefas">
+            <figcaption>Configurações › Personalização — ilustração esquemática</figcaption>
+          </figure>
+          <div>
+            <ol class="leg">
+              <li data-n="1"><strong>Localizar:</strong> digite o que procura (ex.: "mouse").</li>
+              <li data-n="2"><strong>Categorias:</strong> Sistema, Personalização, Contas, Acessibilidade…</li>
+              <li data-n="3"><strong>Opções</strong> da categoria escolhida.</li>
+            </ol>
+            <ul>
+              <li><strong>Personalização:</strong> tela de fundo, cores e <strong>modo escuro</strong>.</li>
+              <li><strong>Acessibilidade:</strong> tamanho do texto e do ponteiro.</li>
+              <li><strong>Contas › Opções de entrada:</strong> trocar senha ou criar PIN.</li>
+              <li><strong>Hora e idioma:</strong> idioma e <strong>layout do teclado</strong> (ABNT2).</li>
+              <li>No laboratório, algumas opções são <strong>bloqueadas</strong> pelo administrador.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 28 - BLOCO DE NOTAS -->
+    <div class="sl denso" id="s_bloco">
+      <div class="slhd"><span class="num">28</span>
+        <h2>Prática: conhecendo o Bloco de Notas do Windows 11</h2>
+      </div>
+      <div class="slbd">
+        <div class="scr">
+          <figure>
+            <img class="foto zoom" src="img/win11-bloco-de-notas.svg"
+              alt="Bloco de Notas do Windows 11 com uma aba aberta, o menu Exibir aberto e a opção Quebra automática de linha marcada">
+            <figcaption>Bloco de Notas — ilustração esquemática</figcaption>
+          </figure>
+          <div>
+            <ol class="leg">
+              <li data-n="1"><strong>Abas:</strong> vários arquivos na mesma janela (botão +).</li>
+              <li data-n="2"><strong>Exibir:</strong> no Windows 11 a quebra de linha mudou para este menu (antes
+                ficava em Formatar).</li>
+              <li data-n="3"><strong>Quebra automática de linha:</strong> o texto se ajusta à largura da janela.
+              </li>
+              <li data-n="4"><strong>Barra de status:</strong> linha, coluna, zoom e codificação (UTF-8).</li>
+            </ol>
+            <div class="bege">
+              <p><strong>Como abrir:</strong> <span class="kbd">⊞ Win</span>, digite <em>bloco de notas</em> e
+                <span class="kbd">Enter</span> — ou <span class="kbd">⊞ Win</span>+<span class="kbd">R</span>,
+                digite <strong>notepad</strong> e <span class="kbd">Enter</span>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 29 - ATIVIDADE -->
+    <div class="sl" id="s_atividade">
+      <div class="slhd"><span class="num">29</span>
+        <h2>Atividade prática: digitação no Bloco de Notas</h2>
+      </div>
+      <div class="slbd">
+        <div class="abas">
+          <button class="on" data-p="p_passos" type="button">Passo a passo</button>
+          <button data-p="p_texto" type="button">Texto para digitação</button>
+        </div>
+        <div class="painel on" id="p_passos">
+          <ol class="passos">
+            <li><strong>Crie a pasta:</strong> <span class="kbd">⊞ Win</span>+<span class="kbd">E</span> ›
+              Documentos › <strong>⊕ Novo › Pasta</strong> › nomeie <strong>Informatica_Aplicada</strong>.</li>
+            <li><strong>Abra o Bloco de Notas</strong> e ative <strong>Exibir › Quebra automática de linha</strong>.
+            </li>
+            <li><strong>Digite o texto</strong> da aba ao lado, com atenção aos acentos, à pontuação e aos
+              parágrafos.</li>
+            <li><strong>Salve:</strong> <span class="kbd">Ctrl</span>+<span class="kbd">S</span> › escolha a pasta
+              criada › nome <strong>Exercicio_Digitacao_SeuNome.txt</strong> › Salvar.</li>
+            <li><strong>Revise</strong> o texto, corrija os erros e salve de novo.</li>
+            <li><strong>Envie pelo SUAP:</strong> abra o navegador, acesse <strong>suap.ifpi.edu.br</strong>, entre
+              com matrícula e senha e envie o arquivo na disciplina.</li>
+          </ol>
+        </div>
+        <div class="painel texto-dig" id="p_texto">
+          <p>"A informática revolucionou o modo como trabalhamos, estudamos e nos comunicamos. Todos os dias, milhões
+            de pessoas utilizam computadores para realizar tarefas que, há algumas décadas, seriam impensáveis de
+            serem feitas com tanta rapidez e eficiência.</p>
+          <p>O domínio das ferramentas básicas de um computador não é apenas uma habilidade útil, mas essencial no
+            mundo contemporâneo. Desde a simples navegação pelo sistema de arquivos até o uso de softwares
+            específicos, cada conhecimento adquirido representa um passo importante na inclusão digital.</p>
+          <p>No ambiente acadêmico e profissional, a capacidade de digitar com velocidade e precisão faz diferença na
+            produtividade. Esta atividade tem como objetivo exercitar suas habilidades de digitação,
+            familiarizando-se com o teclado e com a interface do Bloco de Notas, um dos aplicativos mais básicos e
+            úteis do Windows.</p>
+          <p>O aprendizado dessas habilidades fundamentais é crucial para acompanhar as rápidas transformações
+            tecnológicas e se manter competitivo no mercado de trabalho. Dominar o uso do computador e das principais
+            ferramentas digitais é um diferencial que pode abrir portas e ampliar oportunidades em diversos setores.
+          </p>
+          <p>Portanto, é essencial que todos os estudantes e profissionais se dediquem a aprimorar suas competências
+            digitais, explorando os recursos disponíveis e praticando constantemente. Essa jornada de aprendizado
+            contínuo irá prepará-los para os desafios do futuro e garantir sua adaptabilidade em um mundo cada vez
+            mais tecnológico."</p>
+        </div>
+      </div>
+      <div class="ref"><span class="rt">Entrega:</span><a href="https://suap.ifpi.edu.br" target="_blank"
+          rel="noopener">suap.ifpi.edu.br</a> — arquivo .txt na disciplina Informática Aplicada</div>
+    </div>
+
+    <!-- SLIDE 30 - DESAFIO SO -->
+    <div class="sl" id="s_desafio">
+      <div class="slhd"><span class="num">30</span>
+        <h2>Desafio rápido: e agora, o que eu faço?</h2>
+      </div>
+      <div class="slbd">
+        <p>Pense antes de clicar: <span class="mk">toque em cada pergunta para revelar a resposta</span>.</p>
+        <div class="rev">1. Um programa travou e não fecha. Preciso desligar o computador no botão?<div class="resp">
+            <strong>Não.</strong> Abra o <strong>Gerenciador de Tarefas</strong> (<span class="kbd">Ctrl</span>+<span
+              class="kbd">Shift</span>+<span class="kbd">Esc</span>), selecione o programa e clique em
+            <strong>Finalizar tarefa</strong>.</div>
+        </div>
+        <div class="rev">2. Apaguei sem querer a pasta do trabalho. Perdi tudo?<div class="resp">Provavelmente não:
+            pressione <span class="kbd">Ctrl</span>+<span class="kbd">Z</span> ou abra a <strong>Lixeira</strong> e
+            use <strong>Restaurar</strong>. Só o <span class="kbd">Shift</span>+<span class="kbd">Del</span> apaga
+            direto.</div>
+        </div>
+        <div class="rev">3. Qual é o sistema operacional do seu celular e quem o desenvolve?<div class="resp">Na
+            maioria dos casos é o <strong>Android</strong> (Google, base de código aberto) ou o
+            <strong>iOS</strong> (Apple, proprietário). Ambos fazem as mesmas funções de um SO de computador.</div>
+        </div>
+        <div class="ca">
+          <h3>Atividade da semana</h3>
+          <p>Entregue o <strong>exercício de digitação</strong> no SUAP e traga, por escrito, <strong>3
+              atitudes de segurança</strong> que você vai passar a adotar no seu celular ou computador.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 31 - ENCERRAMENTO -->
+    <div class="sl" id="s_fim">
+      <div class="slhd"><span class="num">31</span>
+        <h2>Dúvidas?</h2>
+      </div>
+      <div class="slbd">
+        <div class="divisor">
+          <img class="bg" src="img/encerramento.jpg" alt="">
+          <div class="ov"></div>
+          <div class="in">
+            <div class="rot">Informática Aplicada · Aula 04</div>
+            <h1>Dúvidas?</h1>
+            <p>As dúvidas de hoje são o conhecimento de amanhã.</p>
+            <p>Prof. Diego Cordeiro de Oliveira — <a href="mailto:diego.cordeiro@ifpi.edu.br"
+                style="color:#fff">diego.cordeiro@ifpi.edu.br</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.sc -->
+
+  <div class="ctrl-wrap">
+    <div class="progress-wrap">
+      <div id="progress" class="progress"></div>
+    </div>
+    <nav class="ctr">
+      <div id="dots" class="dots"></div>
+      <button class="bn" onclick="openPresentation()" title="Abrir em janela de apresentação">Apresentação</button>
+      <button class="bz sq" onclick="pv()" title="Slide anterior">‹</button>
+      <button class="bz sq" id="play" type="button" title="Reproduzir automaticamente">▶</button>
+      <button class="bz sq" id="full" type="button" title="Tela cheia">⛶</button>
+      <button class="bv sq" onclick="nx()" title="Próximo slide">›</button>
+    </nav>
+  </div>
+
+  <script src="aula04.js"></script>
+</body>
+
+</html>
