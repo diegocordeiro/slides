@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Encontro 1 · Fundamentos: letramento digital, IA e uso responsável de dados</title>
+  <link rel="stylesheet" href="aula.css">
+</head>
+
+<body class="projetor">
+  <header class="tb">
+    <h2>Minicurso Letramento Digital em IA · IFPI — Campus Barras</h2>
+    <div class="tb-right">
+      <div class="fz" aria-label="Tamanho do texto">
+        <button onclick="fz(-1)" title="Diminuir tamanho da fonte">A−</button>
+        <span id="fzpct">100%</span>
+        <button onclick="fz(1)" title="Aumentar tamanho da fonte">A+</button>
+      </div>
+      <button class="cz" id="cz" type="button" onclick="toggleProjetor()"
+        title="Tema projetor ativo — clique para o tema de leitura" aria-pressed="true">◉ Projetor</button>
+      <span class="ct" id="ctr">1 / 30</span>
+    </div>
+  </header>
+  <div class="fita"></div>
+  <div class="sc">
+
+    <!-- CAPA -->
+    <div class="sl ac" id="s1">
+      <div class="capa">
+        <div class="esq">
+          <div class="rot">Minicurso · Encontro 1 de 3</div>
+          <h1>Fundamentos: letramento digital, IA e dados</h1>
+          <p class="sub">Letramento Digital em Ferramentas de IA para Professores</p>
+          <p class="sub">28/10/2026 · 19h às 21h · Lab. de Informática · IFPI Campus Barras</p>
+          <p class="sub">Prof. Diego Cordeiro de Oliveira e equipe</p>
+          <div class="faixa"></div>
+        </div>
+        <div class="dir">
+          <img src="logo.png" alt="Logo do IFPI">
+          <h2>Instituto Federal do Piauí</h2>
+          <p>Projeto de extensão em parceria com as redes municipais de ensino.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOAS-VINDAS: O MINICURSO -->
+    <div class="sl" id="s_minicurso">
+      <div class="slhd"><span class="num">2</span>
+        <h2>Bem-vindos! O minicurso em 3 encontros</h2>
+      </div>
+      <div class="slbd fill">
+        <table class="tb2 prog denso">
+          <tr>
+            <th>Encontro</th>
+            <th>Tema</th>
+            <th>Atividade na sua turma</th>
+          </tr>
+          <tr>
+            <td><strong>1 · 28/10</strong> (hoje)</td>
+            <td>Fundamentos: letramento digital, IA generativa, LGPD e ECA Digital</td>
+            <td>“Semáforo dos dados” → socializar em 18/11</td>
+          </tr>
+          <tr>
+            <td><strong>2 · 18/11</strong></td>
+            <td>Ferramentas e prática: uma aula completa com IA (plano, apresentação e atividades)</td>
+            <td>“Minha aula com IA” → apresentar em 02/12</td>
+          </tr>
+          <tr>
+            <td><strong>3 · 02/12</strong></td>
+            <td>A IA nas mãos dos alunos: como funciona, ética e uso como suporte</td>
+            <td>Sequência didática com IA (produto final)</td>
+          </tr>
+        </table>
+        <div class="cd">
+          <h3>Formação em cascata</h3>
+          <p>Você aprende aqui, <strong>aplica com seus alunos</strong>, registra o que aconteceu e
+            <strong>socializa</strong> no encontro seguinte. Cada professor é um <strong>multiplicador</strong>.</p>
+        </div>
+        <p class="mini">Quartas-feiras, 19h às 21h · carga horária total: 6 h/a · avaliação por frequência e
+          participação.</p>
+      </div>
+    </div>
+
+    <!-- ROTEIRO DE HOJE -->
+    <div class="sl" id="s_agenda">
+      <div class="slhd"><span class="num">3</span>
+        <h2>O que vamos explorar hoje?</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>1. Letramento digital e em IA</h3>
+            <p>Por que <strong>saber usar</strong> não basta e o que significa <strong>usar com
+                criticidade</strong>.</p>
+          </div>
+          <div class="bege">
+            <h3>2. O que é IA generativa</h3>
+            <p>O que ela faz bem, onde erra e um primeiro <strong>mão na massa</strong>.</p>
+          </div>
+          <div class="bege">
+            <h3>3. Dados, LGPD e ECA Digital</h3>
+            <p>O que a lei protege e um <strong>semáforo</strong> para decidir o que pode ir para uma IA.</p>
+          </div>
+          <div class="bege">
+            <h3>4. Imagem e casos práticos</h3>
+            <p>Registrar vs divulgar, situações reais da escola e a <strong>Atividade 1</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIAGNÓSTICO -->
+    <div class="sl" id="s_diag">
+      <div class="slhd"><span class="num">4</span>
+        <h2>Para começar: onde você está?</h2>
+      </div>
+      <div class="slbd">
+        <ol class="passos">
+          <li>Você já usou alguma IA como <strong>ChatGPT, Gemini, Claude ou DeepSeek</strong>? Para quê?</li>
+          <li>Já usou IA para <strong>planejar aula</strong>, criar atividade ou corrigir trabalhos?</li>
+          <li>Seus alunos usam IA? Você <strong>percebe</strong> quando usam?</li>
+          <li>Na sua escola, qual a realidade de <strong>internet e equipamentos</strong>?</li>
+          <li>Qual a sua <strong>maior preocupação</strong> com a IA na educação?</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- DIVISOR PARTE 1 -->
+    <div class="sl" id="s_div1">
+      <div class="slhd"><span class="num">5</span>
+        <h2>Parte 1</h2>
+      </div>
+      <div class="slbd fill">
+        <div class="divisor">
+          <div class="ov"></div>
+          <div class="in">
+            <div class="rot">Parte 1</div>
+            <h1>Letramento digital e Inteligência Artificial</h1>
+            <p>Do “saber usar” ao “usar com criticidade”.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LETRAMENTO DIGITAL -->
+    <div class="sl" id="s_letr">
+      <div class="slhd"><span class="num">6</span>
+        <h2>Letramento digital não é só saber usar o celular</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Alfabetização digital (instrumental)</h3>
+            <ul>
+              <li>Ligar, digitar, instalar um aplicativo.</li>
+              <li>Saber <strong>onde clicar</strong>.</li>
+              <li>Necessária, mas <strong>insuficiente</strong>.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Letramento digital (crítico e social)</h3>
+            <ul>
+              <li><strong>Compreender e avaliar</strong> informação de múltiplas fontes digitais (Gilster, 1997).</li>
+              <li>Usar as tecnologias para <strong>pensar, comunicar-se, produzir conhecimento</strong> e participar
+                da vida social (Coscarelli; Ribeiro, 2005; Buzato, 2006).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cd">
+          <h3>Pergunta</h3>
+          <p>Um aluno que encontra uma “notícia” no grupo da família e repassa sem checar é
+            <strong>alfabetizado</strong> digitalmente. Ele é <strong>letrado</strong>?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LETRAMENTO EM IA -->
+    <div class="sl" id="s_letria">
+      <div class="slhd"><span class="num">7</span>
+        <h2>Letramento em IA: o que o professor precisa saber</h2>
+      </div>
+      <div class="slbd">
+        <p>O <strong>Marco de Competências em IA para Docentes</strong> (UNESCO, 2024) organiza a formação em cinco
+          dimensões:</p>
+        <ol class="passos">
+          <li><strong>Abordagem centrada no ser humano:</strong> a IA serve às pessoas, e não o contrário.</li>
+          <li><strong>Ética da IA:</strong> privacidade, vieses, autoria e responsabilidade.</li>
+          <li><strong>Fundamentos e aplicações:</strong> como funciona, o que faz e onde falha.</li>
+          <li><strong>Pedagogia com IA:</strong> integrar a IA ao planejamento, ao ensino e à avaliação.</li>
+          <li><strong>Desenvolvimento profissional:</strong> usar a IA para aprender e se atualizar.</li>
+        </ol>
+        <div class="ca">
+          <p>Neste minicurso: <strong>Encontro 1</strong> → dimensões 1, 2 e 3 · <strong>Encontro 2</strong> → 4 e
+            5 · <strong>Encontro 3</strong> → 1, 2 e 4, agora com o olhar dos alunos.</p>
+        </div>
+      </div>
+      <div class="ref">Fonte: UNESCO. <em>AI competency framework for teachers</em>. Paris: UNESCO, 2024.</div>
+    </div>
+
+    <!-- A IA JÁ ESTÁ NA ESCOLA -->
+    <div class="sl" id="s_iaja">
+      <div class="slhd"><span class="num">8</span>
+        <h2>A IA já está na escola (mesmo sem a gente perceber)</h2>
+      </div>
+      <div class="slbd">
+        <div class="c3">
+          <div class="bege">
+            <h3>No celular</h3>
+            <p>Corretor e <strong>autocompletar</strong> do teclado, desbloqueio por rosto, assistente de voz.</p>
+          </div>
+          <div class="bege">
+            <h3>Nas redes</h3>
+            <p><strong>O que aparece</strong> no YouTube, TikTok e Instagram é escolhido por algoritmos de
+              recomendação.</p>
+          </div>
+          <div class="bege">
+            <h3>Nas tarefas</h3>
+            <p>Tradutores, apps que <strong>resolvem exercício pela foto</strong> e chatbots que escrevem redações.
+            </p>
+          </div>
+        </div>
+        <div class="dc">
+          <p><strong>Ideia-chave:</strong> a questão não é <em>se</em> os alunos vão usar IA, e sim
+            <strong>como</strong> e quem vai ensiná-los a usar bem.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- O QUE É IA GENERATIVA -->
+    <div class="sl" id="s_iagen">
+      <div class="slhd"><span class="num">9</span>
+        <h2>O que é IA generativa?</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <p>Sistemas que <strong>criam conteúdo novo</strong>: texto, imagem, áudio, vídeo; a partir de uma
+              instrução escrita, o <strong>prompt</strong>.</p>
+          </div>
+          <div class="bege">
+            <h3>Como?</h3>
+            <p>Foram treinados com <strong>enormes volumes de textos</strong> e aprenderam padrões. Ao responder,
+              <strong>preveem a próxima palavra</strong> mais provável, várias vezes seguidas.</p>
+          </div>
+        </div>
+        <p>Assistentes de texto que vamos usar no minicurso:</p>
+        <p><span class="tag cheio">Gemini</span><span class="tag cheio">ChatGPT</span><span
+            class="tag cheio">Claude</span><span class="tag cheio">DeepSeek</span></p>
+        <div class="ca">
+          <h3>Importante</h3>
+          <p>Ela não “sabe” nem “pesquisa” como uma pessoa: <strong>gera um texto plausível</strong>. Plausível
+            não é o mesmo que <strong>verdadeiro</strong>. (Aprofundamos no Encontro 3.)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAZ BEM x ERRA -->
+    <div class="sl" id="s_forcas">
+      <div class="slhd"><span class="num">10</span>
+        <h2>O que ela faz bem e onde ela erra</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Faz bem (com revisão)</h3>
+            <ul>
+              <li>Primeiros <strong>rascunhos</strong> de planos, textos e atividades.</li>
+              <li><strong>Reescrever</strong> em outro nível de linguagem.</li>
+              <li>Gerar <strong>exemplos</strong>, perguntas e ideias.</li>
+              <li><strong>Organizar</strong> conteúdo em tabelas, roteiros e listas.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Onde erra</h3>
+            <ul>
+              <li><strong>Alucinação:</strong> inventa fatos, datas, autores e referências com toda confiança.</li>
+              <li><strong>Vieses:</strong> reproduz estereótipos presentes nos dados.</li>
+              <li><strong>Desatualização</strong> e cálculos mal feitos.</li>
+              <li><strong>Não conhece</strong> a sua turma nem a sua escola.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cd">
+          <p>Regra: <strong>a IA propõe, o professor decide</strong>. Tudo passa por
+            <strong>revisão humana</strong>.</p>
+        </div>
+        <div class="ca">
+          <p>Material escolar mostra menino negro em lixeira em Itapecerica, em SP | G1 <a href="https://share.google/3f9an6MzHAINKAKbv" target="_blank">https://share.google/3f9an6MzHAINKAKbv</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MÃO NA MASSA 1 -->
+    <div class="sl" id="s_mao1">
+      <div class="slhd"><span class="num">11</span>
+        <h2>Mão na massa: o primeiro prompt (10 min)</h2>
+      </div>
+      <div class="slbd">
+        <ol class="passos">
+          <li>Abra uma das ferramentas: <strong>gemini.google.com</strong>, <strong>chatgpt.com</strong>,
+            <strong>claude.ai</strong> ou <strong>chat.deepseek.com</strong>.</li>
+          <li>Cole o prompt abaixo, trocando os campos <span class="mk">destacados</span>.</li>
+          <li>Compare a resposta com a do <strong>colega ao lado</strong>, que usou outra ferramenta.</li>
+        </ol>
+        <div class="prompt">
+          <div class="pt">Prompt de teste</div>
+          <pre>Explique <i>[um conteúdo que você ensina]</i> para estudantes do <i>[ano/série]</i> em até 5 frases curtas, com um exemplo do dia a dia da cidade de Barras cidade do interior do Piauí. No final, proponha 1 pergunta para verificar se entenderam.</pre>
+        </div>
+        <div class="dc">
+          <p><strong>Conversa:</strong> as respostas foram iguais? Estão corretas? O exemplo é adequado à sua turma?
+            O que você mudaria?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIVISOR PARTE 2 -->
+    <div class="sl" id="s_div2">
+      <div class="slhd"><span class="num">12</span>
+        <h2>Parte 2</h2>
+      </div>
+      <div class="slbd fill">
+        <div class="divisor">
+          <div class="ov"></div>
+          <div class="in">
+            <div class="rot">Parte 2</div>
+            <h1>Dados, LGPD e ECA Digital na escola</h1>
+            <p>Antes de colar qualquer coisa em uma IA, precisamos saber o que estamos entregando.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRÊS CENÁRIOS -->
+    <div class="sl" id="s_cenarios">
+      <div class="slhd"><span class="num">13</span>
+        <h2>Três cenários que acontecem toda semana</h2>
+      </div>
+      <div class="slbd">
+        <div class="c3">
+          <div class="bege">
+            <h3>A foto do evento</h3>
+            <p>A turma na festa junina vai para o perfil da escola. <strong>Quem autorizou?</strong></p>
+          </div>
+          <div class="bege">
+            <h3>A planilha de matrícula</h3>
+            <p>Lista com CPF, endereço e NIS em pasta aberta para <strong>“qualquer pessoa com o link”</strong>.</p>
+          </div>
+          <div class="bege">
+            <h3>O laudo no chatbot</h3>
+            <p>O relatório de um aluno, com laudo, colado em uma <strong>IA aberta</strong> para redigir o parecer.
+            </p>
+          </div>
+        </div>
+        <div class="cd">
+          <h3>Pergunta</h3>
+          <p>Quem aqui já viu algo parecido? <strong>Sem constrangimento</strong>: o objetivo é aprender a fazer
+            melhor.</p>
+        </div>
+        <div class="dc">
+          <p>Registrar e divulgar as ações da escola é <strong>possível e desejável</strong>, desde que saibamos
+            <strong>o que coletar, com qual base legal, onde inserir e como divulgar</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAPA LEGAL -->
+    <div class="sl" id="s_mapa">
+      <div class="slhd"><span class="num">14</span>
+        <h2>Mapa legal</h2>
+      </div>
+      <div class="slbd fill">
+        <table class="tb2 prog denso">
+          <tr>
+            <th>Norma</th>
+            <th>O que cobre</th>
+            <th>Na escola</th>
+          </tr>
+          <tr>
+            <td><strong>Constituição, art. 5º, X e LXXIX</strong></td>
+            <td>Intimidade, vida privada, imagem e proteção de dados como direito fundamental</td>
+            <td>Base de tudo; a imagem é direito fundamental</td>
+          </tr>
+          <tr>
+            <td><strong>LGPD</strong> (Lei 13.709/2018)</td>
+            <td>Tratamento de dados pessoais por qualquer pessoa ou órgão, inclusive público</td>
+            <td>Coletar, guardar, compartilhar e inserir dados em sistemas e IA</td>
+          </tr>
+          <tr>
+            <td><strong>ECA</strong> (Lei 8.069/1990), arts. 17, 18 e 100</td>
+            <td>Respeito à imagem, identidade e privacidade; melhor interesse</td>
+            <td>Divulgação de fotos de estudantes</td>
+          </tr>
+          <tr>
+            <td><strong>ECA Digital</strong> (Lei 15.211/2025)</td>
+            <td>Proteção de crianças e adolescentes em produtos e serviços digitais</td>
+            <td>Escolha de apps, plataformas e IAs indicados aos alunos</td>
+          </tr>
+          <tr>
+            <td><strong>Código Civil, art. 20</strong></td>
+            <td>Uso da imagem exige autorização, salvo exceções</td>
+            <td>Fundamento do termo de autorização de imagem</td>
+          </tr>
+        </table>
+        <div class="cd">
+          <p>A mesma foto é <strong>dado pessoal</strong> (LGPD), <strong>direito de imagem</strong> (CF e Código
+            Civil) e <strong>dado de criança ou adolescente</strong> (ECA e art. 14 da LGPD) ao mesmo tempo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LGPD CONCEITOS -->
+    <div class="sl" id="s_lgpd1">
+      <div class="slhd"><span class="num">15</span>
+        <h2>LGPD: os conceitos que usamos todo dia</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2 compacto" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="bege">
+            <h3>Dado pessoal</h3>
+            <p>Informação ligada a pessoa <strong>identificada ou identificável</strong>: nome, matrícula, CPF, NIS,
+              foto, voz.</p>
+          </div>
+          <div class="bege">
+            <h3>Dado pessoal sensível</h3>
+            <p>Origem racial ou étnica, religião, opinião política, <strong>saúde</strong>, vida sexual, dado genético
+              ou <strong>biométrico</strong>. Laudos e dados de inclusão entram aqui.</p>
+          </div>
+          <div class="bege">
+            <h3>Anonimização × pseudonimização</h3>
+            <p>Anonimizado é o dado que <strong>não permite mais identificar</strong> a pessoa. Trocar o nome por
+              iniciais, mantendo contexto raro, é só <strong>pseudonimização</strong>.</p>
+          </div>
+          <div class="bege">
+            <h3>Quem é quem na rede municipal</h3>
+            <ul>
+              <li><strong>Controlador:</strong> quem decide (o Município / Secretaria de Educação).</li>
+              <li><strong>Operador:</strong> quem trata em nome do controlador (ex.: empresa do sistema de gestão).</li>
+              <li><strong>Encarregado:</strong> canal entre órgão, titulares e ANPD.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LGPD PRINCÍPIOS -->
+    <div class="sl" id="s_lgpd2">
+      <div class="slhd"><span class="num">16</span>
+        <h2>LGPD: princípios e bases legais</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Princípios que mais pesam (art. 6º)</h3>
+            <ul>
+              <li><strong>Finalidade e adequação:</strong> para que coleto?</li>
+              <li><strong>Necessidade:</strong> só o indispensável.</li>
+              <li><strong>Segurança e prevenção:</strong> proteger do acesso indevido.</li>
+              <li><strong>Transparência:</strong> o titular sabe o que acontece.</li>
+              <li><strong>Não discriminação</strong> e <strong>responsabilização</strong>.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Bases legais na escola pública (arts. 7º, 11 e 23)</h3>
+            <ul>
+              <li><strong>Obrigação legal</strong>: matrícula, frequência, histórico escolar.</li>
+              <li><strong>Execução de políticas públicas</strong>: ensino, merenda, transporte, programas.</li>
+              <li><strong>Proteção da vida</strong> ou da saúde, em emergências.</li>
+              <li><strong>Consentimento</strong>: para o que passa da missão da escola.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ca">
+          <h3>Consentimento é a exceção</h3>
+          <p>Na rotina, a base costuma ser a <strong>atividade pública</strong>. O consentimento entra quando o uso
+            <strong>ultrapassa a missão</strong>, como divulgar a imagem de um aluno em rede social.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CRIANÇAS E ADOLESCENTES -->
+    <div class="sl" id="s_lgpd3">
+      <div class="slhd"><span class="num">17</span>
+        <h2>Crianças e adolescentes e direitos do titular</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Dados de crianças e adolescentes (art. 14)</h3>
+            <ul>
+              <li>O tratamento deve atender ao <strong>melhor interesse</strong> da criança e do adolescente.</li>
+              <li>Para crianças, o consentimento é <strong>específico e em destaque</strong>, dado por pelo menos um
+                dos pais ou responsável legal.</li>
+              <li>A ANPD admite <strong>outras bases legais</strong> além do consentimento, sempre respeitado o melhor
+                interesse (Enunciado CD/ANPD nº 1/2023).</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>O que o titular pode pedir (art. 18)</h3>
+            <ul>
+              <li>Confirmação e <strong>acesso</strong> aos dados.</li>
+              <li><strong>Correção</strong> de dados incompletos ou desatualizados.</li>
+              <li><strong>Eliminação</strong> ou anonimização de dados desnecessários.</li>
+              <li>Informação sobre <strong>compartilhamento</strong>.</li>
+              <li><strong>Revogação</strong> do consentimento.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cd">
+          <h3>Segurança e incidentes</h3>
+          <p>Medidas técnicas e administrativas são obrigatórias (art. 46). Vazou? <strong>Avise rápido</strong> a
+            gestão da escola e a Secretaria: incidente com risco relevante deve ser comunicado à ANPD e ao titular
+            (art. 48).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ECA DIGITAL -->
+    <div class="sl" id="s_eca1">
+      <div class="slhd"><span class="num">18</span>
+        <h2>ECA Digital: o que é e a quem se dirige</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>A lei</h3>
+            <ul>
+              <li><strong>Lei 15.211/2025</strong>, publicada em 17/09/2025.</li>
+              <li>Em vigor desde <strong>17/03/2026</strong>.</li>
+              <li>Fiscalização e regulamentação pela <strong>ANPD</strong>.</li>
+              <li>Alcança serviços digitais <strong>direcionados a crianças e adolescentes</strong> ou de
+                <strong>acesso provável</strong> por eles (art. 1º).</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Principais obrigações dos provedores</h3>
+            <ul>
+              <li><strong>Verificação de idade</strong> confiável, vedada a autodeclaração (arts. 9 a 15).</li>
+              <li><strong>Supervisão parental</strong> com padrão no mais alto nível de proteção (arts. 16 a 18).</li>
+              <li><strong>Loot boxes</strong> proibidas em jogos (art. 20).</li>
+              <li><strong>Perfilamento para publicidade</strong> proibido para menores (art. 22).</li>
+              <li>Contas de menores de 16 em redes sociais <strong>vinculadas a um responsável</strong> (art. 24).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="ref">Fonte: <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15211.htm"
+          target="_blank" rel="noopener">Lei 15.211/2025 · Planalto</a> · <a
+          href="https://www.gov.br/anpd/pt-br/assuntos/eca-digital" target="_blank" rel="noopener">ANPD · ECA
+          Digital</a></div>
+    </div>
+
+    <!-- ECA DIGITAL PARA O PROFESSOR -->
+    <div class="sl" id="s_eca2">
+      <div class="slhd"><span class="num">19</span>
+        <h2>O que o ECA Digital muda para o professor</h2>
+      </div>
+      <div class="slbd">
+        <ol class="passos">
+          <li><strong>Antes de indicar</strong> um app, rede social ou IA aos alunos, conferir <strong>idade
+              mínima</strong>, termos e configurações de privacidade.</li>
+          <li><strong>Preferir ferramentas</strong> educacionais ou adotadas pela rede, com controles adequados.</li>
+          <li><strong>Nunca orientar</strong> o aluno a mentir a idade ou contornar a verificação de uma plataforma.
+          </li>
+          <li>Com crianças, preferir o <strong>uso demonstrativo</strong>: o professor opera a IA, a turma analisa.</li>
+          <li><strong>Tratar a lei como padrão de cuidado:</strong> mesmo que a obrigação seja do provedor, o dano ao
+            aluno também atinge a escola.</li>
+        </ol>
+        <div class="ca">
+          <p>O ECA Digital não cria tarefa burocrática para o professor, mas torna a <strong>escolha da
+              ferramenta</strong> uma decisão pedagógica e de proteção.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ONDE OS DADOS PASSAM -->
+    <div class="sl" id="s_rotina">
+      <div class="slhd"><span class="num">20</span>
+        <h2>Dados na rotina da escola: cinco regras práticas</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2">
+          <div class="bege">
+            <h3>Por onde circulam</h3>
+            <ul>
+              <li>Diário de classe e <strong>sistema de gestão escolar</strong>.</li>
+              <li>Grupos de <strong>WhatsApp</strong> de pais e de professores.</li>
+              <li><strong>Formulários</strong> e planilhas online.</li>
+              <li><strong>Laudos</strong>, cadastros socioeconômicos e dados de saúde.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Cinco regras</h3>
+            <ol class="passos">
+              <li><strong>Colete só o necessário.</strong></li>
+              <li><strong>Diga a finalidade</strong> no próprio formulário.</li>
+              <li><strong>Use contas institucionais</strong>, com acesso restrito.</li>
+              <li><strong>Defina prazo</strong> e apague o que não serve mais.</li>
+              <li><strong>Pseudonimize</strong> em relatórios e apresentações.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IA E DADOS -->
+    <div class="sl" id="s_ia1">
+      <div class="slhd"><span class="num">21</span>
+        <h2>IA e dados pessoais: onde está o risco</h2>
+      </div>
+      <div class="slbd">
+        <ol class="passos">
+          <li><strong>Você digita</strong> um texto, anexa um arquivo ou envia uma foto.</li>
+          <li><strong>O serviço armazena</strong> o conteúdo e, às vezes, humanos revisam.</li>
+          <li><strong>Pode treinar modelos</strong>, conforme o serviço, o plano e a configuração.</li>
+          <li><strong>Pode cruzar fronteiras:</strong> processamento em outro país é transferência internacional
+            (arts. 33 a 36 da LGPD).</li>
+        </ol>
+        <div class="ca">
+          <h3>Atenção</h3>
+          <p>Depois de digitado, o dado <strong>deixa de estar sob o nosso controle</strong>. Por isso a decisão vem
+            <strong>antes</strong> de colar o texto.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMÁFORO -->
+    <div class="sl" id="s_ia2">
+      <div class="slhd"><span class="num">22</span>
+        <h2>Semáforo: o que pode ir para uma IA aberta</h2>
+      </div>
+      <div class="slbd fill">
+        <table class="tb2 prog denso">
+          <tr>
+            <th>Cor</th>
+            <th>Tipo de conteúdo</th>
+            <th>Exemplos</th>
+            <th>Pode?</th>
+          </tr>
+          <tr>
+            <td><strong>🟢 Verde</strong></td>
+            <td>Sem identificação de pessoas</td>
+            <td>Plano de aula, explicação de conceito, lista de exercícios, rubrica genérica</td>
+            <td><strong>Sim</strong></td>
+          </tr>
+          <tr>
+            <td><strong>🟡 Amarelo</strong></td>
+            <td>Contexto sem identificar pessoas</td>
+            <td>“Turma de 28 alunos do 6º ano, 3 com dificuldade de leitura”; dados agregados</td>
+            <td><strong>Com cuidado</strong>, revisando antes</td>
+          </tr>
+          <tr>
+            <td><strong>🔴 Vermelho</strong></td>
+            <td>Identificável ou sensível</td>
+            <td>Nome, matrícula, CPF, NIS, notas individuais, laudos, fotos de rostos, voz</td>
+            <td><strong>Não</strong></td>
+          </tr>
+        </table>
+        <div class="cd">
+          <h3>Atenção ao “quase anonimizado”</h3>
+          <p>Escola pequena, deficiência rara ou caso conhecido na cidade podem <strong>identificar por
+              contexto</strong>. Nesses casos, trate como vermelho.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUATRO PERGUNTAS + BOAS PRÁTICAS -->
+    <div class="sl" id="s_ia3">
+      <div class="slhd"><span class="num">23</span>
+        <h2>Quatro perguntas antes de usar IA</h2>
+      </div>
+      <div class="slbd">
+        <ol class="passos">
+          <li><strong>Esse dado identifica alguém?</strong> Se sim, anonimizar ou não usar.</li>
+          <li><strong>Eu teria autorização</strong> para enviar isso a um terceiro?</li>
+          <li><strong>A ferramenta é adequada</strong> (termos, idade mínima, configurações de privacidade)?</li>
+          <li><strong>Vou revisar o resultado</strong> antes de usar, avaliar ou divulgar?</li>
+        </ol>
+        <div class="c2">
+          <div class="bege">
+            <h3>Boas práticas</h3>
+            <ul>
+              <li><strong>Anonimize</strong> antes de colar.</li>
+              <li><strong>Desative o uso para treinamento</strong> e o histórico, se houver a opção.</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Nunca</h3>
+            <ul>
+              <li>Envie <strong>fotos, vídeos ou voz de alunos</strong> a geradores de imagem, vídeo ou voz.</li>
+              <li>Deixe a IA dar a <strong>nota final</strong> sem revisão humana.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMAGEM -->
+    <div class="sl" id="s_img">
+      <div class="slhd"><span class="num">24</span>
+        <h2>Imagem de alunos: registrar não é divulgar</h2>
+      </div>
+      <div class="slbd fill">
+        <table class="tb2 prog denso">
+          <tr>
+            <th>Uso</th>
+            <th>Exemplo</th>
+            <th>Base e cuidado</th>
+          </tr>
+          <tr>
+            <td><strong>Registro interno</strong></td>
+            <td>Foto para comprovar a atividade no relatório da escola ou da Secretaria</td>
+            <td>Pode se apoiar na política pública e na prestação de contas; guardar com <strong>acesso
+                restrito</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Divulgação institucional</strong></td>
+            <td>Perfil oficial da escola ou da prefeitura</td>
+            <td>Em regra, <strong>autorização específica</strong> dos responsáveis; avaliar o risco à criança</td>
+          </tr>
+          <tr>
+            <td><strong>Divulgação pessoal</strong></td>
+            <td>Perfil pessoal do professor, status do WhatsApp</td>
+            <td><strong>Não recomendado</strong> para imagens de alunos menores</td>
+          </tr>
+        </table>
+        <div class="c2 compacto">
+          <div class="bege">
+            <h3>Prefira</h3>
+            <p>Fotos de <strong>produções, mãos e planos abertos</strong>; legenda sem nome completo, turma ou
+              localização.</p>
+          </div>
+          <div class="bege">
+            <h3>Evite</h3>
+            <p>Imagens que associem o aluno a <strong>saúde, deficiência</strong> ou vulnerabilidade, ou situações
+              constrangedoras.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASOS PRÁTICOS -->
+    <div class="sl" id="s_casos">
+      <div class="slhd"><span class="num">25</span>
+        <h2>Casos práticos: pode ou não pode?</h2>
+      </div>
+      <div class="slbd">
+        <div class="rev">1. A professora cola no ChatGPT a lista de notas da turma, com nomes, para gerar comentários
+          de boletim.<div class="resp">Não. <strong>Anonimize</strong> (Aluno 1, Aluno 2…) ou use ferramenta
+            institucional, e revise cada comentário.</div>
+        </div>
+        <div class="rev">2. Usar uma IA aberta para resumir o laudo de um aluno com TEA.<div class="resp">Não: é
+            <strong>dado sensível</strong> de criança. Descreva só a necessidade pedagógica, sem identificar
+            (“estratégias para um aluno que se beneficia de rotina visual”).</div>
+        </div>
+        <div class="rev">3. Pedir à IA um plano de aula sobre frações para o 5º ano, com 2 alunos com dificuldade de
+          leitura.<div class="resp"><strong>Pode</strong> (verde/amarelo): não há identificação. Revise o plano antes de
+            usar.</div>
+        </div>
+        <div class="rev">4. Pedir que alunos de 11 anos criem conta no ChatGPT para fazer a tarefa em casa.<div
+            class="resp">Não. Confira a <strong>idade mínima</strong> nos termos (em geral 13 anos, com autorização
+            dos responsáveis). Com crianças, prefira o uso demonstrativo em sala.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div class="sl" id="s_check">
+      <div class="slhd"><span class="num">26</span>
+        <h2>Checklist do professor</h2>
+      </div>
+      <div class="slbd">
+        <div class="c2 compacto" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="bege">
+            <h3>Dados</h3>
+            <ul>
+              <li>Preciso mesmo deste dado? Se não, <strong>não coleto</strong>.</li>
+              <li>Está em <strong>conta institucional</strong>, com acesso restrito?</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>IA e ferramentas</h3>
+            <ul>
+              <li>Removi <strong>nomes, matrículas, laudos e rostos</strong>?</li>
+              <li>A ferramenta <strong>aceita a idade</strong> da turma?</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Imagem</h3>
+            <ul>
+              <li>A divulgação tem <strong>autorização específica</strong> dos responsáveis?</li>
+              <li>O aluno foi <strong>ouvido</strong>?</li>
+            </ul>
+          </div>
+          <div class="bege">
+            <h3>Na dúvida</h3>
+            <ul>
+              <li>Fale com a <strong>gestão da escola</strong> e com a <strong>Secretaria Municipal de
+                  Educação</strong>.</li>
+              <li>Consulte o encarregado de dados do município.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATIVIDADE 1 -->
+    <div class="sl" id="s_ativ1">
+      <div class="slhd"><span class="num">27</span>
+        <h2>Atividade 1 · “Semáforo dos dados” na sua turma</h2>
+      </div>
+      <div class="slbd">
+        <div class="ativ">
+          <div class="rot">Para aplicar até 18/11 · 30 a 40 min · não precisa de internet</div>
+          <h3>Objetivo: que os alunos aprendam a decidir o que pode ou não ser compartilhado na internet e com uma IA.
+          </h3>
+        </div>
+        <ol class="passos">
+          <li><strong>Conversa inicial (5 min):</strong> “O que é um dado pessoal? Que dados seus estão na internet?”
+          </li>
+          <li><strong>Semáforo (20 min):</strong> em grupos, os alunos classificam cartões de situações em
+            🟢 pode · 🟡 com cuidado · 🔴 não pode, e justificam.</li>
+          <li><strong>Combinados da turma (10 min):</strong> criam juntos um cartaz com 3 a 5 regras de privacidade.
+          </li>
+          <li><strong>Registro:</strong> preencha a <strong>ficha de registro</strong> (sem nomes de alunos; fotos só
+            do cartaz ou das mãos).</li>
+        </ol>
+        <div class="dc">
+          <p><strong>Adapte:</strong> anos iniciais → cartões com desenhos e situações do cotidiano (foto, endereço,
+            senha) · anos finais → incluir situações com IA, redes sociais e deepfakes.</p>
+        </div>
+        <p class="mini">Roteiro completo, cartões para recortar e ficha de registro: arquivo
+          <strong>atividade-01_semaforo_dos_dados</strong> (pasta “atividades”).</p>
+      </div>
+    </div>
+
+    <!-- SOCIALIZAÇÃO -->
+    <div class="sl" id="s_social">
+      <div class="slhd"><span class="num">28</span>
+        <h2>No próximo encontro (18/11): socialização</h2>
+      </div>
+      <div class="slbd">
+        <p>Será sorteado dois professores que terão <strong>3 minutos</strong> para contar como foi. Traga a ficha preenchida e, se quiser,
+          uma foto do cartaz da turma.</p>
+        <ol class="passos">
+          <li>Em qual <strong>turma e ano</strong> você aplicou?</li>
+          <li>Qual situação gerou <strong>mais debate</strong> entre os alunos?</li>
+          <li>O que os alunos <strong>já sabiam</strong> e o que os <strong>surpreendeu</strong>?</li>
+          <li>O que você <strong>ajustaria</strong> para aplicar de novo?</li>
+        </ol>
+        <div class="cd">
+          <p>Não deu certo do jeito planejado? <strong>Também conta!</strong> Os ajustes são parte do aprendizado e
+            ajudam os colegas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARA LEVAR -->
+    <div class="sl" id="s_levar">
+      <div class="slhd"><span class="num">29</span>
+        <h2>Para levar deste encontro</h2>
+      </div>
+      <div class="slbd">
+        <ol class="passos">
+          <li><strong>Letramento é criticidade:</strong> usar bem é compreender, avaliar e decidir.</li>
+          <li><strong>IA generativa gera texto plausível,</strong> não necessariamente verdadeiro: a IA propõe, o
+            professor decide.</li>
+          <li><strong>IA aberta não é lugar de dado identificável:</strong> siga o semáforo.</li>
+          <li><strong>Crianças e adolescentes têm proteção reforçada:</strong> melhor interesse, idade mínima e
+            autorização dos responsáveis.</li>
+        </ol>
+        <div class="cd">
+          <h3>Próximo encontro · 18/11 · 19h</h3>
+          <p>Ferramentas e prática: <strong>uma aula completa com IA</strong>. Traga a ficha da Atividade 1 e, se
+            possível, o tema de uma aula que você vai minstrar em breve.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENCERRAMENTO -->
+    <div class="sl" id="s_fim">
+      <div class="slhd"><span class="num">30</span>
+        <h2>Dúvidas?</h2>
+      </div>
+      <div class="slbd fill">
+        <div class="divisor">
+          <div class="ov"></div>
+          <div class="in">
+            <div class="rot">Encontro 1 · Letramento digital, IA e dados</div>
+            <h1>Dúvidas?</h1>
+            <p>Obrigado pela participação! Até 18/11.</p>
+            <p>Prof. Diego Cordeiro de Oliveira — <a href="mailto:diego.cordeiro@ifpi.edu.br"
+                style="color:#fff">diego.cordeiro@ifpi.edu.br</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /.sc -->
+  <div class="ctrl-wrap">
+    <div class="progress-wrap">
+      <div id="progress" class="progress"></div>
+    </div>
+    <nav class="ctr">
+      <div id="dots" class="dots"></div>
+      <button class="bn" onclick="openPresentation()" title="Abrir em janela de apresentação">Apresentação</button>
+      <button class="bz sq" onclick="pv()" title="Slide anterior">‹</button>
+      <button class="bz sq" id="play" type="button" title="Reproduzir automaticamente">▶</button>
+      <button class="bz sq" id="full" type="button" title="Tela cheia">⛶</button>
+      <button class="bv sq" onclick="nx()" title="Próximo slide">›</button>
+    </nav>
+  </div>
+  <script src="aula.js"></script>
+</body>
+
+</html>
