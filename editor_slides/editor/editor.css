@@ -67,8 +67,7 @@ code { background: #EEF1F4; padding: 1px 4px; border-radius: 4px; font-size: .92
 #palco-wrap { flex: 1; min-height: 0; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden }
 #palco-escala { width: 1280px; height: 720px; transform-origin: center center; box-shadow: 0 4px 24px rgba(0,0,0,.16); background: #fff; flex-shrink: 0 }
 #palco { width: 1280px; height: 720px; border: 0; display: block; background: #fff }
-#notas-wrap label { margin-top: 0 }
-#notas { min-height: 64px }
+#notas .rico-area { min-height: 56px; max-height: 120px }
 
 #painel { background: var(--sup); border-left: 1px solid var(--linha); display: flex; flex-direction: column; min-height: 0 }
 .abas { display: flex; border-bottom: 1px solid var(--linha) }
@@ -123,3 +122,36 @@ dialog h2 { margin: 0 0 10px; font-size: 18px }
 #toast.erro { background: var(--erro) }
 .carregando { opacity: .6; pointer-events: none }
 .vazio { color: var(--tx2); text-align: center; padding: 30px 10px }
+
+/* ===== Editor de texto rico ===== */
+.campo { margin: 8px 0 }
+.campo > .rotulo, #notas-wrap > .rotulo { display: block; font-weight: 600; font-size: 12.5px; color: var(--tx2); margin-bottom: 3px }
+.rico { border: 1px solid var(--linha); border-radius: 6px; background: #fff; overflow: hidden }
+.rico:focus-within { border-color: var(--pri); box-shadow: 0 0 0 2px rgba(37,99,235,.15) }
+.rico-barra { display: flex; flex-wrap: wrap; gap: 1px; padding: 3px 4px; background: #F6F8FA; border-bottom: 1px solid var(--linha) }
+.rico-barra button { border: 1px solid transparent; background: transparent; padding: 1px 5px; font-size: 12px; border-radius: 4px; min-width: 24px; justify-content: center; line-height: 1.6 }
+.rico-barra button:hover:not(:disabled) { background: #E8EDF3; border-color: #D5DCE4 }
+.rico-barra button.on { background: #E8F0FE; border-color: #BFD3FB; color: var(--pri-e) }
+.rico-barra code { background: none; padding: 0; font-size: 11px }
+.rico-esp { flex: 1 }
+.mk-amostra { background: linear-gradient(transparent 50%, #FDE68A 50%); font-weight: 700 }
+.rico-area { padding: 6px 8px; min-height: 44px; max-height: 260px; overflow: auto; outline: none; font-size: 13.5px; line-height: 1.45; word-break: break-word }
+.rico-area.compacto { min-height: 30px; padding: 4px 8px }
+.rico-area:empty::before { content: attr(data-placeholder); color: #9AA5B1 }
+.rico-area p { margin: 0 0 4px }
+.rico-area ul, .rico-area ol { margin: 2px 0 4px; padding-left: 20px }
+.rico-area .mk { background: linear-gradient(transparent 55%, #CBE7D3 55%); font-weight: 600 }
+.rico-area code { font-size: .9em }
+.rico-area a { color: var(--pri-e) }
+.rico-fonte { border: 0; border-radius: 0; min-height: 60px; display: block }
+.rico-compacto .rico-barra { padding: 2px 3px }
+.rico-compacto .rico-barra button { padding: 0 5px; min-width: 22px; font-size: 11px }
+.lista-rica { display: flex; flex-direction: column; gap: 6px }
+.item-rico { display: grid; grid-template-columns: 18px 1fr auto; gap: 6px; align-items: start }
+.item-rico .num-item { font-size: 11px; font-weight: 700; color: var(--tx2); text-align: right; padding-top: 7px }
+.item-rico .rico { min-width: 0 }
+.ops-item { display: flex; flex-direction: column; gap: 2px; padding-top: 2px }
+.ops-item button { padding: 0 6px; font-size: 11px; line-height: 1.5 }
+.add-item { align-self: flex-start; font-size: 12.5px }
+.rico-compacto .rico-barra { display: none }
+.rico-compacto:focus-within .rico-barra { display: flex }

@@ -372,13 +372,14 @@ function setNotasHtml(s, v) {
   s.html = raiz.outerHTML; s.editado = true;
 }
 function renderNotas() {
-  const ta = $('#notas'); const s = st.dados && st.dados.slides[st.sel];
-  ta.disabled = !s; ta.value = s ? (s.layout === 'html' ? notasHtml(s) : (s.notas || '')) : '';
+  const box = $('#notas'); box.innerHTML = '';
+  const s = st.dados && st.dados.slides[st.sel];
+  if (!s) { box.append(h('p', { class: 'muted' }, 'Abra uma aula.')); return; }
+  const salvarNotas = debounce(v => {
+    if (s.layout === 'html') { setNotasHtml(s, v); marcar(); } else { s.notas = v; marcar(false); }
+  }, 400);
+  box.append(editorRico(s.layout === 'html' ? notasHtml(s) : (s.notas || ''), salvarNotas, { placeholder: 'O que dizer neste slide…' }));
 }
-$('#notas').addEventListener('input', debounce(() => {
-  const s = st.dados && st.dados.slides[st.sel]; if (!s) return;
-  if (s.layout === 'html') { setNotasHtml(s, $('#notas').value); marcar(); } else { s.notas = $('#notas').value; marcar(false); }
-}, 400));
 
 /* ------------------------------------------------------------ painel: abas */
 function abaAtiva(nome) {
@@ -387,6 +388,110 @@ function abaAtiva(nome) {
   if (nome === 'tema') renderTema(); if (nome === 'aula') renderAula(); if (nome === 'ia') renderIA();
 }
 function renderPainel() { renderPainelSlide(); renderAula(); renderTema(); renderIA(); }
+
+/* ------------------------------------------------------------ editor de texto rico */
+/* Campos HTML ganham uma barra de formatação (negrito, itálico, marca-texto, código,
+   lista, link…) e um botão </> para ver/editar o HTML. Colar insere texto puro. */
+function limparRico(html) {
+  let v = (html || '').replace(/\u200b/g, '');
+  v = v.replace(/<(b|strong|em|i|u|code|span)\b[^>]*>\s*<\/\1>/gi, '');
+  return /^(\s|<br\s*\/?>|&nbsp;)*$/i.test(v) ? '' : v.trim();
+}
+function dentroDe(no, raiz, teste) {
+  for (let n = no && (no.nodeType === 1 ? no : no.parentNode); n && n !== raiz; n = n.parentNode) if (teste(n)) return n;
+  return null;
+}
+function envolver(area, tag, cls) {
+  area.focus();
+  const sel = getSelection(); if (!sel.rangeCount) return;
+  const r = sel.getRangeAt(0); if (!area.contains(r.commonAncestorContainer)) return;
+  const casa = n => n.tagName === tag.toUpperCase() && (!cls || n.classList.contains(cls));
+  const atual = dentroDe(r.commonAncestorContainer, area, casa);
+  if (atual) { // desfaz
+    const pai = atual.parentNode; while (atual.firstChild) pai.insertBefore(atual.firstChild, atual); pai.removeChild(atual);
+  } else {
+    if (r.collapsed) return toast('Selecione o trecho que quer formatar.');
+    const el = document.createElement(tag); if (cls) el.className = cls;
+    el.append(r.extractContents()); r.insertNode(el);
+    sel.removeAllRanges(); const nr = document.createRange(); nr.selectNodeContents(el); sel.addRange(nr);
+  }
+  area.dispatchEvent(new Event('input', { bubbles: true }));
+}
+function editorRico(valor, aoMudar, op = {}) {
+  const area = h('div', { class: 'rico-area' + (op.compacto ? ' compacto' : ''), contenteditable: 'true', spellcheck: 'true', 'data-placeholder': op.placeholder || '' });
+  area.innerHTML = valor || '';
+  const fonte = h('textarea', { class: 'rico-fonte mono', spellcheck: 'false', hidden: true });
+  const emit = () => aoMudar(limparRico(area.innerHTML));
+  area.addEventListener('input', emit);
+  area.addEventListener('paste', e => {
+    e.preventDefault();
+    const t = (e.clipboardData || window.clipboardData).getData('text/plain');
+    document.execCommand('insertText', false, t);
+  });
+  area.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey && op.aoEnter && !dentroDe(getSelection().anchorNode, area, n => n.tagName === 'LI')) { e.preventDefault(); op.aoEnter(); return; }
+    if (e.key === 'Enter' && e.shiftKey) { e.preventDefault(); document.execCommand('insertLineBreak'); }
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); link(); }
+  });
+  fonte.addEventListener('input', () => { area.innerHTML = fonte.value; aoMudar(limparRico(fonte.value)); });
+  const cmd = (c, v) => { area.focus(); document.execCommand(c, false, v); emit(); };
+  const link = () => {
+    area.focus();
+    const a = dentroDe(getSelection().anchorNode, area, n => n.tagName === 'A');
+    const url = prompt('Endereço do link (vazio remove):', a ? a.getAttribute('href') : 'https://');
+    if (url === null) return;
+    if (!url.trim()) { if (a) { const sel = getSelection(); const r = document.createRange(); r.selectNodeContents(a); sel.removeAllRanges(); sel.addRange(r); } cmd('unlink'); return; }
+    if (a) { a.setAttribute('href', url); a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener'); emit(); return; }
+    if (getSelection().isCollapsed) return toast('Selecione o texto do link.');
+    cmd('createLink', url);
+    $$('a[href]', area).forEach(x => { if (!x.target) { x.target = '_blank'; x.rel = 'noopener'; } });
+    emit();
+  };
+  const bt = (rot, titulo, fn, cls) => h('button', { type: 'button', class: cls || '', title: titulo, tabindex: '-1', onmousedown: e => e.preventDefault(), onclick: fn }, rot);
+  const barra = h('div', { class: 'rico-barra' },
+    bt(h('b', {}, 'N'), 'Negrito (Ctrl+B)', () => cmd('bold')),
+    bt(h('i', {}, 'I'), 'Itálico (Ctrl+I)', () => cmd('italic')),
+    bt(h('span', { class: 'mk-amostra' }, 'M'), 'Marca-texto', () => envolver(area, 'span', 'mk')),
+    bt(h('code', {}, 'cód'), 'Código', () => envolver(area, 'code')),
+    op.compacto ? null : bt('•', 'Lista com marcadores', () => cmd('insertUnorderedList')),
+    op.compacto ? null : bt('1.', 'Lista numerada', () => cmd('insertOrderedList')),
+    bt('↵', 'Quebra de linha (Shift+Enter)', () => cmd('insertLineBreak')),
+    bt('🔗', 'Link (Ctrl+K)', link),
+    bt('⌫', 'Limpar formatação do trecho selecionado', () => { cmd('removeFormat'); cmd('unlink'); }),
+    h('span', { class: 'rico-esp' }),
+    bt('</>', 'Ver / editar o HTML', e => {
+      const ver = fonte.hidden; fonte.hidden = !ver; area.hidden = ver;
+      e.currentTarget.classList.toggle('on', ver);
+      if (ver) { fonte.value = limparRico(area.innerHTML); fonte.style.height = Math.max(60, area.offsetHeight + 10) + 'px'; fonte.focus(); } else area.focus();
+    }, 'rico-html'));
+  return h('div', { class: 'rico' + (op.compacto ? ' rico-compacto' : '') }, barra, area, fonte);
+}
+function campoRotulo(rot, ...filhos) { return h('div', { class: 'campo' }, h('span', { class: 'rotulo' }, rot), ...filhos); }
+const LISTAS_SIMPLES = ['linhas_classe', 'cabecalho_classe'];
+function listaRica(itens, aoMudar, rot) {
+  const box = h('div', { class: 'lista-rica' });
+  const lista = (itens || []).slice();
+  const salvar = () => aoMudar(lista.filter(x => x !== undefined));
+  const redesenhar = (foco) => {
+    box.innerHTML = '';
+    lista.forEach((it, i) => {
+      const ed = editorRico(it, v => { lista[i] = v; salvar(); }, {
+        compacto: true, placeholder: 'Item ' + (i + 1),
+        aoEnter: () => { lista.splice(i + 1, 0, ''); salvar(); redesenhar(i + 1); }
+      });
+      const mov = d => { const j = i + d; if (j < 0 || j >= lista.length) return; [lista[i], lista[j]] = [lista[j], lista[i]]; salvar(); redesenhar(j); };
+      box.append(h('div', { class: 'item-rico' }, h('span', { class: 'num-item' }, i + 1), ed,
+        h('div', { class: 'ops-item' },
+          h('button', { type: 'button', title: 'Subir', onclick: () => mov(-1) }, '↑'),
+          h('button', { type: 'button', title: 'Descer', onclick: () => mov(1) }, '↓'),
+          h('button', { type: 'button', class: 'perigo', title: 'Remover item', onclick: () => { lista.splice(i, 1); salvar(); redesenhar(); } }, '✕'))));
+    });
+    box.append(h('button', { type: 'button', class: 'add-item', onclick: () => { lista.push(''); salvar(); redesenhar(lista.length - 1); } }, '+ Adicionar item'));
+    if (foco !== undefined) { const a = $$('.rico-area', box)[foco]; if (a) a.focus(); }
+  };
+  redesenhar();
+  return campoRotulo(h('span', {}, rot, ' ', h('span', { class: 'muted' }, '— Enter cria um novo item; Shift+Enter quebra a linha')), box);
+}
 
 /* ------------------------------------------------------------ formulários genéricos */
 function campoEl(c, base, onAlterar) {
@@ -397,12 +502,14 @@ function campoEl(c, base, onAlterar) {
     case 'texto': case 'proporcao':
       return h('label', {}, rot, h('input', { value: v || '', placeholder: c.padrao || '', oninput: e => alterar(e.target.value) }));
     case 'html':
-      return h('label', {}, rot, h('textarea', { rows: 2, value: v || '', oninput: e => alterar(e.target.value) }));
+      return campoRotulo(rot, editorRico(v, val => alterar(val)));
     case 'codigo':
       return h('label', {}, rot, h('textarea', { class: 'mono', rows: 6, value: v || '', spellcheck: 'false', oninput: e => alterar(e.target.value) }));
     case 'lista':
-      return h('label', {}, rot + ' (um por linha)', h('textarea', { rows: Math.min(8, Math.max(2, (v || []).length + 1)), value: (v || []).join('\n'),
-        oninput: e => alterar(e.target.value.split('\n').map(x => x.trim()).filter(Boolean)) }));
+      if (LISTAS_SIMPLES.includes(c.nome))
+        return h('label', {}, rot + ' (um por linha)', h('textarea', { rows: Math.min(8, Math.max(2, (v || []).length + 1)), value: (v || []).join('\n'),
+          oninput: e => alterar(e.target.value.split('\n').map(x => x.trim())) }));
+      return listaRica(v, val => alterar(val.filter(x => x !== '' || false)), rot);
     case 'selecao': {
       const sel = h('select', { onchange: e => alterar(e.target.value) });
       for (const [k, r] of Object.entries(c.opcoes)) sel.append(h('option', { value: k }, r));
