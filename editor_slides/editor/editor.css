@@ -155,3 +155,21 @@ dialog h2 { margin: 0 0 10px; font-size: 18px }
 .add-item { align-self: flex-start; font-size: 12.5px }
 .rico-compacto .rico-barra { display: none }
 .rico-compacto:focus-within .rico-barra { display: flex }
+
+/* ===== Importar PDF ===== */
+dialog.largo { width: min(1060px, 96vw) }
+.erro-caixa { border-color: #F5B5AE; background: #FEF3F2; color: #7A271A }
+.pdf-paginas { max-height: 42vh; overflow: auto; border: 1px solid var(--linha); border-radius: 8px; margin: 6px 0 }
+.pdf-pag { display: grid; grid-template-columns: 72px 1fr; gap: 8px; padding: 8px 10px; border-bottom: 1px solid var(--linha) }
+.pdf-pag:last-child { border-bottom: 0 }
+.pdf-txt { min-width: 0; font-size: 13px }
+.pdf-imgs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px }
+.pdf-img { position: relative; display: inline-block; margin: 0 }
+.pdf-img img { height: 56px; max-width: 110px; object-fit: contain; border: 1px solid var(--linha); border-radius: 4px; background: #F3F4F6; display: block }
+.pdf-img input { position: absolute; top: 2px; left: 2px; width: auto; margin: 0 }
+.pdf-opcoes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; align-items: end }
+.pdf-previa { display: grid; grid-template-columns: 300px 1fr; gap: 12px; align-items: start }
+.pdf-lista { list-style: none; margin: 0; padding: 0; max-height: 360px; overflow: auto; border: 1px solid var(--linha); border-radius: 8px }
+.pdf-lista li { display: flex; gap: 6px; align-items: flex-start; padding: 6px 8px; cursor: pointer; border-bottom: 1px solid var(--linha); font-size: 13px }
+.pdf-lista li.on { background: #E8F0FE }
+.pdf-lista input { width: auto; margin-top: 3px }

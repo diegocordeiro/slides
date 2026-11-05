@@ -19,7 +19,7 @@ LLM     ?=
 SHELL := /bin/bash
 .DEFAULT_GOAL := ajuda
 
-.PHONY: ajuda listar index checar servir publicar acompanhar site status limpar editor gerar importar verificar
+.PHONY: ajuda listar index checar servir publicar acompanhar site status limpar editor gerar importar verificar instalar-pdf
 
 ajuda:
 	@echo "Slides IFPI — alvos disponíveis:"
@@ -28,6 +28,7 @@ ajuda:
 	@echo "  make gerar         gera as aulas a partir dos apresentacao.json (estado editor)"
 	@echo "  make importar      importa aulas feitas à mão para o editor (não altera os originais)"
 	@echo "  make verificar     confere se as aulas importadas reproduzem o HTML publicado"
+	@echo "  make instalar-pdf  instala o PyMuPDF (para importar aulas em PDF no editor)"
 	@echo "  make listar        lista as aulas detectadas (inclusive pastas novas)"
 	@echo "  make index         regenera o index.html a partir das aulas"
 	@echo "  make checar        valida as referências de todas as aulas"
@@ -51,6 +52,10 @@ importar:
 
 verificar:
 	@$(PY) editor_slides/gerar_slides.py --verificar
+
+instalar-pdf:
+	@$(PY) -m pip install --user -r editor_slides/requirements.txt || $(PY) -m pip install --user --break-system-packages -r editor_slides/requirements.txt
+	@$(PY) -c "import pymupdf; print('PyMuPDF instalado:', pymupdf.VersionBind)"
 
 listar:
 	@$(PY) scripts/gerar_index.py --listar

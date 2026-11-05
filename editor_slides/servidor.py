@@ -30,6 +30,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(AQUI), "scripts"))
 
 from motor import render, validar  # noqa: E402
 from llm import provedores, acoes  # noqa: E402
+from motor import pdf as mpdf  # noqa: E402
 import importar_aula  # noqa: E402
 
 RAIZ = render.RAIZ
@@ -246,7 +247,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def _corpo(self) -> dict:
         n = int(self.headers.get("Content-Length") or 0)
-        if n > 60 * 1024 * 1024:
+        if n > 90 * 1024 * 1024:
             raise ErroUsuario("requisição grande demais")
         return json.loads(self.rfile.read(n).decode("utf-8") or "{}") if n else {}
 
@@ -298,6 +299,9 @@ class Handler(BaseHTTPRequestHandler):
                                    "tema_vars": vars_do_tema(cj, d), "imagens": listar_imagens(cj)})
             if caminho == "/api/imagens":
                 return self._json({"imagens": listar_imagens(caminho_json(q.get("c")))})
+            if caminho == "/api/pdf/status":
+                ok, msg = mpdf.disponivel()
+                return self._json({"ok": ok, "msg": msg})
             if caminho == "/api/git":
                 return self._json(estado_git())
             return self.send_error(404)
@@ -373,6 +377,37 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json(checar())
             if caminho == "/api/publicar":
                 return self._publicar(e)
+            if caminho == "/api/pdf/enviar":
+                ok, msg = mpdf.disponivel()
+                if not ok:
+                    raise ErroUsuario(msg)
+                bruto = base64.b64decode((e.get("dados") or "").split(",", 1)[-1])
+                if not bruto.startswith(b"%PDF"):
+                    raise ErroUsuario("o arquivo não parece ser um PDF")
+                if len(bruto) > 60 * 1024 * 1024:
+                    raise ErroUsuario("PDF maior que 60 MB")
+                try:
+                    r = mpdf.extrair(bruto, os.path.basename(e.get("nome") or "aula.pdf"))
+                except RuntimeError as ex:
+                    raise ErroUsuario(str(ex))
+                for p in r["paginas"]:  # a interface só precisa de um trecho do texto
+                    p["caracteres"] = len(p["texto"])
+                    p["texto"] = p["texto"][:400]
+                r["url_cache"] = "/r/" + rel(mpdf.pasta(r["token"])) + "/"
+                return self._json(r)
+            if caminho == "/api/pdf/planejar":
+                return self._json({"lotes": mpdf.planejar(mpdf.carregar(e.get("token")), e.get("paginas") or [])})
+            if caminho == "/api/pdf/aplicar":
+                cj = caminho_json(e.get("c"))
+                mapa = mpdf.copiar_para_aula(e.get("token"), os.path.dirname(cj), e.get("arquivos") or [])
+                mpdf.apagar(e.get("token"))
+                return self._json({"mapa": mapa})
+            if caminho == "/api/pdf/descartar":
+                try:
+                    mpdf.apagar(e.get("token"))
+                except ValueError:
+                    pass
+                return self._json({"ok": True})
             if caminho == "/api/llm":
                 return self._llm(e)
             return self.send_error(404)
@@ -432,6 +467,7 @@ def main() -> int:
     ap.add_argument("--sem-navegador", action="store_true")
     a = ap.parse_args()
     provedores.carregar_env()
+    mpdf.limpar_antigos()
     if a.llm:
         if a.llm not in provedores.config()["provedores"]:
             print("Provedor de LLM desconhecido: %s" % a.llm)

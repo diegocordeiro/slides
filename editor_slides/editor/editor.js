@@ -63,9 +63,10 @@ function tituloSlide(s) {
   if (!s) return '';
   if (s.layout === 'html') {
     const m = /class="slhd"[\s\S]*?<h2[^>]*>([\s\S]*?)<\/h2>/.exec(s.html || '') || /<h1[^>]*>([\s\S]*?)<\/h1>/.exec(s.html || '') || /<h2[^>]*>([\s\S]*?)<\/h2>/.exec(s.html || '');
-    return m ? txt(m[1]) : '(slide HTML)';
+    const alt = /<img[^>]*\balt="([^"]+)"/.exec(s.html || '');
+    return m ? txt(m[1]) : alt ? txt(alt[1]) : '(slide HTML)';
   }
-  return txt(s.titulo) || (CAT.layouts[s.layout] || {}).rotulo || s.layout;
+  return txt(s.titulo) || (s.layout === 'imagem' && txt(s.alt)) || (CAT.layouts[s.layout] || {}).rotulo || s.layout;
 }
 
 /* ------------------------------------------------------------ histórico e salvamento */
@@ -836,6 +837,11 @@ function renderIA() {
   const ped = h('textarea', { id: 'ia-pedido', rows: 3, placeholder: legado() ? 'Ex.: slide comparando HD e SSD, no mesmo estilo dos outros' : 'Ex.: slide com 3 cartões sobre os tipos de memória' });
   box.append(h('h3', {}, 'Novo slide'), ped, h('div', { class: 'linha-bts' }, h('button', { class: 'primario', onclick: () => iaNovoSlide(ped.value) }, '✦ Criar slide após o atual')));
 
+  // Aula em PDF
+  box.append(h('h3', {}, 'Aula em PDF'),
+    h('p', { class: 'muted' }, 'Carregue uma aula que você elaborou em PDF: o LLM adapta o conteúdo ao template desta apresentação (com prévia antes de inserir).'),
+    h('div', { class: 'linha-bts' }, h('button', { class: 'primario', onclick: abrirPdf }, '✦ Importar aula de um PDF…')));
+
   // Aula completa
   if (!legado()) {
     const f = { tema: h('input', { value: txt((st.dados.meta || {}).titulo) }), publico: h('input', { value: 'estudantes do curso técnico' }),
@@ -946,6 +952,191 @@ async function iaAlt() {
     }
     else if (s.layout === 'html') { im.el.setAttribute('alt', r.alt); s.html = serializar(slideEl); s.editado = true; marcar(); }
   }, true]]);
+}
+
+/* ------------------------------------------------------------ importar aula em PDF */
+const PDF = { r: null, cancelado: false, slides: [], aplicado: false };
+const parafusoPdf = txt => h('p', { class: 'muted' }, txt);
+function slidesParaPrevia(slides) {
+  if (!PDF.r) return slides;
+  return JSON.parse(JSON.stringify(slides).split('img/pdf-').join(PDF.r.url_cache + 'pdf-'));
+}
+async function descartarPdf() {
+  if (PDF.r && !PDF.aplicado) { try { await api('/api/pdf/descartar', { token: PDF.r.token }); } catch (e) { } }
+  PDF.r = null; PDF.slides = []; PDF.cancelado = true;
+}
+async function abrirPdf() {
+  if (!st.dados) return;
+  await descartarPdf();
+  PDF.aplicado = false; PDF.cancelado = false;
+  const d = $('#d-pdf'); const corpo = $('#pdf-corpo'); const acoes = $('#pdf-acoes');
+  d.onclose = () => descartarPdf();
+  corpo.innerHTML = ''; acoes.innerHTML = '';
+  $('#pdf-titulo').textContent = 'Importar aula de um PDF — 1. Arquivo';
+  d.showModal();
+  let status = { ok: false, msg: '' };
+  try { status = await api('/api/pdf/status'); } catch (e) { status.msg = e.message; }
+  const prov = (LLM.provedores.find(p => p.nome === st.provedor) || {});
+  corpo.append(
+    h('p', {}, 'Escolha o PDF da sua aula. O texto e as imagens são extraídos no seu computador; depois você escolhe as páginas e o LLM ',
+      h('b', {}, 'adapta'), ' o conteúdo ao template (reorganiza, divide páginas densas e leva detalhes para o roteiro).'),
+    h('div', { class: 'caixa' }, '🔒 O texto das páginas escolhidas será enviado ao provedor ', h('b', {}, prov.rotulo || st.provedor),
+      '. O PDF fica numa pasta temporária fora do git e é apagado quando você termina.'));
+  if (!status.ok) {
+    corpo.append(h('div', { class: 'caixa erro-caixa' }, h('b', {}, 'Falta o PyMuPDF. '), status.msg));
+    acoes.append(h('button', { onclick: () => d.close() }, 'Fechar'));
+    return;
+  }
+  const inp = h('input', { type: 'file', accept: 'application/pdf,.pdf' });
+  corpo.append(h('label', {}, 'Arquivo PDF', inp), h('p', { class: 'muted' }, status.msg));
+  acoes.append(h('button', { onclick: () => d.close() }, 'Cancelar'));
+  inp.onchange = async () => {
+    const f = inp.files[0]; if (!f) return;
+    corpo.append(parafusoPdf('Lendo ' + f.name + '…')); inp.disabled = true;
+    try {
+      const b64 = await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(f); });
+      PDF.r = await api('/api/pdf/enviar', { nome: f.name, dados: b64 });
+      revisarPdf();
+    } catch (e) { toast(e.message, true); inp.disabled = false; }
+  };
+}
+function intervalo(txt, max) {
+  const set = new Set();
+  for (const parte of (txt || '').split(/[,;\s]+/).filter(Boolean)) {
+    const m = /^(\d+)(?:-(\d+))?$/.exec(parte); if (!m) continue;
+    let a = +m[1], b = +(m[2] || m[1]); if (a > b) [a, b] = [b, a];
+    for (let k = Math.max(1, a); k <= Math.min(max, b); k++) set.add(k);
+  }
+  return set;
+}
+function revisarPdf() {
+  const r = PDF.r; const corpo = $('#pdf-corpo'); const acoes = $('#pdf-acoes');
+  $('#pdf-titulo').textContent = 'Importar aula de um PDF — 2. Revisar';
+  corpo.innerHTML = ''; acoes.innerHTML = '';
+  const nTexto = r.paginas.filter(p => !p.sem_texto).length;
+  const nImg = r.paginas.reduce((n, p) => n + p.imagens.length, 0);
+  corpo.append(h('p', {}, h('b', {}, r.nome), ' — ', r.total_paginas + ' página(s), ' + nImg + ' imagem(ns) aproveitável(is)',
+    r.paginas.some(p => p.sem_texto) ? ', ' + r.paginas.filter(p => p.sem_texto).length + ' página(s) sem texto (entram como slide de imagem inteira)' : '', '.'));
+  const faixa = h('input', { value: '1-' + r.total_paginas, title: 'Ex.: 1-5, 8, 10-12' });
+  const lista = h('div', { class: 'pdf-paginas' });
+  const marcarFaixa = () => { const set = intervalo(faixa.value, r.total_paginas); $$('input[data-pag]', lista).forEach(c => c.checked = set.has(+c.dataset.pag)); atualizar(); };
+  faixa.oninput = marcarFaixa;
+  for (const p of r.paginas) {
+    const imgs = h('div', { class: 'pdf-imgs' });
+    for (const im of p.imagens) imgs.append(h('label', { class: 'pdf-img', title: im.arquivo + ' — ' + im.largura + '×' + im.altura },
+      h('input', { type: 'checkbox', checked: true, 'data-img': im.arquivo }), h('img', { src: r.url_cache + im.arquivo, alt: '' })));
+    if (p.render) imgs.append(h('span', { class: 'pdf-img' }, h('img', { src: r.url_cache + p.render, alt: '' })));
+    lista.append(h('div', { class: 'pdf-pag' },
+      h('label', { class: 'chk' }, h('input', { type: 'checkbox', checked: true, 'data-pag': p.numero, onchange: atualizar }), h('b', {}, 'p. ' + p.numero)),
+      h('div', { class: 'pdf-txt' },
+        p.sem_texto ? h('span', { class: 'selo importada' }, 'sem texto → slide de imagem inteira') : h('span', {}, h('b', {}, p.titulo || ''), h('br'), h('small', { class: 'muted' }, (p.texto || '').slice(p.titulo.length, 220).replace(/\s+/g, ' ') + '… (' + p.caracteres + ' caracteres)')),
+        imgs)));
+  }
+  const alvo = h('input', { type: 'number', min: 1, max: 200, value: Math.max(1, Math.round(nTexto * 1.3)) });
+  const roteiro = h('input', { type: 'checkbox', checked: true });
+  const onde = h('select', {}, h('option', { value: 'depois' }, 'Após o slide atual'), h('option', { value: 'fim' }, 'No final da apresentação'),
+    h('option', { value: 'substituir' }, 'Substituir todos os slides'));
+  if (legado()) onde.value = 'fim';
+  const est = h('p', { class: 'muted' });
+  function atualizar() {
+    const pags = $$('input[data-pag]', lista).filter(c => c.checked).map(c => +c.dataset.pag);
+    const chars = r.paginas.filter(p => pags.includes(p.numero)).reduce((n, p) => n + p.caracteres, 0);
+    est.textContent = pags.length + ' página(s) selecionada(s) · ~' + Math.round(chars / 3.2 + 1500 * Math.max(1, Math.ceil(pags.length / 8))).toLocaleString('pt-BR') + ' tokens de entrada estimados';
+  }
+  corpo.append(h('label', {}, 'Páginas (intervalo)', faixa), lista,
+    h('div', { class: 'pdf-opcoes' },
+      h('label', {}, 'Nº aproximado de slides', alvo),
+      h('label', {}, 'Inserir', onde),
+      h('label', { class: 'chk' }, roteiro, 'Escrever o roteiro de fala')),
+    ...(legado() ? [h('p', { class: 'muted' }, 'Aula importada: os slides serão criados em HTML no mesmo estilo dos slides desta aula.')] : []), est);
+  atualizar();
+  acoes.append(h('button', { onclick: () => $('#d-pdf').close() }, 'Cancelar'),
+    h('button', { class: 'primario', onclick: () => {
+      const pags = $$('input[data-pag]', lista).filter(c => c.checked).map(c => +c.dataset.pag);
+      if (!pags.length) return toast('Selecione ao menos uma página.', true);
+      const imgs = $$('input[data-img]', lista).filter(c => c.checked).map(c => c.dataset.img);
+      converterPdf(pags, imgs, +alvo.value || 1, roteiro.checked, onde.value);
+    } }, '✦ Converter com IA'));
+}
+async function converterPdf(pags, imgs, alvo, roteiro, onde) {
+  const r = PDF.r; const corpo = $('#pdf-corpo'); const acoes = $('#pdf-acoes');
+  $('#pdf-titulo').textContent = 'Importar aula de um PDF — 3. Convertendo';
+  corpo.innerHTML = ''; acoes.innerHTML = '';
+  PDF.cancelado = false; PDF.slides = [];
+  const prog = h('progress', { max: 1, value: 0, style: 'width:100%' }); const msg = parafusoPdf('Planejando…'); const erros = h('div');
+  corpo.append(prog, msg, erros);
+  acoes.append(h('button', { onclick: () => { PDF.cancelado = true; msg.textContent = 'Cancelando após o lote atual…'; } }, 'Cancelar'));
+  let lotes;
+  try { lotes = (await api('/api/pdf/planejar', { token: r.token, paginas: pags })).lotes; } catch (e) { msg.textContent = e.message; return; }
+  const pagsTexto = lotes.filter(l => l.tipo === 'texto').reduce((n, l) => n + l.paginas.length, 0) || 1;
+  const exemplos = legado() ? st.dados.slides.filter(x => x.layout === 'html').slice(Math.max(0, st.sel - 1), st.sel + 2).map(x => x.html) : [];
+  prog.max = lotes.length;
+  for (let k = 0; k < lotes.length; k++) {
+    if (PDF.cancelado) break;
+    const l = lotes[k];
+    if (l.tipo === 'imagem') {
+      const src = 'img/' + l.arquivo, alt = 'Página ' + l.pagina + ' de ' + r.nome;
+      PDF.slides.push({ slide: legado()
+        ? { layout: 'html', editado: true, html: '<div class="sl" style="padding:0;background:#fff"><img src="' + src + '" alt="' + alt.replace(/"/g, '&quot;') + '" style="width:100%;height:100%;object-fit:contain;display:block"></div>' }
+        : { layout: 'imagem', imagem: src, alt, notas: '' }, imagens: [l.arquivo], paginas: [l.pagina] });
+      prog.value = k + 1; continue;
+    }
+    msg.textContent = 'Lote ' + (k + 1) + ' de ' + lotes.length + ': páginas ' + l.paginas[0] + '–' + l.paginas[l.paginas.length - 1] + ' (consultando ' + st.provedor + '…)';
+    try {
+      const res = await api('/api/llm', { acao: 'pdf_lote', provedor: st.provedor, modelo: st.modelo || null, c: st.c, entrada: {
+        token: r.token, paginas: l.paginas, imagens_ok: imgs, roteiro, legado: legado(), exemplos,
+        slides_alvo: Math.max(1, Math.round(alvo * l.paginas.length / pagsTexto)),
+        dados: { meta: st.dados.meta } } });
+      if (res.uso_sessao) LLM.uso = res.uso_sessao;
+      res.slides.forEach(sl => PDF.slides.push({ slide: sl, imagens: res.imagens_usadas, paginas: res.paginas }));
+    } catch (e) {
+      erros.append(h('p', { style: 'color:#B42318' }, 'Páginas ' + l.paginas.join(', ') + ': ' + e.message));
+    }
+    prog.value = k + 1;
+  }
+  previaPdf(onde);
+}
+async function previaPdf(onde) {
+  const corpo = $('#pdf-corpo'); const acoes = $('#pdf-acoes');
+  const erros = $$('p', corpo).filter(p => p.style.color);
+  $('#pdf-titulo').textContent = 'Importar aula de um PDF — 4. Prévia';
+  corpo.innerHTML = ''; acoes.innerHTML = '';
+  erros.forEach(e => corpo.append(e));
+  if (!PDF.slides.length) { corpo.append(h('p', { class: 'vazio' }, 'Nenhum slide foi gerado.')); acoes.append(h('button', { onclick: () => $('#d-pdf').close() }, 'Fechar')); return; }
+  const marcados = PDF.slides.map(() => true);
+  const fr = h('iframe', { title: 'Prévia' }); let atual = 0;
+  const lista = h('ol', { class: 'pdf-lista' });
+  const mostrar = () => {
+    const doc = fr.contentDocument; if (doc) $$('.sl', doc).forEach((s, k) => s.classList.toggle('ac', k === atual));
+    $$('li', lista).forEach((li, k) => li.classList.toggle('on', k === atual));
+  };
+  PDF.slides.forEach((x, i) => lista.append(h('li', { onclick: () => { atual = i; mostrar(); } },
+    h('input', { type: 'checkbox', checked: true, onclick: e => e.stopPropagation(), onchange: e => { marcados[i] = e.target.checked; botao.textContent = 'Inserir ' + marcados.filter(Boolean).length + ' slide(s)'; } }),
+    h('span', {}, tituloSlide(x.slide), h('small', { class: 'muted' }, '  ' + (x.paginas.length > 1 ? 'págs. ' + x.paginas[0] + '–' + x.paginas[x.paginas.length - 1] : 'pág. ' + x.paginas[0]))))));
+  corpo.append(h('p', { class: 'muted' }, PDF.slides.length + ' slide(s) gerado(s). Clique para ver; desmarque o que não quiser. Depois de inserir, tudo continua editável (e Ctrl+Z desfaz).'),
+    h('div', { class: 'pdf-previa' }, lista, h('div', { class: 'previa-mini' }, fr)));
+  const dados = clone(st.dados); dados.slides = slidesParaPrevia(PDF.slides.map(x => x.slide));
+  try { const r = await api('/api/previa', { c: st.c, dados }); fr.onload = mostrar; fr.src = r.url; } catch (e) { toast(e.message, true); }
+  const botao = h('button', { class: 'primario', onclick: () => aplicarPdf(marcados, onde) }, 'Inserir ' + PDF.slides.length + ' slide(s)');
+  acoes.append(h('button', { onclick: () => $('#d-pdf').close() }, 'Descartar'), botao);
+}
+async function aplicarPdf(marcados, onde) {
+  const escolhidos = PDF.slides.filter((_, i) => marcados[i]);
+  if (!escolhidos.length) return toast('Nenhum slide marcado.', true);
+  let texto = JSON.stringify(escolhidos.map(x => x.slide));
+  const usados = [...new Set((texto.match(/img\/(pdf-[\w-]+\.(?:png|jpg))/g) || []).map(s => s.slice(4)))];
+  try {
+    const r = await api('/api/pdf/aplicar', { c: st.c, token: PDF.r.token, arquivos: usados });
+    PDF.aplicado = true;
+    for (const [nome, final] of Object.entries(r.mapa)) texto = texto.split('img/' + nome).join(final);
+  } catch (e) { return toast(e.message, true); }
+  const novos = JSON.parse(texto);
+  if (onde === 'substituir') { if (!confirm('Substituir todos os slides atuais? (Ctrl+Z desfaz)')) return; st.dados.slides = novos; st.sel = 0; }
+  else if (onde === 'fim') { st.sel = st.dados.slides.length; st.dados.slides.push(...novos); }
+  else { st.dados.slides.splice(st.sel + 1, 0, ...novos); st.sel = st.sel + 1; }
+  st.bloco = null; PDF.r = null;
+  $('#d-pdf').close(); marcar(); renderTudo();
+  toast(novos.length + ' slide(s) inseridos a partir do PDF. O PDF temporário foi apagado.');
 }
 
 /* ------------------------------------------------------------ atalhos e início */

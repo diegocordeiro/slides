@@ -147,6 +147,25 @@ HTML dos vizinhos); reescrever/resumir/deixar mais didático/corrigir o texto se
 fala; converter um slide HTML em blocos ou sugerir um layout melhor; texto alternativo de imagens.
 Toda sugestão aparece numa prévia para **aceitar ou descartar**.
 
+#### Importar uma aula em PDF
+
+Na aba **IA → Importar aula de um PDF** você carrega uma aula que elaborou em PDF e o LLM a **adapta** ao
+template da apresentação aberta (reorganiza, divide páginas densas, transforma texto em tópicos/cartões/tabelas
+e leva os detalhes para o roteiro de fala). Passo a passo:
+
+1. **Arquivo** — o texto e as imagens são extraídos no seu computador com o PyMuPDF
+   (instale uma vez com `make instalar-pdf`). Logos repetidas e ícones pequenos são descartados.
+2. **Revisar** — escolha as páginas (ex.: `1-5, 8`), as imagens a aproveitar, o nº aproximado de slides,
+   onde inserir e se quer o roteiro de fala. Aparece uma estimativa de tokens.
+   Páginas **sem texto** (escaneadas ou só imagem) viram slides de **imagem inteira**, sem passar pelo LLM.
+3. **Conversão** — em lotes de até 8 páginas, com o sumário do documento para manter a coerência
+   (dá para cancelar). O LLM só pode usar as imagens extraídas.
+4. **Prévia** — navegue pelos slides gerados, desmarque o que não quiser e insira. Só as imagens usadas vão para
+   `img/` da aula (`pdf-p03-1.png`…). Nas aulas importadas, os slides saem em HTML no mesmo estilo da aula.
+
+O PDF fica em `editor_slides/.cache/pdf/` (fora do git) e é **apagado** ao terminar ou cancelar
+(sobras com mais de 24 h também são removidas). O texto das páginas escolhidas é enviado ao provedor de IA.
+
 Provedores e modelos ficam em `editor_slides/llm.config.json` (sem chaves):
 
 | Provedor | Tipo | Modelos (rápido / forte) |

@@ -7,7 +7,10 @@
       "tipo": "openai_compat",
       "base_url": "https://api.deepseek.com",
       "chave_env": "DEEPSEEK_API_KEY",
-      "modelos": {"rapido": "deepseek-flash", "forte": "deepseek-v4-pro"},
+      "modelos": {
+        "rapido": "deepseek-flash",
+        "forte": "deepseek-v4-pro"
+      },
       "json_nativo": true,
       "imagens": false
     },
@@ -16,7 +19,10 @@
       "tipo": "openai_compat",
       "base_url": "https://api.openai.com/v1",
       "chave_env": "OPENAI_API_KEY",
-      "modelos": {"rapido": "gpt-4o-mini", "forte": "gpt-4o"},
+      "modelos": {
+        "rapido": "gpt-4o-mini",
+        "forte": "gpt-4o"
+      },
       "json_nativo": true,
       "imagens": true
     },
@@ -25,7 +31,10 @@
       "tipo": "anthropic",
       "base_url": "https://api.anthropic.com",
       "chave_env": "ANTHROPIC_API_KEY",
-      "modelos": {"rapido": "claude-haiku-4-5", "forte": "claude-sonnet-4-5"},
+      "modelos": {
+        "rapido": "claude-haiku-4-5",
+        "forte": "claude-sonnet-4-5"
+      },
       "json_nativo": false,
       "imagens": true
     },
@@ -34,7 +43,10 @@
       "tipo": "openai_compat",
       "base_url": "http://localhost:11434/v1",
       "chave_env": null,
-      "modelos": {"rapido": "llama3.1", "forte": "llama3.1"},
+      "modelos": {
+        "rapido": "llama3.1",
+        "forte": "llama3.1"
+      },
       "json_nativo": true,
       "imagens": false
     }
@@ -46,7 +58,8 @@
     "slide_legado": "forte",
     "reescrever": "rapido",
     "roteiro": "rapido",
-    "alt": "rapido"
+    "alt": "rapido",
+    "pdf_lote": "forte"
   },
   "temperatura": 0.4,
   "max_tokens": 8000,

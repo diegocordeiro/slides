@@ -212,5 +212,84 @@ def slide_legado(e: dict, prov=None, modelo=None) -> dict:
     return {"html": validar.limpar_html(obj["html"]).strip(), **info}
 
 
+def _lote_pdf(e: dict) -> tuple:
+    """Monta o texto do lote, o sumário do documento e a lista de imagens permitidas."""
+    from motor import pdf
+    resumo = pdf.carregar(e.get("token", ""))
+    por_num = {p["numero"]: p for p in resumo["paginas"]}
+    pags = [por_num[int(n)] for n in e.get("paginas") or [] if int(n) in por_num]
+    if not pags:
+        raise provedores.ErroLLM("Nenhuma página selecionada neste lote")
+    ok = set(e.get("imagens_ok") or [])
+    imagens = [im for p in pags for im in p["imagens"] if im["arquivo"] in ok]
+    sumario = "\n".join("p.%d: %s" % (p["numero"], p["titulo"] or "(sem texto)") for p in resumo["paginas"])
+    corpo = "\n\n".join("=== Página %d ===\n%s" % (p["numero"], p["texto"]) for p in pags)
+    lista_img = "\n".join("- img/%s (página %d, %dx%d px)" % (im["arquivo"], im["pagina"], im["largura"], im["altura"]) for im in imagens) or "(nenhuma)"
+    return resumo, pags, imagens, sumario, corpo, lista_img
+
+
+def pdf_lote(e: dict, prov=None, modelo=None) -> dict:
+    """Converte um lote de páginas do PDF em slides (estruturados ou, em aula importada, HTML no mesmo estilo)."""
+    resumo, pags, imagens, sumario, corpo, lista_img = _lote_pdf(e)
+    permitidas = {"img/" + im["arquivo"] for im in imagens}
+    alvo = e.get("slides_alvo") or max(1, round(len(pags) * 1.3))
+    instr = (_ler("pdf.md").replace("{{ALVO}}", str(alvo))
+             .replace("{{ROTEIRO}}", "" if e.get("roteiro", True) else " (deixe \"notas\" vazio: o professor não quer roteiro)"))
+    meta = (e.get("dados") or {}).get("meta") or {}
+    contexto = ("Documento: %s (%d páginas). Aula de destino: %s\nSumário do documento (primeira linha de cada página):\n%s"
+                % (resumo.get("titulo") or resumo.get("nome"), resumo["total_paginas"], meta.get("titulo", ""), sumario[:4000]))
+    if e.get("legado"):
+        exemplos = "\n\n".join(e.get("exemplos") or [])[:10000]
+        sistema = _ler("sistema.md") + "\n\n" + instr
+        usuario = ("%s\n\nA aula de destino usa HTML próprio. Crie cada slide como um único <div class=\"sl\"> no MESMO padrão de marcação "
+                   "dos exemplos, reutilizando só classes que aparecem neles; o roteiro vai num <div class=\"nt\"> se os exemplos tiverem. "
+                   "Figuras: <img src=\"img/...\" alt=\"...\"> só com as imagens disponíveis.\n\nExemplos de slides da aula:\n%s\n\n"
+                   "Imagens disponíveis:\n%s\n\nPáginas deste lote:\n%s\n\n"
+                   'Responda com {"slides": [{"html": "<div class=\\"sl\\">...</div>"}, ...]}.') % (contexto, exemplos, lista_img, corpo)
+
+        def ok(o):
+            lst = o.get("slides") if isinstance(o, dict) else None
+            if not isinstance(lst, list) or not lst:
+                return ["o JSON deve ter 'slides' (lista)"]
+            return ["slides[%d]: 'html' deve começar com <div class=\"sl\">" % i for i, x in enumerate(lst)
+                    if not (isinstance(x, dict) and isinstance(x.get("html"), str) and re.match(r'\s*<div[^>]*class="sl[\s"]', x["html"]))]
+        obj, info = _chamar("pdf_lote", sistema, usuario, prov, modelo, ok)
+        slides = []
+        for x in obj["slides"]:
+            h = validar.limpar_html(x["html"]).strip()
+            h = re.sub(r'<img\b[^>]*\bsrc="(?!(%s)")[^"]*"[^>]*>' % "|".join(re.escape(p) for p in permitidas) if permitidas else r"<img\b[^>]*>", "", h)
+            slides.append({"layout": "html", "editado": True, "html": h})
+    else:
+        sistema = _ler("sistema.md") + "\n\n" + formato() + "\n\n" + instr
+        usuario = "%s\n\nImagens disponíveis:\n%s\n\nPáginas deste lote:\n%s\n\nResponda com {\"slides\": [ ... ]}." % (contexto, lista_img, corpo)
+
+        def ok(o):
+            erros = _slides_ok(o)
+            if erros:
+                return erros
+            ruins = [src for src in _srcs(o["slides"]) if src not in permitidas]
+            return ["imagem fora da lista: %s (use só as imagens disponíveis)" % ", ".join(sorted(set(ruins)))] if ruins else []
+        obj, info = _chamar("pdf_lote", sistema, usuario, prov, modelo, ok)
+        slides = [validar.normalizar_slide(x) for x in obj["slides"]]
+    usadas = sorted({src[4:] for src in _srcs(slides)} | {m for x in slides if x.get("layout") == "html"
+                                                          for m in re.findall(r'src="img/(pdf-[^"]+)"', x.get("html", ""))})
+    return {"slides": slides, "imagens_usadas": usadas, "paginas": [p["numero"] for p in pags], **info}
+
+
+def _srcs(obj) -> list:
+    """Todos os caminhos de imagem usados em slides estruturados."""
+    achados = []
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            if k in ("src", "imagem") and isinstance(v, str) and v:
+                achados.append(v)
+            else:
+                achados += _srcs(v)
+    elif isinstance(obj, list):
+        for v in obj:
+            achados += _srcs(v)
+    return achados
+
+
 ACOES = {"gerar_aula": gerar_aula, "gerar_slide": gerar_slide, "reescrever": reescrever, "roteiro": roteiro,
-         "alt": alt, "converter": converter, "slide_legado": slide_legado}
+         "alt": alt, "converter": converter, "slide_legado": slide_legado, "pdf_lote": pdf_lote}
