@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="generator" content="editor_slides">
+  <title>Informática Aplicada · Aula 05 — Prática de Digitação</title>
+  <link rel="stylesheet" href="aula05.css">
+</head>
+
+<body data-limite="50">
+  <header class="tb">
+    <div class="tb-left">
+      <h2>Informática Aplicada · Aula 05</h2>
+    </div>
+    <div class="tb-right">
+      <div class="fz" aria-label="Tamanho do texto">
+        <button onclick="fz(-1)" title="Diminuir tamanho da fonte">A−</button>
+        <span id="fzpct">100%</span>
+        <button onclick="fz(1)" title="Aumentar tamanho da fonte">A+</button>
+      </div>
+      <button class="bpb" id="bnt" onclick="toggleNotas()" title="Mostrar/ocultar roteiro de fala (tecla N)">Roteiro</button>
+      <button class="tmr" id="tmr" onclick="if(event.shiftKey){tmrDefinirLimite()}else{toggleTimer()}" ondblclick="resetTimer()" title="Iniciar/pausar (T) · duplo clique zera · Shift+clique define o limite">00:00 / 50:00</button>
+      <button class="bpb" id="bp" onclick="openPresenter()">Modo apresentador</button>
+      <span class="ct" id="ctr">1 / 14</span>
+      <span class="modo-tag">APRESENTAÇÃO</span>
+    </div>
+  </header>
+  <div class="fita"></div>
+  <div class="sc">
+
+    <!-- SLIDE 1 — Prática de Digitação -->
+    <div class="sl" id="s1">
+      <div class="capa">
+        <div class="esq">
+          <div class="rot">Informática Aplicada · Aula 05</div>
+          <h1>Prática de Digitação</h1>
+          <div class="faixa"></div>
+          <div class="sub">Conheça o teclado, posicione as mãos corretamente e treine sua digitação no Windows 11.</div>
+          <div class="meta"><span>Teclado ABNT2</span><span>Atalhos do Windows 11</span><span>Typing.com</span></div>
+        </div>
+        <div class="dir"><img src="img/capa-teclado.svg" alt=""></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> Abrir a aula lembrando que digitar bem é uma habilidade prática: depende de conhecer as teclas, posicionar as mãos e treinar. Perguntar quem digita olhando para o teclado.</div>
+    </div>
+
+    <!-- SLIDE 2 — O que vamos estudar e praticar -->
+    <div class="sl" id="s2">
+      <div class="slhd"><span class="num">2</span><h2>O que vamos estudar e praticar</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1.25fr">
+          <div class="col"><div class="card vd grow"><h3>Teclado QWERTY · padrão ABNT2</h3><div class="txt-bloco"><p></p><p></p><span style="font-size: 1.3em;"><p><ul><li>Definição: Padrão mundial de teclas, nomeado pelas 6 primeiras letras superiores.</li><li>Origem (1868): Criado para evitar o travamento das hastes nas antigas máquinas de escrever.<br><b>Por que usamos até hoje?</b></li><li>Domínio de mercado: Popularizado pela Remington (1873) e consolidado por cursos de datilografia, virou um hábito global.</li><li>Inércia tecnológica: Mesmo com opções mais ergonômicas (como o modelo Dvorak), o custo de reaprendizado torna a troca impraticável.</li><li>No Brasil, os computadores com Windows 11 usam o teclado <strong>QWERTY</strong> no padrão <strong>ABNT2</strong>: é o que tem a tecla <strong>Ç</strong>.</li></ul></p><p>Nesta aula você vai conhecer as teclas, aprender a posição correta das mãos e começar a praticar.</p></span><p></p><p></p></div><div style="display:contents"><div class="fileira"><kbd class="tc">Q</kbd><kbd class="tc">W</kbd><kbd class="tc">E</kbd><kbd class="tc">R</kbd><kbd class="tc">T</kbd><kbd class="tc">Y</kbd></div></div></div></div>
+          <div class="col"><div class="lins"><div class="lin"><div><b>Teclas principais</b><span>Esc, Backspace, Delete, Tab, Enter, Ctrl e outras</span></div></div><div class="lin"><div><b>Tipos de teclas</b><span>Os grupos do teclado e para que servem</span></div></div><div class="lin"><div><b>Posição das mãos</b><span>Fileira guia: A S D F · J K L Ç</span></div></div><div class="lin"><div><b>Atalhos do Windows 11</b><span>Combinações que economizam tempo</span></div></div><div class="lin"><div><b>Prática no Typing.com</b><span>Cadastro na turma e primeiras lições</span></div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> Apresentar o roteiro. Destacar que o teclado brasileiro (ABNT2) tem o Ç e que isso muda a posição da mão direita em relação aos tutoriais em inglês.</div>
+    </div>
+
+    <!-- SLIDE 3 — Teclas principais -->
+    <div class="sl" id="s3">
+      <div class="slhd"><span class="num">3</span><h2>Teclas principais</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="col"><div class="card"><div style="display:contents"><div class="tecla-cab"><kbd class="tc">Esc</kbd><h3>Escape (sair)</h3></div></div><div class="txt-bloco">Cancela uma ação, fecha menus e caixas de diálogo.</div></div><div class="card"><div style="display:contents"><div class="tecla-cab"><kbd class="tc lg">Tab ⇥</kbd><h3>Tab</h3></div></div><div class="txt-bloco">Avança o cursor e passa de um campo para o outro em formulários.</div></div></div>
+          <div class="col"><div class="card"><div style="display:contents"><div class="tecla-cab"><kbd class="tc lg">⟵ Backspace</kbd><h3>Backspace</h3></div></div><div class="txt-bloco">Apaga o caractere <strong>à esquerda</strong> do cursor.</div></div><div class="card"><div style="display:contents"><div class="tecla-cab"><kbd class="tc lg">Enter ↵</kbd><h3>Enter</h3></div></div><div class="txt-bloco">Confirma uma ação ou começa uma nova linha no texto.</div></div></div>
+          <div class="col"><div class="card"><div style="display:contents"><div class="tecla-cab"><kbd class="tc">Del</kbd><h3>Delete</h3></div></div><div class="txt-bloco">Apaga o caractere <strong>à direita</strong> do cursor ou o item selecionado.</div></div><div class="card"><div style="display:contents"><div class="tecla-cab"><kbd class="tc">Ctrl</kbd><h3>Control (controle)</h3></div></div><div class="txt-bloco">Combinada com outras teclas, forma atalhos (ex.: <strong>Ctrl + C</strong>).</div></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Mostrar cada tecla no teclado real. Fazer a turma testar Backspace × Delete com o cursor no meio de uma palavra no Bloco de Notas.</div>
+    </div>
+
+    <!-- SLIDE 4 — Mais teclas importantes -->
+    <div class="sl" id="s4">
+      <div class="slhd"><span class="num">4</span><h2>Mais teclas importantes</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="col"><div class="card vd"><div style="display:contents"><div class="tecla-cab"><kbd class="tc" title="Tecla Windows"><svg class="win" viewBox="0 0 20 20" aria-hidden="true"><rect width="9.3" height="9.3"/><rect x="10.7" width="9.3" height="9.3"/><rect y="10.7" width="9.3" height="9.3"/><rect x="10.7" y="10.7" width="9.3" height="9.3"/></svg></kbd><h3>Tecla Windows</h3></div></div><div class="txt-bloco">Abre o menu <strong>Iniciar</strong> do Windows 11 e faz parte de vários atalhos.</div></div><div class="card"><div style="display:contents"><div class="tecla-cab"><kbd class="tc lg">⇧ Shift</kbd><h3>Shift</h3></div></div><div class="txt-bloco">Segure para digitar <strong>maiúsculas</strong> e o símbolo de cima das teclas.</div></div></div>
+          <div class="col"><div class="card"><div style="display:contents"><div class="tecla-cab"><kbd class="tc">Alt</kbd><h3>Alt (alternativa)</h3></div></div><div class="txt-bloco">Usada em atalhos, como <strong>Alt + Tab</strong> para alternar entre janelas.</div></div><div class="card"><div style="display:contents"><div class="tecla-cab"><kbd class="tc lg">Caps Lock</kbd><h3>Caps Lock</h3></div></div><div class="txt-bloco">Liga e desliga as letras maiúsculas (repare na luz indicadora).</div></div></div>
+          <div class="col"><div class="card"><div style="display:contents"><div class="tecla-cab"><kbd class="tc espaco">&nbsp;</kbd><h3>Barra de espaço</h3></div></div><div class="txt-bloco">Insere um espaço entre as palavras. Use os <strong>polegares</strong>.</div></div><div class="card"><div style="display:contents"><div class="tecla-cab"><span class="setas"><kbd class="tc s-up">↑</kbd><kbd class="tc">←</kbd><kbd class="tc">↓</kbd><kbd class="tc">→</kbd></span><h3>Setas</h3></div></div><div class="txt-bloco">Movem o cursor pelo texto e pela tela.</div></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Pedir que todos apertem a tecla Windows e vejam o menu Iniciar abrir. Mostrar a diferença entre segurar o Shift e ativar o Caps Lock.</div>
+    </div>
+
+    <!-- SLIDE 5 — Tipos de teclas -->
+    <div class="sl" id="s5">
+      <div class="slhd"><span class="num">5</span><h2>Tipos de teclas</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div class="fig"><img src="img/teclado-tipos.svg" alt="Teclado ABNT2 com as teclas coloridas por tipo: alfanuméricas, função, especiais, navegação e numéricas"></div></div></div>
+        <div style="display:contents"><div class="legenda-tipos"><div class="lt lt-alfa"><b>Alfanuméricas</b><span>letras, números, símbolos e espaço</span></div><div class="lt lt-func"><b>Função F1–F12</b><span>F1 ajuda · F2 renomeia · F5 atualiza</span></div><div class="lt lt-esp"><b>Especiais</b><span>Ctrl, Alt, Shift, Windows, Tab, Enter</span></div><div class="lt lt-nav"><b>Navegação</b><span>setas, Home, End, Page Up/Down</span></div><div class="lt lt-num"><b>Numéricas</b><span>teclado lateral para números</span></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Percorrer as cores do teclado. Lembrar que em <strong>notebooks</strong> o teclado numérico costuma não existir e as teclas F1–F12 podem exigir a tecla <strong>Fn</strong>.</div>
+    </div>
+
+    <!-- SLIDE 6 — Posicionamento correto das mãos -->
+    <div class="sl" id="s6">
+      <div class="slhd"><span class="num">6</span><h2>Posicionamento correto das mãos</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1.35fr 1fr">
+          <div class="col"><div class="fig"><img src="img/maos-fileira-guia.svg" alt="Teclado com as teclas coloridas por dedo; a fileira guia A S D F e J K L Ç aparece em cor forte"></div><div class="cap">Cor forte = fileira guia, onde os dedos descansam.</div></div>
+          <div class="col"><div class="lins"><div class="lin"><div><b>Posição inicial</b><span>Esquerda em <strong>A S D F</strong>; direita em <strong>J K L Ç</strong>.</span></div></div><div class="lin"><div><b>Guias de relevo</b><span><strong>F</strong> e <strong>J</strong> têm um pequeno relevo: ache-os sem olhar.</span></div></div><div class="lin"><div><b>Polegares</b><span>Ficam apoiados sobre a barra de espaço.</span></div></div><div class="lin"><div><b>Dedos curvados</b><span>Dedos levemente curvados e pulsos relaxados.</span></div></div><div class="lin"><div><b>Olhe para a tela</b><span>Evite olhar para o teclado enquanto digita.</span></div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~4 min.</strong> Pedir que todos fechem os olhos e encontrem F e J pelo relevo. No ABNT2 o mínimo direito fica no <strong>Ç</strong> (não no ponto e vírgula, como nos tutoriais em inglês).</div>
+    </div>
+
+    <!-- SLIDE 7 — Atalhos úteis do Windows 11 -->
+    <div class="sl" id="s7">
+      <div class="slhd"><span class="num">7</span><h2>Atalhos úteis do Windows 11</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><table class="tb2 fill"><tr><th>Atalho</th><th>O que faz</th></tr><tr><td><span class="combo"><kbd class="tc">Ctrl</kbd><i>+</i><kbd class="tc">C</kbd></span></td><td>Copiar</td></tr><tr><td><span class="combo"><kbd class="tc">Ctrl</kbd><i>+</i><kbd class="tc">V</kbd></span></td><td>Colar</td></tr><tr><td><span class="combo"><kbd class="tc">Ctrl</kbd><i>+</i><kbd class="tc">Z</kbd></span></td><td>Desfazer a última ação</td></tr><tr><td><span class="combo"><kbd class="tc">Alt</kbd><i>+</i><kbd class="tc">Tab</kbd></span></td><td>Alternar entre janelas abertas</td></tr></table></div>
+          <div class="col"><table class="tb2 fill"><tr><th>Atalho</th><th>O que faz</th></tr><tr><td><span class="combo"><kbd class="tc" title="Tecla Windows"><svg class="win" viewBox="0 0 20 20" aria-hidden="true"><rect width="9.3" height="9.3"/><rect x="10.7" width="9.3" height="9.3"/><rect y="10.7" width="9.3" height="9.3"/><rect x="10.7" y="10.7" width="9.3" height="9.3"/></svg></kbd><i>+</i><kbd class="tc">E</kbd></span></td><td>Abrir o Explorador de Arquivos</td></tr><tr><td><span class="combo"><kbd class="tc" title="Tecla Windows"><svg class="win" viewBox="0 0 20 20" aria-hidden="true"><rect width="9.3" height="9.3"/><rect x="10.7" width="9.3" height="9.3"/><rect y="10.7" width="9.3" height="9.3"/><rect x="10.7" y="10.7" width="9.3" height="9.3"/></svg></kbd><i>+</i><kbd class="tc">V</kbd></span></td><td>Histórico da área de transferência</td></tr><tr><td><span class="combo"><kbd class="tc" title="Tecla Windows"><svg class="win" viewBox="0 0 20 20" aria-hidden="true"><rect width="9.3" height="9.3"/><rect x="10.7" width="9.3" height="9.3"/><rect y="10.7" width="9.3" height="9.3"/><rect x="10.7" y="10.7" width="9.3" height="9.3"/></svg></kbd><i>+</i><kbd class="tc">Shift</kbd><i>+</i><kbd class="tc">S</kbd></span></td><td>Capturar parte da tela</td></tr><tr><td><span class="combo"><kbd class="tc" title="Tecla Windows"><svg class="win" viewBox="0 0 20 20" aria-hidden="true"><rect width="9.3" height="9.3"/><rect x="10.7" width="9.3" height="9.3"/><rect y="10.7" width="9.3" height="9.3"/><rect x="10.7" y="10.7" width="9.3" height="9.3"/></svg></kbd><i>+</i><kbd class="tc">.</kbd></span></td><td>Painel de emojis e símbolos</td></tr></table></div></div>
+        <div class="bege"><h3>Dica</h3><div class="txt-bloco">A tecla Windows é a do <strong>logotipo</strong>, entre <strong>Ctrl</strong> e <strong>Alt</strong>. Segure a primeira tecla e toque a segunda.</div></div>
+      </div>
+      <div class="nt"><strong>~4 min.</strong> Demonstrar ao vivo: copiar e colar um texto, Alt + Tab entre duas janelas, Win + Shift + S para capturar a tela e Win + . para inserir um emoji.</div>
+    </div>
+
+    <!-- SLIDE 8 — Benefícios da digitação correta -->
+    <div class="sl" id="s8">
+      <div class="slhd"><span class="num">8</span><h2>Benefícios da digitação correta</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr 1fr 1fr">
+          <div class="col"><div class="card vd grow"><div style="display:contents"><div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><h3>Produtividade</h3></div><div class="txt-bloco">Trabalhe mais rápido e com menos esforço.</div></div></div>
+          <div class="col"><div class="card vd grow"><div style="display:contents"><div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-9.3-9A5.2 5.2 0 0 1 12 6.6 5.2 5.2 0 0 1 21.3 12C19 16.6 12 21 12 21z"/></svg></div><h3>Saúde das mãos</h3></div><div class="txt-bloco">Evite lesões por esforço repetitivo (<strong>LER</strong>).</div></div></div>
+          <div class="col"><div class="card vd grow"><div style="display:contents"><div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a9 9 0 0 0-9 9h3a6 6 0 0 1 12 0h3a9 9 0 0 0-9-9zm4.2 4.4-5 5a1.4 1.4 0 1 0 2 2l4.4-5.6z"/></svg></div><h3>Velocidade</h3></div><div class="txt-bloco">Digite mais palavras por minuto (<strong>PPM</strong>).</div></div></div>
+          <div class="col"><div class="card vd grow"><div style="display:contents"><div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="12" r="1.8"/></svg></div><h3>Precisão</h3></div><div class="txt-bloco">Cometa menos erros ao digitar.</div></div></div></div>
+        <div class="faixa-az"><span><b>Pratique regularmente!</b> Em poucas semanas você vai notar grande melhora na velocidade e na precisão.</span></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Relacionar com o dia a dia do técnico: relatórios, planilhas e formulários. Comentar a LER e a importância da postura.</div>
+    </div>
+
+    <!-- SLIDE 9 — Vamos praticar! -->
+    <div class="sl" id="s9">
+      <div class="slhd"><span class="num">9</span><h2>Vamos praticar!</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:0.8fr 1.2fr">
+          <div class="col"><div class="kpi" style="grid-template-rows:repeat(2,1fr);"><div><b>15 min</b><span><span style="font-size: 1.3em;">por dia já fazem grande diferença</span></span></div><div><b>Precisão → velocidade</b><span><span style="font-size: 1.3em;">primeiro acertar, depois acelerar</span></span></div></div></div>
+          <div class="col"><div class="lins"><div class="lin"><div><b>Comece devagar</b><span><span style="font-size: 1.3em;">Priorize a <strong>precisão</strong> antes da velocidade. Digite cada letra com atenção.</span></span></div></div><div class="lin"><div><b>Olhe para a tela</b><span><span style="font-size: 1.3em;">Mantenha o olhar no <strong>monitor</strong>, não no teclado.</span></span></div></div><div class="lin"><div><b>Pratique diariamente</b><span><span style="font-size: 1.3em;">Crie o hábito: a <span class="mk">constância</span> é o que traz resultado.</span></span></div></div><div class="lin"><div><b>Acompanhe seu progresso</b><span><span style="font-size: 1.3em;">Veja sua velocidade (<strong>PPM</strong>) e sua precisão no Typing.com.</span></span></div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Pouco tempo todos os dias faz mais diferença do que muito tempo de vez em quando.</div>
+    </div>
+
+    <!-- SLIDE 10 — Acesse a turma no Typing.com -->
+    <div class="sl" id="s10">
+      <div class="slhd"><span class="num">10</span><h2>Acesse a turma no Typing.com</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:0.7fr 1.3fr">
+          <div class="col"><div class="fig"><img src="img/typing-logo.png" alt="Logotipo do Typing.com"></div><div class="cap">Plataforma gratuita de treino de digitação</div></div>
+          <div class="col"><div class="lins"><div class="lin"><div><b>Abra o navegador</b><span><span style="font-size: 1.3em;">No Windows 11, use o <strong>Microsoft Edge</strong> (ou o Chrome) e acesse: <a href="https://www.typing.com/join#6AECEA71273B7" target="_blank" rel="noopener">https://www.typing.com/join#6AECEA71273B7</a><br></span><a class="blink" href="https://www.typing.com/br/student/join/signup#68A12FFE3D37F" target="_blank" rel="noopener"></a></span></div></div><div class="lin"><div><b>Entre na classe</b><span><span style="font-size: 1.3em;">Cadastre-se na classe do professor <strong>Diego Cordeiro</strong> usando sua <span class="mk">matrícula</span>.</span></span></div></div><div class="lin"><div><b>Comece os exercícios</b><span><span style="font-size: 1.3em;">Escolha o <strong>Nível Iniciante</strong> e siga as instruções da plataforma.</span></span></div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Projetar o link e esperar todos abrirem. Conferir se o código da turma é o da classe correta.</div>
+    </div>
+
+    <!-- SLIDE 11 — Como acessar a plataforma -->
+    <div class="sl" id="s11">
+      <div class="slhd"><span class="num">11</span><h2>Como acessar a plataforma</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1.6fr 1fr">
+          <div class="col"><div class="fig"><img src="img/typing-passo1-entrar-classe.jpg" alt="Tela do Typing.com com o seletor de idioma e as opções de usar conta existente ou criar uma nova"></div></div>
+          <div class="col"><div class="chips"><span>Passo 1 de 3</span></div><h3 class="tit-bloco">Entrar na classe</h3><ol class="passos"><li><span style="font-size: 1.3em;">Clique em <strong>EN</strong>, no canto superior direito, e mude o idioma para <strong>Português</strong>.</span></li><li><span style="font-size: 1.3em;">Se ainda não tiver conta, clique em <strong>Create a New Typing.com Account</strong>.</span></li></ol></div></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> Mostrar onde fica a troca de idioma.</div>
+    </div>
+
+    <!-- SLIDE 12 — Como acessar a plataforma -->
+    <div class="sl" id="s12">
+      <div class="slhd"><span class="num">12</span><h2>Como acessar a plataforma</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="chips"><span>Passo 2 de 3</span></div><h3 class="tit-bloco">Cadastro do aluno</h3><ol class="passos"><li><span style="font-size: 1.3em;">Confira se aparece a classe de <strong>Diego Cordeiro</strong>.</span></li><li><span style="font-size: 1.3em;">Em <strong>Nome de usuário</strong>, digite sua <span class="mk">matrícula</span>.</span></li><li><span style="font-size: 1.3em;">Escolha uma senha e anote-a em local seguro.</span></li><li><span style="font-size: 1.3em;">Clique em <strong>Cadastrar-se</strong>.</span></li></ol></div>
+          <div class="col"><div class="fig"><img src="img/typing-passo2-cadastro.jpg" alt="Formulário de cadastro do aluno no Typing.com com nome de usuário, senha e botão Cadastrar-se"></div></div></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Reforçar: usuário = matrícula. Pedir que anotem a senha.</div>
+    </div>
+
+    <!-- SLIDE 13 — Como acessar a plataforma -->
+    <div class="sl" id="s13">
+      <div class="slhd"><span class="num">13</span><h2>Como acessar a plataforma</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1.5fr 1fr">
+          <div class="col"><div class="fig"><img src="img/typing-passo3-licoes.jpg" alt="Tela de lições do Typing.com com o Nível Iniciante e a lição 1: J, F e Barra de Espaço"></div></div>
+          <div class="col"><div class="chips"><span>Passo 3 de 3</span></div><h3 class="tit-bloco">Começar as lições</h3><ol class="passos"><li><span style="font-size: 1.3em;">Em <strong>Aprender a Digitar</strong>, selecione <strong>Nível Iniciante</strong>.</span></li><li><span style="font-size: 1.3em;">Na lição 1 (<strong>J, F e Barra de Espaço</strong>), clique em <strong>Iniciar</strong>.</span></li><li><span style="font-size: 1.3em;">Cumpra a meta diária de <span class="mk">15 minutos</span>.</span></li></ol></div></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> Circular pela sala conferindo a posição das mãos nas primeiras lições.</div>
+    </div>
+
+    <!-- SLIDE 14 — Alguma dúvida? -->
+    <div class="sl" id="s14">
+      <div class="secao-slide"><div class="divisor"><div class="ov"></div><div class="in"><div class="rot">Fim da aula 05</div><h1>Alguma dúvida?</h1><div class="txt-bloco"><p></p><span style="font-size: 1.3em;"><p>Este é o momento de esclarecer qualquer questão sobre o que vimos até agora.</p><p>Não tenha receio de perguntar: <em>as dúvidas de hoje são o conhecimento de amanhã!</em></p><p style="margin-top:18px"><span class="tdiv">Prof. Diego Cordeiro</span></p></span><p style="margin-top:18px"></p></div></div></div></div>
+      <div class="nt"><strong>~3 min.</strong> Abrir para perguntas. Combinar a prática diária de 15 minutos no Typing.com como tarefa.</div>
+    </div>
+
+  </div>
+  <nav class="ctr" aria-label="Navegação da apresentação">
+    <button class="bz" id="bprev" onclick="pv()">Anterior</button>
+    <div class="dots" id="dots" role="group" aria-label="Ir para o slide"></div>
+    <button class="bv" id="bnext" onclick="nx()">Próximo</button>
+    <button class="bp" id="bexp" onclick="exportarPDF()" title="Exportar os slides em PDF — na janela de impressão escolha 'Salvar como PDF', margens 'Nenhuma' e mantenha 'Gráficos de fundo'">Exportar PDF</button>
+  </nav>
+  <script src="aula05.js"></script>
+</body>
+
+</html>

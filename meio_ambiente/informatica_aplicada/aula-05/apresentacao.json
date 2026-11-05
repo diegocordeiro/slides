@@ -1,0 +1,688 @@
+{
+  "versao": 1,
+  "motor": "editor",
+  "estado": "editor",
+  "meta": {
+    "titulo": "Informática Aplicada · Aula 05 — Prática de Digitação",
+    "titulo_barra": "Informática Aplicada · Aula 05",
+    "arquivo": "aula05.html",
+    "cronometro_min": 50,
+    "rodape": "",
+    "numerar": true,
+    "mostrar_pdf": true,
+    "lang": "pt-BR"
+  },
+  "tema": {
+    "base": "ifpi",
+    "vars": {},
+    "logos": {}
+  },
+  "css_extra": "/* ---- teclas (kbd) ---- */\n.tc { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-width:2.3em; height:2.1em; padding:0 .6em;\n  font-family:var(--fonte-tit); font-weight:700; font-size:.95em; line-height:1; color:var(--p); background:#fff;\n  border:1px solid var(--linha-bt); border-bottom:5px solid var(--linha-bt); border-radius:9px; white-space:nowrap; vertical-align:middle }\n.tc.lg { padding:0 .8em }\n.tc.espaco { width:7.5em }\n.tc .win { width:1.05em; height:1.05em; fill:#0078D4 }\n.tecla-cab { display:flex; align-items:center; gap:14px; margin-bottom:10px }\n.tecla-cab h3 { margin:0 !important }\n.card .tecla-cab .tc { font-size:1.05em; height:2.3em }\n.setas { display:inline-grid; grid-template-columns:repeat(3,auto); gap:3px }\n.setas .tc { min-width:1.9em; height:1.7em; padding:0; font-size:.85em }\n.setas .s-up { grid-column:2; grid-row:1 }\n.setas .tc:not(.s-up) { grid-row:2 }\n.combo { display:inline-flex; align-items:center; gap:6px; flex-wrap:nowrap }\n.combo i { font-style:normal; font-weight:800; color:var(--c) }\n.combo .tc { font-size:.85em; height:1.95em }\n.fileira { display:flex; gap:8px; margin-top:auto; padding-top:14px }\n.card.az .fileira .tc { color:var(--az); border-color:var(--destaque); border-bottom-color:var(--destaque) }\n.g .card .txt-bloco p { font-size:var(--fs-corpo) }\n.card .txt-bloco { line-height:1.45 }\n/* ---- slide 5: legenda dos tipos ---- */\n.legenda-tipos { display:grid; grid-template-columns:repeat(5,1fr); gap:10px }\n.legenda-tipos .lt { border-radius:12px; padding:9px 12px; border:1px solid; line-height:1.3 }\n.legenda-tipos .lt b { display:block; font-family:var(--fonte-tit); font-size:15px; margin-bottom:3px }\n.legenda-tipos .lt span { font-size:var(--fs-min) }\n.lt-alfa { background:#EAF3EE; border-color:#9CC7AE !important; color:#1C5A3E }\n.lt-func { background:#FBEFEC; border-color:#E2AFA5 !important; color:#7E3A30 }\n.lt-esp  { background:#E3E9E5; border-color:#9AAEA3 !important; color:#24513C }\n.lt-nav  { background:#F8F0DC; border-color:#DDBF7A !important; color:#7A5A12 }\n.lt-num  { background:#E6EFF5; border-color:#9DBBD0 !important; color:#2D5872 }\n#s5 .fig, #s6 .fig { border:0; padding:0 }\n/* ---- slide 8: ícones ---- */\n.icone { width:52px; height:52px; border-radius:50%; background:#fff; border:1px solid var(--vd-bd); display:flex; align-items:center; justify-content:center; margin-bottom:12px; color:var(--ve) }\n.icone svg { width:28px; height:28px; fill:currentColor }\n#s8 .card h3 { font-size:1.15em; margin:0 0 6px !important; color:var(--vd-tx) }\n/* ---- slide 9: indicador ---- */\n#s9 .kpi b { font-size:2.1em }\n#s9 .kpi > div:last-child b { font-size:1.6em }\n/* ---- passos (11–13) ---- */\n#s11 .col:last-child, #s12 .col:first-child, #s13 .col:last-child { justify-content:center }\n#s11 .chips, #s12 .chips, #s13 .chips { align-self:flex-start }\n#s11 .tit-bloco, #s12 .tit-bloco, #s13 .tit-bloco { font-size:1.3em; margin:2px 0 0 }\n#s10 .fig img { max-height:240px }\n#s3 .card, #s4 .card { flex:1 1 0; justify-content:center; padding:16px 20px }\n#s3 .card .txt-bloco, #s4 .card .txt-bloco { font-size:1.05em }\n#s8 .card { justify-content:center; padding:20px 20px }\n#s8 .icone { width:72px; height:72px; margin-bottom:16px }\n#s8 .icone svg { width:38px; height:38px }\n#s8 .card h3 { font-size:1.35em }\n#s8 .card .txt-bloco { font-size:1.08em }\n#s9 .kpi b { font-size:3.2em }\n#s9 .kpi span { font-size:17px }\n#s7 .tb2 { table-layout:fixed }\n#s7 .tb2 th, #s7 .tb2 td { text-align:left; vertical-align:middle }\n#s7 .tb2 th:first-child, #s7 .tb2 td:first-child { width:46% }\n#s7 .combo .tc { font-size:1em }\n",
+  "slides": [
+    {
+      "layout": "capa",
+      "rotulo": "Informática Aplicada · Aula 05",
+      "titulo": "Prática de Digitação",
+      "subtitulos": [
+        "Conheça o teclado, posicione as mãos corretamente e treine sua digitação no Windows 11."
+      ],
+      "etiquetas": [
+        "Teclado ABNT2",
+        "Atalhos do Windows 11",
+        "Typing.com"
+      ],
+      "imagem": "img/capa-teclado.svg",
+      "notas": "<strong>~1 min.</strong> Abrir a aula lembrando que digitar bem é uma habilidade prática: depende de conhecer as teclas, posicionar as mãos e treinar. Perguntar quem digita olhando para o teclado."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "O que vamos estudar e praticar",
+      "proporcao": "1fr 1.25fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Teclado QWERTY · padrão ABNT2",
+            "html": "<p></p><p></p><span style=\"font-size: 1.3em;\"><p><ul><li>Definição: Padrão mundial de teclas, nomeado pelas 6 primeiras letras superiores.</li><li>Origem (1868): Criado para evitar o travamento das hastes nas antigas máquinas de escrever.<br><b>Por que usamos até hoje?</b></li><li>Domínio de mercado: Popularizado pela Remington (1873) e consolidado por cursos de datilografia, virou um hábito global.</li><li>Inércia tecnológica: Mesmo com opções mais ergonômicas (como o modelo Dvorak), o custo de reaprendizado torna a troca impraticável.</li><li>No Brasil, os computadores com Windows 11 usam o teclado <strong>QWERTY</strong> no padrão <strong>ABNT2</strong>: é o que tem a tecla <strong>Ç</strong>.</li></ul></p><p>Nesta aula você vai conhecer as teclas, aprender a posição correta das mãos e começar a praticar.</p></span><p></p><p></p>",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"fileira\"><kbd class=\"tc\">Q</kbd><kbd class=\"tc\">W</kbd><kbd class=\"tc\">E</kbd><kbd class=\"tc\">R</kbd><kbd class=\"tc\">T</kbd><kbd class=\"tc\">Y</kbd></div>"
+              }
+            ],
+            "destaque": ""
+          }
+        ],
+        [
+          {
+            "tipo": "lins",
+            "itens": [
+              {
+                "titulo": "Teclas principais",
+                "html": "Esc, Backspace, Delete, Tab, Enter, Ctrl e outras"
+              },
+              {
+                "titulo": "Tipos de teclas",
+                "html": "Os grupos do teclado e para que servem"
+              },
+              {
+                "titulo": "Posição das mãos",
+                "html": "Fileira guia: A S D F · J K L Ç"
+              },
+              {
+                "titulo": "Atalhos do Windows 11",
+                "html": "Combinações que economizam tempo"
+              },
+              {
+                "titulo": "Prática no Typing.com",
+                "html": "Cadastro na turma e primeiras lições"
+              }
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min.</strong> Apresentar o roteiro. Destacar que o teclado brasileiro (ABNT2) tem o Ç e que isso muda a posição da mão direita em relação aos tutoriais em inglês."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Teclas principais",
+      "proporcao": "1fr 1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"tecla-cab\"><kbd class=\"tc\">Esc</kbd><h3>Escape (sair)</h3></div>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Cancela uma ação, fecha menus e caixas de diálogo."
+              }
+            ]
+          },
+          {
+            "tipo": "card",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"tecla-cab\"><kbd class=\"tc lg\">Tab ⇥</kbd><h3>Tab</h3></div>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Avança o cursor e passa de um campo para o outro em formulários."
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"tecla-cab\"><kbd class=\"tc lg\">⟵ Backspace</kbd><h3>Backspace</h3></div>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Apaga o caractere <strong>à esquerda</strong> do cursor."
+              }
+            ]
+          },
+          {
+            "tipo": "card",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"tecla-cab\"><kbd class=\"tc lg\">Enter ↵</kbd><h3>Enter</h3></div>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Confirma uma ação ou começa uma nova linha no texto."
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"tecla-cab\"><kbd class=\"tc\">Del</kbd><h3>Delete</h3></div>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Apaga o caractere <strong>à direita</strong> do cursor ou o item selecionado."
+              }
+            ]
+          },
+          {
+            "tipo": "card",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"tecla-cab\"><kbd class=\"tc\">Ctrl</kbd><h3>Control (controle)</h3></div>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Combinada com outras teclas, forma atalhos (ex.: <strong>Ctrl + C</strong>)."
+              }
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~3 min.</strong> Mostrar cada tecla no teclado real. Fazer a turma testar Backspace × Delete com o cursor no meio de uma palavra no Bloco de Notas."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Mais teclas importantes",
+      "proporcao": "1fr 1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"tecla-cab\"><kbd class=\"tc\" title=\"Tecla Windows\"><svg class=\"win\" viewBox=\"0 0 20 20\" aria-hidden=\"true\"><rect width=\"9.3\" height=\"9.3\"/><rect x=\"10.7\" width=\"9.3\" height=\"9.3\"/><rect y=\"10.7\" width=\"9.3\" height=\"9.3\"/><rect x=\"10.7\" y=\"10.7\" width=\"9.3\" height=\"9.3\"/></svg></kbd><h3>Tecla Windows</h3></div>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Abre o menu <strong>Iniciar</strong> do Windows 11 e faz parte de vários atalhos."
+              }
+            ],
+            "variante": "vd"
+          },
+          {
+            "tipo": "card",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"tecla-cab\"><kbd class=\"tc lg\">⇧ Shift</kbd><h3>Shift</h3></div>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Segure para digitar <strong>maiúsculas</strong> e o símbolo de cima das teclas."
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"tecla-cab\"><kbd class=\"tc\">Alt</kbd><h3>Alt (alternativa)</h3></div>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Usada em atalhos, como <strong>Alt + Tab</strong> para alternar entre janelas."
+              }
+            ]
+          },
+          {
+            "tipo": "card",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"tecla-cab\"><kbd class=\"tc lg\">Caps Lock</kbd><h3>Caps Lock</h3></div>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Liga e desliga as letras maiúsculas (repare na luz indicadora)."
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"tecla-cab\"><kbd class=\"tc espaco\">&nbsp;</kbd><h3>Barra de espaço</h3></div>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Insere um espaço entre as palavras. Use os <strong>polegares</strong>."
+              }
+            ]
+          },
+          {
+            "tipo": "card",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"tecla-cab\"><span class=\"setas\"><kbd class=\"tc s-up\">↑</kbd><kbd class=\"tc\">←</kbd><kbd class=\"tc\">↓</kbd><kbd class=\"tc\">→</kbd></span><h3>Setas</h3></div>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Movem o cursor pelo texto e pela tela."
+              }
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~3 min.</strong> Pedir que todos apertem a tecla Windows e vejam o menu Iniciar abrir. Mostrar a diferença entre segurar o Shift e ativar o Caps Lock."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Tipos de teclas",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/teclado-tipos.svg",
+            "alt": "Teclado ABNT2 com as teclas coloridas por tipo: alfanuméricas, função, especiais, navegação e numéricas"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"legenda-tipos\"><div class=\"lt lt-alfa\"><b>Alfanuméricas</b><span>letras, números, símbolos e espaço</span></div><div class=\"lt lt-func\"><b>Função F1–F12</b><span>F1 ajuda · F2 renomeia · F5 atualiza</span></div><div class=\"lt lt-esp\"><b>Especiais</b><span>Ctrl, Alt, Shift, Windows, Tab, Enter</span></div><div class=\"lt lt-nav\"><b>Navegação</b><span>setas, Home, End, Page Up/Down</span></div><div class=\"lt lt-num\"><b>Numéricas</b><span>teclado lateral para números</span></div></div>"
+        }
+      ],
+      "notas": "<strong>~3 min.</strong> Percorrer as cores do teclado. Lembrar que em <strong>notebooks</strong> o teclado numérico costuma não existir e as teclas F1–F12 podem exigir a tecla <strong>Fn</strong>."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Posicionamento correto das mãos",
+      "proporcao": "1.35fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/maos-fileira-guia.svg",
+            "alt": "Teclado com as teclas coloridas por dedo; a fileira guia A S D F e J K L Ç aparece em cor forte",
+            "legenda": "Cor forte = fileira guia, onde os dedos descansam."
+          }
+        ],
+        [
+          {
+            "tipo": "lins",
+            "itens": [
+              {
+                "titulo": "Posição inicial",
+                "html": "Esquerda em <strong>A S D F</strong>; direita em <strong>J K L Ç</strong>."
+              },
+              {
+                "titulo": "Guias de relevo",
+                "html": "<strong>F</strong> e <strong>J</strong> têm um pequeno relevo: ache-os sem olhar."
+              },
+              {
+                "titulo": "Polegares",
+                "html": "Ficam apoiados sobre a barra de espaço."
+              },
+              {
+                "titulo": "Dedos curvados",
+                "html": "Dedos levemente curvados e pulsos relaxados."
+              },
+              {
+                "titulo": "Olhe para a tela",
+                "html": "Evite olhar para o teclado enquanto digita."
+              }
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~4 min.</strong> Pedir que todos fechem os olhos e encontrem F e J pelo relevo. No ABNT2 o mínimo direito fica no <strong>Ç</strong> (não no ponto e vírgula, como nos tutoriais em inglês)."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Atalhos úteis do Windows 11",
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "cabecalho": [
+              "Atalho",
+              "O que faz"
+            ],
+            "linhas": [
+              [
+                "<span class=\"combo\"><kbd class=\"tc\">Ctrl</kbd><i>+</i><kbd class=\"tc\">C</kbd></span>",
+                "Copiar"
+              ],
+              [
+                "<span class=\"combo\"><kbd class=\"tc\">Ctrl</kbd><i>+</i><kbd class=\"tc\">V</kbd></span>",
+                "Colar"
+              ],
+              [
+                "<span class=\"combo\"><kbd class=\"tc\">Ctrl</kbd><i>+</i><kbd class=\"tc\">Z</kbd></span>",
+                "Desfazer a última ação"
+              ],
+              [
+                "<span class=\"combo\"><kbd class=\"tc\">Alt</kbd><i>+</i><kbd class=\"tc\">Tab</kbd></span>",
+                "Alternar entre janelas abertas"
+              ]
+            ],
+            "preencher": true
+          }
+        ],
+        [
+          {
+            "tipo": "tabela",
+            "cabecalho": [
+              "Atalho",
+              "O que faz"
+            ],
+            "linhas": [
+              [
+                "<span class=\"combo\"><kbd class=\"tc\" title=\"Tecla Windows\"><svg class=\"win\" viewBox=\"0 0 20 20\" aria-hidden=\"true\"><rect width=\"9.3\" height=\"9.3\"/><rect x=\"10.7\" width=\"9.3\" height=\"9.3\"/><rect y=\"10.7\" width=\"9.3\" height=\"9.3\"/><rect x=\"10.7\" y=\"10.7\" width=\"9.3\" height=\"9.3\"/></svg></kbd><i>+</i><kbd class=\"tc\">E</kbd></span>",
+                "Abrir o Explorador de Arquivos"
+              ],
+              [
+                "<span class=\"combo\"><kbd class=\"tc\" title=\"Tecla Windows\"><svg class=\"win\" viewBox=\"0 0 20 20\" aria-hidden=\"true\"><rect width=\"9.3\" height=\"9.3\"/><rect x=\"10.7\" width=\"9.3\" height=\"9.3\"/><rect y=\"10.7\" width=\"9.3\" height=\"9.3\"/><rect x=\"10.7\" y=\"10.7\" width=\"9.3\" height=\"9.3\"/></svg></kbd><i>+</i><kbd class=\"tc\">V</kbd></span>",
+                "Histórico da área de transferência"
+              ],
+              [
+                "<span class=\"combo\"><kbd class=\"tc\" title=\"Tecla Windows\"><svg class=\"win\" viewBox=\"0 0 20 20\" aria-hidden=\"true\"><rect width=\"9.3\" height=\"9.3\"/><rect x=\"10.7\" width=\"9.3\" height=\"9.3\"/><rect y=\"10.7\" width=\"9.3\" height=\"9.3\"/><rect x=\"10.7\" y=\"10.7\" width=\"9.3\" height=\"9.3\"/></svg></kbd><i>+</i><kbd class=\"tc\">Shift</kbd><i>+</i><kbd class=\"tc\">S</kbd></span>",
+                "Capturar parte da tela"
+              ],
+              [
+                "<span class=\"combo\"><kbd class=\"tc\" title=\"Tecla Windows\"><svg class=\"win\" viewBox=\"0 0 20 20\" aria-hidden=\"true\"><rect width=\"9.3\" height=\"9.3\"/><rect x=\"10.7\" width=\"9.3\" height=\"9.3\"/><rect y=\"10.7\" width=\"9.3\" height=\"9.3\"/><rect x=\"10.7\" y=\"10.7\" width=\"9.3\" height=\"9.3\"/></svg></kbd><i>+</i><kbd class=\"tc\">.</kbd></span>",
+                "Painel de emojis e símbolos"
+              ]
+            ],
+            "preencher": true
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "destaque",
+          "estilo": "bege",
+          "titulo": "Dica",
+          "html": "A tecla Windows é a do <strong>logotipo</strong>, entre <strong>Ctrl</strong> e <strong>Alt</strong>. Segure a primeira tecla e toque a segunda."
+        }
+      ],
+      "notas": "<strong>~4 min.</strong> Demonstrar ao vivo: copiar e colar um texto, Alt + Tab entre duas janelas, Win + Shift + S para capturar a tela e Win + . para inserir um emoji."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Benefícios da digitação correta",
+      "proporcao": "1fr 1fr 1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"icone\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M13 2 4 14h7l-1 8 9-12h-7z\"/></svg></div><h3>Produtividade</h3>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Trabalhe mais rápido e com menos esforço."
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"icone\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 21s-7-4.4-9.3-9A5.2 5.2 0 0 1 12 6.6 5.2 5.2 0 0 1 21.3 12C19 16.6 12 21 12 21z\"/></svg></div><h3>Saúde das mãos</h3>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Evite lesões por esforço repetitivo (<strong>LER</strong>)."
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"icone\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 4a9 9 0 0 0-9 9h3a6 6 0 0 1 12 0h3a9 9 0 0 0-9-9zm4.2 4.4-5 5a1.4 1.4 0 1 0 2 2l4.4-5.6z\"/></svg></div><h3>Velocidade</h3>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Digite mais palavras por minuto (<strong>PPM</strong>)."
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"icone\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\"/><circle cx=\"12\" cy=\"12\" r=\"5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\"/><circle cx=\"12\" cy=\"12\" r=\"1.8\"/></svg></div><h3>Precisão</h3>"
+              },
+              {
+                "tipo": "texto",
+                "html": "Cometa menos erros ao digitar."
+              }
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "<b>Pratique regularmente!</b> Em poucas semanas você vai notar grande melhora na velocidade e na precisão."
+        }
+      ],
+      "notas": "<strong>~2 min.</strong> Relacionar com o dia a dia do técnico: relatórios, planilhas e formulários. Comentar a LER e a importância da postura."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Vamos praticar!",
+      "proporcao": "0.8fr 1.2fr",
+      "colunas": [
+        [
+          {
+            "tipo": "kpis",
+            "direcao": "vertical",
+            "itens": [
+              {
+                "valor": "15 min",
+                "texto": "<span style=\"font-size: 1.3em;\">por dia já fazem grande diferença</span>"
+              },
+              {
+                "valor": "Precisão → velocidade",
+                "texto": "<span style=\"font-size: 1.3em;\">primeiro acertar, depois acelerar</span>"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "lins",
+            "itens": [
+              {
+                "titulo": "Comece devagar",
+                "html": "<span style=\"font-size: 1.3em;\">Priorize a <strong>precisão</strong> antes da velocidade. Digite cada letra com atenção.</span>"
+              },
+              {
+                "titulo": "Olhe para a tela",
+                "html": "<span style=\"font-size: 1.3em;\">Mantenha o olhar no <strong>monitor</strong>, não no teclado.</span>"
+              },
+              {
+                "titulo": "Pratique diariamente",
+                "html": "<span style=\"font-size: 1.3em;\">Crie o hábito: a <span class=\"mk\">constância</span> é o que traz resultado.</span>"
+              },
+              {
+                "titulo": "Acompanhe seu progresso",
+                "html": "<span style=\"font-size: 1.3em;\">Veja sua velocidade (<strong>PPM</strong>) e sua precisão no Typing.com.</span>"
+              }
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~2 min.</strong> Pouco tempo todos os dias faz mais diferença do que muito tempo de vez em quando."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Acesse a turma no Typing.com",
+      "proporcao": "0.7fr 1.3fr",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/typing-logo.png",
+            "alt": "Logotipo do Typing.com",
+            "legenda": "Plataforma gratuita de treino de digitação"
+          }
+        ],
+        [
+          {
+            "tipo": "lins",
+            "itens": [
+              {
+                "titulo": "Abra o navegador",
+                "html": "<span style=\"font-size: 1.3em;\">No Windows 11, use o <strong>Microsoft Edge</strong> (ou o Chrome) e acesse: <a href=\"https://www.typing.com/join#6AECEA71273B7\" target=\"_blank\" rel=\"noopener\">https://www.typing.com/join#6AECEA71273B7</a><br></span><a class=\"blink\" href=\"https://www.typing.com/br/student/join/signup#68A12FFE3D37F\" target=\"_blank\" rel=\"noopener\"></a>"
+              },
+              {
+                "titulo": "Entre na classe",
+                "html": "<span style=\"font-size: 1.3em;\">Cadastre-se na classe do professor <strong>Diego Cordeiro</strong> usando sua <span class=\"mk\">matrícula</span>.</span>"
+              },
+              {
+                "titulo": "Comece os exercícios",
+                "html": "<span style=\"font-size: 1.3em;\">Escolha o <strong>Nível Iniciante</strong> e siga as instruções da plataforma.</span>"
+              }
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~2 min.</strong> Projetar o link e esperar todos abrirem. Conferir se o código da turma é o da classe correta."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Como acessar a plataforma",
+      "proporcao": "1.6fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/typing-passo1-entrar-classe.jpg",
+            "alt": "Tela do Typing.com com o seletor de idioma e as opções de usar conta existente ou criar uma nova"
+          }
+        ],
+        [
+          {
+            "tipo": "chips",
+            "itens": [
+              "Passo 1 de 3"
+            ]
+          },
+          {
+            "tipo": "titulo",
+            "texto": "Entrar na classe"
+          },
+          {
+            "tipo": "lista",
+            "numerada": true,
+            "itens": [
+              "<span style=\"font-size: 1.3em;\">Clique em <strong>EN</strong>, no canto superior direito, e mude o idioma para <strong>Português</strong>.</span>",
+              "<span style=\"font-size: 1.3em;\">Se ainda não tiver conta, clique em <strong>Create a New Typing.com Account</strong>.</span>"
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min.</strong> Mostrar onde fica a troca de idioma."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Como acessar a plataforma",
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "chips",
+            "itens": [
+              "Passo 2 de 3"
+            ]
+          },
+          {
+            "tipo": "titulo",
+            "texto": "Cadastro do aluno"
+          },
+          {
+            "tipo": "lista",
+            "numerada": true,
+            "itens": [
+              "<span style=\"font-size: 1.3em;\">Confira se aparece a classe de <strong>Diego Cordeiro</strong>.</span>",
+              "<span style=\"font-size: 1.3em;\">Em <strong>Nome de usuário</strong>, digite sua <span class=\"mk\">matrícula</span>.</span>",
+              "<span style=\"font-size: 1.3em;\">Escolha uma senha e anote-a em local seguro.</span>",
+              "<span style=\"font-size: 1.3em;\">Clique em <strong>Cadastrar-se</strong>.</span>"
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "figura",
+            "src": "img/typing-passo2-cadastro.jpg",
+            "alt": "Formulário de cadastro do aluno no Typing.com com nome de usuário, senha e botão Cadastrar-se"
+          }
+        ]
+      ],
+      "notas": "<strong>~2 min.</strong> Reforçar: usuário = matrícula. Pedir que anotem a senha."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Como acessar a plataforma",
+      "proporcao": "1.5fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/typing-passo3-licoes.jpg",
+            "alt": "Tela de lições do Typing.com com o Nível Iniciante e a lição 1: J, F e Barra de Espaço"
+          }
+        ],
+        [
+          {
+            "tipo": "chips",
+            "itens": [
+              "Passo 3 de 3"
+            ]
+          },
+          {
+            "tipo": "titulo",
+            "texto": "Começar as lições"
+          },
+          {
+            "tipo": "lista",
+            "numerada": true,
+            "itens": [
+              "<span style=\"font-size: 1.3em;\">Em <strong>Aprender a Digitar</strong>, selecione <strong>Nível Iniciante</strong>.</span>",
+              "<span style=\"font-size: 1.3em;\">Na lição 1 (<strong>J, F e Barra de Espaço</strong>), clique em <strong>Iniciar</strong>.</span>",
+              "<span style=\"font-size: 1.3em;\">Cumpra a meta diária de <span class=\"mk\">15 minutos</span>.</span>"
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min.</strong> Circular pela sala conferindo a posição das mãos nas primeiras lições."
+    },
+    {
+      "layout": "secao",
+      "rotulo": "Fim da aula 05",
+      "titulo": "Alguma dúvida?",
+      "texto": "<p></p><span style=\"font-size: 1.3em;\"><p>Este é o momento de esclarecer qualquer questão sobre o que vimos até agora.</p><p>Não tenha receio de perguntar: <em>as dúvidas de hoje são o conhecimento de amanhã!</em></p><p style=\"margin-top:18px\"><span class=\"tdiv\">Prof. Diego Cordeiro</span></p></span><p style=\"margin-top:18px\"></p>",
+      "notas": "<strong>~3 min.</strong> Abrir para perguntas. Combinar a prática diária de 15 minutos no Typing.com como tarefa."
+    }
+  ]
+}
