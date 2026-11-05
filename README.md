@@ -112,7 +112,8 @@ make editor            # abre http://127.0.0.1:8765 no navegador (Ctrl+C encerra
   ajusta cores/fontes/tamanhos (variáveis CSS), adiciona suas próprias logos (barra, capa, rodapé, marca d'água)
   e pode salvar o resultado como um tema novo.
 - **Campos de texto com formatação** (corpo, subtítulos, itens de lista, roteiro…) têm um editor integrado:
-  negrito, itálico, marca-texto, código, listas, quebra de linha, link e limpar formatação, além do botão
+  negrito, itálico, marca-texto, código, listas, **tamanho da fonte** (A− / A+, lista de 60% a 300% ou
+  Ctrl+Shift+> / Ctrl+Shift+<, relativo ao tema), quebra de linha, link e limpar formatação, além do botão
   `</>` para ver/editar o HTML. Nas listas, cada item é um editor próprio: Enter cria o próximo item,
   Shift+Enter quebra a linha, ↑ ↓ reordenam. Colar sempre insere texto puro (sem estilos de outros sites).
 - **Imagens** enviadas pelo editor vão para `img/` da aula com nome em minúsculas e hífens (o `make checar` agradece).

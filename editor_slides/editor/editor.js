@@ -418,6 +418,57 @@ function envolver(area, tag, cls) {
   }
   area.dispatchEvent(new Event('input', { bubbles: true }));
 }
+/* Tamanho da fonte (como no Word): envolve o trecho em <span style="font-size:N em">.
+   Usa "em" (relativo) para acompanhar o tema, o zoom A−/A+ da apresentação e o PDF. */
+const TAMANHOS = [0.6, 0.75, 0.85, 1, 1.15, 1.3, 1.5, 1.75, 2, 2.5, 3];
+const ehSpanTam = n => n.tagName === 'SPAN' && n.style && n.style.fontSize && /em$/.test(n.style.fontSize);
+function tamanhoAtual(area) {
+  const sel = getSelection(); if (!sel.rangeCount) return 1;
+  let t = 1;
+  for (let n = sel.getRangeAt(0).commonAncestorContainer; n && n !== area; n = n.parentNode)
+    if (n.nodeType === 1 && ehSpanTam(n)) t *= parseFloat(n.style.fontSize) || 1;
+  return Math.round(t * 100) / 100;
+}
+function aplicarTamanho(area, alvo) {
+  area.focus();
+  const sel = getSelection(); if (!sel.rangeCount) return;
+  const r = sel.getRangeAt(0);
+  if (!area.contains(r.commonAncestorContainer)) return;
+  if (r.collapsed) return toast('Selecione o trecho cujo tamanho você quer mudar.');
+  const atual = tamanhoAtual(area);
+  let novo = alvo;
+  if (alvo === 'mais') novo = TAMANHOS.find(x => x > atual + 0.001) || TAMANHOS[TAMANHOS.length - 1];
+  if (alvo === 'menos') novo = [...TAMANHOS].reverse().find(x => x < atual - 0.001) || TAMANHOS[0];
+  // span de tamanho que já envolve exatamente a seleção: só ajusta o valor
+  const dono = dentroDe(r.commonAncestorContainer, area, ehSpanTam);
+  if (dono && dono.textContent === r.toString()) {
+    const fora = (atual / (parseFloat(dono.style.fontSize) || 1));
+    const v = Math.round(novo / fora * 1000) / 1000;
+    if (Math.abs(v - 1) < 0.001) { const pai = dono.parentNode; while (dono.firstChild) pai.insertBefore(dono.firstChild, dono); pai.removeChild(dono); }
+    else { dono.style.fontSize = v + 'em'; const nr = document.createRange(); nr.selectNodeContents(dono); sel.removeAllRanges(); sel.addRange(nr); }
+    area.dispatchEvent(new Event('input', { bubbles: true }));
+    return novo;
+  }
+  const frag = r.extractContents();
+  frag.querySelectorAll && frag.querySelectorAll('span').forEach(x => { // remove tamanhos internos (não acumular)
+    if (ehSpanTam(x)) { x.style.fontSize = ''; if (!x.getAttribute('style')) x.removeAttribute('style'); if (!x.attributes.length) { while (x.firstChild) x.parentNode.insertBefore(x.firstChild, x); x.remove(); } }
+  });
+  const v = Math.round(novo / (atual || 1) * 1000) / 1000; // relativo ao tamanho herdado
+  let no;
+  if (Math.abs(v - 1) < 0.001) { no = frag; }
+  else { no = document.createElement('span'); no.style.fontSize = v + 'em'; no.append(frag); }
+  const nr = document.createRange();
+  if (no.nodeType === 1) { r.insertNode(no); nr.selectNodeContents(no); }
+  else { // voltou a 100%: insere o conteúdo solto e reseleciona entre marcadores
+    const ini = document.createTextNode(''), fim = document.createTextNode('');
+    r.insertNode(fim); r.insertNode(no); r.insertNode(ini);
+    nr.setStartAfter(ini); nr.setEndBefore(fim);
+  }
+  sel.removeAllRanges(); sel.addRange(nr);
+  area.dispatchEvent(new Event('input', { bubbles: true }));
+  return novo;
+}
+
 function editorRico(valor, aoMudar, op = {}) {
   const area = h('div', { class: 'rico-area' + (op.compacto ? ' compacto' : ''), contenteditable: 'true', spellcheck: 'true', 'data-placeholder': op.placeholder || '' });
   area.innerHTML = valor || '';
@@ -448,6 +499,28 @@ function editorRico(valor, aoMudar, op = {}) {
     $$('a[href]', area).forEach(x => { if (!x.target) { x.target = '_blank'; x.rel = 'noopener'; } });
     emit();
   };
+  const tam = h('select', { class: 'rico-tam', title: 'Tamanho da fonte do trecho selecionado (100% = tamanho normal do tema)', tabindex: '-1',
+    onmousedown: () => { const sel = getSelection(); tam._r = sel.rangeCount && area.contains(sel.getRangeAt(0).commonAncestorContainer) ? sel.getRangeAt(0).cloneRange() : null; },
+    onchange: () => {
+      if (tam._r) { const sel = getSelection(); sel.removeAllRanges(); sel.addRange(tam._r); }
+      aplicarTamanho(area, parseFloat(tam.value));
+    } }, ...TAMANHOS.map(x => h('option', { value: String(x) }, Math.round(x * 100) + '%')));
+  tam.value = '1';
+  const sincTam = () => { const sel = getSelection(); if (sel.rangeCount && area.contains(sel.anchorNode)) tam.value = String(TAMANHOS.reduce((a, b) => Math.abs(b - tamanhoAtual(area)) < Math.abs(a - tamanhoAtual(area)) ? b : a)); };
+  area.addEventListener('keyup', sincTam); area.addEventListener('mouseup', sincTam);
+  area.addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.shiftKey && (e.key === '>' || e.key === '.')) { e.preventDefault(); const t = aplicarTamanho(area, 'mais'); if (t) tam.value = String(t); }
+    if ((e.metaKey || e.ctrlKey) && e.shiftKey && (e.key === '<' || e.key === ',')) { e.preventDefault(); const t = aplicarTamanho(area, 'menos'); if (t) tam.value = String(t); }
+  });
+  const limparTamanho = () => {
+    const sel = getSelection(); if (!sel.rangeCount) return;
+    const r = sel.getRangeAt(0);
+    $$('span', area).filter(x => ehSpanTam(x) && r.intersectsNode(x)).forEach(x => {
+      x.style.fontSize = ''; if (!x.getAttribute('style')) x.removeAttribute('style');
+      if (!x.attributes.length) { const pai = x.parentNode; while (x.firstChild) pai.insertBefore(x.firstChild, x); pai.removeChild(x); }
+    });
+    emit(); tam.value = '1';
+  };
   const bt = (rot, titulo, fn, cls) => h('button', { type: 'button', class: cls || '', title: titulo, tabindex: '-1', onmousedown: e => e.preventDefault(), onclick: fn }, rot);
   const barra = h('div', { class: 'rico-barra' },
     bt(h('b', {}, 'N'), 'Negrito (Ctrl+B)', () => cmd('bold')),
@@ -458,7 +531,10 @@ function editorRico(valor, aoMudar, op = {}) {
     op.compacto ? null : bt('1.', 'Lista numerada', () => cmd('insertOrderedList')),
     bt('↵', 'Quebra de linha (Shift+Enter)', () => cmd('insertLineBreak')),
     bt('🔗', 'Link (Ctrl+K)', link),
-    bt('⌫', 'Limpar formatação do trecho selecionado', () => { cmd('removeFormat'); cmd('unlink'); }),
+    bt('A−', 'Diminuir a fonte do trecho selecionado (Ctrl+Shift+<)', () => { const t = aplicarTamanho(area, 'menos'); if (t) tam.value = String(t); }),
+    tam,
+    bt('A+', 'Aumentar a fonte do trecho selecionado (Ctrl+Shift+>)', () => { const t = aplicarTamanho(area, 'mais'); if (t) tam.value = String(t); }),
+    bt('⌫', 'Limpar formatação do trecho selecionado (inclui tamanho)', () => { cmd('removeFormat'); cmd('unlink'); limparTamanho(); }),
     h('span', { class: 'rico-esp' }),
     bt('</>', 'Ver / editar o HTML', e => {
       const ver = fonte.hidden; fonte.hidden = !ver; area.hidden = ver;
