@@ -382,7 +382,7 @@ def render_pagina(dados: dict, ed: bool = False, base_href: str | None = None) -
         rod = '\n  <footer class="ft">\n    %s<span class="txt">%s</span>\n  </footer>' % (im, meta.get("rodape", ""))
     cab_ed = ""
     if ed:
-        cab_ed = '\n  <base href="%s">\n  <link rel="stylesheet" href="/editor/palco.css">' % esc(base_href or "./")
+        cab_ed = ('\n  <base href="%s">' % esc(base_href) if base_href else "") + '\n  <link rel="stylesheet" href="/editor/palco.css">'
     pdf = ('\n    <button class="bp" id="bexp" onclick="exportarPDF()" title="Exportar os slides em PDF — na janela de impressão '
            'escolha \'Salvar como PDF\', margens \'Nenhuma\' e mantenha \'Gráficos de fundo\'">Exportar PDF</button>') if meta.get("mostrar_pdf", True) else ""
     lim = meta.get("cronometro_min") or 10
@@ -458,8 +458,8 @@ def render_legado(dados: dict, ed: bool = False, base_href: str | None = None) -
     if ed:
         antes = re.sub(r"<script\b[^>]*>.*?</script>", "", antes, flags=re.S | re.I)
         depois = re.sub(r"<script\b[^>]*>.*?</script>", "", depois, flags=re.S | re.I)
-        antes = _injetar_head(antes, '<base href="%s">\n%s\n<link rel="stylesheet" href="/editor/palco.css">' % (
-            esc(base_href or "./"), ESTILO_EDITOR_LEGADO))
+        antes = _injetar_head(antes, ('<base href="%s">\n' % esc(base_href) if base_href else "") +
+                              ESTILO_EDITOR_LEGADO + '\n<link rel="stylesheet" href="/editor/palco.css">')
     return antes + "".join(partes) + depois
 
 

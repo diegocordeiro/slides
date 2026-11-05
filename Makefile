@@ -9,30 +9,48 @@
 
 PY      ?= python3
 PORTA   ?= 8000
-BRANCH  ?= main
+BRANCH  ?= $(shell git branch --show-current 2>/dev/null || echo main)
 MSG     ?= Atualiza slides e indice das aulas
 SITE    ?= https://diegocordeiro.github.io/slides/
 CHROME  ?= /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+PORTA_EDITOR ?= 8765
+LLM     ?=
 
 SHELL := /bin/bash
 .DEFAULT_GOAL := ajuda
 
-.PHONY: ajuda listar index checar servir publicar acompanhar site status limpar
+.PHONY: ajuda listar index checar servir publicar acompanhar site status limpar editor gerar importar verificar
 
 ajuda:
 	@echo "Slides IFPI — alvos disponíveis:"
 	@echo ""
+	@echo "  make editor        abre o editor de slides em http://127.0.0.1:$(PORTA_EDITOR) (LLM=deepseek)"
+	@echo "  make gerar         gera as aulas a partir dos apresentacao.json (estado editor)"
+	@echo "  make importar      importa aulas feitas à mão para o editor (não altera os originais)"
+	@echo "  make verificar     confere se as aulas importadas reproduzem o HTML publicado"
 	@echo "  make listar        lista as aulas detectadas (inclusive pastas novas)"
 	@echo "  make index         regenera o index.html a partir das aulas"
 	@echo "  make checar        valida as referências de todas as aulas"
 	@echo "  make servir        gera o índice e serve em http://localhost:$(PORTA)"
-	@echo "  make publicar      index + checar + commit + push (MSG=\"...\")"
+	@echo "  make publicar      gerar + index + checar + commit + push na branch atual (MSG=\"...\")"
 	@echo "  make acompanhar    acompanha o deploy no GitHub Actions"
 	@echo "  make site          abre $(SITE)"
 	@echo "  make status        branch, pendências locais e último deploy"
 	@echo "  make limpar        remove _site/, __pycache__/ e .DS_Store"
 	@echo ""
-	@echo "Variáveis: PORTA=$(PORTA) BRANCH=$(BRANCH)"
+	@echo "Variáveis: PORTA=$(PORTA) BRANCH=$(BRANCH) PORTA_EDITOR=$(PORTA_EDITOR) LLM=$(LLM)"
+
+editor:
+	@$(PY) editor_slides/servidor.py --porta $(PORTA_EDITOR) $(if $(LLM),--llm $(LLM),)
+
+gerar:
+	@$(PY) editor_slides/gerar_slides.py --todas
+
+importar:
+	@$(PY) editor_slides/importar_aula.py --todas
+
+verificar:
+	@$(PY) editor_slides/gerar_slides.py --verificar
 
 listar:
 	@$(PY) scripts/gerar_index.py --listar
@@ -47,7 +65,10 @@ servir: index
 	@echo "Servindo em http://localhost:$(PORTA) — Ctrl+C encerra"
 	@$(PY) -m http.server $(PORTA)
 
-publicar: index checar
+publicar: gerar index checar
+	@if [ "$(BRANCH)" != "main" ]; then \
+		echo "Atenção: branch '$(BRANCH)' — o push vai para origin/$(BRANCH); o site só muda após o merge na main."; \
+	fi
 	@git add -A
 	@if git diff --cached --quiet; then \
 		echo "Sem mudanças para commitar — enviando o estado atual."; \
@@ -77,6 +98,6 @@ status:
 	@git status -s
 
 limpar:
-	@rm -rf _site scripts/__pycache__
+	@rm -rf _site scripts/__pycache__ editor_slides/__pycache__ editor_slides/motor/__pycache__ editor_slides/llm/__pycache__
 	@find . -name '.DS_Store' -not -path './.git/*' -delete
 	@echo "Removidos: _site/, __pycache__/ e arquivos .DS_Store"

@@ -1,0 +1,9 @@
+/* Estilos do palco do editor (carregado só na prévia, nunca publicado) */
+[data-e] { cursor: text; border-radius: 3px; transition: outline-color .1s }
+[data-e]:hover { outline: 1px dashed rgba(37, 99, 235, .55); outline-offset: 2px }
+[contenteditable="true"]:focus { outline: 2px solid #2563EB !important; outline-offset: 2px }
+.sl[contenteditable="true"]:focus { outline: none !important }
+[data-b].ed-sel { outline: 2px solid #F59E0B !important; outline-offset: 3px }
+img[data-img], .ed-html img { cursor: pointer }
+img[data-img]:hover, .ed-html img:hover { outline: 3px solid rgba(245, 158, 11, .8); outline-offset: -3px }
+.sl .nt { display: none !important }

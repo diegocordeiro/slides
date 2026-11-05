@@ -7,7 +7,8 @@ Para cada aula detectada (mesma regra usada pelo índice) confere:
   * grafia de maiúsculas/minúsculas diferente do arquivo real
     (o macOS não diferencia, mas o GitHub Pages roda em Linux e diferencia);
   * caminhos absolutos (começando com ``/``), que quebram em "project pages";
-  * se o ``index.html`` cita todas as aulas encontradas.
+  * se o ``index.html`` cita todas as aulas encontradas;
+  * se alguma chave de API (``.env`` ou ``sk-…``) entraria no commit.
 
 Uso:
     python3 scripts/checar_referencias.py
@@ -20,6 +21,7 @@ from __future__ import annotations
 import argparse
 import os
 import re
+import subprocess
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -92,6 +94,38 @@ def checar_indice(raiz: str, aulas: list) -> list:
     return problemas
 
 
+PADRAO_CHAVE = re.compile(r"\b(sk-[A-Za-z0-9_-]{20,}|sk-ant-[A-Za-z0-9_-]{20,}|AIza[0-9A-Za-z_-]{30,})")
+
+
+def checar_segredos(raiz: str) -> list:
+    """Impede que chaves de API entrem no git: .env versionado ou chave dentro de arquivos.
+
+    Considera os arquivos que o 'git add -A' do 'make publicar' incluiria
+    (rastreados + não rastreados que não estão no .gitignore)."""
+    try:
+        saida = subprocess.run(["git", "ls-files", "--cached", "--others", "--exclude-standard"], cwd=raiz,
+                               capture_output=True, text=True, timeout=30)
+    except (OSError, subprocess.TimeoutExpired):
+        return []
+    if saida.returncode != 0:
+        return []
+    problemas = []
+    for rel in saida.stdout.splitlines():
+        base = os.path.basename(rel)
+        if base == ".env" or (base.startswith(".env.") and base != ".env.exemplo"):
+            problemas.append("{}: arquivo de chaves seria publicado — ele deve ficar no .gitignore".format(rel))
+            continue
+        if not rel.endswith((".html", ".js", ".css", ".json", ".py", ".md", ".txt", ".yml", ".yaml", ".sh", ".env.exemplo")):
+            continue
+        try:
+            texto = open(os.path.join(raiz, rel), encoding="utf-8", errors="ignore").read()
+        except OSError:
+            continue
+        if PADRAO_CHAVE.search(texto):
+            problemas.append("{}: parece conter uma chave de API — remova antes de publicar".format(rel))
+    return problemas
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Valida as referências das apresentações.")
     parser.add_argument("--raiz", default=".", help="pasta raiz do site (padrão: .)")
@@ -104,6 +138,7 @@ def main() -> None:
     for aula in aulas:
         problemas.extend(checar_aula(raiz, aula))
     problemas.extend(checar_indice(raiz, aulas))
+    problemas.extend(checar_segredos(raiz))
 
     print("Aulas verificadas: {}".format(len(aulas)))
     for aula in aulas:
