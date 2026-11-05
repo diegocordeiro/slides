@@ -1,0 +1,3 @@
+# Dependência opcional: só para "Importar aula de um PDF" no editor.
+# Instale com: make instalar-pdf   (ou: pip3 install -r editor_slides/requirements.txt)
+pymupdf>=1.24

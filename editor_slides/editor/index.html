@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Editor de slides</title>
+  <link rel="stylesheet" href="/editor/editor.css">
+</head>
+<body>
+  <header id="barra">
+    <div class="marca">Editor de slides</div>
+    <button id="b-abrir" title="Abrir ou importar uma aula">Abrir</button>
+    <button id="b-novo" title="Criar uma aula nova">Nova aula</button>
+    <div id="projeto"><span id="p-titulo">Nenhuma aula aberta</span><span id="p-estado" class="selo"></span></div>
+    <span id="salvo" class="muted"></span>
+    <div class="grupo">
+      <button id="b-desfazer" title="Desfazer (Ctrl+Z)">↶</button>
+      <button id="b-refazer" title="Refazer (Ctrl+Shift+Z)">↷</button>
+      <button id="b-salvar" title="Salvar (Ctrl+S)">Salvar</button>
+    </div>
+    <div class="grupo">
+      <button id="b-gerar" title="Gera aulaNN.html/.css/.js na pasta da aula">Gerar</button>
+      <button id="b-ver" title="Abre a aula gerada numa nova aba">Visualizar</button>
+      <button id="b-pdf" title="Abre a aula pronta para exportar em PDF">PDF</button>
+      <button id="b-publicar" class="primario" title="Roda o make publicar">Publicar</button>
+    </div>
+    <span id="branch" class="selo" title="Branch atual do git"></span>
+  </header>
+
+  <main id="app">
+    <aside id="lista">
+      <div class="lista-topo">
+        <strong>Slides</strong>
+        <div class="menu-wrap">
+          <button id="b-add" class="primario">+ Slide</button>
+          <div id="menu-add" class="menu" hidden></div>
+        </div>
+      </div>
+      <ol id="slides"></ol>
+    </aside>
+
+    <section id="centro">
+      <div id="aviso" hidden></div>
+      <div id="palco-wrap"><div id="palco-escala"><iframe id="palco" title="Prévia do slide"></iframe></div></div>
+      <div id="notas-wrap">
+        <span class="rotulo">Roteiro de fala <span class="muted">(aparece com a tecla N e no modo apresentador)</span></span>
+        <div id="notas"></div>
+      </div>
+    </section>
+
+    <aside id="painel">
+      <nav class="abas">
+        <button data-aba="slide" class="on">Slide</button>
+        <button data-aba="aula">Aula</button>
+        <button data-aba="tema">Tema</button>
+        <button data-aba="ia">IA</button>
+      </nav>
+      <div id="aba-slide" class="aba on"></div>
+      <div id="aba-aula" class="aba"></div>
+      <div id="aba-tema" class="aba"></div>
+      <div id="aba-ia" class="aba"></div>
+    </aside>
+  </main>
+
+  <dialog id="d-abrir">
+    <h2>Abrir aula</h2>
+    <div id="abrir-lista"></div>
+    <div class="acoes"><button value="fechar" class="fechar">Fechar</button></div>
+  </dialog>
+
+  <dialog id="d-novo">
+    <h2>Nova aula</h2>
+    <form id="f-novo" method="dialog">
+      <label>Área <input name="area" required placeholder="meio_ambiente" list="dl-areas"></label>
+      <label>Disciplina <input name="disciplina" required placeholder="informatica_aplicada" list="dl-disc"></label>
+      <label>Pasta da aula <input name="pasta" required placeholder="aula-05"></label>
+      <label>Título <input name="titulo" required placeholder="Sistemas Operacionais"></label>
+      <label>Tema <select name="tema" id="novo-tema"></select></label>
+      <datalist id="dl-areas"></datalist><datalist id="dl-disc"></datalist>
+      <p class="muted">Será criada a pasta <code>&lt;área&gt;/&lt;disciplina&gt;/&lt;pasta&gt;/</code> com o <code>apresentacao.json</code>.
+        Os arquivos <code>aulaNN.html/.css/.js</code> são gerados ao clicar em <b>Gerar</b>.</p>
+      <div class="acoes"><button type="button" class="fechar">Cancelar</button><button class="primario" value="ok">Criar</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="d-imagem">
+    <h2>Escolher imagem</h2>
+    <p class="muted">Imagens da pasta da aula. Arquivos enviados vão para <code>img/</code> com nome em minúsculas e hífens.</p>
+    <div id="galeria"></div>
+    <div class="acoes">
+      <label class="botao">Enviar imagem… <input type="file" id="up-img" accept="image/*" hidden></label>
+      <button id="img-remover">Sem imagem</button>
+      <button class="fechar">Cancelar</button>
+    </div>
+  </dialog>
+
+  <dialog id="d-publicar">
+    <h2>Publicar</h2>
+    <div id="pub-info"></div>
+    <label>Mensagem do commit <input id="pub-msg" value="Atualiza slides (editor)"></label>
+    <pre id="pub-log" hidden></pre>
+    <div class="acoes">
+      <button id="pub-checar">Checar referências</button>
+      <button class="fechar">Fechar</button>
+      <button id="pub-ok" class="primario">Publicar agora</button>
+    </div>
+  </dialog>
+
+  <dialog id="d-ia">
+    <h2 id="ia-titulo">Sugestão da IA</h2>
+    <div id="ia-corpo"></div>
+    <div class="acoes" id="ia-acoes"></div>
+  </dialog>
+
+  <dialog id="d-pdf" class="largo">
+    <h2 id="pdf-titulo">Importar aula de um PDF</h2>
+    <div id="pdf-corpo"></div>
+    <div class="acoes" id="pdf-acoes"></div>
+  </dialog>
+
+  <dialog id="d-codigo">
+    <h2>HTML do slide</h2>
+    <textarea id="codigo" spellcheck="false"></textarea>
+    <div class="acoes"><button class="fechar">Cancelar</button><button id="codigo-ok" class="primario">Aplicar</button></div>
+  </dialog>
+
+  <div id="toast" hidden></div>
+  <script src="/editor/editor.js"></script>
+</body>
+</html>

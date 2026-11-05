@@ -1,0 +1,177 @@
+[hidden] { display: none !important }
+:root {
+  --fundo: #F4F5F7; --sup: #FFFFFF; --linha: #DFE3E8; --tx: #1F2933; --tx2: #5B6670;
+  --pri: #2563EB; --pri-e: #1D4ED8; --ok: #16794C; --alerta: #B45309; --erro: #B42318;
+  --raio: 8px; color-scheme: light;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+* { box-sizing: border-box }
+html, body { margin: 0; height: 100%; background: var(--fundo); color: var(--tx); font-size: 14px }
+button, input, select, textarea { font: inherit; color: inherit }
+button, .botao {
+  background: var(--sup); border: 1px solid var(--linha); border-radius: 6px; padding: 5px 11px; cursor: pointer;
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 4px
+}
+button:hover:not(:disabled), .botao:hover { border-color: #B8C0C9; background: #F8FAFC }
+button:disabled { opacity: .45; cursor: default }
+button.primario { background: var(--pri); border-color: var(--pri); color: #fff }
+button.primario:hover:not(:disabled) { background: var(--pri-e) }
+button.perigo { color: var(--erro) }
+input, select, textarea { width: 100%; border: 1px solid var(--linha); border-radius: 6px; padding: 5px 8px; background: #fff }
+textarea { resize: vertical; min-height: 54px; font-size: 13px; line-height: 1.4 }
+textarea.mono, #codigo { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px }
+label { display: block; font-weight: 600; font-size: 12.5px; margin: 8px 0 3px; color: var(--tx2) }
+label > input, label > select, label > textarea { margin-top: 3px; font-weight: 400; color: var(--tx) }
+label.chk { display: flex; gap: 6px; align-items: center; font-weight: 500 }
+label.chk input { width: auto }
+code { background: #EEF1F4; padding: 1px 4px; border-radius: 4px; font-size: .92em }
+.muted { color: var(--tx2); font-weight: 400 }
+.selo { white-space: nowrap; font-size: 11.5px; font-weight: 700; padding: 2px 8px; border-radius: 99px; background: #E8EDF3; color: var(--tx2) }
+.selo.importada { background: #FEF3C7; color: #92400E }
+.selo.editor { background: #DCFCE7; color: #166534 }
+.selo.main { background: #FEE2E2; color: #991B1B }
+
+#barra { height: 50px; display: flex; align-items: center; gap: 10px; padding: 0 12px; background: #111827; color: #fff }
+#barra .marca { font-weight: 800; letter-spacing: .02em; margin-right: 6px }
+#barra button { background: #1F2937; border-color: #374151; color: #E5E7EB }
+#barra button:hover:not(:disabled) { background: #374151 }
+#barra button.primario { background: var(--pri); border-color: var(--pri); color: #fff }
+#barra .grupo { display: flex; gap: 4px }
+#barra .muted { color: #9CA3AF }
+#projeto { flex: 1; min-width: 0; display: flex; gap: 8px; align-items: center; overflow: hidden }
+#p-titulo { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+
+#app { display: grid; grid-template-columns: 250px 1fr 360px; height: calc(100vh - 50px) }
+#lista { background: var(--sup); border-right: 1px solid var(--linha); display: flex; flex-direction: column; min-height: 0 }
+.lista-topo { display: flex; justify-content: space-between; align-items: center; padding: 10px }
+#slides { list-style: none; margin: 0; padding: 0 8px 12px; overflow: auto; flex: 1 }
+#slides li { display: grid; grid-template-columns: 26px 1fr auto; gap: 6px; align-items: center; padding: 7px 6px; border-radius: 7px; cursor: pointer; border: 1px solid transparent; margin-bottom: 2px }
+#slides li:hover { background: #F3F6FA }
+#slides li.on { background: #E8F0FE; border-color: #BFD3FB }
+#slides li.arrastando { opacity: .4 }
+#slides li.alvo { border-top: 3px solid var(--pri) }
+#slides .n { font-weight: 800; color: var(--tx2); text-align: right; font-size: 12px }
+#slides .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px }
+#slides .t small { display: block; color: var(--tx2); font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em }
+#slides .ops { display: none; gap: 2px }
+#slides li:hover .ops, #slides li.on .ops { display: flex }
+#slides .ops button { padding: 1px 5px; font-size: 12px }
+.menu-wrap { position: relative }
+.menu { position: absolute; z-index: 20; left: 0; top: 34px; background: #fff; border: 1px solid var(--linha); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,.12); padding: 4px; min-width: 220px }
+.menu button { display: flex; width: 100%; border: 0; justify-content: flex-start; padding: 7px 10px }
+.menu hr { border: 0; border-top: 1px solid var(--linha); margin: 4px 0 }
+
+#centro { display: flex; flex-direction: column; min-width: 0; min-height: 0; padding: 12px; gap: 10px }
+#aviso { background: #FFFBEB; border: 1px solid #FCD34D; color: #78350F; border-radius: 8px; padding: 8px 12px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap }
+#aviso.ok { background: #ECFDF5; border-color: #A7F3D0; color: #065F46 }
+#palco-wrap { flex: 1; min-height: 0; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden }
+#palco-escala { width: 1280px; height: 720px; transform-origin: center center; box-shadow: 0 4px 24px rgba(0,0,0,.16); background: #fff; flex-shrink: 0 }
+#palco { width: 1280px; height: 720px; border: 0; display: block; background: #fff }
+#notas .rico-area { min-height: 56px; max-height: 120px }
+
+#painel { background: var(--sup); border-left: 1px solid var(--linha); display: flex; flex-direction: column; min-height: 0 }
+.abas { display: flex; border-bottom: 1px solid var(--linha) }
+.abas button { flex: 1; border: 0; border-radius: 0; padding: 10px; justify-content: center; font-weight: 600; color: var(--tx2); background: transparent }
+.abas button.on { color: var(--pri); box-shadow: inset 0 -2px 0 var(--pri) }
+.aba { display: none; padding: 12px 14px 40px; overflow: auto; flex: 1 }
+.aba.on { display: block }
+.aba h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--tx2); margin: 16px 0 6px }
+.aba h3:first-child { margin-top: 0 }
+.linha-bts { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 }
+.caixa { border: 1px solid var(--linha); border-radius: var(--raio); padding: 8px 10px; margin: 8px 0; background: #FBFCFD }
+.bloco { border: 1px solid var(--linha); border-radius: 8px; margin: 6px 0; background: #fff }
+.bloco.sel { border-color: #F59E0B; box-shadow: 0 0 0 2px rgba(245,158,11,.25) }
+.bloco > .cab { display: flex; align-items: center; gap: 6px; padding: 6px 8px; cursor: pointer }
+.bloco > .cab .nome { flex: 1; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.bloco > .cab .nome small { color: var(--tx2); font-weight: 400 }
+.bloco > .cab button { padding: 1px 6px; font-size: 12px }
+.bloco > .corpo { padding: 0 10px 10px; border-top: 1px dashed var(--linha) }
+.bloco .bloco { margin-left: 4px }
+.colunas-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin: 6px 0 }
+.colunas-tabs button.on { background: #E8F0FE; border-color: #BFD3FB; color: var(--pri-e) }
+.item { border-left: 3px solid #E5E7EB; padding-left: 8px; margin: 6px 0 }
+.var-linha { display: grid; grid-template-columns: 1fr 44px 92px 22px; gap: 6px; align-items: center; margin: 3px 0 }
+.var-linha span { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; overflow: hidden; text-overflow: ellipsis }
+.var-linha input[type=color] { padding: 0; height: 26px; border: 1px solid var(--linha) }
+.var-linha input[type=text] { font-size: 12px; padding: 3px 5px }
+.var-linha.mudou span { color: var(--pri-e); font-weight: 700 }
+.var-linha button { padding: 0 4px; font-size: 11px }
+.logo-linha { display: grid; grid-template-columns: 70px 1fr auto auto; gap: 6px; align-items: center; margin: 4px 0 }
+.logo-linha img { max-height: 28px; max-width: 100%; background: #eee; border-radius: 4px }
+
+dialog { border: 0; border-radius: 12px; padding: 18px 20px; width: min(760px, 94vw); max-height: 90vh; box-shadow: 0 20px 60px rgba(0,0,0,.3) }
+dialog::backdrop { background: rgba(17,24,39,.45) }
+dialog h2 { margin: 0 0 10px; font-size: 18px }
+.acoes { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; flex-wrap: wrap }
+#abrir-lista h4 { margin: 14px 0 4px; font-size: 12px; text-transform: uppercase; color: var(--tx2); letter-spacing: .04em }
+#abrir-lista .proj { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 7px 10px; border: 1px solid var(--linha); border-radius: 8px; margin: 4px 0; cursor: pointer }
+#abrir-lista .proj:hover { background: #F3F6FA }
+#galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; max-height: 52vh; overflow: auto }
+#galeria figure { margin: 0; border: 1px solid var(--linha); border-radius: 8px; padding: 6px; cursor: pointer; text-align: center }
+#galeria figure:hover { border-color: var(--pri) }
+#galeria img { width: 100%; height: 80px; object-fit: contain; background: #F3F4F6 }
+#galeria figcaption { font-size: 11px; color: var(--tx2); word-break: break-all }
+#pub-log { background: #0F172A; color: #E2E8F0; padding: 10px; border-radius: 8px; max-height: 40vh; overflow: auto; font-size: 12px; white-space: pre-wrap }
+#codigo { width: 100%; height: 60vh }
+.previa-mini { width: 640px; height: 360px; overflow: hidden; border: 1px solid var(--linha); border-radius: 8px; margin: 6px auto }
+.previa-mini iframe { width: 1280px; height: 720px; border: 0; transform: scale(.5); transform-origin: 0 0 }
+.comparar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px }
+.comparar > div { border: 1px solid var(--linha); border-radius: 8px; padding: 8px; max-height: 40vh; overflow: auto; font-size: 13px }
+.comparar h4 { margin: 0 0 6px; font-size: 12px; color: var(--tx2) }
+#toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: #111827; color: #fff; padding: 9px 16px; border-radius: 8px; z-index: 50; max-width: 80vw; box-shadow: 0 8px 24px rgba(0,0,0,.25) }
+#toast.erro { background: var(--erro) }
+.carregando { opacity: .6; pointer-events: none }
+.vazio { color: var(--tx2); text-align: center; padding: 30px 10px }
+
+/* ===== Editor de texto rico ===== */
+.campo { margin: 8px 0 }
+.campo > .rotulo, #notas-wrap > .rotulo { display: block; font-weight: 600; font-size: 12.5px; color: var(--tx2); margin-bottom: 3px }
+.rico { border: 1px solid var(--linha); border-radius: 6px; background: #fff; overflow: hidden }
+.rico:focus-within { border-color: var(--pri); box-shadow: 0 0 0 2px rgba(37,99,235,.15) }
+.rico-barra { display: flex; flex-wrap: wrap; gap: 1px; padding: 3px 4px; background: #F6F8FA; border-bottom: 1px solid var(--linha) }
+.rico-barra button { border: 1px solid transparent; background: transparent; padding: 1px 5px; font-size: 12px; border-radius: 4px; min-width: 24px; justify-content: center; line-height: 1.6 }
+.rico-barra button:hover:not(:disabled) { background: #E8EDF3; border-color: #D5DCE4 }
+.rico-barra button.on { background: #E8F0FE; border-color: #BFD3FB; color: var(--pri-e) }
+.rico-barra code { background: none; padding: 0; font-size: 11px }
+.rico-esp { flex: 1 }
+.mk-amostra { background: linear-gradient(transparent 50%, #FDE68A 50%); font-weight: 700 }
+.rico-area { padding: 6px 8px; min-height: 44px; max-height: 260px; overflow: auto; outline: none; font-size: 13.5px; line-height: 1.45; word-break: break-word }
+.rico-area.compacto { min-height: 30px; padding: 4px 8px }
+.rico-area:empty::before { content: attr(data-placeholder); color: #9AA5B1 }
+.rico-area p { margin: 0 0 4px }
+.rico-area ul, .rico-area ol { margin: 2px 0 4px; padding-left: 20px }
+.rico-area .mk { background: linear-gradient(transparent 55%, #CBE7D3 55%); font-weight: 600 }
+.rico-area code { font-size: .9em }
+.rico-area a { color: var(--pri-e) }
+.rico-fonte { border: 0; border-radius: 0; min-height: 60px; display: block }
+.rico-compacto .rico-barra { padding: 2px 3px }
+.rico-compacto .rico-barra button { padding: 0 5px; min-width: 22px; font-size: 11px }
+.lista-rica { display: flex; flex-direction: column; gap: 6px }
+.item-rico { display: grid; grid-template-columns: 18px 1fr auto; gap: 6px; align-items: start }
+.item-rico .num-item { font-size: 11px; font-weight: 700; color: var(--tx2); text-align: right; padding-top: 7px }
+.item-rico .rico { min-width: 0 }
+.ops-item { display: flex; flex-direction: row; gap: 2px; padding-top: 3px }
+.ops-item button { padding: 0 6px; font-size: 11px; line-height: 1.5 }
+.add-item { align-self: flex-start; font-size: 12.5px }
+.rico-compacto .rico-barra { display: none }
+.rico-compacto:focus-within .rico-barra { display: flex }
+
+/* ===== Importar PDF ===== */
+dialog.largo { width: min(1060px, 96vw) }
+.erro-caixa { border-color: #F5B5AE; background: #FEF3F2; color: #7A271A }
+.pdf-paginas { max-height: 42vh; overflow: auto; border: 1px solid var(--linha); border-radius: 8px; margin: 6px 0 }
+.pdf-pag { display: grid; grid-template-columns: 72px 1fr; gap: 8px; padding: 8px 10px; border-bottom: 1px solid var(--linha) }
+.pdf-pag:last-child { border-bottom: 0 }
+.pdf-txt { min-width: 0; font-size: 13px }
+.pdf-imgs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px }
+.pdf-img { position: relative; display: inline-block; margin: 0 }
+.pdf-img img { height: 56px; max-width: 110px; object-fit: contain; border: 1px solid var(--linha); border-radius: 4px; background: #F3F4F6; display: block }
+.pdf-img input { position: absolute; top: 2px; left: 2px; width: auto; margin: 0 }
+.pdf-opcoes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; align-items: end }
+.pdf-previa { display: grid; grid-template-columns: 300px 1fr; gap: 12px; align-items: start }
+.pdf-lista { list-style: none; margin: 0; padding: 0; max-height: 360px; overflow: auto; border: 1px solid var(--linha); border-radius: 8px }
+.pdf-lista li { display: flex; gap: 6px; align-items: flex-start; padding: 6px 8px; cursor: pointer; border-bottom: 1px solid var(--linha); font-size: 13px }
+.pdf-lista li.on { background: #E8F0FE }
+.pdf-lista input { width: auto; margin-top: 3px }
+.rico-barra select.rico-tam { width: auto; padding: 0 2px; font-size: 11.5px; height: 22px; border-color: transparent; background: transparent; cursor: pointer }
+.rico-barra select.rico-tam:hover { border-color: #D5DCE4; background: #E8EDF3 }

@@ -1,0 +1,540 @@
+{
+  "versao": 1,
+  "descricao": "Catálogo de layouts de slide e de blocos. Usado pelo editor (formulários), pelo gerador (validação) e pelo LLM (formato de resposta). Campos do tipo 'html' aceitam HTML simples: <strong>, <b>, <em>, <br>, <code>, <p>, <ul>/<li>, <span class=\"mk\">.",
+  "layouts": {
+    "capa": {
+      "rotulo": "Capa",
+      "descricao": "Abertura: rótulo, título, subtítulos, etiquetas e imagem opcional à direita.",
+      "campos": [
+        {
+          "nome": "rotulo",
+          "tipo": "texto",
+          "rotulo": "Rótulo (acima do título)"
+        },
+        {
+          "nome": "titulo",
+          "tipo": "html",
+          "rotulo": "Título",
+          "obrigatorio": true
+        },
+        {
+          "nome": "subtitulos",
+          "tipo": "lista",
+          "rotulo": "Subtítulos (um por item)"
+        },
+        {
+          "nome": "etiquetas",
+          "tipo": "lista",
+          "rotulo": "Etiquetas"
+        },
+        {
+          "nome": "imagem",
+          "tipo": "imagem",
+          "rotulo": "Imagem à direita (vazio = usa a logo de capa do tema, se houver)"
+        },
+        {
+          "nome": "selo",
+          "tipo": "texto",
+          "rotulo": "Selo de texto à direita (quando não há imagem)"
+        }
+      ]
+    },
+    "conteudo": {
+      "rotulo": "Conteúdo",
+      "descricao": "Cabeçalho com número e título; corpo com faixa superior opcional, colunas de blocos e faixa inferior opcional.",
+      "campos": [
+        {
+          "nome": "titulo",
+          "tipo": "texto",
+          "rotulo": "Título",
+          "obrigatorio": true
+        },
+        {
+          "nome": "proporcao",
+          "tipo": "proporcao",
+          "rotulo": "Proporção das colunas (ex.: 1fr 1fr)",
+          "padrao": "1fr"
+        },
+        {
+          "nome": "topo_proporcao",
+          "tipo": "proporcao",
+          "rotulo": "Proporção da faixa superior (vazio = partes iguais)"
+        },
+        {
+          "nome": "topo",
+          "tipo": "blocos",
+          "rotulo": "Faixa superior"
+        },
+        {
+          "nome": "colunas",
+          "tipo": "colunas",
+          "rotulo": "Colunas"
+        },
+        {
+          "nome": "rodape",
+          "tipo": "blocos",
+          "rotulo": "Faixa inferior"
+        }
+      ]
+    },
+    "secao": {
+      "rotulo": "Seção / encerramento",
+      "descricao": "Slide de abertura de seção ou de encerramento, com imagem de fundo opcional.",
+      "campos": [
+        {
+          "nome": "rotulo",
+          "tipo": "texto",
+          "rotulo": "Rótulo"
+        },
+        {
+          "nome": "titulo",
+          "tipo": "html",
+          "rotulo": "Título",
+          "obrigatorio": true
+        },
+        {
+          "nome": "texto",
+          "tipo": "html",
+          "rotulo": "Texto"
+        },
+        {
+          "nome": "imagem",
+          "tipo": "imagem",
+          "rotulo": "Imagem de fundo"
+        }
+      ]
+    },
+    "imagem": {
+      "rotulo": "Imagem inteira",
+      "descricao": "Uma imagem ocupando o slide inteiro.",
+      "campos": [
+        {
+          "nome": "imagem",
+          "tipo": "imagem",
+          "rotulo": "Imagem",
+          "obrigatorio": true
+        },
+        {
+          "nome": "alt",
+          "tipo": "texto",
+          "rotulo": "Texto alternativo"
+        }
+      ]
+    },
+    "html": {
+      "rotulo": "HTML livre",
+      "descricao": "Slide em HTML livre (usado na importação das aulas antigas). Editável direto no palco ou no código.",
+      "campos": [
+        {
+          "nome": "html",
+          "tipo": "codigo",
+          "rotulo": "HTML do slide (<div class=\"sl\">…</div>)"
+        }
+      ]
+    }
+  },
+  "blocos": {
+    "texto": {
+      "rotulo": "Texto",
+      "campos": [
+        {
+          "nome": "html",
+          "tipo": "html",
+          "rotulo": "Texto"
+        }
+      ]
+    },
+    "titulo": {
+      "rotulo": "Subtítulo (h3)",
+      "campos": [
+        {
+          "nome": "texto",
+          "tipo": "texto",
+          "rotulo": "Texto"
+        }
+      ]
+    },
+    "lista": {
+      "rotulo": "Lista",
+      "campos": [
+        {
+          "nome": "itens",
+          "tipo": "lista",
+          "rotulo": "Itens"
+        },
+        {
+          "nome": "numerada",
+          "tipo": "bool",
+          "rotulo": "Numerada (passos)"
+        }
+      ]
+    },
+    "card": {
+      "rotulo": "Cartão",
+      "campos": [
+        {
+          "nome": "variante",
+          "tipo": "selecao",
+          "rotulo": "Cor",
+          "opcoes": {
+            "": "Neutro",
+            "vd": "Verde (positivo)",
+            "er": "Vermelho (alerta)",
+            "az": "Escuro"
+          }
+        },
+        {
+          "nome": "titulo",
+          "tipo": "texto",
+          "rotulo": "Título"
+        },
+        {
+          "nome": "destaque",
+          "tipo": "texto",
+          "rotulo": "Frase grande"
+        },
+        {
+          "nome": "html",
+          "tipo": "html",
+          "rotulo": "Corpo"
+        },
+        {
+          "nome": "itens",
+          "tipo": "lista",
+          "rotulo": "Itens"
+        },
+        {
+          "nome": "blocos",
+          "tipo": "blocos",
+          "rotulo": "Blocos dentro do cartão"
+        },
+        {
+          "nome": "stat_valor",
+          "tipo": "texto",
+          "rotulo": "Número em destaque"
+        },
+        {
+          "nome": "stat_texto",
+          "tipo": "texto",
+          "rotulo": "Legenda do número"
+        },
+        {
+          "nome": "rodape",
+          "tipo": "html",
+          "rotulo": "Rodapé"
+        },
+        {
+          "nome": "crescer",
+          "tipo": "bool",
+          "rotulo": "Ocupar o espaço livre"
+        }
+      ]
+    },
+    "destaque": {
+      "rotulo": "Caixa de destaque",
+      "campos": [
+        {
+          "nome": "estilo",
+          "tipo": "selecao",
+          "rotulo": "Estilo",
+          "opcoes": {
+            "cd": "Verde",
+            "ca": "Azul",
+            "bege": "Bege"
+          }
+        },
+        {
+          "nome": "titulo",
+          "tipo": "texto",
+          "rotulo": "Título"
+        },
+        {
+          "nome": "html",
+          "tipo": "html",
+          "rotulo": "Texto"
+        }
+      ]
+    },
+    "chips": {
+      "rotulo": "Etiquetas",
+      "campos": [
+        {
+          "nome": "itens",
+          "tipo": "lista",
+          "rotulo": "Etiquetas"
+        }
+      ]
+    },
+    "pergunta": {
+      "rotulo": "Pergunta / chamada",
+      "campos": [
+        {
+          "nome": "rotulo",
+          "tipo": "texto",
+          "rotulo": "Rótulo pequeno"
+        },
+        {
+          "nome": "html",
+          "tipo": "html",
+          "rotulo": "Texto"
+        }
+      ]
+    },
+    "tabela": {
+      "rotulo": "Tabela",
+      "campos": [
+        {
+          "nome": "cabecalho",
+          "tipo": "lista",
+          "rotulo": "Cabeçalho"
+        },
+        {
+          "nome": "linhas",
+          "tipo": "tabela",
+          "rotulo": "Linhas"
+        },
+        {
+          "nome": "linhas_classe",
+          "tipo": "lista",
+          "rotulo": "Classe de cada linha (hl = destacar, bs = base)"
+        },
+        {
+          "nome": "celulas_classe",
+          "tipo": "json",
+          "rotulo": "Classe por célula, ex.: {\"2,1\": \"ruim\"} (ruim, bom, cen)"
+        },
+        {
+          "nome": "preencher",
+          "tipo": "bool",
+          "rotulo": "Esticar até a altura disponível"
+        }
+      ]
+    },
+    "kpis": {
+      "rotulo": "Indicadores",
+      "campos": [
+        {
+          "nome": "itens",
+          "tipo": "itens",
+          "rotulo": "Indicadores",
+          "subcampos": [
+            {
+              "nome": "valor",
+              "tipo": "texto",
+              "rotulo": "Valor"
+            },
+            {
+              "nome": "texto",
+              "tipo": "html",
+              "rotulo": "Legenda"
+            }
+          ]
+        },
+        {
+          "nome": "direcao",
+          "tipo": "selecao",
+          "rotulo": "Direção",
+          "opcoes": {
+            "horizontal": "Lado a lado",
+            "vertical": "Empilhados"
+          }
+        }
+      ]
+    },
+    "faixa": {
+      "rotulo": "Faixa de conclusão",
+      "campos": [
+        {
+          "nome": "html",
+          "tipo": "html",
+          "rotulo": "Texto"
+        },
+        {
+          "nome": "fim",
+          "tipo": "bool",
+          "rotulo": "Centralizada (encerramento)"
+        }
+      ]
+    },
+    "figura": {
+      "rotulo": "Figura",
+      "campos": [
+        {
+          "nome": "src",
+          "tipo": "imagem",
+          "rotulo": "Imagem"
+        },
+        {
+          "nome": "alt",
+          "tipo": "texto",
+          "rotulo": "Texto alternativo"
+        },
+        {
+          "nome": "legenda",
+          "tipo": "texto",
+          "rotulo": "Legenda"
+        }
+      ]
+    },
+    "duelo": {
+      "rotulo": "Comparação antes × depois",
+      "campos": [
+        {
+          "nome": "titulo",
+          "tipo": "texto",
+          "rotulo": "Título (opcional)"
+        },
+        {
+          "nome": "antes_rotulo",
+          "tipo": "texto",
+          "rotulo": "Rótulo da esquerda"
+        },
+        {
+          "nome": "antes_valor",
+          "tipo": "texto",
+          "rotulo": "Valor da esquerda"
+        },
+        {
+          "nome": "depois_rotulo",
+          "tipo": "texto",
+          "rotulo": "Rótulo da direita"
+        },
+        {
+          "nome": "depois_valor",
+          "tipo": "texto",
+          "rotulo": "Valor da direita"
+        }
+      ]
+    },
+    "lins": {
+      "rotulo": "Linhas numeradas",
+      "campos": [
+        {
+          "nome": "itens",
+          "tipo": "itens",
+          "rotulo": "Linhas",
+          "subcampos": [
+            {
+              "nome": "titulo",
+              "tipo": "texto",
+              "rotulo": "Título"
+            },
+            {
+              "nome": "html",
+              "tipo": "html",
+              "rotulo": "Texto"
+            }
+          ]
+        }
+      ]
+    },
+    "evo": {
+      "rotulo": "Evolução (antes → depois)",
+      "campos": [
+        {
+          "nome": "titulo",
+          "tipo": "texto",
+          "rotulo": "Título"
+        },
+        {
+          "nome": "linhas",
+          "tipo": "itens",
+          "rotulo": "Linhas",
+          "subcampos": [
+            {
+              "nome": "rotulo",
+              "tipo": "texto",
+              "rotulo": "Rótulo"
+            },
+            {
+              "nome": "valor",
+              "tipo": "texto",
+              "rotulo": "Valor"
+            },
+            {
+              "nome": "tendencia",
+              "tipo": "selecao",
+              "rotulo": "Tendência",
+              "opcoes": {
+                "up": "Melhora",
+                "down": "Piora",
+                "eq": "Igual"
+              }
+            }
+          ]
+        },
+        {
+          "nome": "obs",
+          "tipo": "texto",
+          "rotulo": "Observação"
+        },
+        {
+          "nome": "verde",
+          "tipo": "bool",
+          "rotulo": "Borda verde"
+        }
+      ]
+    },
+    "revelar": {
+      "rotulo": "Pergunta com resposta oculta",
+      "campos": [
+        {
+          "nome": "pergunta",
+          "tipo": "texto",
+          "rotulo": "Pergunta"
+        },
+        {
+          "nome": "resposta",
+          "tipo": "html",
+          "rotulo": "Resposta (aparece ao clicar)"
+        }
+      ]
+    },
+    "codigo": {
+      "rotulo": "Código",
+      "campos": [
+        {
+          "nome": "codigo",
+          "tipo": "codigo",
+          "rotulo": "Código"
+        }
+      ]
+    },
+    "video": {
+      "rotulo": "Vídeo do YouTube",
+      "campos": [
+        {
+          "nome": "url",
+          "tipo": "texto",
+          "rotulo": "Endereço do vídeo"
+        }
+      ]
+    },
+    "grade": {
+      "rotulo": "Grade (sub-colunas)",
+      "campos": [
+        {
+          "nome": "proporcao",
+          "tipo": "proporcao",
+          "rotulo": "Proporção",
+          "padrao": "1fr 1fr"
+        },
+        {
+          "nome": "colunas",
+          "tipo": "colunas",
+          "rotulo": "Colunas"
+        }
+      ]
+    },
+    "html": {
+      "rotulo": "HTML livre",
+      "campos": [
+        {
+          "nome": "html",
+          "tipo": "codigo",
+          "rotulo": "HTML"
+        }
+      ]
+    }
+  }
+}
