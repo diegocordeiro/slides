@@ -111,7 +111,8 @@ make editor            # abre http://127.0.0.1:8765 no navegador (Ctrl+C encerra
 - **Temas** (`editor_slides/temas/`): `ppgcc`, `ifpi` e `neutro`, **sem logos**. Na aba *Tema* você troca o tema,
   ajusta cores/fontes/tamanhos (variáveis CSS), adiciona suas próprias logos (barra, capa, rodapé, marca d'água)
   e pode salvar o resultado como um tema novo.
-- **Campos de texto com formatação** (corpo, subtítulos, itens de lista, roteiro…) têm um editor integrado:
+- **Todos os campos de texto** dos slides e blocos (títulos, corpo, faixas, legendas, indicadores, itens de lista,
+  roteiro…) têm um editor integrado (nos campos de uma linha, Enter quebra a linha):
   negrito, itálico, marca-texto, código, listas, **tamanho da fonte** (A− / A+, lista de 60% a 300% ou
   Ctrl+Shift+> / Ctrl+Shift+<, relativo ao tema), quebra de linha, link e limpar formatação, além do botão
   `</>` para ver/editar o HTML. Nas listas, cada item é um editor próprio: Enter cria o próximo item,

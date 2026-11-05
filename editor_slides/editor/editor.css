@@ -150,7 +150,7 @@ dialog h2 { margin: 0 0 10px; font-size: 18px }
 .item-rico { display: grid; grid-template-columns: 18px 1fr auto; gap: 6px; align-items: start }
 .item-rico .num-item { font-size: 11px; font-weight: 700; color: var(--tx2); text-align: right; padding-top: 7px }
 .item-rico .rico { min-width: 0 }
-.ops-item { display: flex; flex-direction: column; gap: 2px; padding-top: 2px }
+.ops-item { display: flex; flex-direction: row; gap: 2px; padding-top: 3px }
 .ops-item button { padding: 0 6px; font-size: 11px; line-height: 1.5 }
 .add-item { align-self: flex-start; font-size: 12.5px }
 .rico-compacto .rico-barra { display: none }

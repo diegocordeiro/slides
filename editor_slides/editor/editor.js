@@ -6,7 +6,7 @@
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const st = {
-  c: null, dados: null, sel: 0, bloco: null, abertos: new Set(), colAtiva: {},
+  c: null, dados: null, sel: 0, bloco: null, fechados: new Set(), colAtiva: {},
   hist: [], fut: [], ultimo: null, sujo: false, ver: null, temaVars: null, imagens: [],
   foco: null, imgSel: null, provedor: null, modelo: ''
 };
@@ -114,7 +114,7 @@ async function abrir(c) {
   const r = await api('/api/projeto?c=' + encodeURIComponent(c));
   Object.assign(st, { c, dados: r.dados, ver: r.verificacao, temaVars: r.tema_vars, imagens: r.imagens, sel: 0, bloco: null,
     hist: [], fut: [], ultimo: JSON.stringify(r.dados), sujo: false, foco: null, imgSel: null });
-  st.abertos.clear();
+  st.fechados.clear();
   try { localStorage.setItem('editor_slides:ultimo', c); } catch (e) { }
   $('#salvo').textContent = '';
   renderTudo();
@@ -351,7 +351,7 @@ function trocarImagemPalco(img) {
 function selecionarBloco(caminho) {
   st.bloco = caminho;
   const ks = caminho.split('/');
-  for (let k = 3; k <= ks.length; k++) st.abertos.add(ks.slice(0, k).join('/'));
+  for (let k = 3; k <= ks.length; k++) st.fechados.delete(ks.slice(0, k).join('/'));
   const re = /colunas\/(\d+)/g; let m;
   while ((m = re.exec(caminho))) st.colAtiva[caminho.slice(0, m.index + 7)] = +m[1];
   const doc = docPalco(); $$('.ed-sel', doc).forEach(x => x.classList.remove('ed-sel'));
@@ -482,7 +482,8 @@ function editorRico(valor, aoMudar, op = {}) {
   });
   area.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey && op.aoEnter && !dentroDe(getSelection().anchorNode, area, n => n.tagName === 'LI')) { e.preventDefault(); op.aoEnter(); return; }
-    if (e.key === 'Enter' && e.shiftKey) { e.preventDefault(); document.execCommand('insertLineBreak'); }
+    if (e.key === 'Enter' && (e.shiftKey || op.linha) && !op.aoEnter) { e.preventDefault(); document.execCommand('insertLineBreak'); }
+    else if (e.key === 'Enter' && e.shiftKey) { e.preventDefault(); document.execCommand('insertLineBreak'); }
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); link(); }
   });
   fonte.addEventListener('input', () => { area.innerHTML = fonte.value; aoMudar(limparRico(fonte.value)); });
@@ -545,6 +546,8 @@ function editorRico(valor, aoMudar, op = {}) {
 }
 function campoRotulo(rot, ...filhos) { return h('div', { class: 'campo' }, h('span', { class: 'rotulo' }, rot), ...filhos); }
 const LISTAS_SIMPLES = ['linhas_classe', 'cabecalho_classe'];
+// campos de texto que NÃO são HTML (atributos, nomes de arquivo, números)
+const TEXTO_SIMPLES = ['alt', 'url', 'arquivo', 'cronometro_min', 'src', 'nome'];
 function listaRica(itens, aoMudar, rot) {
   const box = h('div', { class: 'lista-rica' });
   const lista = (itens || []).slice();
@@ -576,7 +579,11 @@ function campoEl(c, base, onAlterar) {
   const alterar = (val, rerender = true) => { setP(st.dados, caminho, val); marcar(rerender); if (onAlterar) onAlterar(); };
   const rot = c.rotulo || c.nome;
   switch (c.tipo) {
-    case 'texto': case 'proporcao':
+    case 'texto':
+      if (!TEXTO_SIMPLES.includes(c.nome) && !/^meta(\/|$)/.test(base))
+        return campoRotulo(rot, editorRico(v, val => alterar(val), { compacto: true, linha: true, placeholder: c.padrao || '' }));
+      return h('label', {}, rot, h('input', { value: v || '', placeholder: c.padrao || '', oninput: e => alterar(e.target.value) }));
+    case 'proporcao':
       return h('label', {}, rot, h('input', { value: v || '', placeholder: c.padrao || '', oninput: e => alterar(e.target.value) }));
     case 'html':
       return campoRotulo(rot, editorRico(v, val => alterar(val)));
@@ -648,10 +655,10 @@ function editorBlocos(caminho) {
   const box = h('div', {});
   lista.forEach((b, i) => {
     const p = caminho + '/' + i; const def = CAT.blocos[b.tipo] || { rotulo: b.tipo, campos: [] };
-    const aberto = st.abertos.has(p);
+    const aberto = !st.fechados.has(p);
     const mov = (d) => { const j = i + d; if (j < 0 || j >= lista.length) return; [lista[i], lista[j]] = [lista[j], lista[i]]; st.bloco = null; marcar(); renderPainelSlide(); };
     const el = h('div', { class: 'bloco' + (st.bloco === p ? ' sel' : '') },
-      h('div', { class: 'cab', onclick: () => { aberto ? st.abertos.delete(p) : st.abertos.add(p); renderPainelSlide(); } },
+      h('div', { class: 'cab', onclick: () => { aberto ? st.fechados.add(p) : st.fechados.delete(p); renderPainelSlide(); } },
         h('span', {}, aberto ? '▾' : '▸'),
         h('span', { class: 'nome' }, def.rotulo + ' ', h('small', {}, resumoBloco(b))),
         h('button', { title: 'Subir', onclick: e => { e.stopPropagation(); mov(-1); } }, '↑'),
@@ -661,7 +668,7 @@ function editorBlocos(caminho) {
     if (aberto) { const corpo = h('div', { class: 'corpo' }); formCampos(def.campos, p, corpo); el.append(corpo); }
     box.append(el);
   });
-  const sel = h('select', { onchange: e => { if (!e.target.value) return; lista.push(blocoPadrao(e.target.value)); setP(st.dados, caminho, lista); st.abertos.add(caminho + '/' + (lista.length - 1)); marcar(); renderPainelSlide(); } },
+  const sel = h('select', { onchange: e => { if (!e.target.value) return; lista.push(blocoPadrao(e.target.value)); setP(st.dados, caminho, lista); st.fechados.delete(caminho + '/' + (lista.length - 1)); marcar(); renderPainelSlide(); } },
     h('option', { value: '' }, '+ Adicionar bloco…'), ...Object.entries(CAT.blocos).map(([k, v]) => h('option', { value: k }, v.rotulo)));
   box.append(sel);
   return box;
