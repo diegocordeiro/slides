@@ -1,0 +1,719 @@
+{
+  "versao": 1,
+  "motor": "editor",
+  "estado": "editor",
+  "meta": {
+    "titulo": "Predição de Doença Cardíaca — Random Forest × Árvore de Decisão",
+    "titulo_barra": "Random Forest × Árvore de Decisão",
+    "arquivo": "apresentacao.html",
+    "cronometro_min": 10,
+    "rodape": "<strong>Random Forest × Árvore de Decisão</strong> · Aprendizado de Máquina — PPGCC/UFPI",
+    "numerar": true,
+    "mostrar_pdf": true,
+    "lang": "pt-BR"
+  },
+  "tema": {
+    "base": "ppgcc",
+    "vars": {},
+    "logos": {
+      "barra": "img/logo.png",
+      "capa": null,
+      "rodape": "img/logo_full.png",
+      "marca": "img/marca.png"
+    }
+  },
+  "css_extra": "#s2 .card li { margin:7px 0 }\n#s2 .duelo { grid-template-columns:1fr 1.18fr }\n#s2 .duelo b { font-size:1.35em; white-space:nowrap }\n#s4 .tb2 td, #s4 .tb2 th { padding-top:4px; padding-bottom:4px }\n#s4 .kpi > div { padding:8px 14px }\n#s4 .kpi b { font-size:1.42em }\n#s4 .kpi span { font-size:14.5px; line-height:1.3 }\n#s8 .card { padding:9px 12px }\n#s8 .card p { font-size:15px; line-height:1.34 }\n#s8 .tb2 td, #s8 .tb2 th { padding:5px 12px }\n#s9 .card.vd { padding:18px 24px; border-left:6px solid var(--ve) }\n#s9 .card.vd h3 { font-size:1.2em; margin-bottom:10px !important; color:var(--vd-tx) }\n#s9 .card.vd p { font-size:19px; line-height:1.55 }\n#s3 .card { padding:12px 14px; justify-content:center; flex:1 1 auto }\n#s3 .tb2 { margin:0; table-layout:fixed }\n#s3 .tb2 th:first-child, #s3 .tb2 td:first-child { width:46% }\n#s3 .tb2 th:nth-child(2), #s3 .tb2 td:nth-child(2), #s3 .tb2 th:nth-child(3), #s3 .tb2 td:nth-child(3) { width:27% }\n#s3 .tb2 th { padding:8px 12px }\n#s3 .tb2 td { padding:9px 12px }\n#s3 .tb2 tr.grp td { background:var(--azc) !important }\n#s3 .tb2 tr.grp td:first-child { box-shadow:inset 3px 0 0 var(--bem) }\n#s3 .tb2 td.floresta { background:var(--vd-bg); color:var(--vd-tx); font-weight:700 }\n#s3 .cap { margin:8px 0 0 }\n#s2 .duelo { flex:0 0 auto; margin-bottom:8px }\n#s9 .card.vd { justify-content:center }",
+  "slides": [
+    {
+      "layout": "capa",
+      "rotulo": "Aprendizado de Máquina · PPGCC/UFPI",
+      "titulo": "Predição de Doença Cardíaca:<br>Random Forest × Árvore de Decisão",
+      "subtitulos": [
+        "Integrantes:\n            <ul>\n              <li>Arthur Fernando Elvas Bohn — 20261001997</li>\n              <li>Diego Cordeiro de Oliveira — 20261002180</li>\n              <li>Keoma de Sousa Coelho — 20261004952</li>\n            </ul>",
+        "Professor:\n            <ul>\n              <li>Dr. Vinicius Ponte Machado</li>\n            </ul>"
+      ],
+      "imagem": "img/logo_full.png",
+      "notas": "<strong>~20 s.</strong> Apresentar o grupo. A pergunta de pesquisa abre o próximo slide: “repetimos com Random Forest tudo o que fizemos com a Árvore de Decisão e comparamos os resultados”."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Contexto",
+      "topo_proporcao": "1.25fr 1fr",
+      "topo": [
+        {
+          "tipo": "pergunta",
+          "rotulo": "Pergunta de pesquisa",
+          "html": "Trocar <b>1 árvore</b> por uma floresta de <b>300 árvores</b> melhora a triagem de doença cardíaca?"
+        },
+        {
+          "tipo": "chips",
+          "itens": [
+            "Classificação binária",
+            "Heart Failure (Kaggle)",
+            "918 registros",
+            "11 atributos",
+            "Teste: 184 pacientes"
+          ]
+        }
+      ],
+      "proporcao": "1fr 1.1fr 1.1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "titulo": "Erro mais grave",
+            "destaque": "Falso negativo da classe 1",
+            "html": "<p>O paciente doente classificado como sadio fica <strong>sem tratamento</strong>.</p>",
+            "stat_valor": "102",
+            "stat_texto": "doentes no conjunto de teste, cada FN é um deles sem diagnóstico",
+            "rodape": "<strong>Métricas:</strong> recall e F1 da classe 1, além do F1 macro."
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Mantido igual",
+            "itens": [
+              "Split estratificado 80/20, semente 42 (734 / 184).",
+              "CV <code>RepeatedStratifiedKFold</code> 5 × 2.",
+              "Grade de <strong>864 combinações</strong>, refit por F1_c1.",
+              "Ablação, engenharia, baseline e IC 95%."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "O que muda",
+            "blocos": [
+              {
+                "tipo": "duelo",
+                "antes_rotulo": "Antes",
+                "antes_valor": "1 árvore",
+                "depois_rotulo": "Agora",
+                "depois_valor": "300 árvores"
+              }
+            ],
+            "itens": [
+              "<strong>Aleatoriedade:</strong> bootstrap + <code>max_features</code> por nó.",
+              "<strong>Extras:</strong> OOB, dispersão das importâncias e nº de árvores."
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "O algoritmo é a <b>única variável alterada</b> → a diferença de resultado é atribuível ao modelo, não ao protocolo."
+        }
+      ],
+      "notas": "<strong>~1 min.</strong> Reforçar que o protocolo é idêntico ao da árvore; o único fator alterado é o estimador. Explicar rapidamente por que o falso negativo é o erro que guia a escolha das métricas."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Grid Search: mesma grade e custo maior",
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<table class=\"tb2\">\n              <tr>\n                <th>Selecionado (Random Forest)</th>\n                <th>one-hot</th>\n                <th>ordinal</th>\n              </tr>\n              <tr class=\"grp\">\n                <td>Comum às duas</td>\n                <td colspan=\"2\" class=\"cen\"><code>entropy</code> · <code>sqrt</code> · <code>balanced</code></td>\n              </tr>\n              <tr>\n                <td>max_depth / min_samples_leaf</td>\n                <td>None / 5</td>\n                <td>7 / 1</td>\n              </tr>\n              <tr>\n                <td>Imputação</td>\n                <td>mediana</td>\n                <td>média</td>\n              </tr>\n              <tr>\n                <td>Melhor F1_CV</td>\n                <td><strong>0,8809</strong></td>\n                <td>0,8799</td>\n              </tr>\n              <tr>\n                <td>OOB score</td>\n                <td>0,8583</td>\n                <td>0,8583</td>\n              </tr>\n              <tr>\n                <td>Tempo de busca</td>\n                <td>12,0 min</td>\n                <td>14,4 min</td>\n              </tr>\n            </table>"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<table class=\"tb2\">\n              <tr>\n                <th>Métrica</th>\n                <th>Árvore de Decisão</th>\n                <th>Random Forest</th>\n              </tr>\n              <tr>\n                <td>Profundidade das árvores</td>\n                <td>3</td>\n                <td class=\"floresta\">7,0 – 9,9</td>\n              </tr>\n              <tr>\n                <td>Tempo de busca</td>\n                <td>segundos</td>\n                <td class=\"floresta\">~26 min</td>\n              </tr>\n              <tr>\n                <td>Runs no MLflow</td>\n                <td>111</td>\n                <td class=\"floresta\">26</td>\n              </tr>\n            </table>"
+              }
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~50 s.</strong> A árvore precisou ser rasa (profundidade 3) para generalizar; a floresta usa árvores profundas e reduz a variância pela média. O preço é o tempo de busca. Tudo está no MLflow, no mesmo banco da árvore, o que permite comparar lado a lado."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Resultados: 4 cenários",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "cabecalho": [
+              "Cenário",
+              "F1_c1 AD",
+              "F1_c1 RF",
+              "ΔF1_c1",
+              "FN AD",
+              "FN RF",
+              "F1_macro AD",
+              "F1_macro RF"
+            ],
+            "linhas": [
+              [
+                "one-hot",
+                "0,8308",
+                "0,8932",
+                "+0,0624",
+                "21",
+                "<strong>10</strong>",
+                "0,8200",
+                "0,8787"
+              ],
+              [
+                "ordinal",
+                "0,8387",
+                "0,8955",
+                "+0,0568",
+                "11",
+                "12",
+                "0,8035",
+                "0,8849"
+              ],
+              [
+                "sem engenharia",
+                "0,8387",
+                "<strong>0,9091</strong>",
+                "<strong>+0,0704</strong>",
+                "11",
+                "<strong>7</strong>",
+                "0,8035",
+                "<strong>0,8948</strong>"
+              ],
+              [
+                "com engenharia",
+                "0,8545",
+                "0,8558",
+                "+0,0012",
+                "8",
+                "13",
+                "0,8192",
+                "0,8341"
+              ]
+            ],
+            "linhas_classe": [
+              "",
+              "",
+              "hl",
+              ""
+            ]
+          },
+          {
+            "tipo": "grade",
+            "proporcao": "1.75fr 1fr",
+            "colunas": [
+              [
+                {
+                  "tipo": "figura",
+                  "src": "img/comparacao_rf_vs_arvore.png",
+                  "alt": "Gráfico comparativo de F1_c1 e falsos negativos"
+                }
+              ],
+              [
+                {
+                  "tipo": "kpis",
+                  "direcao": "vertical",
+                  "itens": [
+                    {
+                      "valor": "+0,0704",
+                      "texto": "maior ganho de F1_c1, RF com os 11 atributos chega a <strong>0,9091</strong>"
+                    },
+                    {
+                      "valor": "11FN (AD) → 7 FN (RF)",
+                      "texto": "menos doentes sem diagnóstico no mesmo cenário"
+                    },
+                    {
+                      "valor": "24FP (AD) → 12 FP (RF)",
+                      "texto": "dados da melhor árvore (com engenharia, 8 FN). Baseline: F1_c1 0,7133 e 82 FP"
+                    }
+                  ]
+                }
+              ]
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min 30 s — slide central.</strong> Ler a linha destacada: com todos os atributos, a floresta sobe o F1_c1 de 0,8387 para 0,9091 e cai de 11 para 7 falsos negativos. A vantagem aparece nos quatro cenários (Δ de +0,0012 a +0,0704), também no F1 macro. Citar o baseline para mostrar que 0,71 é o piso."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Alvo da questão de pesquisa",
+      "proporcao": "1.3fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "cabecalho": [
+              "Modelo (teste: 82 sadios, 102 doentes)",
+              "FP",
+              "FN",
+              "Recall_c1",
+              "F1_c1"
+            ],
+            "linhas": [
+              [
+                "RF sem engenharia",
+                "12",
+                "<strong>7</strong>",
+                "<strong>0,9314</strong>",
+                "<strong>0,9091</strong>"
+              ],
+              [
+                "RF ordinal",
+                "<strong>9</strong>",
+                "12",
+                "0,8824",
+                "0,8955"
+              ],
+              [
+                "RF one-hot",
+                "12",
+                "10",
+                "0,9020",
+                "0,8932"
+              ],
+              [
+                "AD com engenharia",
+                "24",
+                "8",
+                "0,9216",
+                "0,8545"
+              ],
+              [
+                "AD ordinal",
+                "24",
+                "11",
+                "0,8922",
+                "0,8387"
+              ],
+              [
+                "AD one-hot",
+                "12",
+                "21",
+                "0,7941",
+                "0,8308"
+              ],
+              [
+                "Baseline (maioria)",
+                "82",
+                "0",
+                "1,0000",
+                "0,7133"
+              ]
+            ],
+            "linhas_classe": [
+              "hl",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "bs"
+            ],
+            "celulas_classe": {
+              "5,2": "ruim"
+            },
+            "preencher": true
+          }
+        ],
+        [
+          {
+            "tipo": "figura",
+            "src": "img/confusion_matrix_rf_ordinal.png",
+            "alt": "Matriz de confusão do Random Forest ordinal",
+            "legenda": "RF ordinal: menos alarmes falsos (9 FP) porém 12 FN"
+          },
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "titulo": "Trade-off",
+            "html": "<p style=\"margin:0;\">A melhor floresta erra <strong>menos doentes</strong> que a melhor árvore (7 × 8 FN) com <strong>metade dos falsos positivos</strong> (12 × 24). O baseline tem 0 FN, mas erra os 82 sadios.</p>"
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min 15 s.</strong> Focar na coluna FN. A RF ordinal (na matriz) é a que menos gera alarmes falsos (9 FP), mas deixa 12 doentes sem diagnóstico; a RF com os 11 atributos é o melhor compromisso para triagem. O baseline mostra por que a acurácia isolada engana."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Otimizações: ablação e engenharia de atributos",
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Ablação — F1_c1 ao remover um atributo",
+            "blocos": [
+              {
+                "tipo": "tabela",
+                "cabecalho": [
+                  "Cenário",
+                  "Árvore",
+                  "RF"
+                ],
+                "linhas": [
+                  [
+                    "todos os atributos",
+                    "<strong>0,8387</strong>",
+                    "<strong>0,9091</strong>"
+                  ],
+                  [
+                    "sem Oldpeak",
+                    "0,7647",
+                    "0,9005"
+                  ],
+                  [
+                    "sem MaxHR",
+                    "0,7890",
+                    "0,9005"
+                  ],
+                  [
+                    "sem ST_Slope",
+                    "0,7897",
+                    "0,8600"
+                  ],
+                  [
+                    "sem ChestPainType",
+                    "0,7647",
+                    "0,8400"
+                  ]
+                ],
+                "linhas_classe": [
+                  "hl",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                "celulas_classe": {
+                  "1,1": "ruim",
+                  "2,1": "ruim",
+                  "3,1": "ruim",
+                  "4,1": "ruim"
+                },
+                "preencher": true
+              }
+            ],
+            "rodape": "RF vence nos <strong>12 cenários de ablação em comparação com Árvore de Decisão</strong> (Δ de +0,0585 a +0,1358). Nas duas abordagens, manter todos os atributos é o melhor."
+          }
+        ],
+        [
+          {
+            "tipo": "titulo",
+            "texto": "Engenharia de atributos"
+          },
+          {
+            "tipo": "evo",
+            "titulo": "Árvore de Decisão — sem → com",
+            "linhas": [
+              {
+                "rotulo": "F1_c1 no teste",
+                "valor": "0,8387 → 0,8545 ▲",
+                "tendencia": "up"
+              },
+              {
+                "rotulo": "F1_CV",
+                "valor": "0,8604 → 0,7946 ▼",
+                "tendencia": "down"
+              }
+            ],
+            "obs": "Ganho no teste não confirmado pela CV."
+          },
+          {
+            "tipo": "evo",
+            "verde": true,
+            "titulo": "Random Forest — sem → com",
+            "linhas": [
+              {
+                "rotulo": "F1_c1 no teste",
+                "valor": "0,9091 → 0,8558 ▼",
+                "tendencia": "down"
+              },
+              {
+                "rotulo": "Falsos negativos",
+                "valor": "7 → 13 ▼",
+                "tendencia": "down"
+              },
+              {
+                "rotulo": "F1_CV",
+                "valor": "0,8744 → 0,8775 ≈",
+                "tendencia": "eq"
+              }
+            ],
+            "obs": "Efeito oposto: piora a floresta no teste."
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "O ensemble compensa a variável ausente e já combina cortes para formar interações. As razões criadas para a árvore, viram ruído na floresta."
+        }
+      ],
+      "notas": "<strong>~1 min 45 s.</strong> Ablação: a árvore despenca para 0,76–0,79 sem Oldpeak, MaxHR ou ChestPainType; a floresta se mantém entre 0,84 e 0,91 — é a redução de variância na prática. Engenharia: na árvore, ganho no teste não confirmado pela CV; na floresta, piora no teste. Conclusão: não é ganho universal."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Como a floresta decide",
+      "proporcao": "1.05fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/importancia_variaveis_top10_rf.png",
+            "alt": "Top 10 importâncias médias do Random Forest"
+          }
+        ],
+        [
+          {
+            "tipo": "tabela",
+            "cabecalho": [
+              "Variável",
+              "Impureza",
+              "Desvio",
+              "Permutação ΔF1"
+            ],
+            "linhas": [
+              [
+                "ST_Slope",
+                "<strong>0,2687</strong>",
+                "0,1328",
+                "<strong>0,1367</strong>"
+              ],
+              [
+                "ChestPainType",
+                "0,1432",
+                "0,0913",
+                "0,0391"
+              ],
+              [
+                "MaxHR",
+                "0,1083",
+                "0,0539",
+                "0,0158"
+              ],
+              [
+                "Oldpeak",
+                "0,1030",
+                "0,0602",
+                "0,0226"
+              ]
+            ],
+            "linhas_classe": [
+              "hl",
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "ST_Slope domina",
+            "html": "<p style=\"margin:0;\">Lidera nas duas medidas, mas com <strong>desvio alto</strong> entre as árvores: em algumas decide quase tudo, em outras é secundária.</p>"
+          },
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Árvore de Decisão × Random Forest",
+            "html": "<p style=\"margin:0;\"><strong>AD:</strong> ExerciseAngina e ST_Slope na raiz. <strong>RF:</strong> decisão distribuída; ChestPainType sobe para 2º.</p>"
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min.</strong> A importância por impureza e a por permutação concordam no topo (ST_Slope). O desvio alto mostra que em algumas árvores ela decide quase tudo e em outras é secundária — por isso reportamos a dispersão. A interpretação deixa de ser “um caminho” e passa a ser “quais variáveis reduzem mais a impureza”."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Análise do ganho",
+      "proporcao": "1.2fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "cabecalho": [
+              "Modelo",
+              "F1_CV",
+              "F1_c1 teste",
+              "IC 95% F1_c1"
+            ],
+            "linhas": [
+              [
+                "AD ordinal",
+                "0,8604",
+                "0,8387",
+                "0,7817–0,8879"
+              ],
+              [
+                "AD one-hot",
+                "0,8550",
+                "0,8308",
+                "0,7650–0,8865"
+              ],
+              [
+                "RF ordinal",
+                "0,8799",
+                "0,8955",
+                "0,8469–0,9368"
+              ],
+              [
+                "RF one-hot",
+                "<strong>0,8809</strong>",
+                "0,8932",
+                "0,8442–0,9347"
+              ],
+              [
+                "RF sem engenharia",
+                "0,8744",
+                "<strong>0,9091</strong>",
+                "0,8649–0,9469"
+              ]
+            ],
+            "linhas_classe": [
+              "",
+              "",
+              "hl",
+              "hl",
+              "hl"
+            ]
+          },
+          {
+            "tipo": "grade",
+            "proporcao": "1fr 1fr 1.45fr",
+            "colunas": [
+              [
+                {
+                  "tipo": "card",
+                  "variante": "vd",
+                  "crescer": true,
+                  "titulo": "Validação Cruzada (CV)",
+                  "html": "<p style=\"margin:0;\">F1_CV <strong>maior em todas</strong> as configurações.</p>"
+                }
+              ],
+              [
+                {
+                  "tipo": "card",
+                  "variante": "er",
+                  "crescer": true,
+                  "titulo": "Intervalo de Confiança (IC 95%)",
+                  "html": "<p style=\"margin:0;\">Intervalos <strong>se sobrepõem</strong>: vantagem consistente, mas não conclusiva com 184 pacientes.</p>"
+                }
+              ],
+              [
+                {
+                  "tipo": "card",
+                  "crescer": true,
+                  "titulo": "OOB (<em>out-of-bag</em>)",
+                  "html": "<p style=\"margin:0;\">Cada árvore é avaliada nas amostras que ficaram <strong>fora do seu bootstrap</strong>, uma validação interna, sem usar o teste. <strong>0,8583</strong> (630 de 734), coerente com a CV.</p>"
+                }
+              ]
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "figura",
+            "src": "img/sensibilidade_n_arvores.png",
+            "alt": "Curva de sensibilidade ao número de árvores"
+          },
+          {
+            "tipo": "kpis",
+            "itens": [
+              {
+                "valor": "+0,0054",
+                "texto": "100 → 300 árvores"
+              },
+              {
+                "valor": "+0,0044",
+                "texto": "300 → 500 árvores"
+              },
+              {
+                "valor": "0",
+                "texto": "500 → 800 (idênticos)"
+              }
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min.</strong> Pergunta provável da banca: “é sorte do split?”. Resposta: a CV repetida também favorece a floresta; porém os IC ainda se sobrepõem, então somos cautelosos. O número de árvores tem retorno decrescente — 300 já capturam quase todo o ganho."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Conclusão",
+      "topo": [
+        {
+          "tipo": "kpis",
+          "itens": [
+            {
+              "valor": "0,9091",
+              "texto": "F1_c1 da melhor floresta (árvore: 0,8545)"
+            },
+            {
+              "valor": "7 FN",
+              "texto": "contra 8 da melhor árvore, com metade dos FP"
+            },
+            {
+              "valor": "0,8809",
+              "texto": "F1_CV da floresta (árvore: 0,8604)"
+            },
+            {
+              "valor": "~26 min",
+              "texto": "de busca, contra segundos da árvore"
+            }
+          ]
+        }
+      ],
+      "proporcao": "1.25fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "lins",
+            "itens": [
+              {
+                "titulo": "Desempenho",
+                "html": "Random Forest foi <strong>superior em todos os cenários</strong> → F1_c1, F1 macro e falsos positivos."
+              },
+              {
+                "titulo": "Engenharia de atributos",
+                "html": "Ajudou a Árvore de Decisão e <strong>prejudicou a RF</strong>."
+              },
+              {
+                "titulo": "Interpretabilidade",
+                "html": "AD oferece um <strong>caminho auditável</strong>, RF importância agregada e permutação."
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Análise no ambiente de triagem",
+            "html": "<p style=\"margin:0;\">Usar o Random Forest com os 11 atributos. Manter a Árvoce de Decisão quando a <strong>explicabilidade</strong> do caminho de decisão for requisito.</p>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "fim": true,
+          "html": "Obrigado! Perguntas?"
+        }
+      ],
+      "notas": "<strong>~1 min.</strong> Fechar com os quatro números e a recomendação."
+    }
+  ]
+}

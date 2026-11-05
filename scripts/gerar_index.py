@@ -23,7 +23,7 @@ import re
 from datetime import datetime
 
 # Pastas que nunca entram na varredura
-PASTAS_IGNORADAS = {".git", ".github", "scripts", "_site", "node_modules", "__pycache__"}
+PASTAS_IGNORADAS = {".git", ".github", "scripts", "_site", "node_modules", "__pycache__", "editor_slides"}
 
 # Um arquivo é considerado apresentação quando tem pelo menos dois slides
 PADRAO_SLIDE = re.compile(r'<div class="sl(?:\s|")')

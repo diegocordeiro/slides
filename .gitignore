@@ -19,3 +19,9 @@ __pycache__/
 
 # ---- Saída do build do GitHub Pages ----
 _site/
+
+# ---- Editor de slides: chaves de API (NUNCA versionar) ----
+.env
+.env.*
+!.env.exemplo
+editor_slides/.cache/

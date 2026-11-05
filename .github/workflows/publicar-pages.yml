@@ -37,6 +37,10 @@ jobs:
             --exclude='.git' \
             --exclude='.github' \
             --exclude='scripts' \
+            --exclude='editor_slides' \
+            --exclude='apresentacao.json' \
+            --exclude='.env' \
+            --exclude='Makefile' \
             --exclude='_site' \
             --exclude='.DS_Store' \
             --exclude='._*' \
