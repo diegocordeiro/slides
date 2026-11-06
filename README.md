@@ -118,6 +118,13 @@ make editor            # abre http://127.0.0.1:8765 no navegador (Ctrl+C encerra
   `</>` para ver/editar o HTML. Nas listas, cada item é um editor próprio: Enter cria o próximo item,
   Shift+Enter quebra a linha, ↑ ↓ reordenam. Colar sempre insere texto puro (sem estilos de outros sites).
 - **Imagens** enviadas pelo editor vão para `img/` da aula com nome em minúsculas e hífens (o `make checar` agradece).
+- **Apresentar com passador ou tela de toque** (aulas geradas pelo editor, nas janelas de apresentação e do
+  apresentador, que andam juntas):
+  - avançar: PageDown, →, ↓, Espaço, Enter · voltar: PageUp, ←, ↑, Backspace, Shift+Espaço · Home/End: início/fim;
+  - botão "iniciar" do passador (F5) ou F: tela cheia · botão "tela preta" (. ou B) / W: tela branca —
+    qualquer tecla volta;
+  - toque: arraste para a esquerda/direita, ou toque na faixa lateral (15% de cada lado);
+    os botões de navegação ficam maiores em telas de toque.
 - **Salvamento** automático, desfazer/refazer (Ctrl+Z / Ctrl+Shift+Z), Ctrl+S salva.
 - **Publicar**: mostra a branch e os arquivos alterados, permite rodar o *checar* e então executa
   `make publicar` exibindo o log. Fora da `main` o push vai para a branch atual (o site só muda após o merge).

@@ -1,36 +1,36 @@
 /* Gerado pelo editor de slides — não edite à mão (edite o apresentacao.json). */
 
-/* Tema: PPGCC / UFPI */
+/* Tema: Neutro */
 
 :root {
-    --az: #0B1922;
-    --aze: #07121A;
-    --azc: #EAF0F6;
-    --azc-bd: #C9D7E5;
-    --ve: #2D9A39;
-    --ves: #EAF4EC;
-    --mk: #CBE7D3;
-    --bg: #F0F2F4;
-    --p: #16211F;
-    --c: #5C5C5C;
+    --az: #1F2937;
+    --aze: #111827;
+    --azc: #EEF2F7;
+    --azc-bd: #D1D9E4;
+    --ve: #2563EB;
+    --ves: #EFF4FF;
+    --mk: #DBE6FE;
+    --bg: #F3F4F6;
+    --p: #111827;
+    --c: #4B5563;
     --b: #fff;
-    --er: #B3261E;
-    --bem: #3E7CB6;
-    --bem2: #1B3A5C;
-    --capa-dir: #123246;
-    --fita2: #7CC99A;
-    --rot-claro: #B4D89F;
-    --destaque: #8FE39B;
-    --tela: #EEF1F3;
-    --card-bg: #F7F9FA;
-    --linha: #E1E7EC;
-    --linha-tab: #D8DFE3;
-    --zebra: #F4F6F8;
-    --linha-bt: #C7D1D9;
-    --nota-bg: #F0F7F3;
-    --nota-bd: #BFD9CB;
-    --ov1: rgba(7, 18, 26, .92);
-    --ov2: rgba(27, 58, 92, .86);
+    --er: #B42318;
+    --bem: #2563EB;
+    --bem2: #1E3A8A;
+    --capa-dir: #374151;
+    --fita2: #60A5FA;
+    --rot-claro: #BFDBFE;
+    --destaque: #93C5FD;
+    --tela: #F3F4F6;
+    --card-bg: #F9FAFB;
+    --linha: #E5E7EB;
+    --linha-tab: #E5E7EB;
+    --zebra: #F9FAFB;
+    --linha-bt: #D1D5DB;
+    --nota-bg: #EFF4FF;
+    --nota-bd: #C7D7FE;
+    --ov1: rgba(17, 24, 39, .92);
+    --ov2: rgba(30, 58, 138, .86);
     --fonte: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     --fonte-tit: var(--fonte);
     --fs-capa: clamp(32px, 2.6vw, 40px);
@@ -44,12 +44,12 @@
     --er-bg: #FBEDEC;
     --er-bd: #F0C7C3;
     --er-tx: #8A1F18;
-    --vd-bg: #EAF4EC;
-    --vd-bd: #CBE7D3;
-    --vd-tx: #1F7A2C;
+    --vd-bg: #EFF4FF;
+    --vd-bd: #C7D7FE;
+    --vd-tx: #1D4ED8;
     --aviso-bg: #F8F4E9;
     --aviso-tx: #6B5E44;
-    --tx-apoio: #45525C;
+    --tx-apoio: #4B5563;
 }
 
 /* ============================================================
@@ -1599,6 +1599,21 @@ body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
 .divisor .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
 .divisor:not(:has(.bg)) { background: linear-gradient(135deg, var(--aze), var(--bem2)) }
 .capa .dir .selo { color: #fff; font-family: var(--fonte-tit); font-size: 64px; font-weight: 800; opacity: .9 }
+
+/* ===== Toque e passadores ===== */
+.ctr button, .dots .dot, .tb button { touch-action: manipulation }
+.sc, .sl { touch-action: pan-y pinch-zoom }
+#tela-apagada { position: fixed; inset: 0; z-index: 9999; display: none; cursor: none }
+#tela-apagada.on { display: block }
+#tela-apagada.preta { background: #000 }
+#tela-apagada.branca { background: #fff }
+@media (pointer: coarse) {
+    .ctr { padding: 10px; gap: 12px }
+    .ctr button { padding: 12px 24px; font-size: 16px; min-height: 46px }
+    .dots .dot { min-width: 38px; height: 38px; font-size: 14px }
+    .tb button, .fz button { min-height: 38px }
+}
+@media print { #tela-apagada { display: none !important } }
 
 /* ===== Modo editor (prévia dentro do editor; nunca publicado) ===== */
 body.modo-editor { width: 1280px; height: 720px }
