@@ -1,0 +1,855 @@
+{
+  "versao": 1,
+  "motor": "editor",
+  "estado": "editor",
+  "meta": {
+    "titulo": "Agentic Harness Engineering — Seminário PPGCC/UFPI",
+    "titulo_barra": "Agentic Harness Engineering",
+    "arquivo": "apresentacao.html",
+    "cronometro_min": 20,
+    "rodape": "<strong>Agentic Harness Engineering</strong> · Lin et al. (2026) · Seminário — PPGCC/UFPI",
+    "numerar": true,
+    "mostrar_pdf": true,
+    "lang": "pt-BR"
+  },
+  "tema": {
+    "base": "neutro",
+    "vars": {},
+    "logos": {
+      "barra": "img/logo.png",
+      "capa": null,
+      "rodape": "img/logo_full.png",
+      "marca": "img/marca.png"
+    }
+  },
+  "css_extra": "/* fonte das informações, discreta, alinhada à direita */\n.fonte { font-size:12.5px; color:var(--tx-apoio); text-align:right; line-height:1.3; margin-top:-4px }\n.slbd.g > .fonte, .slbd.g > div > .fonte { margin-top:-8px }\n/* capa */\n#s1 .capa .esq h1 { font-size:38px }\n#s1 .capa .esq h1 span { display:block; font-size:.6em; font-weight:600; line-height:1.3; margin-top:8px; letter-spacing:-.2px; color:var(--destaque) }\n#s1 .capa .esq .sub { font-size:15.5px }\n#s1 .capa .esq .sub b { color:#fff }\n/* roteiro */\n#s2 .lin div { font-size:17px }\n#s2 .lin span { color:var(--tx-apoio) }\n#s2 .lin { padding:9px 18px }\n#s2 .card.vd p { font-size:15.5px }\n/* mapa obstáculo → pilar (slide 4) */\n.mapa { display:grid; grid-template-rows:auto repeat(3,1fr); gap:10px; flex:1; min-height:0 }\n.mapa .ln { display:grid; grid-template-columns:1fr 44px 0.82fr; align-items:stretch; gap:0 }\n.mapa .cab { font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--tx-apoio); align-self:end }\n.mapa .cab.d { color:var(--vd-tx) }\n.mapa .obs { background:var(--card-bg); border:1px solid var(--linha); border-radius:14px; padding:10px 16px; display:flex; flex-direction:column; justify-content:center }\n.mapa .obs b { color:var(--az); font-size:1.02em }\n.mapa .obs span { color:var(--tx-apoio); font-size:15.5px; line-height:1.35; margin-top:2px }\n.mapa .seta { display:flex; align-items:center; justify-content:center; color:var(--ve); font-size:26px; font-weight:800 }\n.mapa .pil { background:var(--vd-bg); border:1px solid var(--vd-bd); border-radius:14px; padding:10px 16px; display:flex; align-items:center; gap:12px; font-weight:700; color:var(--vd-tx) }\n.n-bola { flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--ve); color:#fff; font-weight:800; display:inline-flex; align-items:center; justify-content:center; font-size:15px }\n/* laço do AHE (slide 5) */\n.laco { display:grid; grid-template-columns:1fr 34px 1fr 34px 1fr 34px 1fr; grid-template-rows:1fr 28px 1fr; flex:1; min-height:0 }\n.laco .no { background:var(--card-bg); border:1px solid var(--linha); border-radius:14px; padding:9px 12px; display:flex; flex-direction:column; justify-content:center; text-align:center; line-height:1.3 }\n.laco .no b { color:var(--az); font-size:1.1em }\n.laco .no span { font-size:15.5px; color:var(--tx-apoio); margin-top:3px }\n.laco .no.esc { background:linear-gradient(135deg,var(--az),var(--bem2)); border:0 }\n.laco .no.esc b { color:#fff } .laco .no.esc span { color:#DCE3EE }\n.laco .no.vd { background:var(--vd-bg); border-color:var(--vd-bd) } .laco .no.vd b { color:var(--vd-tx) }\n.laco .sh, .laco .sv { display:flex; align-items:center; justify-content:center; color:var(--ve); font-weight:800; font-size:22px }\n.pilares { display:grid; grid-template-columns:repeat(3,1fr); gap:12px }\n.pilares div { display:flex; align-items:center; gap:10px; background:var(--azc); border:1px solid var(--azc-bd); border-radius:12px; padding:8px 12px; font-weight:700; color:var(--bem2); font-size:15.5px; line-height:1.3 }\n/* componentes do NexAU (slide 6) */\n.tiles { display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:1fr 1fr; gap:12px; flex:1.25 1 0 }\n#s6 .col > .grade { flex:1 1 0 }\n#s6 .card { justify-content:center }\n.tiles .tl { background:var(--card-bg); border:1px solid var(--linha); border-radius:12px; padding:10px 14px; display:flex; gap:12px; align-items:center; min-height:0 }\n.tiles .tl b { display:block; color:var(--az); font-size:17px; line-height:1.25 }\n.tiles .tl > div span { display:block; color:var(--tx-apoio); font-size:15px; line-height:1.3; margin-top:2px }\n.tiles .tl .n-bola { width:30px; height:30px; font-size:15px }\n.tiles .tl.esc { background:linear-gradient(135deg,var(--az),var(--bem2)); border:0; align-items:center }\n.tiles .tl.esc b { color:#fff } .tiles .tl.esc > div span { color:#DCE3EE }\n/* funil do Agent Debugger (slide 7) */\n.funil { display:flex; flex-direction:column; align-items:center; gap:6px; flex:1; justify-content:center }\n.funil .cam { border-radius:14px; padding:20px 22px; text-align:center; line-height:1.3 }\n.funil .cam b { display:block; font-size:1.2em } .funil .cam span { display:block; font-size:16px; margin-top:4px }\n.funil .f1 { width:100%; background:linear-gradient(135deg,var(--az),var(--bem2)); color:#fff } .funil .f1 span { color:#DCE3EE }\n.funil .f2 { width:82%; background:var(--azc); border:1px solid var(--azc-bd); color:var(--az) } .funil .f2 span { color:var(--tx-apoio) }\n.funil .f3 { width:64%; background:var(--vd-bg); border:2px solid var(--ve); color:var(--vd-tx) } .funil .f3 span { color:var(--vd-tx) }\n.funil .ar { color:var(--ve); font-weight:800; font-size:24px; line-height:1 }\n/* cadeia do manifesto (slide 8) */\n.cadeia { display:grid; grid-template-columns:1fr 30px 1fr 30px 1fr 30px 1.15fr; align-items:stretch }\n.cadeia .el { border-radius:12px; padding:14px 12px; text-align:center; font-weight:700; display:flex; flex-direction:column; justify-content:center; line-height:1.3; background:var(--card-bg); border:1px solid var(--linha); color:var(--az) }\n.cadeia .el span { font-weight:400; font-size:15px; color:var(--tx-apoio); margin-top:3px }\n.cadeia .el.fim { background:linear-gradient(135deg,var(--az),var(--bem2)); color:#fff; border:0 } .cadeia .el.fim span { color:#DCE3EE }\n.cadeia .sh { display:flex; align-items:center; justify-content:center; color:var(--ve); font-weight:800; font-size:20px }\n/* etapas do algoritmo (slide 9) */\n.etapas { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:1fr 1fr; gap:12px; flex:1; min-height:0; counter-reset:et }\n.etapas .ep { background:var(--card-bg); border:1px solid var(--linha); border-radius:14px; padding:14px 20px; display:flex; flex-direction:column; justify-content:center }\n.etapas .ep h4 { display:flex; align-items:center; gap:10px; font-size:1.25em; color:var(--az); margin-bottom:6px }\n.etapas .ep p { margin:0; font-size:18px; color:var(--tx-apoio); line-height:1.4 }\n.etapas .ep.at { background:var(--vd-bg); border-color:var(--vd-bd) } .etapas .ep.at h4 { color:var(--vd-tx) }\n/* configuração (slide 10) */\n#s10 .tb2 { font-size:15.5px } #s10 .tb2 th { font-size:15.5px }\n#s10 .tb2 td, #s10 .tb2 th { padding:6px 12px }\n#s10 .slbd.g .tb2 tr > *:nth-child(n+2) { text-align:left }\n#s10 .tb2 td:first-child { font-weight:700; color:var(--az); width:28% }\n#s10 .lin div { font-size:15.5px } #s10 .lin { padding:9px 14px }\n/* gráficos e kpis dos experimentos */\n#s11 .kpi b, #s12 .kpi b, #s15 .kpi b { font-size:26px }\n#s11 .kpi > div, #s15 .kpi > div { padding:10px 14px }\n#s11 .card li, #s13 .card li, #s14 .card li, #s15 .card li { font-size:16px; margin:4px 0 }\n#s12 .tb2 { margin:0 } #s12 .tb2 td, #s12 .tb2 th { padding:7px 12px }\n#s12 .card li { font-size:16px; margin:4px 0 }\n/* análise crítica (slide 16) */\n.criticas { display:grid; grid-template-columns:repeat(6,1fr); grid-template-rows:1fr 1fr; gap:12px; flex:1; min-height:0 }\n.criticas .cr { grid-column:span 2; background:var(--card-bg); border:1px solid var(--linha); border-radius:14px; padding:14px 20px; display:flex; flex-direction:column; justify-content:center }\n.criticas .cr:nth-child(4), .criticas .cr:nth-child(5) { grid-column:span 3 }\n.criticas .cr h4 { display:flex; align-items:center; gap:10px; color:var(--er); font-size:1.12em; margin-bottom:5px; line-height:1.25 }\n.criticas .cr h4 .n-bola { background:var(--er) }\n.criticas .cr p { margin:0; font-size:17.5px; line-height:1.4; color:var(--p) }\n.criticas .cr.dec { background:var(--aviso-bg) } .criticas .cr.dec h4 { color:var(--aviso-tx) } .criticas .cr.dec h4 .n-bola { background:var(--aviso-tx) }\n/* conclusões (slide 17) */\n#s17 .kpi b { font-size:24px } #s17 .kpi > div { padding:9px 14px } #s17 .kpi span { font-size:14px }\n#s17 .lin { padding:8px 16px } #s17 .lin div { font-size:16.5px }\n#s17 .card.vd p { font-size:16px; line-height:1.45 }\n/* referências (slide 18) */\n.refs { list-style:none; margin:0; display:flex; flex-direction:column; justify-content:space-evenly; flex:1 }\n#s18 .card { padding:16px 22px }\n.sl .refs li { font-size:16.5px; line-height:1.35; margin:0; padding-left:20px }\n/* cartões centralizados verticalmente e texto mais legível */\n#s2 .card.vd, #s3 .card, #s7 .card, #s8 .card, #s11 .card, #s12 .card, #s13 .card, #s14 .card, #s15 .card, #s17 .card.vd { justify-content:center }\n#s2 .card.vd p { font-size:18.5px; line-height:1.5 }\n#s3 .card li { font-size:18px; margin:8px 0 } #s3 .card p { font-size:18px }\n#s7 .card p { font-size:18px } #s14 .card p { font-size:17.5px; line-height:1.45 } #s8 .card li { font-size:18px; margin:7px 0 }\n#s11 .card li, #s12 .card li, #s14 .card li, #s15 .card li { font-size:17.5px; margin:7px 0 }\n#s12 .tb2 td, #s12 .tb2 th { font-size:17px }\n/* modo roteiro (tecla N): slide compacto + notas legíveis na tela do apresentador */\nbody.notas .sl .slbd.g, body.notas .sl .slhd { zoom:.8 }\nbody.notas .sl .nt { font-size:14.5px; line-height:1.42; padding:9px 14px; max-height:40%; overflow:auto }",
+  "slides": [
+    {
+      "layout": "capa",
+      "rotulo": "Seminário · Grupo de Pesquisa SERG · PPGCC/UFPI · 2026",
+      "titulo": "Agentic Harness Engineering<span>Observability-Driven Automatic Evolution of Coding-Agent Harnesses</span>",
+      "subtitulos": [
+        "Lin, Liu, Pan, Lin, Dou, Xi, Huang, Yan, Han, Gui &amp; Jiang<br>Fudan University · Peking University · Shanghai Qiji Zhifeng Co., Ltd<br>arXiv:2604.25850v4 [cs.CL], 18 de maio de 2026",
+        "Apresentação:\n            <ul>\n              <li><b>Diego Cordeiro de Oliveira</b></li>\n            </ul>"
+      ],
+      "imagem": "img/logo_full.png",
+      "notas": "<strong>0:00 → 0:30 · 30 s.</strong> Apresente o artigo de Lin et al. (Fudan, Pequim e Qiji Zhifeng). Diga logo que é um <em>preprint</em> do arXiv, sem revisão por pares; isso prepara a análise crítica do slide 16. Frase-guia: “um agente consegue melhorar sozinho, e de forma auditável, o harness de outro agente de código? A resposta depende de tornar observáveis três coisas: componentes, experiência e decisões.”<br><strong>Se perguntarem:</strong> “O que é harness?” Tudo o que cerca o modelo: system prompt, ferramentas, middleware, skills, subagentes e memória (slide 3)."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Roteiro da apresentação",
+      "proporcao": "1.55fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "lins",
+            "itens": [
+              {
+                "titulo": "Contexto e problema",
+                "html": "O que é o harness, por que automatizar e a pergunta central"
+              },
+              {
+                "titulo": "Método: NexAU, Agent Debugger, Evolve Agent e o laço",
+                "html": "Os três pilares de observabilidade e o Algoritmo 1"
+              },
+              {
+                "titulo": "Experimentos: RQ1, RQ2 e RQ3",
+                "html": "Desempenho, transferência, ablação e autoatribuição"
+              },
+              {
+                "titulo": "Análise e conclusões",
+                "html": "Limitações, leitura crítica e contribuições"
+              },
+              {
+                "titulo": "Referências",
+                "html": "Material de apoio para a discussão"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Em uma frase",
+            "html": "<p>O artigo trata o <strong>harness</strong> como objeto de otimização automática: um agente edita o harness de outro agente de código, e cada edição vem com uma <strong>previsão verificável</strong> que a rodada seguinte confirma ou reverte.</p>"
+          },
+          {
+            "tipo": "chips",
+            "itens": [
+              "Preprint arXiv",
+              "Terminal-Bench 2",
+              "SWE-bench-verified",
+              "Código público"
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>0:30 → 1:00 · 30 s.</strong> Cinco blocos: contexto (slides 3 e 4), método (5 a 9), experimentos pelas três perguntas de pesquisa (10 a 15), análise e conclusões (16 e 17) e referências. Marcos de tempo: 3:30 fim do contexto · 9:00 fim do método · 15:30 fim dos experimentos · 17:30 fim da análise.<br><strong>Se atrasar:</strong> reduza o slide 12 (SWE-bench) a uma frase.<br><strong>Se perguntarem:</strong> “Por que este artigo?” Trata o harness como objeto de otimização automática, com números em benchmarks reais; complementa o artigo conceitual de Zhong e Zhu (slide 17)."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Contexto",
+      "proporcao": "1.1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "O que é o harness",
+            "html": "<p style=\"margin:0 0 4px\">Tudo o que fica <strong>fora do modelo</strong> e o cerca:</p>",
+            "itens": [
+              "<strong>system prompt</strong> (configuração comportamental e restritiva da IA)",
+              "<strong>ferramentas</strong> e seus contratos",
+              "<strong>middleware</strong> (contexto, execução, recuperação)",
+              "<strong>skills</strong>, <strong>subagentes</strong> e <strong>memória</strong>"
+            ]
+          },
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "html": "<p style=\"margin:0\">Coding agents em tarefas longas (SWE-bench, Terminal-Bench) dependem do <strong>modelo</strong> e do <strong>harness</strong>.</p>"
+          }
+        ],
+        [
+          {
+            "tipo": "titulo",
+            "texto": "Por que automatizar"
+          },
+          {
+            "tipo": "card",
+            "crescer": true,
+            "html": "<p style=\"margin:0\"><strong>O harness ideal é específico do modelo.</strong> Um harness ajustado a um modelo pode ir pior em outro.</p>"
+          },
+          {
+            "tipo": "card",
+            "crescer": true,
+            "html": "<p style=\"margin:0\"><strong>Hoje o ajuste é manual:</strong> inspecionar trajetórias, achar padrões de falha e editar prompts, ferramentas e middleware à mão.</p>"
+          },
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "html": "<p style=\"margin:0\"><strong>Modelos evoluem rápido</strong>, o ajuste manual não acompanha.</p>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Resumo e Seção 1.</div>"
+        }
+      ],
+      "notas": "<strong>1:00 → 2:30 · 1 min 30 s.</strong> Agentes de código já resolvem issues reais e fluxos longos de terminal; o desempenho depende do <strong>modelo</strong> e do <strong>harness</strong>. Analogia: o modelo é o motorista; o harness é o carro, o painel e as regras de trânsito. Dois fatos motivam o artigo: (1) mudar o harness muda a taxa de sucesso mesmo com o modelo fixo; (2) o harness ótimo é específico do modelo. Hoje a adaptação é manual e não acompanha a velocidade dos lançamentos.<br><strong>Transição:</strong> “A ideia natural é automatizar esse laço com um agente. Mas isso é mais difícil do que parece.”<br><strong>Se perguntarem:</strong> “É só prompt engineering?” Não: o prompt sozinho até piora o resultado (slide 14); o ganho vem de ferramentas, middleware e memória."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Pergunta central",
+      "topo": [
+        {
+          "tipo": "pergunta",
+          "rotulo": "Pergunta de pesquisa",
+          "html": "Como um agente pode evoluir <b>todos os componentes editáveis</b> do harness, de forma <b>conjunta e estável</b>?"
+        }
+      ],
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"mapa\"><div class=\"ln\"><div class=\"cab\">Obstáculo</div><div></div><div class=\"cab d\">Resposta do AHE</div></div><div class=\"ln\"><div class=\"obs\"><b>Espaço de ação heterogêneo</b><span>Prompt, ferramentas, middleware e memória têm formatos e efeitos diferentes.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">1</span>Observabilidade de componentes</div></div><div class=\"ln\"><div class=\"obs\"><b>Trajetórias volumosas</b><span>Milhões de tokens brutos enterram o sinal.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">2</span>Observabilidade de experiência</div></div><div class=\"ln\"><div class=\"obs\"><b>Edições difíceis de atribuir</b><span>Sem contrato, não se sabe qual edição causou qual efeito.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">3</span>Observabilidade de decisão</div></div></div>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Tese dos autores: o gargalo é a <b>observabilidade</b>, não a capacidade do agente."
+        },
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Resumo e Seção 1.</div>"
+        }
+      ],
+      "notas": "<strong>2:30 → 3:30 · 1 min.</strong> Leia a pergunta. Três obstáculos: (1) espaço de ação heterogêneo; (2) trajetórias volumosas, milhões de tokens que enterram o sinal; (3) edições difíceis de atribuir. Trabalhos anteriores evoluem em geral um único componente, quase sempre o prompt. A tese: com contexto estruturado e um espaço de ação claro, o agente converge para harnesses melhores. Cada obstáculo recebe um pilar. Cautela: é hipótese dos autores; o artigo não isola o efeito de agentes mais fortes.<br><strong>Transição:</strong> “Vou mostrar primeiro o quadro geral e depois cada pilar.”<br><strong>Se perguntarem:</strong> “É diferente de ACE ou Reflexion?” Sim: eles revisam saídas ou playbooks em texto; o AHE edita a estrutura do harness (código, middleware, memória)."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Visão geral do AHE",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"laco\"><div class=\"no esc\"><b>Harness (NexAU)</b><span>prompt · ferramentas · middleware · skills · subagentes · memória</span></div><div class=\"sh\">→</div><div class=\"no\"><b>Agente de código</b><span>roda k tarefas no ambiente</span></div><div class=\"sh\">→</div><div class=\"no\"><b>Traços brutos</b><span>~10M tokens</span></div><div class=\"sh\">→</div><div class=\"no\"><b>Agent Debugger</b><span>relatórios em camadas</span></div><div class=\"sv\">↑</div><div></div><div></div><div></div><div></div><div></div><div class=\"sv\">↓</div><div class=\"no\"><b>Próxima rodada</b><span>confirma ou reverte cada edição</span></div><div class=\"sh\">←</div><div class=\"no\" style=\"grid-column:span 3\"><b>Commit no git + manifesto</b><span>edição = previsão falsificável: correções esperadas e regressões em risco</span></div><div class=\"sh\">←</div><div class=\"no vd\"><b>Evolve Agent</b><span>lê a evidência (~10K tokens), edita componentes e escreve o manifesto</span></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"pilares\"><div><span class=\"n-bola\">1</span>Componentes: arquivos editáveis</div><div><span class=\"n-bola\">2</span>Experiência: evidência destilada</div><div><span class=\"n-bola\">3</span>Decisão: previsão verificável</div></div>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "<b>Modelo-base fixo:</b> só o harness explícito é editado. Os três agentes (código, debugger, evolução) usam o mesmo modelo."
+        },
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: recriação a partir da Figura 2 de Lin et al. (2026).</div>"
+        }
+      ],
+      "notas": "<strong>3:30 → 5:00 · 1 min 30 s.</strong> Recriação da Figura 2. Siga as setas: o harness (no NexAU) é usado pelo agente de código, que roda as tarefas e gera ~10 milhões de tokens de traços; o Agent Debugger destila isso em ~10 mil tokens; o Evolve Agent lê a evidência, edita componentes e registra o raciocínio no manifesto; cada edição vira um commit; na rodada seguinte o laço compara previsto e observado e reverte o que não funcionou. Embaixo, os três pilares. O modelo-base fica fixo e os três agentes usam o GPT-5.4 com raciocínio alto.<br><strong>Transição:</strong> “Vamos aos pilares, começando pelo substrato: o NexAU.”<br><strong>Se perguntarem:</strong> “O agente pode alterar o verificador?” Não: runs, tracer, verificador e configuração do LLM são somente leitura (slide 8)."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Pilar 1 · NexAU: componentes como arquivos",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"tiles\"><div class=\"tl\"><span class=\"n-bola\">1</span><div><b>System prompt</b><span>regras e disciplina</span></div></div><div class=\"tl\"><span class=\"n-bola\">2</span><div><b>Descrição de ferramenta</b><span>contrato exposto ao modelo</span></div></div><div class=\"tl\"><span class=\"n-bola\">3</span><div><b>Implementação de ferramenta</b><span>código executado</span></div></div><div class=\"tl\"><span class=\"n-bola\">4</span><div><b>Middleware</b><span>hooks antes e depois</span></div></div><div class=\"tl\"><span class=\"n-bola\">5</span><div><b>Skills</b><span>procedimentos reutilizáveis</span></div></div><div class=\"tl\"><span class=\"n-bola\">6</span><div><b>Config. de subagente</b><span>delegação</span></div></div><div class=\"tl\"><span class=\"n-bola\">7</span><div><b>Memória de longo prazo</b><span>lições persistentes</span></div></div><div class=\"tl esc\"><div><b>1 edição lógica = 1 commit</b><span>diff e rollback por arquivo</span></div></div></div>"
+          },
+          {
+            "tipo": "grade",
+            "proporcao": "1fr 1fr",
+            "colunas": [
+              [
+                {
+                  "tipo": "card",
+                  "crescer": true,
+                  "titulo": "Observabilidade de componentes",
+                  "itens": [
+                    "Cada padrão de falha mapeia para <strong>uma classe de componente</strong>.",
+                    "Acoplamento fraco: adicionar middleware não exige mexer no prompt."
+                  ]
+                }
+              ],
+              [
+                {
+                  "tipo": "card",
+                  "variante": "vd",
+                  "crescer": true,
+                  "titulo": "Semente NexAU₀ (H₀)",
+                  "itens": [
+                    "Só uma ferramenta de shell.",
+                    "Sem middleware, skills ou subagentes.",
+                    "Semente mínima: cada componente adicionado precisa <strong>provar seu valor</strong>."
+                  ]
+                }
+              ]
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 3.1; Nex-AGI (2025); Nex-AGI Team (2025).</div>"
+        }
+      ],
+      "notas": "<strong>5:00 → 6:00 · 1 min.</strong> O NexAU (Nex-AGI) expõe <strong>sete tipos ortogonais</strong> de componente como arquivos em pontos fixos do workspace. Fracamente acoplados: cada padrão de falha cai em uma classe de componente, o que dá ao agente evolutivo um espaço de ação limpo. Cada edição lógica vira um commit: diff e rollback de graça. A semente é mínima de propósito: uma semente já ajustada ao benchmark contaminaria a atribuição de cada edição.<br><strong>Ponto de atenção (só se perguntarem):</strong> vários autores do AHE também assinam o relatório Nex-N1 da Nex-AGI; o substrato vem de um grupo próximo.<br><strong>Se perguntarem:</strong> “Serve para outros frameworks?” Só foi testado no NexAU; a portabilidade não foi avaliada."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Pilar 2 · Agent Debugger: experiência como evidência",
+      "proporcao": "1.3fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"funil\"><div class=\"cam f1\"><b>Traços brutos</b><span>~10 milhões de tokens · k rollouts por tarefa</span></div><div class=\"ar\">↓</div><div class=\"cam f2\"><b>Relatório por tarefa</b><span>causa raiz da falha ou padrão do sucesso + status pass/fail</span></div><div class=\"ar\">↓</div><div class=\"cam f3\"><b>Visão geral do benchmark</b><span>~10 mil tokens · ponto de entrada de cada iteração</span></div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "kpis",
+            "itens": [
+              {
+                "valor": "~1.000×",
+                "texto": "menos tokens no ponto de entrada (10M → 10K)"
+              }
+            ]
+          },
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Divulgação progressiva",
+            "html": "<p style=\"margin:0\">Cada mensagem de trajetória vive em seu próprio arquivo, navegável por shell e scripts.</p>"
+          },
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Detalhe sob demanda",
+            "html": "<p style=\"margin:0\">Os traços originais (brutos e levemente limpos) continuam disponíveis para <strong>conferir as afirmações</strong> dos relatórios.</p>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 3.2; Agent Debugger: Lin (2026).</div>"
+        }
+      ],
+      "notas": "<strong>6:00 → 7:00 · 1 min.</strong> Para cada tarefa são gerados k traços: milhões de tokens. O Agent Debugger trata as trajetórias como um ambiente navegável (uma mensagem por arquivo, acesso por shell e scripts). Saída em três camadas: traços originais → relatório por tarefa (causa raiz ou padrão do sucesso, com pass/fail) → visão geral de ~10 mil tokens, ponto de entrada da iteração. O Evolve Agent começa pelo resumo e só desce ao detalhe quando precisa: economiza tokens e melhora a decisão.<br><strong>Se perguntarem:</strong> “O Debugger pode alucinar a causa?” Pode. Por isso os traços originais ficam disponíveis e a decisão é validada depois, pelo previsto × observado."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Pilar 3 · Evolve Agent: decisões verificáveis",
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Controlabilidade",
+            "itens": [
+              "Escreve <strong>só no workspace</strong> do harness.",
+              "Somente leitura: runs, tracer, verificador e configuração do LLM.",
+              "Prompt semente não pode ser apagado."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Baseada em evidência",
+            "itens": [
+              "Toda edição é acompanhada de uma <strong>entrada no manifesto</strong>.",
+              "A rodada seguinte compara previsto e observado e <strong>reverte o que falhou</strong>."
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "titulo",
+          "texto": "Anatomia de uma entrada do manifesto"
+        },
+        {
+          "tipo": "html",
+          "html": "<div class=\"cadeia\"><div class=\"el\">Evidência da falha<span>o que o relatório mostrou</span></div><div class=\"sh\">→</div><div class=\"el\">Causa raiz inferida<span>por que falhou</span></div><div class=\"sh\">→</div><div class=\"el\">Correção direcionada<span>qual componente muda</span></div><div class=\"sh\">→</div><div class=\"el fim\">Impacto previsto<span>correções esperadas + regressões em risco</span></div></div>"
+        },
+        {
+          "tipo": "faixa",
+          "html": "Impacto previsto = tarefas que devem passar + tarefas em risco de piorar. <b>Substitui a justificativa por um contrato mensurável.</b>"
+        },
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 3.3 e Apêndice B.2.</div>"
+        }
+      ],
+      "notas": "<strong>7:00 → 8:00 · 1 min.</strong> O Evolve Agent fecha o laço: lê a evidência, decide adicionar, modificar ou remover componentes, edita e registra o raciocínio. Duas restrições: (1) <strong>controlabilidade</strong>: só escreve no workspace, o que bloqueia atalhos como desligar o verificador, trocar o modelo ou aumentar o raciocínio, e mantém todo ganho atribuível ao harness; (2) <strong>evidência</strong>: cada edição traz uma entrada de manifesto. Na rodada seguinte, os conjuntos previstos são cruzados com os deltas observados e cada edição recebe um veredito.<br><strong>Se perguntarem:</strong> “O agente pode trapacear?” A controlabilidade limita onde ele escreve, mas os autores admitem que não há uma pilha completa de salvaguardas: é um protótipo."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Algoritmo do AHE: seis fases por iteração",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"etapas\"><div class=\"ep\"><h4><span class=\"n-bola\">1</span>Rollout</h4><p>k execuções por tarefa com o harness atual</p></div><div class=\"ep\"><h4><span class=\"n-bola\">2</span>Limpeza</h4><p>normaliza os traços para a forma canônica</p></div><div class=\"ep at\"><h4><span class=\"n-bola\">3</span>Atribuição</h4><p>t ≥ 2: verifica o manifesto anterior e faz rollback do que falhou</p></div><div class=\"ep\"><h4><span class=\"n-bola\">4</span>Destilação</h4><p>Agent Debugger gera a evidência em camadas</p></div><div class=\"ep\"><h4><span class=\"n-bola\">5</span>Evolução</h4><p>Evolve Agent edita o workspace e escreve novo manifesto</p></div><div class=\"ep\"><h4><span class=\"n-bola\">6</span>Commit</h4><p>marca a iteração no git; atualiza o melhor harness</p></div></div>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "<b>A atribuição vem antes da destilação:</b> o veredito de cada edição já entra no corpus de evidência da rodada."
+        },
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Algoritmo 1 (Seção 3.3).</div>"
+        }
+      ],
+      "notas": "<strong>8:00 → 9:00 · 1 min.</strong> Seis fases por iteração t: rollout (k execuções), limpeza, atribuição (a partir de t = 2: veredito do manifesto e rollback), destilação, evolução e commit. Com k ≥ 2, cada tarefa tem uma taxa de aprovação, o que estabiliza o pass@1. A atribuição vem antes da destilação para o veredito entrar na evidência. Na iteração 1, um agente de exploração semeia algumas skills reutilizáveis, que depois podem ser mantidas ou removidas.<br><strong>Guarde para a crítica:</strong> linha 14 do algoritmo, o harness final é o de <em>maior pass@1</em> entre as iterações, um máximo sobre medidas ruidosas.<br><strong>Se perguntarem:</strong> “Por que 10 iterações?” É o ponto de operação da campanha (T = 10, k = 2); não há estudo de sensibilidade a T ou k."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Configuração experimental",
+      "proporcao": "1.6fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "preencher": true,
+            "cabecalho": [
+              "Item",
+              "Configuração"
+            ],
+            "linhas": [
+              [
+                "Benchmark de evolução",
+                "Terminal-Bench 2: 89 tarefas (4 fáceis, 55 médias, 30 difíceis), timeout de 1 h"
+              ],
+              [
+                "Transferência",
+                "SWE-bench-verified: 500 tarefas em 7 repositórios"
+              ],
+              [
+                "Modelo (3 papéis)",
+                "GPT-5.4, raciocínio high (código, debugger e evolução)"
+              ],
+              [
+                "Modelos alternativos",
+                "GPT-5.4 medium e xhigh, qwen-3.6-plus, gemini-3.1-flash-lite-preview, deepseek-v4-flash"
+              ],
+              [
+                "Campanha",
+                "1 execução: T = 10 iterações, k = 2 rollouts por tarefa, cerca de 32 h"
+              ],
+              [
+                "Métricas",
+                "pass@1 e tokens/trial; falhas de infraestrutura contam como falha"
+              ],
+              [
+                "Baselines",
+                "Humanos: OpenCode, Terminus-2, Codex. Autoevolução: ACE e TF-GRPO (mesma semente NexAU₀)"
+              ]
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "titulo",
+            "texto": "Perguntas de pesquisa"
+          },
+          {
+            "tipo": "lins",
+            "itens": [
+              {
+                "titulo": "RQ1 · Desempenho",
+                "html": "Por que engenharia agêntica, e não harnesses humanos ou outros métodos automáticos?"
+              },
+              {
+                "titulo": "RQ2 · Overfitting",
+                "html": "O harness transfere para outro benchmark e outros modelos?"
+              },
+              {
+                "titulo": "RQ3 · Mecanismo",
+                "html": "Onde está o ganho e quão confiável é a autoatribuição?"
+              }
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 4.1 e Apêndice A (Tabela 4).</div>"
+        }
+      ],
+      "notas": "<strong>9:00 → 10:00 · 1 min.</strong> Evolução nas 89 tarefas do Terminal-Bench 2, com timeout de 1 h; transferência no SWE-bench-verified (500 tarefas, 7 repositórios). pass@1 = média de sucesso binário sobre os k rollouts; falha de infraestrutura conta como falha (convenção dura, igual ao leaderboard). Uma campanha de 10 iterações, k = 2, cerca de 32 h; ACE e TF-GRPO partem da mesma semente. Apresente as três RQs da direita: elas organizam os próximos cinco slides.<br><strong>Ponto de atenção:</strong> o texto principal não deixa claro qual modelo-base os harnesses humanos (Codex etc.) usaram.<br><strong>Se perguntarem:</strong> “Por que 89 tarefas e não 100?” É o subconjunto oficial do Terminal-Bench 2 usado no leaderboard."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "RQ1: o AHE lidera no Terminal-Bench 2",
+      "topo": [
+        {
+          "tipo": "pergunta",
+          "rotulo": "Pergunta (RQ1)",
+          "html": "Por que engenharia agêntica de harness, e não harnesses projetados por humanos ou outros métodos automáticos?"
+        }
+      ],
+      "proporcao": "1.45fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/rq1_terminal_bench.png",
+            "alt": "pass@1 no Terminal-Bench 2 por método: AHE 77,0%, TF-GRPO 72,3%, Codex 71,9%, NexAU0 69,7%, ACE 68,9%, Terminus-2 62,9%, OpenCode 47,2%"
+          }
+        ],
+        [
+          {
+            "tipo": "kpis",
+            "itens": [
+              {
+                "valor": "+7,3 pp",
+                "texto": "sobre a semente (69,7% → 77,0%)"
+              },
+              {
+                "valor": "+5,1 pp",
+                "texto": "sobre o Codex (71,9%)"
+              }
+            ]
+          },
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Análise",
+            "itens": [
+              "ACE (68,9%) ficou <strong>abaixo da própria semente</strong>.",
+              "Único ponto fraco: nível <strong>Difícil</strong>, em que o Codex tem 56,7% e o AHE 53,3%."
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Tabela 1 (pass@1, 89 tarefas).</div>"
+        }
+      ],
+      "notas": "<strong>10:00 → 11:30 · 1 min 30 s.</strong> Resultado principal: em 10 iterações o AHE leva o pass@1 de 69,7% para <strong>77,0%</strong>, acima do Codex (71,9%), do TF-GRPO (72,3%) e do ACE (68,9%, abaixo da semente). Por que os baselines perdem? <em>Descompasso de camada</em>: o ACE destila playbooks em texto; o TF-GRPO reforça sequências de ferramentas; nenhum edita o scaffolding. Ponto fraco: Difícil (53,3% contra 56,7% do Codex), atribuído à interferência entre componentes (slide 14).<br><strong>Se perguntarem:</strong> “7 pp é muito?” São cerca de 6 a 7 tarefas em 89; com k = 2, uma campanha e sem barras de erro, é sugestivo, não demonstrado. A faixa Fácil tem só 4 tarefas."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "RQ2 (1/2): transferência para o SWE-bench-verified",
+      "topo": [
+        {
+          "tipo": "pergunta",
+          "rotulo": "Pergunta (RQ2)",
+          "html": "O AHE sofre overfitting ao alvo da otimização? Aqui: transfere para <b>tarefas não vistas</b> (SWE-bench-verified)?"
+        }
+      ],
+      "proporcao": "1.25fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "preencher": true,
+            "cabecalho": [
+              "Método",
+              "Sucesso (500 tarefas)",
+              "Tokens por trial (mil)"
+            ],
+            "linhas": [
+              [
+                "ACE",
+                "74,6%",
+                "679"
+              ],
+              [
+                "TF-GRPO",
+                "74,2%",
+                "582"
+              ],
+              [
+                "NexAU₀ (semente)",
+                "75,2%",
+                "526"
+              ],
+              [
+                "<strong>AHE</strong>",
+                "<strong>75,6%</strong>",
+                "<strong>461</strong>"
+              ]
+            ],
+            "linhas_classe": [
+              "",
+              "",
+              "",
+              "hl"
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "kpis",
+            "itens": [
+              {
+                "valor": "+0,4 pp",
+                "texto": "sucesso sobre a semente"
+              },
+              {
+                "valor": "−12%",
+                "texto": "tokens vs. semente (−32% vs. ACE, −21% vs. TF-GRPO)"
+              }
+            ]
+          },
+          {
+            "tipo": "card",
+            "crescer": true,
+            "itens": [
+              "Harness <strong>congelado</strong>, evoluído só no Terminal-Bench 2 (sem reevolução no SWE-bench).",
+              "ACE e TF-GRPO ficam abaixo da semente e gastam <strong>11% a 29% mais tokens</strong>: o texto destilado acompanha cada chamada."
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "O ganho aqui é sobretudo de <b>custo</b>: mesmo desempenho com menos tokens."
+        },
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Tabela 2 e Seção 4.3.</div>"
+        }
+      ],
+      "notas": "<strong>11:30 → 12:15 · 45 s.</strong> Para testar overfitting, o harness evoluído no Terminal-Bench 2 é congelado e avaliado no SWE-bench, sem reevolução. Sucesso: 75,6% contra 75,2% da semente, praticamente empate em 500 tarefas. O ganho real é o custo: 461 mil tokens por trial (−12% vs. semente). ACE e TF-GRPO caem abaixo da semente e gastam mais, porque o texto destilado viaja em toda chamada ao modelo.<br><strong>Cuidado:</strong> diga “mantém o desempenho com menos tokens”, não “melhora o SWE-bench”. <strong>Se atrasado:</strong> resuma em uma frase.<br><strong>Se perguntarem:</strong> “Isso prova que não há overfitting?” Não prova: mostra ausência de degradação e ganho de custo, não generalização de desempenho."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "RQ2 (2/2): transferência entre modelos-base",
+      "topo": [
+        {
+          "tipo": "pergunta",
+          "rotulo": "Pergunta (RQ2)",
+          "html": "O AHE sofre overfitting ao alvo da otimização? Aqui: transfere para <b>outros modelos-base</b>?"
+        }
+      ],
+      "proporcao": "1.75fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/rq2_modelos_base.png",
+            "alt": "pass@1 da semente e do AHE em seis modelos-base; ganhos de +2,3 a +10,1 pp"
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Ganhos de +2,3 a +10,1 pp",
+            "itens": [
+              "Em cinco outras bases, <strong>sem nova evolução</strong> (GPT-5.4 high é a base da evolução).",
+              "Famílias diferentes ganham mais: deepseek +10,1; qwen +6,3; gemini +5,1."
+            ]
+          },
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "titulo": "Ressalva dos autores",
+            "itens": [
+              "Orçamento de passos e timeout ajustados ao GPT-5.4 high.",
+              "Perfil não monotônico no GPT-5.4: +2,3, +7,3, +2,3."
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Figura 3 e Seção 4.3 (valores lidos da figura).</div>"
+        }
+      ],
+      "notas": "<strong>12:15 → 13:00 · 45 s.</strong> O mesmo harness, sem nova evolução, roda em cinco outras bases, sempre comparado com a semente na mesma base. Todos os ganhos são positivos, de +2,3 a +10,1 pp, e outras famílias ganham mais. Leitura dos autores (hipótese, não teste): bases mais longe da saturação se apoiam mais na coordenação que o AHE fixou em ferramentas, middleware e memória. Ressalva: o perfil no GPT-5.4 é não monotônico; no xhigh, mais tentativas estouram o timeout, que conta como falha.<br><strong>Se perguntarem:</strong> “Por que o gemini ganha menos que o deepseek?” O artigo não explica; o ganho acompanha o ponto de operação da evolução, não a capacidade bruta da base."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "RQ3a: onde está o ganho? Ablação por componente",
+      "topo": [
+        {
+          "tipo": "pergunta",
+          "rotulo": "Pergunta (RQ3a)",
+          "html": "O que dentro do AHE gera os ganhos? Em quais componentes o valor se acumula?"
+        }
+      ],
+      "proporcao": "1.45fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/rq3a_ablacao.png",
+            "alt": "Ganho de pass@1 sobre a semente ao inserir cada componente: memória +5,6; ferramentas +3,3; middleware +2,2; system prompt −2,3; AHE completo +7,3 pp"
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Análise",
+            "itens": [
+              "<strong>Ganhos isolados:</strong> memória +5,6; ferramentas +3,3; middleware +2,2 pp.",
+              "<strong>Prompt sozinho:</strong> −2,3 pp (única regressão).",
+              "<strong>Não aditivo:</strong> soma dos positivos = +11,1 pp; AHE completo = +7,3 pp."
+            ]
+          },
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "titulo": "Nível Difícil",
+            "html": "<p style=\"margin:0\">Só a memória (<strong>63,3%</strong>) supera o AHE completo (<strong>53,3%</strong>): empilhar componentes gasta turnos em rechecagens redundantes de fechamento.</p>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Tabela 3 e Seção 4.4.1 (Terminal-Bench 2, 89 tarefas).</div>"
+        }
+      ],
+      "notas": "<strong>13:00 → 14:30 · 1 min 30 s.</strong> Ablação aqui é <em>inserir</em> cada componente evoluído, isolado, na semente (não remover do AHE). Memória +5,6 (12 lições de casos-limite); ferramentas +3,3 (shell de 1.364 linhas que exibe dicas de contrato); middleware +2,2 (gancho que força uma checagem final no estilo do avaliador); prompt −2,3 (79 linhas de regras que só são executáveis com os outros três). Não aditividade: os componentes empurram para a mesma verificação de fechamento e geram rechecagens redundantes; como o laço otimiza o agregado, dominado pelas 55 tarefas médias, aceita perder no Difícil.<br><strong>Se perguntarem:</strong> “Então o AHE é pior que só a memória no Difícil?” Sim (53,3% contra 63,3%), e isso explica a derrota para o Codex nessa faixa."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "RQ3b: a autoatribuição é confiável?",
+      "topo": [
+        {
+          "tipo": "pergunta",
+          "rotulo": "Pergunta (RQ3b)",
+          "html": "As previsões de correção e de regressão do Evolve Agent batem com a realidade?"
+        }
+      ],
+      "proporcao": "1.45fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/rq3b_autoatribuicao.png",
+            "alt": "Precisão e revocação das previsões: correções 33,7% e 51,4% contra 6,5% e 10,6% do acaso; regressões 11,8% e 11,1% contra 5,6% e 5,4%"
+          }
+        ],
+        [
+          {
+            "tipo": "kpis",
+            "itens": [
+              {
+                "valor": "≈ 5×",
+                "texto": "acima do acaso nas <strong>correções</strong>"
+              },
+              {
+                "valor": "≈ 2×",
+                "texto": "acima do acaso nas <strong>regressões</strong>"
+              }
+            ]
+          },
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Análise",
+            "itens": [
+              "O alvo de cada edição é real; o agente <strong>não vê o que vai quebrar</strong>.",
+              "Em 9 rodadas: 43 regressões previstas, 5 acertaram; 40 ocorreram sem serem previstas."
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Trabalho futuro apontado pelos autores: <b>prever regressões</b>."
+        },
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Figura 4, Seção 4.4.2 e Apêndice D.</div>"
+        }
+      ],
+      "notas": "<strong>14:30 → 15:30 · 1 min.</strong> A cada rodada o agente prevê o que vai consertar e o que pode quebrar; compara-se a previsão da rodada N−1 com o resultado da rodada N, em 9 rodadas. Correções: precisão 33,7% e revocação 51,4%, cerca de 5× o acaso. Regressões: 11,8% e 11,1%, só ~2× o acaso. Imagem para falar: o agente dá um passo à frente (a correção) e, sem perceber, dois para trás (a regressão); depois tenta consertar o que quebrou partindo de uma premissa errada. Daí a curva de evolução não monotônica.<br><strong>Se perguntarem:</strong> “Isso compromete o rollback?” Em parte: o rollback corrige, mas com uma iteração de atraso e ao custo de uma rodada."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Análise crítica",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"criticas\"><div class=\"cr\"><h4><span class=\"n-bola\">1</span>Evolução e avaliação no mesmo conjunto</h4><p>Evolui e reporta nas mesmas 89 tarefas do Terminal-Bench 2. O único teste fora da amostra é o SWE-bench.</p></div><div class=\"cr\"><h4><span class=\"n-bola\">2</span>Ganho pequeno fora do benchmark</h4><p>SWE-bench: +0,4 pp em sucesso (75,2% para 75,6%). O benefício é de custo (−12% de tokens).</p></div><div class=\"cr\"><h4><span class=\"n-bola\">3</span>Sem robustez a operação e modelo</h4><p>Ajustado ao GPT-5.4 high; três papéis com o mesmo modelo; uma única rodada de experimento.</p></div><div class=\"cr\"><h4><span class=\"n-bola\">4</span>Regressões imprevisíveis</h4><p>Precisão de ~11,8% ao prever regressões; componentes não se somam e o perfil é não monotônico.</p></div><div class=\"cr dec\"><h4><span class=\"n-bola\">5</span>Limites declarados</h4><p>Só 2 benchmarks; sem outras linguagens, repositórios grandes ou humano no laço; “protótipo de pesquisa”.</p></div></div>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Veredito: proposta de engenharia bem pensada, com contrato falsificável e rollback; <b>evidência sugestiva, não conclusiva</b>."
+        },
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: análise do apresentador com base em Lin et al. (2026), Tabelas 1 a 3, Figuras 1 e 4, Limitations.</div>"
+        }
+      ],
+      "notas": "<strong>15:30 → 17:30 · 2 min.</strong> Esta é a minha contribuição. (1) Evolui e reporta nas mesmas 89 tarefas: os 77,0% medem ajuste ao conjunto; além disso, o harness final é o <em>máximo</em> entre 10 iterações com k = 2 (as finais ficam em ~74–75%) e não há barras de erro. (2) Fora da amostra, +0,4 pp: o benefício é custo. (3) Ajuste ao GPT-5.4 high, mesmo modelo nos três papéis, uma campanha. (4) Regressões imprevisíveis e componentes não aditivos (slides 14 e 15). (5) Limites que os próprios autores declaram.<br><strong>Se perguntarem:</strong> “O que você faria?” Separar tarefas de evolução e de teste; repetir a campanha com sementes diferentes e reportar intervalos; variar T, k e o modelo evolutivo; testar mais benchmarks. “Isso invalida o artigo?” Não: o método é auditável; o que fica em aberto é o tamanho do ganho real."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Conclusões",
+      "topo": [
+        {
+          "tipo": "kpis",
+          "itens": [
+            {
+              "valor": "69,7% → 77,0%",
+              "texto": "pass@1 no Terminal-Bench 2 em 10 iterações"
+            },
+            {
+              "valor": "−12%",
+              "texto": "tokens no SWE-bench, com sucesso estável"
+            },
+            {
+              "valor": "+2,3 a +10,1 pp",
+              "texto": "em cinco outras bases, sem reevolução"
+            },
+            {
+              "valor": "5× vs. 2×",
+              "texto": "acerto acima do acaso: correções vs. regressões"
+            }
+          ]
+        }
+      ],
+      "proporcao": "1.35fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "lins",
+            "itens": [
+              {
+                "titulo": "Superfície de adaptação",
+                "html": "Harness com componentes como arquivos e edições como commits."
+              },
+              {
+                "titulo": "Observabilidade",
+                "html": "Torna a evolução autônoma auditável e reversível."
+              },
+              {
+                "titulo": "Onde está o ganho",
+                "html": "Ferramentas, middleware e memória, <strong>não no prompt</strong>."
+              },
+              {
+                "titulo": "Transferência",
+                "html": "Harness congelado transfere entre modelos; no SWE-bench, mais barato."
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Visão dos autores e ligação com Zhong &amp; Zhu",
+            "html": "<p>A evolução em nível de harness é um <strong>eixo complementar ao treino do modelo</strong>: uma superfície externa e auditável onde a experiência do agente se acumula.</p><p style=\"margin-bottom:0\">Zhong &amp; Zhu (2026) dão o vocabulário do harness; o AHE traz um primeiro teste empírico automatizado.</p>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "fim": true,
+          "html": "Obrigado! Perguntas?"
+        },
+        {
+          "tipo": "html",
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 5; Zhong &amp; Zhu (2026).</div>"
+        }
+      ],
+      "notas": "<strong>17:30 → 18:30 · 1 min.</strong> Feche com os quatro números do topo e as quatro contribuições. Ligação com Zhong e Zhu (“AI Harness Engineering”): eles propõem o vocabulário (11 responsabilidades, escada H0 a H3) com evidência mínima; o AHE automatiza a melhoria do harness e mede o resultado. Lição prática: comece pelo que o agente consegue <strong>observar e reverter</strong>. Abra para perguntas (folga de ~1 min 30 s até os 20 min).<br><strong>Se perguntarem:</strong> “Isso substitui o fine-tuning?” Não; os autores o apresentam como eixo complementar. “Há código?” Sim: github.com/china-qijizhifeng/agentic-harness-engineering."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Referências",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<ul class=\"refs\"><li>LIN, J. et al. Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses. arXiv:2604.25850v4, 2026.</li><li>ZHONG, H.; ZHU, S. AI Harness Engineering: A Runtime Substrate for Foundation-Model Software Agents. arXiv:2605.13357v1, 2026.</li><li>NEX-AGI. NexAU: a general-purpose agent framework. github.com/nex-agi/NexAU, 2025.</li><li>NEX-AGI TEAM et al. Nex-N1: Agentic models trained via a unified ecosystem for large-scale environment construction. arXiv:2512.04987, 2025.</li><li>MERRILL, M. A. et al. Terminal-Bench: Benchmarking agents on hard, realistic tasks in command line interfaces. arXiv:2601.11868, 2026.</li><li>JIMENEZ, C. E. et al. SWE-bench: Can language models resolve real-world GitHub issues? ICLR, 2024.</li><li>ZHANG, Q. et al. Agentic context engineering: Evolving contexts for self-improving language models (ACE). ICLR, 2026.</li><li>CAI, Y. et al. Training-free group relative policy optimization. arXiv:2510.08191, 2025.</li><li>LIN, L. Agent Debugger: Understanding agent trajectory with agentic workflows. dawning-road.github.io/blog/agent-debugger, 2026.</li><li>OPENAI. Codex CLI, 2025; Introducing GPT-5.4, 2026. ANOMALY. OpenCode, 2025. HARBOR. Terminus-2, 2026.</li></ul>"
+              }
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>Fora do tempo · só se perguntarem.</strong> As 53 referências completas estão no artigo. Para ler mais: Apêndice C do AHE (estudo de caso com quatro trajetórias), Zhong e Zhu (2026) para o vocabulário de harness e Meta-Harness, a referência mais próxima em objetivo. Código: github.com/china-qijizhifeng/agentic-harness-engineering."
+    }
+  ]
+}
