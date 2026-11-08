@@ -302,7 +302,7 @@ function mostrarSlide(i) {
   if (sl.layout === 'html') {
     el.classList.add('ed-html');
     el.setAttribute('contenteditable', 'true');
-    el.oninput = () => { sl.html = serializar(el); sl.editado = true; marcar(false); };
+    el.oninput = () => { sl.html = serializar(el); sl.editado = true; marcar(false); sincPainelHtml(); };
     el.onblur = () => { renderLista(); };
   } else {
     $$('[data-e]', el).forEach(c => {
@@ -315,6 +315,9 @@ function mostrarSlide(i) {
   }
   if (st.bloco) { const b = el.querySelector('[data-b="' + st.bloco + '"]'); if (b) b.classList.add('ed-sel'); }
 }
+const agendarListaHtml = debounce(() => renderLista(), 600);
+/* edição direta no palco → atualiza o editor do painel (se o painel não estiver em uso) */
+const sincPainelHtml = debounce(() => { if (!$('#aba-slide').contains(document.activeElement)) renderPainelSlide(true); }, 500);
 function serializar(el) {
   const c = el.cloneNode(true);
   c.removeAttribute('contenteditable'); c.removeAttribute('data-slide');
@@ -395,7 +398,7 @@ function renderPainel() { renderPainelSlide(); renderAula(); renderTema(); rende
    lista, link…) e um botão </> para ver/editar o HTML. Colar insere texto puro. */
 function limparRico(html) {
   let v = (html || '').replace(/\u200b/g, '');
-  v = v.replace(/<(b|strong|em|i|u|code|span)\b[^>]*>\s*<\/\1>/gi, '');
+  v = v.replace(/<(b|strong|em|i|u|code)>\s*<\/\1>/gi, '').replace(/<span(?:\s+style="font-size:[^"]*")?>\s*<\/span>/gi, ''); // só tags vazias sem atributos
   return /^(\s|<br\s*\/?>|&nbsp;)*$/i.test(v) ? '' : v.trim();
 }
 function dentroDe(no, raiz, teste) {
@@ -469,11 +472,21 @@ function aplicarTamanho(area, alvo) {
   return novo;
 }
 
+const desarmar = html => { let a, h = html || ''; do { a = h; h = h.replace(/(<[a-z][^>]*?\s)on([a-z]+)=/gi, '$1data-edon-$2='); } while (h !== a); return h; };
+const rearmar = html => (html || '').replace(/data-edon-([a-z]+)=/gi, 'on$1=');
 function editorRico(valor, aoMudar, op = {}) {
   const area = h('div', { class: 'rico-area' + (op.compacto ? ' compacto' : ''), contenteditable: 'true', spellcheck: 'true', 'data-placeholder': op.placeholder || '' });
-  area.innerHTML = valor || '';
+  const relativo = u => u && !/^(https?:|data:|blob:|\/|#)/i.test(u);
+  const ajustarImgs = () => { if (!op.baseImg) return; $$('img[src]', area).forEach(im => { const u = im.getAttribute('src'); if (relativo(u) && !im.hasAttribute('data-edsrc')) { im.setAttribute('data-edsrc', u); im.setAttribute('src', op.baseImg + u); } }); };
+  const html = () => { // conteúdo da área com os caminhos de imagem originais
+    if (!op.baseImg) return area.innerHTML;
+    const c = area.cloneNode(true);
+    $$('img[data-edsrc]', c).forEach(im => { im.setAttribute('src', im.getAttribute('data-edsrc')); im.removeAttribute('data-edsrc'); });
+    return c.innerHTML;
+  };
+  area.innerHTML = desarmar(valor); ajustarImgs();
   const fonte = h('textarea', { class: 'rico-fonte mono', spellcheck: 'false', hidden: true });
-  const emit = () => aoMudar(limparRico(area.innerHTML));
+  const emit = () => aoMudar(rearmar(limparRico(html())));
   area.addEventListener('input', emit);
   area.addEventListener('paste', e => {
     e.preventDefault();
@@ -486,7 +499,7 @@ function editorRico(valor, aoMudar, op = {}) {
     else if (e.key === 'Enter' && e.shiftKey) { e.preventDefault(); document.execCommand('insertLineBreak'); }
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); link(); }
   });
-  fonte.addEventListener('input', () => { area.innerHTML = fonte.value; aoMudar(limparRico(fonte.value)); });
+  fonte.addEventListener('input', () => { area.innerHTML = desarmar(fonte.value); ajustarImgs(); aoMudar(limparRico(fonte.value)); });
   const cmd = (c, v) => { area.focus(); document.execCommand(c, false, v); emit(); };
   const link = () => {
     area.focus();
@@ -540,7 +553,7 @@ function editorRico(valor, aoMudar, op = {}) {
     bt('</>', 'Ver / editar o HTML', e => {
       const ver = fonte.hidden; fonte.hidden = !ver; area.hidden = ver;
       e.currentTarget.classList.toggle('on', ver);
-      if (ver) { fonte.value = limparRico(area.innerHTML); fonte.style.height = Math.max(60, area.offsetHeight + 10) + 'px'; fonte.focus(); } else area.focus();
+      if (ver) { fonte.value = rearmar(limparRico(html())); fonte.style.height = Math.max(60, area.offsetHeight + 10) + 'px'; fonte.focus(); } else area.focus();
     }, 'rico-html'));
   const raiz = h('div', { class: 'rico' + (op.compacto ? ' rico-compacto' : '') }, barra, area, fonte);
   if (op.inicioHtml && /<(table|div|section|iframe|svg|script|style)\b/i.test(valor || '')) { // HTML estrutural: começa no código
@@ -796,7 +809,14 @@ function renderPainelSlide(manterRolagem) {
   sel.value = s.layout;
   box.append(h('h3', {}, 'Slide ' + (st.sel + 1)), h('label', {}, 'Layout', sel));
   if (s.layout === 'html') {
-    box.append(h('p', { class: 'muted' }, 'Slide em HTML livre: clique no texto do palco para editar. Clique numa imagem e use "Trocar imagem" (ou dê duplo clique nela).'),
+    let avisou = false;
+    const ed = editorRico(s.html || '', v => {
+      if (!/^\s*<div\b[^>]*class="sl[\s"]/.test(v)) { if (!avisou) { avisou = true; toast('O slide precisa continuar dentro de <div class="sl">… — use </> para conferir o código.', true); } return; }
+      avisou = false; s.html = v.trim(); s.editado = true; marcar(); renderNotas(); agendarListaHtml();
+    }, { placeholder: '<div class="sl">…</div>', baseImg: urlAula('') });
+    ed.classList.add('rico-slide');
+    box.append(campoRotulo(h('span', {}, 'Conteúdo do slide ', h('span', { class: 'muted' }, '— edite aqui com a barra de formatação ou direto no palco; </> mostra o HTML')), ed));
+    box.append(h('p', { class: 'muted' }, 'Clique numa imagem e use "Trocar imagem" (ou dê duplo clique nela).'),
       h('div', { class: 'linha-bts' },
         h('button', { onclick: editarCodigo }, 'Editar código HTML'),
         h('button', { onclick: () => st.imgSel ? trocarImagemPalco(st.imgSel.el) : toast('Clique numa imagem do slide primeiro.') }, 'Trocar imagem'),

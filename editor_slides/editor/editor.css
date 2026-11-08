@@ -203,3 +203,16 @@ dialog.largo { width: min(1060px, 96vw) }
 .abas button.largura { flex: 0 0 40px; font-size: 15px }
 body.painel-largo #app { grid-template-columns: 250px 1fr 620px }
 body.painel-largo .abas button.largura { color: var(--pri) }
+/* editor do slide "HTML livre" no painel: conteúdo legível sem o CSS da aula */
+.rico-slide .rico-area { max-height: 460px; font-size: 13px }
+.rico-slide .rico-area img { max-width: 100%; height: auto; max-height: 160px; object-fit: contain }
+.rico-slide .rico-area h1, .rico-slide .rico-area h2 { font-size: 16px; margin: 4px 0 }
+.rico-slide .rico-area h3, .rico-slide .rico-area h4 { font-size: 14px; margin: 4px 0 }
+.rico-slide .rico-area .nt { border: 1px dashed #A9D4B4; background: #F0F7F3; padding: 4px 6px; margin-top: 6px; border-radius: 4px; font-size: 12px }
+.rico-slide .rico-area .nt::before { content: "Roteiro: "; font-weight: 700; color: #16794C }
+.rico-slide .rico-area .slhd { background: #1F2937; color: #fff; padding: 4px 8px; border-radius: 4px }
+.rico-slide .rico-area .slhd .num { margin-right: 6px; opacity: .7 }
+.rico-slide .rico-area table { border-collapse: collapse; font-size: 12px }
+.rico-slide .rico-area td, .rico-slide .rico-area th { border: 1px solid #D5DCE4; padding: 2px 4px }
+.rico-slide .rico-area .ov, .rico-slide .rico-area .bg { display: none }
+.rico-slide .rico-area iframe { max-width: 100%; height: 120px }

@@ -120,6 +120,7 @@ make editor            # abre http://127.0.0.1:8765 no navegador (Ctrl+C encerra
   **Tabelas** são editadas numa grade: cada célula tem o editor; ↑ ↓ ← → movem linhas/colunas, ✕ exclui,
   "+ Linha" / "+ col" acrescentam e ⋯ define a cor da linha (destacada, base) ou da célula (bom, ruim, centralizada).
   O bloco **HTML livre** abre no código quando tem estrutura (tabelas, divs) e pode ser alternado para o modo visual.
+  Os **slides em HTML livre** (aulas importadas) também têm o editor no painel, sincronizado com a edição direta no palco.
   O botão ⇔ nas abas amplia o painel lateral.
 - **Imagens** enviadas pelo editor vão para `img/` da aula com nome em minúsculas e hífens (o `make checar` agradece).
 - **Apresentar com passador ou tela de toque** (aulas geradas pelo editor, nas janelas de apresentação e do
