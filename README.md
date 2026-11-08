@@ -117,6 +117,11 @@ make editor            # abre http://127.0.0.1:8765 no navegador (Ctrl+C encerra
   Ctrl+Shift+> / Ctrl+Shift+<, relativo ao tema), quebra de linha, link e limpar formatação, além do botão
   `</>` para ver/editar o HTML. Nas listas, cada item é um editor próprio: Enter cria o próximo item,
   Shift+Enter quebra a linha, ↑ ↓ reordenam. Colar sempre insere texto puro (sem estilos de outros sites).
+  **Tabelas** são editadas numa grade: cada célula tem o editor; ↑ ↓ ← → movem linhas/colunas, ✕ exclui,
+  "+ Linha" / "+ col" acrescentam e ⋯ define a cor da linha (destacada, base) ou da célula (bom, ruim, centralizada).
+  O bloco **HTML livre** abre no código quando tem estrutura (tabelas, divs) e pode ser alternado para o modo visual.
+  Os **slides em HTML livre** (aulas importadas) também têm o editor no painel, sincronizado com a edição direta no palco.
+  O botão ⇔ nas abas amplia o painel lateral.
 - **Imagens** enviadas pelo editor vão para `img/` da aula com nome em minúsculas e hífens (o `make checar` agradece).
 - **Apresentar com passador ou tela de toque** (aulas geradas pelo editor, nas janelas de apresentação e do
   apresentador, que andam juntas):

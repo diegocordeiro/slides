@@ -302,7 +302,7 @@ function mostrarSlide(i) {
   if (sl.layout === 'html') {
     el.classList.add('ed-html');
     el.setAttribute('contenteditable', 'true');
-    el.oninput = () => { sl.html = serializar(el); sl.editado = true; marcar(false); };
+    el.oninput = () => { sl.html = serializar(el); sl.editado = true; marcar(false); sincPainelHtml(); };
     el.onblur = () => { renderLista(); };
   } else {
     $$('[data-e]', el).forEach(c => {
@@ -315,6 +315,9 @@ function mostrarSlide(i) {
   }
   if (st.bloco) { const b = el.querySelector('[data-b="' + st.bloco + '"]'); if (b) b.classList.add('ed-sel'); }
 }
+const agendarListaHtml = debounce(() => renderLista(), 600);
+/* edição direta no palco → atualiza o editor do painel (se o painel não estiver em uso) */
+const sincPainelHtml = debounce(() => { if (!$('#aba-slide').contains(document.activeElement)) renderPainelSlide(true); }, 500);
 function serializar(el) {
   const c = el.cloneNode(true);
   c.removeAttribute('contenteditable'); c.removeAttribute('data-slide');
@@ -395,7 +398,7 @@ function renderPainel() { renderPainelSlide(); renderAula(); renderTema(); rende
    lista, link…) e um botão </> para ver/editar o HTML. Colar insere texto puro. */
 function limparRico(html) {
   let v = (html || '').replace(/\u200b/g, '');
-  v = v.replace(/<(b|strong|em|i|u|code|span)\b[^>]*>\s*<\/\1>/gi, '');
+  v = v.replace(/<(b|strong|em|i|u|code)>\s*<\/\1>/gi, '').replace(/<span(?:\s+style="font-size:[^"]*")?>\s*<\/span>/gi, ''); // só tags vazias sem atributos
   return /^(\s|<br\s*\/?>|&nbsp;)*$/i.test(v) ? '' : v.trim();
 }
 function dentroDe(no, raiz, teste) {
@@ -469,11 +472,21 @@ function aplicarTamanho(area, alvo) {
   return novo;
 }
 
+const desarmar = html => { let a, h = html || ''; do { a = h; h = h.replace(/(<[a-z][^>]*?\s)on([a-z]+)=/gi, '$1data-edon-$2='); } while (h !== a); return h; };
+const rearmar = html => (html || '').replace(/data-edon-([a-z]+)=/gi, 'on$1=');
 function editorRico(valor, aoMudar, op = {}) {
   const area = h('div', { class: 'rico-area' + (op.compacto ? ' compacto' : ''), contenteditable: 'true', spellcheck: 'true', 'data-placeholder': op.placeholder || '' });
-  area.innerHTML = valor || '';
+  const relativo = u => u && !/^(https?:|data:|blob:|\/|#)/i.test(u);
+  const ajustarImgs = () => { if (!op.baseImg) return; $$('img[src]', area).forEach(im => { const u = im.getAttribute('src'); if (relativo(u) && !im.hasAttribute('data-edsrc')) { im.setAttribute('data-edsrc', u); im.setAttribute('src', op.baseImg + u); } }); };
+  const html = () => { // conteúdo da área com os caminhos de imagem originais
+    if (!op.baseImg) return area.innerHTML;
+    const c = area.cloneNode(true);
+    $$('img[data-edsrc]', c).forEach(im => { im.setAttribute('src', im.getAttribute('data-edsrc')); im.removeAttribute('data-edsrc'); });
+    return c.innerHTML;
+  };
+  area.innerHTML = desarmar(valor); ajustarImgs();
   const fonte = h('textarea', { class: 'rico-fonte mono', spellcheck: 'false', hidden: true });
-  const emit = () => aoMudar(limparRico(area.innerHTML));
+  const emit = () => aoMudar(rearmar(limparRico(html())));
   area.addEventListener('input', emit);
   area.addEventListener('paste', e => {
     e.preventDefault();
@@ -486,7 +499,7 @@ function editorRico(valor, aoMudar, op = {}) {
     else if (e.key === 'Enter' && e.shiftKey) { e.preventDefault(); document.execCommand('insertLineBreak'); }
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); link(); }
   });
-  fonte.addEventListener('input', () => { area.innerHTML = fonte.value; aoMudar(limparRico(fonte.value)); });
+  fonte.addEventListener('input', () => { area.innerHTML = desarmar(fonte.value); ajustarImgs(); aoMudar(limparRico(fonte.value)); });
   const cmd = (c, v) => { area.focus(); document.execCommand(c, false, v); emit(); };
   const link = () => {
     area.focus();
@@ -540,9 +553,14 @@ function editorRico(valor, aoMudar, op = {}) {
     bt('</>', 'Ver / editar o HTML', e => {
       const ver = fonte.hidden; fonte.hidden = !ver; area.hidden = ver;
       e.currentTarget.classList.toggle('on', ver);
-      if (ver) { fonte.value = limparRico(area.innerHTML); fonte.style.height = Math.max(60, area.offsetHeight + 10) + 'px'; fonte.focus(); } else area.focus();
+      if (ver) { fonte.value = rearmar(limparRico(html())); fonte.style.height = Math.max(60, area.offsetHeight + 10) + 'px'; fonte.focus(); } else area.focus();
     }, 'rico-html'));
-  return h('div', { class: 'rico' + (op.compacto ? ' rico-compacto' : '') }, barra, area, fonte);
+  const raiz = h('div', { class: 'rico' + (op.compacto ? ' rico-compacto' : '') }, barra, area, fonte);
+  if (op.inicioHtml && /<(table|div|section|iframe|svg|script|style)\b/i.test(valor || '')) { // HTML estrutural: começa no código
+    fonte.hidden = false; area.hidden = true; fonte.value = valor || ''; fonte.style.height = '160px';
+    const b = barra.querySelector('.rico-html'); if (b) b.classList.add('on');
+  }
+  return raiz;
 }
 function campoRotulo(rot, ...filhos) { return h('div', { class: 'campo' }, h('span', { class: 'rotulo' }, rot), ...filhos); }
 const LISTAS_SIMPLES = ['linhas_classe', 'cabecalho_classe'];
@@ -580,15 +598,19 @@ function campoEl(c, base, onAlterar) {
   const rot = c.rotulo || c.nome;
   switch (c.tipo) {
     case 'texto':
-      if (!TEXTO_SIMPLES.includes(c.nome) && !/^meta(\/|$)/.test(base))
+      if (!TEXTO_SIMPLES.includes(c.nome))
         return campoRotulo(rot, editorRico(v, val => alterar(val), { compacto: true, linha: true, placeholder: c.padrao || '' }));
       return h('label', {}, rot, h('input', { value: v || '', placeholder: c.padrao || '', oninput: e => alterar(e.target.value) }));
     case 'proporcao':
       return h('label', {}, rot, h('input', { value: v || '', placeholder: c.padrao || '', oninput: e => alterar(e.target.value) }));
     case 'html':
       return campoRotulo(rot, editorRico(v, val => alterar(val)));
-    case 'codigo':
+    case 'codigo': {
+      const dono = getP(st.dados, base);
+      if (c.nome === 'html' && dono && dono.tipo === 'html') // bloco "HTML livre": visual + </>
+        return campoRotulo(rot, editorRico(v, val => alterar(val), { placeholder: '<p>HTML</p>', inicioHtml: true }));
       return h('label', {}, rot, h('textarea', { class: 'mono', rows: 6, value: v || '', spellcheck: 'false', oninput: e => alterar(e.target.value) }));
+    }
     case 'lista':
       if (LISTAS_SIMPLES.includes(c.nome))
         return h('label', {}, rot + ' (um por linha)', h('textarea', { rows: Math.min(8, Math.max(2, (v || []).length + 1)), value: (v || []).join('\n'),
@@ -610,8 +632,7 @@ function campoEl(c, base, onAlterar) {
       return h('label', {}, rot, h('textarea', { class: 'mono', rows: 2, value: v ? JSON.stringify(v) : '',
         oninput: e => { try { alterar(e.target.value.trim() ? JSON.parse(e.target.value) : {}); e.target.style.borderColor = ''; } catch (x) { e.target.style.borderColor = 'red'; } } }));
     case 'tabela':
-      return h('label', {}, rot + ' (uma linha por linha; células separadas por | )', h('textarea', { class: 'mono', rows: Math.min(10, (v || []).length + 2),
-        value: (v || []).map(r => r.join(' | ')).join('\n'), oninput: e => alterar(e.target.value.split('\n').filter(x => x.trim()).map(r => r.split('|').map(x => x.trim()))) }));
+      return campoRotulo(h('span', {}, 'Tabela ', h('span', { class: 'muted' }, '— clique numa célula para editar; ⋯ define a cor da linha/célula')), editorTabela(base));
     case 'itens': {
       const box = h('div', { class: 'caixa' }, h('b', {}, rot));
       (v || []).forEach((it, i) => {
@@ -630,8 +651,97 @@ function campoEl(c, base, onAlterar) {
   }
   return h('div', {}, rot + ': tipo não suportado');
 }
+const CAMPOS_DA_GRADE = ['cabecalho', 'linhas_classe', 'celulas_classe', 'preencher']; // editados dentro da grade da tabela
 function formCampos(campos, base, cont) {
-  for (const c of campos) cont.append(campoEl(c, base));
+  const dono = base ? getP(st.dados, base) : null;
+  for (const c of campos) {
+    if (dono && dono.tipo === 'tabela' && CAMPOS_DA_GRADE.includes(c.nome)) continue;
+    cont.append(campoEl(c, base));
+  }
+}
+
+/* ------------------------------------------------------------ editor de tabela */
+const CLASSES_LINHA = { '': 'normal', hl: 'destacada (verde)', bs: 'base / referência' };
+const CLASSES_CELULA = { '': 'normal', bom: 'valor bom (verde)', ruim: 'valor ruim (vermelho)', cen: 'centralizada' };
+function editorTabela(base) {
+  const b = getP(st.dados, base);
+  b.cabecalho = b.cabecalho || []; b.linhas = b.linhas || [];
+  const ncol = () => Math.max(b.cabecalho.length, ...b.linhas.map(r => r.length), 1);
+  const normalizar = () => {
+    const n = ncol();
+    while (b.cabecalho.length < n) b.cabecalho.push('');
+    b.linhas.forEach(r => { while (r.length < n) r.push(''); });
+    b.linhas_classe = (b.linhas_classe || []).slice(0, b.linhas.length);
+    while (b.linhas_classe.length < b.linhas.length) b.linhas_classe.push('');
+    if (!b.linhas_classe.some(Boolean)) delete b.linhas_classe;
+    if (b.celulas_classe && !Object.keys(b.celulas_classe).length) delete b.celulas_classe;
+  };
+  normalizar();
+  const mudou = (redesenhar) => { normalizar(); marcar(); if (redesenhar) renderPainelSlide(true); };
+  const remapear = fn => { // reescreve as chaves "linha,coluna" das classes por célula
+    const novo = {};
+    for (const [k, v] of Object.entries(b.celulas_classe || {})) { const [r, c] = k.split(',').map(Number); const nk = fn(r, c); if (nk) novo[nk[0] + ',' + nk[1]] = v; }
+    b.celulas_classe = novo;
+  };
+  const tb = h('table', { class: 'tabela-ed' });
+  // cabeçalho
+  const trc = h('tr', {}, h('th', { class: 'canto' }, '#'));
+  for (let c = 0; c < ncol(); c++) {
+    trc.append(h('th', {},
+      editorRico(b.cabecalho[c], v => { b.cabecalho[c] = v; marcar(); }, { compacto: true, linha: true, placeholder: 'Coluna ' + (c + 1) }),
+      h('div', { class: 'ops-cel' },
+        h('button', { type: 'button', title: 'Mover coluna para a esquerda', disabled: c === 0, onclick: () => {
+          [b.cabecalho[c - 1], b.cabecalho[c]] = [b.cabecalho[c], b.cabecalho[c - 1]];
+          b.linhas.forEach(r => { [r[c - 1], r[c]] = [r[c], r[c - 1]]; });
+          remapear((r, k) => [r, k === c ? c - 1 : k === c - 1 ? c : k]); mudou(true); } }, '←'),
+        h('button', { type: 'button', title: 'Mover coluna para a direita', disabled: c === ncol() - 1, onclick: () => {
+          [b.cabecalho[c + 1], b.cabecalho[c]] = [b.cabecalho[c], b.cabecalho[c + 1]];
+          b.linhas.forEach(r => { [r[c + 1], r[c]] = [r[c], r[c + 1]]; });
+          remapear((r, k) => [r, k === c ? c + 1 : k === c + 1 ? c : k]); mudou(true); } }, '→'),
+        h('button', { type: 'button', class: 'perigo', title: 'Excluir coluna', disabled: ncol() <= 1, onclick: () => {
+          if (!confirm('Excluir a coluna ' + (c + 1) + '?')) return;
+          b.cabecalho.splice(c, 1); b.linhas.forEach(r => r.splice(c, 1));
+          remapear((r, k) => k === c ? null : [r, k > c ? k - 1 : k]); mudou(true); } }, '✕'))));
+  }
+  trc.append(h('th', { class: 'canto' }, h('button', { type: 'button', title: 'Nova coluna', onclick: () => { b.cabecalho.push(''); b.linhas.forEach(r => r.push('')); mudou(true); } }, '+ col')));
+  tb.append(trc);
+  // linhas
+  b.linhas.forEach((linha, r) => {
+    const cls = (b.linhas_classe || [])[r] || '';
+    const selLinha = h('select', { title: 'Cor da linha', onchange: e => { b.linhas_classe = b.linhas_classe || b.linhas.map(() => ''); b.linhas_classe[r] = e.target.value; mudou(true); } },
+      ...Object.entries(CLASSES_LINHA).map(([k, t]) => h('option', { value: k }, t)));
+    selLinha.value = cls;
+    const tr = h('tr', { class: cls ? 'cls-' + cls : '' }, h('td', { class: 'canto' },
+      h('div', { class: 'num-linha' }, r + 1),
+      h('div', { class: 'ops-cel' },
+        h('button', { type: 'button', title: 'Subir linha', disabled: r === 0, onclick: () => {
+          [b.linhas[r - 1], b.linhas[r]] = [b.linhas[r], b.linhas[r - 1]];
+          if (b.linhas_classe) [b.linhas_classe[r - 1], b.linhas_classe[r]] = [b.linhas_classe[r], b.linhas_classe[r - 1]];
+          remapear((k, c) => [k === r ? r - 1 : k === r - 1 ? r : k, c]); mudou(true); } }, '↑'),
+        h('button', { type: 'button', title: 'Descer linha', disabled: r === b.linhas.length - 1, onclick: () => {
+          [b.linhas[r + 1], b.linhas[r]] = [b.linhas[r], b.linhas[r + 1]];
+          if (b.linhas_classe) [b.linhas_classe[r + 1], b.linhas_classe[r]] = [b.linhas_classe[r], b.linhas_classe[r + 1]];
+          remapear((k, c) => [k === r ? r + 1 : k === r + 1 ? r : k, c]); mudou(true); } }, '↓'),
+        h('button', { type: 'button', class: 'perigo', title: 'Excluir linha', onclick: () => {
+          b.linhas.splice(r, 1); if (b.linhas_classe) b.linhas_classe.splice(r, 1);
+          remapear((k, c) => k === r ? null : [k > r ? k - 1 : k, c]); mudou(true); } }, '✕')),
+      h('details', { class: 'mais-cel' }, h('summary', { title: 'Cor da linha' }, '⋯'), selLinha)));
+    for (let c = 0; c < ncol(); c++) {
+      const chave = r + ',' + c; const cc = (b.celulas_classe || {})[chave] || '';
+      const selCel = h('select', { title: 'Estilo da célula', onchange: e => {
+        b.celulas_classe = b.celulas_classe || {}; if (e.target.value) b.celulas_classe[chave] = e.target.value; else delete b.celulas_classe[chave]; mudou(true); } },
+        ...Object.entries(CLASSES_CELULA).map(([k, t]) => h('option', { value: k }, t)));
+      selCel.value = cc;
+      tr.append(h('td', { class: cc ? 'cel-' + cc : '' },
+        editorRico(linha[c], v => { linha[c] = v; marcar(); }, { compacto: true, linha: true }),
+        h('details', { class: 'mais-cel' }, h('summary', { title: 'Estilo da célula' }, '⋯'), selCel)));
+    }
+    tb.append(tr);
+  });
+  return h('div', { class: 'tabela-wrap' }, tb,
+    h('div', { class: 'linha-bts' },
+      h('button', { type: 'button', onclick: () => { b.linhas.push(Array(ncol()).fill('')); mudou(true); } }, '+ Linha'),
+      h('label', { class: 'chk' }, h('input', { type: 'checkbox', checked: !!b.preencher, onchange: e => { b.preencher = e.target.checked; marcar(); } }), 'Esticar até a altura disponível')));
 }
 function resumoBloco(b) {
   const t = b.titulo || b.texto || b.html || b.legenda || b.pergunta || (b.itens && b.itens[0] && (b.itens[0].valor || b.itens[0].titulo || b.itens[0])) || b.src || (b.cabecalho || []).join(' · ') || '';
@@ -699,7 +809,14 @@ function renderPainelSlide(manterRolagem) {
   sel.value = s.layout;
   box.append(h('h3', {}, 'Slide ' + (st.sel + 1)), h('label', {}, 'Layout', sel));
   if (s.layout === 'html') {
-    box.append(h('p', { class: 'muted' }, 'Slide em HTML livre: clique no texto do palco para editar. Clique numa imagem e use "Trocar imagem" (ou dê duplo clique nela).'),
+    let avisou = false;
+    const ed = editorRico(s.html || '', v => {
+      if (!/^\s*<div\b[^>]*class="sl[\s"]/.test(v)) { if (!avisou) { avisou = true; toast('O slide precisa continuar dentro de <div class="sl">… — use </> para conferir o código.', true); } return; }
+      avisou = false; s.html = v.trim(); s.editado = true; marcar(); renderNotas(); agendarListaHtml();
+    }, { placeholder: '<div class="sl">…</div>', baseImg: urlAula('') });
+    ed.classList.add('rico-slide');
+    box.append(campoRotulo(h('span', {}, 'Conteúdo do slide ', h('span', { class: 'muted' }, '— edite aqui com a barra de formatação ou direto no palco; </> mostra o HTML')), ed));
+    box.append(h('p', { class: 'muted' }, 'Clique numa imagem e use "Trocar imagem" (ou dê duplo clique nela).'),
       h('div', { class: 'linha-bts' },
         h('button', { onclick: editarCodigo }, 'Editar código HTML'),
         h('button', { onclick: () => st.imgSel ? trocarImagemPalco(st.imgSel.el) : toast('Clique numa imagem do slide primeiro.') }, 'Trocar imagem'),
@@ -1241,7 +1358,10 @@ function ligar() {
   $('#b-publicar').onclick = () => dialogoPublicar().catch(e => toast(e.message, true));
   $('#b-add').onclick = e => { e.stopPropagation(); menuAdicionar(); };
   document.addEventListener('click', e => { if (!e.target.closest('.menu-wrap')) $('#menu-add').hidden = true; });
-  $$('.abas button').forEach(b => b.onclick = () => abaAtiva(b.dataset.aba));
+  $$('.abas button[data-aba]').forEach(b => b.onclick = () => abaAtiva(b.dataset.aba));
+  const largo = v => { document.body.classList.toggle('painel-largo', v); try { localStorage.setItem('editor_slides:painel-largo', v ? '1' : ''); } catch (e) { } setTimeout(escalarPalco, 50); };
+  try { largo(!!localStorage.getItem('editor_slides:painel-largo')); } catch (e) { }
+  $('#b-largura').onclick = () => largo(!document.body.classList.contains('painel-largo'));
   $$('dialog .fechar').forEach(b => b.addEventListener('click', ev => { ev.preventDefault(); b.closest('dialog').close(); }));
   document.addEventListener('keydown', atalhos);
   window.addEventListener('beforeunload', e => { if (st.sujo) { salvar(true); e.preventDefault(); e.returnValue = ''; } });
