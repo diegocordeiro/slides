@@ -130,6 +130,12 @@ make editor            # abre http://127.0.0.1:8765 no navegador (Ctrl+C encerra
     qualquer tecla volta;
   - toque: arraste para a esquerda/direita, ou toque na faixa lateral (15% de cada lado);
     os botões de navegação ficam maiores em telas de toque.
+- **Celular e tablet**: as aulas geradas se adaptam à tela. Em telas estreitas (até 820 px) o slide vira uma
+  página que rola: colunas e cartões empilham, indicadores ficam 2 por linha, tabelas largas rolam para o lado
+  (arrastar sobre a tabela não troca de slide), imagens mantêm a proporção e a barra superior mostra só o
+  essencial (roteiro, cronômetro, modo apresentador, rodapé e "Exportar PDF" ficam ocultos). Com o celular
+  deitado, as barras ficam mínimas. Grades criadas no "CSS extra" de uma aula também passam a quebrar quando
+  não cabem. Na tela grande e no PDF nada muda.
 - **Salvamento** automático, desfazer/refazer (Ctrl+Z / Ctrl+Shift+Z), Ctrl+S salva.
 - **Publicar**: mostra a branch e os arquivos alterados, permite rodar o *checar* e então executa
   `make publicar` exibindo o log. Fora da `main` o push vai para a branch atual (o site só muda após o merge).
