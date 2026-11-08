@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="generator" content="editor_slides">
+  <title>Automatização do Processo de Documentação em Fábricas de IA — Projeto de Pesquisa</title>
+  <link rel="stylesheet" href="apresentacao.css">
+</head>
+
+<body data-limite="10">
+  <header class="tb">
+    <div class="tb-left">
+      <img src="img/logo.png" class="tb-logo" alt="">
+      <h2>Automatização da Documentação em Fábricas de IA</h2>
+    </div>
+    <div class="tb-right">
+      <div class="fz" aria-label="Tamanho do texto">
+        <button onclick="fz(-1)" title="Diminuir tamanho da fonte">A−</button>
+        <span id="fzpct">100%</span>
+        <button onclick="fz(1)" title="Aumentar tamanho da fonte">A+</button>
+      </div>
+      <button class="bpb" id="bnt" onclick="toggleNotas()" title="Mostrar/ocultar roteiro de fala (tecla N)">Roteiro</button>
+      <button class="tmr" id="tmr" onclick="if(event.shiftKey){tmrDefinirLimite()}else{toggleTimer()}" ondblclick="resetTimer()" title="Iniciar/pausar (T) · duplo clique zera · Shift+clique define o limite">00:00 / 10:00</button>
+      <button class="bpb" id="bp" onclick="openPresenter()">Modo apresentador</button>
+      <span class="ct" id="ctr">1 / 10</span>
+      <span class="modo-tag">APRESENTAÇÃO</span>
+    </div>
+  </header>
+  <div class="fita"></div>
+  <div class="sc">
+
+    <!-- SLIDE 1 — Automatização do Processo de Documentação em Fábricas de IA: uma Abordagem Baseada em Sistemas Multiagente -->
+    <div class="sl" id="s1">
+      <div class="capa">
+        <div class="esq">
+          <div class="rot">Projeto de Pesquisa · Mestrado · PPGCC/UFPI</div>
+          <h1>Automatização do Processo de Documentação em Fábricas de IA:<br>uma Abordagem Baseada em Sistemas Multiagente</h1>
+          <div class="faixa"></div>
+          <div class="sub">Mestrando:
+<ul>
+<li>Diego Cordeiro de Oliveira</li>
+</ul></div>
+          <div class="sub">Orientador:
+<ul>
+<li>Prof. Dr. Guilherme Amaral Avelino</li>
+</ul></div>
+        </div>
+        <div class="dir"><img src="img/logo_full.png" alt=""><img class="marca" src="img/marca.png" alt=""></div>
+      </div>
+      <div class="nt"><strong>~20 s.</strong> Apresentar o tema: investigar como um Sistema Multiagente (MAS) pode automatizar o processo de documentação de uma Fábrica de IA, apoiando a equipe — não substituindo. Roteiro: contexto e problema, questões de pesquisa, método de análise, escopo e cronograma.</div>
+    </div>
+
+    <!-- SLIDE 2 — Contexto: a Fábrica de IA -->
+    <div class="sl" id="s2">
+      <div class="slhd"><span class="num">2</span><h2>Contexto: a Fábrica de IA</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr;">
+        <div class="pergunta"><small>Fábrica de IA</small><span>Estrutura que sistematiza o desenvolvimento de soluções de <b>IA preditiva</b> para órgãos da administração pública estadual, com processos, papéis e <b>artefatos padronizados</b>.</span></div>
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="fluxo"><div class="et"><span class="num">I</span><div><b>Exploração</b></div><div class="et-sub">foco deste trabalho</div></div><div class="st">→</div><div class="et"><span class="num">II</span><div><b>Viabilidade e Concepção</b></div><div class="et-sub"></div></div><div class="st">→</div><div class="et"><span class="num">III</span><div><b>Desenvolvimento do MVP</b></div><div class="et-sub"></div></div><div class="st">→</div><div class="et"><span class="num">IV</span><div><b>Piloto Controlado</b></div><div class="et-sub"></div></div><div class="st">→</div><div class="et"><span class="num">V</span><div><b>Entrega e Habilitação</b></div><div class="et-sub"></div></div></div></div><table class="tb2 fill"><tr><th>Artefatos da Exploração (cada um consome os anteriores)</th><th>Finalidade</th></tr><tr><td><strong>DO1</strong> Demanda do órgão</td><td>Formaliza a solicitação e o contexto institucional</td></tr><tr><td><strong>DO2</strong> Lista de stakeholders</td><td>Identifica gestores, especialistas e atores técnicos</td></tr><tr><td><strong>DO3</strong> Registro da oficina</td><td>Dores, oportunidades, premissas, restrições e riscos</td></tr><tr><td><strong>DO4</strong> Portfólio de problemas</td><td>Consolida problemas, evidências e oportunidades de IA</td></tr><tr><td><strong>DO5</strong> Portfólio priorizado</td><td>Priorização validada, complexidade e impacto público</td></tr><tr class="hl"><td><strong>DO6</strong> Problema prioritário</td><td>Escopo, dados, hipótese de valor — entrada da Fase II</td></tr></table></div></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> O processo trata de soluções de IA preditiva. Governança pela Lean R&amp;D [Kalinowski et al. 2020]; execução técnica pelo workflow de Amershi et al. [2019]. São cinco fases, e o avanço depende de um comitê gestor que delibera sobre artefatos validados. O foco é a Exploração: seis artefatos encadeados, da demanda (DO1) ao problema prioritário (DO6), que é a entrada da Fase II. No setor público, esse registro tem valor institucional: transparência, prestação de contas e conformidade.</div>
+    </div>
+
+    <!-- SLIDE 3 — Problema e lacuna na literatura -->
+    <div class="sl" id="s3">
+      <div class="slhd"><span class="num">3</span><h2>Problema e lacuna na literatura</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1.25fr">
+          <div class="col"><div class="card er grow"><h3>Produção manual dos artefatos</h3><div class="big">Consome tempo e esforço da equipe</div><ul><li><strong>Inconsistência</strong> de formato e terminologia entre documentos.</li><li><strong>Duplicidade</strong> de informações entre artefatos.</li><li><strong>Lacunas</strong> que só aparecem na auditoria ou no reúso.</li></ul><div class="rod"><strong>Efeito:</strong> perda de padronização e rastreabilidade em ML, decisões não registradas na hora são irrecuperáveis [Amershi et al. 2019; Sculley et al. 2015].</div></div></div>
+          <div class="col"><div style="display:contents"><h3 class="tit-bloco">Revisão rápida (PICOC, 92 estudos) [Cartaxo et al. 2020]</h3></div><div class="grade" style="grid-template-columns:1fr 1fr"><div class="col"><div class="kpi" style="grid-template-rows:repeat(2,1fr);"><div><b>47,9%</b><span>dos 94 MAS analisados geram código; só 3,2% atuam em requisitos [Cai et al. 2025]</span></div><div><b>1 estudo</b><span>trata model, data e risk cards — e <strong>sem agentes</strong> [Celepija et al. 2025]</span></div></div></div><div class="col"><div class="kpi" style="grid-template-rows:repeat(2,1fr);"><div><b>1 de 94</b><span>estudos considera o <strong>reúso</strong> de artefatos.</span></div><div><b>0</b><span>estudos mencionam AI Factories; nenhum valida artefatos com a equipe do processo</span></div></div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~1 min 15 s.</strong> Problema: feita individualmente, a produção gera inconsistências, duplicidade e lacunas que só aparecem numa auditoria ou no reúso por outro órgão — degradando padronização e rastreabilidade. Lacuna: a revisão rápida examinou 92 estudos, dez em texto completo, e mostrou quatro descompassos (os quatro números). O mais próximo, o KGMAF [Huang et al. 2025], é um artigo de visão, usa normas internacionais em vez de templates organizacionais e não reporta métricas.</div>
+    </div>
+
+    <!-- SLIDE 4 — Proposta e objetivo -->
+    <div class="sl" id="s4">
+      <div class="slhd"><span class="num">4</span><h2>Proposta e objetivo</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="fluxo"><div class="et"><span class="num">1</span><div><b>Sistema Multiagente</b></div><div class="et-sub">consolida reuniões, entrevistas, documentos e preenche os templates</div></div><div class="st">→</div><div class="et"><span class="num">2</span><div><b>Artefatos</b></div><div class="et-sub">validação estrutural (automática) e semântica (humana)</div></div><div class="st">→</div><div class="et"><span class="num">3</span><div><b>Equipe da Fábrica</b></div><div class="et-sub">complementa ou gera novos artefatos e homologa</div></div></div></div><div class="grade" style="grid-template-columns:1.4fr 1fr"><div class="col"><div class="card az grow"><h3>Objetivo geral</h3><div class="txt-bloco"><p style="margin:0;">Desenvolver e avaliar um Sistema Multiagente para <strong>automatizar o processo de documentação</strong> do desenvolvimento de soluções de IA em uma Fábrica de IA governamental, submetendo os artefatos a validação estrutural e semântica antes da revisão humana.</p></div></div></div><div class="col"><div class="card vd grow"><h3>Humano no processo</h3><div class="txt-bloco"><p style="margin:0;">O MAS opera com o processo, respeita seus papéis e a autoridade de decisão fica com a equipe. Nenhum agente responsável sem um humano verificar [Ronanki 2025].</p></div></div></div></div></div></div>
+        <div class="faixa-az"><span>O MAS <b>gera,</b>&nbsp;a equipe <b>valida, complementa e decide</b>.</span></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> Ponto central da orientação: o foco é automatizar o processo de documentação, não fazer a IA produzir tudo sozinha. O MAS gera artefatos que dão suporte à equipe; a equipe valida, complementa ou gera novos artefatos e mantém a homologação.</div>
+    </div>
+
+    <!-- SLIDE 5 — Questões de pesquisa -->
+    <div class="sl" id="s5">
+      <div class="slhd"><span class="num">5</span><h2>Questões de pesquisa</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr;">
+        <div class="pergunta"><small>RQ1 — questão principal</small><span>Um Sistema Multiagente pode <b>automatizar o processo de documentação</b> previsto por uma Fábrica de IA no desenvolvimento de soluções de IA, <b>apoiando a equipe</b> responsável na produção dos artefatos?</span></div>
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><table class="tb2 fill"><tr><th>Sub-questão</th><th>Indicador</th><th>Pergunta (MAS × produção manual)</th></tr><tr><td><strong>RQ1.1</strong></td><td>Tempo</td><td>Qual o tempo de produção dos artefatos com o MAS, comparado ao manual?</td></tr><tr><td><strong>RQ1.2</strong></td><td>Cobertura</td><td>Em que medida os artefatos cobrem as informações dos documentos de origem?</td></tr><tr><td><strong>RQ1.3</strong></td><td>Custos</td><td>Quais os custos da produção com o MAS, comparados ao manual?</td></tr><tr><td><strong>RQ1.4</strong></td><td>Consistência</td><td>O MAS preserva a consistência entre artefatos encadeados?</td></tr><tr><td><strong>RQ1.5</strong></td><td>Retrabalho</td><td>Qual a taxa de retrabalho dos artefatos do MAS, comparada à dos manuais?</td></tr><tr><td><strong>RQ1.6</strong></td><td>Esforço de revisão</td><td>Qual o esforço de revisão humana até a equipe homologar os artefatos?</td></tr></table></div></div>
+      </div>
+      <div class="nt"><strong>~1 min 30 s — slide central.</strong> A RQ1 pergunta se o MAS consegue automatizar o processo de documentação apoiando a equipe. Ela é desdobrada em seis sub-questões, uma por indicador de avaliação. Todas comparam a produção assistida pelo MAS com a produção manual. Destacar a RQ1.4: como cada artefato consome os anteriores, a consistência da cadeia é condição de validade do conjunto.</div>
+    </div>
+
+    <!-- SLIDE 6 — Método: Design Science Research -->
+    <div class="sl" id="s6">
+      <div class="slhd"><span class="num">6</span><h2>Método: Design Science Research</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr;">
+        <div style="display:contents"><div class="fluxo"><div class="et"><span class="num">1</span><div><b>Aquisição dos dados</b></div><div class="et-sub">caso real, contexto em modelo JSON</div></div><div class="st">→</div><div class="et"><span class="num">2</span><div><b>Análise estrutural</b></div><div class="et-sub">atividades → saídas → templates e lacunas</div></div><div class="st">→</div><div class="et"><span class="num">3</span><div><b>Geração e correção</b></div><div class="et-sub">preenche templates preservando o LaTeX</div></div><div class="st">→</div><div class="et"><span class="num">4</span><div><b>Validação e avaliação</b></div><div class="et-sub">duas camadas + comparação com o manual</div></div></div></div>
+        <div class="grade" style="grid-template-columns:1.3fr 1fr">
+          <div class="col"><table class="tb2 fill"><tr><th>Agente (CrewAI)</th><th>Responsabilidade</th></tr><tr><td>Analista de Atividades</td><td>Mapear atividades e saídas e casar cada saída com um template</td></tr><tr><td>Gerador de Artefatos</td><td>Preencher os templates com os dados consolidados</td></tr><tr><td>Construtor de Documentos LaTeX</td><td>Produzir documentos para saídas sem template</td></tr><tr><td>Validador de Estrutura</td><td>Comparar com o template e corrigir</td></tr></table></div>
+          <div class="col"><div class="card grow"><h3>Decisões de projeto</h3><ul><li><strong>Determinístico primeiro:</strong> LLM só quando a correspondência falha, fluxo auditável [Mohanta et al. 2026].</li><li><strong>3 níveis:</strong>&nbsp;Orquestração → ferramenta direta → <em>fallback</em> mínimo válido [Chen et al. 2025].</li></ul><div class="rod">DSR [Hevner et al. 2004] conduzida pelas atividades da DSRM [Peffers et al. 2007].</div></div></div></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> Enquadramento em DSR, seguindo as atividades de projeto e desenvolvimento, demonstração e avaliação da DSRM. Quatro etapas. Quatro agentes no CrewAI. Duas decisões: procedimentos determinísticos sempre que possível, com o LLM só nas lacunas, e uma cadeia de robustez contra erro em cascata.</div>
+    </div>
+
+    <!-- SLIDE 7 — Coleta dos dados -->
+    <div class="sl" id="s7">
+      <div class="slhd"><span class="num">7</span><h2>Coleta dos dados</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="fluxo"><div class="et"><span class="num">1</span><div><b>Documentos da Fase II</b></div><div class="et-sub">demanda, stakeholders, problema, viabilidade e decisões</div></div><div class="st">→</div><div class="et"><span class="num">2</span><div><b>Modelo de dados JSON</b></div><div class="et-sub">mesma entrada para os dois modos</div></div><div class="st">→</div><div class="et-par"><div class="et"><span class="num">3a</span><div><b>Modo manual</b></div><div class="et-sub">integrantes da equipe da Fábrica</div></div><div class="et"><span class="num">3b</span><div><b>Modo assistido</b></div><div class="et-sub">o MAS proposto</div></div></div><div class="st">→</div><div class="et"><span class="num">4</span><div><b>DO1–DO6 × 2</b></div><div class="et-sub">dois conjuntos comparáveis</div></div></div></div><div class="grade" style="grid-template-columns:1fr 1fr"><div class="col"><div class="card er grow"><h3>Restrição</h3><div class="txt-bloco"><p style="margin:0;">No momento da coleta, o projeto já estava na <strong>Fase II (SIMO)</strong>: os registros primários da Exploração não estavam acessíveis.</p></div></div></div><div class="col"><div class="card vd grow"><h3>Estratégia de reconstrução</h3><div class="txt-bloco"><p style="margin:0;">A Exploração é <strong>reconstruída</strong> a partir dos documentos consolidados, seguindo as atividades e os templates da fase.</p></div></div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> O projeto do órgão já estava na Fase II, então reconstruímos a Exploração: o contexto foi extraído dos documentos da Fase II e organizado num modelo JSON. A partir da mesma entrada, dois conjuntos: um manual, feito pela equipe, e um pelo MAS. Essa é a base de comparação.</div>
+    </div>
+
+    <!-- SLIDE 8 — Análise dos resultados -->
+    <div class="sl" id="s8">
+      <div class="slhd"><span class="num">8</span><h2>Análise dos resultados</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="card az"><h3>Camada 1 · Validação estrutural (automática)</h3><div class="txt-bloco"><p style="margin:0;">O Validador compara o documento com o template: ambientes, seções, tabelas e comandos. Laço de correção de até <strong>2 tentativas</strong>.</p></div></div><div class="card vd"><h3>Camada 2 · Validação semântica (humana)</h3><div class="txt-bloco"><p style="margin:0;">Especialistas da Fábrica verificam <strong>completude, coerência e conformidade</strong> antes da homologação.</p></div></div><div class="card er grow"><h3>Por que duas camadas</h3><div class="txt-bloco"><p style="margin:0;">Documentos formalmente maduros podem registrar <strong>decisões incorretas</strong> [Chen et al. 2025]: verificar a forma não substitui verificar o conteúdo.</p></div></div></div>
+          <div class="col"><div style="display:contents"><h3 class="tit-bloco">Avaliação: produção manual × MAS (DSRM)</h3></div><table class="tb2 fill"><tr><th>Indicador</th><th>Responde</th></tr><tr><td>Tempo de produção dos artefatos</td><td>RQ1.1</td></tr><tr><td>Cobertura das informações de origem</td><td>RQ1.2</td></tr><tr><td>Custos envolvidos</td><td>RQ1.3</td></tr><tr><td>Consistência entre artefatos encadeados</td><td>RQ1.4</td></tr><tr><td>Taxa de retrabalho</td><td>RQ1.5</td></tr><tr><td>Esforço de revisão humana</td><td>RQ1.6</td></tr></table><div style="display:contents"><div class="cap">Artefatos persistidos com rastreabilidade da atividade de origem: dá para auditar o resultado e o percurso.</div></div></div></div>
+      </div>
+      <div class="nt"><strong>~1 min 30 s.</strong> Método de análise do resultado coletado. Primeiro, validação em duas camadas: a estrutural é automática (Validador + até duas correções); a semântica é humana (especialistas verificam completude, coerência e conformidade). A separação responde a Chen et al.: documento bem estruturado pode registrar decisão errada. Segundo, a avaliação de eficácia pela DSRM: os dois conjuntos são comparados pelos seis indicadores, cada um respondendo a uma sub-questão.</div>
+    </div>
+
+    <!-- SLIDE 9 — Estado atual e escopo -->
+    <div class="sl" id="s9">
+      <div class="slhd"><span class="num">9</span><h2>Estado atual e escopo</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="col"><div class="card vd grow"><h3>Desenvolvido</h3><ul><li>Caracterização do processo e dos artefatos</li><li>Revisão rápida e posicionamento</li><li>Estratégia de reconstrução e modelo JSON</li><li>Arquitetura com 4 agentes (CrewAI)</li><li>Análise estrutural, geração e validação estrutural</li></ul></div></div>
+          <div class="col"><div class="card er grow"><h3>Pendente</h3><ul><li>Comparação manual × MAS nos 6 indicadores</li><li>Validação semântica com a equipe</li><li>Ameaças à validade</li></ul></div></div>
+          <div class="col"><div class="card grow"><h3>Delimitação do escopo</h3><ul><li>Somente a fase de Exploração (DO1–DO6)</li><li>Um único caso, de um órgão estadual (SIMO)</li><li>Artefatos reconstruídos a partir da Fase II</li><li>Deliberações institucionais, como a priorização conjunta, não são automatizadas</li></ul></div></div></div>
+      </div>
+      <div class="nt"><strong>~45 s.</strong> Pronto: caracterização do processo, revisão, reconstrução com o modelo JSON, arquitetura e métodos de análise estrutural, geração e validação estrutural. Falta: rodar a comparação nos seis indicadores, a validação semântica e as ameaças à validade. Escopo: só a Exploração, um caso, reconstruído da Fase II; o MAS não substitui deliberações institucionais.</div>
+    </div>
+
+    <!-- SLIDE 10 — Cronograma -->
+    <div class="sl" id="s10">
+      <div class="slhd"><span class="num">10</span><h2>Cronograma</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><table class="tb2 fill"><tr><th>Atividade</th><th>Período</th></tr><tr><td>Consolidação da revisão da literatura</td><td>nov/2026 – jan/2027</td></tr><tr><td>Ajustes finais do MAS para a fase de Exploração</td><td>dez/2026 – fev/2027</td></tr><tr><td>Produção dos artefatos nos modos manual e assistido</td><td>fev/2027 – mar/2027</td></tr><tr><td>Validação semântica e coleta dos indicadores</td><td>mar/2027 – abr/2027</td></tr><tr><td>Análise dos resultados e ameaças à validade</td><td>abr/2027 – mai/2027</td></tr><tr><td>Avaliação da extensão às fases subsequentes</td><td>mai/2027 – jul/2027</td></tr><tr><td>Escrita da qualificação</td><td>jul/2027 – ago/2027</td></tr><tr class="hl"><td><strong>Qualificação</strong></td><td><strong>ago/2027</strong></td></tr><tr><td>Redação da dissertação</td><td>set/2027 – nov/2027</td></tr><tr class="hl"><td><strong>Defesa</strong></td><td><strong>nov/2027</strong></td></tr></table></div></div>
+      </div>
+      <div class="nt"><strong>~45 s.</strong> Até maio de 2027: produção nos dois modos, validação e análise. Maio a julho: extensão às fases seguintes. Escrita da qualificação em julho–agosto, qualificação em agosto de 2027. Redação da dissertação de setembro a novembro, defesa em novembro de 2027. Abrir para comentários.</div>
+    </div>
+
+  </div>
+  <footer class="ft">
+    <span class="txt"><strong>Automatização da Documentação em Fábricas de IA</strong> · Projeto de Pesquisa — PPGCC/UFPI</span>
+  </footer>
+  <nav class="ctr" aria-label="Navegação da apresentação">
+    <button class="bz" id="bprev" onclick="pv()">Anterior</button>
+    <div class="dots" id="dots" role="group" aria-label="Ir para o slide"></div>
+    <button class="bv" id="bnext" onclick="nx()">Próximo</button>
+    <button class="bp" id="bexp" onclick="exportarPDF()" title="Exportar os slides em PDF — na janela de impressão escolha 'Salvar como PDF', margens 'Nenhuma' e mantenha 'Gráficos de fundo'">Exportar PDF</button>
+  </nav>
+  <script src="apresentacao.js"></script>
+</body>
+
+</html>
