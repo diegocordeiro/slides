@@ -104,7 +104,7 @@ async function salvar(auto) {
 function atualizarBotoes() {
   const tem = !!st.dados;
   $('#b-desfazer').disabled = !st.hist.length; $('#b-refazer').disabled = !st.fut.length;
-  for (const id of ['#b-salvar', '#b-gerar', '#b-ver', '#b-pdf', '#b-add']) $(id).disabled = !tem;
+  for (const id of ['#b-salvar', '#b-gerar', '#b-ver', '#b-pdf', '#b-celular', '#b-add']) $(id).disabled = !tem;
   $('#b-gerar').disabled = !tem || (legado() && st.dados.estado !== 'editor');
 }
 
@@ -955,9 +955,10 @@ function escolherImagem(cb) {
 }
 
 /* ------------------------------------------------------------ gerar / visualizar / publicar */
-async function gerar(silencioso) {
+async function gerar(silencioso, comPdf) {
   await salvar(true);
-  const r = await api('/api/gerar', { c: st.c });
+  if (!silencioso || comPdf) toast('Gerando a aula' + (comPdf !== false ? ' e o PDF (usado no celular)…' : '…'));
+  const r = await api('/api/gerar', { c: st.c, pdf: comPdf !== undefined ? comPdf : !silencioso });
   if (!r.ok) { toast((r.erros || []).slice(0, 3).join(' · '), true); return null; }
   if (!silencioso) toast(r.escritos.length ? 'Gerado: ' + r.escritos.map(x => x.split('/').pop()).join(', ') : 'Nada mudou desde a última geração.');
   return r;
@@ -965,10 +966,11 @@ async function gerar(silencioso) {
 async function visualizar(pdf) {
   try {
     let arq = (st.dados.meta || {}).arquivo;
-    if (!(legado() && st.dados.estado !== 'editor')) { const r = await gerar(true); if (!r) return; arq = r.html.split('/').pop(); }
+    if (!(legado() && st.dados.estado !== 'editor')) { const r = await gerar(true, pdf === 'celular'); if (!r) return; arq = r.html.split('/').pop(); }
     else toast('Aula importada: abrindo o HTML publicado (suas edições ainda não entram nele).');
-    const w = window.open(urlAula(arq) + (pdf ? '?pdf=1' : ''), '_blank');
-    if (pdf && w) w.addEventListener('load', () => setTimeout(() => { if (w.exportarPDF) w.exportarPDF(); else w.print(); }, 600));
+    const w = pdf === 'celular' ? window.open(urlAula(arq), 'slides_celular', 'width=400,height=820,menubar=no,toolbar=no,location=no')
+      : window.open(urlAula(arq) + (pdf ? '?pdf=1' : ''), '_blank');
+    if (pdf === true && w) w.addEventListener('load', () => setTimeout(() => { if (w.exportarPDF) w.exportarPDF(); else w.print(); }, 600));
   } catch (e) { toast(e.message, true); }
 }
 async function dialogoPublicar() {
@@ -1355,6 +1357,7 @@ function ligar() {
   $('#b-desfazer').onclick = desfazer; $('#b-refazer').onclick = refazer;
   $('#b-gerar').onclick = () => gerar().catch(e => toast(e.message, true));
   $('#b-ver').onclick = () => visualizar(false); $('#b-pdf').onclick = () => visualizar(true);
+  $('#b-celular').onclick = () => visualizar('celular');
   $('#b-publicar').onclick = () => dialogoPublicar().catch(e => toast(e.message, true));
   $('#b-add').onclick = e => { e.stopPropagation(); menuAdicionar(); };
   document.addEventListener('click', e => { if (!e.target.closest('.menu-wrap')) $('#menu-add').hidden = true; });

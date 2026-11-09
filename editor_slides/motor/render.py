@@ -388,6 +388,11 @@ def render_pagina(dados: dict, ed: bool = False, base_href: str | None = None) -
     lim = meta.get("cronometro_min") or 10
     script = "" if ed else '\n  <script src="%s.js"></script>' % esc(base)
     estilo = '<style>%s</style>' % css_aula(dados) if ed else '<link rel="stylesheet" href="%s.css">' % esc(base)
+    # celular/tablet (mesma regra do runtime.js), decidido antes de desenhar:
+    #   padrão → abre o PDF da aula ("celular-pdf"); ?web=1 → versão web em rolagem ("movel")
+    movel = "" if ed else ("\n  <script>try{var q=location.search;if(!/[?&](modo=apresentador|pdf=1)/.test(q)&&matchMedia("
+                           "'(max-width: 820px), (max-height: 500px) and (pointer: coarse)').matches)"
+                           "document.documentElement.classList.add(/[?&]web=1/.test(q)?'movel':'celular-pdf')}catch(e){}</script>")
     lim_txt = "%02d:%02d" % (int(lim), round((float(lim) % 1) * 60))
     return f"""<!DOCTYPE html>
 <html lang="{esc(meta.get('lang') or 'pt-BR')}">
@@ -397,10 +402,10 @@ def render_pagina(dados: dict, ed: bool = False, base_href: str | None = None) -
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <meta name="generator" content="editor_slides">{cab_ed}
   <title>{esc(_txt(titulo))}</title>
-  {estilo}
+  {estilo}{movel}
 </head>
 
-<body data-limite="{esc(lim)}"{' class="modo-editor"' if ed else ''}>
+<body data-limite="{esc(lim)}" data-pdf="{esc(base)}.pdf"{' class="modo-editor"' if ed else ''}>
   <header class="tb">
     <div class="tb-left">
       {logo_barra}<h2>{barra}</h2>
@@ -483,7 +488,28 @@ def _gravar_se_mudou(caminho: str, conteudo: str, escritos: list) -> None:
     escritos.append(caminho)
 
 
-def gerar(caminho_json: str, forcar: bool = False) -> list:
+def _pdf_desatualizado(pasta: str, base: str, caminho_json: str) -> bool:
+    pdf = os.path.join(pasta, base + ".pdf")
+    if not os.path.isfile(pdf):
+        return True
+    fontes = [caminho_json] + [os.path.join(pasta, base + x) for x in (".html", ".css", ".js")]
+    img = os.path.join(pasta, "img")
+    if os.path.isdir(img):
+        for r, _, fs in os.walk(img):
+            fontes += [os.path.join(r, f) for f in fs]
+    return max(os.path.getmtime(f) for f in fontes if os.path.isfile(f)) > os.path.getmtime(pdf)
+
+
+def gerar_pdf(caminho_json: str) -> tuple:
+    """(Re)gera aulaNN.pdf ao lado do HTML (é o que o celular abre). Devolve (ok, mensagem)."""
+    from . import exportar_pdf
+    dados = ler_json(caminho_json)
+    pasta = os.path.dirname(os.path.abspath(caminho_json))
+    arq, base = nomes(dados)
+    return exportar_pdf.exportar(os.path.join(pasta, arq), os.path.join(pasta, base + ".pdf"))
+
+
+def gerar(caminho_json: str, forcar: bool = False, pdf: bool = True) -> list:
     """Grava os arquivos da aula ao lado do apresentacao.json. Devolve os arquivos alterados."""
     dados = ler_json(caminho_json)
     pasta = os.path.dirname(os.path.abspath(caminho_json))
@@ -502,6 +528,12 @@ def gerar(caminho_json: str, forcar: bool = False) -> list:
     for k, v in (tema.get("logos") or {}).items():
         if v and not ((dados.get("tema") or {}).get("logos") or {}).get(k):
             _copiar(os.path.join(TEMAS, tema["nome"], v), os.path.join(pasta, "img", "tema", os.path.basename(v)), escritos)
+    if pdf and (escritos or _pdf_desatualizado(pasta, base, caminho_json)):
+        ok, msg = gerar_pdf(caminho_json)
+        if ok and msg == "PDF gerado":
+            escritos.append(os.path.join(pasta, base + ".pdf"))
+        elif not ok:
+            print("  aviso: " + msg)
     return escritos
 
 

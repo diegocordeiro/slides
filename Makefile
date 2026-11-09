@@ -45,7 +45,7 @@ editor:
 	@$(PY) editor_slides/servidor.py --porta $(PORTA_EDITOR) $(if $(LLM),--llm $(LLM),)
 
 gerar:
-	@$(PY) editor_slides/gerar_slides.py --todas
+	@CHROME="$(CHROME)" $(PY) editor_slides/gerar_slides.py --todas
 
 importar:
 	@$(PY) editor_slides/importar_aula.py --todas
