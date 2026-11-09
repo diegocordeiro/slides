@@ -46,11 +46,11 @@
             "itens": [
               {
                 "titulo": "Contexto e problema",
-                "html": "O que é o harness, por que automatizar e a pergunta central"
+                "html": "O que é o harness e por que automatizar."
               },
               {
-                "titulo": "Método: NexAU, Agent Debugger, Evolve Agent e o laço",
-                "html": "Os três pilares de observabilidade e o Algoritmo 1"
+                "titulo": "Método: NexAU, Agent Debugger, Evolve Agent&nbsp;",
+                "html": "Os três pontos de observabilidade e o Algoritmo 1"
               },
               {
                 "titulo": "Experimentos: RQ1, RQ2 e RQ3",
@@ -58,7 +58,7 @@
               },
               {
                 "titulo": "Análise e conclusões",
-                "html": "Limitações, leitura crítica e contribuições"
+                "html": "Limitações, analise e conclusão"
               },
               {
                 "titulo": "Referências",
@@ -72,7 +72,7 @@
             "tipo": "card",
             "variante": "vd",
             "crescer": true,
-            "titulo": "Em uma frase",
+            "titulo": "Resumo",
             "html": "<p>O artigo trata o <strong>harness</strong> como objeto de otimização automática: um agente edita o harness de outro agente de código, e cada edição vem com uma <strong>previsão verificável</strong> que a rodada seguinte confirma ou reverte.</p>"
           }
         ]
@@ -116,7 +116,7 @@
           {
             "tipo": "card",
             "crescer": true,
-            "html": "<p style=\"margin:0\"><strong>Hoje o ajuste é manual:</strong> inspecionar trajetórias, achar padrões de falha e editar prompts, ferramentas e middleware à mão.</p>"
+            "html": "<p style=\"margin:0\"><strong>Hoje o ajuste é manual:</strong> inspecionar trajetórias, achar padrões de falha, editar prompts, ferramentas e middleware à mão.</p>"
           },
           {
             "tipo": "card",
@@ -136,11 +136,11 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "Pergunta central",
+      "titulo": "Pergunta de Pesquisa",
       "topo": [
         {
           "tipo": "pergunta",
-          "rotulo": "Pergunta de pesquisa",
+          "rotulo": "",
           "html": "Como um agente pode evoluir <b>todos os componentes editáveis</b> do harness, de forma <b>conjunta e estável</b>?"
         }
       ],
@@ -148,16 +148,17 @@
         [
           {
             "tipo": "html",
-            "html": "<div class=\"mapa\"><div class=\"ln\"><div class=\"cab\">Obstáculo</div><div></div><div class=\"cab d\">Resposta do AHE</div></div><div class=\"ln\"><div class=\"obs\"><b>Espaço de ação heterogêneo</b><span>Prompt, ferramentas, middleware e memória têm formatos e efeitos diferentes.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">1</span>Observabilidade de componentes</div></div><div class=\"ln\"><div class=\"obs\"><b>Trajetórias volumosas</b><span>Milhões de tokens brutos enterram o sinal.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">2</span>Observabilidade de experiência</div></div><div class=\"ln\"><div class=\"obs\"><b>Edições difíceis de atribuir</b><span>Sem contrato, não se sabe qual edição causou qual efeito.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">3</span>Observabilidade de decisão</div></div></div>"
+            "html": "<div class=\"mapa\"><div class=\"ln\"><div class=\"cab\">Obstáculo</div><div></div><div class=\"cab d\">Resposta do AHE</div></div><div class=\"ln\"><div class=\"obs\"><b>Espaço de ação heterogêneo</b><span>Prompt, ferramentas, middleware e memória têm formatos e efeitos diferentes.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">1</span>Observabilidade de componentes</div></div><div class=\"ln\"><div class=\"obs\"><b>Trajetórias volumosas</b><span>Milhões de tokens brutos.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">2</span>Observabilidade de experiência</div></div><div class=\"ln\"><div class=\"obs\"><b>Edições difíceis de atribuir</b><span>Sem contrato, não se sabe qual edição causou qual efeito.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">3</span>Observabilidade de decisão</div></div></div>"
+          },
+          {
+            "tipo": "card",
+            "titulo": "Tese dos autores:",
+            "html": "<p>O gargalo é a observabilidade, não a capacidade do agente.</p>",
+            "variante": "az"
           }
         ]
       ],
       "rodape": [
-        {
-          "tipo": "faixa",
-          "html": "Tese dos autores: o gargalo é a <b>observabilidade</b>, não a capacidade do agente.",
-          "fim": false
-        },
         {
           "tipo": "html",
           "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Resumo e Seção 1.</div>"
@@ -167,7 +168,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "Visão geral do AHE",
+      "titulo": "Visão geral do Agentic Harness Engineering (AHE)",
       "colunas": [
         [
           {
@@ -177,14 +178,16 @@
           {
             "tipo": "html",
             "html": "<div class=\"pilares\"><div><span class=\"n-bola\">1</span>Componentes: arquivos editáveis</div><div><span class=\"n-bola\">2</span>Experiência: evidência destilada</div><div><span class=\"n-bola\">3</span>Decisão: previsão verificável</div></div>"
+          },
+          {
+            "tipo": "card",
+            "titulo": "Modelo-base fixo:&nbsp;",
+            "html": "<p>Só o harness explícito é editado. Os três agentes (código, debugger, evolução) usam o mesmo modelo.</p>",
+            "variante": "az"
           }
         ]
       ],
       "rodape": [
-        {
-          "tipo": "faixa",
-          "html": "<b>Modelo-base fixo:</b> só o harness explícito é editado. Os três agentes (código, debugger, evolução) usam o mesmo modelo."
-        },
         {
           "tipo": "html",
           "html": "<div class=\"fonte\">Fonte: recriação a partir da Figura 2 de Lin et al. (2026).</div>"
@@ -194,7 +197,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "Pilar 1 · NexAU: componentes como arquivos",
+      "titulo": "Ponto 1 · NexAU",
       "colunas": [
         [
           {
@@ -243,7 +246,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "Pilar 2 · Agent Debugger: experiência como evidência",
+      "titulo": "Ponto 2 · Agent Debugger",
       "proporcao": "1.3fr 1fr",
       "colunas": [
         [
@@ -287,8 +290,8 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "Pilar 3 · Evolve Agent: decisões verificáveis",
-      "proporcao": "1fr 1fr",
+      "titulo": "Ponto 3 · Evolve Agent",
+      "proporcao": "1.1fr 1fr",
       "colunas": [
         [
           {
@@ -300,57 +303,78 @@
               "Somente leitura: runs, tracer, verificador e configuração do LLM.",
               "Prompt semente não pode ser apagado."
             ]
-          }
-        ],
-        [
+          },
           {
             "tipo": "card",
             "variante": "vd",
             "crescer": true,
             "titulo": "Baseada em evidência",
             "itens": [
-              "Toda edição é acompanhada de uma <strong>entrada no manifesto</strong>.",
-              "A rodada seguinte compara previsto e observado e <strong>reverte o que falhou</strong>."
+              "Toda edição vem com uma <strong>entrada no manifesto</strong>.",
+              "A rodada seguinte compara previsto × observado e <strong>reverte o que falhou</strong>."
             ]
+          }
+        ],
+        [
+          {
+            "tipo": "titulo",
+            "texto": "Anatomia de uma entrada do manifesto"
+          },
+          {
+            "tipo": "lins",
+            "itens": [
+              {
+                "titulo": "Evidência da falha",
+                "html": "o que o relatório mostrou"
+              },
+              {
+                "titulo": "Causa raiz inferida",
+                "html": "por que falhou"
+              },
+              {
+                "titulo": "Correção direcionada",
+                "html": "qual componente muda"
+              },
+              {
+                "titulo": "Impacto previsto",
+                "html": "correções esperadas + regressões em risco"
+              }
+            ]
+          },
+          {
+            "tipo": "destaque",
+            "estilo": "ca",
+            "titulo": "",
+            "html": "Impacto previsto = tarefas que devem passar + tarefas em risco de piorar. Substitui a justificativa por um <span class=\"mk\">contrato mensurável</span>."
           }
         ]
       ],
       "rodape": [
         {
-          "tipo": "titulo",
-          "texto": "Anatomia de uma entrada do manifesto"
-        },
-        {
-          "tipo": "html",
-          "html": "<div class=\"cadeia\"><div class=\"el\">Evidência da falha<span>o que o relatório mostrou</span></div><div class=\"sh\">→</div><div class=\"el\">Causa raiz inferida<span>por que falhou</span></div><div class=\"sh\">→</div><div class=\"el\">Correção direcionada<span>qual componente muda</span></div><div class=\"sh\">→</div><div class=\"el fim\">Impacto previsto<span>correções esperadas + regressões em risco</span></div></div>"
-        },
-        {
-          "tipo": "faixa",
-          "html": "Impacto previsto = tarefas que devem passar + tarefas em risco de piorar. <b>Substitui a justificativa por um contrato mensurável.</b>"
-        },
-        {
-          "tipo": "html",
-          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 3.3 e Apêndice B.2.</div>"
+          "tipo": "texto",
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 3.2; Agent Debugger: Lin (2026).</div>"
         }
       ],
       "notas": "<strong>7:00 → 8:00 · 1 min.</strong> O Evolve Agent fecha o laço: lê a evidência, decide adicionar, modificar ou remover componentes, edita e registra o raciocínio. Duas restrições: (1) <strong>controlabilidade</strong>: só escreve no workspace, o que bloqueia atalhos como desligar o verificador, trocar o modelo ou aumentar o raciocínio, e mantém todo ganho atribuível ao harness; (2) <strong>evidência</strong>: cada edição traz uma entrada de manifesto. Na rodada seguinte, os conjuntos previstos são cruzados com os deltas observados e cada edição recebe um veredito.<br><strong>Se perguntarem:</strong> “O agente pode trapacear?” A controlabilidade limita onde ele escreve, mas os autores admitem que não há uma pilha completa de salvaguardas: é um protótipo."
     },
     {
       "layout": "conteudo",
-      "titulo": "Algoritmo do AHE: seis fases por iteração",
+      "titulo": "Algoritmo do AHE",
       "colunas": [
         [
           {
             "tipo": "html",
-            "html": "<div class=\"etapas\"><div class=\"ep\"><h4><span class=\"n-bola\">1</span>Rollout</h4><p>k execuções por tarefa com o harness atual</p></div><div class=\"ep\"><h4><span class=\"n-bola\">2</span>Limpeza</h4><p>normaliza os traços para a forma canônica</p></div><div class=\"ep at\"><h4><span class=\"n-bola\">3</span>Atribuição</h4><p>t ≥ 2: verifica o manifesto anterior e faz rollback do que falhou</p></div><div class=\"ep\"><h4><span class=\"n-bola\">4</span>Destilação</h4><p>Agent Debugger gera a evidência em camadas</p></div><div class=\"ep\"><h4><span class=\"n-bola\">5</span>Evolução</h4><p>Evolve Agent edita o workspace e escreve novo manifesto</p></div><div class=\"ep\"><h4><span class=\"n-bola\">6</span>Commit</h4><p>marca a iteração no git; atualiza o melhor harness</p></div></div>"
+            "html": "<div class=\"etapas\"><div class=\"ep\"><h4><span class=\"n-bola\">1</span>Rollout</h4><p>k execuções por tarefa com o harness atual</p></div><div class=\"ep\"><h4><span class=\"n-bola\">2</span>Limpeza</h4><p>normaliza os traços para a forma canônica</p></div><div class=\"ep at\"><h4><span class=\"n-bola\">3</span>Atribuição</h4><p>t ≥ 2: verifica o manifesto anterior e faz rollback do que falhou</p></div><div class=\"ep\"><h4><span class=\"n-bola\">4</span>Destilação</h4><p>Agent Debugger gera a evidência em camadas</p></div><div class=\"ep\"><h4><span class=\"n-bola\">5</span>Evolução</h4><p>Evolve Agent edita o workspace e escreve novo manifesto</p></div><div class=\"ep\"><h4><span class=\"n-bola\">6</span>Commit</h4><p>marca a iteração no git, atualiza o melhor harness</p></div></div>"
+          },
+          {
+            "tipo": "destaque",
+            "estilo": "cd",
+            "titulo": "",
+            "html": "<p>A atribuição vem antes da destilação: o veredito de cada edição já entra no corpus de evidência da rodada.</p>"
           }
         ]
       ],
       "rodape": [
-        {
-          "tipo": "faixa",
-          "html": "<b>A atribuição vem antes da destilação:</b> o veredito de cada edição já entra no corpus de evidência da rodada."
-        },
         {
           "tipo": "html",
           "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Algoritmo 1 (Seção 3.3).</div>"
@@ -437,7 +461,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "RQ1: o AHE lidera no Terminal-Bench 2",
+      "titulo": "RQ1",
       "topo": [
         {
           "tipo": "pergunta",
@@ -489,7 +513,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "RQ2 (1/2): transferência para o SWE-bench-verified",
+      "titulo": "RQ2.1",
       "topo": [
         {
           "tipo": "pergunta",
@@ -536,6 +560,13 @@
               "",
               "hl"
             ]
+          },
+          {
+            "tipo": "card",
+            "titulo": "O ganho de custo:",
+            "html": "<p>Mesmo desempenho com menos tokens.</p>",
+            "destaque": "",
+            "variante": "az"
           }
         ],
         [
@@ -564,10 +595,6 @@
       ],
       "rodape": [
         {
-          "tipo": "faixa",
-          "html": "O ganho aqui é sobretudo de <b>custo</b>: mesmo desempenho com menos tokens."
-        },
-        {
           "tipo": "html",
           "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Tabela 2 e Seção 4.3.</div>"
         }
@@ -576,7 +603,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "RQ2 (2/2): transferência entre modelos-base",
+      "titulo": "RQ2.2",
       "topo": [
         {
           "tipo": "pergunta",
@@ -626,7 +653,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "RQ3a: onde está o ganho? Ablação por componente",
+      "titulo": "RQ3a: Ablação por componente",
       "topo": [
         {
           "tipo": "pergunta",
@@ -673,7 +700,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "RQ3b: a autoatribuição é confiável?",
+      "titulo": "RQ3b: autoatribuição",
       "topo": [
         {
           "tipo": "pergunta",
@@ -688,6 +715,12 @@
             "tipo": "figura",
             "src": "img/rq3b_autoatribuicao.png",
             "alt": "Precisão e revocação das previsões: correções 33,7% e 51,4% contra 6,5% e 10,6% do acaso; regressões 11,8% e 11,1% contra 5,6% e 5,4%"
+          },
+          {
+            "tipo": "card",
+            "titulo": "Trabalho futuro apontado pelos autores:",
+            "html": "<p>Prever regressões.</p>",
+            "variante": "az"
           }
         ],
         [
@@ -717,10 +750,6 @@
       ],
       "rodape": [
         {
-          "tipo": "faixa",
-          "html": "Trabalho futuro apontado pelos autores: <b>prever regressões</b>."
-        },
-        {
           "tipo": "html",
           "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Figura 4, Seção 4.4.2 e Apêndice D.</div>"
         }
@@ -729,7 +758,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "Análise crítica",
+      "titulo": "Análise",
       "colunas": [
         [
           {
@@ -739,10 +768,6 @@
         ]
       ],
       "rodape": [
-        {
-          "tipo": "faixa",
-          "html": "Veredito: proposta de engenharia bem pensada, com contrato falsificável e rollback; <b>evidência sugestiva, não conclusiva</b>."
-        },
         {
           "tipo": "html",
           "html": "<div class=\"fonte\">Fonte: análise do apresentador com base em Lin et al. (2026), Tabelas 1 a 3, Figuras 1 e 4, Limitations.</div>"
@@ -776,7 +801,7 @@
           ]
         }
       ],
-      "proporcao": "1.35fr 1fr",
+      "proporcao": "1fr",
       "colunas": [
         [
           {
@@ -799,24 +824,15 @@
                 "html": "Harness congelado transfere entre modelos; no SWE-bench, mais barato."
               }
             ]
-          }
-        ],
-        [
+          },
           {
-            "tipo": "card",
-            "variante": "vd",
-            "crescer": true,
-            "titulo": "Visão dos autores e ligação com Zhong &amp; Zhu",
-            "html": "<p>A evolução em nível de harness é um <strong>eixo complementar ao treino do modelo</strong>: uma superfície externa e auditável onde a experiência do agente se acumula.</p><p style=\"margin-bottom:0\">Zhong &amp; Zhu (2026) dão o vocabulário do harness; o AHE traz um primeiro teste empírico automatizado.</p>"
+            "tipo": "faixa",
+            "html": "Obrigado! Perguntas?",
+            "fim": true
           }
         ]
       ],
       "rodape": [
-        {
-          "tipo": "faixa",
-          "fim": true,
-          "html": "Obrigado! Perguntas?"
-        },
         {
           "tipo": "html",
           "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 5; Zhong &amp; Zhu (2026).</div>"
