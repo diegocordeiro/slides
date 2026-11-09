@@ -869,7 +869,7 @@ pre.pc .nb {
     color: var(--er)
 }
 
-@media(max-width:768px) {
+@media screen and (max-width:768px) {
     .f-etapa {
         min-width: 120px;
         font-size: 12px
@@ -1129,7 +1129,7 @@ pre.pc .nb {
 }
 
 
-@media(max-width:768px) {
+@media screen and (max-width:768px) {
     .sl {
         font-size: 17px
     }
@@ -1320,7 +1320,7 @@ pre.pc .nb {
     }
 }
 
-@media(max-width:480px) {
+@media screen and (max-width:480px) {
     .sl {
         font-size: 16px
     }
@@ -1342,7 +1342,7 @@ pre.pc .nb {
     }
 }
 
-@media(min-width:1600px) {
+@media screen and (min-width:1600px) {
     .sl {
         font-size: 21px
     }
@@ -1372,7 +1372,7 @@ pre.pc .nb {
     }
 }
 
-@media(min-width:2560px) {
+@media screen and (min-width:2560px) {
     .sl {
         font-size: 25px
     }
@@ -1437,7 +1437,7 @@ pre.pc .nb {
 .blink { display: inline-block; margin-top: 6px; color: var(--bem); font-weight: 700; text-decoration: none }
 .blink:hover { text-decoration: underline }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .padf { height: 420px }
 }
 
@@ -1550,6 +1550,9 @@ body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
 
 /* ===== Exportação em PDF (botão "Exportar PDF" ou Ctrl/Cmd+P) ===== */
 @media print {
+    /* tamanhos que dependem da largura da janela (vw) ficam fixos no valor de uma tela de 1280 px:
+       o diálogo de impressão usa outra largura e mudaria títulos e quebras de linha */
+    :root { --fs-capa: 33.3px !important; --fs-h2: 25px !important }
     @page { size: 1280px 720px; margin: 0 }
 
     html, body { height:auto !important; overflow:visible !important; display:block !important; background:#fff !important }
@@ -1564,7 +1567,7 @@ body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
     .sl .slbd.g { flex:1 !important; min-height:0 !important; margin:0 !important; padding:16px 24px !important; gap:16px !important }
 
     /* O layout de impressão do Chrome usa uma viewport estreita (~740px), o que
-       ativaria o @media(max-width:768px) e jogaria o slide no layout de celular.
+       ativaria o @media screen and (max-width:768px) e jogaria o slide no layout de celular.
        Reafirmo aqui a versão desktop para o PDF sair igual à tela. */
     .sl { font-size:18px !important }
     .slhd { padding:16px 28px !important; gap:14px !important }
@@ -1607,13 +1610,139 @@ body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
 #tela-apagada.on { display: block }
 #tela-apagada.preta { background: #000 }
 #tela-apagada.branca { background: #fff }
-@media (pointer: coarse) {
+@media screen and (pointer: coarse) {
     .ctr { padding: 10px; gap: 12px }
     .ctr button { padding: 12px 24px; font-size: 16px; min-height: 46px }
     .dots .dot { min-width: 38px; height: 38px; font-size: 14px }
     .tb button, .fz button { min-height: 38px }
 }
 @media print { #tela-apagada { display: none !important } }
+
+/* ===== Celular/tablet: tela que abre o PDF (classe "celular-pdf" no <html>) ===== */
+@media screen {
+    html.celular-pdf, html.celular-pdf body { height: auto; min-height: 100%; overflow: auto }
+    html.celular-pdf body { display: block; background: linear-gradient(160deg, var(--aze), var(--bem2)); min-height: 100vh }
+    html.celular-pdf body > *:not(#celular-pdf) { display: none !important }
+    #celular-pdf { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 24px 18px }
+    #celular-pdf .cp-caixa { width: 100%; max-width: 420px; background: #fff; border-radius: 18px; padding: 26px 22px 22px; text-align: center;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, .3); font-family: var(--fonte); color: var(--p) }
+    #celular-pdf .cp-icone { width: 64px; height: 78px; margin: 0 auto 14px; border-radius: 8px; background: var(--er); color: #fff;
+        font: 800 18px/78px var(--fonte-tit); letter-spacing: .04em; clip-path: polygon(0 0, 72% 0, 100% 22%, 100% 100%, 0 100%) }
+    #celular-pdf h1 { font-family: var(--fonte-tit); font-size: 20px; line-height: 1.25; margin: 0 0 8px }
+    #celular-pdf .cp-msg { font-size: 15px; line-height: 1.45; color: var(--c); margin: 0 0 18px }
+    #celular-pdf .cp-bt, #celular-pdf .cp-link { display: none }
+    #celular-pdf.pronto .cp-bt { display: block; padding: 14px 16px; margin: 10px 0 0; border-radius: 12px; font-weight: 700; font-size: 16px;
+        text-decoration: none; border: 2px solid var(--az); color: var(--az); background: #fff }
+    #celular-pdf.pronto .cp-pri { background: var(--az); color: #fff }
+    #celular-pdf.pronto .cp-link { display: inline-block; margin-top: 16px; font-size: 14px; color: var(--bem) }
+}
+
+/* ===== Celular e tablet: MODO ROLAGEM =====
+   Ativado pelo runtime (classe "movel" no <html>) em telas de até 820 px de largura
+   ou celulares deitados (até 500 px de altura). Os slides deixam de ser "telas"
+   16:9 e viram cartões empilhados numa página que rola na vertical; a barra
+   superior fica fixa no topo e a navegação (‹ ›) fixa no rodapé.
+   Só na tela: impressão/PDF e telas grandes não mudam. */
+@media screen {
+    /* overflow "clip" (e não "hidden") para não criar contêiner de rolagem: a barra superior continua fixa */
+    html.movel, html.movel body { height: auto; min-height: 100%; overflow: visible; overflow-x: clip }
+    html.movel body { display: block; background: var(--tela) }
+    /* barra superior fixa e enxuta */
+    html.movel .tb { position: sticky; top: 0; z-index: 30; padding: 7px 10px; gap: 8px; box-shadow: 0 3px 0 var(--ve) }
+    html.movel .tb-left { flex: 1 1 auto; min-width: 0; gap: 8px }
+    html.movel .tb-logo { height: 24px }
+    html.movel .tb h2 { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+    html.movel .tb-right { gap: 6px; flex-shrink: 0 }
+    html.movel #bnt, html.movel .tmr, html.movel #bp, html.movel .modo-tag, html.movel .fz span { display: none !important }
+    html.movel .fz { padding: 1px }
+    html.movel .fz button { padding: 4px 8px; font-size: 13px }
+    html.movel .tb .ct { font-size: 12px; padding: 3px 9px }
+    html.movel .fita, html.movel .ft { display: none }
+    /* todos os slides, um embaixo do outro */
+    html.movel .sc { display: block; overflow: visible; padding: 12px 10px calc(84px + env(safe-area-inset-bottom)) }
+    html.movel .sl, html.movel .sl.ac { display: block !important; width: auto; height: auto !important; min-height: 0; overflow: visible;
+        margin: 0 0 16px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0, 0, 0, .10); font-size: 16px; scroll-margin-top: 58px; background: #fff }
+    html.movel .sl > :first-child { border-radius: 12px 12px 0 0 }
+    html.movel .sl > :last-child { border-radius: 0 0 12px 12px }
+    html.movel .sl .slbd { animation: none }
+    html.movel .slhd { position: static; padding: 10px 14px; gap: 10px }
+    html.movel .slhd .num { min-width: 30px; height: 30px; font-size: .95em; border-radius: 6px }
+    html.movel .slhd h2 { font-size: 1.12em }
+    /* corpo: empilha tudo, altura natural */
+    html.movel .sl .slbd.g, html.movel .sl .slbd { display: flex !important; flex-direction: column; gap: 12px; height: auto; min-height: 0;
+        padding: 12px 14px 16px !important; margin: 0; font-size: 16px }
+    html.movel .grade, html.movel .topo, html.movel .c2, html.movel .capa { grid-template-columns: 1fr !important }
+    html.movel .grade { display: flex; flex-direction: column; gap: 12px }
+    html.movel .col { gap: 12px }
+    html.movel .sl .col > *, html.movel .sl .grade > *, html.movel .sl .slbd.g > *, html.movel .sl .lins > *,
+    html.movel .grow, html.movel .lin, html.movel .evo, html.movel .lins { flex: 0 0 auto !important; min-height: auto !important; max-height: none }
+    html.movel .sl a { overflow-wrap: anywhere; word-break: break-word }
+    html.movel .sl img, html.movel .sl svg, html.movel .sl video, html.movel .sl iframe { max-width: 100% }
+    html.movel .card { padding: 12px 14px }
+    html.movel .card ul, html.movel .card p { overflow-wrap: anywhere }
+    html.movel .big { font-size: 1.3em }
+    html.movel .stat b { font-size: 1.8em }
+    html.movel .chips span { font-size: 13px }
+    html.movel .pergunta { font-size: 15px }
+    html.movel .faixa-az { padding: 10px 14px; font-size: 15px }
+    html.movel .faixa-az.fim { font-size: 1.15em }
+    html.movel .duelo { grid-template-columns: 1fr 1fr !important }
+    html.movel .kpi, html.movel .kpi4 { grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)) !important; grid-template-rows: none !important }
+    html.movel .kpi b { font-size: 1.45em; overflow-wrap: anywhere }
+    html.movel .kpi span { font-size: 13.5px }
+    html.movel .fig { flex: 0 0 auto !important; height: auto; min-height: 0; padding: 4px }
+    html.movel .fig img { height: auto !important; max-height: 70vh; width: 100% }
+    html.movel .cap { margin-top: 0 }
+    /* tabelas largas rolam na horizontal (com sombra indicando continuação) */
+    html.movel .tb2 { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 14px !important; height: auto !important; table-layout: auto !important;
+        background: linear-gradient(90deg, #fff 30%, rgba(255,255,255,0)) left / 24px 100% no-repeat local,
+            linear-gradient(270deg, #fff 30%, rgba(255,255,255,0)) right / 24px 100% no-repeat local,
+            radial-gradient(farthest-side at 0 50%, rgba(0,0,0,.18), transparent) left / 10px 100% no-repeat scroll,
+            radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,.18), transparent) right / 10px 100% no-repeat scroll }
+    html.movel .tb2 th, html.movel .tb2 td { padding: 6px 8px !important; white-space: nowrap; width: auto !important }
+    html.movel .tb2 td:first-child, html.movel .tb2 th:first-child { white-space: normal; min-width: 110px }
+    /* capa, seções e imagem inteira com altura natural */
+    html.movel .capa { display: flex !important; flex-direction: column; min-height: 0; border-radius: 12px; overflow: hidden }
+    html.movel .capa .esq { padding: 22px 18px !important }
+    html.movel .capa .esq h1 { font-size: 26px !important }
+    html.movel .capa .esq .sub { font-size: 15.5px }
+    html.movel .capa .dir { min-height: 120px; padding: 14px }
+    html.movel .capa .dir img { max-height: 110px }
+    html.movel .capa .dir .marca { display: none }
+    html.movel .secao-slide, html.movel .divisor { min-height: 0; border-radius: 12px; overflow: hidden }
+    html.movel .divisor { padding: 34px 0 }
+    html.movel .divisor .in { padding: 10px 16px }
+    html.movel .divisor h1 { font-size: 26px }
+    html.movel .sl.slimg img { width: 100%; height: auto; object-fit: contain; border-radius: 12px }
+    html.movel .video { min-height: 0; height: auto; aspect-ratio: 16 / 9; flex: 0 0 auto }
+    html.movel pre.pc { font-size: 13px; white-space: pre-wrap; overflow-wrap: anywhere }
+    /* grades/linhas do CSS extra da aula que não cabem (marcadas pelo runtime) */
+    html.movel .sl .grade-movel { grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)) !important; grid-template-rows: none !important; grid-column: auto !important }
+    html.movel .sl .flex-movel { flex-wrap: wrap !important }
+    html.movel .sl .grade-movel > *, html.movel .sl .flex-movel > * { min-width: 0; grid-column: auto !important; grid-row: auto !important }
+    /* roteiro (tecla N) dentro do cartão */
+    html.movel body.notas .sl .nt { display: block; margin: 0 14px 14px }
+    /* navegação fixa no rodapé: ‹ anterior · próximo › (rola até o slide) */
+    html.movel .ctr { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; justify-content: center; gap: 10px;
+        padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); background: rgba(255, 255, 255, .96); border-top: 1px solid var(--linha);
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, .08); backdrop-filter: blur(6px) }
+    html.movel .ctr .bp, html.movel .dots { display: none }
+    html.movel .ctr button { padding: 10px 22px; font-size: 15px; min-height: 44px }
+}
+@media screen and (max-width: 420px) {
+    html.movel .tb h2 { font-size: 13px }
+    html.movel .capa .esq h1 { font-size: 23px !important }
+    html.movel .duelo { grid-template-columns: 1fr !important }
+}
+/* celular deitado: barras mais baixas */
+@media screen and (max-height: 500px) {
+    html.movel .tb { padding: 4px 10px }
+    html.movel .ctr { padding: 4px 10px calc(4px + env(safe-area-inset-bottom)) }
+    html.movel .ctr button { padding: 6px 18px; min-height: 36px }
+    html.movel .sc { padding-bottom: calc(60px + env(safe-area-inset-bottom)) }
+    html.movel .sl { scroll-margin-top: 44px }
+    html.movel .fig img { max-height: 80vh }
+}
 
 /* ===== Modo editor (prévia dentro do editor; nunca publicado) ===== */
 body.modo-editor { width: 1280px; height: 720px }
