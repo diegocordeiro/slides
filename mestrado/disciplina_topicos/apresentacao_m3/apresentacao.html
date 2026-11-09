@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="generator" content="editor_slides">
+  <title>IFGuia — M3: Entrega Final do MVP</title>
+  <link rel="stylesheet" href="apresentacao.css">
+</head>
+
+<body data-limite="20">
+  <header class="tb">
+    <div class="tb-left">
+      <img src="img/logo.png" class="tb-logo" alt="">
+      <h2>IFGuia · M3 — Entrega Final do MVP</h2>
+    </div>
+    <div class="tb-right">
+      <div class="fz" aria-label="Tamanho do texto">
+        <button onclick="fz(-1)" title="Diminuir tamanho da fonte">A−</button>
+        <span id="fzpct">100%</span>
+        <button onclick="fz(1)" title="Aumentar tamanho da fonte">A+</button>
+      </div>
+      <button class="bpb" id="bnt" onclick="toggleNotas()" title="Mostrar/ocultar roteiro de fala (tecla N)">Roteiro</button>
+      <button class="tmr" id="tmr" onclick="if(event.shiftKey){tmrDefinirLimite()}else{toggleTimer()}" ondblclick="resetTimer()" title="Iniciar/pausar (T) · duplo clique zera · Shift+clique define o limite">00:00 / 20:00</button>
+      <button class="bpb" id="bp" onclick="openPresenter()">Modo apresentador</button>
+      <span class="ct" id="ctr">1 / 18</span>
+      <span class="modo-tag">APRESENTAÇÃO</span>
+    </div>
+  </header>
+  <div class="fita"></div>
+  <div class="sc">
+
+    <!-- SLIDE 1 — IFGuia: assistente de consulta às normativas de ensino do IFPI -->
+    <div class="sl" id="s1">
+      <div class="capa">
+        <div class="esq">
+          <div class="rot">Eng. de Software para Sistemas Inteligentes · UFPI · M3</div>
+          <h1>IFGuia: assistente de consulta<br>às normativas de ensino do IFPI</h1>
+          <div class="faixa"></div>
+          <div class="sub">Equipe:
+            <ul>
+              <li>Sharon Wendy Feitosa Franca Rocha — Eng. de Dados</li>
+              <li>Diego Cordeiro de Oliveira — Eng. de Machine Learning</li>
+              <li>Guilherme Nonato de Sá Ribeiro — Eng. de Machine Learning</li>
+              <li>Luis Felipe Ferreira de Castro — Eng. de Software</li>
+            </ul></div>
+          <div class="sub">Demandante: PROEN/IFPI (Odimógenes Soares Lopes)&nbsp;<div>Professor: Dr. Guilherme Avelino</div></div>
+          <div class="sub">Entrega final do MVP · versão <code>v1.0-mvp</code> · 09/11/2026</div>
+        </div>
+        <div class="dir"><img src="img/logo_full.png" alt=""><img class="marca" src="img/marca.png" alt=""></div>
+      </div>
+      <div class="nt"><strong>~20 s.</strong> Apresentar a equipe e o demandante. Dizer o objetivo da fala: mostrar o que foi entregue, como foi validado e pedir à banca a decisão sobre o piloto.</div>
+    </div>
+
+    <!-- SLIDE 2 — Problema e objetivo -->
+    <div class="sl" id="s2">
+      <div class="slhd"><span class="num">2</span><h2>Problema e objetivo</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
+        <div class="pergunta"><small>Problema (M1/M2)</small><span>Servidores e discentes não encontram nem interpretam com segurança as <b>normativas de ensino</b> do IFPI, dispersas em PDFs, muitos digitalizados.</span></div>
+        <div class="grade" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="col"><div class="card grow"><h3>Negócio</h3><div class="txt-bloco"><p>Reduzir a dependência dos especialistas da PROEN e uniformizar a interpretação entre os campi.</p></div></div></div>
+          <div class="col"><div class="card grow"><h3>Sistema</h3><div class="txt-bloco"><p>Responder em linguagem clara, <strong>sempre citando</strong> documento, artigo e vigência; <strong>recusar</strong> quando não há evidência.</p></div></div></div>
+          <div class="col"><div class="card grow"><h3>Modelo</h3><div class="txt-bloco"><p>Recuperar o trecho certo e gerar a resposta <strong>só com ele</strong>, sem informação de fora.</p></div></div></div></div>
+        <div style="display:contents"><div class="grade" style="grid-template-columns:1.25fr 1fr"><div class="card er"><h3>Problema</h3><div class="txt-bloco"><p style="margin:0">Resposta errada com <strong>citação aparentemente válida</strong> (ou norma revogada citada como vigente). </p></div></div><div class="card vd"><h3>Papel do assistente</h3><div class="txt-bloco"><p style="margin:0"><strong>Guia orientador e apoio à decisão</strong>, com supervisão humana. A decisão final continua com a PROEN.</p></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> Os três níveis de objetivo vêm do M2. Ressaltar o erro mais grave: ele explica por que medimos recusa e citação, e não a fluência do texto. Recusar é aceitável; afirmar errado com cara de certo não é.</div>
+    </div>
+
+    <!-- SLIDE 3 — Escopo implementado no MVP -->
+    <div class="sl" id="s3">
+      <div class="slhd"><span class="num">3</span><h2>Escopo implementado no MVP</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1.55fr 1fr">
+          <div class="col"><div class="card vd grow"><h3>Entregue e demonstrável</h3><ul><li><strong>Ingestão do acervo completo:</strong> 1.446 de 1.449 PDFs; extração com OCR, gate de qualidade e carga incremental.</li><li><strong>Metadados e vigência</strong> por documento (vigente, alterada, revogada, cancelada), revisáveis no admin.</li><li><strong>Chunking por artigo</strong> e índices versionados (BM25 + ChromaDB/bge-m3) com busca híbrida.</li><li><strong>Geração com citação obrigatória</strong>, recusa, aviso de vigência e guardrails.</li><li><strong>Aplicação web + API</strong> (<code>/v1/consulta</code>, <code>/v1/feedback</code>) e admin com fila de revisão da PROEN.</li><li><strong>Golden set</strong> (56 perguntas), harness de avaliação, Docker e<strong>&nbsp;</strong>testes automatizados.</li></ul></div></div>
+          <div class="col"><div class="card er grow"><h3>Fora do escopo</h3><ul><li>SUAP e dados de discentes (LGPD).</li><li>Implantação na DTI.</li><li>Fine-tuning de LLM ou de embeddings.</li><li>Grafo completo de revogações.</li><li>Reranking, Airflow e alertas.</li></ul></div></div></div>
+        <div class="faixa-az"><span>Publicado em <b>https://ifguia.professordiegocordeiro.com.br/</b> · código na tag <b>v1.0-mvp</b> (commit <b>b50a37b</b>).</span></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> Percorrer a lista rapidamente: cada item tem evidência no repositório. Fora do escopo: o que o M2 já tinha excluído (SUAP, SSO, fine-tuning) e o que adiamos (reranking).</div>
+    </div>
+
+    <!-- SLIDE 4 — Cenário principal -->
+    <div class="sl" id="s4">
+      <div class="slhd"><span class="num">4</span><h2>Cenário principal</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr;">
+        <div style="display:contents"><div class="fluxo seta-fluxo"><div class="et"><span class="num">1</span><b>Pergunta</b>“Quais os requisitos para a colação de grau?”</div><div class="st">→</div><div class="et"><span class="num">2</span><b>Guardrails</b>escopo, injeção, dados pessoais</div><div class="st">→</div><div class="et"><span class="num">3</span><b>Busca híbrida</b>trechos + artigos vizinhos</div><div class="st">→</div><div class="et"><span class="num">4</span><b>LLM</b>responde só com os trechos</div><div class="st">→</div><div class="et"><span class="num">5</span><b>Verificação</b>citações e confiança</div><div class="st">→</div><div class="et"><span class="num">6</span><b>Tela + feedback</b>fila da PROEN</div></div></div>
+        <div class="grade" style="grid-template-columns:1.35fr 1fr">
+          <div class="col"><div class="card grow"><h3>O que o usuário vê</h3><ul><li>Resposta com citações <strong>[n]</strong> ligadas aos trechos, ao documento e ao artigo.</li><li><strong>Vigência</strong> da norma e selo de <strong>confiança</strong> (alta, média, baixa).</li><li>Aviso fixo: o assistente <strong>não substitui a norma</strong>.</li><li>Sem evidência ou fora do escopo: <strong>recusa</strong> com encaminhamento à PROEN.</li><li>Botão útil / não útil + comentário → <strong>fila de revisão</strong> no admin.</li></ul></div></div>
+          <div class="col"><div class="card vd grow"><h3>Demonstração</h3><div style="display:contents"><img class="qr" src="img/qrcode_ifguia.png" alt="QR code da aplicação"><div class="url-demo" style="margin-top:8px">ifguia.professordiegocordeiro.com.br</div></div><div class="rod">Servidor dedicado com HTTPS</div></div></div></div>
+      </div>
+      <div class="nt"><strong>~1 min 30 s (com demo).</strong> Se a rede permitir, fazer a pergunta da colação de grau ao vivo e mostrar citação, vigência e confiança; depois uma pergunta fora do escopo para mostrar a recusa. Plano B: descrever o fluxo pelos 6 passos.</div>
+    </div>
+
+    <!-- SLIDE 5 — Arquitetura e componentes -->
+    <div class="sl" id="s5">
+      <div class="slhd"><span class="num">5</span><h2>Arquitetura e componentes</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr;">
+        <div style="display:contents"><div class="fluxo seta-fluxo"><div class="et"><span class="num">A</span><b>Pipeline de ingestão</b>PyMuPDF + OCR (Tesseract) → gate Jev → JSONL aprovados / rejeitados</div><div class="st">→</div><div class="et"><span class="num">B</span><b>Núcleo <code>src/rag</code></b>normalização, metadados, vigência, chunking, índices, consulta</div><div class="st">→</div><div class="et"><span class="num">C</span><b>Django</b>telas, API, admin, logs e feedback (SQLite)</div><div class="st">→</div><div class="et"><span class="num">D</span><b>Publicação</b>gunicorn + Nginx + HTTPS, em Docker</div></div></div>
+        <div class="grade" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="col"><div class="card grow"><h3>Modelos (FMware)</h3><div class="txt-bloco"><p><strong>Sem treinamento próprio.</strong> <code>BAAI/bge-m3</code> local para embeddings; <code>deepseek-flash</code> por API para gerar; <code>jev-latest</code> (TypeSafe) no gate.</p><p style="margin:0">Provedor atrás de interface única (Ollama local suportado).</p></div></div></div>
+          <div class="col"><div class="card grow"><h3>Dados</h3><div class="txt-bloco"><p><strong>903</strong> documentos aprovados (56.834 trechos) e <strong>543</strong> de baixa confiabilidade (15.937 trechos).</p><p style="margin:0">Índices <strong>versionados e imutáveis</strong>; a versão ativa fica em <code>ATIVO.json</code> (rollback por troca de arquivo).</p></div></div></div>
+          <div class="col"><div class="card grow"><h3>Infraestrutura</h3><div class="txt-bloco"><p>Linux x86_64 com <strong>4 vCPU, 8 GB de RAM, 100 GB SSD</strong>, sem GPU.</p><p style="margin:0">ADR 0002: <strong>Django no lugar do FastAPI.</strong>&nbsp;Interface admin da PROEN e API num só serviço.</p></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~1 min 15 s.</strong> O RAG é Python puro (src/rag) e o Django é só a camada de serviço: isso deixa o núcleo testável sem web. Trilha FMware: não treinamos modelo, combinamos modelos prontos e medimos. As decisões estão em 8 ADRs no repositório.</div>
+    </div>
+
+    <!-- SLIDE 6 — Decisão 1 · Dados: extração, gate e baixa confiabilidade -->
+    <div class="sl" id="s6">
+      <div class="slhd"><span class="num">6</span><h2>Decisão 1 · Dados: extração, gate e baixa confiabilidade</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1.1fr 1fr">
+          <div class="col"><div class="card grow"><h3>Como o acervo entra</h3><ul><li><strong>Extração por trilha:</strong> texto nativo pelo PyMuPDF, páginas escaneadas pelo OCR.</li><li><strong>Gate de qualidade (Jev):</strong> um LLM avaliador dá nota de legibilidade e verifica se os metadados da norma sobreviveram à extração.</li><li><strong>Aprovados (903)</strong> formam o índice principal.</li><li><strong>Reprovados (543)</strong> não ficam de fora: vão para um índice de <strong>baixa confiabilidade</strong>, usado só como complemento, com aviso na tela.</li></ul></div></div>
+          <div class="col"><div style="display:contents"><div class="termos"><div class="termo"><b>Gate de qualidade</b>Filtro antes do índice: só texto legível vira evidência (requisito R4 do M2).</div><div class="termo"><b>Score (1–5) e noul</b>Score = legibilidade do texto. Noul = probabilidade de os metadados (norma, número, data, artigo) estarem preservados. Aprova com score ≥ 2 e noul ≥ 0,50.</div><div class="termo"><b>Baixa confiabilidade</b>Entra com peso 0,5 na busca, no máximo 2 trechos, relevância ≥ 0,65 e confiança limitada a 0,39.</div></div></div></div></div>
+        <div class="faixa-az"><span>Mudança de escopo: o M2 previa <b>excluir</b> os reprovados, o MVP os mantém <b>sinalizados</b>, para nenhuma norma vigente ficar fora da resposta.</span></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> Explicar o gate em uma frase: é um avaliador automático que decide se o texto extraído é confiável. Os 543 reprovados são sobretudo OCR ruim e tabelas corrompidas; em vez de descartá-los, entram como complemento com aviso.</div>
+    </div>
+
+    <!-- SLIDE 7 — Decisão 2 · Chunking -->
+    <div class="sl" id="s7">
+      <div class="slhd"><span class="num">7</span><h2>Decisão 2 · Chunking</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
+        <div style="display:contents"><div class="termo" style="border-left-color:var(--bem2)"><b>Chunking (fatiamento)</b>Dividir cada documento em trechos menores. O trecho é a unidade que a busca encontra e que a resposta cita.</div></div>
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="card grow"><h3><code>paragrafo</code> — baseline do M2</h3><ul><li>Blocos de até <strong>1.200 caracteres</strong> com <strong>150 de sobreposição</strong>.</li><li>Simples, mas corta artigos ao meio e não sabe qual dispositivo citar.</li></ul></div></div>
+          <div class="col"><div class="card vd grow"><h3><code>artigo</code> — adotado</h3><ul><li><strong>Um trecho por artigo</strong> (Art. 5º), com o dispositivo guardado para a citação.</li><li>Artigo longo dividido em parágrafos (§) e partes, regulamentos anexos ganham o prefixo “Anexo”.</li><li>Trata erros do OCR (“Art. 72” lido no lugar de “Art. 7º”) e marca o dispositivo como incerto.</li></ul></div></div></div>
+        <div class="faixa-az"><span>A citação vira <b>“Resolução nº 253/2025, Art. 53”</b> — verificável pelo usuário, que é o que a PROEN pediu.</span></div>
+      </div>
+      <div class="nt"><strong>~50 s.</strong> A escolha do artigo é de domínio: a norma é organizada em artigos e é assim que servidores citam. O parágrafo fica como baseline e as duas estratégias podem ser comparadas no harness.</div>
+    </div>
+
+    <!-- SLIDE 8 — Decisão 3 · Busca: bm25 , dense e hybrid -->
+    <div class="sl" id="s8">
+      <div class="slhd"><span class="num">8</span><h2>Decisão 3 · Busca: <code>bm25</code>, <code>dense</code> e <code>hybrid</code></h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
+        <div style="display:contents"><div class="grade" style="grid-template-columns:1fr 1fr 1fr"><div class="termo"><b><code>bm25</code> — lexical</b>Pontua o trecho pelas <strong>palavras em comum</strong> com a pergunta, valorizando termos. Ótimo para “Art. 53”, “trancamento”. É o <strong>baseline</strong> do M2.</div><div class="termo"><b><code>dense</code> — semântica</b>Converte pergunta e trecho em vetores (<strong>embeddings</strong> do bge-m3, 1.024 dimensões) e compara o <strong>significado</strong>, mesmo com outras palavras. Vetores no ChromaDB.</div><div class="termo" style="border-left-color:var(--bem2)"><b><code>hybrid</code> — adotado</b>Junta as duas listas pela <strong>fusão RRF</strong> (Reciprocal Rank Fusion): soma 1/(60 + posição) de cada método, com <strong>peso do BM25</strong> ajustável.</div></div></div>
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="card grow"><h3>Contexto enviado ao LLM</h3><ul><li><strong>k = 8</strong> trechos principais, escolhidos entre 50 candidatos por método.</li><li><strong>Artigos vizinhos:</strong> o anterior e o seguinte de cada trecho, até 8 extras.</li><li><strong>Deduplicação:</strong> mesmo artigo em duas versões → fica a norma mais recente.</li></ul></div></div>
+          <div class="col"><div class="card grow"><h3>Relevância e limiares</h3><ul><li><strong>Relevância (0–1):</strong> maior entre o cosseno da busca densa e o BM25 saturado.</li><li>Trecho abaixo de <strong>0,35</strong> não conta como evidência.</li><li>Norma <strong>revogada</strong> nunca é evidência: aparece à parte, sinalizada.</li></ul></div></div></div>
+        <div class="faixa-az"><span>A literatura do M2 apontava o híbrido com bge-m3 como melhor arranjo, o MVP <b>mediu</b> os três modos no nosso acervo (slide 11).</span></div>
+      </div>
+      <div class="nt"><strong>~1 min 30 s.</strong> Explicar com um exemplo: “trancar a matrícula” — o BM25 acha quem escreve “trancamento”; o denso acha “suspensão das atividades” sem a palavra. O RRF combina as posições, não as notas, então não precisa calibrar escalas diferentes. Vizinhos: a resposta costuma estar no artigo ao lado.</div>
+    </div>
+
+    <!-- SLIDE 9 — Decisão 4 · Geração e salvaguardas -->
+    <div class="sl" id="s9">
+      <div class="slhd"><span class="num">9</span><h2>Decisão 4 · Geração e salvaguardas</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="card grow"><h3>Geração</h3><ul><li><strong>Prompt versionado (v3)</strong>: responde só com os trechos numerados, cita cada afirmação e admite resposta parcial quando falta parte.</li><li><strong>Temperatura 0</strong>, até 700 tokens, timeout de 30 s.</li><li><strong>Verificação da saída:</strong> citação inexistente ou resposta sem citação vira recusa.</li><li><strong>Confiança</strong> = relevância dos trechos citados × cobertura de citação, abaixo de <strong>0,40</strong> recusa.</li></ul></div></div>
+          <div class="col"><div class="card vd grow"><h3>Salvaguardas</h3><ul><li><strong>Guardrails de entrada:</strong> escopo (legislação federal, caso individual), detecção de injeção e máscara de dados pessoais.</li><li><strong>Fallback “somente busca”</strong> se o provedor falhar.</li><li><strong>Supervisão humana:</strong> feedback por resposta e fila da PROEN para confiança média, feedback negativo e injeção suspeita.</li><li><strong>Logs</strong> com latência, custo e versões (prompt, modelo, índice).</li></ul></div></div></div>
+        <div class="faixa-az"><span>Projeto orientado ao erro mais grave,&nbsp;<b>na dúvida recusa</b> e encaminha à PROEN.</span></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> Destacar a verificação automática da citação: o sistema não confia no LLM; confere se cada [n] aponta para um trecho que existe. A confiança pondera relevância e cobertura de citação. Mencionar o fallback para quando a API cai.</div>
+    </div>
+
+    <!-- SLIDE 10 — Como avaliamos: golden set e harness -->
+    <div class="sl" id="s10">
+      <div class="slhd"><span class="num">10</span><h2>Como avaliamos: golden set e harness</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr;">
+        <div class="pergunta"><small>Golden set (versão 1c8902a7)</small><span><b>56 perguntas</b>: 40 factuais, 5 fora do acervo, 5 fora do escopo, 3 sobre normas revogadas e 3 de injeçã, cada factual com documento e artigo esperados.</span></div>
+        <div class="grade" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="col"><div style="display:contents"><div class="termos"><div class="termo"><b>Recall@k (corte k = 5)</b>Fração das perguntas em que o artigo esperado aparece entre os <strong>5 primeiros</strong> resultados.</div><div class="termo"><b>MRR</b>Média de 1/posição do primeiro acerto: mede se o acerto vem <strong>no topo</strong>.</div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="termos"><div class="termo"><b>IC 95% (Wilson)</b>Intervalo de confiança da taxa; com n = 40 ele é <strong>largo</strong>, e 1–2 perguntas são ruído.</div><div class="termo"><b>Recall do contexto</b>O artigo esperado chega ao que <strong>vai para o LLM</strong> (k, vizinhos, deduplicação)?</div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="termos"><div class="termo"><b>Recusa correta / falsa recusa</b>Recusou o que devia × recusou pergunta que tinha resposta.</div><div class="termo"><b>Acerto / precisão de citação</b>Cita o artigo esperado? Que fração das citações está nele?</div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~1 min 15 s.</strong> O run_evals roda as 56 perguntas pelo fluxo real e grava relatório com o hash do golden set. O ajustar_busca testa pesos e vizinhos sem gastar API. Fidelidade (afirmação fora dos trechos) exige anotação manual e ainda não foi feita.</div>
+    </div>
+
+    <!-- SLIDE 11 — Resultados · Recuperação (40 perguntas factuais) -->
+    <div class="sl" id="s11">
+      <div class="slhd"><span class="num">11</span><h2>Resultados · Recuperação (40 perguntas factuais)</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1.15fr 1fr">
+          <div class="col"><div class="card grow"><h3>Recall@5 por modo (configuração adotada)</h3><div style="display:contents"><div class="barras"><div class="barra"><span>BM25 (baseline)</span><div class="trilho"><div class="enche base" style="width:57%"></div><div class="meta" style="left:70%"></div></div><b>0,57</b></div><div class="barra"><span>Denso</span><div class="trilho"><div class="enche" style="width:68%"></div><div class="meta" style="left:70%"></div></div><b>0,68</b></div><div class="barra"><span>Híbrido (peso 1,0)</span><div class="trilho"><div class="enche alvo" style="width:62%"></div><div class="meta" style="left:70%"></div></div><b>0,62</b></div><div class="barra"><span>Híbrido (peso 0,5)</span><div class="trilho"><div class="enche" style="width:72.5%"></div><div class="meta" style="left:70%"></div></div><b>0,725</b></div><div class="barra"><span>Recall do contexto</span><div class="trilho"><div class="enche alvo" style="width:80%"></div><div class="meta" style="left:70%"></div></div><b>0,80</b></div></div><div class="legenda-meta">- - - meta do M2: Recall@k ≥ 0,70</div></div></div></div>
+          <div class="col"><table class="tb2"><tr><th>Modo</th><th>Recall@5</th><th>IC 95%</th><th>MRR</th><th>Doc.</th></tr><tr class="bs"><td>BM25</td><td>0,57</td><td>0,42–0,71</td><td>0,45</td><td>0,75</td></tr><tr><td>Denso</td><td>0,68</td><td>0,52–0,80</td><td>0,48</td><td>0,75</td></tr><tr class="hl"><td>Híbrido</td><td>0,62</td><td>0,47–0,76</td><td><strong>0,49</strong></td><td><strong>0,80</strong></td></tr></table><div class="card grow"><h3>Leitura</h3><div class="txt-bloco"><p style="margin:0">O híbrido <strong>supera o baseline</strong> e tem o melhor MRR e recall de documento. Com peso 0,5 chega a <strong>0,725</strong>, mas recusa menos (slide 12). Com k = 8 e vizinhos, o artigo certo chega ao LLM em <strong>80%</strong> das perguntas.</p></div></div></div></div>
+        <div class="faixa-az"><span>Os intervalos se <b>sobrepõem</b>: com 40 perguntas, a diferença entre os modos é indício, não prova.</span></div>
+      </div>
+      <div class="nt"><strong>~1 min 15 s.</strong> Ser direto: na configuração adotada, o Recall@5 (0,62) está abaixo da meta de 0,70. Mas o que importa para a resposta é o contexto: o artigo chega ao LLM em 80% dos casos. Recall do documento (0,80) mostra que muitas falhas são o artigo vizinho, não o documento errado.</div>
+    </div>
+
+    <!-- SLIDE 12 — Resultados · Resposta com o LLM (56 perguntas) -->
+    <div class="sl" id="s12">
+      <div class="slhd"><span class="num">12</span><h2>Resultados · Resposta com o LLM (56 perguntas)</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
+        <div style="display:contents"><div class="mini-tit">Evolução das rodadas: base_v1 (prompt v1, k = 5) → v3 → candidato A (peso 0,5) → candidato B (peso 1,0, até 8 vizinhos) — adotado</div></div>
+        <div class="grade" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="col"><div class="card grow"><h3>Recusa correta</h3><div style="display:contents"><div class="evo3"><div><small>base_v1</small><b>71%</b></div><div><small>v3</small><b>71%</b></div><div><small>cand. A</small><b>80%</b></div><div class="fim"><small>cand. B</small><b>100%</b></div></div></div><div class="rod">Meta do M2: ≥ 90%</div></div></div>
+          <div class="col"><div class="card grow"><h3>Falsa recusa</h3><div style="display:contents"><div class="evo3"><div><small>base_v1</small><b>21%</b></div><div><small>v3</small><b>8%</b></div><div><small>cand. A</small><b>8%</b></div><div class="fim"><small>cand. B</small><b>8%</b></div></div></div><div class="rod">3 de 40 factuais</div></div></div>
+          <div class="col"><div class="card grow"><h3>Acerto de citação</h3><div style="display:contents"><div class="evo3"><div><small>base_v1</small><b>19%</b></div><div><small>v3</small><b>72%</b></div><div><small>cand. A</small><b>81%</b></div><div class="fim"><small>cand. B</small><b>81%</b></div></div></div><div class="rod">Cita o artigo esperado</div></div></div></div>
+        <div class="kpi" style="grid-template-columns:repeat(4,1fr);"><div><b>100%</b><span>citações válidas · 0 saídas bloqueadas</span></div><div><b>0</b><span>respostas citando norma não vigente</span></div><div><b>2,45 s</b><span>latência p95 (meta ≤ 15 s)</span></div><div><b>US$ 0,0006</b><span>por consulta (US$ 0,036 por 56)</span></div></div>
+      </div>
+      <div class="nt"><strong>~1 min 15 s.</strong> A escolha do candidato B foi pela recusa: A e B empatam em falsa recusa e citação, mas B recusa corretamente todas as perguntas sem resposta. Ou seja, privilegiamos o erro mais grave. Custo e latência estão muito abaixo do limite.</div>
+    </div>
+
+    <!-- SLIDE 13 — Critérios de aceite do M2 × resultado -->
+    <div class="sl" id="s13">
+      <div class="slhd"><span class="num">13</span><h2>Critérios de aceite do M2 × resultado</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><table class="tb2 fill"><tr><th>Cenário ou requisito (M2)</th><th>Meta</th><th>Resultado no MVP</th><th>Situação</th></tr><tr><td>R1 · Respostas com citação para trecho existente</td><td>100%</td><td>100% (0 bloqueadas)</td><td><span class="pill ok">Atendido</span></td></tr><tr><td>R2 · Recusa nas perguntas sem resposta no acervo</td><td>≥ 90%</td><td>100% (n = 10)</td><td><span class="pill ok">Atendido</span></td></tr><tr><td>R3 · Recall@k comparado ao BM25</td><td>≥ 0,70</td><td>0,62 (BM25 0,57); contexto 0,80</td><td><span class="pill parc">Parcial</span></td></tr><tr><td>Fidelidade das respostas (M2, seção 7)</td><td>≥ 0,85</td><td>não medida (anotação manual pendente)</td><td><span class="pill nao">Pendente</span></td></tr><tr><td>H3 · Vigência</td><td>nenhuma revogada como vigente</td><td>0 citações não vigentes; revogada sinalizada em 2 de 3</td><td><span class="pill parc">Parcial</span></td></tr><tr><td>R4 · Só documento aprovado como evidência plena</td><td>auditoria</td><td>903 no índice principal; 543 à parte, com aviso</td><td><span class="pill ok">Atendido</span></td></tr><tr><td>Guardrails e degradação</td><td>injeção e falha do provedor</td><td>injeção detectada em 100% (n = 3); modo “somente busca” testado</td><td><span class="pill ok">Atendido</span></td></tr><tr><td>R5 · Reprodutível e p95 ≤ 15 s</td><td>Docker + p95</td><td>Docker, testes, p95 2,45 s; sem CI e sem teste por terceiros</td><td><span class="pill parc">Parcial</span></td></tr><tr><td>Fluxo prioritário demonstrável</td><td>ponta a ponta</td><td>publicado com HTTPS; 77 consultas registradas</td><td><span class="pill ok">Atendido</span></td></tr></table></div></div>
+        <div class="faixa-az"><span>Conclusão do modelo: <b>atende com restrições</b>&nbsp; as salvaguardas estão cumpridas; recuperação e fidelidade ainda não.</span></div>
+      </div>
+      <div class="nt"><strong>~1 min 15 s — slide central para a banca.</strong> Ler as linhas por situação: os critérios ligados ao erro grave (citação, recusa, vigência como evidência) estão atendidos. O que falta é medir fidelidade e subir o Recall. Não esconder: abaixo do mínimo do M2, o MVP pode ser demonstrado, mas não liberado para uso real.</div>
+    </div>
+
+    <!-- SLIDE 14 — Backlog e mudanças de escopo -->
+    <div class="sl" id="s14">
+      <div class="slhd"><span class="num">14</span><h2>Backlog e mudanças de escopo</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1.25fr">
+          <div class="col"><div class="kpi" style="grid-template-rows:repeat(3,1fr);"><div><b>22 entregues</b><span>das 31 tarefas dos incrementos 1–3 (GitHub Projects, issues #8–#38)</span></div><div><b>6 parciais</b><span>dump compartilhado, golden set validado, noul, ajuste final, teste ponta a ponta, runbook</span></div><div><b>3 não entregues</b><span>CI (#9), ground truth com dupla anotação (#27), execução por terceiros (#36)</span></div></div></div>
+          <div class="col"><div class="card grow"><h3>O que mudou em relação ao M2</h3><ul><li><strong>FastAPI → Django</strong> (ADR 0002): telas, admin e API num só serviço.</li><li><strong>Painel da PROEN antecipado</strong> como admin do Django (logs, fila, vigência).</li><li><strong>Reprovados no gate</strong> viraram índice de baixa confiabilidade, em vez de excluídos.</li><li><strong>Acrescentados:</strong> carga incremental, diagnóstico do ambiente, vizinhos e deduplicação, prompt v3.</li><li><strong>Removidos/adiados:</strong> MLflow, Airflow e template de ML (ADR 0008); reranking; LLM local não avaliado.</li></ul></div></div></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> Todas as tarefas estão rastreadas por issue e commit no relatório. As não entregues são de processo (CI, dupla anotação, terceiros), não de funcionalidade. As mudanças de escopo foram decisões registradas em ADR.</div>
+    </div>
+
+    <!-- SLIDE 15 — Análise de erros, limitações e riscos -->
+    <div class="sl" id="s15">
+      <div class="slhd"><span class="num">15</span><h2>Análise de erros, limitações e riscos</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="card grow"><h3>Onde o sistema erra</h3><ul><li><strong>Falsa recusa (8%):</strong> acha o documento certo, mas outro artigo dele.</li><li><strong>Precisão de citação (44%):</strong> cita também os vizinhos — correto, porém menos enxuto.</li><li><strong>Vigência:</strong> 1 de 3 revogadas sem sinalização; vigência vem do nome do arquivo + revisão manual.</li><li><strong>Tabelas e OCR:</strong> 543 documentos com OCR inválido (347) ou tabela corrompida (150); perguntas sobre quadros (oferta de vagas) são o pior caso.</li></ul></div></div>
+          <div class="col"><div class="card er grow"><h3>Limitações e riscos para uso real</h3><ul><li><strong>Golden set pequeno e não validado pela PROEN</strong> (só pela equipe, por falta de agenda); perguntas escritas lendo os artigos favorecem o BM25.</li><li><strong>Fidelidade não medida.</strong></li><li>Dependência das APIs <strong>DeepSeek e TypeSafe</strong> (custo, disponibilidade, envio de texto público).</li><li>Listas extensas (“todos os cursos de 2027”) recebem resposta <strong>parcial</strong>.</li><li>Consulta pública sem autenticação; sem CI.</li></ul></div></div></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> O risco principal para uso real é o golden set: sem validação da PROEN, não sabemos se ele representa as dúvidas reais. Por isso a recomendação é piloto controlado, com perguntas reais, e não liberação geral.</div>
+    </div>
+
+    <!-- SLIDE 16 — Em andamento e próximos passos -->
+    <div class="sl" id="s16">
+      <div class="slhd"><span class="num">16</span><h2>Em andamento e próximos passos</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr;">
+        <div class="kpi" style="grid-template-columns:repeat(4,1fr);"><div><b>202 / 543</b><span>reprovados passam no gate com a nova extração</span></div><div><b>0,62 → 0,65</b><span>Recall@5 do híbrido</span></div><div><b>0,80 → 0,85</b><span>recall do documento, com recusa correta mantida em 100%</span></div><div><b>100% → 33%</b><span>falsa recusa nas perguntas da Res. 40/2026</span></div></div>
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div class="card vd grow"><h3>Em andamento: branch <code>exp/extracao-tabelas</code></h3><ul><li>Tabelas em Markdown com espaços nas células e cabeçalho repetido em cada trecho.</li><li>OCR com binarização; Jev sobre o texto normalizado.</li><li>Vagas reservadas para a baixa confiabilidade e prioridade ao ano citado na pergunta.</li><li>Será mesclado após os testes da equipe na aplicação web.</li></ul></div></div></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> O experimento ataca exatamente o pior caso (tabelas e OCR) e já mostra ganho sem perder a recusa. As pendências são curtas e conhecidas; nenhuma exige mudar a arquitetura.</div>
+    </div>
+
+    <!-- SLIDE 17 — Obrigado! Perguntas? -->
+    <div class="sl" id="s17">
+      <div class="slhd"><span class="num">17</span><h2>Obrigado! Perguntas?</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div style="display:contents"><div class="qrbox"><img class="qr" src="img/qrcode_ifguia.png" alt="QR code da aplicação"><div class="url-demo">ifguia.professordiegocordeiro.com.br</div><div class="rod">Aplicação publicada</div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="qrbox"><img class="qr" src="img/qrcode_repo.png" alt="QR code do repositório"><div class="url-demo" style="font-size:18px">github.com/SE4AI-UFPI/IFGuia · tag v1.0-mvp</div><div class="rod">Código, README, ADRs e relatórios de avaliação</div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~20 s.</strong> Abrir para perguntas. O apêndice (próximo slide) tem o glossário dos termos técnicos para consulta durante a arguição.</div>
+    </div>
+
+    <!-- SLIDE 18 — Apêndice · Glossário para a arguição -->
+    <div class="sl" id="s18">
+      <div class="slhd"><span class="num">18</span><h2>Apêndice · Glossário para a arguição</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="col"><div style="display:contents"><div class="termos"><div class="termo"><b>RAG</b>Geração aumentada por recuperação: busca trechos e o LLM responde só com eles.</div><div class="termo"><b>FMware</b>Software construído sobre modelos fundacionais prontos, sem treinar modelo próprio.</div><div class="termo"><b>Embedding</b>Vetor numérico que representa o significado de um texto.</div><div class="termo"><b>Baseline</b>Referência simples para comparar: BM25 na busca, base_v1 na resposta.</div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="termos"><div class="termo"><b>k e candidatos</b>k = trechos enviados ao LLM (8); candidatos = resultados de cada método antes da fusão (50).</div><div class="termo"><b>Peso do BM25</b>Quanto a lista lexical vale na fusão RRF (o denso vale 1,0).</div><div class="termo"><b>Golden set</b>Conjunto de perguntas com resposta esperada, usado como gabarito.</div><div class="termo"><b>p50 / p95</b>Latência mediana e a que 95% das consultas não ultrapassam.</div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="termos"><div class="termo"><b>Fidelidade</b>Fração da resposta sustentada pelos trechos; medida por anotação humana.</div><div class="termo"><b>Guardrail</b>Regra automática na entrada ou na saída (escopo, injeção, citação).</div><div class="termo"><b>Injeção de prompt</b>Texto que tenta fazer o modelo ignorar as instruções.</div><div class="termo"><b>Índice versionado</b>Cada reconstrução cria uma versão nova e imutável; <code>ATIVO.json</code> aponta a vigente.</div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>Apêndice (fora dos 20 min).</strong> Usar durante as perguntas.</div>
+    </div>
+
+  </div>
+  <footer class="ft">
+    <img src="img/logo_full.png" alt=""><span class="txt"><strong>IFGuia · M3 — Entrega Final do MVP</strong> · Eng. de Software para Sistemas Inteligentes — UFPI</span>
+  </footer>
+  <nav class="ctr" aria-label="Navegação da apresentação">
+    <button class="bz" id="bprev" onclick="pv()">Anterior</button>
+    <div class="dots" id="dots" role="group" aria-label="Ir para o slide"></div>
+    <button class="bv" id="bnext" onclick="nx()">Próximo</button>
+    <button class="bp" id="bexp" onclick="exportarPDF()" title="Exportar os slides em PDF — na janela de impressão escolha 'Salvar como PDF', margens 'Nenhuma' e mantenha 'Gráficos de fundo'">Exportar PDF</button>
+  </nav>
+  <script src="apresentacao.js"></script>
+</body>
+
+</html>

@@ -1,3 +1,5 @@
+/* runtime.js — navegação, modo apresentador, roteiro, cronômetro e PDF.
+   Copiado para cada aula gerada pelo editor (aulaNN.js). Não edite a cópia da aula. */
 let c=0,t=document.querySelectorAll('.sl').length,dots=[];
 let isPresenter = new URLSearchParams(location.search).get('modo')==='apresentador';
 let win=null;
@@ -45,7 +47,7 @@ function openPresenter(){
   var bp=document.getElementById('bp');
   if(win && !win.closed){win.close();win=null;if(bp)bp.textContent='Modo apresentador';return}
   var url=location.href.split('?')[0].split('#')[0]+'?modo=apresentador&c='+c+(zoomManual?'&fz='+fzLevel:'')+'&limite='+(TMR_LIM/60);
-  win=window.open(url,'rf_apresentador','menubar=no,toolbar=no,location=no,width=1280,height=800');
+  win=window.open(url,'slides_apresentador','menubar=no,toolbar=no,location=no,width=1280,height=800');
   if(win && bp)bp.textContent='Fechar apresentação';
 }
 function sync(){
@@ -59,13 +61,13 @@ function applyEstado(cn,fzN){
   if(typeof fzN==='number'){fzLevel=Math.max(0,Math.min(fzSteps.length-1,fzN));applyZoom()}
   sh(c);
 }
-window.addEventListener('message',function(e){var d=e.data||{};if(d.type==='estado'&&typeof d.c==='number')applyEstado(d.c,d.fz)});
+window.addEventListener('message',function(e){var d=e.data||{};if(d.type==='estado'&&typeof d.c==='number')applyEstado(d.c,d.fz);else if(d.type==='tela')telaApagada(d.modo,true)});
 
 function rv(e){e.classList.toggle('rv')}
 
 function toggleFullscreen(){if(document.fullscreenElement||document.webkitFullscreenElement){if(document.exitFullscreen)document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();}else{var d=document.documentElement;if(d.requestFullscreen)d.requestFullscreen();else if(d.webkitRequestFullscreen)d.webkitRequestFullscreen();}}
 
-/* Exporta os 9 slides em PDF pela janela de impressão (CSS @media print em estilo.css).
+/* Exporta os slides em PDF pela janela de impressão (CSS @media print em estilo.css).
    O zoom aplicado ao .sc na tela é neutralizado durante a impressão. */
 function exportarPDF(){
   var sc=document.querySelector('.sc'),antes=sc?sc.style.zoom:'';
@@ -75,7 +77,62 @@ function exportarPDF(){
   window.print();
   setTimeout(restaurar,1500);
 }
-document.addEventListener('keydown',function(e){if(e.key==='ArrowRight')nx();else if(e.key==='ArrowLeft')pv();else if(e.key==='Home'){e.preventDefault();go(0)}else if(e.key==='End'){e.preventDefault();go(t-1)}else if(e.key==='f'||e.key==='F')toggleFullscreen()});
+/* ===== Teclado e passadores de slides (clickers) =====
+   Os passadores USB/Bluetooth se apresentam como teclado e enviam, conforme o modelo:
+   PageDown/PageUp (Logitech, Targus…), setas, Espaço/Enter, F5 ou Esc (botão "iniciar")
+   e "." ou "b" (botão "tela preta"). Tudo funciona nas duas janelas (apresentação e
+   apresentador) e a outra janela acompanha pelo postMessage. */
+var TECLAS_AVANCAR=['ArrowRight','ArrowDown','PageDown',' ','Spacebar','Enter','MediaTrackNext','MediaNextTrack'],
+    TECLAS_VOLTAR=['ArrowLeft','ArrowUp','PageUp','Backspace','MediaTrackPrevious','MediaPreviousTrack'];
+function emCampo(el){return el&&(el.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName))}
+function emControle(el){return el&&el.closest&&el.closest('button,a[href],summary,[role="button"],.rev,.aba,[onclick]')}
+function telaApagada(modo,remoto){
+  var v=document.getElementById('tela-apagada');
+  if(!v){v=document.createElement('div');v.id='tela-apagada';v.title='Clique ou pressione qualquer tecla para voltar';
+    v.onclick=function(){telaApagada(null)};document.body.appendChild(v)}
+  var atual=v.getAttribute('data-modo');
+  if(modo===undefined)modo=null;
+  if(modo&&atual===modo&&!remoto)modo=null;
+  if(modo){v.setAttribute('data-modo',modo);v.className='on '+modo}else{v.removeAttribute('data-modo');v.className=''}
+  if(!remoto){try{var alvo=isPresenter?window.opener:(win&&!win.closed?win:null);if(alvo)alvo.postMessage({type:'tela',modo:modo},'*')}catch(x){}}
+}
+document.addEventListener('keydown',function(e){
+  if(emCampo(e.target)||e.ctrlKey||e.metaKey||e.altKey)return;
+  var k=e.key,v=document.getElementById('tela-apagada');
+  if(v&&v.getAttribute('data-modo')&&k!=='Shift'){e.preventDefault();telaApagada(null);return}
+  if((k===' '||k==='Enter')&&emControle(e.target))return; /* Espaço/Enter num botão focado: deixa o botão agir */
+  if(k===' '&&e.shiftKey){e.preventDefault();pv();return}
+  if(TECLAS_AVANCAR.indexOf(k)>=0){e.preventDefault();nx()}
+  else if(TECLAS_VOLTAR.indexOf(k)>=0){e.preventDefault();pv()}
+  else if(k==='Home'){e.preventDefault();go(0)}
+  else if(k==='End'){e.preventDefault();go(t-1)}
+  else if(k==='f'||k==='F'||k==='F5'){e.preventDefault();toggleFullscreen()}
+  else if(k==='b'||k==='B'||k==='.'||k===';'){e.preventDefault();telaApagada('preta')}
+  else if(k==='w'||k==='W'||k===','){e.preventDefault();telaApagada('branca')}
+});
+
+/* ===== Telas sensíveis ao toque =====
+   Arrastar para a esquerda/direita troca de slide; toque rápido na faixa lateral
+   (15% de cada lado) também avança/volta. A rolagem vertical do slide continua normal. */
+(function(){
+  var sc=document.querySelector('.sc');if(!sc)return;
+  var x0=null,y0=0,t0=0,alvo=null;
+  function ini(x,y,el){x0=x;y0=y;t0=Date.now();alvo=el}
+  function fim(x,y){
+    if(x0===null)return;
+    var dx=x-x0,dy=y-y0,dt=Date.now()-t0;x0=null;
+    if(Math.abs(dx)>=50&&Math.abs(dx)>Math.abs(dy)*1.3&&dt<1000){if(dx<0)nx();else pv();return true}
+    if(Math.abs(dx)<12&&Math.abs(dy)<12&&dt<450&&!emCampo(alvo)&&!emControle(alvo)&&!(alvo&&alvo.closest&&alvo.closest('iframe,video'))){
+      var w=window.innerWidth;if(x>w*0.85){nx();return true}if(x<w*0.15){pv();return true}
+    }
+  }
+  sc.addEventListener('touchstart',function(e){if(e.touches.length!==1){x0=null;return}var p=e.touches[0];ini(p.clientX,p.clientY,e.target)},{passive:true});
+  sc.addEventListener('touchend',function(e){var p=e.changedTouches[0];if(p&&fim(p.clientX,p.clientY)&&e.cancelable)e.preventDefault()},{passive:false});
+  sc.addEventListener('touchcancel',function(){x0=null},{passive:true});
+  /* caneta (stylus) em telas interativas que não geram eventos de toque */
+  sc.addEventListener('pointerdown',function(e){if(e.pointerType==='pen')ini(e.clientX,e.clientY,e.target)},{passive:true});
+  sc.addEventListener('pointerup',function(e){if(e.pointerType==='pen')fim(e.clientX,e.clientY)},{passive:true});
+})();
 
 if(isPresenter){
   document.body.classList.add('modo-presenter');
@@ -92,11 +149,11 @@ sync();
 /* ?pdf=1 — usado pelo exportar_pdf.sh: mantém o zoom em 1 para o PDF sair no tamanho de projeto */
 if(new URLSearchParams(location.search).get('pdf')==='1'){zoomManual=true;fzLevel=1;applyZoom()}
 
-/* ===== Roteiro de fala e cronômetro (versão de 10 minutos) ===== */
+/* ===== Roteiro de fala e cronômetro ===== */
 function toggleNotas(){document.body.classList.toggle('notas');var b=document.getElementById('bnt');if(b)b.classList.toggle('on',document.body.classList.contains('notas'))}
 var tmrIni=null,tmrAcum=0,tmrId=null;
 /* Limite do cronômetro: ?limite=<min> na URL > localStorage (Shift+clique) > valor abaixo */
-var TMR_CONF={limiteMin:10},TMR_CHAVE='rf_tmr_lim';
+var TMR_CONF={limiteMin:parseFloat(document.body.getAttribute('data-limite'))||10},TMR_CHAVE='slides_tmr_lim:'+location.pathname;
 function tmrNum(v){var n=parseFloat(String(v).replace(',','.'));return isFinite(n)?n:NaN}
 function tmrLimiteMin(){
   var q=new URLSearchParams(location.search).get('limite');
@@ -128,5 +185,5 @@ function tmrDefinirLimite(){
 }
 function toggleTimer(){if(tmrIni){tmrAcum+=Date.now()-tmrIni;tmrIni=null;clearInterval(tmrId)}else{tmrIni=Date.now();tmrId=setInterval(tmrDraw,500)}tmrDraw()}
 function resetTimer(){if(tmrIni){clearInterval(tmrId)}tmrIni=null;tmrAcum=0;tmrDraw()}
-document.addEventListener('keydown',function(e){if(isPresenter)return;if(e.key==='n'||e.key==='N')toggleNotas();else if(e.key==='t'||e.key==='T')toggleTimer()});
+document.addEventListener('keydown',function(e){if(isPresenter||emCampo(e.target)||e.ctrlKey||e.metaKey||e.altKey)return;if(e.key==='n'||e.key==='N')toggleNotas();else if(e.key==='t'||e.key==='T')toggleTimer()});
 tmrDraw();

@@ -1,0 +1,811 @@
+{
+  "versao": 1,
+  "motor": "editor",
+  "estado": "editor",
+  "meta": {
+    "titulo": "IFGuia — M3: Entrega Final do MVP",
+    "titulo_barra": "IFGuia · M3 — Entrega Final do MVP",
+    "arquivo": "apresentacao.html",
+    "cronometro_min": 20,
+    "rodape": "<strong>IFGuia · M3 — Entrega Final do MVP</strong> · Eng. de Software para Sistemas Inteligentes — UFPI",
+    "numerar": true,
+    "mostrar_pdf": true,
+    "lang": "pt-BR"
+  },
+  "tema": {
+    "base": "ppgcc",
+    "vars": {},
+    "logos": {
+      "barra": "img/logo.png",
+      "capa": null,
+      "rodape": "img/logo_full.png",
+      "marca": "img/marca.png"
+    }
+  },
+  "css_extra": ".termos { display:grid; gap:8px }\n.termo { background:var(--b); border:1px solid var(--linha); border-left:4px solid var(--bem); border-radius:10px; padding:7px 11px; font-size:var(--fs-apoio); line-height:1.35 }\n.termo b { display:block; color:var(--p); font-size:15.5px; margin-bottom:1px }\n.termo code { font-size:.92em }\n.barras { display:grid; gap:9px; margin:4px 0 }\n.barra { display:grid; grid-template-columns:150px 1fr 56px; align-items:center; gap:10px; font-size:var(--fs-apoio) }\n.barra .trilho { position:relative; height:22px; background:var(--azc); border-radius:6px; overflow:hidden }\n.barra .enche { position:absolute; inset:0 auto 0 0; background:var(--bem); border-radius:6px }\n.barra .enche.base { background:#9CA3AF }\n.barra .enche.alvo { background:var(--bem2) }\n.barra .meta { position:absolute; top:-3px; bottom:-3px; width:0; border-left:2px dashed var(--er) }\n.barra b { text-align:right; font-variant-numeric:tabular-nums }\n.legenda-meta { font-size:var(--fs-min); color:var(--er-tx); margin-top:2px }\n.pill { display:inline-block; padding:2px 10px; border-radius:999px; font-size:13.5px; font-weight:700; white-space:nowrap }\n.pill.ok { background:#E7F6EC; color:#166534; border:1px solid #BBE5C8 }\n.pill.parc { background:#FFF6E0; color:#8A5A00; border:1px solid #F3DCA2 }\n.pill.nao { background:var(--er-bg); color:var(--er-tx); border:1px solid var(--er-bd) }\n.url-demo { font-family:var(--fonte-tit); font-weight:800; font-size:21px; color:var(--bem2); word-break:break-all }\n.qr { width:150px; height:150px; image-rendering:pixelated; border-radius:8px; border:1px solid var(--linha); background:#fff; padding:4px }\n.evo3 { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; text-align:center }\n.evo3 > div { background:var(--b); border:1px solid var(--linha); border-radius:10px; padding:8px 6px }\n.evo3 small { display:block; color:var(--tx-apoio); font-size:13px }\n.evo3 b { display:block; font-size:24px; color:var(--p) }\n.evo3 .fim b { color:var(--bem) }\n.mini-tit { font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--tx-apoio); font-weight:700; margin:2px 0 4px }\n.seta-fluxo .et { flex:1 1 120px; padding:9px 8px; font-size:var(--fs-apoio); line-height:1.3 }\n.seta-fluxo .et b { display:block; font-size:16px; color:var(--p) }\n.seta-fluxo .st { font-size:1.4em }\n.rec { display:flex; gap:12px; flex-wrap:wrap; margin:2px 0 8px }\n.rec span { padding:8px 14px; border-radius:10px; border:1px solid var(--linha); font-weight:700; color:var(--tx-apoio); background:var(--b) }\n.rec span.on { background:var(--bem2); color:#fff; border-color:var(--bem2) }\n\n/* ===== IFGuia M3: escala de leitura para projeção (tela grande e PDF; não afeta o modo celular) ===== */\nhtml:not(.movel) { --fs-corpo: 19.5px; --fs-h3: 21px }\nhtml:not(.movel) .sl .slbd.g { font-size: 19.5px !important }\nhtml:not(.movel) .sl .card h3 { font-size: 22px }\nhtml:not(.movel) .sl .card { padding: 15px 20px }\nhtml:not(.movel) .termo { font-size: 18px; padding: 10px 14px; line-height: 1.4 }\nhtml:not(.movel) .termo b { font-size: 20px; margin-bottom: 4px }\nhtml:not(.movel) .fluxo .et { font-size: 16.5px; line-height: 1.3; padding: 12px 10px }\nhtml:not(.movel) .fluxo .et b { display:block; font-size: 18.5px; margin-bottom: 2px }\nhtml:not(.movel) .pergunta { font-size: 19.5px }\nhtml:not(.movel) .pergunta small { font-size: 13px }\nhtml:not(.movel) .chips span { font-size: 16.5px }\nhtml:not(.movel) .faixa-az { font-size: 19.5px; padding: 12px 22px }\nhtml:not(.movel) .faixa-az.fim { font-size: 24px }\nhtml:not(.movel) .kpi b { font-size: 34px }\nhtml:not(.movel) .kpi span { font-size: 16.5px }\nhtml:not(.movel) .card .rod { font-size: 16.5px }\nhtml:not(.movel) .barras { gap: 16px; margin: 10px 0 }\nhtml:not(.movel) .barra { grid-template-columns: 190px 1fr 64px; font-size: 18.5px }\nhtml:not(.movel) .barra .trilho { height: 32px }\nhtml:not(.movel) .legenda-meta { font-size: 15.5px; margin-top: 8px }\nhtml:not(.movel) .evo3 { margin: auto 0 }\nhtml:not(.movel) .evo3 > div { padding: 14px 6px }\nhtml:not(.movel) .evo3 small { font-size: 15px }\nhtml:not(.movel) .evo3 b { font-size: 30px }\nhtml:not(.movel) .evo3 { gap: 6px }\nhtml:not(.movel) .mini-tit { font-size: 15px }\n\nhtml:not(.movel) #s13 .tb2, html:not(.movel) #s13 .tb2 th { font-size: 17.5px !important }\nhtml:not(.movel) .pill { font-size: 15px; padding: 3px 12px }\nhtml:not(.movel) .rec span { font-size: 18px; padding: 8px 16px }\nhtml:not(.movel) .url-demo { font-size: 23px }\nhtml:not(.movel) .qr { width: 180px; height: 180px }\n\n/* ===== Ajustes por slide (antes eram estilos inline no HTML) ===== */\n.termos { flex: 1 1 auto }\n#s4 .card.vd { align-items: center; text-align: center }\n#s4 .card.vd .rod { align-self: stretch }\n#s11 .tb2 td, #s11 .tb2 th { padding-top: 5px; padding-bottom: 5px }\nhtml:not(.movel) #s11 .tb2, html:not(.movel) #s11 .tb2 th { font-size: 18px !important }\n.qrbox { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 10px }\n.qrbox .rod { font-size: var(--fs-apoio); color: var(--tx-apoio) }\nhtml:not(.movel) .qrbox .qr { width: 190px; height: 190px }\nhtml:not(.movel) .qrbox .rod { font-size: 17px }",
+  "slides": [
+    {
+      "layout": "capa",
+      "rotulo": "Eng. de Software para Sistemas Inteligentes · UFPI · M3",
+      "titulo": "IFGuia: assistente de consulta<br>às normativas de ensino do IFPI",
+      "subtitulos": [
+        "Equipe:\n            <ul>\n              <li>Sharon Wendy Feitosa Franca Rocha — Eng. de Dados</li>\n              <li>Diego Cordeiro de Oliveira — Eng. de Machine Learning</li>\n              <li>Guilherme Nonato de Sá Ribeiro — Eng. de Machine Learning</li>\n              <li>Luis Felipe Ferreira de Castro — Eng. de Software</li>\n            </ul>",
+        "Demandante: PROEN/IFPI (Odimógenes Soares Lopes)&nbsp;<div>Professor: Dr. Guilherme Avelino</div>",
+        "Entrega final do MVP · versão <code>v1.0-mvp</code> · 09/11/2026"
+      ],
+      "imagem": "img/logo_full.png",
+      "notas": "<strong>~20 s.</strong> Apresentar a equipe e o demandante. Dizer o objetivo da fala: mostrar o que foi entregue, como foi validado e pedir à banca a decisão sobre o piloto."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Problema e objetivo",
+      "topo_proporcao": "1.3fr 1fr",
+      "topo": [
+        {
+          "tipo": "pergunta",
+          "rotulo": "Problema (M1/M2)",
+          "html": "Servidores e discentes não encontram nem interpretam com segurança as <b>normativas de ensino</b> do IFPI, dispersas em PDFs, muitos digitalizados."
+        }
+      ],
+      "proporcao": "1fr 1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Negócio",
+            "html": "<p>Reduzir a dependência dos especialistas da PROEN e uniformizar a interpretação entre os campi.</p>"
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Sistema",
+            "html": "<p>Responder em linguagem clara, <strong>sempre citando</strong> documento, artigo e vigência; <strong>recusar</strong> quando não há evidência.</p>"
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Modelo",
+            "html": "<p>Recuperar o trecho certo e gerar a resposta <strong>só com ele</strong>, sem informação de fora.</p>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"grade\" style=\"grid-template-columns:1.25fr 1fr\"><div class=\"card er\"><h3>Problema</h3><div class=\"txt-bloco\"><p style=\"margin:0\">Resposta errada com <strong>citação aparentemente válida</strong> (ou norma revogada citada como vigente). </p></div></div><div class=\"card vd\"><h3>Papel do assistente</h3><div class=\"txt-bloco\"><p style=\"margin:0\"><strong>Guia orientador e apoio à decisão</strong>, com supervisão humana. A decisão final continua com a PROEN.</p></div></div></div>"
+        }
+      ],
+      "notas": "<strong>~1 min.</strong> Os três níveis de objetivo vêm do M2. Ressaltar o erro mais grave: ele explica por que medimos recusa e citação, e não a fluência do texto. Recusar é aceitável; afirmar errado com cara de certo não é."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Escopo implementado no MVP",
+      "proporcao": "1.55fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Entregue e demonstrável",
+            "itens": [
+              "<strong>Ingestão do acervo completo:</strong> 1.446 de 1.449 PDFs; extração com OCR, gate de qualidade e carga incremental.",
+              "<strong>Metadados e vigência</strong> por documento (vigente, alterada, revogada, cancelada), revisáveis no admin.",
+              "<strong>Chunking por artigo</strong> e índices versionados (BM25 + ChromaDB/bge-m3) com busca híbrida.",
+              "<strong>Geração com citação obrigatória</strong>, recusa, aviso de vigência e guardrails.",
+              "<strong>Aplicação web + API</strong> (<code>/v1/consulta</code>, <code>/v1/feedback</code>) e admin com fila de revisão da PROEN.",
+              "<strong>Golden set</strong> (56 perguntas), harness de avaliação, Docker e<strong>&nbsp;</strong>testes automatizados."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "titulo": "Fora do escopo",
+            "itens": [
+              "SUAP e dados de discentes (LGPD).",
+              "Implantação na DTI.",
+              "Fine-tuning de LLM ou de embeddings.",
+              "Grafo completo de revogações.",
+              "Reranking, Airflow e alertas."
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Publicado em <b>https://ifguia.professordiegocordeiro.com.br/</b> · código na tag <b>v1.0-mvp</b> (commit <b>b50a37b</b>)."
+        }
+      ],
+      "notas": "<strong>~1 min.</strong> Percorrer a lista rapidamente: cada item tem evidência no repositório. Fora do escopo: o que o M2 já tinha excluído (SUAP, SSO, fine-tuning) e o que adiamos (reranking)."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Cenário principal",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"fluxo seta-fluxo\"><div class=\"et\"><span class=\"num\">1</span><b>Pergunta</b>“Quais os requisitos para a colação de grau?”</div><div class=\"st\">→</div><div class=\"et\"><span class=\"num\">2</span><b>Guardrails</b>escopo, injeção, dados pessoais</div><div class=\"st\">→</div><div class=\"et\"><span class=\"num\">3</span><b>Busca híbrida</b>trechos + artigos vizinhos</div><div class=\"st\">→</div><div class=\"et\"><span class=\"num\">4</span><b>LLM</b>responde só com os trechos</div><div class=\"st\">→</div><div class=\"et\"><span class=\"num\">5</span><b>Verificação</b>citações e confiança</div><div class=\"st\">→</div><div class=\"et\"><span class=\"num\">6</span><b>Tela + feedback</b>fila da PROEN</div></div>"
+        }
+      ],
+      "proporcao": "1.35fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "O que o usuário vê",
+            "itens": [
+              "Resposta com citações <strong>[n]</strong> ligadas aos trechos, ao documento e ao artigo.",
+              "<strong>Vigência</strong> da norma e selo de <strong>confiança</strong> (alta, média, baixa).",
+              "Aviso fixo: o assistente <strong>não substitui a norma</strong>.",
+              "Sem evidência ou fora do escopo: <strong>recusa</strong> com encaminhamento à PROEN.",
+              "Botão útil / não útil + comentário → <strong>fila de revisão</strong> no admin."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Demonstração",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<img class=\"qr\" src=\"img/qrcode_ifguia.png\" alt=\"QR code da aplicação\"><div class=\"url-demo\" style=\"margin-top:8px\">ifguia.professordiegocordeiro.com.br</div>"
+              }
+            ],
+            "rodape": "Servidor dedicado com HTTPS"
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min 30 s (com demo).</strong> Se a rede permitir, fazer a pergunta da colação de grau ao vivo e mostrar citação, vigência e confiança; depois uma pergunta fora do escopo para mostrar a recusa. Plano B: descrever o fluxo pelos 6 passos."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Arquitetura e componentes",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"fluxo seta-fluxo\"><div class=\"et\"><span class=\"num\">A</span><b>Pipeline de ingestão</b>PyMuPDF + OCR (Tesseract) → gate Jev → JSONL aprovados / rejeitados</div><div class=\"st\">→</div><div class=\"et\"><span class=\"num\">B</span><b>Núcleo <code>src/rag</code></b>normalização, metadados, vigência, chunking, índices, consulta</div><div class=\"st\">→</div><div class=\"et\"><span class=\"num\">C</span><b>Django</b>telas, API, admin, logs e feedback (SQLite)</div><div class=\"st\">→</div><div class=\"et\"><span class=\"num\">D</span><b>Publicação</b>gunicorn + Nginx + HTTPS, em Docker</div></div>"
+        }
+      ],
+      "proporcao": "1fr 1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Modelos (FMware)",
+            "html": "<p><strong>Sem treinamento próprio.</strong> <code>BAAI/bge-m3</code> local para embeddings; <code>deepseek-flash</code> por API para gerar; <code>jev-latest</code> (TypeSafe) no gate.</p><p style=\"margin:0\">Provedor atrás de interface única (Ollama local suportado).</p>"
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Dados",
+            "html": "<p><strong>903</strong> documentos aprovados (56.834 trechos) e <strong>543</strong> de baixa confiabilidade (15.937 trechos).</p><p style=\"margin:0\">Índices <strong>versionados e imutáveis</strong>; a versão ativa fica em <code>ATIVO.json</code> (rollback por troca de arquivo).</p>"
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Infraestrutura",
+            "html": "<p>Linux x86_64 com <strong>4 vCPU, 8 GB de RAM, 100 GB SSD</strong>, sem GPU.</p><p style=\"margin:0\">ADR 0002: <strong>Django no lugar do FastAPI.</strong>&nbsp;Interface admin da PROEN e API num só serviço.</p>"
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min 15 s.</strong> O RAG é Python puro (src/rag) e o Django é só a camada de serviço: isso deixa o núcleo testável sem web. Trilha FMware: não treinamos modelo, combinamos modelos prontos e medimos. As decisões estão em 8 ADRs no repositório."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Decisão 1 · Dados: extração, gate e baixa confiabilidade",
+      "proporcao": "1.1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Como o acervo entra",
+            "itens": [
+              "<strong>Extração por trilha:</strong> texto nativo pelo PyMuPDF, páginas escaneadas pelo OCR.",
+              "<strong>Gate de qualidade (Jev):</strong> um LLM avaliador dá nota de legibilidade e verifica se os metadados da norma sobreviveram à extração.",
+              "<strong>Aprovados (903)</strong> formam o índice principal.",
+              "<strong>Reprovados (543)</strong> não ficam de fora: vão para um índice de <strong>baixa confiabilidade</strong>, usado só como complemento, com aviso na tela."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"termos\"><div class=\"termo\"><b>Gate de qualidade</b>Filtro antes do índice: só texto legível vira evidência (requisito R4 do M2).</div><div class=\"termo\"><b>Score (1–5) e noul</b>Score = legibilidade do texto. Noul = probabilidade de os metadados (norma, número, data, artigo) estarem preservados. Aprova com score ≥ 2 e noul ≥ 0,50.</div><div class=\"termo\"><b>Baixa confiabilidade</b>Entra com peso 0,5 na busca, no máximo 2 trechos, relevância ≥ 0,65 e confiança limitada a 0,39.</div></div>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Mudança de escopo: o M2 previa <b>excluir</b> os reprovados, o MVP os mantém <b>sinalizados</b>, para nenhuma norma vigente ficar fora da resposta."
+        }
+      ],
+      "notas": "<strong>~1 min.</strong> Explicar o gate em uma frase: é um avaliador automático que decide se o texto extraído é confiável. Os 543 reprovados são sobretudo OCR ruim e tabelas corrompidas; em vez de descartá-los, entram como complemento com aviso."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Decisão 2 · Chunking",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"termo\" style=\"border-left-color:var(--bem2)\"><b>Chunking (fatiamento)</b>Dividir cada documento em trechos menores. O trecho é a unidade que a busca encontra e que a resposta cita.</div>"
+        }
+      ],
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "<code>paragrafo</code> — baseline do M2",
+            "itens": [
+              "Blocos de até <strong>1.200 caracteres</strong> com <strong>150 de sobreposição</strong>.",
+              "Simples, mas corta artigos ao meio e não sabe qual dispositivo citar."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "<code>artigo</code> — adotado",
+            "itens": [
+              "<strong>Um trecho por artigo</strong> (Art. 5º), com o dispositivo guardado para a citação.",
+              "Artigo longo dividido em parágrafos (§) e partes, regulamentos anexos ganham o prefixo “Anexo”.",
+              "Trata erros do OCR (“Art. 72” lido no lugar de “Art. 7º”) e marca o dispositivo como incerto."
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "A citação vira <b>“Resolução nº 253/2025, Art. 53”</b> — verificável pelo usuário, que é o que a PROEN pediu."
+        }
+      ],
+      "notas": "<strong>~50 s.</strong> A escolha do artigo é de domínio: a norma é organizada em artigos e é assim que servidores citam. O parágrafo fica como baseline e as duas estratégias podem ser comparadas no harness."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Decisão 3 · Busca: <code>bm25</code>, <code>dense</code> e <code>hybrid</code>",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"grade\" style=\"grid-template-columns:1fr 1fr 1fr\"><div class=\"termo\"><b><code>bm25</code> — lexical</b>Pontua o trecho pelas <strong>palavras em comum</strong> com a pergunta, valorizando termos. Ótimo para “Art. 53”, “trancamento”. É o <strong>baseline</strong> do M2.</div><div class=\"termo\"><b><code>dense</code> — semântica</b>Converte pergunta e trecho em vetores (<strong>embeddings</strong> do bge-m3, 1.024 dimensões) e compara o <strong>significado</strong>, mesmo com outras palavras. Vetores no ChromaDB.</div><div class=\"termo\" style=\"border-left-color:var(--bem2)\"><b><code>hybrid</code> — adotado</b>Junta as duas listas pela <strong>fusão RRF</strong> (Reciprocal Rank Fusion): soma 1/(60 + posição) de cada método, com <strong>peso do BM25</strong> ajustável.</div></div>"
+        }
+      ],
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Contexto enviado ao LLM",
+            "itens": [
+              "<strong>k = 8</strong> trechos principais, escolhidos entre 50 candidatos por método.",
+              "<strong>Artigos vizinhos:</strong> o anterior e o seguinte de cada trecho, até 8 extras.",
+              "<strong>Deduplicação:</strong> mesmo artigo em duas versões → fica a norma mais recente."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Relevância e limiares",
+            "itens": [
+              "<strong>Relevância (0–1):</strong> maior entre o cosseno da busca densa e o BM25 saturado.",
+              "Trecho abaixo de <strong>0,35</strong> não conta como evidência.",
+              "Norma <strong>revogada</strong> nunca é evidência: aparece à parte, sinalizada."
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "A literatura do M2 apontava o híbrido com bge-m3 como melhor arranjo, o MVP <b>mediu</b> os três modos no nosso acervo (slide 11)."
+        }
+      ],
+      "notas": "<strong>~1 min 30 s.</strong> Explicar com um exemplo: “trancar a matrícula” — o BM25 acha quem escreve “trancamento”; o denso acha “suspensão das atividades” sem a palavra. O RRF combina as posições, não as notas, então não precisa calibrar escalas diferentes. Vizinhos: a resposta costuma estar no artigo ao lado."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Decisão 4 · Geração e salvaguardas",
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Geração",
+            "itens": [
+              "<strong>Prompt versionado (v3)</strong>: responde só com os trechos numerados, cita cada afirmação e admite resposta parcial quando falta parte.",
+              "<strong>Temperatura 0</strong>, até 700 tokens, timeout de 30 s.",
+              "<strong>Verificação da saída:</strong> citação inexistente ou resposta sem citação vira recusa.",
+              "<strong>Confiança</strong> = relevância dos trechos citados × cobertura de citação, abaixo de <strong>0,40</strong> recusa."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Salvaguardas",
+            "itens": [
+              "<strong>Guardrails de entrada:</strong> escopo (legislação federal, caso individual), detecção de injeção e máscara de dados pessoais.",
+              "<strong>Fallback “somente busca”</strong> se o provedor falhar.",
+              "<strong>Supervisão humana:</strong> feedback por resposta e fila da PROEN para confiança média, feedback negativo e injeção suspeita.",
+              "<strong>Logs</strong> com latência, custo e versões (prompt, modelo, índice)."
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Projeto orientado ao erro mais grave,&nbsp;<b>na dúvida recusa</b> e encaminha à PROEN."
+        }
+      ],
+      "notas": "<strong>~1 min.</strong> Destacar a verificação automática da citação: o sistema não confia no LLM; confere se cada [n] aponta para um trecho que existe. A confiança pondera relevância e cobertura de citação. Mencionar o fallback para quando a API cai."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Como avaliamos: golden set e harness",
+      "topo_proporcao": "1.2fr 1fr",
+      "topo": [
+        {
+          "tipo": "pergunta",
+          "rotulo": "Golden set (versão 1c8902a7)",
+          "html": "<b>56 perguntas</b>: 40 factuais, 5 fora do acervo, 5 fora do escopo, 3 sobre normas revogadas e 3 de injeçã, cada factual com documento e artigo esperados."
+        }
+      ],
+      "proporcao": "1fr 1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"termos\"><div class=\"termo\"><b>Recall@k (corte k = 5)</b>Fração das perguntas em que o artigo esperado aparece entre os <strong>5 primeiros</strong> resultados.</div><div class=\"termo\"><b>MRR</b>Média de 1/posição do primeiro acerto: mede se o acerto vem <strong>no topo</strong>.</div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"termos\"><div class=\"termo\"><b>IC 95% (Wilson)</b>Intervalo de confiança da taxa; com n = 40 ele é <strong>largo</strong>, e 1–2 perguntas são ruído.</div><div class=\"termo\"><b>Recall do contexto</b>O artigo esperado chega ao que <strong>vai para o LLM</strong> (k, vizinhos, deduplicação)?</div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"termos\"><div class=\"termo\"><b>Recusa correta / falsa recusa</b>Recusou o que devia × recusou pergunta que tinha resposta.</div><div class=\"termo\"><b>Acerto / precisão de citação</b>Cita o artigo esperado? Que fração das citações está nele?</div></div>"
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min 15 s.</strong> O run_evals roda as 56 perguntas pelo fluxo real e grava relatório com o hash do golden set. O ajustar_busca testa pesos e vizinhos sem gastar API. Fidelidade (afirmação fora dos trechos) exige anotação manual e ainda não foi feita."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Resultados · Recuperação (40 perguntas factuais)",
+      "proporcao": "1.15fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Recall@5 por modo (configuração adotada)",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"barras\"><div class=\"barra\"><span>BM25 (baseline)</span><div class=\"trilho\"><div class=\"enche base\" style=\"width:57%\"></div><div class=\"meta\" style=\"left:70%\"></div></div><b>0,57</b></div><div class=\"barra\"><span>Denso</span><div class=\"trilho\"><div class=\"enche\" style=\"width:68%\"></div><div class=\"meta\" style=\"left:70%\"></div></div><b>0,68</b></div><div class=\"barra\"><span>Híbrido (peso 1,0)</span><div class=\"trilho\"><div class=\"enche alvo\" style=\"width:62%\"></div><div class=\"meta\" style=\"left:70%\"></div></div><b>0,62</b></div><div class=\"barra\"><span>Híbrido (peso 0,5)</span><div class=\"trilho\"><div class=\"enche\" style=\"width:72.5%\"></div><div class=\"meta\" style=\"left:70%\"></div></div><b>0,725</b></div><div class=\"barra\"><span>Recall do contexto</span><div class=\"trilho\"><div class=\"enche alvo\" style=\"width:80%\"></div><div class=\"meta\" style=\"left:70%\"></div></div><b>0,80</b></div></div><div class=\"legenda-meta\">- - - meta do M2: Recall@k ≥ 0,70</div>"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "tabela",
+            "cabecalho": [
+              "Modo",
+              "Recall@5",
+              "IC 95%",
+              "MRR",
+              "Doc."
+            ],
+            "linhas": [
+              [
+                "BM25",
+                "0,57",
+                "0,42–0,71",
+                "0,45",
+                "0,75"
+              ],
+              [
+                "Denso",
+                "0,68",
+                "0,52–0,80",
+                "0,48",
+                "0,75"
+              ],
+              [
+                "Híbrido",
+                "0,62",
+                "0,47–0,76",
+                "<strong>0,49</strong>",
+                "<strong>0,80</strong>"
+              ]
+            ],
+            "linhas_classe": [
+              "bs",
+              "",
+              "hl"
+            ]
+          },
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Leitura",
+            "html": "<p style=\"margin:0\">O híbrido <strong>supera o baseline</strong> e tem o melhor MRR e recall de documento. Com peso 0,5 chega a <strong>0,725</strong>, mas recusa menos (slide 12). Com k = 8 e vizinhos, o artigo certo chega ao LLM em <strong>80%</strong> das perguntas.</p>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Os intervalos se <b>sobrepõem</b>: com 40 perguntas, a diferença entre os modos é indício, não prova."
+        }
+      ],
+      "notas": "<strong>~1 min 15 s.</strong> Ser direto: na configuração adotada, o Recall@5 (0,62) está abaixo da meta de 0,70. Mas o que importa para a resposta é o contexto: o artigo chega ao LLM em 80% dos casos. Recall do documento (0,80) mostra que muitas falhas são o artigo vizinho, não o documento errado."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Resultados · Resposta com o LLM (56 perguntas)",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"mini-tit\">Evolução das rodadas: base_v1 (prompt v1, k = 5) → v3 → candidato A (peso 0,5) → candidato B (peso 1,0, até 8 vizinhos) — adotado</div>"
+        }
+      ],
+      "proporcao": "1fr 1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Recusa correta",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"evo3\"><div><small>base_v1</small><b>71%</b></div><div><small>v3</small><b>71%</b></div><div><small>cand. A</small><b>80%</b></div><div class=\"fim\"><small>cand. B</small><b>100%</b></div></div>"
+              }
+            ],
+            "rodape": "Meta do M2: ≥ 90%"
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Falsa recusa",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"evo3\"><div><small>base_v1</small><b>21%</b></div><div><small>v3</small><b>8%</b></div><div><small>cand. A</small><b>8%</b></div><div class=\"fim\"><small>cand. B</small><b>8%</b></div></div>"
+              }
+            ],
+            "rodape": "3 de 40 factuais"
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Acerto de citação",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<div class=\"evo3\"><div><small>base_v1</small><b>19%</b></div><div><small>v3</small><b>72%</b></div><div><small>cand. A</small><b>81%</b></div><div class=\"fim\"><small>cand. B</small><b>81%</b></div></div>"
+              }
+            ],
+            "rodape": "Cita o artigo esperado"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "kpis",
+          "itens": [
+            {
+              "valor": "100%",
+              "texto": "citações válidas · 0 saídas bloqueadas"
+            },
+            {
+              "valor": "0",
+              "texto": "respostas citando norma não vigente"
+            },
+            {
+              "valor": "2,45 s",
+              "texto": "latência p95 (meta ≤ 15 s)"
+            },
+            {
+              "valor": "US$ 0,0006",
+              "texto": "por consulta (US$ 0,036 por 56)"
+            }
+          ]
+        }
+      ],
+      "notas": "<strong>~1 min 15 s.</strong> A escolha do candidato B foi pela recusa: A e B empatam em falsa recusa e citação, mas B recusa corretamente todas as perguntas sem resposta. Ou seja, privilegiamos o erro mais grave. Custo e latência estão muito abaixo do limite."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Critérios de aceite do M2 × resultado",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "preencher": true,
+            "cabecalho": [
+              "Cenário ou requisito (M2)",
+              "Meta",
+              "Resultado no MVP",
+              "Situação"
+            ],
+            "linhas": [
+              [
+                "R1 · Respostas com citação para trecho existente",
+                "100%",
+                "100% (0 bloqueadas)",
+                "<span class=\"pill ok\">Atendido</span>"
+              ],
+              [
+                "R2 · Recusa nas perguntas sem resposta no acervo",
+                "≥ 90%",
+                "100% (n = 10)",
+                "<span class=\"pill ok\">Atendido</span>"
+              ],
+              [
+                "R3 · Recall@k comparado ao BM25",
+                "≥ 0,70",
+                "0,62 (BM25 0,57); contexto 0,80",
+                "<span class=\"pill parc\">Parcial</span>"
+              ],
+              [
+                "Fidelidade das respostas (M2, seção 7)",
+                "≥ 0,85",
+                "não medida (anotação manual pendente)",
+                "<span class=\"pill nao\">Pendente</span>"
+              ],
+              [
+                "H3 · Vigência",
+                "nenhuma revogada como vigente",
+                "0 citações não vigentes; revogada sinalizada em 2 de 3",
+                "<span class=\"pill parc\">Parcial</span>"
+              ],
+              [
+                "R4 · Só documento aprovado como evidência plena",
+                "auditoria",
+                "903 no índice principal; 543 à parte, com aviso",
+                "<span class=\"pill ok\">Atendido</span>"
+              ],
+              [
+                "Guardrails e degradação",
+                "injeção e falha do provedor",
+                "injeção detectada em 100% (n = 3); modo “somente busca” testado",
+                "<span class=\"pill ok\">Atendido</span>"
+              ],
+              [
+                "R5 · Reprodutível e p95 ≤ 15 s",
+                "Docker + p95",
+                "Docker, testes, p95 2,45 s; sem CI e sem teste por terceiros",
+                "<span class=\"pill parc\">Parcial</span>"
+              ],
+              [
+                "Fluxo prioritário demonstrável",
+                "ponta a ponta",
+                "publicado com HTTPS; 77 consultas registradas",
+                "<span class=\"pill ok\">Atendido</span>"
+              ]
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Conclusão do modelo: <b>atende com restrições</b>&nbsp; as salvaguardas estão cumpridas; recuperação e fidelidade ainda não."
+        }
+      ],
+      "notas": "<strong>~1 min 15 s — slide central para a banca.</strong> Ler as linhas por situação: os critérios ligados ao erro grave (citação, recusa, vigência como evidência) estão atendidos. O que falta é medir fidelidade e subir o Recall. Não esconder: abaixo do mínimo do M2, o MVP pode ser demonstrado, mas não liberado para uso real."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Backlog e mudanças de escopo",
+      "proporcao": "1fr 1.25fr",
+      "colunas": [
+        [
+          {
+            "tipo": "kpis",
+            "direcao": "vertical",
+            "itens": [
+              {
+                "valor": "22 entregues",
+                "texto": "das 31 tarefas dos incrementos 1–3 (GitHub Projects, issues #8–#38)"
+              },
+              {
+                "valor": "6 parciais",
+                "texto": "dump compartilhado, golden set validado, noul, ajuste final, teste ponta a ponta, runbook"
+              },
+              {
+                "valor": "3 não entregues",
+                "texto": "CI (#9), ground truth com dupla anotação (#27), execução por terceiros (#36)"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "O que mudou em relação ao M2",
+            "itens": [
+              "<strong>FastAPI → Django</strong> (ADR 0002): telas, admin e API num só serviço.",
+              "<strong>Painel da PROEN antecipado</strong> como admin do Django (logs, fila, vigência).",
+              "<strong>Reprovados no gate</strong> viraram índice de baixa confiabilidade, em vez de excluídos.",
+              "<strong>Acrescentados:</strong> carga incremental, diagnóstico do ambiente, vizinhos e deduplicação, prompt v3.",
+              "<strong>Removidos/adiados:</strong> MLflow, Airflow e template de ML (ADR 0008); reranking; LLM local não avaliado."
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min.</strong> Todas as tarefas estão rastreadas por issue e commit no relatório. As não entregues são de processo (CI, dupla anotação, terceiros), não de funcionalidade. As mudanças de escopo foram decisões registradas em ADR."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Análise de erros, limitações e riscos",
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Onde o sistema erra",
+            "itens": [
+              "<strong>Falsa recusa (8%):</strong> acha o documento certo, mas outro artigo dele.",
+              "<strong>Precisão de citação (44%):</strong> cita também os vizinhos — correto, porém menos enxuto.",
+              "<strong>Vigência:</strong> 1 de 3 revogadas sem sinalização; vigência vem do nome do arquivo + revisão manual.",
+              "<strong>Tabelas e OCR:</strong> 543 documentos com OCR inválido (347) ou tabela corrompida (150); perguntas sobre quadros (oferta de vagas) são o pior caso."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "titulo": "Limitações e riscos para uso real",
+            "itens": [
+              "<strong>Golden set pequeno e não validado pela PROEN</strong> (só pela equipe, por falta de agenda); perguntas escritas lendo os artigos favorecem o BM25.",
+              "<strong>Fidelidade não medida.</strong>",
+              "Dependência das APIs <strong>DeepSeek e TypeSafe</strong> (custo, disponibilidade, envio de texto público).",
+              "Listas extensas (“todos os cursos de 2027”) recebem resposta <strong>parcial</strong>.",
+              "Consulta pública sem autenticação; sem CI."
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min.</strong> O risco principal para uso real é o golden set: sem validação da PROEN, não sabemos se ele representa as dúvidas reais. Por isso a recomendação é piloto controlado, com perguntas reais, e não liberação geral."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Em andamento e próximos passos",
+      "topo": [
+        {
+          "tipo": "kpis",
+          "itens": [
+            {
+              "valor": "202 / 543",
+              "texto": "reprovados passam no gate com a nova extração"
+            },
+            {
+              "valor": "0,62 → 0,65",
+              "texto": "Recall@5 do híbrido"
+            },
+            {
+              "valor": "0,80 → 0,85",
+              "texto": "recall do documento, com recusa correta mantida em 100%"
+            },
+            {
+              "valor": "100% → 33%",
+              "texto": "falsa recusa nas perguntas da Res. 40/2026"
+            }
+          ]
+        }
+      ],
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Em andamento: branch <code>exp/extracao-tabelas</code>",
+            "itens": [
+              "Tabelas em Markdown com espaços nas células e cabeçalho repetido em cada trecho.",
+              "OCR com binarização; Jev sobre o texto normalizado.",
+              "Vagas reservadas para a baixa confiabilidade e prioridade ao ano citado na pergunta.",
+              "Será mesclado após os testes da equipe na aplicação web."
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min.</strong> O experimento ataca exatamente o pior caso (tabelas e OCR) e já mostra ganho sem perder a recusa. As pendências são curtas e conhecidas; nenhuma exige mudar a arquitetura."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Obrigado! Perguntas?",
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"qrbox\"><img class=\"qr\" src=\"img/qrcode_ifguia.png\" alt=\"QR code da aplicação\"><div class=\"url-demo\">ifguia.professordiegocordeiro.com.br</div><div class=\"rod\">Aplicação publicada</div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"qrbox\"><img class=\"qr\" src=\"img/qrcode_repo.png\" alt=\"QR code do repositório\"><div class=\"url-demo\" style=\"font-size:18px\">github.com/SE4AI-UFPI/IFGuia · tag v1.0-mvp</div><div class=\"rod\">Código, README, ADRs e relatórios de avaliação</div></div>"
+          }
+        ]
+      ],
+      "rodape": [],
+      "notas": "<strong>~20 s.</strong> Abrir para perguntas. O apêndice (próximo slide) tem o glossário dos termos técnicos para consulta durante a arguição."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Apêndice · Glossário para a arguição",
+      "proporcao": "1fr 1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"termos\"><div class=\"termo\"><b>RAG</b>Geração aumentada por recuperação: busca trechos e o LLM responde só com eles.</div><div class=\"termo\"><b>FMware</b>Software construído sobre modelos fundacionais prontos, sem treinar modelo próprio.</div><div class=\"termo\"><b>Embedding</b>Vetor numérico que representa o significado de um texto.</div><div class=\"termo\"><b>Baseline</b>Referência simples para comparar: BM25 na busca, base_v1 na resposta.</div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"termos\"><div class=\"termo\"><b>k e candidatos</b>k = trechos enviados ao LLM (8); candidatos = resultados de cada método antes da fusão (50).</div><div class=\"termo\"><b>Peso do BM25</b>Quanto a lista lexical vale na fusão RRF (o denso vale 1,0).</div><div class=\"termo\"><b>Golden set</b>Conjunto de perguntas com resposta esperada, usado como gabarito.</div><div class=\"termo\"><b>p50 / p95</b>Latência mediana e a que 95% das consultas não ultrapassam.</div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"termos\"><div class=\"termo\"><b>Fidelidade</b>Fração da resposta sustentada pelos trechos; medida por anotação humana.</div><div class=\"termo\"><b>Guardrail</b>Regra automática na entrada ou na saída (escopo, injeção, citação).</div><div class=\"termo\"><b>Injeção de prompt</b>Texto que tenta fazer o modelo ignorar as instruções.</div><div class=\"termo\"><b>Índice versionado</b>Cada reconstrução cria uma versão nova e imutável; <code>ATIVO.json</code> aponta a vigente.</div></div>"
+          }
+        ]
+      ],
+      "notas": "<strong>Apêndice (fora dos 20 min).</strong> Usar durante as perguntas."
+    }
+  ]
+}

@@ -1,18 +1,12 @@
-/* ===== Tipografia: Inter (variável 400–800) servida localmente, funciona offline ===== */
-@font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400 800;
-    font-display: swap;
-    src: url('fonts/inter-latin-var.woff2') format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
-}
+/* Gerado pelo editor de slides — não edite à mão (edite o apresentacao.json). */
 
-/* ===== Identidade visual PPGCC / UFPI ===== */
+/* Tema: PPGCC / UFPI */
+
 :root {
     --az: #0B1922;
     --aze: #07121A;
     --azc: #EAF0F6;
+    --azc-bd: #C9D7E5;
     --ve: #2D9A39;
     --ves: #EAF4EC;
     --mk: #CBE7D3;
@@ -23,10 +17,22 @@
     --er: #B3261E;
     --bem: #3E7CB6;
     --bem2: #1B3A5C;
-    /* tipografia: Inter local + fallback do sistema */
+    --capa-dir: #123246;
+    --fita2: #7CC99A;
+    --rot-claro: #B4D89F;
+    --destaque: #8FE39B;
+    --tela: #EEF1F3;
+    --card-bg: #F7F9FA;
+    --linha: #E1E7EC;
+    --linha-tab: #D8DFE3;
+    --zebra: #F4F6F8;
+    --linha-bt: #C7D1D9;
+    --nota-bg: #F0F7F3;
+    --nota-bd: #BFD9CB;
+    --ov1: rgba(7, 18, 26, .92);
+    --ov2: rgba(27, 58, 92, .86);
     --fonte: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     --fonte-tit: var(--fonte);
-    /* escala tipográfica da apresentação (o zoom do .sc cuida da escala por tela) */
     --fs-capa: clamp(32px, 2.6vw, 40px);
     --fs-h2: clamp(25px, 1.95vw, 28px);
     --fs-h3: 17.5px;
@@ -35,7 +41,6 @@
     --fs-apoio: 15px;
     --fs-min: 13.5px;
     --fs-kpi: 29px;
-    /* cores semânticas (antes repetidas em hex solto) */
     --er-bg: #FBEDEC;
     --er-bd: #F0C7C3;
     --er-tx: #8A1F18;
@@ -44,8 +49,25 @@
     --vd-tx: #1F7A2C;
     --aviso-bg: #F8F4E9;
     --aviso-tx: #6B5E44;
-    --tx-apoio: #45525C
+    --tx-apoio: #45525C;
 }
+
+/* ============================================================
+   base.css — estrutura e componentes dos slides do editor
+   Derivado de exemplos/random-forest-original/estilo.css.
+   NÃO coloque cores fixas aqui: use as variáveis definidas pelo
+   tema (temas/<nome>/tema.json → bloco :root gerado no CSS da aula).
+   ============================================================ */
+/* ===== Tipografia: Inter (variável 400–800) servida localmente, funciona offline ===== */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url('fonts/inter-latin-var.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+}
+
 
 * {
     box-sizing: border-box;
@@ -62,7 +84,7 @@ textarea {
 
 body {
     font-family: var(--fonte);
-    background: #EEF1F3;
+    background: var(--tela);
     color: var(--p);
     overflow: hidden;
     height: 100vh;
@@ -157,7 +179,7 @@ body {
 
 .fita {
     height: 7px;
-    background: linear-gradient(90deg, var(--ve), #7CC99A);
+    background: linear-gradient(90deg, var(--ve), var(--fita2));
     flex-shrink: 0
 }
 
@@ -348,13 +370,13 @@ body {
 }
 
 .tb2 td {
-    border: 1px solid #D8DFE3;
+    border: 1px solid var(--linha-tab);
     padding: 8px 12px;
     vertical-align: middle
 }
 
 .tb2 tr:nth-child(even) td {
-    background: #F4F6F8
+    background: var(--zebra)
 }
 
 .tb2.mini {
@@ -418,16 +440,16 @@ body.modo-presenter .modo-tag {
 }
 
 body.modo-presenter .ctr {
-    background: #0B1922;
-    border-top-color: #0B1922
+    background: var(--az);
+    border-top-color: var(--az)
 }
 
 body.modo-presenter .ctr .bv {
-    background: #2D9A39
+    background: var(--ve)
 }
 
 body.modo-presenter .ctr .bz {
-    background: #3E7CB6;
+    background: var(--bem);
     color: #fff
 }
 
@@ -496,7 +518,7 @@ body.modo-presenter .ctr .dot.ac {
     min-width: 28px;
     height: 28px;
     padding: 0 6px;
-    border: 1px solid #C7D1D9;
+    border: 1px solid var(--linha-bt);
     border-radius: 8px;
     background: #F2F5F8;
     color: var(--c);
@@ -526,7 +548,7 @@ body.modo-presenter .ctr .dot.ac {
 
 .aba {
     padding: 8px 16px;
-    border: 1px solid #C7D1D9;
+    border: 1px solid var(--linha-bt);
     border-radius: 8px;
     background: #F2F5F8;
     color: var(--c);
@@ -598,7 +620,7 @@ body.modo-presenter .ctr .dot.ac {
 .ctr .bp {
     background: #fff;
     color: var(--az);
-    border: 1px solid #C7D1D9;
+    border: 1px solid var(--linha-bt);
     margin-left: 8px
 }
 
@@ -749,7 +771,7 @@ pre.pc .nb {
 .painel {
     display: none;
     background: #F5F7F9;
-    border: 2px solid #D8DFE3;
+    border: 2px solid var(--linha-tab);
     border-radius: 10px;
     padding: 14px 16px;
     margin-top: 2px
@@ -905,8 +927,8 @@ pre.pc .nb {
     display: none;
     margin-top: 14px;
     padding: 12px 16px;
-    background: #F0F7F3;
-    border: 2px solid #BFD9CB;
+    background: var(--nota-bg);
+    border: 2px solid var(--nota-bd);
     border-radius: 10px;
     font-size: 15.5px;
     line-height: 1.45;
@@ -929,7 +951,7 @@ pre.pc .nb {
 }
 
 .capa .esq {
-    background: linear-gradient(135deg, #07121A, #1B3A5C);
+    background: linear-gradient(135deg, var(--aze), var(--bem2));
     color: #fff;
     padding: 32px;
     display: flex;
@@ -950,7 +972,7 @@ pre.pc .nb {
     font-size: 12.5px;
     letter-spacing: .24em;
     text-transform: uppercase;
-    color: #B4D89F
+    color: var(--rot-claro)
 }
 
 .capa .esq .sub {
@@ -978,7 +1000,7 @@ pre.pc .nb {
 
 .capa .faixa {
     height: 7px;
-    background: linear-gradient(90deg, var(--ve), #7CC99A);
+    background: linear-gradient(90deg, var(--ve), var(--fita2));
     margin-top: 20px
 }
 
@@ -987,7 +1009,7 @@ pre.pc .nb {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #123246, #0B1922)
+    background: linear-gradient(135deg, var(--capa-dir), var(--az))
 }
 
 .capa .dir img {
@@ -1022,7 +1044,7 @@ pre.pc .nb {
 .divisor .ov {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(7, 18, 26, .92), rgba(27, 58, 92, .86))
+    background: linear-gradient(135deg, var(--ov1), var(--ov2))
 }
 
 .divisor .in {
@@ -1036,7 +1058,7 @@ pre.pc .nb {
     font-size: 13px;
     letter-spacing: .22em;
     text-transform: uppercase;
-    color: #B4D89F
+    color: var(--rot-claro)
 }
 
 .divisor h1 {
@@ -1203,7 +1225,7 @@ pre.pc .nb {
     .slimg {
         justify-content: center;
         align-items: center;
-        background: linear-gradient(135deg, #07121A, #1B3A5C)
+        background: linear-gradient(135deg, var(--aze), var(--bem2))
     }
 
     .slimg img {
@@ -1411,7 +1433,7 @@ pre.pc .nb {
     font-size: 18px;
 }
 
-.padf { width: 100%; height: 520px; border: 1px solid #C7D1D9; border-radius: 10px; margin: 10px 0; background: #fff }
+.padf { width: 100%; height: 520px; border: 1px solid var(--linha-bt); border-radius: 10px; margin: 10px 0; background: #fff }
 .blink { display: inline-block; margin-top: 6px; color: var(--bem); font-weight: 700; text-decoration: none }
 .blink:hover { text-decoration: underline }
 
@@ -1423,10 +1445,10 @@ pre.pc .nb {
 /* controles do apresentador */
 .tmr { background:#1E2B36; color:#E6EDF3; border:1px solid #2C3C49; border-radius:6px; padding:4px 10px;
   font:700 13.5px/1.2 var(--fonte); font-variant-numeric:tabular-nums; cursor:pointer }
-.tmr.run { background:#2D9A39; border-color:#2D9A39; color:#fff }
+.tmr.run { background:var(--ve); border-color:var(--ve); color:#fff }
 .tmr.alerta { background:#E3B341; border-color:#E3B341; color:#1B1B1B }
-.tmr.estouro { background:#B3261E; border-color:#B3261E; color:#fff }
-#bnt.on { background:#2D9A39; color:#fff }
+.tmr.estouro { background:var(--er); border-color:var(--er); color:#fff }
+#bnt.on { background:var(--ve); color:#fff }
 body.notas .sl .nt { display:block; margin:0 24px 12px; flex-shrink:0 }
 body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
 
@@ -1438,12 +1460,12 @@ body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
 .grow { flex:1; min-height:0 }
 
 /* cartões */
-.card { background:#F7F9FA; border:1px solid #E1E7EC; border-radius:14px; padding:13px 17px; display:flex; flex-direction:column; min-height:0 }
+.card { background:var(--card-bg); border:1px solid var(--linha); border-radius:14px; padding:13px 17px; display:flex; flex-direction:column; min-height:0 }
 .card h3 { margin:0 0 8px !important; display:block; color:var(--bem) }
 .card.er { background:var(--er-bg); border-color:var(--er-bd) }
 .card.er h3 { color:var(--er) }
-.card.az { background:linear-gradient(135deg,#0B1922,#1B3A5C); border:0; color:#fff }
-.card.az h3 { color:#8FE39B }
+.card.az { background:linear-gradient(135deg,var(--az),var(--bem2)); border:0; color:#fff }
+.card.az h3 { color:var(--destaque) }
 .card.vd { background:var(--vd-bg); border-color:var(--vd-bd) }
 .card.vd h3 { color:var(--vd-tx) }
 .card ul { margin:0 }
@@ -1451,26 +1473,26 @@ body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
 .big { font-size:1.6em; font-weight:800; line-height:1.15; letter-spacing:-.01em; margin:4px 0 8px; color:var(--er-tx) }
 
 /* faixa de conclusão */
-.faixa-az { background:linear-gradient(90deg,#07121A,#1B3A5C); color:#fff; border-radius:12px; padding:11px 20px;
+.faixa-az { background:linear-gradient(90deg,var(--aze),var(--bem2)); color:#fff; border-radius:12px; padding:11px 20px;
   display:flex; align-items:center; gap:12px; font-weight:600; line-height:1.4 }
-.faixa-az b { color:#8FE39B }
+.faixa-az b { color:var(--destaque) }
 
 /* chips de contexto */
 .chips { display:flex; flex-wrap:wrap; gap:8px; align-content:center }
-.chips span { background:#EAF0F6; color:var(--bem2); border:1px solid #C9D7E5; border-radius:20px; padding:4px 13px;
+.chips span { background:var(--azc); color:var(--bem2); border:1px solid var(--azc-bd); border-radius:20px; padding:4px 13px;
   font-size:var(--fs-apoio); font-weight:700 }
 
 /* pergunta de pesquisa — abre o slide 2 */
 .topo { display:grid; grid-template-columns:1.25fr 1fr; gap:16px; align-items:center }
-.pergunta { background:#EAF0F6; border:1px solid #C9D7E5; border-left:5px solid var(--ve); border-radius:12px;
+.pergunta { background:var(--azc); border:1px solid var(--azc-bd); border-left:5px solid var(--ve); border-radius:12px;
   padding:10px 16px; font-size:16.5px; line-height:1.42; color:var(--az); font-weight:600 }
 .pergunta small { display:block; color:var(--vd-tx); font-size:12px; letter-spacing:.18em; text-transform:uppercase;
   margin-bottom:3px; font-weight:800 }
 .pergunta b { color:var(--vd-tx) }
 
 /* duelo árvore × floresta */
-.duelo { display:grid; grid-template-columns:1fr 1fr; gap:0; border-radius:14px; overflow:hidden; border:1px solid #E1E7EC; flex:1 1 auto; min-height:0 }
-.duelo .tt { grid-column:1/3; background:#0B1922; color:#fff; font-weight:700; font-size:var(--fs-apoio); padding:6px 14px; display:flex; gap:8px; align-items:center; line-height:1.35 }
+.duelo { display:grid; grid-template-columns:1fr 1fr; gap:0; border-radius:14px; overflow:hidden; border:1px solid var(--linha); flex:1 1 auto; min-height:0 }
+.duelo .tt { grid-column:1/3; background:var(--az); color:#fff; font-weight:700; font-size:var(--fs-apoio); padding:6px 14px; display:flex; gap:8px; align-items:center; line-height:1.35 }
 .duelo > div:not(.tt) { padding:7px 14px; display:flex; flex-direction:column; justify-content:center; background:#fff }
 .duelo > div.rf { background:var(--vd-bg) }
 .duelo small { font-size:13px; color:var(--c); font-weight:700; text-transform:uppercase; letter-spacing:.06em }
@@ -1479,19 +1501,19 @@ body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
 
 /* indicadores */
 .kpi { display:grid; gap:12px }
-.kpi > div { background:linear-gradient(135deg,#0B1922,#1B3A5C); color:#fff; border-radius:14px; padding:12px 16px; display:flex; flex-direction:column; justify-content:center }
-.kpi b { display:block; font-size:var(--fs-kpi); line-height:1.1; color:#8FE39B; font-variant-numeric:tabular-nums }
+.kpi > div { background:linear-gradient(135deg,var(--az),var(--bem2)); color:#fff; border-radius:14px; padding:12px 16px; display:flex; flex-direction:column; justify-content:center }
+.kpi b { display:block; font-size:var(--fs-kpi); line-height:1.1; color:var(--destaque); font-variant-numeric:tabular-nums }
 .kpi span { display:block; font-size:var(--fs-apoio); line-height:1.35; opacity:.95; margin-top:4px }
 .kpi4 { grid-template-columns:repeat(4,1fr) }
 /* imagens que preenchem o espaço */
-.fig { flex:1; min-height:0; display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid #E1E7EC; border-radius:14px; padding:6px }
+.fig { flex:1; min-height:0; display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid var(--linha); border-radius:14px; padding:6px }
 .fig img { width:100%; height:100%; max-width:100%; max-height:100%; object-fit:contain; display:block }
 .cap { font-size:var(--fs-apoio); color:var(--tx-apoio); text-align:center; margin-top:-6px }
 
 /* tabelas */
 .tb2.fill { height:100% }
 .tb2 td.cen { text-align:center }
-.tb2 tr.hl td { background:#E6F3E9 !important; font-weight:600 }
+.tb2 tr.hl td { background:var(--vd-bg) !important; font-weight:600 }
 .tb2 tr.hl td:first-child { box-shadow:inset 3px 0 0 var(--ve) }
 .tb2 tr.bs td { background:var(--aviso-bg) !important; color:var(--aviso-tx) }
 .tb2 td.ruim { color:var(--er); font-weight:700 }
@@ -1500,57 +1522,31 @@ body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
 .slbd.g .tb2 tr > *:nth-child(n+2) { text-align:center }
 
 /* evolução sem → com engenharia */
-.evo { background:#fff; border:1px solid #E1E7EC; border-left:6px solid var(--bem); border-radius:14px; padding:11px 15px;
+.evo { background:#fff; border:1px solid var(--linha); border-left:6px solid var(--bem); border-radius:14px; padding:11px 15px;
   display:flex; flex-direction:column; gap:5px; flex:1 1 auto; justify-content:center; min-height:0 }
 .evo.rf { border-left-color:var(--ve) }
 .evo .t { font-weight:800; color:var(--az); font-size:var(--fs-h3) }
-.evo .r { display:flex; justify-content:space-between; align-items:baseline; gap:10px; border-bottom:1px dashed #E1E7EC; padding:2px 0 }
+.evo .r { display:flex; justify-content:space-between; align-items:baseline; gap:10px; border-bottom:1px dashed var(--linha); padding:2px 0 }
 .evo .r span { color:var(--tx-apoio); font-size:15.5px }
 .evo .r b { font-size:1.12em; font-variant-numeric:tabular-nums }
 .evo .up { color:var(--vd-tx) } .evo .down { color:var(--er) } .evo .eq { color:var(--c) }
 .evo .v { font-size:var(--fs-apoio); color:var(--tx-apoio); font-style:italic; margin-top:3px }
 
 /* conclusão */
-.lin { flex:1; display:flex; align-items:center; gap:14px; background:#F7F9FA; border:1px solid #E1E7EC; border-left:6px solid var(--ve);
+.lin { flex:1; display:flex; align-items:center; gap:14px; background:var(--card-bg); border:1px solid var(--linha); border-left:6px solid var(--ve);
   border-radius:14px; padding:12px 18px; min-height:0 }
 .lin b { display:block; color:var(--bem); font-size:1.02em; margin-bottom:3px }
 .lin div { font-size:var(--fs-corpo); line-height:1.45 }
 .faixa-az.fim { justify-content:center; font-size:1.3em; font-weight:800; padding:9px 20px }
-#s9 .col:first-child { counter-reset: cl }
 .lin::before { counter-increment: cl; content: counter(cl); flex-shrink:0; width:32px; height:32px; border-radius:50%;
   background:var(--az); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:15px }
 
-/* ajustes finos por slide */
+/* ajustes de cards em grade */
 .g .card p, .g .card li { font-size:var(--fs-corpo) }
 .stat { display:flex; align-items:center; gap:14px; background:#fff; border:1px solid var(--er-bd); border-radius:12px; padding:10px 14px; margin:auto 0 }
 .stat b { font-size:2.2em; line-height:1; color:var(--er); font-variant-numeric:tabular-nums }
 .stat span { font-size:var(--fs-apoio); line-height:1.35; color:#5A2A26 }
-#s2 .card li { margin:7px 0 }
-#s2 .duelo { grid-template-columns:1fr 1.18fr }
-#s2 .duelo b { font-size:1.35em; white-space:nowrap }
-#s4 .tb2 td, #s4 .tb2 th { padding-top:4px; padding-bottom:4px }
-#s4 .kpi > div { padding:8px 14px }
-#s4 .kpi b { font-size:1.42em }
-#s4 .kpi span { font-size:14.5px; line-height:1.3 }
-#s8 .card { padding:9px 12px }
-#s8 .card p { font-size:15px; line-height:1.34 }
-#s8 .tb2 td, #s8 .tb2 th { padding:5px 12px }
-#s9 .card.vd { padding:18px 24px; border-left:6px solid var(--ve) }
-#s9 .card.vd h3 { font-size:1.2em; margin-bottom:10px !important; color:var(--vd-tx) }
-#s9 .card.vd p { font-size:19px; line-height:1.55 }
 
-/* slide 3: duas tabelas com a mesma moldura e a mesma proporção de colunas */
-#s3 .card { padding:12px 14px; justify-content:center; flex:1 1 auto }
-#s3 .tb2 { margin:0; table-layout:fixed }
-#s3 .tb2 th:first-child, #s3 .tb2 td:first-child { width:46% }
-#s3 .tb2 th:nth-child(2), #s3 .tb2 td:nth-child(2),
-#s3 .tb2 th:nth-child(3), #s3 .tb2 td:nth-child(3) { width:27% }
-#s3 .tb2 th { padding:8px 12px }
-#s3 .tb2 td { padding:9px 12px }
-#s3 .tb2 tr.grp td { background:var(--azc) !important }
-#s3 .tb2 tr.grp td:first-child { box-shadow:inset 3px 0 0 var(--bem) }
-#s3 .tb2 td.floresta { background:var(--vd-bg); color:var(--vd-tx); font-weight:700 }
-#s3 .cap { margin:8px 0 0 }
 
 /* ===== Exportação em PDF (botão "Exportar PDF" ou Ctrl/Cmd+P) ===== */
 @media print {
@@ -1585,3 +1581,122 @@ body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
     .capa .dir { min-height:0 !important }
     .capa .dir .marca { display:block !important }
 }
+
+/* ===== Acréscimos do editor ===================================== */
+.capa.sem-dir { grid-template-columns: 1fr }
+.capa .esq .sub ul { margin-top: 4px }
+.lins { display: flex; flex-direction: column; gap: 14px; counter-reset: cl; flex: 1; min-height: 0 }
+.txt-bloco > :first-child { margin-top: 0 }
+.txt-bloco > :last-child { margin-bottom: 0 }
+.grade { display: grid; gap: 14px; min-height: 0; min-width: 0 }
+.grade > * { min-height: 0; min-width: 0 }
+.col > .grade { flex: 1 1 auto }
+.col > :only-child { flex: 1 1 auto }
+.slbd.g h3.tit-bloco { margin: 0 !important }
+.video { flex: 1; min-height: 240px; width: 100%; border: 0; border-radius: 14px; background: #000 }
+.secao-slide { flex: 1; display: flex }
+.secao-slide .divisor { flex: 1 }
+.divisor .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
+.divisor:not(:has(.bg)) { background: linear-gradient(135deg, var(--aze), var(--bem2)) }
+.capa .dir .selo { color: #fff; font-family: var(--fonte-tit); font-size: 64px; font-weight: 800; opacity: .9 }
+
+/* ===== Toque e passadores ===== */
+.ctr button, .dots .dot, .tb button { touch-action: manipulation }
+.sc, .sl { touch-action: pan-y pinch-zoom }
+#tela-apagada { position: fixed; inset: 0; z-index: 9999; display: none; cursor: none }
+#tela-apagada.on { display: block }
+#tela-apagada.preta { background: #000 }
+#tela-apagada.branca { background: #fff }
+@media (pointer: coarse) {
+    .ctr { padding: 10px; gap: 12px }
+    .ctr button { padding: 12px 24px; font-size: 16px; min-height: 46px }
+    .dots .dot { min-width: 38px; height: 38px; font-size: 14px }
+    .tb button, .fz button { min-height: 38px }
+}
+@media print { #tela-apagada { display: none !important } }
+
+/* ===== Modo editor (prévia dentro do editor; nunca publicado) ===== */
+body.modo-editor { width: 1280px; height: 720px }
+body.modo-editor .tb, body.modo-editor .fita, body.modo-editor .ft,
+body.modo-editor .ctr { display: none !important }
+body.modo-editor .sc { zoom: 1 !important }
+body.modo-editor .sl .slbd { animation: none }
+
+
+/* ===== CSS específico desta apresentação ===== */
+.termos { display:grid; gap:8px }
+.termo { background:var(--b); border:1px solid var(--linha); border-left:4px solid var(--bem); border-radius:10px; padding:7px 11px; font-size:var(--fs-apoio); line-height:1.35 }
+.termo b { display:block; color:var(--p); font-size:15.5px; margin-bottom:1px }
+.termo code { font-size:.92em }
+.barras { display:grid; gap:9px; margin:4px 0 }
+.barra { display:grid; grid-template-columns:150px 1fr 56px; align-items:center; gap:10px; font-size:var(--fs-apoio) }
+.barra .trilho { position:relative; height:22px; background:var(--azc); border-radius:6px; overflow:hidden }
+.barra .enche { position:absolute; inset:0 auto 0 0; background:var(--bem); border-radius:6px }
+.barra .enche.base { background:#9CA3AF }
+.barra .enche.alvo { background:var(--bem2) }
+.barra .meta { position:absolute; top:-3px; bottom:-3px; width:0; border-left:2px dashed var(--er) }
+.barra b { text-align:right; font-variant-numeric:tabular-nums }
+.legenda-meta { font-size:var(--fs-min); color:var(--er-tx); margin-top:2px }
+.pill { display:inline-block; padding:2px 10px; border-radius:999px; font-size:13.5px; font-weight:700; white-space:nowrap }
+.pill.ok { background:#E7F6EC; color:#166534; border:1px solid #BBE5C8 }
+.pill.parc { background:#FFF6E0; color:#8A5A00; border:1px solid #F3DCA2 }
+.pill.nao { background:var(--er-bg); color:var(--er-tx); border:1px solid var(--er-bd) }
+.url-demo { font-family:var(--fonte-tit); font-weight:800; font-size:21px; color:var(--bem2); word-break:break-all }
+.qr { width:150px; height:150px; image-rendering:pixelated; border-radius:8px; border:1px solid var(--linha); background:#fff; padding:4px }
+.evo3 { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; text-align:center }
+.evo3 > div { background:var(--b); border:1px solid var(--linha); border-radius:10px; padding:8px 6px }
+.evo3 small { display:block; color:var(--tx-apoio); font-size:13px }
+.evo3 b { display:block; font-size:24px; color:var(--p) }
+.evo3 .fim b { color:var(--bem) }
+.mini-tit { font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--tx-apoio); font-weight:700; margin:2px 0 4px }
+.seta-fluxo .et { flex:1 1 120px; padding:9px 8px; font-size:var(--fs-apoio); line-height:1.3 }
+.seta-fluxo .et b { display:block; font-size:16px; color:var(--p) }
+.seta-fluxo .st { font-size:1.4em }
+.rec { display:flex; gap:12px; flex-wrap:wrap; margin:2px 0 8px }
+.rec span { padding:8px 14px; border-radius:10px; border:1px solid var(--linha); font-weight:700; color:var(--tx-apoio); background:var(--b) }
+.rec span.on { background:var(--bem2); color:#fff; border-color:var(--bem2) }
+
+/* ===== IFGuia M3: escala de leitura para projeção (tela grande e PDF; não afeta o modo celular) ===== */
+html:not(.movel) { --fs-corpo: 19.5px; --fs-h3: 21px }
+html:not(.movel) .sl .slbd.g { font-size: 19.5px !important }
+html:not(.movel) .sl .card h3 { font-size: 22px }
+html:not(.movel) .sl .card { padding: 15px 20px }
+html:not(.movel) .termo { font-size: 18px; padding: 10px 14px; line-height: 1.4 }
+html:not(.movel) .termo b { font-size: 20px; margin-bottom: 4px }
+html:not(.movel) .fluxo .et { font-size: 16.5px; line-height: 1.3; padding: 12px 10px }
+html:not(.movel) .fluxo .et b { display:block; font-size: 18.5px; margin-bottom: 2px }
+html:not(.movel) .pergunta { font-size: 19.5px }
+html:not(.movel) .pergunta small { font-size: 13px }
+html:not(.movel) .chips span { font-size: 16.5px }
+html:not(.movel) .faixa-az { font-size: 19.5px; padding: 12px 22px }
+html:not(.movel) .faixa-az.fim { font-size: 24px }
+html:not(.movel) .kpi b { font-size: 34px }
+html:not(.movel) .kpi span { font-size: 16.5px }
+html:not(.movel) .card .rod { font-size: 16.5px }
+html:not(.movel) .barras { gap: 16px; margin: 10px 0 }
+html:not(.movel) .barra { grid-template-columns: 190px 1fr 64px; font-size: 18.5px }
+html:not(.movel) .barra .trilho { height: 32px }
+html:not(.movel) .legenda-meta { font-size: 15.5px; margin-top: 8px }
+html:not(.movel) .evo3 { margin: auto 0 }
+html:not(.movel) .evo3 > div { padding: 14px 6px }
+html:not(.movel) .evo3 small { font-size: 15px }
+html:not(.movel) .evo3 b { font-size: 30px }
+html:not(.movel) .evo3 { gap: 6px }
+html:not(.movel) .mini-tit { font-size: 15px }
+
+html:not(.movel) #s13 .tb2, html:not(.movel) #s13 .tb2 th { font-size: 17.5px !important }
+html:not(.movel) .pill { font-size: 15px; padding: 3px 12px }
+html:not(.movel) .rec span { font-size: 18px; padding: 8px 16px }
+html:not(.movel) .url-demo { font-size: 23px }
+html:not(.movel) .qr { width: 180px; height: 180px }
+
+/* ===== Ajustes por slide (antes eram estilos inline no HTML) ===== */
+.termos { flex: 1 1 auto }
+#s4 .card.vd { align-items: center; text-align: center }
+#s4 .card.vd .rod { align-self: stretch }
+#s11 .tb2 td, #s11 .tb2 th { padding-top: 5px; padding-bottom: 5px }
+html:not(.movel) #s11 .tb2, html:not(.movel) #s11 .tb2 th { font-size: 18px !important }
+.qrbox { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 10px }
+.qrbox .rod { font-size: var(--fs-apoio); color: var(--tx-apoio) }
+html:not(.movel) .qrbox .qr { width: 190px; height: 190px }
+html:not(.movel) .qrbox .rod { font-size: 17px }
