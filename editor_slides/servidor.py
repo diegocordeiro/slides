@@ -256,6 +256,23 @@ class Handler(BaseHTTPRequestHandler):
         h = self.headers.get("Host", "")
         return not o or urllib.parse.urlparse(o).netloc == h
 
+    # --- HEAD (o editor confere se o PDF da aula existe)
+    def do_HEAD(self):
+        caminho = urllib.parse.unquote(urllib.parse.urlparse(self.path).path)
+        try:
+            p = dentro_da_raiz(caminho[3:]) if caminho.startswith("/r/") else None
+        except ErroUsuario:
+            p = None
+        if not p or not os.path.isfile(p):
+            self.send_response(404)
+            self.end_headers()
+            return
+        self.send_response(200)
+        self.send_header("Content-Type", mimetypes.guess_type(p)[0] or "application/octet-stream")
+        self.send_header("Content-Length", str(os.path.getsize(p)))
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+
     # --- GET
     def do_GET(self):
         u = urllib.parse.urlparse(self.path)
@@ -343,7 +360,7 @@ class Handler(BaseHTTPRequestHandler):
                     return self._json({"ok": False, "erros": erros})
                 if d.get("motor") == "legado" and d.get("estado") != "editor":
                     return self._json({"ok": False, "erros": ["Aula importada: clique em 'Assumir esta aula pelo editor' antes de gerar."]})
-                escritos = render.gerar(cj)
+                escritos = render.gerar(cj, pdf=e.get("pdf", True) is not False)
                 return self._json({"ok": True, "escritos": [rel(x) for x in escritos],
                                    "html": rel(os.path.join(os.path.dirname(cj), render.nomes(d)[0]))})
             if caminho == "/api/novo":

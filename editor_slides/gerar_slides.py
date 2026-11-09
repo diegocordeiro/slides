@@ -6,6 +6,10 @@ Uso:
     python3 editor_slides/gerar_slides.py caminho/apresentacao.json [...]
     python3 editor_slides/gerar_slides.py --verificar        # aulas importadas: o JSON reproduz o publicado?
     python3 editor_slides/gerar_slides.py --exemplos         # inclui editor_slides/exemplos
+    python3 editor_slides/gerar_slides.py --todas --sem-pdf  # não gera os PDFs (mais rápido)
+
+Cada aula do editor também ganha um aulaNN.pdf (gerado com o Chrome/Chromium/Edge
+instalado, em modo headless): é o que o celular abre. Sem navegador, o PDF é pulado.
 
 Aulas importadas (estado "importada") NUNCA são regeneradas por --todas: o
 HTML publicado continua sendo a versão oficial até você clicar em
@@ -31,6 +35,7 @@ def main() -> int:
     ap.add_argument("--todas", action="store_true")
     ap.add_argument("--exemplos", action="store_true")
     ap.add_argument("--verificar", action="store_true")
+    ap.add_argument("--sem-pdf", action="store_true", help="não gera o PDF (aulaNN.pdf) que o celular abre")
     a = ap.parse_args()
 
     alvos = [os.path.abspath(x) for x in a.arquivos]
@@ -54,7 +59,7 @@ def main() -> int:
         if d.get("motor") == "legado" and d.get("estado") != "editor":
             print("pula " + rel(p) + " (importada; o HTML publicado continua oficial)")
             continue
-        escritos = render.gerar(p)
+        escritos = render.gerar(p, pdf=not a.sem_pdf)
         total += len(escritos)
         print("gera " + rel(p) + (" → " + ", ".join(os.path.basename(x) for x in escritos) if escritos else " (sem mudanças)"))
     print("%d arquivo(s) atualizado(s)." % total)
