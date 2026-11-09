@@ -130,14 +130,15 @@ make editor            # abre http://127.0.0.1:8765 no navegador (Ctrl+C encerra
     qualquer tecla volta;
   - toque: arraste para a esquerda/direita, ou toque na faixa lateral (15% de cada lado);
     os botões de navegação ficam maiores em telas de toque.
-- **Celular e tablet — modo rolagem**: em telas de até 820 px de largura (ou celular deitado) a aula vira uma
-  página que rola na vertical, com **todos os slides empilhados como cartões**. A barra superior fica fixa e mostra
-  o slide atual (ex.: 3 / 14), que acompanha a rolagem; "Anterior/Próximo" ficam fixos no rodapé e rolam até o
-  slide. Dentro de cada cartão, colunas empilham, indicadores se ajustam, tabelas largas rolam para o lado e
-  imagens mantêm a proporção. Grades criadas no "CSS extra" da aula também quebram quando não cabem. Ao girar o
-  celular ou redimensionar a janela, o modo liga/desliga sozinho e mantém o slide em que você estava.
-  Na tela grande, no modo apresentador e no PDF nada muda. No editor, o botão **Celular** abre a aula gerada
-  numa janela do tamanho de um celular.
+- **Celular e tablet → PDF**: em telas de até 820 px de largura (ou celular deitado), as aulas feitas no
+  editor **abrem direto o PDF** da apresentação (`aulaNN.pdf`, ao lado do HTML). Se o navegador não mostra PDF
+  dentro da página (caso do Chrome no Android), aparece uma tela com **Abrir o PDF** e **Baixar o PDF**. Também há
+  o link "Ver no navegador mesmo assim" (versão web em rolagem, `?web=1`). Se a aula ainda não tiver PDF
+  publicado, o celular cai direto na versão web. Computador, modo apresentador e PDF não mudam.
+  - O PDF é gerado automaticamente no **Gerar** do editor e no `make gerar`/`make publicar`, usando o Chrome
+    (ou Chromium/Edge) instalado, em modo invisível. Sem navegador, o PDF é pulado com um aviso
+    (`CHROME=/caminho` indica outro executável; `--sem-pdf` pula de propósito).
+  - No editor, o botão **Celular** gera a aula e o PDF e abre numa janela do tamanho de um celular.
 - **Salvamento** automático, desfazer/refazer (Ctrl+Z / Ctrl+Shift+Z), Ctrl+S salva.
 - **Publicar**: mostra a branch e os arquivos alterados, permite rodar o *checar* e então executa
   `make publicar` exibindo o log. Fora da `main` o push vai para a branch atual (o site só muda após o merge).

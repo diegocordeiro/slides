@@ -343,7 +343,7 @@ class Handler(BaseHTTPRequestHandler):
                     return self._json({"ok": False, "erros": erros})
                 if d.get("motor") == "legado" and d.get("estado") != "editor":
                     return self._json({"ok": False, "erros": ["Aula importada: clique em 'Assumir esta aula pelo editor' antes de gerar."]})
-                escritos = render.gerar(cj)
+                escritos = render.gerar(cj, pdf=e.get("pdf", True) is not False)
                 return self._json({"ok": True, "escritos": [rel(x) for x in escritos],
                                    "html": rel(os.path.join(os.path.dirname(cj), render.nomes(d)[0]))})
             if caminho == "/api/novo":

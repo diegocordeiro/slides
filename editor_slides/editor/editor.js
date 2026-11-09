@@ -955,9 +955,10 @@ function escolherImagem(cb) {
 }
 
 /* ------------------------------------------------------------ gerar / visualizar / publicar */
-async function gerar(silencioso) {
+async function gerar(silencioso, comPdf) {
   await salvar(true);
-  const r = await api('/api/gerar', { c: st.c });
+  if (!silencioso || comPdf) toast('Gerando a aula' + (comPdf !== false ? ' e o PDF (usado no celular)…' : '…'));
+  const r = await api('/api/gerar', { c: st.c, pdf: comPdf !== undefined ? comPdf : !silencioso });
   if (!r.ok) { toast((r.erros || []).slice(0, 3).join(' · '), true); return null; }
   if (!silencioso) toast(r.escritos.length ? 'Gerado: ' + r.escritos.map(x => x.split('/').pop()).join(', ') : 'Nada mudou desde a última geração.');
   return r;
@@ -965,7 +966,7 @@ async function gerar(silencioso) {
 async function visualizar(pdf) {
   try {
     let arq = (st.dados.meta || {}).arquivo;
-    if (!(legado() && st.dados.estado !== 'editor')) { const r = await gerar(true); if (!r) return; arq = r.html.split('/').pop(); }
+    if (!(legado() && st.dados.estado !== 'editor')) { const r = await gerar(true, pdf === 'celular'); if (!r) return; arq = r.html.split('/').pop(); }
     else toast('Aula importada: abrindo o HTML publicado (suas edições ainda não entram nele).');
     const w = pdf === 'celular' ? window.open(urlAula(arq), 'slides_celular', 'width=400,height=820,menubar=no,toolbar=no,location=no')
       : window.open(urlAula(arq) + (pdf ? '?pdf=1' : ''), '_blank');

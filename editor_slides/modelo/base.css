@@ -1561,6 +1561,25 @@ body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
 }
 @media print { #tela-apagada { display: none !important } }
 
+/* ===== Celular/tablet: tela que abre o PDF (classe "celular-pdf" no <html>) ===== */
+@media screen {
+    html.celular-pdf, html.celular-pdf body { height: auto; min-height: 100%; overflow: auto }
+    html.celular-pdf body { display: block; background: linear-gradient(160deg, var(--aze), var(--bem2)); min-height: 100vh }
+    html.celular-pdf body > *:not(#celular-pdf) { display: none !important }
+    #celular-pdf { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 24px 18px }
+    #celular-pdf .cp-caixa { width: 100%; max-width: 420px; background: #fff; border-radius: 18px; padding: 26px 22px 22px; text-align: center;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, .3); font-family: var(--fonte); color: var(--p) }
+    #celular-pdf .cp-icone { width: 64px; height: 78px; margin: 0 auto 14px; border-radius: 8px; background: var(--er); color: #fff;
+        font: 800 18px/78px var(--fonte-tit); letter-spacing: .04em; clip-path: polygon(0 0, 72% 0, 100% 22%, 100% 100%, 0 100%) }
+    #celular-pdf h1 { font-family: var(--fonte-tit); font-size: 20px; line-height: 1.25; margin: 0 0 8px }
+    #celular-pdf .cp-msg { font-size: 15px; line-height: 1.45; color: var(--c); margin: 0 0 18px }
+    #celular-pdf .cp-bt, #celular-pdf .cp-link { display: none }
+    #celular-pdf.pronto .cp-bt { display: block; padding: 14px 16px; margin: 10px 0 0; border-radius: 12px; font-weight: 700; font-size: 16px;
+        text-decoration: none; border: 2px solid var(--az); color: var(--az); background: #fff }
+    #celular-pdf.pronto .cp-pri { background: var(--az); color: #fff }
+    #celular-pdf.pronto .cp-link { display: inline-block; margin-top: 16px; font-size: 14px; color: var(--bem) }
+}
+
 /* ===== Celular e tablet: MODO ROLAGEM =====
    Ativado pelo runtime (classe "movel" no <html>) em telas de até 820 px de largura
    ou celulares deitados (até 500 px de altura). Os slides deixam de ser "telas"

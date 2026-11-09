@@ -4,7 +4,42 @@ let c=0,t=document.querySelectorAll('.sl').length,dots=[];
 let isPresenter = new URLSearchParams(location.search).get('modo')==='apresentador';
 let win=null;
 
-/* ===== Celular/tablet: modo rolagem =====
+/* ===== Celular/tablet: abre o PDF da aula =====
+   O <script> do <head> marca <html class="celular-pdf"> em telas de celular/tablet.
+   - navegador que mostra PDF (Safari/iOS, Firefox, Chrome de computador…): abre o PDF direto;
+   - sem visualizador de PDF (Chrome/Android, a maioria): mostra botões "Abrir" e "Baixar";
+   - sem PDF publicado: cai na versão web em rolagem (?web=1). */
+function celularPdf(){
+  var raiz=document.documentElement;if(!raiz.classList.contains('celular-pdf'))return;
+  var pdf=document.body.getAttribute('data-pdf');
+  var web=location.pathname+(location.search?location.search+'&':'?')+'web=1'+location.hash;
+  function versaoWeb(){location.replace(web)}
+  if(!pdf)return versaoWeb();
+  var ua=navigator.userAgent||'';
+  var ios=/iPad|iPhone|iPod/.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1);
+  var mostra=navigator.pdfViewerEnabled===true||(navigator.pdfViewerEnabled===undefined&&ios);
+  var titulo=(document.querySelector('.tb h2')||{}).textContent||document.title;
+  var p=document.createElement('div');p.id='celular-pdf';
+  p.innerHTML='<div class="cp-caixa"><div class="cp-icone" aria-hidden="true">PDF</div>'+
+    '<h1></h1><p class="cp-msg">Abrindo a apresentação em PDF…</p>'+
+    '<a class="cp-bt cp-pri" id="cp-abrir">Abrir o PDF</a>'+
+    '<a class="cp-bt" id="cp-baixar" download>Baixar o PDF</a>'+
+    '<a class="cp-link" id="cp-web">Ver no navegador mesmo assim</a></div>';
+  p.querySelector('h1').textContent=titulo.trim();
+  p.querySelector('#cp-abrir').href=pdf;p.querySelector('#cp-baixar').href=pdf;p.querySelector('#cp-web').href=web;
+  document.body.appendChild(p);
+  function semVisualizador(){p.querySelector('.cp-msg').textContent='Este navegador não mostra PDF dentro da página. Toque em "Abrir o PDF" (abre no leitor do celular) ou baixe o arquivo.';p.classList.add('pronto')}
+  function existe(cb){
+    if(location.protocol==='file:'||!window.fetch)return cb(true);
+    fetch(pdf,{method:'HEAD',cache:'no-store'}).then(function(r){cb(r.ok)}).catch(function(){cb(false)});
+  }
+  existe(function(ok){
+    if(!ok)return versaoWeb();
+    if(mostra){p.classList.add('pronto');location.replace(pdf)}else semVisualizador();
+  });
+}
+
+/* ===== Celular/tablet: versão web em rolagem (?web=1) =====
    Mesma regra do <script> no <head> da aula (que liga a classe antes de desenhar). */
 var MQ_MOVEL='(max-width: 820px), (max-height: 500px) and (pointer: coarse)';
 var mqMovel=window.matchMedia?window.matchMedia(MQ_MOVEL):{matches:false};
@@ -74,7 +109,8 @@ function ajustarTodos(){document.querySelectorAll('.sl').forEach(ajustarCelular)
 
 /* liga/desliga o modo rolagem (girar o celular, redimensionar a janela) */
 function aplicarMovel(){
-  var era=movel(),agora=!!mqMovel.matches&&!isPresenter;
+  if(document.documentElement.classList.contains('celular-pdf'))return; /* celular: tela do PDF */
+  var era=movel(),agora=!!mqMovel.matches&&!isPresenter&&/[?&]web=1/.test(location.search);
   document.documentElement.classList.toggle('movel',agora);
   if(agora){
     if(!zoomManual){fzLevel=autoZoom();applyZoom()}
@@ -203,6 +239,7 @@ if(isPresenter){
   document.title='(Apresentação) — '+document.title;
 }
 aplicarMovel();
+celularPdf();
 applyZoom();
 buildDots();
 sh(c,true);
