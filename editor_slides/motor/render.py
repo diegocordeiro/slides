@@ -118,6 +118,9 @@ def css_aula(dados: dict) -> str:
         base,
     ]
     extra = (dados.get("css_extra") or "").strip()
+    # regras de tela pequena do CSS extra valem só na tela: o diálogo de impressão do Chrome
+    # usa uma largura estreita (~740 px) e elas desmontariam o PDF
+    extra = re.sub(r"@media\s*\((?=[^)]*(?:max|min)-(?:width|height))", "@media screen and (", extra)
     if extra:
         partes.append("\n/* ===== CSS específico desta apresentação ===== */\n" + extra + "\n")
     return "\n".join(partes)
