@@ -25,7 +25,7 @@
       <button class="bpb" id="bnt" onclick="toggleNotas()" title="Mostrar/ocultar roteiro de fala (tecla N)">Roteiro</button>
       <button class="tmr" id="tmr" onclick="if(event.shiftKey){tmrDefinirLimite()}else{toggleTimer()}" ondblclick="resetTimer()" title="Iniciar/pausar (T) · duplo clique zera · Shift+clique define o limite">00:00 / 20:00</button>
       <button class="bpb" id="bp" onclick="openPresenter()">Modo apresentador</button>
-      <span class="ct" id="ctr">1 / 18</span>
+      <span class="ct" id="ctr">1 / 17</span>
       <span class="modo-tag">APRESENTAÇÃO</span>
     </div>
   </header>
@@ -247,18 +247,6 @@
           <div class="col"><div style="display:contents"><div class="qrbox"><img class="qr" src="img/qrcode_repo.png" alt="QR code do repositório"><div class="url-demo" style="font-size:18px">github.com/SE4AI-UFPI/IFGuia · tag v1.0-mvp</div><div class="rod">Código, README, ADRs e relatórios de avaliação</div></div></div></div></div>
       </div>
       <div class="nt"><strong>~20 s.</strong> Abrir para perguntas. O apêndice (próximo slide) tem o glossário dos termos técnicos para consulta durante a arguição.</div>
-    </div>
-
-    <!-- SLIDE 18 — Apêndice · Glossário para a arguição -->
-    <div class="sl" id="s18">
-      <div class="slhd"><span class="num">18</span><h2>Apêndice · Glossário para a arguição</h2></div>
-      <div class="slbd g" style="grid-template-rows:1fr;">
-        <div class="grade" style="grid-template-columns:1fr 1fr 1fr">
-          <div class="col"><div style="display:contents"><div class="termos"><div class="termo"><b>RAG</b>Geração aumentada por recuperação: busca trechos e o LLM responde só com eles.</div><div class="termo"><b>FMware</b>Software construído sobre modelos fundacionais prontos, sem treinar modelo próprio.</div><div class="termo"><b>Embedding</b>Vetor numérico que representa o significado de um texto.</div><div class="termo"><b>Baseline</b>Referência simples para comparar: BM25 na busca, base_v1 na resposta.</div></div></div></div>
-          <div class="col"><div style="display:contents"><div class="termos"><div class="termo"><b>k e candidatos</b>k = trechos enviados ao LLM (8); candidatos = resultados de cada método antes da fusão (50).</div><div class="termo"><b>Peso do BM25</b>Quanto a lista lexical vale na fusão RRF (o denso vale 1,0).</div><div class="termo"><b>Golden set</b>Conjunto de perguntas com resposta esperada, usado como gabarito.</div><div class="termo"><b>p50 / p95</b>Latência mediana e a que 95% das consultas não ultrapassam.</div></div></div></div>
-          <div class="col"><div style="display:contents"><div class="termos"><div class="termo"><b>Fidelidade</b>Fração da resposta sustentada pelos trechos; medida por anotação humana.</div><div class="termo"><b>Guardrail</b>Regra automática na entrada ou na saída (escopo, injeção, citação).</div><div class="termo"><b>Injeção de prompt</b>Texto que tenta fazer o modelo ignorar as instruções.</div><div class="termo"><b>Índice versionado</b>Cada reconstrução cria uma versão nova e imutável; <code>ATIVO.json</code> aponta a vigente.</div></div></div></div></div>
-      </div>
-      <div class="nt"><strong>Apêndice (fora dos 20 min).</strong> Usar durante as perguntas.</div>
     </div>
 
   </div>
