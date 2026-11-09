@@ -392,7 +392,7 @@
         [
           {
             "tipo": "html",
-            "html": "<div class=\"termos\"><div class=\"termo\"><b>IC 95% (Wilson)</b>Intervalo de confiança da taxa; com n = 40 ele é <strong>largo</strong>, e 1–2 perguntas são ruído.</div><div class=\"termo\"><b>Recall do contexto</b>O artigo esperado chega ao que <strong>vai para o LLM</strong> (k, vizinhos, deduplicação)?</div></div>"
+            "html": "<div class=\"termos\"><div class=\"termo\"><b>IC 95% </b>Intervalo de confiança da taxa; com n = 40 ele é <strong>largo</strong>, e 1–2 perguntas são ruído.</div><div class=\"termo\"><b>Recall do contexto</b>O artigo esperado chega ao que <strong>vai para o LLM</strong> (k, vizinhos, deduplicação)?</div></div>"
           }
         ],
         [
