@@ -632,7 +632,7 @@
       "rodape": [
         {
           "tipo": "faixa",
-          "html": "Conclusão do modelo: <b>atende com restrições</b>&nbsp; as salvaguardas estão cumpridas; recuperação e fidelidade ainda não."
+          "html": "Conclusão do modelo: <b>atende com restrições</b>&nbsp; as salvaguardas estão cumpridas, recuperação e fidelidade ainda não."
         }
       ],
       "notas": "<strong>~1 min 15 s — slide central para a banca.</strong> Ler as linhas por situação: os critérios ligados ao erro grave (citação, recusa, vigência como evidência) estão atendidos. O que falta é medir fidelidade e subir o Recall. Não esconder: abaixo do mínimo do M2, o MVP pode ser demonstrado, mas não liberado para uso real."
