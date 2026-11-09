@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="generator" content="editor_slides">
+  <title>Internet: Histórico e fundamentos — Aula 06</title>
+  <link rel="stylesheet" href="apresentacao.css">
+  <script>try{var q=location.search;if(!/[?&](modo=apresentador|pdf=1)/.test(q)&&matchMedia('(max-width: 820px), (max-height: 500px) and (pointer: coarse)').matches)document.documentElement.classList.add(/[?&]web=1/.test(q)?'movel':'celular-pdf')}catch(e){}</script>
+</head>
+
+<body data-limite="100" data-pdf="apresentacao.pdf">
+  <header class="tb">
+    <div class="tb-left">
+      <img src="img/logo_aula.svg" class="tb-logo" alt="">
+      <h2>Internet: Histórico e fundamentos</h2>
+    </div>
+    <div class="tb-right">
+      <div class="fz" aria-label="Tamanho do texto">
+        <button onclick="fz(-1)" title="Diminuir tamanho da fonte">A−</button>
+        <span id="fzpct">100%</span>
+        <button onclick="fz(1)" title="Aumentar tamanho da fonte">A+</button>
+      </div>
+      <button class="bpb" id="bnt" onclick="toggleNotas()" title="Mostrar/ocultar roteiro de fala (tecla N)">Roteiro</button>
+      <button class="tmr" id="tmr" onclick="if(event.shiftKey){tmrDefinirLimite()}else{toggleTimer()}" ondblclick="resetTimer()" title="Iniciar/pausar (T) · duplo clique zera · Shift+clique define o limite">00:00 / 100:00</button>
+      <button class="bpb" id="bp" onclick="openPresenter()">Modo apresentador</button>
+      <span class="ct" id="ctr">1 / 30</span>
+      <span class="modo-tag">APRESENTAÇÃO</span>
+    </div>
+  </header>
+  <div class="fita"></div>
+  <div class="sc">
+
+    <!-- SLIDE 1 — Internet: Histórico e fundamentos -->
+    <div class="sl" id="s1">
+      <div class="capa">
+        <div class="esq">
+          <div class="rot">Informática Aplicada · Meio Ambiente · IFPI</div>
+          <h1>Internet: Histórico<br>e fundamentos</h1>
+          <div class="faixa"></div>
+          <div class="sub">Aula 06</div>
+          <div class="sub">Professor Diego Cordeiro</div>
+        </div>
+        <div class="dir"><img src="img/capa.svg" alt=""></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Apresentar o roteiro da aula: de onde a internet veio, como ela chega até nós e as ferramentas do dia a dia (navegador, busca, e-mail, nuvem, redes sociais). Indicar o Catálogo de Aulas para revisão.</div>
+    </div>
+
+    <!-- SLIDE 2 — História da Internet -->
+    <div class="sl" id="s2">
+      <div class="slhd"><span class="num">2</span><h2>História da Internet</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1.15fr 1fr">
+          <div class="col"><div style="display:contents"><div class="card grow lead-card"><p class="lead">A internet surgiu da necessidade de <strong>comunicação mais rápida e segura</strong> durante a <strong>Guerra Fria</strong>, na década de 1960. A Agência de Projetos de Pesquisa Avançada dos Estados Unidos (<strong>ARPA</strong>) desenvolveu a <strong>ARPANET</strong>, que foi o princípio das redes de computadores e da internet atual.</p><p class="lead">O princípio da internet é <strong>interligar vários computadores de redes diferentes</strong>, permitindo o compartilhamento de informações entre pessoas e empresas em todo o mundo. Com ela podemos saber o que acontece globalmente, interagir com pessoas e descobrir novas formas de trabalhar e de fazer negócios.</p></div></div></div>
+          <div class="col"><div style="display:contents"><ol class="tl"><li><b>Década de 1960</b><span>Guerra Fria: a defesa dos EUA precisa de uma rede que continue funcionando mesmo se parte dela cair.</span></li><li><b>1969</b><span>A ARPANET conecta os primeiros computadores de universidades americanas.</span></li><li><b>1991</b><span>A World Wide Web (WWW) é aberta ao público e a internet se populariza.</span></li><li class="hoje"><b>Hoje</b><span>Cerca de <strong>6 bilhões</strong> de pessoas conectadas no mundo (UIT, 2025).</span></li></ol></div></div></div>
+        <div class="faixa-az"><span>Ideia central: <b>redes diferentes, conectadas entre si</b>, trocando informação.</span></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Contar a origem militar e acadêmica. Enfatizar que a rede foi pensada para não depender de um único ponto: se um caminho cai, os dados seguem por outro. Isso prepara a atividade e o slide “Como funciona”.</div>
+    </div>
+
+    <!-- SLIDE 3 — Atividade: desenhe a internet -->
+    <div class="sl" id="s3">
+      <div class="slhd"><span class="num">3</span><h2>Atividade: desenhe a internet</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1.15fr">
+          <div class="col"><div style="display:contents"><div class="fig fig-limpa"><img src="img/atividade.svg" alt="Folha de papel com um desenho simples de rede e um lápis"></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card vd grow ativ"><div class="tag-tempo"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2"/></svg> 5 minutos</div><h3 class="ativ-tit">Desenhe como você imagina o funcionamento da internet.</h3><p>Seja criativo e explore todas as suas ideias. Algumas perguntas para começar:</p><ul><li>Como uma mensagem sai do seu celular e chega a outra pessoa?</li><li>Por onde ela passa no caminho?</li><li>O que acontece se um desses caminhos parar de funcionar?</li></ul><p class="dica">Não existe desenho errado. Vamos comparar com o modelo real no próximo slide.</p></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~5 min.</strong> Iniciar o cronômetro (tecla T). Circular pela sala, pedir que 2 ou 3 estudantes mostrem o desenho. Guardar os desenhos para comparar com o diagrama de ISPs.</div>
+    </div>
+
+    <!-- SLIDE 4 — Como funciona a internet? -->
+    <div class="sl" id="s4">
+      <div class="slhd"><span class="num">4</span><h2>Como funciona a internet?</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1.75fr 1fr">
+          <div class="col"><div style="display:contents"><div class="fig fig-limpa"><img src="img/rede_isp.svg" alt="Diagrama de provedores de internet: ISPs locais ligados a ISPs de nível 2, ligados a ISPs de nível 1"></div></div></div>
+          <div class="col"><div style="display:contents"><div class="niveis"><div class="nv l"><b>ISP local</b><span>O provedor que leva a internet até a sua casa, escola ou celular.</span></div><div class="nv m"><b>ISP Nível 2</b><span>Redes regionais e nacionais que interligam os provedores locais.</span></div><div class="nv a"><b>ISP Nível 1</b><span>Grandes redes de alcance mundial (backbones) conectadas entre si.</span></div><div class="nv p"><b>Pacote de dados</b><span>O ponto laranja: seus dados viajam em pequenos pacotes e podem seguir caminhos diferentes.</span></div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~4 min.</strong> ISP = Internet Service Provider (provedor). Mostrar o pacote percorrendo: casa → ISP local → nível 2 → nível 1 → … → destino. Retomar os desenhos: quem desenhou algo parecido?</div>
+    </div>
+
+    <!-- SLIDE 5 — Tipos de conexão à internet -->
+    <div class="sl" id="s5">
+      <div class="slhd"><span class="num">5</span><h2>Tipos de conexão à internet</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div style="display:contents"><div class="card cx "><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1.3" fill="currentColor"/></svg></span><h3>Conexão sem fio (Wi-Fi)</h3></div><div class="cx-bd"><p>Transmite dados por <strong>ondas de rádio</strong> a partir de um roteador, permitindo acesso com alta velocidade dentro de casa, da escola ou do trabalho.</p></div></div></div><div style="display:contents"><div class="card cx k2"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 10v12M8 22l4-12 4 12M9.5 17h5"/><circle cx="12" cy="8" r="2"/><path d="M7.8 4.2a6 6 0 0 0 0 7.6M16.2 4.2a6 6 0 0 1 0 7.6M5 2a9.5 9.5 0 0 0 0 12M19 2a9.5 9.5 0 0 1 0 12"/></svg></span><h3>Conexão 4G/5G</h3></div><div class="cx-bd"><p>Funciona pelas <strong>torres de telefonia celular</strong>, com amplo raio de alcance. Presente na maioria dos celulares atuais; o 5G oferece mais velocidade e menor atraso.</p></div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card cx k3"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 7 9 3 5 7l4 4M17 11l4 4-4 4-4-4M8 12l4 4M10.5 9.5l4 4L18 10l-4-4z"/><path d="M4 16a5 5 0 0 0 4 4M3 19a2 2 0 0 0 2 2"/></svg></span><h3>Conexão via satélite</h3></div><div class="cx-bd"><p>Pode ser oferecida em <strong>qualquer parte do planeta</strong> com uma antena, sem depender de cabos. Útil em zonas rurais, áreas remotas e unidades de conservação.</p></div></div></div><div style="display:contents"><div class="card cx k4"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4v6H4zM8 12h3c3 0 3-6 6-6h3M17 6v12M20 18h-3c-3 0-3-6-6-6"/></svg></span><h3>Conexão cabeada</h3></div><div class="cx-bd"><p>Versão com fio, distribuída por um roteador. Hoje usa principalmente <strong>fibra óptica</strong>, que transmite o sinal por luz e oferece a conexão mais estável.</p></div></div></div></div></div>
+        <div class="faixa-az"><span>Novidade: satélites de <b>órbita baixa</b> (como a Starlink) reduziram o atraso da internet via satélite, tema do vídeo adiante.</span></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Perguntar quais conexões os estudantes usam. Relacionar a internet via satélite com o trabalho de campo em meio ambiente (fiscalização, monitoramento em áreas sem sinal de celular).</div>
+    </div>
+
+    <!-- SLIDE 6 — Cabos submarinos -->
+    <div class="sl" id="s6">
+      <div class="slhd"><span class="num">6</span><h2>Cabos submarinos</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1.45fr 1fr">
+          <div class="col"><div style="display:contents"><div class="fig fig-limpa"><img src="img/cabos.svg" alt="Mapa esquemático do Atlântico com cabos submarinos saindo de Fortaleza"></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card grow"><p class="lead">A maior parte do tráfego de internet entre continentes não passa por satélites, e sim por <strong>cabos de fibra óptica no fundo do mar</strong>.</p><div class="destaque-local"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg><span><b>Fortaleza (CE)</b> é o principal ponto de chegada de cabos submarinos do Brasil, ligando o país à América do Norte, à Europa e à África.</span></div></div></div><div style="display:contents"><a class="lk" href="https://www.submarinecablemap.com/" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c3 3.2 3 15.8 0 19M12 2.5c-3 3.2-3 15.8 0 19"/></svg><span><b>Submarine Cable Map</b><small>Mapa interativo e atualizado dos cabos submarinos do mundo</small><em>submarinecablemap.com · TeleGeography</em></span><svg class="ic lk-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Abrir o mapa interativo e clicar em Fortaleza para ver os cabos que chegam ao Ceará. Curiosidade: muitas falhas de cabos são causadas por âncoras de navios e redes de pesca.</div>
+    </div>
+
+    <!-- SLIDE 7 — Distribuição da internet pelo mundo -->
+    <div class="sl" id="s7">
+      <div class="slhd"><span class="num">7</span><h2>Distribuição da internet pelo mundo</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1.7fr 1fr">
+          <div class="col"><div style="display:contents"><div class="emb"><iframe src="https://ourworldindata.org/grapher/share-of-individuals-using-the-internet?tab=map" loading="lazy" title="Mapa: parcela da população que usa a internet (Our World in Data)" allow="fullscreen"></iframe></div></div></div>
+          <div class="col"><div style="display:contents"><div class="kpi kpi-col"><div><b>~6 bilhões</b><span>de pessoas usam a internet no mundo (UIT, 2025)</span></div><div><b>~2,2 bilhões</b><span>ainda estão desconectadas, sobretudo em áreas rurais e países de baixa renda</span></div><div><b>90%</b><span>dos brasileiros com 10 anos ou mais usaram a internet (IBGE, PNAD TIC 2025)</span></div></div></div><div style="display:contents"><a class="lk" href="https://ourworldindata.org/grapher/share-of-individuals-using-the-internet" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M6 17v-4M10 17V9M14 17v-6M18 17V5"/></svg><span><b>Our World in Data</b><small>Parcela da população que usou a internet nos últimos 3 meses</small><em>ourworldindata.org</em></span><svg class="ic lk-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> O mapa é interativo: passar o mouse sobre os países e usar a linha do tempo. Discutir desigualdade de acesso (exclusão digital) entre países e entre zona urbana e rural.</div>
+    </div>
+
+    <!-- SLIDE 8 — Por que Elon Musk está construindo a Starlink? -->
+    <div class="sl" id="s8">
+      <div class="slhd"><span class="num">8</span><h2>Por que Elon Musk está construindo a Starlink?</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1.6fr 1fr">
+          <div class="col"><div style="display:contents"><div class="emb video-emb"><iframe src="https://www.youtube-nocookie.com/embed/Q089i8RQPB0?rel=0" loading="lazy" title="Why Elon Musk is Really Building Starlink" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div></div></div>
+          <div class="col"><div style="display:contents"><a class="lk" href="https://www.youtube.com/watch?v=Q089i8RQPB0" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="m10 8.5 5.5 3.5-5.5 3.5z" fill="currentColor"/></svg><span><b>Why Elon Musk is Really Building Starlink</b><em>YouTube · 15 min · em inglês (ative as legendas)</em></span><svg class="ic lk-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div><div style="display:contents"><div class="card grow"><h3>Para discutir depois do vídeo</h3><ul><li>Cabo submarino ou satélite: qual é mais rápido? E mais barato?</li><li>Quem ganha com internet via satélite no interior do Piauí?</li><li><strong>Olhar ambiental:</strong> milhares de satélites geram <strong>lixo espacial</strong> e mais brilho no céu noturno, afetando a astronomia.</li></ul></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~17 min</strong> (vídeo de 15 min + 2 min de conversa). Ativar legendas em português (Configurações → Legendas → Traduzir automaticamente). Se a sala estiver sem internet, usar só as perguntas.</div>
+    </div>
+
+    <!-- SLIDE 9 — A Internet -->
+    <div class="sl" id="s9">
+      <div class="secao-slide"><div class="divisor"><img class="bg" src="img/secao_internet.svg" alt=""><div class="ov"></div><div class="in"><div class="rot">Bloco 2</div><h1>A Internet</h1><div class="txt-bloco">Web, endereços e navegadores</div></div></div></div>
+      <div class="nt">Transição: da infraestrutura (cabos, satélites) para o que usamos na tela.</div>
+    </div>
+
+    <!-- SLIDE 10 — World Wide Web (WWW) -->
+    <div class="sl" id="s10">
+      <div class="slhd"><span class="num">10</span><h2>World Wide Web (WWW)</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr;">
+        <div style="display:contents"><p class="lead">A World Wide Web é um sistema que reúne várias mídias interligadas por meio eletrônico, onde é possível acessar <strong>textos, imagens, sons e vídeos</strong>. É o padrão mundial para navegação na internet.</p></div>
+        <div class="grade" style="grid-template-columns:1.55fr 1fr">
+          <div class="col"><div style="display:contents"><div class="card grow"><h3>Estrutura de uma URL</h3><div class="url" role="list"><span class="u u1" role="listitem" tabindex="0">https://<i>Protocolo seguro: o cadeado indica que a conexão é criptografada</i></span><span class="u u2" role="listitem" tabindex="0">www.<i>World Wide Web: padrão mundial (hoje costuma ser opcional)</i></span><span class="u u3" role="listitem" tabindex="0">nomedosite<i>Nome do site: google, gov, ifpi, inpe</i></span><span class="u u4" role="listitem" tabindex="0">.com<i>Domínio: indica a finalidade do site</i></span><span class="u u5" role="listitem" tabindex="0">.br<i>País: indica a localização (Brasil)</i></span></div><p class="url-dica">Passe o mouse (ou toque) em cada parte do endereço.</p></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card grow"><h3>Tipos de domínio</h3><table class="tb2 dom"><tr><td><code>.br</code></td><td>sites brasileiros</td></tr><tr><td><code>.com</code></td><td>sites comerciais</td></tr><tr><td><code>.gov.br</code></td><td>governo: <em>gov.br/ibama</em>, <em>gov.br/mma</em></td></tr><tr><td><code>.edu.br</code></td><td>educação: <em>ifpi.edu.br</em></td></tr><tr><td><code>.org</code></td><td>organizações não governamentais</td></tr></table></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Montar uma URL na lousa com os estudantes. Mostrar que órgãos ambientais federais estão em gov.br (Ibama, ICMBio, MMA). Alertar: o cadeado só garante a conexão criptografada, não que o site seja confiável.</div>
+    </div>
+
+    <!-- SLIDE 11 — Navegadores web -->
+    <div class="sl" id="s11">
+      <div class="slhd"><span class="num">11</span><h2>Navegadores web</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr;">
+        <div style="display:contents"><p class="lead">O <strong>navegador</strong> é o programa usado para navegar na internet: com ele você acessa sites e visualiza páginas da web. Existem vários navegadores disponíveis, todos gratuitos.</p></div>
+        <div class="grade" style="grid-template-columns:1fr 1fr 1fr 1fr">
+          <div class="col"><div style="display:contents"><div class="card nav"><div class="nav-ic" style="--c:#0EA5E9">E</div><h3>Microsoft Edge</h3><p>Desenvolvido pela Microsoft. Vem instalado por padrão no Windows e usa o mesmo motor do Chrome (Chromium).</p></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card nav"><div class="nav-ic" style="--c:#16A34A">C</div><h3>Google Chrome</h3><p>Do Google, gratuito e multiplataforma. É o navegador mais usado no mundo, inclusive nos celulares Android.</p></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card nav"><div class="nav-ic" style="--c:#EA580C">F</div><h3>Mozilla Firefox</h3><p>Da Mozilla Foundation, sem fins lucrativos. Leve, seguro e com foco em privacidade; disponível para vários sistemas.</p></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card nav"><div class="nav-ic" style="--c:#2563EB">S</div><h3>Safari</h3><p>Da Apple, presente no iPhone, iPad e Mac. É otimizado e tem bom desempenho nesses dispositivos.</p></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Perguntar qual navegador cada um usa no celular e no computador. Todos acessam os mesmos sites; a escolha é por preferência, desempenho e privacidade.</div>
+    </div>
+
+    <!-- SLIDE 12 — Elementos de um navegador -->
+    <div class="sl" id="s12">
+      <div class="slhd"><span class="num">12</span><h2>Elementos de um navegador</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1.3fr 1fr">
+          <div class="col"><div style="display:contents"><div class="fig fig-limpa"><svg class="browser" viewBox="0 0 640 400" font-family="Inter, Arial, sans-serif" role="img" aria-label="Janela de navegador com os elementos numerados">
+<rect x="1" y="1" width="638" height="398" rx="14" fill="#fff" stroke="#CBD5E1" stroke-width="2"/>
+<path d="M1 15a14 14 0 0 1 14-14h610a14 14 0 0 1 14 14v31H1z" fill="#E2E8F0"/>
+<circle cx="22" cy="23" r="6" fill="#F87171"/><circle cx="40" cy="23" r="6" fill="#FBBF24"/><circle cx="58" cy="23" r="6" fill="#34D399"/>
+<path d="M80 46V16a6 6 0 0 1 6-6h150a6 6 0 0 1 6 6v30z" fill="#fff"/><text x="96" y="33" font-size="13" fill="#334155">IFPI</text>
+<path d="M248 46V18a6 6 0 0 1 6-6h120a6 6 0 0 1 6 6v28z" fill="#CBD5E1"/><text x="262" y="33" font-size="13" fill="#475569">Ibama</text>
+<text x="390" y="34" font-size="20" fill="#64748B">+</text>
+<rect x="1" y="46" width="638" height="44" fill="#fff"/>
+<g stroke="#475569" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M28 68h-12M21 62l-6 6 6 6"/><path d="M44 68h12M51 62l6 6-6 6"/><path d="M82 62a7 7 0 1 0 2 6M84 59v4h-4"/></g>
+<rect x="124" y="55" width="420" height="26" rx="13" fill="#F1F5F9" stroke="#CBD5E1"/>
+<text x="142" y="73" font-size="13" fill="#0F172A">🔒 https://www.ifpi.edu.br</text>
+<path d="M528 61l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6-4.5-4 6-1z" fill="#FBBF24"/>
+<g fill="#475569"><circle cx="612" cy="61" r="2.4"/><circle cx="612" cy="68" r="2.4"/><circle cx="612" cy="75" r="2.4"/></g>
+<rect x="1" y="90" width="638" height="26" fill="#F8FAFC"/><g font-size="12" fill="#475569"><text x="18" y="107">★ MapBiomas</text><text x="118" y="107">★ INPE Queimadas</text><text x="240" y="107">★ Gmail</text></g>
+<rect x="24" y="134" width="592" height="56" rx="8" fill="#0B7A55"/><text x="44" y="169" font-size="20" font-weight="700" fill="#fff">Instituto Federal do Piauí</text>
+<rect x="24" y="206" width="180" height="172" rx="8" fill="#F1F5F9"/><rect x="220" y="206" width="396" height="80" rx="8" fill="#ECFDF5"/>
+<rect x="220" y="298" width="190" height="80" rx="8" fill="#F1F5F9"/><rect x="426" y="298" width="190" height="80" rx="8" fill="#F1F5F9"/>
+<g class="mk" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">
+<circle cx="300" cy="68" r="14" fill="#F59E0B" stroke="#fff" stroke-width="3"/><text x="300" y="73">1</text>
+<circle cx="104" cy="68" r="14" fill="#F59E0B" stroke="#fff" stroke-width="3"/><text x="104" y="73">2</text>
+<circle cx="190" cy="28" r="14" fill="#F59E0B" stroke="#fff" stroke-width="3"/><text x="190" y="33">3</text>
+<circle cx="345" cy="104" r="14" fill="#F59E0B" stroke="#fff" stroke-width="3"/><text x="345" y="109">4</text>
+<circle cx="590" cy="68" r="14" fill="#F59E0B" stroke="#fff" stroke-width="3"/><text x="590" y="73">5</text></g>
+</svg></div></div></div>
+          <div class="col"><div style="display:contents"><ol class="elem"><li><div><b>Barra de endereços</b><span>Onde você digita o endereço do site e pressiona Enter. Também aceita pesquisas.</span></div></li><li><div><b>Botões de controle</b><span>Voltar, Avançar e Atualizar (F5). Esc interrompe o carregamento.</span></div></li><li><div><b>Guias (abas)</b><span>Abrem várias páginas em uma só janela. Ctrl+T abre uma nova guia.</span></div></li><li><div><b>Favoritos</b><span>Salve páginas para acessar depois (Ctrl+D ou a estrela ★).</span></div></li><li><div><b>Menu de configurações</b><span>Histórico, downloads, privacidade e extensões. Cada navegador tem funções próprias.</span></div></li></ol></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Se houver computador conectado ao projetor, abrir o navegador e mostrar cada elemento ao vivo, incluindo Ctrl+T, Ctrl+D e o histórico (Ctrl+H).</div>
+    </div>
+
+    <!-- SLIDE 13 — Pesquisar na Internet -->
+    <div class="sl" id="s13">
+      <div class="secao-slide"><div class="divisor"><img class="bg" src="img/secao_pesquisa.svg" alt=""><div class="ov"></div><div class="in"><div class="rot">Bloco 3</div><h1>Pesquisar na Internet</h1><div class="txt-bloco">Buscadores, operadores e fontes confiáveis</div></div></div></div>
+      <div class="nt">Transição para a parte prática de pesquisa. Se possível, estudantes acompanham no celular.</div>
+    </div>
+
+    <!-- SLIDE 14 — Pesquisa de informações na internet -->
+    <div class="sl" id="s14">
+      <div class="slhd"><span class="num">14</span><h2>Pesquisa de informações na internet</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
+        <div style="display:contents"><p class="lead">A internet é uma fonte enorme de informações. Para filtrá-las existem os <strong>buscadores</strong>, sites que pesquisam por palavras-chave: <a href="https://www.google.com" target="_blank" rel="noopener">Google</a>, <a href="https://www.bing.com" target="_blank" rel="noopener">Bing</a> e <a href="https://duckduckgo.com/" target="_blank" rel="noopener">DuckDuckGo</a>. Clique nos exemplos para testar:</p></div>
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="ops"><a class="op" href="https://www.google.com/search?q=%22licenciamento+ambiental%22" target="_blank" rel="noopener"><span class="op-n">Aspas</span><code>&quot;licenciamento ambiental&quot;</code><small>busca o termo exato</small></a><a class="op" href="https://www.google.com/search?q=queimadas+site%3Ainpe.br" target="_blank" rel="noopener"><span class="op-n">site:</span><code>queimadas site:inpe.br</code><small>pesquisa só dentro de um site</small></a><a class="op" href="https://www.google.com/search?q=%22plano+de+manejo%22+filetype%3Apdf" target="_blank" rel="noopener"><span class="op-n">filetype:</span><code>&quot;plano de manejo&quot; filetype:pdf</code><small>procura um tipo de arquivo (pdf, ppt, xls)</small></a><a class="op" href="https://www.google.com/search?q=desmatamento+Piau%C3%AD+after%3A2025-01-01" target="_blank" rel="noopener"><span class="op-n">before: / after:</span><code>desmatamento Piauí after:2025-01-01</code><small>filtra por data (antes / depois)</small></a><a class="op" href="https://www.google.com/search?q=reciclagem+-venda" target="_blank" rel="noopener"><span class="op-n">sinal de menos</span><code>reciclagem -venda</code><small>exclui uma palavra do resultado</small></a><a class="op" href="https://www.google.com/search?q=%22coleta+seletiva%22+OR+compostagem+Teresina" target="_blank" rel="noopener"><span class="op-n">OR</span><code>&quot;coleta seletiva&quot; OR compostagem Teresina</code><small>aceita um termo ou outro</small></a><a class="op" href="https://www.google.com/search?q=%40instagram+educa%C3%A7%C3%A3o+ambiental" target="_blank" rel="noopener"><span class="op-n">@rede social</span><code>@instagram educação ambiental</code><small>busca em uma rede social</small></a><a class="op" href="https://www.google.com/search?q=composteira+dom%C3%A9stica+R%24100..R%24300" target="_blank" rel="noopener"><span class="op-n">R$ e ..</span><code>composteira doméstica R$100..R$300</code><small>produtos numa faixa de preço</small></a></div></div></div></div>
+        <div style="display:contents"><div class="aviso"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20.5h20z"/><path d="M12 10v4.5"/><circle cx="12" cy="17.5" r="1" fill="currentColor"/></svg><span><b>Importante:</b> nem tudo na internet é confiável, e respostas geradas por IA no topo da busca também podem errar. Prefira fontes oficiais (<em>.gov.br</em>, universidades, institutos de pesquisa) e confira de onde veio a informação. Os antigos <code>define:</code> e <code>related:</code> foram descontinuados pelo Google.</span></div></div>
+      </div>
+      <div class="nt"><strong>~5 min.</strong> Testar 3 ou 4 operadores ao vivo e comparar com a busca sem operador. Pedir que os estudantes combinem dois operadores (ex.: site:gov.br filetype:pdf "resíduos sólidos").</div>
+    </div>
+
+    <!-- SLIDE 15 — Pesquisa de imagens e vídeos -->
+    <div class="sl" id="s15">
+      <div class="slhd"><span class="num">15</span><h2>Pesquisa de imagens e vídeos</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr;">
+        <div style="display:contents"><p class="lead">Além de textos, os buscadores encontram <strong>imagens e vídeos</strong>, e podem até pesquisar a partir de uma foto tirada com o celular.</p></div>
+        <div class="grade" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="col"><div style="display:contents"><div class="card cx "><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="m21 16-5-5-9 9"/></svg></span><h3>Pesquisa de imagens</h3></div><div class="cx-bd"><p>No Google, digite o termo e clique em <strong>Imagens</strong> para ver resultados visuais. Clique na imagem para vê-la maior e acessar o site de origem.</p><p class="mini">Para usar em trabalhos: <em>Ferramentas → Direitos de uso → Licenças Creative Commons</em>.</p></div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card cx k2"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="12" r="3.5"/></svg></span><h3>Pesquisa por imagem</h3></div><div class="cx-bd"><p>Com o <strong>Google Lens</strong>, você fotografa algo e o buscador encontra informações sobre ele.</p><p class="mini">No campo: fotografe uma planta, um inseto ou uma ave para descobrir a espécie. O app <em>iNaturalist</em> faz isso com ajuda de especialistas.</p></div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card cx k3"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="m10 9 5 3-5 3z" fill="currentColor"/></svg></span><h3>Pesquisa de vídeos</h3></div><div class="cx-bd"><p>O <strong>YouTube</strong> permite pesquisar e assistir vídeos. Digite o assunto, pressione Enter e clique no vídeo desejado.</p><p class="mini">Use os <em>Filtros</em> para escolher duração e data, e ative as legendas quando precisar.</p></div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~4 min.</strong> Demonstrar o Google Lens com a foto de uma planta do campus. Explicar que imagem encontrada na internet não é automaticamente livre para uso.</div>
+    </div>
+
+    <!-- SLIDE 16 — Download de arquivos -->
+    <div class="sl" id="s16">
+      <div class="secao-slide"><div class="divisor"><img class="bg" src="img/secao_download.svg" alt=""><div class="ov"></div><div class="in"><div class="rot">Bloco 4</div><h1>Download de arquivos</h1><div class="txt-bloco">Baixar e enviar arquivos com segurança</div></div></div></div>
+      <div class="nt">Transição.</div>
+    </div>
+
+    <!-- SLIDE 17 — Download e upload de arquivos -->
+    <div class="sl" id="s17">
+      <div class="slhd"><span class="num">17</span><h2>Download e upload de arquivos</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1.25fr .8fr">
+          <div class="col"><div style="display:contents"><p class="lead">Download é <strong>“baixar”</strong> arquivos da internet para o seu computador, celular ou tablet. Upload é o contrário: <strong>enviar</strong> arquivos do seu dispositivo para a web.</p></div><div style="display:contents"><div class="dupla"><div><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg><b>Download</b><span>Retirar um arquivo da internet para o seu dispositivo.</span></div><div><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5M4 20h16"/></svg><b>Upload</b><span>Enviar um arquivo para a web, como anexar em um e-mail.</span></div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card grow"><h3>Onde baixar com segurança</h3><ul class="chk"><li><b>Lojas oficiais:</b> Play Store, App Store e Microsoft Store.</li><li><b>Sites oficiais</b> de quem desenvolve o programa (ex.: <em>qgis.org</em>).</li><li><b>Dados abertos ambientais:</b> <a href="https://dados.gov.br" target="_blank" rel="noopener">dados.gov.br</a>, MapBiomas e INPE.</li><li><b>Vídeos offline:</b> use o botão <em>Download</em> do próprio app (YouTube Premium, por exemplo).</li></ul></div></div><div style="display:contents"><div class="aviso"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20.5h20z"/><path d="M12 10v4.5"/><circle cx="12" cy="17.5" r="1" fill="currentColor"/></svg><span>Evite sites “baixadores” de vídeos e músicas: são cheios de anúncios enganosos e podem instalar <b>vírus</b>. Baixar conteúdo de terceiros sem permissão também pode violar direitos autorais.</span></div></div></div>
+          <div class="col"><div style="display:contents"><div class="fig fig-limpa"><img src="img/download.svg" alt="Monitor com ícone de download e barra de progresso"></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~4 min.</strong> Atualização em relação ao material antigo: serviços como SaveFrom e 4Shared foram retirados por riscos de segurança e de direitos autorais. Mostrar onde ficam os downloads no navegador (Ctrl+J).</div>
+    </div>
+
+    <!-- SLIDE 18 — Correio eletrônico -->
+    <div class="sl" id="s18">
+      <div class="secao-slide"><div class="divisor"><img class="bg" src="img/secao_email.svg" alt=""><div class="ov"></div><div class="in"><div class="rot">Bloco 5</div><h1>Correio eletrônico</h1><div class="txt-bloco">E-mail e Gmail</div></div></div></div>
+      <div class="nt">Transição.</div>
+    </div>
+
+    <!-- SLIDE 19 — Correio eletrônico (e-mail) -->
+    <div class="sl" id="s19">
+      <div class="slhd"><span class="num">19</span><h2>Correio eletrônico (e-mail)</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr;">
+        <div style="display:contents"><p class="lead">E-mail é a ferramenta para <strong>enviar e receber mensagens e arquivos</strong> pela internet. Bilhões de pessoas se comunicam por e-mail, e ele é indispensável para cadastros, trabalho e comunicação com órgãos públicos.</p></div>
+        <div class="grade" style="grid-template-columns:1.2fr 1fr">
+          <div class="col"><div style="display:contents"><div class="card grow"><h3>Estrutura do e-mail</h3><div class="mail"><span class="m1">usuario</span><span class="m2">@</span><span class="m3">provedor</span><span class="m4">.com.br</span></div><ul><li><b>Login:</b> identificação do usuário (antes do @).</li><li><b>Provedor:</b> Gmail, Outlook (antigo Hotmail), Yahoo, ou o institucional <em>@ifpi.edu.br</em>.</li><li><b>@</b> (arroba) significa “em”: <em>usuário em tal provedor</em>.</li></ul></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card grow"><h3>Campos de destinatário</h3><p class="mini">Clique para revelar:</p><div class="rev" onclick="rv(this)"><span>Para</span><div class="resp">Destinatário principal da mensagem.</div></div><div class="rev" onclick="rv(this)"><span>Cc</span><div class="resp">Com cópia: o destinatário recebe e <b>todos veem</b> que ele foi copiado.</div></div><div class="rev" onclick="rv(this)"><span>Cco</span><div class="resp">Com cópia oculta: recebe, mas <b>ninguém vê</b> o endereço dele. Ideal para enviar a muitas pessoas sem expor os e-mails.</div></div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Perguntar antes de revelar: “quando eu uso Cco?”. Exemplo: convite de um evento de educação ambiental enviado a 50 pessoas → usar Cco para proteger os endereços.</div>
+    </div>
+
+    <!-- SLIDE 20 — Usando o Gmail -->
+    <div class="sl" id="s20">
+      <div class="slhd"><span class="num">20</span><h2>Usando o Gmail</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div style="display:contents"><div class="passo"><span class="pn">01</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><div><b>Criando uma conta</b><span>Acesse <em>gmail.com</em>, clique em <b>Criar conta</b> e preencha o formulário. Ative a <b>verificação em duas etapas</b>.</span></div></div></div><div style="display:contents"><div class="passo"><span class="pn">02</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m20 11.5-8.2 8.2a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7L9.5 17.4a1.7 1.7 0 0 1-2.4-2.4l7.8-7.8"/></svg><div><b>Escrevendo e-mails</b><span>Clique em <b>Escrever</b>, preencha destinatário, assunto e texto. Use o clipe para anexar (até 25 MB; acima disso vai como link do Google Drive).</span></div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="passo"><span class="pn">03</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 7l2-4h14l2 4M9 11h6"/></svg><div><b>Gerenciando e-mails</b><span>E-mails em negrito ainda não foram lidos. <b>Responder</b> volta ao remetente; <b>Encaminhar</b> envia a outras pessoas.</span></div></div></div><div style="display:contents"><div class="passo"><span class="pn">04</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 16l-4-4 4-4M6 12h10"/></svg><div><b>Segurança na saída</b><span>Em computadores compartilhados, sempre clique em <b>Sair</b>. Só fechar o navegador deixa a conta aberta para o próximo usuário.</span></div></div></div></div></div>
+        <div style="display:contents"><div class="lks2"><a class="lk" href="https://support.google.com/mail" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 6.5 9 7 9-7"/></svg><span><b>Central de Ajuda do Gmail</b><small>Guia oficial do Google</small><em>support.google.com/mail</em></span><svg class="ic lk-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a><a class="lk" href="https://www.ufsm.br/app/uploads/sites/762/2020/09/Tutorial_Gmail.pdf" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 7l2-4h14l2 4M9 11h6"/></svg><span><b>Tutorial Gmail</b><small>Material produzido pela UFSM</small><em>ufsm.br · PDF</em></span><svg class="ic lk-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Mostrar a caixa de entrada e o botão Escrever. Reforçar a verificação em duas etapas e o “Sair” nos laboratórios do campus.</div>
+    </div>
+
+    <!-- SLIDE 21 — Prática: escrevendo um e-mail -->
+    <div class="sl" id="s21">
+      <div class="slhd"><span class="num">21</span><h2>Prática: escrevendo um e-mail</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1.25fr">
+          <div class="col"><div style="display:contents"><div class="card grow"><h3>Boas práticas de assunto e corpo</h3><ol class="elem bp-mail"><li><div><b>Assunto</b><span>Curto e específico: diga do que se trata. Nunca deixe em branco.</span></div></li><li><div><b>Saudação</b><span>“Olá, professor Diego,” ou “Prezado(a) …,”.</span></div></li><li><div><b>Identificação</b><span>Quem é você: nome, curso e turma.</span></div></li><li><div><b>Mensagem</b><span>Objetiva, em parágrafos curtos. Se houver anexo, avise no texto.</span></div></li><li><div><b>Despedida e assinatura</b><span>“Atenciosamente,” + nome completo e curso.</span></div></li><li><div><b>Revise antes de enviar</b><span>Ortografia, destinatário e anexo. Evite CAIXA ALTA, gírias e emojis.</span></div></li></ol></div></div></div>
+          <div class="col"><div style="display:contents"><div class="mailbox"><div class="mb-hd"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"></rect><path d="m3 6.5 9 7 9-7"></path></svg><b>Nova mensagem</b></div><div class="mb-l"><span>Para</span><code>diego.cordeiro@ifpi.edu.br</code></div><div class="mb-l"><span>Cc</span><em>e-mail de um colega da turma</em></div><div class="mb-l"><span>Assunto</span><b>Informática Aplicada – Aula 06 – Prática de e-mail – Seu Nome</b></div><div class="mb-bd"><p>Olá, professor Diego,</p><p>Sou <b>[seu nome]</b>, da turma <b>[turma]</b> do curso de Meio Ambiente. Envio em anexo a foto do meu desenho de como a internet funciona, feito na atividade desta aula.</p><p>Atenciosamente,<br><b>[Nome completo]</b><br>Meio Ambiente · IFPI</p></div><div class="mb-ft"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m20 11.5-8.2 8.2a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7L9.5 17.4a1.7 1.7 0 0 1-2.4-2.4l7.8-7.8"></path></svg><span>desenho-internet.jpg</span></div></div></div><div style="display:contents"><a class="lk" href="mailto:diego.cordeiro@ifpi.edu.br" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 6.5 9 7 9-7"/></svg><span><b>Envie para diego.cordeiro@ufpi.edu.br</b><small>Copie um colega em Cc e anexe a foto do desenho da atividade</small><em>Prazo: até o fim da aula</em></span><svg class="ic lk-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div></div></div>
+      </div>
+      <div class="nt"><strong>~6 min.</strong> Cada estudante escreve do próprio celular (Gmail ou e-mail institucional) seguindo o modelo, com um colega em Cc e a foto do desenho anexada (retoma a atividade do slide 3 e o anexo do slide anterior). Na próxima aula, comentar exemplos de assuntos bons e ruins recebidos, sem expor nomes.</div>
+    </div>
+
+    <!-- SLIDE 22 — Computação em nuvem -->
+    <div class="sl" id="s22">
+      <div class="secao-slide"><div class="divisor"><img class="bg" src="img/secao_nuvem.svg" alt=""><div class="ov"></div><div class="in"><div class="rot">Bloco 6</div><h1>Computação em nuvem</h1><div class="txt-bloco">Arquivos e programas acessíveis de qualquer lugar</div></div></div></div>
+      <div class="nt">Transição.</div>
+    </div>
+
+    <!-- SLIDE 23 — Computação em nuvem -->
+    <div class="sl" id="s23">
+      <div class="slhd"><span class="num">23</span><h2>Computação em nuvem</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr;">
+        <div style="display:contents"><p class="lead">A computação em nuvem (<em>cloud computing</em>) permite <strong>armazenar e acessar dados e programas pela internet</strong>, em vez de depender só do seu computador. É como ter um disco virtual e programas disponíveis em qualquer lugar, a qualquer hora: Google Drive, OneDrive e iCloud são exemplos.</p></div>
+        <div class="grade" style="grid-template-columns:1fr 1fr .85fr">
+          <div class="col"><div style="display:contents"><div class="card cx "><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c3 3.2 3 15.8 0 19M12 2.5c-3 3.2-3 15.8 0 19"/></svg></span><h3>Acessibilidade universal</h3></div><div class="cx-bd"><p>Acesse arquivos e aplicativos de qualquer dispositivo conectado, sem estar perto do seu computador.</p></div></div></div><div style="display:contents"><div class="card cx k3"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M15 8.5c-.6-1-1.7-1.5-3-1.5-1.8 0-3 .9-3 2.3 0 3.3 6 1.8 6 5 0 1.4-1.3 2.4-3 2.4-1.4 0-2.6-.6-3.2-1.7M12 5.5v13"/></svg></span><h3>Redução de custos</h3></div><div class="cx-bd"><p>Menos gastos com equipamentos, manutenção e licenças de software.</p></div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card cx k2"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M6 17v-4M10 17V9M14 17v-6M18 17V5"/></svg></span><h3>Escalabilidade flexível</h3></div><div class="cx-bd"><p>Aumente ou diminua armazenamento e processamento conforme a necessidade, pagando pelo que usa.</p></div></div></div><div style="display:contents"><div class="card cx k4"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z"/><path d="m8.5 12 2.5 2.5 4.5-4.5"/></svg></span><h3>Segurança e confiabilidade</h3></div><div class="cx-bd"><p>Servidores com cópias de segurança automáticas protegem contra perdas e falhas de equipamento.</p></div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="fig fig-limpa"><img src="img/nuvem.svg" alt="Nuvem com servidores conectada a notebook, celular e tablet"></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Perguntar quem já perdeu arquivos por pen drive ou celular quebrado. Mostrar o Google Drive institucional, se disponível.</div>
+    </div>
+
+    <!-- SLIDE 24 — Softwares e plataformas online para Meio Ambiente -->
+    <div class="sl" id="s24">
+      <div class="slhd"><span class="num">24</span><h2>Softwares e plataformas online para Meio Ambiente</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
+        <div style="display:contents"><p class="lead">A nuvem também transformou o trabalho ambiental: hoje é possível <strong>monitorar florestas, queimadas e biodiversidade pelo navegador</strong>, com dados gratuitos.</p></div>
+        <div class="grade" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="col"><div style="display:contents"><a class="soft" href="https://brasil.mapbiomas.org" target="_blank" rel="noopener"><div class="soft-hd"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg><b>MapBiomas</b><span class="tag">Web · gratuito</span></div><p>Mapas anuais de uso e cobertura do solo do Brasil desde 1985: florestas, agropecuária, água e áreas urbanas.</p><em>brasil.mapbiomas.org ↗</em></a></div><div style="display:contents"><a class="soft" href="https://earthengine.google.com" target="_blank" rel="noopener"><div class="soft-hd"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><path d="M14 7h3v3"/></svg><b>Google Earth Engine</b><span class="tag">Nuvem · uso acadêmico</span></div><p>Plataforma que processa décadas de imagens de satélite nos servidores do Google. Gratuita para ensino e pesquisa.</p><em>earthengine.google.com ↗</em></a></div></div>
+          <div class="col"><div style="display:contents"><a class="soft" href="https://terrabrasilis.dpi.inpe.br" target="_blank" rel="noopener"><div class="soft-hd"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-6M12 16l-3-3M12 14l3-3"/><path d="M12 2a6 6 0 0 0-5.6 8.1A4.5 4.5 0 0 0 8.5 18h7a4.5 4.5 0 0 0 2.1-7.9A6 6 0 0 0 12 2z"/></svg><b>TerraBrasilis (INPE)</b><span class="tag">Web · gratuito</span></div><p>Dados oficiais de desmatamento dos programas PRODES e DETER, com painéis por bioma, estado e município.</p><em>terrabrasilis.dpi.inpe.br ↗</em></a></div><div style="display:contents"><a class="soft" href="https://www.inaturalist.org" target="_blank" rel="noopener"><div class="soft-hd"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="16" r="3.5"/><circle cx="17.5" cy="16" r="3.5"/><path d="M10 16h4M4 13l2-8h3l1 8M20 13l-2-8h-3l-1 8"/></svg><b>iNaturalist</b><span class="tag">App · gratuito</span></div><p>Ciência cidadã: registre fotos de plantas e animais, receba sugestão de espécie e ajude pesquisas de biodiversidade.</p><em>inaturalist.org ↗</em></a></div></div>
+          <div class="col"><div style="display:contents"><a class="soft" href="https://terrabrasilis.dpi.inpe.br/queimadas/bdqueimadas/" target="_blank" rel="noopener"><div class="soft-hd"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22c4 0 7-2.7 7-6.8 0-4.2-3.4-6.5-4.5-10.7-2.4 1.8-3.4 4-3.2 6.5-1.3-.7-2.1-1.9-2.3-3.5C6.6 9.300 5 12 5 15.2 5 19.3 8 22 12 22z"/></svg><b>BDQueimadas (INPE)</b><span class="tag">Web · gratuito</span></div><p>Focos de calor detectados por satélite quase em tempo real, com filtros por período, estado e unidade de conservação.</p><em>terrabrasilis.dpi.inpe.br/queimadas ↗</em></a></div><div style="display:contents"><a class="soft" href="https://www.car.gov.br" target="_blank" rel="noopener"><div class="soft-hd"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19C5 9 11 4 20 4c0 9-5 15-15 15z"/><path d="M5 19 14 10"/></svg><b>SICAR (CAR)</b><span class="tag">Sistema público</span></div><p>Sistema do Cadastro Ambiental Rural: registro online obrigatório dos imóveis rurais, com APPs e reserva legal.</p><em>car.gov.br ↗</em></a></div></div></div>
+        <div class="faixa-az"><span>Para análises no computador: <b>QGIS</b>, sistema de informação geográfica livre e gratuito (<em>qgis.org</em>).</span></div>
+      </div>
+      <div class="nt"><strong>~6 min.</strong> Adaptação para Meio Ambiente (substitui SAP e Salesforce do material original). Abrir pelo menos o MapBiomas e o BDQueimadas. Comentar que o CAR é exigido por lei para imóveis rurais e é uma área de atuação do técnico.</div>
+    </div>
+
+    <!-- SLIDE 25 — Prática: os dados ambientais do seu município -->
+    <div class="sl" id="s25">
+      <div class="slhd"><span class="num">25</span><h2>Prática: os dados ambientais do seu município</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1.3fr 1fr">
+          <div class="col"><div style="display:contents"><div class="card grow"><h3>Em duplas, no celular ou no laboratório</h3><ol class="passos"><li>Acesse a plataforma do <b>MapBiomas</b> e busque o seu município (ex.: Teresina).</li><li>Compare a cobertura do solo de <b>1985</b> com a do <b>ano mais recente</b>.</li><li>No <b>BDQueimadas</b>, filtre o estado do Piauí e veja os focos de calor dos últimos 30 dias.</li><li>Anote <b>duas observações</b> e de qual fonte elas vieram.</li></ol></div></div></div>
+          <div class="col"><div style="display:contents"><a class="lk" href="https://plataforma.brasil.mapbiomas.org" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg><span><b>Plataforma MapBiomas</b><em>plataforma.brasil.mapbiomas.org</em></span><svg class="ic lk-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div><div style="display:contents"><a class="lk" href="https://terrabrasilis.dpi.inpe.br/queimadas/bdqueimadas/" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22c4 0 7-2.7 7-6.8 0-4.2-3.4-6.5-4.5-10.7-2.4 1.8-3.4 4-3.2 6.5-1.3-.7-2.1-1.9-2.3-3.5C6.6 9.300 5 12 5 15.2 5 19.3 8 22 12 22z"/></svg><span><b>BDQueimadas</b><em>INPE · terrabrasilis.dpi.inpe.br</em></span><svg class="ic lk-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div><div style="display:contents"><div class="card vd grow"><h3>Para discutir</h3><div class="rev" onclick="rv(this)"><span>O que mudou na paisagem?</span><div class="resp">Ex.: aumento de áreas agrícolas ou urbanas e redução de vegetação nativa (Cerrado e Caatinga, no Piauí).</div></div><div class="rev" onclick="rv(this)"><span>Por que usar a fonte oficial?</span><div class="resp">Dados com metodologia publicada e revisada, que podem ser citados em relatórios técnicos.</div></div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~6 min.</strong> Atividade que substitui o vídeo sobre CRM do material original. Projetar o passo a passo uma vez e depois deixar as duplas explorarem. Encerrar com 2 ou 3 duplas compartilhando o que observaram.</div>
+    </div>
+
+    <!-- SLIDE 26 — Redes sociais -->
+    <div class="sl" id="s26">
+      <div class="secao-slide"><div class="divisor"><img class="bg" src="img/secao_redes.svg" alt=""><div class="ov"></div><div class="in"><div class="rot">Bloco 7</div><h1>Redes sociais</h1><div class="txt-bloco">Uso profissional, boas práticas e segurança</div></div></div></div>
+      <div class="nt">Transição.</div>
+    </div>
+
+    <!-- SLIDE 27 — Redes sociais no ambiente profissional -->
+    <div class="sl" id="s27">
+      <div class="slhd"><span class="num">27</span><h2>Redes sociais no ambiente profissional</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
+        <div style="display:contents"><p class="lead">Redes sociais são espaços onde pessoas se conectam por <strong>interesses comuns</strong>. Na área ambiental, servem para <strong>educação ambiental, divulgação de projetos, mobilização e networking</strong> com órgãos, ONGs e empresas.</p></div>
+        <div class="grade" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="col"><div style="display:contents"><div class="card cx "><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14a6.5 6.5 0 0 1 3.5 6"/></svg></span><h3>Facebook</h3></div><div class="cx-bd"><p>Páginas, eventos e <strong>grupos</strong>. Bom para comunidades locais, mutirões de limpeza e grupos acadêmicos ou profissionais.</p></div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card cx k2"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="14" rx="3"/><circle cx="12" cy="13" r="4"/><path d="M8.5 6 10 3.5h4L15.5 6"/></svg></span><h3>Instagram</h3></div><div class="cx-bd"><p>Foco em <strong>fotos e vídeos</strong>. Ideal para campanhas de educação ambiental e para mostrar projetos e ações em campo.</p></div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card cx k3"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8.5 7V5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v2M2.5 13h19"/></svg></span><h3>LinkedIn</h3></div><div class="cx-bd"><p>Rede <strong>profissional</strong>: currículo online, vagas de estágio e emprego na área ambiental e contato com empresas e consultorias.</p></div></div></div></div></div>
+        <div class="faixa-az"><span>Dica: siga perfis oficiais como <b>Ibama, ICMBio, INPE</b> e a secretaria de meio ambiente do seu estado.</span></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Perguntar quem já tem LinkedIn. Sugerir criar o perfil ainda no curso, registrando estágios e projetos.</div>
+    </div>
+
+    <!-- SLIDE 28 — Boas práticas em redes sociais -->
+    <div class="sl" id="s28">
+      <div class="slhd"><span class="num">28</span><h2>Boas práticas em redes sociais</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
+        <div style="display:contents"><p class="lead">Segundo a <strong>Cartilha de Segurança do CERT.br</strong>, é fundamental adotar comportamentos seguros nas redes sociais para proteger informações pessoais e profissionais.</p></div>
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div style="display:contents"><div class="card cx "><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.7" r="1.4" fill="currentColor"/></svg></span><h3>Configurações de privacidade</h3></div><div class="cx-bd"><p>Controle quem vê suas publicações e revise as configurações de privacidade regularmente.</p></div></div></div><div style="display:contents"><div class="card cx k3"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8.5 7V5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v2M2.5 13h19"/></svg></span><h3>Conteúdo profissional</h3></div><div class="cx-bd"><p>Mantenha uma postura profissional e evite polêmicas: empregadores podem verificar seu perfil.</p></div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card cx k2"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><h3>Informações pessoais</h3></div><div class="cx-bd"><p>Evite compartilhar endereço, telefone, localização em tempo real ou dados financeiros.</p></div></div></div><div style="display:contents"><div class="card cx k4"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><h3>Verificação de contatos</h3></div><div class="cx-bd"><p>Aceite apenas pessoas conhecidas e desconfie de perfis falsos ou suspeitos.</p></div></div></div></div></div>
+        <div style="display:contents"><a class="lk" href="https://cartilha.cert.br/fasciculos/redes-sociais/fasciculo-redes-sociais.pdf" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z"/><path d="m8.5 12 2.5 2.5 4.5-4.5"/></svg><span><b>Fascículo Redes Sociais</b><small>Cartilha de Segurança para Internet do CERT.br</small><em>cartilha.cert.br · PDF</em></span><svg class="ic lk-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Pedir que cada estudante confira agora, no celular, se o seu perfil está público ou privado.</div>
+    </div>
+
+    <!-- SLIDE 29 — Segurança e comportamento digital -->
+    <div class="sl" id="s29">
+      <div class="slhd"><span class="num">29</span><h2>Segurança e comportamento digital</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
+        <div style="display:contents"><p class="lead">A segurança digital é essencial para qualquer profissional. Adote práticas seguras para proteger informações pessoais e do trabalho.</p></div>
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div style="display:contents"><div class="card cx "><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 6.5 9 7 9-7"/></svg></span><h3>Golpes por mensagem</h3></div><div class="cx-bd"><p>Bancos e órgãos públicos não pedem senha nem código por e-mail, SMS ou WhatsApp. Desconfie de promoções “milagrosas” e de pedidos urgentes de Pix.</p></div></div></div><div style="display:contents"><div class="card cx k3"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z"/><path d="m8.5 12 2.5 2.5 4.5-4.5"/></svg></span><h3>Proteção do sistema</h3></div><div class="cx-bd"><p>Mantenha sistema e aplicativos atualizados, não clique em links suspeitos e faça backup na nuvem.</p></div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card cx k2"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.2a1.5 1.5 0 0 0 1.5 1.3h8.8a1.5 1.5 0 0 0 1.5-1.2L21 7H6"/></svg></span><h3>Compras online</h3></div><div class="cx-bd"><p>Compre em lojas conhecidas e verifique a reputação. O cadeado (https) protege a conexão, mas <strong>não garante</strong> que o site seja honesto.</p></div></div></div><div style="display:contents"><div class="card cx k4"><div class="cx-hd"><span class="cic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m11 12 9-9M16 7l3 3M18.5 4.5l2 2"/></svg></span><h3>Senhas seguras</h3></div><div class="cx-bd"><p>Use senhas longas e diferentes para cada conta, um gerenciador de senhas e a <strong>verificação em duas etapas</strong>.</p></div></div></div></div></div>
+        <div style="display:contents"><div class="aviso"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z"/><path d="m8.5 12 2.5 2.5 4.5-4.5"/></svg><span><b>Lembre-se:</b> na dúvida, não clique! Pesquise sobre o site ou peça ajuda antes de fornecer informações pessoais.</span></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Contar um golpe comum (falso boleto, falso parente no WhatsApp). Mostrar como ativar a verificação em duas etapas no WhatsApp: Configurações → Conta → Confirmação em duas etapas.</div>
+    </div>
+
+    <!-- SLIDE 30 — Alguma dúvida? -->
+    <div class="sl" id="s30">
+      <div class="capa">
+        <div class="esq">
+          <div class="rot">Encerramento</div>
+          <h1>Alguma dúvida?</h1>
+          <div class="faixa"></div>
+          <div class="sub">Este é o momento para esclarecer qualquer questão sobre o conteúdo que vimos até agora.</div>
+          <div class="sub">Não tenha receio de perguntar: as dúvidas de hoje são o conhecimento de amanhã!</div>
+        </div>
+        <div class="dir"><img src="img/duvidas.svg" alt=""></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Recapitular os blocos (história, infraestrutura, web, pesquisa, e-mail, nuvem, redes e segurança) e abrir para perguntas.</div>
+    </div>
+
+  </div>
+  <footer class="ft">
+    <img src="img/logo_aula.svg" alt=""><span class="txt"><strong>Aula 06 · Internet: Histórico e fundamentos</strong> · Informática Aplicada — Meio Ambiente · IFPI · Prof. Diego Cordeiro</span>
+  </footer>
+  <nav class="ctr" aria-label="Navegação da apresentação">
+    <button class="bz" id="bprev" onclick="pv()">Anterior</button>
+    <div class="dots" id="dots" role="group" aria-label="Ir para o slide"></div>
+    <button class="bv" id="bnext" onclick="nx()">Próximo</button>
+    <button class="bp" id="bexp" onclick="exportarPDF()" title="Exportar os slides em PDF — na janela de impressão escolha 'Salvar como PDF', margens 'Nenhuma' e mantenha 'Gráficos de fundo'">Exportar PDF</button>
+  </nav>
+  <script src="apresentacao.js"></script>
+</body>
+
+</html>

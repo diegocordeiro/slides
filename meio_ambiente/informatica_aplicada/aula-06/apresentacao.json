@@ -1,0 +1,807 @@
+{
+  "versao": 1,
+  "motor": "editor",
+  "estado": "editor",
+  "meta": {
+    "titulo": "Internet: Histórico e fundamentos — Aula 06",
+    "titulo_barra": "Internet: Histórico e fundamentos",
+    "arquivo": "apresentacao.html",
+    "cronometro_min": 100,
+    "rodape": "<strong>Aula 06 · Internet: Histórico e fundamentos</strong> · Informática Aplicada — Meio Ambiente · IFPI · Prof. Diego Cordeiro",
+    "numerar": true,
+    "mostrar_pdf": true,
+    "lang": "pt-BR"
+  },
+  "tema": {
+    "base": "neutro",
+    "vars": {
+      "--az": "#14342B",
+      "--aze": "#0B231C",
+      "--azc": "#E8F3EE",
+      "--azc-bd": "#C5E0D3",
+      "--ve": "#0E9F6E",
+      "--ves": "#E7F7F0",
+      "--mk": "#CDEFE0",
+      "--bg": "#F1F5F3",
+      "--p": "#0F1F1A",
+      "--c": "#41524C",
+      "--bem": "#0B7A55",
+      "--bem2": "#115E59",
+      "--capa-dir": "#1F4D3F",
+      "--fita2": "#34D399",
+      "--rot-claro": "#A7F3D0",
+      "--destaque": "#6EE7B7",
+      "--tela": "#F1F5F3",
+      "--card-bg": "#F8FAF9",
+      "--linha": "#E2E8E5",
+      "--nota-bg": "#ECFDF5",
+      "--nota-bd": "#A7F3D0",
+      "--ov1": "rgba(11, 35, 28, .55)",
+      "--ov2": "rgba(17, 94, 89, .35)",
+      "--vd-bg": "#ECFDF5",
+      "--vd-bd": "#A7F3D0",
+      "--vd-tx": "#047857",
+      "--aviso-bg": "#FFF7E6",
+      "--aviso-tx": "#7A4B00",
+      "--tx-apoio": "#41524C"
+    },
+    "logos": {
+      "barra": "img/logo_aula.svg",
+      "capa": null,
+      "rodape": "img/logo_aula.svg",
+      "marca": null
+    }
+  },
+  "css_extra": "/* ===== Aula 06 — componentes ===== */\n.ic { width:22px; height:22px; flex-shrink:0 }\n.lead { font-size:18px; line-height:1.5; color:var(--c); margin:0 }\n.lead strong { color:var(--p) }\n.slbd.g > .grade:first-child:has(.lead) { align-self:start }\n.lead-card { justify-content:center; gap:14px; padding:20px 24px }\n.lead-card .lead + .lead { margin-top:12px }\n.slbd.g a { color:var(--bem); font-weight:600 }\n.mini { font-size:15px !important; color:var(--tx-apoio); line-height:1.4 }\n/* cartões com ícone e cor de acento */\n.card.cx { --k:var(--ve); border-top:4px solid var(--k); flex:1 1 0; gap:8px; justify-content:center; padding:16px 20px }\n.cx-bd p { font-size:17.5px !important; line-height:1.5 }\n.card.cx.k2 { --k:#0EA5E9 } .card.cx.k3 { --k:#F59E0B } .card.cx.k4 { --k:#8B5CF6 }\n.cx-hd { display:flex; align-items:center; gap:10px }\n.cx-hd h3 { margin:0 !important; color:var(--p) !important; font-size:18px }\n.cic { width:38px; height:38px; border-radius:10px; display:grid; place-items:center; color:var(--k);\n  background:color-mix(in srgb, var(--k) 13%, #fff); flex-shrink:0 }\n.cx-bd p { margin:0 } .cx-bd p + p { margin-top:8px }\n/* linha do tempo */\n.tl { list-style:none; margin:0; display:flex; flex-direction:column; justify-content:space-between; height:100%; position:relative; padding-left:6px }\n.tl::before { content:\"\"; position:absolute; left:15px; top:12px; bottom:12px; width:3px; background:linear-gradient(var(--ve),var(--fita2)) }\n.tl li { position:relative; padding:4px 0 4px 40px !important; margin:0 !important }\n.tl li::before { content:\"\" !important; position:absolute; left:2px !important; top:7px !important; width:20px !important; height:20px !important;\n  border-radius:50%; background:#fff !important; border:4px solid var(--ve); margin:0 !important }\n.tl li.hoje::before { background:var(--ve) !important }\n.tl b { display:block; color:var(--bem); font-size:17px }\n.tl span { display:block; font-size:16px; line-height:1.4; color:var(--c) }\n/* figuras sem moldura */\n.fig.fig-limpa { border:0; background:transparent; padding:0 }\n.fig svg.browser { width:100%; height:100%; max-height:100% }\n/* atividade */\n.ativ { justify-content:center; gap:10px; padding:22px 26px }\n.ativ-tit { font-size:24px !important; line-height:1.25; color:var(--p) !important; margin:0 !important }\n.ativ p { margin:0 }\n.ativ .dica { font-size:15px; color:var(--vd-tx); font-style:italic }\n.tag-tempo { align-self:flex-start; display:inline-flex; gap:6px; align-items:center; background:var(--ve); color:#fff; font-weight:700;\n  font-size:14px; padding:5px 12px; border-radius:20px }\n.tag-tempo .ic { width:18px; height:18px }\n/* níveis de ISP */\n.niveis { display:flex; flex-direction:column; gap:10px; justify-content:center; height:100% }\n.nv { border-radius:12px; padding:10px 14px; border-left:6px solid; background:var(--card-bg) }\n.nv b { display:block; font-size:17px } .nv span { font-size:15.5px; line-height:1.4; color:var(--c) }\n.nv.l { border-color:#A7F3D0 } .nv.m { border-color:#115E59 } .nv.a { border-color:#0B231C } .nv.p { border-color:#F59E0B; background:#FFF7E6 }\n/* links externos */\n.lk { display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--p) !important; background:#fff; border:1px solid var(--linha);\n  border-radius:12px; padding:10px 14px; transition:border-color .15s, box-shadow .15s; flex:0 0 auto }\n.lk:hover { border-color:var(--ve); box-shadow:0 4px 14px rgba(14,159,110,.15) }\n.lk > .ic:first-child { width:30px; height:30px; color:var(--ve) }\n.lk span { display:flex; flex-direction:column; min-width:0; flex:1 }\n.lk b { font-size:16px } .lk small { font-size:14px; color:var(--c); font-weight:400; line-height:1.35 }\n.lk em { font-size:13px; color:var(--bem); font-style:normal; font-weight:600 }\n.lk .lk-ext { width:18px; height:18px; color:var(--c) }\n.lks2 { display:grid; grid-template-columns:1fr 1fr; gap:14px }\n.destaque-local { display:flex; gap:12px; align-items:flex-start; margin-top:14px; background:#FFF7E6; border:1px solid #FCD9A0; border-radius:12px; padding:12px 14px }\n.destaque-local .ic { color:#B45309; width:26px; height:26px; margin-top:2px }\n.destaque-local span { font-size:16.5px; line-height:1.45 }\n/* incorporados */\n.emb { position:relative; flex:1; min-height:0; border-radius:14px; overflow:hidden; border:1px solid var(--linha); background:#fff; display:flex }\n.emb iframe { position:relative; flex:1; width:100%; height:100%; border:0; background:transparent }\n.emb::before { content:\"Carregando conteúdo interativo… (requer internet)\"; position:absolute; inset:0; display:grid; place-items:center; color:var(--tx-apoio); font-size:16px }\n.video-emb::before { color:#94A3B8 }\n.passos { margin:auto 0 }\n.video-emb { background:#000 }\n.kpi-col { display:flex; flex-direction:column; gap:10px; flex:1 }\n.kpi-col > div { flex:1; padding:10px 16px }\n.kpi-col b { font-size:28px }\n/* URL */\n.url { display:flex; flex-wrap:wrap; justify-content:center; flex-wrap:nowrap; white-space:nowrap; font:700 31px/1 ui-monospace, 'SF Mono', Menlo, Consolas, monospace; margin:auto 0 8px; position:relative; padding-bottom:96px; padding-top:20px }\n.u { position:static; padding:8px 3px 10px; border-bottom:5px solid var(--uc); cursor:help; color:var(--uc); outline:none }\n.u i { display:none; position:absolute; left:0; right:0; bottom:0; font:500 16px/1.4 var(--fonte); color:var(--p);\n  background:color-mix(in srgb, var(--uc) 10%, #fff); border-left:5px solid var(--uc); border-radius:8px; padding:10px 14px; font-style:normal }\n.u:hover i, .u:focus i { display:block }\n.url:not(:hover):not(:focus-within) .u3 i { display:block }\n.u1 { --uc:#0E9F6E } .u2 { --uc:#0EA5E9 } .u3 { --uc:#8B5CF6 } .u4 { --uc:#F59E0B } .u5 { --uc:#DC2626 }\n.url-dica { font-size:14px !important; color:var(--tx-apoio); margin:0 0 auto; text-align:center }\n.u i { font-size:18px !important }\n.tb2.dom td { padding:7px 10px !important; text-align:left !important }\n.tb2.dom code { font-weight:700; color:var(--bem); font-size:16px }\n/* navegadores */\n.card.nav { align-items:center; text-align:center; justify-content:center; gap:8px; padding:18px 16px; height:100% }\n.nav-ic { width:66px; height:66px; border-radius:50%; display:grid; place-items:center; font-size:30px; font-weight:800; color:#fff;\n  background:radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--c) 60%, #fff), var(--c)); box-shadow:0 6px 16px color-mix(in srgb, var(--c) 35%, transparent) }\n.card.nav h3 { margin:4px 0 0 !important; color:var(--p) }\n.card.nav p { margin:0; font-size:17px !important; line-height:1.5 }\n.nav-ic { width:84px !important; height:84px !important; font-size:38px !important; margin-bottom:8px }\n/* elementos do navegador */\n.elem { list-style:none; margin:0; display:flex; flex-direction:column; gap:8px; counter-reset:el; height:100%; justify-content:center }\n.elem li { counter-increment:el; display:flex; gap:12px; align-items:flex-start; padding:0 !important; margin:0 !important }\n.elem li::before { content:counter(el) !important; position:static !important; flex-shrink:0; width:30px !important; height:30px !important; border-radius:50%;\n  background:#F59E0B !important; color:#fff; font-weight:800; display:grid; place-items:center; font-size:15px; margin:0 !important }\n.elem li > div > b { display:block; font-size:17px } .elem li > div > span { display:block; font-size:15.5px; line-height:1.4; color:var(--c) }\n/* operadores de busca */\n.ops { display:grid; grid-template-columns:1fr 1fr; gap:10px; height:100%; align-content:center }\n.op { display:grid; grid-template-columns:150px 1fr; grid-template-rows:auto auto; column-gap:12px; align-items:center; text-decoration:none;\n  background:var(--card-bg); border:1px solid var(--linha); border-radius:12px; padding:9px 14px; color:var(--p) !important; font-weight:400 !important }\n.op:hover { border-color:var(--ve); background:#fff }\n.op-n { grid-row:1 / 3; font-weight:800; color:var(--bem); font-size:16px }\n.op code { font-size:15.5px; font-weight:600; color:var(--p); background:#fff; border:1px solid var(--linha); border-radius:6px; padding:2px 8px; justify-self:start }\n.op small { font-size:14.5px; color:var(--c); margin-top:3px }\n.op:hover code::after { content:\" ↗\"; color:var(--ve) }\n/* aviso */\n.aviso { display:flex; gap:12px; align-items:center; background:var(--aviso-bg); border:1px solid #FCD9A0; border-radius:12px; padding:10px 16px; color:var(--aviso-tx) }\n.aviso .ic { width:26px; height:26px; color:#D97706 }\n.aviso span { font-size:15.5px; line-height:1.45 }\n/* download / upload */\n.dupla { display:flex; flex-direction:column; gap:10px; flex:1; justify-content:center }\n.dupla > div { display:grid; grid-template-columns:40px 1fr; column-gap:10px; background:var(--card-bg); border:1px solid var(--linha); border-radius:12px; padding:10px 14px }\n.dupla .ic { grid-row:1 / 3; width:32px; height:32px; color:var(--ve); align-self:center }\n.dupla b { font-size:17px } .dupla span { font-size:15.5px; line-height:1.4; color:var(--c) }\nul.chk li { margin:6px 0 }\n/* e-mail */\n.mail { display:flex; font:700 30px/1 ui-monospace, Menlo, Consolas, monospace; margin:10px 0 14px; flex-wrap:wrap }\n.mail span { padding:6px 2px 8px; border-bottom:5px solid }\n.mail .m1 { color:#0E9F6E } .mail .m2 { color:#64748B } .mail .m3 { color:#8B5CF6 } .mail .m4 { color:#F59E0B }\n.rev { text-align:left; margin:6px 0; display:block }\n.rev > span { font-size:18px }\n.rev:not(.rv) > span::after { content:\"  · clique\"; font-weight:400; color:var(--tx-apoio); font-size:14px }\n/* passos do Gmail */\n.passo { flex:1; display:grid; grid-template-columns:auto auto 1fr; gap:14px; align-items:center; background:var(--card-bg); border:1px solid var(--linha); border-radius:14px; padding:12px 18px }\n.passo .pn { font-size:26px; font-weight:800; color:var(--destaque); -webkit-text-stroke:1px var(--bem) }\n.passo > .ic { width:32px; height:32px; color:var(--ve) }\n.passo div > b { display:block; font-size:18px } .passo div > span { display:block; font-size:16px; line-height:1.45; color:var(--c) }\n/* softwares ambientais */\n.soft { flex:1 1 0; display:flex; flex-direction:column; gap:6px; text-decoration:none; color:var(--p) !important; font-weight:400 !important;\n  background:var(--card-bg); border:1px solid var(--linha); border-top:4px solid var(--ve); border-radius:14px; padding:12px 16px; transition:box-shadow .15s }\n.soft:hover { box-shadow:0 6px 18px rgba(14,159,110,.18) }\n.soft-hd { display:flex; align-items:center; gap:8px; flex-wrap:wrap }\n.soft-hd .ic { width:26px; height:26px; color:var(--ve) }\n.soft-hd b { font-size:17.5px }\n.soft .tag { margin-left:auto; font-size:12px; font-weight:700; background:var(--azc); color:var(--bem2); border-radius:20px; padding:2px 9px }\n.soft p { margin:0; font-size:15px !important; line-height:1.4 }\n.soft em { margin-top:auto; font-size:13px; color:var(--bem); font-style:normal; font-weight:600 }\n.col > .soft { flex:1 1 0 }\n/* capa */\n.capa .esq .lk { margin-top:18px; background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.25); color:#fff !important; max-width:520px }\n.capa .esq .lk b { color:#fff } .capa .esq .lk small { color:#D1FAE5 } .capa .esq .lk em { color:var(--destaque) }\n.capa .esq .lk > .ic:first-child { color:var(--destaque) } .capa .esq .lk .lk-ext { color:#fff }\n.capa .esq .sub.aula { font-size:22px; font-weight:800; color:var(--destaque); opacity:1 }\n.capa .dir img.ilu { max-width:82%; max-height:80% }\n.capa.fim .esq .sub { font-size:19px; max-width:620px }\n/* divisórias com fundo gerado */\n.divisor .in h1 { font-size:46px }\n.divisor .in p { font-size:20px; opacity:.9 }\n.divisor .in .rot { font-size:14px }\n/* prática de e-mail */\n.bp-mail { gap:6px; justify-content:space-evenly }\n.bp-mail li > div > span { font-size:15px }\n.mailbox { flex:1 1 auto; display:flex; flex-direction:column; background:#fff; border:1px solid var(--linha); border-radius:14px; overflow:hidden; box-shadow:0 6px 18px rgba(0,0,0,.06) }\n.mb-hd { display:flex; align-items:center; gap:8px; background:var(--az); color:#fff; padding:9px 16px; font-size:15px }\n.mb-hd .ic { color:var(--destaque) }\n.mb-l { display:flex; gap:12px; align-items:baseline; padding:7px 16px; border-bottom:1px solid var(--linha); font-size:15.5px }\n.mb-l > span { width:62px; flex-shrink:0; color:var(--tx-apoio); font-size:14px }\n.mb-l code { font-size:15px; font-weight:700; color:var(--bem) }\n.mb-l em { color:var(--tx-apoio) }\n.mb-bd { padding:10px 16px; flex:1 }\n.mb-bd p { margin:0 0 8px; font-size:15.5px !important; line-height:1.45 }\n.mb-ft { display:flex; gap:8px; align-items:center; padding:7px 16px; background:var(--card-bg); border-top:1px solid var(--linha); font-size:14px; color:var(--c) }\n.mb-ft .ic { width:18px; height:18px; color:var(--ve) }\n@media print { .emb iframe { display:none } .emb::before { content:\"Conteúdo interativo: abra a versão web da apresentação\" } }",
+  "slides": [
+    {
+      "layout": "capa",
+      "rotulo": "Informática Aplicada · Meio Ambiente · IFPI",
+      "titulo": "Internet: Histórico<br>e fundamentos",
+      "subtitulos": [
+        "Aula 06",
+        "Professor Diego Cordeiro"
+      ],
+      "meta": [
+        "História",
+        "Infraestrutura",
+        "Web e navegadores",
+        "Pesquisa",
+        "E-mail",
+        "Nuvem",
+        "Redes sociais e segurança"
+      ],
+      "link": "<a class=\"lk\" href=\"https://professordiegocordeiro.com.br/\" target=\"_blank\" rel=\"noopener\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9.5\"/><path d=\"M2.5 12h19M12 2.5c3 3.2 3 15.8 0 19M12 2.5c-3 3.2-3 15.8 0 19\"/></svg><span><b>Catálogo de Aulas</b><small>Conteúdos didáticos de Tecnologia, online e gratuitos</small><em>professordiegocordeiro.com.br</em></span><svg class=\"ic lk-ext\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5\"/></svg></a>",
+      "imagem": "img/capa.svg",
+      "notas": "<strong>~2 min.</strong> Apresentar o roteiro da aula: de onde a internet veio, como ela chega até nós e as ferramentas do dia a dia (navegador, busca, e-mail, nuvem, redes sociais). Indicar o Catálogo de Aulas para revisão."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "História da Internet",
+      "proporcao": "1.15fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card grow lead-card\"><p class=\"lead\">A internet surgiu da necessidade de <strong>comunicação mais rápida e segura</strong> durante a <strong>Guerra Fria</strong>, na década de 1960. A Agência de Projetos de Pesquisa Avançada dos Estados Unidos (<strong>ARPA</strong>) desenvolveu a <strong>ARPANET</strong>, que foi o princípio das redes de computadores e da internet atual.</p><p class=\"lead\">O princípio da internet é <strong>interligar vários computadores de redes diferentes</strong>, permitindo o compartilhamento de informações entre pessoas e empresas em todo o mundo. Com ela podemos saber o que acontece globalmente, interagir com pessoas e descobrir novas formas de trabalhar e de fazer negócios.</p></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<ol class=\"tl\"><li><b>Década de 1960</b><span>Guerra Fria: a defesa dos EUA precisa de uma rede que continue funcionando mesmo se parte dela cair.</span></li><li><b>1969</b><span>A ARPANET conecta os primeiros computadores de universidades americanas.</span></li><li><b>1991</b><span>A World Wide Web (WWW) é aberta ao público e a internet se populariza.</span></li><li class=\"hoje\"><b>Hoje</b><span>Cerca de <strong>6 bilhões</strong> de pessoas conectadas no mundo (UIT, 2025).</span></li></ol>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Ideia central: <b>redes diferentes, conectadas entre si</b>, trocando informação."
+        }
+      ],
+      "notas": "<strong>~3 min.</strong> Contar a origem militar e acadêmica. Enfatizar que a rede foi pensada para não depender de um único ponto: se um caminho cai, os dados seguem por outro. Isso prepara a atividade e o slide “Como funciona”."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Atividade: desenhe a internet",
+      "proporcao": "1fr 1.15fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"fig fig-limpa\"><img src=\"img/atividade.svg\" alt=\"Folha de papel com um desenho simples de rede e um lápis\"></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card vd grow ativ\"><div class=\"tag-tempo\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9.5\"/><path d=\"M12 6.5V12l3.5 2\"/></svg> 5 minutos</div><h3 class=\"ativ-tit\">Desenhe como você imagina o funcionamento da internet.</h3><p>Seja criativo e explore todas as suas ideias. Algumas perguntas para começar:</p><ul><li>Como uma mensagem sai do seu celular e chega a outra pessoa?</li><li>Por onde ela passa no caminho?</li><li>O que acontece se um desses caminhos parar de funcionar?</li></ul><p class=\"dica\">Não existe desenho errado. Vamos comparar com o modelo real no próximo slide.</p></div>"
+          }
+        ]
+      ],
+      "notas": "<strong>~5 min.</strong> Iniciar o cronômetro (tecla T). Circular pela sala, pedir que 2 ou 3 estudantes mostrem o desenho. Guardar os desenhos para comparar com o diagrama de ISPs."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Como funciona a internet?",
+      "proporcao": "1.75fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"fig fig-limpa\"><img src=\"img/rede_isp.svg\" alt=\"Diagrama de provedores de internet: ISPs locais ligados a ISPs de nível 2, ligados a ISPs de nível 1\"></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"niveis\"><div class=\"nv l\"><b>ISP local</b><span>O provedor que leva a internet até a sua casa, escola ou celular.</span></div><div class=\"nv m\"><b>ISP Nível 2</b><span>Redes regionais e nacionais que interligam os provedores locais.</span></div><div class=\"nv a\"><b>ISP Nível 1</b><span>Grandes redes de alcance mundial (backbones) conectadas entre si.</span></div><div class=\"nv p\"><b>Pacote de dados</b><span>O ponto laranja: seus dados viajam em pequenos pacotes e podem seguir caminhos diferentes.</span></div></div>"
+          }
+        ]
+      ],
+      "notas": "<strong>~4 min.</strong> ISP = Internet Service Provider (provedor). Mostrar o pacote percorrendo: casa → ISP local → nível 2 → nível 1 → … → destino. Retomar os desenhos: quem desenhou algo parecido?"
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Tipos de conexão à internet",
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx \"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0\"/><circle cx=\"12\" cy=\"19.5\" r=\"1.3\" fill=\"currentColor\"/></svg></span><h3>Conexão sem fio (Wi-Fi)</h3></div><div class=\"cx-bd\"><p>Transmite dados por <strong>ondas de rádio</strong> a partir de um roteador, permitindo acesso com alta velocidade dentro de casa, da escola ou do trabalho.</p></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k2\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 10v12M8 22l4-12 4 12M9.5 17h5\"/><circle cx=\"12\" cy=\"8\" r=\"2\"/><path d=\"M7.8 4.2a6 6 0 0 0 0 7.6M16.2 4.2a6 6 0 0 1 0 7.6M5 2a9.5 9.5 0 0 0 0 12M19 2a9.5 9.5 0 0 1 0 12\"/></svg></span><h3>Conexão 4G/5G</h3></div><div class=\"cx-bd\"><p>Funciona pelas <strong>torres de telefonia celular</strong>, com amplo raio de alcance. Presente na maioria dos celulares atuais; o 5G oferece mais velocidade e menor atraso.</p></div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k3\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M13 7 9 3 5 7l4 4M17 11l4 4-4 4-4-4M8 12l4 4M10.5 9.5l4 4L18 10l-4-4z\"/><path d=\"M4 16a5 5 0 0 0 4 4M3 19a2 2 0 0 0 2 2\"/></svg></span><h3>Conexão via satélite</h3></div><div class=\"cx-bd\"><p>Pode ser oferecida em <strong>qualquer parte do planeta</strong> com uma antena, sem depender de cabos. Útil em zonas rurais, áreas remotas e unidades de conservação.</p></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k4\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9h4v6H4zM8 12h3c3 0 3-6 6-6h3M17 6v12M20 18h-3c-3 0-3-6-6-6\"/></svg></span><h3>Conexão cabeada</h3></div><div class=\"cx-bd\"><p>Versão com fio, distribuída por um roteador. Hoje usa principalmente <strong>fibra óptica</strong>, que transmite o sinal por luz e oferece a conexão mais estável.</p></div></div>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Novidade: satélites de <b>órbita baixa</b> (como a Starlink) reduziram o atraso da internet via satélite, tema do vídeo adiante."
+        }
+      ],
+      "notas": "<strong>~3 min.</strong> Perguntar quais conexões os estudantes usam. Relacionar a internet via satélite com o trabalho de campo em meio ambiente (fiscalização, monitoramento em áreas sem sinal de celular)."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Cabos submarinos",
+      "proporcao": "1.45fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"fig fig-limpa\"><img src=\"img/cabos.svg\" alt=\"Mapa esquemático do Atlântico com cabos submarinos saindo de Fortaleza\"></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card grow\"><p class=\"lead\">A maior parte do tráfego de internet entre continentes não passa por satélites, e sim por <strong>cabos de fibra óptica no fundo do mar</strong>.</p><div class=\"destaque-local\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z\"/><path d=\"M9 4v14M15 6v14\"/></svg><span><b>Fortaleza (CE)</b> é o principal ponto de chegada de cabos submarinos do Brasil, ligando o país à América do Norte, à Europa e à África.</span></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<a class=\"lk\" href=\"https://www.submarinecablemap.com/\" target=\"_blank\" rel=\"noopener\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9.5\"/><path d=\"M2.5 12h19M12 2.5c3 3.2 3 15.8 0 19M12 2.5c-3 3.2-3 15.8 0 19\"/></svg><span><b>Submarine Cable Map</b><small>Mapa interativo e atualizado dos cabos submarinos do mundo</small><em>submarinecablemap.com · TeleGeography</em></span><svg class=\"ic lk-ext\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5\"/></svg></a>"
+          }
+        ]
+      ],
+      "notas": "<strong>~3 min.</strong> Abrir o mapa interativo e clicar em Fortaleza para ver os cabos que chegam ao Ceará. Curiosidade: muitas falhas de cabos são causadas por âncoras de navios e redes de pesca."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Distribuição da internet pelo mundo",
+      "proporcao": "1.7fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"emb\"><iframe src=\"https://ourworldindata.org/grapher/share-of-individuals-using-the-internet?tab=map\" loading=\"lazy\" title=\"Mapa: parcela da população que usa a internet (Our World in Data)\" allow=\"fullscreen\"></iframe></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"kpi kpi-col\"><div><b>~6 bilhões</b><span>de pessoas usam a internet no mundo (UIT, 2025)</span></div><div><b>~2,2 bilhões</b><span>ainda estão desconectadas, sobretudo em áreas rurais e países de baixa renda</span></div><div><b>90%</b><span>dos brasileiros com 10 anos ou mais usaram a internet (IBGE, PNAD TIC 2025)</span></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<a class=\"lk\" href=\"https://ourworldindata.org/grapher/share-of-individuals-using-the-internet\" target=\"_blank\" rel=\"noopener\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 21h18M6 17v-4M10 17V9M14 17v-6M18 17V5\"/></svg><span><b>Our World in Data</b><small>Parcela da população que usou a internet nos últimos 3 meses</small><em>ourworldindata.org</em></span><svg class=\"ic lk-ext\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5\"/></svg></a>"
+          }
+        ]
+      ],
+      "notas": "<strong>~3 min.</strong> O mapa é interativo: passar o mouse sobre os países e usar a linha do tempo. Discutir desigualdade de acesso (exclusão digital) entre países e entre zona urbana e rural."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Por que Elon Musk está construindo a Starlink?",
+      "proporcao": "1.6fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"emb video-emb\"><iframe src=\"https://www.youtube-nocookie.com/embed/Q089i8RQPB0?rel=0\" loading=\"lazy\" title=\"Why Elon Musk is Really Building Starlink\" allow=\"accelerometer; encrypted-media; picture-in-picture; fullscreen\" allowfullscreen></iframe></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<a class=\"lk\" href=\"https://www.youtube.com/watch?v=Q089i8RQPB0\" target=\"_blank\" rel=\"noopener\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9.5\"/><path d=\"m10 8.5 5.5 3.5-5.5 3.5z\" fill=\"currentColor\"/></svg><span><b>Why Elon Musk is Really Building Starlink</b><em>YouTube · 15 min · em inglês (ative as legendas)</em></span><svg class=\"ic lk-ext\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5\"/></svg></a>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"card grow\"><h3>Para discutir depois do vídeo</h3><ul><li>Cabo submarino ou satélite: qual é mais rápido? E mais barato?</li><li>Quem ganha com internet via satélite no interior do Piauí?</li><li><strong>Olhar ambiental:</strong> milhares de satélites geram <strong>lixo espacial</strong> e mais brilho no céu noturno, afetando a astronomia.</li></ul></div>"
+          }
+        ]
+      ],
+      "notas": "<strong>~17 min</strong> (vídeo de 15 min + 2 min de conversa). Ativar legendas em português (Configurações → Legendas → Traduzir automaticamente). Se a sala estiver sem internet, usar só as perguntas."
+    },
+    {
+      "layout": "secao",
+      "rotulo": "Bloco 2",
+      "titulo": "A Internet",
+      "texto": "Web, endereços e navegadores",
+      "imagem": "img/secao_internet.svg",
+      "notas": "Transição: da infraestrutura (cabos, satélites) para o que usamos na tela."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "World Wide Web (WWW)",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<p class=\"lead\">A World Wide Web é um sistema que reúne várias mídias interligadas por meio eletrônico, onde é possível acessar <strong>textos, imagens, sons e vídeos</strong>. É o padrão mundial para navegação na internet.</p>"
+        }
+      ],
+      "proporcao": "1.55fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card grow\"><h3>Estrutura de uma URL</h3><div class=\"url\" role=\"list\"><span class=\"u u1\" role=\"listitem\" tabindex=\"0\">https://<i>Protocolo seguro: o cadeado indica que a conexão é criptografada</i></span><span class=\"u u2\" role=\"listitem\" tabindex=\"0\">www.<i>World Wide Web: padrão mundial (hoje costuma ser opcional)</i></span><span class=\"u u3\" role=\"listitem\" tabindex=\"0\">nomedosite<i>Nome do site: google, gov, ifpi, inpe</i></span><span class=\"u u4\" role=\"listitem\" tabindex=\"0\">.com<i>Domínio: indica a finalidade do site</i></span><span class=\"u u5\" role=\"listitem\" tabindex=\"0\">.br<i>País: indica a localização (Brasil)</i></span></div><p class=\"url-dica\">Passe o mouse (ou toque) em cada parte do endereço.</p></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card grow\"><h3>Tipos de domínio</h3><table class=\"tb2 dom\"><tr><td><code>.br</code></td><td>sites brasileiros</td></tr><tr><td><code>.com</code></td><td>sites comerciais</td></tr><tr><td><code>.gov.br</code></td><td>governo: <em>gov.br/ibama</em>, <em>gov.br/mma</em></td></tr><tr><td><code>.edu.br</code></td><td>educação: <em>ifpi.edu.br</em></td></tr><tr><td><code>.org</code></td><td>organizações não governamentais</td></tr></table></div>"
+          }
+        ]
+      ],
+      "notas": "<strong>~3 min.</strong> Montar uma URL na lousa com os estudantes. Mostrar que órgãos ambientais federais estão em gov.br (Ibama, ICMBio, MMA). Alertar: o cadeado só garante a conexão criptografada, não que o site seja confiável."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Navegadores web",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<p class=\"lead\">O <strong>navegador</strong> é o programa usado para navegar na internet: com ele você acessa sites e visualiza páginas da web. Existem vários navegadores disponíveis, todos gratuitos.</p>"
+        }
+      ],
+      "proporcao": "1fr 1fr 1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card nav\"><div class=\"nav-ic\" style=\"--c:#0EA5E9\">E</div><h3>Microsoft Edge</h3><p>Desenvolvido pela Microsoft. Vem instalado por padrão no Windows e usa o mesmo motor do Chrome (Chromium).</p></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card nav\"><div class=\"nav-ic\" style=\"--c:#16A34A\">C</div><h3>Google Chrome</h3><p>Do Google, gratuito e multiplataforma. É o navegador mais usado no mundo, inclusive nos celulares Android.</p></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card nav\"><div class=\"nav-ic\" style=\"--c:#EA580C\">F</div><h3>Mozilla Firefox</h3><p>Da Mozilla Foundation, sem fins lucrativos. Leve, seguro e com foco em privacidade; disponível para vários sistemas.</p></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card nav\"><div class=\"nav-ic\" style=\"--c:#2563EB\">S</div><h3>Safari</h3><p>Da Apple, presente no iPhone, iPad e Mac. É otimizado e tem bom desempenho nesses dispositivos.</p></div>"
+          }
+        ]
+      ],
+      "notas": "<strong>~3 min.</strong> Perguntar qual navegador cada um usa no celular e no computador. Todos acessam os mesmos sites; a escolha é por preferência, desempenho e privacidade."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Elementos de um navegador",
+      "proporcao": "1.3fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"fig fig-limpa\"><svg class=\"browser\" viewBox=\"0 0 640 400\" font-family=\"Inter, Arial, sans-serif\" role=\"img\" aria-label=\"Janela de navegador com os elementos numerados\">\n<rect x=\"1\" y=\"1\" width=\"638\" height=\"398\" rx=\"14\" fill=\"#fff\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n<path d=\"M1 15a14 14 0 0 1 14-14h610a14 14 0 0 1 14 14v31H1z\" fill=\"#E2E8F0\"/>\n<circle cx=\"22\" cy=\"23\" r=\"6\" fill=\"#F87171\"/><circle cx=\"40\" cy=\"23\" r=\"6\" fill=\"#FBBF24\"/><circle cx=\"58\" cy=\"23\" r=\"6\" fill=\"#34D399\"/>\n<path d=\"M80 46V16a6 6 0 0 1 6-6h150a6 6 0 0 1 6 6v30z\" fill=\"#fff\"/><text x=\"96\" y=\"33\" font-size=\"13\" fill=\"#334155\">IFPI</text>\n<path d=\"M248 46V18a6 6 0 0 1 6-6h120a6 6 0 0 1 6 6v28z\" fill=\"#CBD5E1\"/><text x=\"262\" y=\"33\" font-size=\"13\" fill=\"#475569\">Ibama</text>\n<text x=\"390\" y=\"34\" font-size=\"20\" fill=\"#64748B\">+</text>\n<rect x=\"1\" y=\"46\" width=\"638\" height=\"44\" fill=\"#fff\"/>\n<g stroke=\"#475569\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n<path d=\"M28 68h-12M21 62l-6 6 6 6\"/><path d=\"M44 68h12M51 62l6 6-6 6\"/><path d=\"M82 62a7 7 0 1 0 2 6M84 59v4h-4\"/></g>\n<rect x=\"124\" y=\"55\" width=\"420\" height=\"26\" rx=\"13\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\"/>\n<text x=\"142\" y=\"73\" font-size=\"13\" fill=\"#0F172A\">🔒 https://www.ifpi.edu.br</text>\n<path d=\"M528 61l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6-4.5-4 6-1z\" fill=\"#FBBF24\"/>\n<g fill=\"#475569\"><circle cx=\"612\" cy=\"61\" r=\"2.4\"/><circle cx=\"612\" cy=\"68\" r=\"2.4\"/><circle cx=\"612\" cy=\"75\" r=\"2.4\"/></g>\n<rect x=\"1\" y=\"90\" width=\"638\" height=\"26\" fill=\"#F8FAFC\"/><g font-size=\"12\" fill=\"#475569\"><text x=\"18\" y=\"107\">★ MapBiomas</text><text x=\"118\" y=\"107\">★ INPE Queimadas</text><text x=\"240\" y=\"107\">★ Gmail</text></g>\n<rect x=\"24\" y=\"134\" width=\"592\" height=\"56\" rx=\"8\" fill=\"#0B7A55\"/><text x=\"44\" y=\"169\" font-size=\"20\" font-weight=\"700\" fill=\"#fff\">Instituto Federal do Piauí</text>\n<rect x=\"24\" y=\"206\" width=\"180\" height=\"172\" rx=\"8\" fill=\"#F1F5F9\"/><rect x=\"220\" y=\"206\" width=\"396\" height=\"80\" rx=\"8\" fill=\"#ECFDF5\"/>\n<rect x=\"220\" y=\"298\" width=\"190\" height=\"80\" rx=\"8\" fill=\"#F1F5F9\"/><rect x=\"426\" y=\"298\" width=\"190\" height=\"80\" rx=\"8\" fill=\"#F1F5F9\"/>\n<g class=\"mk\" font-size=\"14\" font-weight=\"800\" fill=\"#fff\" text-anchor=\"middle\">\n<circle cx=\"300\" cy=\"68\" r=\"14\" fill=\"#F59E0B\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"300\" y=\"73\">1</text>\n<circle cx=\"104\" cy=\"68\" r=\"14\" fill=\"#F59E0B\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"104\" y=\"73\">2</text>\n<circle cx=\"190\" cy=\"28\" r=\"14\" fill=\"#F59E0B\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"190\" y=\"33\">3</text>\n<circle cx=\"345\" cy=\"104\" r=\"14\" fill=\"#F59E0B\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"345\" y=\"109\">4</text>\n<circle cx=\"590\" cy=\"68\" r=\"14\" fill=\"#F59E0B\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"590\" y=\"73\">5</text></g>\n</svg></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<ol class=\"elem\"><li><div><b>Barra de endereços</b><span>Onde você digita o endereço do site e pressiona Enter. Também aceita pesquisas.</span></div></li><li><div><b>Botões de controle</b><span>Voltar, Avançar e Atualizar (F5). Esc interrompe o carregamento.</span></div></li><li><div><b>Guias (abas)</b><span>Abrem várias páginas em uma só janela. Ctrl+T abre uma nova guia.</span></div></li><li><div><b>Favoritos</b><span>Salve páginas para acessar depois (Ctrl+D ou a estrela ★).</span></div></li><li><div><b>Menu de configurações</b><span>Histórico, downloads, privacidade e extensões. Cada navegador tem funções próprias.</span></div></li></ol>"
+          }
+        ]
+      ],
+      "notas": "<strong>~3 min.</strong> Se houver computador conectado ao projetor, abrir o navegador e mostrar cada elemento ao vivo, incluindo Ctrl+T, Ctrl+D e o histórico (Ctrl+H)."
+    },
+    {
+      "layout": "secao",
+      "rotulo": "Bloco 3",
+      "titulo": "Pesquisar na Internet",
+      "texto": "Buscadores, operadores e fontes confiáveis",
+      "imagem": "img/secao_pesquisa.svg",
+      "notas": "Transição para a parte prática de pesquisa. Se possível, estudantes acompanham no celular."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Pesquisa de informações na internet",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<p class=\"lead\">A internet é uma fonte enorme de informações. Para filtrá-las existem os <strong>buscadores</strong>, sites que pesquisam por palavras-chave: <a href=\"https://www.google.com\" target=\"_blank\" rel=\"noopener\">Google</a>, <a href=\"https://www.bing.com\" target=\"_blank\" rel=\"noopener\">Bing</a> e <a href=\"https://duckduckgo.com/\" target=\"_blank\" rel=\"noopener\">DuckDuckGo</a>. Clique nos exemplos para testar:</p>"
+        }
+      ],
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"ops\"><a class=\"op\" href=\"https://www.google.com/search?q=%22licenciamento+ambiental%22\" target=\"_blank\" rel=\"noopener\"><span class=\"op-n\">Aspas</span><code>&quot;licenciamento ambiental&quot;</code><small>busca o termo exato</small></a><a class=\"op\" href=\"https://www.google.com/search?q=queimadas+site%3Ainpe.br\" target=\"_blank\" rel=\"noopener\"><span class=\"op-n\">site:</span><code>queimadas site:inpe.br</code><small>pesquisa só dentro de um site</small></a><a class=\"op\" href=\"https://www.google.com/search?q=%22plano+de+manejo%22+filetype%3Apdf\" target=\"_blank\" rel=\"noopener\"><span class=\"op-n\">filetype:</span><code>&quot;plano de manejo&quot; filetype:pdf</code><small>procura um tipo de arquivo (pdf, ppt, xls)</small></a><a class=\"op\" href=\"https://www.google.com/search?q=desmatamento+Piau%C3%AD+after%3A2025-01-01\" target=\"_blank\" rel=\"noopener\"><span class=\"op-n\">before: / after:</span><code>desmatamento Piauí after:2025-01-01</code><small>filtra por data (antes / depois)</small></a><a class=\"op\" href=\"https://www.google.com/search?q=reciclagem+-venda\" target=\"_blank\" rel=\"noopener\"><span class=\"op-n\">sinal de menos</span><code>reciclagem -venda</code><small>exclui uma palavra do resultado</small></a><a class=\"op\" href=\"https://www.google.com/search?q=%22coleta+seletiva%22+OR+compostagem+Teresina\" target=\"_blank\" rel=\"noopener\"><span class=\"op-n\">OR</span><code>&quot;coleta seletiva&quot; OR compostagem Teresina</code><small>aceita um termo ou outro</small></a><a class=\"op\" href=\"https://www.google.com/search?q=%40instagram+educa%C3%A7%C3%A3o+ambiental\" target=\"_blank\" rel=\"noopener\"><span class=\"op-n\">@rede social</span><code>@instagram educação ambiental</code><small>busca em uma rede social</small></a><a class=\"op\" href=\"https://www.google.com/search?q=composteira+dom%C3%A9stica+R%24100..R%24300\" target=\"_blank\" rel=\"noopener\"><span class=\"op-n\">R$ e ..</span><code>composteira doméstica R$100..R$300</code><small>produtos numa faixa de preço</small></a></div>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"aviso\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3 2 20.5h20z\"/><path d=\"M12 10v4.5\"/><circle cx=\"12\" cy=\"17.5\" r=\"1\" fill=\"currentColor\"/></svg><span><b>Importante:</b> nem tudo na internet é confiável, e respostas geradas por IA no topo da busca também podem errar. Prefira fontes oficiais (<em>.gov.br</em>, universidades, institutos de pesquisa) e confira de onde veio a informação. Os antigos <code>define:</code> e <code>related:</code> foram descontinuados pelo Google.</span></div>"
+        }
+      ],
+      "notas": "<strong>~5 min.</strong> Testar 3 ou 4 operadores ao vivo e comparar com a busca sem operador. Pedir que os estudantes combinem dois operadores (ex.: site:gov.br filetype:pdf \"resíduos sólidos\")."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Pesquisa de imagens e vídeos",
+      "proporcao": "1fr 1fr 1fr",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<p class=\"lead\">Além de textos, os buscadores encontram <strong>imagens e vídeos</strong>, e podem até pesquisar a partir de uma foto tirada com o celular.</p>"
+        }
+      ],
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx \"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"16\" rx=\"2\"/><circle cx=\"8.5\" cy=\"9.5\" r=\"1.8\"/><path d=\"m21 16-5-5-9 9\"/></svg></span><h3>Pesquisa de imagens</h3></div><div class=\"cx-bd\"><p>No Google, digite o termo e clique em <strong>Imagens</strong> para ver resultados visuais. Clique na imagem para vê-la maior e acessar o site de origem.</p><p class=\"mini\">Para usar em trabalhos: <em>Ferramentas → Direitos de uso → Licenças Creative Commons</em>.</p></div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k2\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3\"/><circle cx=\"12\" cy=\"12\" r=\"3.5\"/></svg></span><h3>Pesquisa por imagem</h3></div><div class=\"cx-bd\"><p>Com o <strong>Google Lens</strong>, você fotografa algo e o buscador encontra informações sobre ele.</p><p class=\"mini\">No campo: fotografe uma planta, um inseto ou uma ave para descobrir a espécie. O app <em>iNaturalist</em> faz isso com ajuda de especialistas.</p></div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k3\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"5\" width=\"19\" height=\"14\" rx=\"3\"/><path d=\"m10 9 5 3-5 3z\" fill=\"currentColor\"/></svg></span><h3>Pesquisa de vídeos</h3></div><div class=\"cx-bd\"><p>O <strong>YouTube</strong> permite pesquisar e assistir vídeos. Digite o assunto, pressione Enter e clique no vídeo desejado.</p><p class=\"mini\">Use os <em>Filtros</em> para escolher duração e data, e ative as legendas quando precisar.</p></div></div>"
+          }
+        ]
+      ],
+      "notas": "<strong>~4 min.</strong> Demonstrar o Google Lens com a foto de uma planta do campus. Explicar que imagem encontrada na internet não é automaticamente livre para uso."
+    },
+    {
+      "layout": "secao",
+      "rotulo": "Bloco 4",
+      "titulo": "Download de arquivos",
+      "texto": "Baixar e enviar arquivos com segurança",
+      "imagem": "img/secao_download.svg",
+      "notas": "Transição."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Download e upload de arquivos",
+      "proporcao": "1fr 1.25fr .8fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<p class=\"lead\">Download é <strong>“baixar”</strong> arquivos da internet para o seu computador, celular ou tablet. Upload é o contrário: <strong>enviar</strong> arquivos do seu dispositivo para a web.</p>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"dupla\"><div><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3v12M7 10l5 5 5-5M4 20h16\"/></svg><b>Download</b><span>Retirar um arquivo da internet para o seu dispositivo.</span></div><div><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 15V3M7 8l5-5 5 5M4 20h16\"/></svg><b>Upload</b><span>Enviar um arquivo para a web, como anexar em um e-mail.</span></div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card grow\"><h3>Onde baixar com segurança</h3><ul class=\"chk\"><li><b>Lojas oficiais:</b> Play Store, App Store e Microsoft Store.</li><li><b>Sites oficiais</b> de quem desenvolve o programa (ex.: <em>qgis.org</em>).</li><li><b>Dados abertos ambientais:</b> <a href=\"https://dados.gov.br\" target=\"_blank\" rel=\"noopener\">dados.gov.br</a>, MapBiomas e INPE.</li><li><b>Vídeos offline:</b> use o botão <em>Download</em> do próprio app (YouTube Premium, por exemplo).</li></ul></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"aviso\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3 2 20.5h20z\"/><path d=\"M12 10v4.5\"/><circle cx=\"12\" cy=\"17.5\" r=\"1\" fill=\"currentColor\"/></svg><span>Evite sites “baixadores” de vídeos e músicas: são cheios de anúncios enganosos e podem instalar <b>vírus</b>. Baixar conteúdo de terceiros sem permissão também pode violar direitos autorais.</span></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"fig fig-limpa\"><img src=\"img/download.svg\" alt=\"Monitor com ícone de download e barra de progresso\"></div>"
+          }
+        ]
+      ],
+      "notas": "<strong>~4 min.</strong> Atualização em relação ao material antigo: serviços como SaveFrom e 4Shared foram retirados por riscos de segurança e de direitos autorais. Mostrar onde ficam os downloads no navegador (Ctrl+J)."
+    },
+    {
+      "layout": "secao",
+      "rotulo": "Bloco 5",
+      "titulo": "Correio eletrônico",
+      "texto": "E-mail e Gmail",
+      "imagem": "img/secao_email.svg",
+      "notas": "Transição."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Correio eletrônico (e-mail)",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<p class=\"lead\">E-mail é a ferramenta para <strong>enviar e receber mensagens e arquivos</strong> pela internet. Bilhões de pessoas se comunicam por e-mail, e ele é indispensável para cadastros, trabalho e comunicação com órgãos públicos.</p>"
+        }
+      ],
+      "proporcao": "1.2fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card grow\"><h3>Estrutura do e-mail</h3><div class=\"mail\"><span class=\"m1\">usuario</span><span class=\"m2\">@</span><span class=\"m3\">provedor</span><span class=\"m4\">.com.br</span></div><ul><li><b>Login:</b> identificação do usuário (antes do @).</li><li><b>Provedor:</b> Gmail, Outlook (antigo Hotmail), Yahoo, ou o institucional <em>@ifpi.edu.br</em>.</li><li><b>@</b> (arroba) significa “em”: <em>usuário em tal provedor</em>.</li></ul></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card grow\"><h3>Campos de destinatário</h3><p class=\"mini\">Clique para revelar:</p><div class=\"rev\" onclick=\"rv(this)\"><span>Para</span><div class=\"resp\">Destinatário principal da mensagem.</div></div><div class=\"rev\" onclick=\"rv(this)\"><span>Cc</span><div class=\"resp\">Com cópia: o destinatário recebe e <b>todos veem</b> que ele foi copiado.</div></div><div class=\"rev\" onclick=\"rv(this)\"><span>Cco</span><div class=\"resp\">Com cópia oculta: recebe, mas <b>ninguém vê</b> o endereço dele. Ideal para enviar a muitas pessoas sem expor os e-mails.</div></div></div>"
+          }
+        ]
+      ],
+      "notas": "<strong>~3 min.</strong> Perguntar antes de revelar: “quando eu uso Cco?”. Exemplo: convite de um evento de educação ambiental enviado a 50 pessoas → usar Cco para proteger os endereços."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Usando o Gmail",
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"passo\"><span class=\"pn\">01</span><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21a8 8 0 0 1 16 0\"/></svg><div><b>Criando uma conta</b><span>Acesse <em>gmail.com</em>, clique em <b>Criar conta</b> e preencha o formulário. Ative a <b>verificação em duas etapas</b>.</span></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"passo\"><span class=\"pn\">02</span><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m20 11.5-8.2 8.2a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7L9.5 17.4a1.7 1.7 0 0 1-2.4-2.4l7.8-7.8\"/></svg><div><b>Escrevendo e-mails</b><span>Clique em <b>Escrever</b>, preencha destinatário, assunto e texto. Use o clipe para anexar (até 25 MB; acima disso vai como link do Google Drive).</span></div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"passo\"><span class=\"pn\">03</span><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 7h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 7l2-4h14l2 4M9 11h6\"/></svg><div><b>Gerenciando e-mails</b><span>E-mails em negrito ainda não foram lidos. <b>Responder</b> volta ao remetente; <b>Encaminhar</b> envia a outras pessoas.</span></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"passo\"><span class=\"pn\">04</span><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 16l-4-4 4-4M6 12h10\"/></svg><div><b>Segurança na saída</b><span>Em computadores compartilhados, sempre clique em <b>Sair</b>. Só fechar o navegador deixa a conta aberta para o próximo usuário.</span></div></div>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"lks2\"><a class=\"lk\" href=\"https://support.google.com/mail\" target=\"_blank\" rel=\"noopener\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"5\" width=\"19\" height=\"14\" rx=\"2\"/><path d=\"m3 6.5 9 7 9-7\"/></svg><span><b>Central de Ajuda do Gmail</b><small>Guia oficial do Google</small><em>support.google.com/mail</em></span><svg class=\"ic lk-ext\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5\"/></svg></a><a class=\"lk\" href=\"https://www.ufsm.br/app/uploads/sites/762/2020/09/Tutorial_Gmail.pdf\" target=\"_blank\" rel=\"noopener\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 7h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 7l2-4h14l2 4M9 11h6\"/></svg><span><b>Tutorial Gmail</b><small>Material produzido pela UFSM</small><em>ufsm.br · PDF</em></span><svg class=\"ic lk-ext\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5\"/></svg></a></div>"
+        }
+      ],
+      "notas": "<strong>~3 min.</strong> Mostrar a caixa de entrada e o botão Escrever. Reforçar a verificação em duas etapas e o “Sair” nos laboratórios do campus."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Prática: escrevendo um e-mail",
+      "proporcao": "1fr 1.25fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card grow\"><h3>Boas práticas de assunto e corpo</h3><ol class=\"elem bp-mail\"><li><div><b>Assunto</b><span>Curto e específico: diga do que se trata. Nunca deixe em branco.</span></div></li><li><div><b>Saudação</b><span>“Olá, professor Diego,” ou “Prezado(a) …,”.</span></div></li><li><div><b>Identificação</b><span>Quem é você: nome, curso e turma.</span></div></li><li><div><b>Mensagem</b><span>Objetiva, em parágrafos curtos. Se houver anexo, avise no texto.</span></div></li><li><div><b>Despedida e assinatura</b><span>“Atenciosamente,” + nome completo e curso.</span></div></li><li><div><b>Revise antes de enviar</b><span>Ortografia, destinatário e anexo. Evite CAIXA ALTA, gírias e emojis.</span></div></li></ol></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"mailbox\"><div class=\"mb-hd\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"5\" width=\"19\" height=\"14\" rx=\"2\"></rect><path d=\"m3 6.5 9 7 9-7\"></path></svg><b>Nova mensagem</b></div><div class=\"mb-l\"><span>Para</span><code>diego.cordeiro@ifpi.edu.br</code></div><div class=\"mb-l\"><span>Cc</span><em>e-mail de um colega da turma</em></div><div class=\"mb-l\"><span>Assunto</span><b>Informática Aplicada – Aula 06 – Prática de e-mail – Seu Nome</b></div><div class=\"mb-bd\"><p>Olá, professor Diego,</p><p>Sou <b>[seu nome]</b>, da turma <b>[turma]</b> do curso de Meio Ambiente. Envio em anexo a foto do meu desenho de como a internet funciona, feito na atividade desta aula.</p><p>Atenciosamente,<br><b>[Nome completo]</b><br>Meio Ambiente · IFPI</p></div><div class=\"mb-ft\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m20 11.5-8.2 8.2a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7L9.5 17.4a1.7 1.7 0 0 1-2.4-2.4l7.8-7.8\"></path></svg><span>desenho-internet.jpg</span></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<a class=\"lk\" href=\"mailto:diego.cordeiro@ifpi.edu.br\" target=\"_blank\" rel=\"noopener\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"5\" width=\"19\" height=\"14\" rx=\"2\"/><path d=\"m3 6.5 9 7 9-7\"/></svg><span><b>Envie para diego.cordeiro@ufpi.edu.br</b><small>Copie um colega em Cc e anexe a foto do desenho da atividade</small><em>Prazo: até o fim da aula</em></span><svg class=\"ic lk-ext\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5\"/></svg></a>"
+          }
+        ]
+      ],
+      "notas": "<strong>~6 min.</strong> Cada estudante escreve do próprio celular (Gmail ou e-mail institucional) seguindo o modelo, com um colega em Cc e a foto do desenho anexada (retoma a atividade do slide 3 e o anexo do slide anterior). Na próxima aula, comentar exemplos de assuntos bons e ruins recebidos, sem expor nomes."
+    },
+    {
+      "layout": "secao",
+      "rotulo": "Bloco 6",
+      "titulo": "Computação em nuvem",
+      "texto": "Arquivos e programas acessíveis de qualquer lugar",
+      "imagem": "img/secao_nuvem.svg",
+      "notas": "Transição."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Computação em nuvem",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<p class=\"lead\">A computação em nuvem (<em>cloud computing</em>) permite <strong>armazenar e acessar dados e programas pela internet</strong>, em vez de depender só do seu computador. É como ter um disco virtual e programas disponíveis em qualquer lugar, a qualquer hora: Google Drive, OneDrive e iCloud são exemplos.</p>"
+        }
+      ],
+      "proporcao": "1fr 1fr .85fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx \"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9.5\"/><path d=\"M2.5 12h19M12 2.5c3 3.2 3 15.8 0 19M12 2.5c-3 3.2-3 15.8 0 19\"/></svg></span><h3>Acessibilidade universal</h3></div><div class=\"cx-bd\"><p>Acesse arquivos e aplicativos de qualquer dispositivo conectado, sem estar perto do seu computador.</p></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k3\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9.5\"/><path d=\"M15 8.5c-.6-1-1.7-1.5-3-1.5-1.8 0-3 .9-3 2.3 0 3.3 6 1.8 6 5 0 1.4-1.3 2.4-3 2.4-1.4 0-2.6-.6-3.2-1.7M12 5.5v13\"/></svg></span><h3>Redução de custos</h3></div><div class=\"cx-bd\"><p>Menos gastos com equipamentos, manutenção e licenças de software.</p></div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k2\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 21h18M6 17v-4M10 17V9M14 17v-6M18 17V5\"/></svg></span><h3>Escalabilidade flexível</h3></div><div class=\"cx-bd\"><p>Aumente ou diminua armazenamento e processamento conforme a necessidade, pagando pelo que usa.</p></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k4\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z\"/><path d=\"m8.5 12 2.5 2.5 4.5-4.5\"/></svg></span><h3>Segurança e confiabilidade</h3></div><div class=\"cx-bd\"><p>Servidores com cópias de segurança automáticas protegem contra perdas e falhas de equipamento.</p></div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"fig fig-limpa\"><img src=\"img/nuvem.svg\" alt=\"Nuvem com servidores conectada a notebook, celular e tablet\"></div>"
+          }
+        ]
+      ],
+      "notas": "<strong>~3 min.</strong> Perguntar quem já perdeu arquivos por pen drive ou celular quebrado. Mostrar o Google Drive institucional, se disponível."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Softwares e plataformas online para Meio Ambiente",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<p class=\"lead\">A nuvem também transformou o trabalho ambiental: hoje é possível <strong>monitorar florestas, queimadas e biodiversidade pelo navegador</strong>, com dados gratuitos.</p>"
+        }
+      ],
+      "proporcao": "1fr 1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<a class=\"soft\" href=\"https://brasil.mapbiomas.org\" target=\"_blank\" rel=\"noopener\"><div class=\"soft-hd\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z\"/><path d=\"M9 4v14M15 6v14\"/></svg><b>MapBiomas</b><span class=\"tag\">Web · gratuito</span></div><p>Mapas anuais de uso e cobertura do solo do Brasil desde 1985: florestas, agropecuária, água e áreas urbanas.</p><em>brasil.mapbiomas.org ↗</em></a>"
+          },
+          {
+            "tipo": "html",
+            "html": "<a class=\"soft\" href=\"https://earthengine.google.com\" target=\"_blank\" rel=\"noopener\"><div class=\"soft-hd\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M3 15l5-5 4 4 3-3 6 6\"/><path d=\"M14 7h3v3\"/></svg><b>Google Earth Engine</b><span class=\"tag\">Nuvem · uso acadêmico</span></div><p>Plataforma que processa décadas de imagens de satélite nos servidores do Google. Gratuita para ensino e pesquisa.</p><em>earthengine.google.com ↗</em></a>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<a class=\"soft\" href=\"https://terrabrasilis.dpi.inpe.br\" target=\"_blank\" rel=\"noopener\"><div class=\"soft-hd\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 22v-6M12 16l-3-3M12 14l3-3\"/><path d=\"M12 2a6 6 0 0 0-5.6 8.1A4.5 4.5 0 0 0 8.5 18h7a4.5 4.5 0 0 0 2.1-7.9A6 6 0 0 0 12 2z\"/></svg><b>TerraBrasilis (INPE)</b><span class=\"tag\">Web · gratuito</span></div><p>Dados oficiais de desmatamento dos programas PRODES e DETER, com painéis por bioma, estado e município.</p><em>terrabrasilis.dpi.inpe.br ↗</em></a>"
+          },
+          {
+            "tipo": "html",
+            "html": "<a class=\"soft\" href=\"https://www.inaturalist.org\" target=\"_blank\" rel=\"noopener\"><div class=\"soft-hd\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"6.5\" cy=\"16\" r=\"3.5\"/><circle cx=\"17.5\" cy=\"16\" r=\"3.5\"/><path d=\"M10 16h4M4 13l2-8h3l1 8M20 13l-2-8h-3l-1 8\"/></svg><b>iNaturalist</b><span class=\"tag\">App · gratuito</span></div><p>Ciência cidadã: registre fotos de plantas e animais, receba sugestão de espécie e ajude pesquisas de biodiversidade.</p><em>inaturalist.org ↗</em></a>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<a class=\"soft\" href=\"https://terrabrasilis.dpi.inpe.br/queimadas/bdqueimadas/\" target=\"_blank\" rel=\"noopener\"><div class=\"soft-hd\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 22c4 0 7-2.7 7-6.8 0-4.2-3.4-6.5-4.5-10.7-2.4 1.8-3.4 4-3.2 6.5-1.3-.7-2.1-1.9-2.3-3.5C6.6 9.300 5 12 5 15.2 5 19.3 8 22 12 22z\"/></svg><b>BDQueimadas (INPE)</b><span class=\"tag\">Web · gratuito</span></div><p>Focos de calor detectados por satélite quase em tempo real, com filtros por período, estado e unidade de conservação.</p><em>terrabrasilis.dpi.inpe.br/queimadas ↗</em></a>"
+          },
+          {
+            "tipo": "html",
+            "html": "<a class=\"soft\" href=\"https://www.car.gov.br\" target=\"_blank\" rel=\"noopener\"><div class=\"soft-hd\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19C5 9 11 4 20 4c0 9-5 15-15 15z\"/><path d=\"M5 19 14 10\"/></svg><b>SICAR (CAR)</b><span class=\"tag\">Sistema público</span></div><p>Sistema do Cadastro Ambiental Rural: registro online obrigatório dos imóveis rurais, com APPs e reserva legal.</p><em>car.gov.br ↗</em></a>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Para análises no computador: <b>QGIS</b>, sistema de informação geográfica livre e gratuito (<em>qgis.org</em>)."
+        }
+      ],
+      "notas": "<strong>~6 min.</strong> Adaptação para Meio Ambiente (substitui SAP e Salesforce do material original). Abrir pelo menos o MapBiomas e o BDQueimadas. Comentar que o CAR é exigido por lei para imóveis rurais e é uma área de atuação do técnico."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Prática: os dados ambientais do seu município",
+      "proporcao": "1.3fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card grow\"><h3>Em duplas, no celular ou no laboratório</h3><ol class=\"passos\"><li>Acesse a plataforma do <b>MapBiomas</b> e busque o seu município (ex.: Teresina).</li><li>Compare a cobertura do solo de <b>1985</b> com a do <b>ano mais recente</b>.</li><li>No <b>BDQueimadas</b>, filtre o estado do Piauí e veja os focos de calor dos últimos 30 dias.</li><li>Anote <b>duas observações</b> e de qual fonte elas vieram.</li></ol></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<a class=\"lk\" href=\"https://plataforma.brasil.mapbiomas.org\" target=\"_blank\" rel=\"noopener\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z\"/><path d=\"M9 4v14M15 6v14\"/></svg><span><b>Plataforma MapBiomas</b><em>plataforma.brasil.mapbiomas.org</em></span><svg class=\"ic lk-ext\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5\"/></svg></a>"
+          },
+          {
+            "tipo": "html",
+            "html": "<a class=\"lk\" href=\"https://terrabrasilis.dpi.inpe.br/queimadas/bdqueimadas/\" target=\"_blank\" rel=\"noopener\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 22c4 0 7-2.7 7-6.8 0-4.2-3.4-6.5-4.5-10.7-2.4 1.8-3.4 4-3.2 6.5-1.3-.7-2.1-1.9-2.3-3.5C6.6 9.300 5 12 5 15.2 5 19.3 8 22 12 22z\"/></svg><span><b>BDQueimadas</b><em>INPE · terrabrasilis.dpi.inpe.br</em></span><svg class=\"ic lk-ext\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5\"/></svg></a>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"card vd grow\"><h3>Para discutir</h3><div class=\"rev\" onclick=\"rv(this)\"><span>O que mudou na paisagem?</span><div class=\"resp\">Ex.: aumento de áreas agrícolas ou urbanas e redução de vegetação nativa (Cerrado e Caatinga, no Piauí).</div></div><div class=\"rev\" onclick=\"rv(this)\"><span>Por que usar a fonte oficial?</span><div class=\"resp\">Dados com metodologia publicada e revisada, que podem ser citados em relatórios técnicos.</div></div></div>"
+          }
+        ]
+      ],
+      "notas": "<strong>~6 min.</strong> Atividade que substitui o vídeo sobre CRM do material original. Projetar o passo a passo uma vez e depois deixar as duplas explorarem. Encerrar com 2 ou 3 duplas compartilhando o que observaram."
+    },
+    {
+      "layout": "secao",
+      "rotulo": "Bloco 7",
+      "titulo": "Redes sociais",
+      "texto": "Uso profissional, boas práticas e segurança",
+      "imagem": "img/secao_redes.svg",
+      "notas": "Transição."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Redes sociais no ambiente profissional",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<p class=\"lead\">Redes sociais são espaços onde pessoas se conectam por <strong>interesses comuns</strong>. Na área ambiental, servem para <strong>educação ambiental, divulgação de projetos, mobilização e networking</strong> com órgãos, ONGs e empresas.</p>"
+        }
+      ],
+      "proporcao": "1fr 1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx \"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"9\" cy=\"8\" r=\"3.5\"/><path d=\"M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14a6.5 6.5 0 0 1 3.5 6\"/></svg></span><h3>Facebook</h3></div><div class=\"cx-bd\"><p>Páginas, eventos e <strong>grupos</strong>. Bom para comunidades locais, mutirões de limpeza e grupos acadêmicos ou profissionais.</p></div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k2\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"6\" width=\"19\" height=\"14\" rx=\"3\"/><circle cx=\"12\" cy=\"13\" r=\"4\"/><path d=\"M8.5 6 10 3.5h4L15.5 6\"/></svg></span><h3>Instagram</h3></div><div class=\"cx-bd\"><p>Foco em <strong>fotos e vídeos</strong>. Ideal para campanhas de educação ambiental e para mostrar projetos e ações em campo.</p></div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k3\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"7\" width=\"19\" height=\"13\" rx=\"2\"/><path d=\"M8.5 7V5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v2M2.5 13h19\"/></svg></span><h3>LinkedIn</h3></div><div class=\"cx-bd\"><p>Rede <strong>profissional</strong>: currículo online, vagas de estágio e emprego na área ambiental e contato com empresas e consultorias.</p></div></div>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Dica: siga perfis oficiais como <b>Ibama, ICMBio, INPE</b> e a secretaria de meio ambiente do seu estado."
+        }
+      ],
+      "notas": "<strong>~3 min.</strong> Perguntar quem já tem LinkedIn. Sugerir criar o perfil ainda no curso, registrando estágios e projetos."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Boas práticas em redes sociais",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<p class=\"lead\">Segundo a <strong>Cartilha de Segurança do CERT.br</strong>, é fundamental adotar comportamentos seguros nas redes sociais para proteger informações pessoais e profissionais.</p>"
+        }
+      ],
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx \"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"4.5\" y=\"10.5\" width=\"15\" height=\"10.5\" rx=\"2\"/><path d=\"M8 10.5V7.5a4 4 0 0 1 8 0v3\"/><circle cx=\"12\" cy=\"15.7\" r=\"1.4\" fill=\"currentColor\"/></svg></span><h3>Configurações de privacidade</h3></div><div class=\"cx-bd\"><p>Controle quem vê suas publicações e revise as configurações de privacidade regularmente.</p></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k3\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"7\" width=\"19\" height=\"13\" rx=\"2\"/><path d=\"M8.5 7V5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v2M2.5 13h19\"/></svg></span><h3>Conteúdo profissional</h3></div><div class=\"cx-bd\"><p>Mantenha uma postura profissional e evite polêmicas: empregadores podem verificar seu perfil.</p></div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k2\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg></span><h3>Informações pessoais</h3></div><div class=\"cx-bd\"><p>Evite compartilhar endereço, telefone, localização em tempo real ou dados financeiros.</p></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k4\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21a8 8 0 0 1 16 0\"/></svg></span><h3>Verificação de contatos</h3></div><div class=\"cx-bd\"><p>Aceite apenas pessoas conhecidas e desconfie de perfis falsos ou suspeitos.</p></div></div>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "html",
+          "html": "<a class=\"lk\" href=\"https://cartilha.cert.br/fasciculos/redes-sociais/fasciculo-redes-sociais.pdf\" target=\"_blank\" rel=\"noopener\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z\"/><path d=\"m8.5 12 2.5 2.5 4.5-4.5\"/></svg><span><b>Fascículo Redes Sociais</b><small>Cartilha de Segurança para Internet do CERT.br</small><em>cartilha.cert.br · PDF</em></span><svg class=\"ic lk-ext\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5\"/></svg></a>"
+        }
+      ],
+      "notas": "<strong>~3 min.</strong> Pedir que cada estudante confira agora, no celular, se o seu perfil está público ou privado."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Segurança e comportamento digital",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<p class=\"lead\">A segurança digital é essencial para qualquer profissional. Adote práticas seguras para proteger informações pessoais e do trabalho.</p>"
+        }
+      ],
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx \"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"5\" width=\"19\" height=\"14\" rx=\"2\"/><path d=\"m3 6.5 9 7 9-7\"/></svg></span><h3>Golpes por mensagem</h3></div><div class=\"cx-bd\"><p>Bancos e órgãos públicos não pedem senha nem código por e-mail, SMS ou WhatsApp. Desconfie de promoções “milagrosas” e de pedidos urgentes de Pix.</p></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k3\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z\"/><path d=\"m8.5 12 2.5 2.5 4.5-4.5\"/></svg></span><h3>Proteção do sistema</h3></div><div class=\"cx-bd\"><p>Mantenha sistema e aplicativos atualizados, não clique em links suspeitos e faça backup na nuvem.</p></div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k2\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"9\" cy=\"20\" r=\"1.5\"/><circle cx=\"18\" cy=\"20\" r=\"1.5\"/><path d=\"M2 3h3l2.6 12.2a1.5 1.5 0 0 0 1.5 1.3h8.8a1.5 1.5 0 0 0 1.5-1.2L21 7H6\"/></svg></span><h3>Compras online</h3></div><div class=\"cx-bd\"><p>Compre em lojas conhecidas e verifique a reputação. O cadeado (https) protege a conexão, mas <strong>não garante</strong> que o site seja honesto.</p></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"card cx k4\"><div class=\"cx-hd\"><span class=\"cic\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"7.5\" cy=\"15.5\" r=\"4.5\"/><path d=\"m11 12 9-9M16 7l3 3M18.5 4.5l2 2\"/></svg></span><h3>Senhas seguras</h3></div><div class=\"cx-bd\"><p>Use senhas longas e diferentes para cada conta, um gerenciador de senhas e a <strong>verificação em duas etapas</strong>.</p></div></div>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"aviso\"><svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z\"/><path d=\"m8.5 12 2.5 2.5 4.5-4.5\"/></svg><span><b>Lembre-se:</b> na dúvida, não clique! Pesquise sobre o site ou peça ajuda antes de fornecer informações pessoais.</span></div>"
+        }
+      ],
+      "notas": "<strong>~3 min.</strong> Contar um golpe comum (falso boleto, falso parente no WhatsApp). Mostrar como ativar a verificação em duas etapas no WhatsApp: Configurações → Conta → Confirmação em duas etapas."
+    },
+    {
+      "layout": "capa",
+      "rotulo": "Encerramento",
+      "titulo": "Alguma dúvida?",
+      "subtitulos": [
+        "Este é o momento para esclarecer qualquer questão sobre o conteúdo que vimos até agora.",
+        "Não tenha receio de perguntar: as dúvidas de hoje são o conhecimento de amanhã!"
+      ],
+      "imagem": "img/duvidas.svg",
+      "fim": true,
+      "notas": "<strong>~2 min.</strong> Recapitular os blocos (história, infraestrutura, web, pesquisa, e-mail, nuvem, redes e segurança) e abrir para perguntas."
+    }
+  ]
+}
