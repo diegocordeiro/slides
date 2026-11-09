@@ -3,8 +3,8 @@
   "motor": "editor",
   "estado": "editor",
   "meta": {
-    "titulo": "Internet: Histórico e fundamentos — Aula 06",
-    "titulo_barra": "Internet: Histórico e fundamentos",
+    "titulo": "Informática Aplicada · Aula 06 - Internet: Histórico e fundamentos",
+    "titulo_barra": "Informática Aplicada · Aula 06",
     "arquivo": "apresentacao.html",
     "cronometro_min": 100,
     "rodape": "<strong>Aula 06 · Internet: Histórico e fundamentos</strong> · Informática Aplicada — Meio Ambiente · IFPI · Prof. Diego Cordeiro",
@@ -56,10 +56,9 @@
   "slides": [
     {
       "layout": "capa",
-      "rotulo": "Informática Aplicada · Meio Ambiente · IFPI",
+      "rotulo": "Informática Aplicada · Aula 06",
       "titulo": "Internet: Histórico<br>e fundamentos",
       "subtitulos": [
-        "Aula 06",
         "Professor Diego Cordeiro"
       ],
       "meta": [
