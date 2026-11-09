@@ -388,6 +388,10 @@ def render_pagina(dados: dict, ed: bool = False, base_href: str | None = None) -
     lim = meta.get("cronometro_min") or 10
     script = "" if ed else '\n  <script src="%s.js"></script>' % esc(base)
     estilo = '<style>%s</style>' % css_aula(dados) if ed else '<link rel="stylesheet" href="%s.css">' % esc(base)
+    # celular/tablet: liga o "modo rolagem" antes de desenhar (mesma regra do runtime.js)
+    movel = "" if ed else ("\n  <script>try{if(!/[?&]modo=apresentador/.test(location.search)&&matchMedia("
+                           "'(max-width: 820px), (max-height: 500px) and (pointer: coarse)').matches)"
+                           "document.documentElement.classList.add('movel')}catch(e){}</script>")
     lim_txt = "%02d:%02d" % (int(lim), round((float(lim) % 1) * 60))
     return f"""<!DOCTYPE html>
 <html lang="{esc(meta.get('lang') or 'pt-BR')}">
@@ -397,7 +401,7 @@ def render_pagina(dados: dict, ed: bool = False, base_href: str | None = None) -
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <meta name="generator" content="editor_slides">{cab_ed}
   <title>{esc(_txt(titulo))}</title>
-  {estilo}
+  {estilo}{movel}
 </head>
 
 <body data-limite="{esc(lim)}"{' class="modo-editor"' if ed else ''}>

@@ -4,9 +4,17 @@ let c=0,t=document.querySelectorAll('.sl').length,dots=[];
 let isPresenter = new URLSearchParams(location.search).get('modo')==='apresentador';
 let win=null;
 
-function sh(n){
+/* ===== Celular/tablet: modo rolagem =====
+   Mesma regra do <script> no <head> da aula (que liga a classe antes de desenhar). */
+var MQ_MOVEL='(max-width: 820px), (max-height: 500px) and (pointer: coarse)';
+var mqMovel=window.matchMedia?window.matchMedia(MQ_MOVEL):{matches:false};
+function movel(){return document.documentElement.classList.contains('movel')}
+
+function sh(n,semRolar){
   document.querySelectorAll('.sl').forEach(s=>s.classList.remove('ac'));
-  document.getElementById('s'+(n+1)).classList.add('ac');
+  var alvo=document.getElementById('s'+(n+1));
+  alvo.classList.add('ac');
+  if(movel()&&!semRolar){rolandoAte=n;clearTimeout(rolandoT);rolandoT=setTimeout(function(){rolandoAte=null},900);alvo.scrollIntoView({behavior:'smooth',block:'start'})}
   document.getElementById('ctr').textContent=(n+1)+' / '+t;
   dots.forEach(function(b,i){
     var on=i===n;
@@ -16,6 +24,26 @@ function sh(n){
   var bp=document.getElementById('bprev'),bn=document.getElementById('bnext');
   if(bp)bp.disabled=n<=0;
   if(bn)bn.disabled=n>=t-1;
+  if(!movel())ajustarCelular(alvo);
+}
+var rolandoAte=null,rolandoT=null;
+/* Celular: grades e linhas de elementos que não cabem na largura passam a quebrar
+   (vale também para estruturas criadas no CSS extra da aula). */
+function ajustarCelular(sl){
+  if(!sl||!movel())return;
+  var els=sl.querySelectorAll('*');
+  for(var i=0;i<els.length;i++){
+    var el=els[i];if(el.closest('table,pre,.dots,.kpi,.tb2,svg'))continue;
+    var cs=getComputedStyle(el);
+    var estoura=!(el.scrollWidth<=el.clientWidth+2&&el.getBoundingClientRect().right<=sl.getBoundingClientRect().right+2);
+    /* grade que cabe, mas com colunas estreitas demais para o texto (ex.: 3–4 cartões lado a lado) */
+    if(!estoura&&(cs.display==='grid'||cs.display==='inline-grid')){
+      for(var k=0;k<el.children.length;k++){var f=el.children[k];if(f.getBoundingClientRect().width<140&&(f.textContent||'').trim().length>14){estoura=true;break}}
+    }
+    if(!estoura)continue;
+    if(cs.display==='grid'||cs.display==='inline-grid')el.classList.add('grade-movel');
+    else if((cs.display==='flex'||cs.display==='inline-flex')&&cs.flexDirection.indexOf('row')===0)el.classList.add('flex-movel');
+  }
 }
 function nx(){if(c<t-1){c++;sh(c);sync()}}
 function pv(){if(c>0){c--;sh(c);sync()}}
@@ -36,12 +64,41 @@ function buildDots(){
 }
 
 let fzLevel=1,zoomManual=false;
-function autoZoom(){var r=Math.min(window.innerHeight/720,window.innerWidth/1280);var best=0;for(var i=0;i<fzSteps.length;i++){if(fzSteps[i]<=r+0.02)best=i}return best}
+function autoZoom(){if(movel())return 1; /* modo rolagem: 100% */var r=Math.min(window.innerHeight/720,window.innerWidth/1280);var best=0;for(var i=0;i<fzSteps.length;i++){if(fzSteps[i]<=r+0.02)best=i}return best}
 const fzSteps=[0.85,1,1.15,1.3,1.45,1.6];
 function fz(d){if(d)zoomManual=true;fzLevel=Math.max(0,Math.min(fzSteps.length-1,fzLevel+(d||0)));applyZoom();sync()}
 function applyZoom(){var sc=document.querySelector('.sc');if(sc)sc.style.zoom=fzSteps[fzLevel];var el=document.getElementById('fzpct');if(el)el.textContent=Math.round(fzSteps[fzLevel]*100)+'%';}
 fzLevel=autoZoom();fz(0);
-window.addEventListener('resize',function(){if(!zoomManual){fzLevel=autoZoom();applyZoom()}});
+window.addEventListener('resize',function(){if(!zoomManual){fzLevel=autoZoom();applyZoom()}if(movel())ajustarTodos()});
+function ajustarTodos(){document.querySelectorAll('.sl').forEach(ajustarCelular)}
+
+/* liga/desliga o modo rolagem (girar o celular, redimensionar a janela) */
+function aplicarMovel(){
+  var era=movel(),agora=!!mqMovel.matches&&!isPresenter;
+  document.documentElement.classList.toggle('movel',agora);
+  if(agora){
+    if(!zoomManual){fzLevel=autoZoom();applyZoom()}
+    ajustarTodos();
+    if(!era&&c>0){ /* mantém o slide em que estava */
+      var alvo=c;rolandoAte=alvo;clearTimeout(rolandoT);rolandoT=setTimeout(function(){rolandoAte=null},600);
+      requestAnimationFrame(function(){var a=document.getElementById('s'+(alvo+1));if(a)a.scrollIntoView({block:'start'})});
+    }
+  }else if(era){
+    window.scrollTo(0,0);if(!zoomManual){fzLevel=autoZoom();applyZoom()}sh(c,true);
+  }
+}
+if(mqMovel.addEventListener)mqMovel.addEventListener('change',aplicarMovel);else if(mqMovel.addListener)mqMovel.addListener(aplicarMovel);
+/* o slide "atual" (contador, botões ‹ ›) é o que está no terço de cima da tela */
+function atualPelaRolagem(){
+  if(!movel())return;
+  var melhor=0,lim=window.innerHeight*0.35;
+  document.querySelectorAll('.sl').forEach(function(sl,i){if(sl.getBoundingClientRect().top<=lim)melhor=i});
+  if((window.innerHeight+window.scrollY)>=document.documentElement.scrollHeight-4)melhor=t-1; /* chegou ao fim */
+  if(rolandoAte!==null&&melhor!==rolandoAte)return; /* durante a rolagem suave disparada por ‹ › */
+  if(melhor!==c){c=melhor;sh(c,true)}
+}
+var rafMovel=0;
+window.addEventListener('scroll',function(){if(!movel()||rafMovel)return;rafMovel=requestAnimationFrame(function(){rafMovel=0;atualPelaRolagem()})},{passive:true});
 
 function openPresenter(){
   var bp=document.getElementById('bp');
@@ -102,6 +159,7 @@ document.addEventListener('keydown',function(e){
   if(v&&v.getAttribute('data-modo')&&k!=='Shift'){e.preventDefault();telaApagada(null);return}
   if((k===' '||k==='Enter')&&emControle(e.target))return; /* Espaço/Enter num botão focado: deixa o botão agir */
   if(k===' '&&e.shiftKey){e.preventDefault();pv();return}
+  if(movel()&&(k==='ArrowUp'||k==='ArrowDown'||k==='PageUp'||k==='PageDown'||k===' '))return; /* rolagem nativa */
   if(TECLAS_AVANCAR.indexOf(k)>=0){e.preventDefault();nx()}
   else if(TECLAS_VOLTAR.indexOf(k)>=0){e.preventDefault();pv()}
   else if(k==='Home'){e.preventDefault();go(0)}
@@ -120,13 +178,16 @@ document.addEventListener('keydown',function(e){
   function ini(x,y,el){x0=x;y0=y;t0=Date.now();alvo=el}
   function fim(x,y){
     if(x0===null)return;
+    if(movel()){x0=null;return}
     var dx=x-x0,dy=y-y0,dt=Date.now()-t0;x0=null;
     if(Math.abs(dx)>=50&&Math.abs(dx)>Math.abs(dy)*1.3&&dt<1000){if(dx<0)nx();else pv();return true}
     if(Math.abs(dx)<12&&Math.abs(dy)<12&&dt<450&&!emCampo(alvo)&&!emControle(alvo)&&!(alvo&&alvo.closest&&alvo.closest('iframe,video'))){
       var w=window.innerWidth;if(x>w*0.85){nx();return true}if(x<w*0.15){pv();return true}
     }
   }
-  sc.addEventListener('touchstart',function(e){if(e.touches.length!==1){x0=null;return}var p=e.touches[0];ini(p.clientX,p.clientY,e.target)},{passive:true});
+  /* não troca de slide quando o dedo arrasta algo que rola na horizontal (tabela larga, código, pontos) */
+  function rolaHorizontal(el){for(var n=el;n&&n!==sc;n=n.parentNode){if(n.nodeType===1&&n.scrollWidth>n.clientWidth+4){var ox=getComputedStyle(n).overflowX;if(ox==='auto'||ox==='scroll')return true}}return false}
+  sc.addEventListener('touchstart',function(e){if(e.touches.length!==1||rolaHorizontal(e.target)){x0=null;return}var p=e.touches[0];ini(p.clientX,p.clientY,e.target)},{passive:true});
   sc.addEventListener('touchend',function(e){var p=e.changedTouches[0];if(p&&fim(p.clientX,p.clientY)&&e.cancelable)e.preventDefault()},{passive:false});
   sc.addEventListener('touchcancel',function(){x0=null},{passive:true});
   /* caneta (stylus) em telas interativas que não geram eventos de toque */
@@ -141,9 +202,10 @@ if(isPresenter){
   var pf=params.get('fz');if(pf!==null&&parseInt(pf)>=0)zoomManual=true,fzLevel=Math.max(0,Math.min(fzSteps.length-1,parseInt(pf)));
   document.title='(Apresentação) — '+document.title;
 }
+aplicarMovel();
 applyZoom();
 buildDots();
-sh(c);
+sh(c,true);
 sync();
 
 /* ?pdf=1 — usado pelo exportar_pdf.sh: mantém o zoom em 1 para o PDF sair no tamanho de projeto */
