@@ -16,20 +16,6 @@ function sh(n){
   var bp=document.getElementById('bprev'),bn=document.getElementById('bnext');
   if(bp)bp.disabled=n<=0;
   if(bn)bn.disabled=n>=t-1;
-  ajustarCelular(document.getElementById('s'+(n+1)));
-}
-/* Celular: grades e linhas de elementos que não cabem na largura passam a quebrar
-   (vale também para estruturas criadas no CSS extra da aula). */
-function ajustarCelular(sl){
-  if(!sl||!telaPequena())return;
-  var els=sl.querySelectorAll('*');
-  for(var i=0;i<els.length;i++){
-    var el=els[i];if(el.closest('table,pre,.dots,.kpi,.tb2,svg'))continue;
-    if(el.scrollWidth<=el.clientWidth+2&&el.getBoundingClientRect().right<=sl.getBoundingClientRect().right+2)continue;
-    var cs=getComputedStyle(el);
-    if(cs.display==='grid'||cs.display==='inline-grid')el.classList.add('grade-movel');
-    else if((cs.display==='flex'||cs.display==='inline-flex')&&cs.flexDirection.indexOf('row')===0)el.classList.add('flex-movel');
-  }
 }
 function nx(){if(c<t-1){c++;sh(c);sync()}}
 function pv(){if(c>0){c--;sh(c);sync()}}
@@ -50,13 +36,12 @@ function buildDots(){
 }
 
 let fzLevel=1,zoomManual=false;
-function telaPequena(){return window.innerWidth<=820||window.innerHeight<=500}
-function autoZoom(){if(telaPequena())return 1; /* celular/tablet: layout responsivo em 100% */var r=Math.min(window.innerHeight/720,window.innerWidth/1280);var best=0;for(var i=0;i<fzSteps.length;i++){if(fzSteps[i]<=r+0.02)best=i}return best}
+function autoZoom(){var r=Math.min(window.innerHeight/720,window.innerWidth/1280);var best=0;for(var i=0;i<fzSteps.length;i++){if(fzSteps[i]<=r+0.02)best=i}return best}
 const fzSteps=[0.85,1,1.15,1.3,1.45,1.6];
 function fz(d){if(d)zoomManual=true;fzLevel=Math.max(0,Math.min(fzSteps.length-1,fzLevel+(d||0)));applyZoom();sync()}
 function applyZoom(){var sc=document.querySelector('.sc');if(sc)sc.style.zoom=fzSteps[fzLevel];var el=document.getElementById('fzpct');if(el)el.textContent=Math.round(fzSteps[fzLevel]*100)+'%';}
 fzLevel=autoZoom();fz(0);
-window.addEventListener('resize',function(){if(!zoomManual){fzLevel=autoZoom();applyZoom()}ajustarCelular(document.getElementById('s'+(c+1)))});
+window.addEventListener('resize',function(){if(!zoomManual){fzLevel=autoZoom();applyZoom()}});
 
 function openPresenter(){
   var bp=document.getElementById('bp');
@@ -141,9 +126,7 @@ document.addEventListener('keydown',function(e){
       var w=window.innerWidth;if(x>w*0.85){nx();return true}if(x<w*0.15){pv();return true}
     }
   }
-  /* não troca de slide quando o dedo arrasta algo que rola na horizontal (tabela larga, código, pontos) */
-  function rolaHorizontal(el){for(var n=el;n&&n!==sc;n=n.parentNode){if(n.nodeType===1&&n.scrollWidth>n.clientWidth+4){var ox=getComputedStyle(n).overflowX;if(ox==='auto'||ox==='scroll')return true}}return false}
-  sc.addEventListener('touchstart',function(e){if(e.touches.length!==1||rolaHorizontal(e.target)){x0=null;return}var p=e.touches[0];ini(p.clientX,p.clientY,e.target)},{passive:true});
+  sc.addEventListener('touchstart',function(e){if(e.touches.length!==1){x0=null;return}var p=e.touches[0];ini(p.clientX,p.clientY,e.target)},{passive:true});
   sc.addEventListener('touchend',function(e){var p=e.changedTouches[0];if(p&&fim(p.clientX,p.clientY)&&e.cancelable)e.preventDefault()},{passive:false});
   sc.addEventListener('touchcancel',function(){x0=null},{passive:true});
   /* caneta (stylus) em telas interativas que não geram eventos de toque */

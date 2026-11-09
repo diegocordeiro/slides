@@ -74,15 +74,6 @@
             "crescer": true,
             "titulo": "Em uma frase",
             "html": "<p>O artigo trata o <strong>harness</strong> como objeto de otimização automática: um agente edita o harness de outro agente de código, e cada edição vem com uma <strong>previsão verificável</strong> que a rodada seguinte confirma ou reverte.</p>"
-          },
-          {
-            "tipo": "chips",
-            "itens": [
-              "Preprint arXiv",
-              "Terminal-Bench 2",
-              "SWE-bench-verified",
-              "Código público"
-            ]
           }
         ]
       ],
@@ -164,7 +155,8 @@
       "rodape": [
         {
           "tipo": "faixa",
-          "html": "Tese dos autores: o gargalo é a <b>observabilidade</b>, não a capacidade do agente."
+          "html": "Tese dos autores: o gargalo é a <b>observabilidade</b>, não a capacidade do agente.",
+          "fim": false
         },
         {
           "tipo": "html",
