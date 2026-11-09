@@ -964,14 +964,30 @@ async function gerar(silencioso, comPdf) {
   return r;
 }
 async function visualizar(pdf) {
+  // abre a janela já no clique (depois de um await o navegador bloquearia o pop-up)
+  const w = pdf === 'celular' ? window.open('', 'slides_celular', 'width=400,height=820,menubar=no,toolbar=no,location=no') : window.open('', '_blank');
   try {
     let arq = (st.dados.meta || {}).arquivo;
-    if (!(legado() && st.dados.estado !== 'editor')) { const r = await gerar(true, pdf === 'celular'); if (!r) return; arq = r.html.split('/').pop(); }
+    const importada = legado() && st.dados.estado !== 'editor';
+    if (!importada) { const r = await gerar(true, pdf === 'celular' || pdf === true); if (!r) { if (w) w.close(); return; } arq = r.html.split('/').pop(); }
     else toast('Aula importada: abrindo o HTML publicado (suas edições ainda não entram nele).');
-    const w = pdf === 'celular' ? window.open(urlAula(arq), 'slides_celular', 'width=400,height=820,menubar=no,toolbar=no,location=no')
-      : window.open(urlAula(arq) + (pdf ? '?pdf=1' : ''), '_blank');
-    if (pdf === true && w) w.addEventListener('load', () => setTimeout(() => { if (w.exportarPDF) w.exportarPDF(); else w.print(); }, 600));
-  } catch (e) { toast(e.message, true); }
+    if (!w) return toast('O navegador bloqueou a nova janela: permita pop-ups para este endereço.', true);
+    if (pdf === true && !importada) {
+      // o mesmo PDF que vai para o site (gerado pelo Chrome a partir do slide de computador)
+      const urlPdf = urlAula(arq.replace(/\.html$/, '.pdf'));
+      const ok = await fetch(urlPdf, { method: 'HEAD', cache: 'no-store' }).then(r => r.ok).catch(() => false);
+      if (ok) { w.location = urlPdf + '?t=' + Date.now(); return; }
+      toast('PDF não gerado (Chrome não encontrado?) — usando a impressão do navegador.', true);
+    }
+    w.location = urlAula(arq) + (pdf === true ? '?pdf=1' : '');
+    if (pdf === true) { // espera a aula carregar na nova janela e abre a impressão
+      let n = 0; const t = setInterval(() => {
+        try { if (w.closed || ++n > 60) return clearInterval(t);
+          if (w.document.readyState === 'complete' && /[?&]pdf=1/.test(w.location.search)) { clearInterval(t); setTimeout(() => { w.exportarPDF ? w.exportarPDF() : w.print(); }, 500); }
+        } catch (x) { }
+      }, 250);
+    }
+  } catch (e) { if (w) w.close(); toast(e.message, true); }
 }
 async function dialogoPublicar() {
   if (st.c && st.sujo) await salvar(true);

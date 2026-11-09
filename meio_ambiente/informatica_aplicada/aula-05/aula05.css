@@ -869,7 +869,7 @@ pre.pc .nb {
     color: var(--er)
 }
 
-@media(max-width:768px) {
+@media screen and (max-width:768px) {
     .f-etapa {
         min-width: 120px;
         font-size: 12px
@@ -1129,7 +1129,7 @@ pre.pc .nb {
 }
 
 
-@media(max-width:768px) {
+@media screen and (max-width:768px) {
     .sl {
         font-size: 17px
     }
@@ -1320,7 +1320,7 @@ pre.pc .nb {
     }
 }
 
-@media(max-width:480px) {
+@media screen and (max-width:480px) {
     .sl {
         font-size: 16px
     }
@@ -1342,7 +1342,7 @@ pre.pc .nb {
     }
 }
 
-@media(min-width:1600px) {
+@media screen and (min-width:1600px) {
     .sl {
         font-size: 21px
     }
@@ -1372,7 +1372,7 @@ pre.pc .nb {
     }
 }
 
-@media(min-width:2560px) {
+@media screen and (min-width:2560px) {
     .sl {
         font-size: 25px
     }
@@ -1437,7 +1437,7 @@ pre.pc .nb {
 .blink { display: inline-block; margin-top: 6px; color: var(--bem); font-weight: 700; text-decoration: none }
 .blink:hover { text-decoration: underline }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .padf { height: 420px }
 }
 
@@ -1550,6 +1550,9 @@ body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
 
 /* ===== Exportação em PDF (botão "Exportar PDF" ou Ctrl/Cmd+P) ===== */
 @media print {
+    /* tamanhos que dependem da largura da janela (vw) ficam fixos no valor de uma tela de 1280 px:
+       o diálogo de impressão usa outra largura e mudaria títulos e quebras de linha */
+    :root { --fs-capa: 33.3px !important; --fs-h2: 25px !important }
     @page { size: 1280px 720px; margin: 0 }
 
     html, body { height:auto !important; overflow:visible !important; display:block !important; background:#fff !important }
@@ -1564,7 +1567,7 @@ body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
     .sl .slbd.g { flex:1 !important; min-height:0 !important; margin:0 !important; padding:16px 24px !important; gap:16px !important }
 
     /* O layout de impressão do Chrome usa uma viewport estreita (~740px), o que
-       ativaria o @media(max-width:768px) e jogaria o slide no layout de celular.
+       ativaria o @media screen and (max-width:768px) e jogaria o slide no layout de celular.
        Reafirmo aqui a versão desktop para o PDF sair igual à tela. */
     .sl { font-size:18px !important }
     .slhd { padding:16px 28px !important; gap:14px !important }
@@ -1607,7 +1610,7 @@ body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
 #tela-apagada.on { display: block }
 #tela-apagada.preta { background: #000 }
 #tela-apagada.branca { background: #fff }
-@media (pointer: coarse) {
+@media screen and (pointer: coarse) {
     .ctr { padding: 10px; gap: 12px }
     .ctr button { padding: 12px 24px; font-size: 16px; min-height: 46px }
     .dots .dot { min-width: 38px; height: 38px; font-size: 14px }

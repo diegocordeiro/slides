@@ -256,6 +256,23 @@ class Handler(BaseHTTPRequestHandler):
         h = self.headers.get("Host", "")
         return not o or urllib.parse.urlparse(o).netloc == h
 
+    # --- HEAD (o editor confere se o PDF da aula existe)
+    def do_HEAD(self):
+        caminho = urllib.parse.unquote(urllib.parse.urlparse(self.path).path)
+        try:
+            p = dentro_da_raiz(caminho[3:]) if caminho.startswith("/r/") else None
+        except ErroUsuario:
+            p = None
+        if not p or not os.path.isfile(p):
+            self.send_response(404)
+            self.end_headers()
+            return
+        self.send_response(200)
+        self.send_header("Content-Type", mimetypes.guess_type(p)[0] or "application/octet-stream")
+        self.send_header("Content-Length", str(os.path.getsize(p)))
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+
     # --- GET
     def do_GET(self):
         u = urllib.parse.urlparse(self.path)
