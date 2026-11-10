@@ -291,7 +291,7 @@
       "topo": [
         {
           "tipo": "html",
-          "html": "<div class=\"grade\" style=\"grid-template-columns:1fr 1fr 1fr\"><div class=\"termo\"><b><code>bm25</code> — lexical</b>Pontua o trecho pelas <strong>palavras em comum</strong> com a pergunta, valorizando termos. Ótimo para “Art. 53”, “trancamento”. É o <strong>baseline</strong> do M2.</div><div class=\"termo\"><b><code>dense</code> — semântica</b>Converte pergunta e trecho em vetores (<strong>embeddings</strong> do bge-m3, 1.024 dimensões) e compara o <strong>significado</strong>, mesmo com outras palavras. Vetores no ChromaDB.</div><div class=\"termo\" style=\"border-left-color:var(--bem2)\"><b><code>hybrid</code> — adotado</b>Junta as duas listas pela <strong>fusão RRF</strong> (Reciprocal Rank Fusion): soma 1/(60 + posição) de cada método, com <strong>peso do BM25</strong> ajustável.</div></div>"
+          "html": "<div class=\"grade\" style=\"grid-template-columns:1fr 1fr 1fr\"><div class=\"termo\"><b><code>bm25</code> — lexical</b>Pontua o trecho pelas <strong>palavras em comum</strong> com a pergunta, valorizando termos. Ótimo para “Art. 53”, “trancamento”. É o <strong>baseline</strong> do M2.</div><div class=\"termo\"><b><code>dense</code> — semântica</b>Converte pergunta e trecho em vetores (<strong>embeddings</strong> do bge-m3, 1.024 dimensões) e compara o <strong>significado</strong>, mesmo com outras palavras. Vetores no ChromaDB.</div><div class=\"termo\" style=\"border-left-color:var(--bem2)\"><b><code>hybrid</code> — adotado</b>Junta as duas listas pela fusão RRF: soma peso/(60 + posição) de cada método. O denso vale 1,0 e o peso do BM25 é ajustável (adotado: 1,0).</div></div>"
         }
       ],
       "proporcao": "1fr 1fr",
