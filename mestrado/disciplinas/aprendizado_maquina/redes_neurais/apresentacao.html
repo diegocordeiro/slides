@@ -25,7 +25,7 @@
       <button class="bpb" id="bnt" onclick="toggleNotas()" title="Mostrar/ocultar roteiro de fala (tecla N)">Roteiro</button>
       <button class="tmr" id="tmr" onclick="if(event.shiftKey){tmrDefinirLimite()}else{toggleTimer()}" ondblclick="resetTimer()" title="Iniciar/pausar (T) · duplo clique zera · Shift+clique define o limite">00:00 / 10:00</button>
       <button class="bpb" id="bp" onclick="openPresenter()">Modo apresentador</button>
-      <span class="ct" id="ctr">1 / 9</span>
+      <span class="ct" id="ctr">1 / 10</span>
       <span class="modo-tag">APRESENTAÇÃO</span>
     </div>
   </header>
@@ -55,9 +55,22 @@
       <div class="nt"><strong>~20 s.</strong> Apresentar o grupo e anunciar o tema em uma frase: “usamos redes neurais para prever, a partir da estrutura química de uma molécula, se ela tem chance de virar remédio contra quatro proteínas”. Não entrar em detalhe ainda.</div>
     </div>
 
-    <!-- SLIDE 2 — O problema: encontrar candidatos a medicamento -->
+    <!-- SLIDE 2 — Redes Neurais -->
     <div class="sl" id="s2">
-      <div class="slhd"><span class="num">2</span><h2>O problema: encontrar candidatos a medicamento</h2></div>
+      <div class="slhd"><span class="num">2</span><h2>Redes Neurais</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
+        <div class="ca"><h3>O que é uma rede neural?</h3><div class="txt-bloco">Modelo computacional que aprende <strong>padrões</strong> a partir de dados, ajustando <strong>pesos</strong> para minimizar o erro entre predição e valor observado.</div></div>
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="card"><h3>Elementos principais</h3><ul><li>Camada de entrada: recebe os atributos</li><li>Camadas ocultas: combinam sinais e extraem padrões</li><li>Camada de saída: gera a predição</li><li>Funções de ativação: adicionam não linearidade</li><li>Pesos e vieses: parâmetros ajustáveis</li></ul></div></div>
+          <div class="col"><div class="card"><h3>Como aprende?</h3><ul><li>Propaga entradas e compara com valor real</li><li>Calcula o erro (função de perda)</li><li>Backpropagation ajusta pesos para reduzir o erro</li><li>Repete por várias épocas</li><li>Generalização avaliada em dados não vistos</li></ul></div></div></div>
+        <div class="faixa-az fim"><span>Neste trabalho a rede mapeia <strong>descritores moleculares</strong> para <strong>atividade biológica</strong>.</span></div>
+      </div>
+      <div class="nt"><strong>~1,5 min.</strong> Comece contextualizando que redes neurais são modelos flexíveis inspirados no cérebro, que aprendem relações complexas. Explique que a arquitetura típica é feedforward: entrada -> camadas ocultas -> saída, com pesos ajustados por backpropagation. Destaque que, na quimioinformática, a entrada pode ser impressões digitais moleculares ou descritores, e a saída é a atividade predita. Enfatize a importância da generalização: o modelo deve funcionar bem em moléculas não usadas no treino.</div>
+    </div>
+
+    <!-- SLIDE 3 — O problema: encontrar candidatos a medicamento -->
+    <div class="sl" id="s3">
+      <div class="slhd"><span class="num">3</span><h2>O problema: encontrar candidatos a medicamento</h2></div>
       <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
         <div class="grade" style="grid-template-columns:1.25fr 1fr;align-items:center"><div class="pergunta"><small>Pergunta de pesquisa</small><span>Dada apenas a <b>estrutura química</b> de uma molécula, é possível prever se ela age sobre uma proteína-alvo?</span></div><div class="chips"><span>Classificação binária</span><span>ChEMBL (dados reais)</span><span>58.736 medições</span><span>4 proteínas-alvo</span><span>Rede neural (MLP)</span></div></div>
         <div class="grade" style="grid-template-columns:1.15fr 1.15fr 1fr">
@@ -69,20 +82,20 @@
       <div class="nt"><strong>~1 min 20 s.</strong> Público leigo: explicar devagar os três cartões. (1) o experimento mede concentração, e menos concentração = mais potente — é contraintuitivo. (2) por isso inverte-se com o logaritmo: pCHEMBL maior = melhor. (3) o erro que dói é jogar fora uma molécula boa. Fechar lendo a faixa: o rótulo é uma decisão nossa, não um dado da base.</div>
     </div>
 
-    <!-- SLIDE 3 — A base -->
-    <div class="sl" id="s3">
-      <div class="slhd"><span class="num">3</span><h2>A base</h2></div>
+    <!-- SLIDE 4 — A base -->
+    <div class="sl" id="s4">
+      <div class="slhd"><span class="num">4</span><h2>A base</h2></div>
       <div class="slbd g" style="grid-template-rows:1fr;">
         <div class="grade" style="grid-template-columns:1.4fr 1fr">
-          <div class="col"><table class="tb2"><tr><th>Alvo</th><th>O que é</th><th>Moléculas</th></tr><tr><td>EGFR</td><td>Receptor de crescimento — <strong>câncer</strong></td><td>10.601 <span style="opacity:.6">· 64% ativas</span></td></tr><tr><td>BACE1</td><td>Enzima amiloide — <strong>Alzheimer</strong></td><td>9.990 <span style="opacity:.6">· 62% ativas</span></td></tr><tr><td>DRD2</td><td>Receptor de dopamina — <strong>psiquiatria</strong></td><td>8.392 <span style="opacity:.6">· 57% ativas</span></td></tr><tr><td>HDAC1</td><td>Enzima de genes — <strong>câncer</strong></td><td>8.003 <span style="opacity:.6">· 54% ativas</span></td></tr></table><div class="card vd"><h3>Quatro modelos</h3><div class="txt-bloco"><p style="margin:0;"><span style="font-size: 1.3em;">Apenas <strong>71 de 37 mil moléculas</strong> foram testadas em mais de um alvo. Os conjuntos são praticamente independentes → <strong>um modelo por proteína</strong>.</span></p></div></div></div>
-          <div class="col"><div class="fig"><img src="img/distribuicao_pchembl.png" alt="Distribuição do pCHEMBL por alvo"></div><div class="cap">Distribuição da potência, linha tracejada corte em 6,5</div><div class="kpi" style="grid-template-columns:repeat(2,1fr);"><div><b>53% – 64%</b><span>de moléculas ativas: desbalanceamento leve, sem reamostragem</span></div><div><b>6,7 – 7,2</b><span>pCHEMBL mediano: distribuições simétricas e comparáveis</span></div></div></div></div>
+          <div class="col"><table class="tb2"><tr><th>Alvo</th><th>O que é</th><th>Moléculas</th></tr><tr><td>EGFR</td><td>Receptor de crescimento — <strong>câncer</strong></td><td>10.601 <span style="opacity:.6">· 64% ativas</span></td></tr><tr><td>BACE1</td><td>Enzima amiloide — <strong>Alzheimer</strong></td><td>9.990 <span style="opacity:.6">· 62% ativas</span></td></tr><tr><td>DRD2</td><td>Receptor de dopamina — <strong>psiquiatria</strong></td><td>8.392 <span style="opacity:.6">· 57% ativas</span></td></tr><tr><td>HDAC1</td><td>Enzima de genes — <strong>câncer</strong></td><td>8.003 <span style="opacity:.6">· 54% ativas</span></td></tr></table><div class="card vd"><h3>Quatro modelos</h3><div class="txt-bloco"><p style="margin:0;"><span style="font-size: 1.3em;">Apenas <strong>71 de 37 mil moléculas</strong> foram testadas em mais de um alvo. Os conjuntos são praticamente independentes → <strong>um modelo por proteína</strong>.</span></p></div></div><div class="kpi" style="grid-template-columns:repeat(2,1fr);"><div><b><b data-e="slides/3/colunas/1/1/itens/0/valor" style="font-size: 29px; color: rgb(143, 227, 155); outline-offset: 2px; outline: rgb(37, 99, 235) solid 2px !important;">53% – 64%</b></b><span><span style="font-size: 15px; display: inline !important;">de moléculas ativas: desbalanceamento leve, sem reamostragem</span></span></div><div><b><b data-e="slides/3/colunas/1/1/itens/1/valor" style="font-size: 29px; color: rgb(143, 227, 155); outline-offset: 2px; outline: rgb(37, 99, 235) solid 2px !important;">6,7 – 7,2</b></b><span><span style="font-size: 15px; display: inline !important;">pCHEMBL mediano: distribuições simétricas e comparáveis</span></span></div></div></div>
+          <div class="col"><div class="fig"><img src="img/distribuicao_pchembl.png" alt="Distribuição do pCHEMBL por alvo"></div><div class="cap">Distribuição da potência, linha tracejada corte em 6,5</div></div></div>
       </div>
       <div class="nt"><strong>~1 min.</strong> Dizer o que cada proteína é, em uma frase, para dar concretude (câncer, Alzheimer, psiquiatria). Mostrar no gráfico que as quatro curvas são parecidas e que a linha vermelha é o corte que escolhemos. Destacar que o corte 6,5 deixa as quatro bases equilibradas — por isso foi escolhido.</div>
     </div>
 
-    <!-- SLIDE 4 — O desafio a base não tem atributos -->
-    <div class="sl" id="s4">
-      <div class="slhd"><span class="num">4</span><h2>O desafio a base não tem atributos</h2></div>
+    <!-- SLIDE 5 — O desafio a base não tem atributos -->
+    <div class="sl" id="s5">
+      <div class="slhd"><span class="num">5</span><h2>O desafio a base não tem atributos</h2></div>
       <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
         <div class="pergunta"><small>Diferença para os trabalhos anteriores</small><span><span style="font-size: 1.3em;">Antes recebíamos uma tabela pronta (idade, colesterol…). Aqui a única informação é <b>a estrutura da molécula, escrita como texto</b>&nbsp;e rede neural não lê texto.</span></span></div>
         <div class="grade" style="grid-template-columns:1fr 1.1fr 1.1fr">
@@ -95,9 +108,9 @@ CC(=O)O   → ácido acético</span></pre></div><div class="rod">Texto de <stron
       <div class="nt"><strong>~1 min 30 s.</strong> Slide mais importante para o público leigo. Insistir: não havia colunas; nós as criamos. Usar a analogia da impressão digital para o fingerprint e “ficha técnica” para os descritores. Avisar que o resultado dessa comparação aparece no slide 7 e surpreende.</div>
     </div>
 
-    <!-- SLIDE 5 — Preparação dos dados: cinco etapas -->
-    <div class="sl" id="s5">
-      <div class="slhd"><span class="num">5</span><h2>Preparação dos dados: cinco etapas</h2></div>
+    <!-- SLIDE 6 — Preparação dos dados: cinco etapas -->
+    <div class="sl" id="s6">
+      <div class="slhd"><span class="num">6</span><h2>Preparação dos dados: cinco etapas</h2></div>
       <div class="slbd g" style="grid-template-rows:1fr auto;">
         <div class="grade" style="grid-template-columns:1.1fr 1fr">
           <div class="col"><div style="display:contents"><ol class="passos">
@@ -113,9 +126,9 @@ CC(=O)O   → ácido acético</span></pre></div><div class="rod">Texto de <stron
       <div class="nt"><strong>~1 min 30 s.</strong> Correr as cinco etapas rapidamente e parar na quinta. Explicar vazamento com a analogia da prova: é como estudar com o gabarito — a nota sobe, mas não mede aprendizado. Mostrar no bloco da direita que 16.599 medições viraram 10.601 moléculas.</div>
     </div>
 
-    <!-- SLIDE 6 — A rede neural e busca de hiperparâmetros -->
-    <div class="sl" id="s6">
-      <div class="slhd"><span class="num">6</span><h2>A rede neural e busca de hiperparâmetros</h2></div>
+    <!-- SLIDE 7 — A rede neural e busca de hiperparâmetros -->
+    <div class="sl" id="s7">
+      <div class="slhd"><span class="num">7</span><h2>A rede neural e busca de hiperparâmetros</h2></div>
       <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
         <div style="display:contents"><div class="fluxo">
           <div class="et"><span class="num">1</span><div>Molécula<br>(SMILES)</div></div>
@@ -143,20 +156,20 @@ CC(=O)O   → ácido acético</span></pre></div><div class="rod">Texto de <stron
       <div class="nt"><strong>~1 min 15 s.</strong> Percorrer o fluxo da esquerda para a direita: molécula vira números, números são padronizados, passam pelas camadas, sai uma probabilidade. Não detalhar matemática. Dizer que testamos 24 configurações em cada um dos 12 cenários e deixar o gancho para o slide 8.</div>
     </div>
 
-    <!-- SLIDE 7 — Resultados: -->
-    <div class="sl" id="s7">
-      <div class="slhd"><span class="num">7</span><h2>Resultados:&nbsp;</h2></div>
+    <!-- SLIDE 8 — Resultados: -->
+    <div class="sl" id="s8">
+      <div class="slhd"><span class="num">8</span><h2>Resultados:&nbsp;</h2></div>
       <div class="slbd g" style="grid-template-rows:1fr;">
         <div class="grade" style="grid-template-columns:1.25fr 1fr">
-          <div class="col"><table class="tb2"><tr><th>Alvo</th><th>Melhor representação</th><th>F1 ativa</th><th>IC 95%</th><th>ROC-AUC</th><th>Referência ingênua (F1 macro)</th></tr><tr class="hl"><td>EGFR</td><td>Combinado</td><td><strong>0,8840</strong></td><td>0,871–0,896</td><td>0,9023</td><td class="ruim">0,3916</td></tr><tr><td>BACE1</td><td>Descritores</td><td>0,8693</td><td>0,855–0,884</td><td>0,8934</td><td class="ruim">0,3816</td></tr><tr><td>HDAC1</td><td><em>Fingerprint</em></td><td>0,8428</td><td>0,823–0,860</td><td>0,8996</td><td class="ruim">0,3492</td></tr><tr><td>DRD2</td><td>Combinado</td><td>0,8259</td><td>0,806–0,844</td><td>0,8744</td><td class="ruim">0,3638</td></tr></table><div class="card er grow"><h3>As três representações empatam</h3><div class="txt-bloco"><p style="margin:0;"><span style="font-size: 1.3em;">Dentro de cada alvo, <em>fingerprint</em>, descritores e combinação ficam <strong>dentro do mesmo intervalo de confiança</strong> → a diferença <strong>não é conclusiva</strong>.</span></p></div></div></div>
-          <div class="col"><div class="fig"><img src="img/f1_por_alvo_featurizacao.png" alt="F1 da classe ativa por alvo e representação"></div><div class="cap">As três barras de cada alvo são praticamente da mesma altura</div><div class="kpi" style="grid-template-columns:repeat(2,1fr);"><div><b>2×</b><span>o F1 macro da referência ingênua (0,80–0,84 contra 0,35–0,39)</span></div><div><b>DRD2</b><span>o alvo mais difícil, em todas as métricas</span></div></div></div></div>
+          <div class="col"><table class="tb2"><tr><th>Alvo</th><th>Melhor representação</th><th>F1 ativa</th><th>IC 95%</th><th>ROC-AUC</th><th>Referência ingênua (F1 macro)</th></tr><tr class="hl"><td>EGFR</td><td>Combinado</td><td><strong>0,8840</strong></td><td>0,871–0,896</td><td>0,9023</td><td class="ruim">0,3916</td></tr><tr><td>BACE1</td><td>Descritores</td><td>0,8693</td><td>0,855–0,884</td><td>0,8934</td><td class="ruim">0,3816</td></tr><tr><td>HDAC1</td><td><em>Fingerprint</em></td><td>0,8428</td><td>0,823–0,860</td><td>0,8996</td><td class="ruim">0,3492</td></tr><tr><td>DRD2</td><td>Combinado</td><td>0,8259</td><td>0,806–0,844</td><td>0,8744</td><td class="ruim">0,3638</td></tr></table><div class="card"><h3>As três representações empatam</h3><div class="txt-bloco"><p style="margin:0;"><span style="font-size: 1.3em;">Dentro de cada alvo, <em>fingerprint</em>, descritores e combinação ficam <strong>dentro do mesmo intervalo de confiança</strong> → a diferença <strong>não é conclusiva</strong>.</span></p></div></div></div>
+          <div class="col"><div class="fig"><img src="img/f1_por_alvo_featurizacao.png" alt="F1 da classe ativa por alvo e representação"></div><div class="cap">As três barras de cada alvo são praticamente da mesma altura</div></div></div>
       </div>
       <div class="nt"><strong>~1 min 45 s — slide central.</strong> Ler a linha do EGFR. Explicar o que é a referência ingênua: um modelo que responde sempre “ativa” — ele até consegue F1 alto na classe ativa, mas nunca acerta uma inativa, e por isso o F1 macro desaba para 0,35. Depois o ponto honesto: as três representações empatam, então escolhemos a mais barata. Mencionar que DRD2 é consistentemente o mais difícil.</div>
     </div>
 
-    <!-- SLIDE 8 — A padronização decide -->
-    <div class="sl" id="s8">
-      <div class="slhd"><span class="num">8</span><h2>A padronização decide</h2></div>
+    <!-- SLIDE 9 — A padronização decide -->
+    <div class="sl" id="s9">
+      <div class="slhd"><span class="num">9</span><h2>A padronização decide</h2></div>
       <div class="slbd g" style="grid-template-rows:1fr auto;">
         <div class="grade" style="grid-template-columns:1.1fr 1fr">
           <div class="col"><table class="tb2"><tr><th>Alvo</th><th>ROC-AUC <strong>com</strong> padronização</th><th>ROC-AUC <strong>sem</strong></th><th>F1 ativa sem</th></tr><tr class="hl"><td>EGFR</td><td><strong>0,9023</strong></td><td class="ruim">0,5115</td><td>0,7864</td></tr><tr class="hl"><td>BACE1</td><td><strong>0,9049</strong></td><td class="ruim">0,4809</td><td class="ruim">0,0000</td></tr><tr class="hl"><td>DRD2</td><td><strong>0,8744</strong></td><td class="ruim">0,5126</td><td>0,7224</td></tr><tr class="hl"><td>HDAC1</td><td><strong>0,9120</strong></td><td class="ruim">0,5090</td><td>0,7014</td></tr></table><div class="card er grow"><h3>0,50 = acaso</h3><div class="txt-bloco"><p style="margin:0;"><span style="font-size: 1.3em;">Sem padronizar, a ROC-AUC cai para <strong>0,48–0,51</strong> nos quatro alvos: o modelo vira um <strong>sorteio</strong>. No BACE1 ele colapsa e não identifica <strong>nenhuma</strong> das 1.233 moléculas ativas.</span></p></div></div></div>
@@ -166,9 +179,9 @@ CC(=O)O   → ácido acético</span></pre></div><div class="rod">Texto de <stron
       <div class="nt"><strong>~1 min 30 s.</strong> Este é o achado que vale a apresentação. Explicar ROC-AUC em uma frase: é a chance de o modelo dar nota maior a uma molécula ativa do que a uma inativa; 0,5 é cara ou coroa. Mostrar o colapso do BACE1. Fechar com a comparação com a árvore dos trabalhos anteriores — é o gancho com a disciplina.</div>
     </div>
 
-    <!-- SLIDE 9 — Conclusão -->
-    <div class="sl" id="s9">
-      <div class="slhd"><span class="num">9</span><h2>Conclusão</h2></div>
+    <!-- SLIDE 10 — Conclusão -->
+    <div class="sl" id="s10">
+      <div class="slhd"><span class="num">10</span><h2>Conclusão</h2></div>
       <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
         <div class="kpi" style="grid-template-columns:repeat(4,1fr);"><div><b>0,826 – 0,884</b><span>F1 da classe ativa nos quatro alvos</span></div><div><b>0,863 – 0,905</b><span>ROC-AUC (0,5 seria acaso)</span></div><div><b>0,50</b><span>ROC-AUC sem padronizar: o modelo morre</span></div><div><b>1.440</b><span>ajustes, 86 runs no MLflow</span></div></div>
         <div class="grade" style="grid-template-columns:1fr">

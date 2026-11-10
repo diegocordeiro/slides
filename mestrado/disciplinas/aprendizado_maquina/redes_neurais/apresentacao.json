@@ -37,6 +37,55 @@
     },
     {
       "layout": "conteudo",
+      "titulo": "Redes Neurais",
+      "proporcao": "1fr 1fr",
+      "topo": [
+        {
+          "tipo": "destaque",
+          "estilo": "ca",
+          "titulo": "O que é uma rede neural?",
+          "html": "Modelo computacional que aprende <strong>padrões</strong> a partir de dados, ajustando <strong>pesos</strong> para minimizar o erro entre predição e valor observado."
+        }
+      ],
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "titulo": "Elementos principais",
+            "itens": [
+              "Camada de entrada: recebe os atributos",
+              "Camadas ocultas: combinam sinais e extraem padrões",
+              "Camada de saída: gera a predição",
+              "Funções de ativação: adicionam não linearidade",
+              "Pesos e vieses: parâmetros ajustáveis"
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "titulo": "Como aprende?",
+            "itens": [
+              "Propaga entradas e compara com valor real",
+              "Calcula o erro (função de perda)",
+              "Backpropagation ajusta pesos para reduzir o erro",
+              "Repete por várias épocas",
+              "Generalização avaliada em dados não vistos"
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Neste trabalho a rede mapeia <strong>descritores moleculares</strong> para <strong>atividade biológica</strong>.",
+          "fim": true
+        }
+      ],
+      "notas": "<strong>~1,5 min.</strong> Comece contextualizando que redes neurais são modelos flexíveis inspirados no cérebro, que aprendem relações complexas. Explique que a arquitetura típica é feedforward: entrada -> camadas ocultas -> saída, com pesos ajustados por backpropagation. Destaque que, na quimioinformática, a entrada pode ser impressões digitais moleculares ou descritores, e a saída é a atividade predita. Enfatize a importância da generalização: o modelo deve funcionar bem em moléculas não usadas no treino."
+    },
+    {
+      "layout": "conteudo",
       "titulo": "O problema: encontrar candidatos a medicamento",
       "topo_proporcao": "1.25fr 1fr",
       "topo": [
@@ -142,6 +191,19 @@
             "crescer": false,
             "titulo": "Quatro modelos",
             "html": "<p style=\"margin:0;\"><span style=\"font-size: 1.3em;\">Apenas <strong>71 de 37 mil moléculas</strong> foram testadas em mais de um alvo. Os conjuntos são praticamente independentes → <strong>um modelo por proteína</strong>.</span></p>"
+          },
+          {
+            "tipo": "kpis",
+            "itens": [
+              {
+                "valor": "<b data-e=\"slides/3/colunas/1/1/itens/0/valor\" style=\"font-size: 29px; color: rgb(143, 227, 155); outline-offset: 2px; outline: rgb(37, 99, 235) solid 2px !important;\">53% – 64%</b>",
+                "texto": "<span style=\"font-size: 15px; display: inline !important;\">de moléculas ativas: desbalanceamento leve, sem reamostragem</span>"
+              },
+              {
+                "valor": "<b data-e=\"slides/3/colunas/1/1/itens/1/valor\" style=\"font-size: 29px; color: rgb(143, 227, 155); outline-offset: 2px; outline: rgb(37, 99, 235) solid 2px !important;\">6,7 – 7,2</b>",
+                "texto": "<span style=\"font-size: 15px; display: inline !important;\">pCHEMBL mediano: distribuições simétricas e comparáveis</span>"
+              }
+            ]
           }
         ],
         [
@@ -150,20 +212,6 @@
             "src": "img/distribuicao_pchembl.png",
             "alt": "Distribuição do pCHEMBL por alvo",
             "legenda": "Distribuição da potência, linha tracejada corte em 6,5"
-          },
-          {
-            "tipo": "kpis",
-            "itens": [
-              {
-                "valor": "53% – 64%",
-                "texto": "de moléculas ativas: desbalanceamento leve, sem reamostragem"
-              },
-              {
-                "valor": "6,7 – 7,2",
-                "texto": "pCHEMBL mediano: distribuições simétricas e comparáveis"
-              }
-            ],
-            "direcao": "horizontal"
           }
         ]
       ],
@@ -403,10 +451,10 @@
           },
           {
             "tipo": "card",
-            "variante": "er",
+            "variante": "",
             "titulo": "As três representações empatam",
             "html": "<p style=\"margin:0;\"><span style=\"font-size: 1.3em;\">Dentro de cada alvo, <em>fingerprint</em>, descritores e combinação ficam <strong>dentro do mesmo intervalo de confiança</strong> → a diferença <strong>não é conclusiva</strong>.</span></p>",
-            "crescer": true
+            "crescer": false
           }
         ],
         [
@@ -415,23 +463,11 @@
             "src": "img/f1_por_alvo_featurizacao.png",
             "alt": "F1 da classe ativa por alvo e representação",
             "legenda": "As três barras de cada alvo são praticamente da mesma altura"
-          },
-          {
-            "tipo": "kpis",
-            "itens": [
-              {
-                "valor": "2×",
-                "texto": "o F1 macro da referência ingênua (0,80–0,84 contra 0,35–0,39)"
-              },
-              {
-                "valor": "DRD2",
-                "texto": "o alvo mais difícil, em todas as métricas"
-              }
-            ]
           }
         ]
       ],
-      "notas": "<strong>~1 min 45 s — slide central.</strong> Ler a linha do EGFR. Explicar o que é a referência ingênua: um modelo que responde sempre “ativa” — ele até consegue F1 alto na classe ativa, mas nunca acerta uma inativa, e por isso o F1 macro desaba para 0,35. Depois o ponto honesto: as três representações empatam, então escolhemos a mais barata. Mencionar que DRD2 é consistentemente o mais difícil."
+      "notas": "<strong>~1 min 45 s — slide central.</strong> Ler a linha do EGFR. Explicar o que é a referência ingênua: um modelo que responde sempre “ativa” — ele até consegue F1 alto na classe ativa, mas nunca acerta uma inativa, e por isso o F1 macro desaba para 0,35. Depois o ponto honesto: as três representações empatam, então escolhemos a mais barata. Mencionar que DRD2 é consistentemente o mais difícil.",
+      "rodape": []
     },
     {
       "layout": "conteudo",
