@@ -142,11 +142,84 @@
       "rodape": [
         {
           "tipo": "faixa",
-          "html": "Definimos <b>classe 1 = ativa</b> (pCHEMBL ≥ 6,5) e <b>classe 0 = inativa</b>. O rótulo <b>não vem pronto,</b>&nbsp;é construído na preparação dos dados.",
-          "fim": true
+          "html": "<b>Classe 1 = ativa</b> (pCHEMBL ≥ 6,5); <b>classe 0 = inativa</b>.<br>O rótulo <b>não vem pronto</b>&nbsp;foi construído na preparação dos dados.<br>Limiar escolhido por dar, nos quatro alvos, a divisão mais equilibrada, desequilíbrio atrapalha treino e métricas.",
+          "fim": false
         }
       ],
       "notas": "<strong>~1 min 20 s.</strong> Público leigo: explicar devagar os três cartões. (1) o experimento mede concentração, e menos concentração = mais potente — é contraintuitivo. (2) por isso inverte-se com o logaritmo: pCHEMBL maior = melhor. (3) o erro que dói é jogar fora uma molécula boa. Fechar lendo a faixa: o rótulo é uma decisão nossa, não um dado da base."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "A base",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "titulo",
+            "texto": "Dicionário de atributos da base de dados"
+          },
+          {
+            "tipo": "tabela",
+            "preencher": false,
+            "cabecalho": [
+              "Coluna",
+              "Descrição"
+            ],
+            "linhas": [
+              [
+                "<code>protein / target_chembl_id</code>",
+                "Proteína-alvo e seu identificador no ChEMBL"
+              ],
+              [
+                "<code>molecule_chembl_id</code>",
+                "Identificador da molécula testada"
+              ],
+              [
+                "<code>canonical_smiles</code>",
+                "Estrutura química da molécula em notação SMILES"
+              ],
+              [
+                "<code>assay_chembl_id / assay_type</code>",
+                "Identificador e tipo do ensaio (todos do tipo B, de ligação)"
+              ],
+              [
+                "<code>standard_type</code>",
+                "Tipo da medida: IC50, Ki, Kd, EC50, AC50 ou ED50"
+              ],
+              [
+                "<code>standard_relation</code>",
+                "Relação da medida (todos iguais a '=', valores exatos)"
+              ],
+              [
+                "<code>standard_value / standard_units</code>",
+                "Valor medido e unidade (todos em nM)"
+              ],
+              [
+                "<code>pchembl_value</code>",
+                "Potência em escala logarítmica: −log₁₀ da concentração molar"
+              ],
+              [
+                "<code>data_validity_comment</code>",
+                "Observação de validade (vazia em todos os registros)"
+              ],
+              [
+                "<code>potential_duplicate</code>",
+                "Indicador de possível duplicata do registro (1 = suspeita)"
+              ],
+              [
+                "<code>activity_id</code>",
+                "Identificador único da medição"
+              ]
+            ]
+          },
+          {
+            "tipo": "card",
+            "titulo": "Observação",
+            "html": "<p>Várias colunas são constantes e, portanto, sem poder preditivo. Os atributos efetivamente utilizados pelo modelo derivam do `canonical_smiles`.</p>"
+          }
+        ]
+      ],
+      "notas": ""
     },
     {
       "layout": "conteudo",
@@ -166,22 +239,22 @@
               [
                 "EGFR",
                 "Receptor de crescimento — <strong>câncer</strong>",
-                "10.601 <span style=\"opacity:.6\">· 64% ativas</span>"
+                "10.601"
               ],
               [
                 "BACE1",
                 "Enzima amiloide — <strong>Alzheimer</strong>",
-                "9.990 <span style=\"opacity:.6\">· 62% ativas</span>"
+                "9.990&nbsp;"
               ],
               [
                 "DRD2",
                 "Receptor de dopamina — <strong>psiquiatria</strong>",
-                "8.392 <span style=\"opacity:.6\">· 57% ativas</span>"
+                "8.392&nbsp;"
               ],
               [
                 "HDAC1",
                 "Enzima de genes — <strong>câncer</strong>",
-                "8.003 <span style=\"opacity:.6\">· 54% ativas</span>"
+                "8.003&nbsp;"
               ]
             ]
           },
@@ -219,7 +292,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "O desafio a base não tem atributos",
+      "titulo": "A base não tem atributos",
       "topo": [
         {
           "tipo": "pergunta",
@@ -260,7 +333,7 @@
             "variante": "vd",
             "crescer": false,
             "titulo": "Opção B — Descritores",
-            "html": "<p></p><span style=\"font-size: 1.3em;\"><p>Calcula <strong>propriedades globais</strong> da molécula.</p><p>Massa molecular, lipofilicidade (logP), área polar, nº de anéis… <strong>205 números</strong>.</p></span><p></p>",
+            "html": "<p></p><span style=\"font-size: 1.3em;\"><p>Calcula <strong>propriedades globais</strong> da molécula.</p><p>Massa molecular, lipofilicidade (logP), área polar, nº de anéis… <strong>205 números</strong>.&nbsp;Os descritores que resultaram em valores indefinidos ou infinitos para alguma molécula foram removidos.</p></span><p></p>",
             "rodape": "Descreve como a molécula <em>é</em>, não quais fragmentos tem."
           }
         ]
@@ -268,64 +341,100 @@
       "rodape": [
         {
           "tipo": "faixa",
-          "html": "Testamos as duas e também a <b>combinação</b> (2.253 atributos). Essa é a principal transformação comparada no trabalho.",
-          "fim": true
+          "html": "Testamos as duas e também a <b>combinação</b> (2.253 atributos).",
+          "fim": false
         }
       ],
       "notas": "<strong>~1 min 30 s.</strong> Slide mais importante para o público leigo. Insistir: não havia colunas; nós as criamos. Usar a analogia da impressão digital para o fingerprint e “ficha técnica” para os descritores. Avisar que o resultado dessa comparação aparece no slide 7 e surpreende."
     },
     {
       "layout": "conteudo",
-      "titulo": "Preparação dos dados: cinco etapas",
+      "titulo": "Preparação dos dados",
       "proporcao": "1.1fr 1fr",
       "colunas": [
         [
           {
-            "tipo": "html",
-            "html": "<ol class=\"passos\">\n            <li><span style=\"font-size: 1.3em;\"><strong>Filtrar a proteína</strong> — os quatro alvos são tratados separadamente.</span></li>\n            <li><span style=\"font-size: 1.3em;\"><strong>Padronizar o tipo de medida</strong> — manter só <code>IC50</code> e <code>Ki</code> (afinidade); descartar EC50 e similares, que medem outra coisa.</span></li>\n            <li><span style=\"font-size: 1.3em;\"><strong>Remover o não confiável</strong> — duplicatas marcadas pelo ChEMBL (12,5%) e registros sem estrutura.</span></li>\n            <li><span style=\"font-size: 1.3em;\"><strong>Validar as estruturas</strong> — todo SMILES passa pelo interpretador químico.</span></li>\n            <li><span style=\"font-size: 1.3em;\"><strong>Agregar por molécula</strong> — várias medições da mesma molécula viram <strong>uma</strong>, pela mediana.</span></li>\n          </ol>"
+            "tipo": "lista",
+            "numerada": true,
+            "itens": [
+              "<strong>Filtrar a proteína</strong> — os quatro alvos são tratados separadamente.",
+              "<strong>Padronizar o tipo de medida</strong> — manter só <code>IC50 (Inibição)</code> e <code>Ki(Afinidade)</code>; juntos respondem por 95,7% dos registros. Descartar EC50 e similares somam pouco mais de 4%.",
+              "<strong>Remover o não confiável</strong> — duplicatas marcadas pelo ChEMBL (12,5%) e registros sem estrutura.",
+              "<strong>Validar as estruturas</strong> — todo SMILES passa pelo interpretador químico (biblioteca RDKit).",
+              "<strong>Agregar por molécula</strong> — várias medições da mesma molécula viram <strong>uma</strong>, pela mediana."
+            ]
           }
         ],
         [
           {
             "tipo": "card",
             "variante": "er",
-            "crescer": false,
-            "titulo": "Por que a etapa 5 é a mais importante",
-            "html": "<p></p><span style=\"font-size: 1.3em;\"><p><strong>30% das moléculas foram medidas mais de uma vez</strong>, em ensaios diferentes.</p><p>Sem agregar, a <strong>mesma molécula</strong> cairia no treino <em>e</em> no teste.</p></span><p></p>",
+            "titulo": "Etapa 5 é muito importante",
+            "html": "<p><strong>30% das moléculas foram medidas mais de uma vez</strong>, em ensaios diferentes.</p><p>Sem agregar, a <strong>mesma molécula</strong> cairia no treino <em>e</em> no teste.</p>",
             "stat_valor": "vazamento",
             "stat_texto": "o modelo “acertaria” aquilo que já tinha visto, e o resultado relatado seria falso"
-          },
-          {
-            "tipo": "evo",
-            "titulo": "EGFR — efeito da preparação",
-            "linhas": [
-              {
-                "rotulo": "Medições do alvo",
-                "valor": "19.866"
-              },
-              {
-                "rotulo": "Após filtros",
-                "valor": "16.599"
-              },
-              {
-                "rotulo": "Moléculas únicas",
-                "valor": "10.601 ▼",
-                "tendencia": "down"
-              }
-            ],
-            "obs": "Cada molécula foi medida 1,57 vez em média.",
-            "verde": false
           }
         ]
       ],
       "rodape": [
         {
-          "tipo": "faixa",
-          "html": "Usamos a <b>mediana</b>, e não a média: ela resiste a medições discrepantes entre laboratórios diferentes.",
-          "fim": true
+          "tipo": "tabela",
+          "cabecalho": [
+            "Alvo",
+            "Moléculas",
+            "Treino",
+            "Teste",
+            "Teste classe 0",
+            "Teste classe 1",
+            "% ativos"
+          ],
+          "linhas": [
+            [
+              "EGFR",
+              "10.601",
+              "8.480",
+              "2.121",
+              "756",
+              "1.365",
+              "64,3%"
+            ],
+            [
+              "BACE1",
+              "9.990",
+              "7.992",
+              "1.998",
+              "765",
+              "1.233",
+              "61,7%"
+            ],
+            [
+              "DRD2",
+              "8.392",
+              "6.713",
+              "1.679",
+              "719",
+              "960",
+              "57,2%"
+            ],
+            [
+              "HDAC1",
+              "8.003",
+              "6.402",
+              "1.601",
+              "742",
+              "859",
+              "53,6%"
+            ]
+          ],
+          "preencher": false
+        },
+        {
+          "tipo": "card",
+          "titulo": "Treinamento / Teste",
+          "html": "<p>Conjuntos de treinamento e teste por alvo (após a preparação: 80% treino, 20% teste)</p><p>Classe 1 = molécula ativa; classe 0 = inativa.</p><p>Exemplo (EGFR): aprende com 8.480 moléculas e avaliado em 2.121 que nunca viu.</p>"
         }
       ],
-      "notas": "<strong>~1 min 30 s.</strong> Correr as cinco etapas rapidamente e parar na quinta. Explicar vazamento com a analogia da prova: é como estudar com o gabarito — a nota sobe, mas não mede aprendizado. Mostrar no bloco da direita que 16.599 medições viraram 10.601 moléculas."
+      "notas": "<strong>~1 min 30 s.</strong> Correr as cinco etapas rapidamente e parar na quinta. Explicar vazamento com a analogia da prova: é como estudar com o gabarito — a nota sobe, mas não mede aprendizado. Mostrar na tabela abaixo que 16.599 medições viraram 10.601 moléculas (exemplo EGFR)."
     },
     {
       "layout": "conteudo",
@@ -333,7 +442,7 @@
       "topo": [
         {
           "tipo": "html",
-          "html": "<div class=\"fluxo\">\n          <div class=\"et\"><span class=\"num\">1</span><div>Molécula<br>(SMILES)</div></div>\n          <div class=\"st\">→</div>\n          <div class=\"et\"><span class=\"num\">2</span><div>Atributos<br>(2.048 bits ou 205 descritores)</div></div>\n          <div class=\"st\">→</div>\n          <div class=\"et\"><span class=\"num\">3</span><div><strong>Padronização</strong><br>(média 0, desvio 1)</div></div>\n          <div class=\"st\">→</div>\n          <div class=\"et\"><span class=\"num\">4</span><div>Camadas ocultas<br>256 → 128 neurônios</div></div>\n          <div class=\"st\">→</div>\n          <div class=\"et\"><span class=\"num\">5</span><div>Probabilidade<br>de ser ativa</div></div>\n        </div>"
+          "html": "<div class=\"fluxo\">\n          <div class=\"et\"><span class=\"num\">1</span><div>Molécula<br>(SMILES)</div></div>\n          <div class=\"st\">→</div>\n          <div class=\"et\"><span class=\"num\">2</span><div>Atributos<br>(2.048 bits ou 205 descritores)</div></div>\n          <div class=\"st\">→</div>\n          <div class=\"et\"><span class=\"num\">3</span><div><strong>Padronização (StandardScaler)</strong><br>(média 0, desvio 1 somente treinamento)</div></div>\n          <div class=\"st\">→</div>\n          <div class=\"et\"><span class=\"num\">4</span><div>Camadas ocultas<br>256 → 128 neurônios</div></div>\n          <div class=\"st\">→</div>\n          <div class=\"et\"><span class=\"num\">5</span><div>Probabilidade<br>de ser ativa</div></div>\n        </div>"
         }
       ],
       "proporcao": "1.1fr 1fr",
@@ -344,7 +453,7 @@
             "blocos": [
               {
                 "tipo": "html",
-                "html": "<table class=\"tb2\">\n            <tr><th>Hiperparâmetro</th><th>Valores testados</th><th>Papel</th></tr>\n            <tr><td>Arquitetura</td><td>(128) · (256,128) · (128,64)</td><td>Capacidade da rede</td></tr>\n            <tr><td>Ativação</td><td><code>relu</code> · <code>tanh</code></td><td>Não linearidade</td></tr>\n            <tr><td>alpha</td><td>0,0001 · 0,001</td><td>Freia o sobreajuste</td></tr>\n            <tr><td>Taxa de aprendizado</td><td>0,001 · 0,0005</td><td>Tamanho do passo</td></tr>\n            <tr class=\"grp\"><td>Total</td><td colspan=\"2\" class=\"cen\"><strong>24 combinações</strong> × 5 partições × 12 cenários = <strong>1.440 ajustes</strong></td></tr>\n          </table>"
+                "html": "<table class=\"tb2\">\n            <tbody><tr><th>Hiperparâmetro</th><th>Valores testados</th><th>Papel</th></tr>\n            <tr><td>Arquitetura (hidden_layer_sizes)</td><td>(128) · (256,128) · (128,64)</td><td>Capacidade da rede</td></tr>\n            <tr><td>Ativação (activation)</td><td><code>relu</code> · <code>tanh</code></td><td>Não linearidade</td></tr>\n            <tr><td>alpha</td><td>0,0001 · 0,001</td><td>Freia o sobreajuste</td></tr>\n            <tr><td>Taxa de aprendizado inicial (learning_rate_init)</td><td>0,001 · 0,0005</td><td>Tamanho do passo</td></tr>\n            <tr class=\"grp\"><td>Total</td><td colspan=\"2\" class=\"cen\"><strong>24 combinações</strong> × 5 partições × 12 cenários = <strong>1.440 ajustes</strong></td></tr>\n          </tbody></table>"
               }
             ]
           }
@@ -354,24 +463,14 @@
             "tipo": "card",
             "variante": "vd",
             "crescer": true,
-            "titulo": "Como escolhemos",
+            "titulo": "Observações",
             "itens": [
               "<strong>Validação cruzada</strong> em 5 partições: o modelo é treinado e testado 5 vezes, em recortes diferentes do treino.",
               "Critério de seleção: <strong>F1 da classe ativa</strong>.",
-              "Os <strong>20% de teste</strong> ficam isolados até o fim."
-            ]
-          },
-          {
-            "tipo": "kpis",
-            "itens": [
-              {
-                "valor": "~23 min",
-                "texto": "de busca total"
-              },
-              {
-                "valor": "86 runs",
-                "texto": "registradas no MLflow"
-              }
+              "Os <strong>20% de teste</strong> ficam isolados até o fim.<div>&nbsp;sem melhora</div>",
+              "Fixo o número máximo de iterações (300).",
+              "Parada antecipada com 10% do treino.",
+              "Refit foi o F1 da classe 1."
             ]
           }
         ]
@@ -379,15 +478,15 @@
       "rodape": [
         {
           "tipo": "faixa",
-          "html": "A etapa 3 do fluxo,&nbsp;<b>padronização,</b>&nbsp;parece um detalhe técnico. O slide 8 mostra que é ela que decide se o modelo funciona.",
+          "html": "A etapa 3 do fluxo,&nbsp;<b>padronização,</b>&nbsp;parece um detalhe técnico. O slide 8 mostra que é ela que decide se o modelo funciona.&nbsp;",
           "fim": true
         }
       ],
-      "notas": "<strong>~1 min 15 s.</strong> Percorrer o fluxo da esquerda para a direita: molécula vira números, números são padronizados, passam pelas camadas, sai uma probabilidade. Não detalhar matemática. Dizer que testamos 24 configurações em cada um dos 12 cenários e deixar o gancho para o slide 8."
+      "notas": "<strong>~1 min 15 s.</strong> Percorrer o fluxo da esquerda para a direita: molécula vira números, números são padronizados, passam pelas camadas, sai uma probabilidade. Não detalhar matemática. Dizer que testamos 24 configurações em cada um dos 12 cenários e deixar o gancho para o slide 8.<div><b>A ReLU</b> (Rectified Linear Unit) devolve o valor de entrada quando positivo e zero caso contrário, é a escolha padrão por treinar rapidamente.&nbsp;</div><div><b>A tanh </b>(tangente hiperbólica) comprime a saída entre −1 e 1, com transição suave.<br><b>Alpha</b> Reduz o sobreajuste (overfitting) ao desestimular que a rede se apoie fortemente em poucos atributos.</div><div><b>Taxa de aprendizado inicial: </b>o tamanho do passo inicial da atualização dos pesos.</div><div><br></div><div><br></div>"
     },
     {
       "layout": "conteudo",
-      "titulo": "Resultados:&nbsp;",
+      "titulo": "Resultados: Análise F1 classe C1",
       "proporcao": "1.25fr 1fr",
       "colunas": [
         [
@@ -400,7 +499,7 @@
               "F1 ativa",
               "IC 95%",
               "ROC-AUC",
-              "Referência ingênua (F1 macro)"
+              "<span style=\"letter-spacing: 0.33px;\">Referência ingênua (F1 c1) - prever a classe majoritária (ativa)</span>"
             ],
             "linhas": [
               [
@@ -409,7 +508,7 @@
                 "<strong>0,8840</strong>",
                 "0,871–0,896",
                 "0,9023",
-                "0,3916"
+                "0,7831"
               ],
               [
                 "BACE1",
@@ -417,7 +516,7 @@
                 "0,8693",
                 "0,855–0,884",
                 "0,8934",
-                "0,3816"
+                "0,7632"
               ],
               [
                 "HDAC1",
@@ -425,7 +524,7 @@
                 "0,8428",
                 "0,823–0,860",
                 "0,8996",
-                "0,3492"
+                "0,7275"
               ],
               [
                 "DRD2",
@@ -433,7 +532,7 @@
                 "0,8259",
                 "0,806–0,844",
                 "0,8744",
-                "0,3638"
+                "0,6984"
               ]
             ],
             "linhas_classe": [
@@ -453,8 +552,9 @@
             "tipo": "card",
             "variante": "",
             "titulo": "As três representações empatam",
-            "html": "<p style=\"margin:0;\"><span style=\"font-size: 1.3em;\">Dentro de cada alvo, <em>fingerprint</em>, descritores e combinação ficam <strong>dentro do mesmo intervalo de confiança</strong> → a diferença <strong>não é conclusiva</strong>.</span></p>",
-            "crescer": false
+            "html": "<ul><li style=\"font-size:18px;\">Objetivo: selecionar moléculas para ensaio.</li><li style=\"font-size: 18px;\"><strong>Falso negativo</strong>: erro mais custoso descarta ativa, sem recuperação.</li><li style=\"font-size: 18px;\"><strong>Falso positivo</strong>: só consome um ensaio.</li><li><span style=\"font-size: 18px;\">Foco: </span><span class=\"mk\" style=\"font-size: 18px; background: linear-gradient(rgba(0, 0, 0, 0) 55%, rgb(203, 231, 211) 55%) 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);\">revocação e F1 da classe 1</span><span style=\"font-size: 20px;\">.</span></li><li><span style=\"font-size: 20px;\">Cada alvo</span><span style=\"font-size: 22.1px;\">&nbsp;fica&nbsp;</span><strong style=\"font-size: 18px;\">dentro do mesmo intervalo de confiança,</strong><span style=\"font-size: 18px;\">&nbsp;a diferença </span><strong style=\"font-size: 18px;\">não é conclusiva</strong><span style=\"font-size: 22.1px;\">.</span></li></ul>",
+            "crescer": false,
+            "itens": []
           }
         ],
         [
@@ -471,7 +571,51 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "A padronização decide",
+      "titulo": "Resultados: Matriz de confusão",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/matrizes_confusao_melhor_por_alvo.png",
+            "alt": ""
+          },
+          {
+            "tipo": "destaque",
+            "estilo": "cd",
+            "titulo": "Análise",
+            "html": "<p>Considerando o falso negativo como o erro mais custoso, os modelos deixam de identificar entre 10,7% e 17,5% das moléculas ativas.</p>"
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min 45 s — slide central.</strong> Ler a linha do EGFR. Explicar o que é a referência ingênua: um modelo que responde sempre “ativa” — ele até consegue F1 alto na classe ativa, mas nunca acerta uma inativa, e por isso o F1 macro desaba para 0,35. Depois o ponto honesto: as três representações empatam, então escolhemos a mais barata. Mencionar que DRD2 é consistentemente o mais difícil.",
+      "rodape": []
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Resultados: Curva ROC",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/curva_roc_por_alvo.png",
+            "alt": ""
+          },
+          {
+            "tipo": "destaque",
+            "estilo": "cd",
+            "titulo": "Análise",
+            "html": "<p>Curvas dos quatro alvos na mesma representação (fingerprint de Morgan). EGFR, BACE1 e HDAC1 se sobrepõem, DRD2 fica abaixo o que confirma a ordem de dificuldade nessas classe.</p>"
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min 45 s — slide central.</strong> Ler a linha do EGFR. Explicar o que é a referência ingênua: um modelo que responde sempre “ativa” — ele até consegue F1 alto na classe ativa, mas nunca acerta uma inativa, e por isso o F1 macro desaba para 0,35. Depois o ponto honesto: as três representações empatam, então escolhemos a mais barata. Mencionar que DRD2 é consistentemente o mais difícil.",
+      "rodape": []
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Resultado: influência da padronização",
       "proporcao": "1.1fr 1fr",
       "colunas": [
         [
@@ -527,9 +671,9 @@
           {
             "tipo": "card",
             "variante": "er",
-            "crescer": true,
-            "titulo": "0,50 = acaso",
-            "html": "<p style=\"margin:0;\"><span style=\"font-size: 1.3em;\">Sem padronizar, a ROC-AUC cai para <strong>0,48–0,51</strong> nos quatro alvos: o modelo vira um <strong>sorteio</strong>. No BACE1 ele colapsa e não identifica <strong>nenhuma</strong> das 1.233 moléculas ativas.</span></p>"
+            "crescer": false,
+            "titulo": "",
+            "html": "<p style=\"margin:0;\"><span style=\"font-size: 1.3em;\">Sem padronizar (</span><span style=\"font-size: 22.1px;\">StandardScaler</span><span style=\"font-size: 1.3em;\">) e mantendo os mesmos hiperparâmetros, a ROC-AUC cai para </span><strong style=\"font-size: 1.3em;\">0,48–0,51</strong><span style=\"font-size: 1.3em;\"> nos quatro alvos, o modelo vira um </span><strong style=\"font-size: 1.3em;\">sorteio</strong><span style=\"font-size: 1.3em;\">. No BACE1 não identifica </span><strong style=\"font-size: 1.3em;\">nenhuma</strong><span style=\"font-size: 1.3em;\"> das 1.233 moléculas ativas F1 c1 = 0.</span></p>"
           }
         ],
         [
@@ -563,47 +707,19 @@
           {
             "tipo": "card",
             "variante": "vd",
-            "crescer": true,
+            "crescer": false,
             "titulo": "Cuidado com uma métrica só",
-            "html": "<p style=\"margin:0;\"><span style=\"font-size: 1.3em;\">Em três alvos, o F1 <em>sem</em> padronização ainda parece razoável (0,70–0,79). É ilusão: a ROC-AUC de 0,51 revela que não há discriminação alguma.</span></p>"
+            "html": "<p style=\"margin:0;\"><span style=\"font-size: 1.3em;\">Em três alvos, o F1 <em>sem</em> padronização ainda parece razoável (0,70–0,79). É ilusão, a ROC-AUC de 0,51 revela que não há classificação alguma.</span></p>"
           }
         ]
       ],
-      "rodape": [
-        {
-          "tipo": "faixa",
-          "html": "Uma <b>árvore de decisão</b> não teria esse problema: ela é invariante à escala. A transformação necessária <b>depende do algoritmo</b>, não só dos dados.",
-          "fim": true
-        }
-      ],
+      "rodape": [],
       "notas": "<strong>~1 min 30 s.</strong> Este é o achado que vale a apresentação. Explicar ROC-AUC em uma frase: é a chance de o modelo dar nota maior a uma molécula ativa do que a uma inativa; 0,5 é cara ou coroa. Mostrar o colapso do BACE1. Fechar com a comparação com a árvore dos trabalhos anteriores — é o gancho com a disciplina."
     },
     {
       "layout": "conteudo",
       "titulo": "Conclusão",
-      "topo": [
-        {
-          "tipo": "kpis",
-          "itens": [
-            {
-              "valor": "0,826 – 0,884",
-              "texto": "F1 da classe ativa nos quatro alvos"
-            },
-            {
-              "valor": "0,863 – 0,905",
-              "texto": "ROC-AUC (0,5 seria acaso)"
-            },
-            {
-              "valor": "0,50",
-              "texto": "ROC-AUC sem padronizar: o modelo morre"
-            },
-            {
-              "valor": "1.440",
-              "texto": "ajustes, 86 runs no MLflow"
-            }
-          ]
-        }
-      ],
+      "topo": [],
       "proporcao": "1fr",
       "colunas": [
         [
@@ -627,7 +743,8 @@
                 "html": "Teste de GRID 6 vezes maior não mudou o resultado no teste."
               },
               {
-                "html": "Bioatividade alta <span class=\"mk\" style=\"background-color: rgb(255, 255, 255);\">não garante</span> bom medicamento, a predição indica um <em>hit</em>&nbsp;e filtros&nbsp;candidatos com <strong>ADMET (Absorção, Distribuição, Metabolismo, Excreção e Toxicidade)</strong>&nbsp;devem ser&nbsp;combinados."
+                "html": "A predição indica um <em>hit</em>&nbsp;e filtros&nbsp;candidatos com <strong>ADMET (Absorção, Distribuição, Metabolismo, Excreção e Toxicidade)</strong>&nbsp;devem ser&nbsp;combinados.",
+                "titulo": "Bioatividade alta não garante bom medicamento"
               }
             ]
           }
