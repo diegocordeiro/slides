@@ -214,7 +214,8 @@
           {
             "tipo": "card",
             "titulo": "Observação",
-            "html": "<p>Várias colunas são constantes e, portanto, sem poder preditivo. Os atributos efetivamente utilizados pelo modelo derivam do `canonical_smiles`.</p>"
+            "html": "<p>Várias colunas são constantes e, portanto, sem poder preditivo. Os atributos efetivamente utilizados pelo modelo derivam do `canonical_smiles`.</p>",
+            "crescer": true
           }
         ]
       ],
