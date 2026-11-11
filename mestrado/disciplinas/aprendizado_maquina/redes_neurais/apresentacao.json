@@ -122,7 +122,7 @@
             "crescer": true,
             "titulo": "A escala pCHEMBL",
             "destaque": "pCHEMBL = −log₁₀(mol/L)",
-            "html": "<p></p><span style=\"font-size: 1.3em;\"><p><span class=\"\">A escala </span><b data-path-to-node=\"0\" data-index-in-node=\"9\">pChEMBL</b> usa o logaritmo para transformar concentrações minúsculas (cheias de zeros) em uma nota simples de 1 a 10. Assim, quanto <b data-path-to-node=\"0\" data-index-in-node=\"138\">maior a nota</b>, mais potente é a molécula, onde cada ponto extra significa precisar de <b data-path-to-node=\"0\" data-index-in-node=\"224\">10 vezes menos substância</b> para o mesmo efeito.</p></span><p style=\"margin:0;\"></p>",
+            "html": "<p></p><span style=\"font-size: 1.3em;\"><p><span class=\"\">A escala </span><b data-path-to-node=\"0\" data-index-in-node=\"9\">pChEMBL</b> usa o logaritmo para transformar concentrações pequenas (cheias de zeros) em uma nota simples de 1 a 10. Assim, quanto <b data-path-to-node=\"0\" data-index-in-node=\"138\">maior a nota</b>, mais potente é a molécula, onde cada ponto extra significa precisar de <b data-path-to-node=\"0\" data-index-in-node=\"224\">10 vezes menos substância</b> para o mesmo efeito.</p></span><p style=\"margin:0;\"></p>",
             "rodape": "<span style=\"font-size: 1.3em;\">pCHEMBL 6 ≈ 1 µM · <strong>6,5 ≈ 316 n</strong></span><span style=\"font-size: 1.3em;\"><strong>M</strong>&nbsp;(3,2x mais potente)· 7 ≈ 100 nM (</span><span style=\"font-size: 1.3em;\">10x mais potente</span><span style=\"font-size: 1.3em;\">)</span>"
           }
         ],
