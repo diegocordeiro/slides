@@ -1744,6 +1744,36 @@ body.modo-presenter #bnt, body.modo-presenter .tmr { display:none }
     html.movel .fig img { max-height: 80vh }
 }
 
+/* ===== Zoom de imagens (lupa + visualizador em tela cheia) ===== */
+.zoom-pai { position: relative }
+img.zoom-ok { cursor: zoom-in }
+.zoom-bt { position: absolute; z-index: 5; width: 40px; height: 40px; padding: 8px; border: 0; border-radius: 50%; cursor: pointer;
+    background: rgba(11, 25, 34, .72); color: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, .3); opacity: 0; transition: opacity .15s, transform .15s;
+    display: flex; align-items: center; justify-content: center; touch-action: manipulation }
+.zoom-bt svg { width: 22px; height: 22px; display: block }
+.zoom-pai:hover > .zoom-bt, .zoom-bt:focus-visible { opacity: 1 }
+.zoom-bt:hover { transform: scale(1.08); background: rgba(11, 25, 34, .9) }
+@media (hover: none), (pointer: coarse) { .zoom-bt { opacity: .92 } }
+#zoom-vis { position: fixed; inset: 0; z-index: 10000; display: none; background: #05090e; user-select: none; -webkit-user-select: none }
+#zoom-vis.on { display: block }
+#zoom-vis .zv-palco { position: absolute; inset: 0 0 0 0; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 56px 56px 64px }
+#zoom-vis .zv-img { max-width: none; max-height: none; object-fit: contain; background: #fff; border-radius: 4px; cursor: zoom-in;
+    transform-origin: center center; touch-action: none; transition: transform .08s ease-out; box-shadow: 0 10px 40px rgba(0, 0, 0, .5) }
+#zoom-vis.ampliada .zv-img { cursor: grab }
+#zoom-vis .zv-barra { position: absolute; top: 10px; right: 10px; display: flex; align-items: center; gap: 6px; z-index: 5; padding: 4px; border-radius: 14px; background: rgba(0, 0, 0, .55) }
+#zoom-vis button { background: rgba(255, 255, 255, .14); color: #fff; border: 1px solid rgba(255, 255, 255, .3); border-radius: 10px;
+    min-width: 42px; height: 42px; font-size: 20px; font-weight: 700; cursor: pointer; touch-action: manipulation }
+#zoom-vis button:hover { background: rgba(255, 255, 255, .28) }
+#zoom-vis .zv-pct { color: #fff; font: 700 13px var(--fonte); min-width: 48px; text-align: center }
+#zoom-vis .zv-nav { position: absolute; top: 50%; transform: translateY(-50%); display: none; font-size: 30px; height: 64px; z-index: 5; background: rgba(0, 0, 0, .55) !important }
+#zoom-vis.varias .zv-nav { display: block }
+#zoom-vis .zv-ant { left: 10px } #zoom-vis .zv-prox { right: 10px }
+#zoom-vis .zv-leg { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); max-width: min(90vw, 900px); color: #fff;
+    font: 15px/1.4 var(--fonte); text-align: center; background: rgba(0, 0, 0, .6); padding: 6px 14px; border-radius: 10px; z-index: 5; pointer-events: none }
+@media screen and (max-width: 600px) { #zoom-vis .zv-palco { padding: 56px 8px 70px } #zoom-vis .zv-pct { display: none } }
+@media print { .zoom-bt, #zoom-vis { display: none !important } img.zoom-ok { cursor: auto } }
+body.modo-editor .zoom-bt { display: none !important }
+
 /* ===== Modo editor (prévia dentro do editor; nunca publicado) ===== */
 body.modo-editor { width: 1280px; height: 720px }
 body.modo-editor .tb, body.modo-editor .fita, body.modo-editor .ft,

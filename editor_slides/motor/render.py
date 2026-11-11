@@ -219,7 +219,8 @@ def render_bloco(b: dict, p: str, c: Ctx) -> str:
         cls = "faixa-az fim" if g("fim") else "faixa-az"
         return '<div class="%s"%s><span%s>%s</span></div>' % (cls, c.b(p), c.e(p + "/html"), g("html", ""))
     if t == "figura":
-        h = '<div class="fig"%s><img src="%s" alt="%s"%s></div>' % (c.b(p), esc(g("src", "")), esc(g("alt", "")), c.img(p + "/src"))
+        nz = ' data-zoom="nao"' if g("sem_zoom") else ""
+        h = '<div class="fig"%s><img src="%s" alt="%s"%s%s></div>' % (c.b(p), esc(g("src", "")), esc(g("alt", "")), nz, c.img(p + "/src"))
         if g("legenda"):
             h += '<div class="cap"%s>%s</div>' % (c.e(p + "/legenda"), g("legenda"))
         return h
@@ -321,8 +322,9 @@ def render_slide(sl: dict, i: int, dados: dict, c: Ctx, sid: str | None = None) 
                 '<div class="in">%s<h1%s>%s</h1>%s</div></div></div>%s\n    </div>') % (
             sid, ds, bg, rot, c.e(p + "/titulo"), sl.get("titulo", ""), txt, _notas(sl, i, c))
     if lay == "imagem":
-        return '<div class="sl slimg" id="%s"%s><img src="%s" alt="%s"%s>%s\n    </div>' % (
-            sid, ds, esc(sl.get("imagem", "")), esc(sl.get("alt", "")), c.img(p + "/imagem"), _notas(sl, i, c))
+        return '<div class="sl slimg" id="%s"%s><img src="%s" alt="%s"%s%s>%s\n    </div>' % (
+            sid, ds, esc(sl.get("imagem", "")), esc(sl.get("alt", "")), ' data-zoom="nao"' if sl.get("sem_zoom") else "",
+            c.img(p + "/imagem"), _notas(sl, i, c))
     # conteudo
     numerar = (dados.get("meta") or {}).get("numerar", True) and not sl.get("sem_numero")
     num = '<span class="num">%d</span>' % (i + 1) if numerar else ""

@@ -118,6 +118,11 @@
           "nome": "alt",
           "tipo": "texto",
           "rotulo": "Texto alternativo"
+        },
+        {
+          "nome": "sem_zoom",
+          "tipo": "bool",
+          "rotulo": "Desativar o zoom (lupa) desta imagem"
         }
       ]
     },
@@ -373,6 +378,11 @@
           "nome": "legenda",
           "tipo": "texto",
           "rotulo": "Legenda"
+        },
+        {
+          "nome": "sem_zoom",
+          "tipo": "bool",
+          "rotulo": "Desativar o zoom (lupa) desta imagem"
         }
       ]
     },
