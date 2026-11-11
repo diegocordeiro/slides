@@ -130,6 +130,14 @@ make editor            # abre http://127.0.0.1:8765 no navegador (Ctrl+C encerra
     qualquer tecla volta;
   - toque: arraste para a esquerda/direita, ou toque na faixa lateral (15% de cada lado);
     os botões de navegação ficam maiores em telas de toque.
+- **Zoom nas imagens** (aulas geradas pelo editor): clique na imagem, ou toque na **lupa** que aparece no canto
+  dela (no computador, ao passar o mouse; em telas de toque, sempre visível), para abri-la em **tela cheia**.
+  - ampliar: clique/toque na imagem (2,5×), roda do mouse, pinça ou + / − · 0 ou ⤢: encaixar · arrastar: mover;
+  - ← / → passam para a próxima imagem do mesmo slide · Esc, PageDown/PageUp (passador) ou ✕ fecham sem trocar de slide
+    (no toque, arrastar para baixo também fecha);
+  - no modo apresentador, o zoom abre e fecha junto na janela do projetor;
+  - logos, capa e divisores não têm zoom, nem imagens com menos de 120 px; para desligar numa imagem específica,
+    marque **Desativar o zoom (lupa) desta imagem** no bloco *Figura* ou no layout *Imagem*. A lupa não sai no PDF.
 - **Celular e tablet → PDF**: em telas de até 820 px de largura (ou celular deitado), as aulas feitas no
   editor **abrem direto o PDF** da apresentação (`aulaNN.pdf`, ao lado do HTML). Se o navegador não mostra PDF
   dentro da página (caso do Chrome no Android), aparece uma tela com **Abrir o PDF** e **Baixar o PDF**. Também há
