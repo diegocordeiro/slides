@@ -111,7 +111,7 @@
             "tipo": "card",
             "crescer": true,
             "titulo": "Como se mede a potência",
-            "html": "<p></p><span style=\"font-size: 1.3em;\"><p>Um ensaio mede <strong>qual concentração</strong> da molécula é necessária para produzir o efeito na proteína.</p><p><strong>Quanto menor a concentração, mais potente</strong> a molécula.</p><p><span class=\"\">Se você precisa de </span><b data-path-to-node=\"2,0,0\" data-index-in-node=\"19\">muito pouquinho</b> (uma gota) para fazer efeito, a molécula é <b data-path-to-node=\"2,0,0\" data-index-in-node=\"78\">muito potente</b>.</p></span><p></p>",
+            "html": "<p></p><span style=\"font-size: 1.3em;\"><p>Um ensaio mede <strong>qual concentração</strong> da molécula é necessária para produzir o efeito na proteína.</p><p><strong>Quanto menor a concentração, mais potente</strong> a molécula.</p><p><span class=\"\">Se você precisa de </span><b data-path-to-node=\"2,0,0\" data-index-in-node=\"19\">muito pouco</b> (uma gota) para fazer efeito, a molécula é <b data-path-to-node=\"2,0,0\" data-index-in-node=\"78\">muito potente</b>.</p></span><p></p>",
             "rodape": "<span style=\"font-size: 1.3em;\">Ex.: <code>IC50</code> = concentração que reduz à metade a atividade da proteína.</span>"
           }
         ],
