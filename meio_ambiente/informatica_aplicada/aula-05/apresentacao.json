@@ -545,6 +545,11 @@
             "src": "img/typing-logo.png",
             "alt": "Logotipo do Typing.com",
             "legenda": "Plataforma gratuita de treino de digitação"
+          },
+          {
+            "tipo": "figura",
+            "src": "img/qrcode_facil.png",
+            "alt": ""
           }
         ],
         [
