@@ -36,7 +36,7 @@
     <div class="sl" id="s1">
       <div class="capa">
         <div class="esq">
-          <div class="rot">Seminário · Grupo de Pesquisa SERG · PPGCC/UFPI · 2026</div>
+          <div class="rot">Grupo de Pesquisa SERG · PPGCC/UFPI · 2026</div>
           <h1>Agentic Harness Engineering<span>Observability-Driven Automatic Evolution of Coding-Agent Harnesses</span></h1>
           <div class="faixa"></div>
           <div class="sub">Lin, Liu, Pan, Lin, Dou, Xi, Huang, Yan, Han, Gui &amp; Jiang<br>Fudan University · Peking University · Shanghai Qiji Zhifeng Co., Ltd<br>arXiv:2604.25850v4 [cs.CL], 18 de maio de 2026</div>
@@ -47,7 +47,7 @@
         </div>
         <div class="dir"><img src="img/logo_full.png" alt=""><img class="marca" src="img/marca.png" alt=""></div>
       </div>
-      <div class="nt"><strong>0:00 → 0:30 · 30 s.</strong> Apresente o artigo de Lin et al. (Fudan, Pequim e Qiji Zhifeng). Diga logo que é um <em>preprint</em> do arXiv, sem revisão por pares; isso prepara a análise crítica do slide 16. Frase-guia: “um agente consegue melhorar sozinho, e de forma auditável, o harness de outro agente de código? A resposta depende de tornar observáveis três coisas: componentes, experiência e decisões.”<br><strong>Se perguntarem:</strong> “O que é harness?” Tudo o que cerca o modelo: system prompt, ferramentas, middleware, skills, subagentes e memória (slide 3).</div>
+      <div class="nt"><div><strong>Evolução automática de estruturas de suporte para agentes de codificação, orientada pela observabilidade</strong></div><strong>0:00 → 0:30 · 30 s.</strong> Apresente o artigo de Lin et al. (Fudan, Pequim e Qiji Zhifeng). Diga logo que é um <em>preprint</em> do arXiv, sem revisão por pares; isso prepara a análise crítica do slide 16. Frase-guia: “um agente consegue melhorar sozinho, e de forma auditável, o harness de outro agente de código? A resposta depende de tornar observáveis três coisas: componentes, experiência e decisões.”<br><strong>Se perguntarem:</strong> “O que é harness?” Tudo o que cerca o modelo: system prompt, ferramentas, middleware, skills, subagentes e memória (slide 3).</div>
     </div>
 
     <!-- SLIDE 2 — Roteiro da apresentação -->
@@ -126,7 +126,7 @@
         <div class="grade" style="grid-template-columns:1.1fr 1fr">
           <div class="col"><div class="card grow"><h3>Controlabilidade</h3><ul><li>Escreve <strong>só no workspace</strong> do harness.</li><li>Somente leitura: runs, tracer, verificador e configuração do LLM.</li></ul></div><div class="card vd grow"><h3>Baseada em evidência</h3><ul><li>Toda edição vem com uma <strong>entrada no manifesto</strong>.</li><li>A rodada seguinte compara previsto com observado e <strong>reverte o que falhou</strong>.</li></ul></div></div>
           <div class="col"><h3 class="tit-bloco">Anatomia de uma entrada do manifesto</h3><div class="lins"><div class="lin"><div><b>Evidência da falha</b><span>o que o relatório mostrou</span></div></div><div class="lin"><div><b>Causa raiz inferida</b><span>por que falhou</span></div></div><div class="lin"><div><b>Correção direcionada</b><span>qual componente muda</span></div></div><div class="lin"><div><b>Impacto previsto</b><span>correções esperadas + regressões em risco</span></div></div></div></div></div>
-        <div class="txt-bloco"><div class="fonte">Fonte: Lin et al. (2026), Seção 3.2; Agent Debugger: Lin (2026).</div></div>
+        <div class="txt-bloco"><div class="fonte">Fonte: Lin et al. (2026), Seção 3.3; Agent Debugger: Lin (2026).</div></div>
       </div>
       <div class="nt"><strong>7:00 → 8:00 · 1 min.</strong> O Evolve Agent fecha o laço: lê a evidência, decide adicionar, modificar ou remover componentes, edita e registra o raciocínio. Duas restrições: (1) <strong>controlabilidade</strong>: só escreve no workspace, o que bloqueia atalhos como desligar o verificador, trocar o modelo ou aumentar o raciocínio, e mantém todo ganho atribuível ao harness; (2) <strong>evidência</strong>: cada edição traz uma entrada de manifesto. Na rodada seguinte, os conjuntos previstos são cruzados com os deltas observados e cada edição recebe um veredito.<br><strong>Se perguntarem:</strong> “O agente pode trapacear?” A controlabilidade limita onde ele escreve, mas os autores admitem que não há uma pilha completa de salvaguardas é um protótipo.<br><b>Trace / trajetória:</b>&nbsp;O registro de tudo que ocorreu num rollout: mensagens do modelo, chamadas de ferramenta e saídas.</div>
     </div>

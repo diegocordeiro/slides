@@ -26,14 +26,14 @@
   "slides": [
     {
       "layout": "capa",
-      "rotulo": "Seminário · Grupo de Pesquisa SERG · PPGCC/UFPI · 2026",
+      "rotulo": "Grupo de Pesquisa SERG · PPGCC/UFPI · 2026",
       "titulo": "Agentic Harness Engineering<span>Observability-Driven Automatic Evolution of Coding-Agent Harnesses</span>",
       "subtitulos": [
         "Lin, Liu, Pan, Lin, Dou, Xi, Huang, Yan, Han, Gui &amp; Jiang<br>Fudan University · Peking University · Shanghai Qiji Zhifeng Co., Ltd<br>arXiv:2604.25850v4 [cs.CL], 18 de maio de 2026",
         "Apresentação:\n            <ul>\n              <li><b>Diego Cordeiro de Oliveira</b></li>\n            </ul>"
       ],
       "imagem": "img/logo_full.png",
-      "notas": "<strong>0:00 → 0:30 · 30 s.</strong> Apresente o artigo de Lin et al. (Fudan, Pequim e Qiji Zhifeng). Diga logo que é um <em>preprint</em> do arXiv, sem revisão por pares; isso prepara a análise crítica do slide 16. Frase-guia: “um agente consegue melhorar sozinho, e de forma auditável, o harness de outro agente de código? A resposta depende de tornar observáveis três coisas: componentes, experiência e decisões.”<br><strong>Se perguntarem:</strong> “O que é harness?” Tudo o que cerca o modelo: system prompt, ferramentas, middleware, skills, subagentes e memória (slide 3)."
+      "notas": "<div><strong>Evolução automática de estruturas de suporte para agentes de codificação, orientada pela observabilidade</strong></div><strong>0:00 → 0:30 · 30 s.</strong> Apresente o artigo de Lin et al. (Fudan, Pequim e Qiji Zhifeng). Diga logo que é um <em>preprint</em> do arXiv, sem revisão por pares; isso prepara a análise crítica do slide 16. Frase-guia: “um agente consegue melhorar sozinho, e de forma auditável, o harness de outro agente de código? A resposta depende de tornar observáveis três coisas: componentes, experiência e decisões.”<br><strong>Se perguntarem:</strong> “O que é harness?” Tudo o que cerca o modelo: system prompt, ferramentas, middleware, skills, subagentes e memória (slide 3)."
     },
     {
       "layout": "conteudo",
@@ -336,7 +336,7 @@
       "rodape": [
         {
           "tipo": "texto",
-          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 3.2; Agent Debugger: Lin (2026).</div>"
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 3.3; Agent Debugger: Lin (2026).</div>"
         }
       ],
       "notas": "<strong>7:00 → 8:00 · 1 min.</strong> O Evolve Agent fecha o laço: lê a evidência, decide adicionar, modificar ou remover componentes, edita e registra o raciocínio. Duas restrições: (1) <strong>controlabilidade</strong>: só escreve no workspace, o que bloqueia atalhos como desligar o verificador, trocar o modelo ou aumentar o raciocínio, e mantém todo ganho atribuível ao harness; (2) <strong>evidência</strong>: cada edição traz uma entrada de manifesto. Na rodada seguinte, os conjuntos previstos são cruzados com os deltas observados e cada edição recebe um veredito.<br><strong>Se perguntarem:</strong> “O agente pode trapacear?” A controlabilidade limita onde ele escreve, mas os autores admitem que não há uma pilha completa de salvaguardas é um protótipo.<br><b>Trace / trajetória:</b>&nbsp;O registro de tudo que ocorreu num rollout: mensagens do modelo, chamadas de ferramenta e saídas."
