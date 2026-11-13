@@ -33,7 +33,7 @@
         "Apresentação:\n            <ul>\n              <li><b>Diego Cordeiro de Oliveira</b></li>\n            </ul>"
       ],
       "imagem": "img/logo_full.png",
-      "notas": "<strong>0:00 → 0:30 · 30 s.</strong> Apresente o artigo de Lin et al. (Fudan, Pequim e Qiji Zhifeng). Diga logo que é um <em>preprint</em> do arXiv, sem revisão por pares; isso prepara a análise crítica do slide 16. Frase-guia: “um agente consegue melhorar sozinho, e de forma auditável, o harness de outro agente de código? A resposta depende de tornar observáveis três coisas: componentes, experiência e decisões.”<br><strong>Se perguntarem:</strong> “O que é harness?” Tudo o que cerca o modelo: system prompt, ferramentas, middleware, skills, subagentes e memória (slide 3)."
+      "notas": "<div><strong>Evolução automática de estruturas de suporte para agentes de codificação, orientada pela observabilidade</strong></div><strong>0:00 → 0:30 · 30 s.</strong> Apresente o artigo de Lin et al. (Fudan, Pequim e Qiji Zhifeng). Diga logo que é um <em>preprint</em> do arXiv, sem revisão por pares; isso prepara a análise crítica do slide 16. Frase-guia: “um agente consegue melhorar sozinho, e de forma auditável, o harness de outro agente de código? A resposta depende de tornar observáveis três coisas: componentes, experiência e decisões.”<br><strong>Se perguntarem:</strong> “O que é harness?” Tudo o que cerca o modelo: system prompt, ferramentas, middleware, skills, subagentes e memória (slide 3)."
     },
     {
       "layout": "conteudo",
