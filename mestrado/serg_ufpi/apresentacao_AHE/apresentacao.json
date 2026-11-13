@@ -336,7 +336,7 @@
       "rodape": [
         {
           "tipo": "texto",
-          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 3.2; Agent Debugger: Lin (2026).</div>"
+          "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 3.3; Agent Debugger: Lin (2026).</div>"
         }
       ],
       "notas": "<strong>7:00 → 8:00 · 1 min.</strong> O Evolve Agent fecha o laço: lê a evidência, decide adicionar, modificar ou remover componentes, edita e registra o raciocínio. Duas restrições: (1) <strong>controlabilidade</strong>: só escreve no workspace, o que bloqueia atalhos como desligar o verificador, trocar o modelo ou aumentar o raciocínio, e mantém todo ganho atribuível ao harness; (2) <strong>evidência</strong>: cada edição traz uma entrada de manifesto. Na rodada seguinte, os conjuntos previstos são cruzados com os deltas observados e cada edição recebe um veredito.<br><strong>Se perguntarem:</strong> “O agente pode trapacear?” A controlabilidade limita onde ele escreve, mas os autores admitem que não há uma pilha completa de salvaguardas é um protótipo.<br><b>Trace / trajetória:</b>&nbsp;O registro de tudo que ocorreu num rollout: mensagens do modelo, chamadas de ferramenta e saídas."
