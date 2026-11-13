@@ -50,7 +50,7 @@
               },
               {
                 "titulo": "Método: NexAU, Agent Debugger, Evolve Agent&nbsp;",
-                "html": "Os três pontos de observabilidade e o Algoritmo 1"
+                "html": "Pontos de observabilidade e o Algoritmo&nbsp;"
               },
               {
                 "titulo": "Experimentos: RQ1, RQ2 e RQ3",
@@ -62,7 +62,7 @@
               },
               {
                 "titulo": "Referências",
-                "html": "Material de apoio para a discussão"
+                "html": ""
               }
             ]
           }
@@ -148,7 +148,7 @@
         [
           {
             "tipo": "html",
-            "html": "<div class=\"mapa\"><div class=\"ln\"><div class=\"cab\">Obstáculo</div><div></div><div class=\"cab d\">Resposta do AHE</div></div><div class=\"ln\"><div class=\"obs\"><b>Espaço de ação heterogêneo</b><span>Prompt, ferramentas, middleware e memória têm formatos e efeitos diferentes.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">1</span>Observabilidade de componentes</div></div><div class=\"ln\"><div class=\"obs\"><b>Trajetórias volumosas</b><span>Milhões de tokens brutos.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">2</span>Observabilidade de experiência</div></div><div class=\"ln\"><div class=\"obs\"><b>Edições difíceis de atribuir</b><span>Sem contrato, não se sabe qual edição causou qual efeito.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">3</span>Observabilidade de decisão</div></div></div>"
+            "html": "<div class=\"mapa\"><div class=\"ln\"><div class=\"cab\">Obstáculo</div><div></div><div class=\"cab d\">Resposta do Agentic Harness Engineering (AHE)</div></div><div class=\"ln\"><div class=\"obs\"><b>Espaço de ação heterogêneo</b><span>Prompt, ferramentas, middleware e memória têm formatos e efeitos diferentes.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">1</span>Observabilidade de componentes</div></div><div class=\"ln\"><div class=\"obs\"><b>Trajetórias volumosas</b><span>Milhões de tokens brutos.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">2</span>Observabilidade de experiência</div></div><div class=\"ln\"><div class=\"obs\"><b>Edições difíceis de atribuir</b><span>Sem contrato, não se sabe qual edição causou qual efeito.</span></div><div class=\"seta\">→</div><div class=\"pil\"><span class=\"n-bola\">3</span>Observabilidade de decisão</div></div></div>"
           },
           {
             "tipo": "card",
@@ -177,7 +177,7 @@
           },
           {
             "tipo": "html",
-            "html": "<div class=\"pilares\"><div><span class=\"n-bola\">1</span>Componentes: arquivos editáveis</div><div><span class=\"n-bola\">2</span>Experiência: evidência destilada</div><div><span class=\"n-bola\">3</span>Decisão: previsão verificável</div></div>"
+            "html": "<div class=\"pilares\"><div><span class=\"n-bola\">1</span>Componentes: arquivos editáveis</div><div><span class=\"n-bola\">2</span>Experiência: evidência</div><div><span class=\"n-bola\">3</span>Decisão: previsão verificável</div></div>"
           },
           {
             "tipo": "card",
@@ -228,7 +228,7 @@
                   "itens": [
                     "Só uma ferramenta de shell.",
                     "Sem middleware, skills ou subagentes.",
-                    "Semente mínima: cada componente adicionado precisa <strong>provar seu valor</strong>."
+                    "Semente mínima: cada componente adicionado precisa <strong>validar sua contribuição</strong>."
                   ]
                 }
               ]
@@ -242,7 +242,7 @@
           "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 3.1; Nex-AGI (2025); Nex-AGI Team (2025).</div>"
         }
       ],
-      "notas": "<strong>5:00 → 6:00 · 1 min.</strong> O NexAU (Nex-AGI) expõe <strong>sete tipos ortogonais</strong> de componente como arquivos em pontos fixos do workspace. Fracamente acoplados: cada padrão de falha cai em uma classe de componente, o que dá ao agente evolutivo um espaço de ação limpo. Cada edição lógica vira um commit: diff e rollback de graça. A semente é mínima de propósito: uma semente já ajustada ao benchmark contaminaria a atribuição de cada edição.<br><strong>Ponto de atenção (só se perguntarem):</strong> vários autores do AHE também assinam o relatório Nex-N1 da Nex-AGI; o substrato vem de um grupo próximo.<br><strong>Se perguntarem:</strong> “Serve para outros frameworks?” Só foi testado no NexAU; a portabilidade não foi avaliada."
+      "notas": "<strong>5:00 → 6:00 · 1 min.</strong> O NexAU (Nex-AGI) expõe <strong>sete tipos ortogonais</strong> de componente como arquivos em pontos fixos do workspace. Fracamente acoplados: cada padrão de falha cai em uma classe de componente, o que dá ao agente evolutivo um espaço de ação limpo. Cada edição lógica vira um commit: diff e rollback de graça. A semente é mínima de propósito: uma semente já ajustada ao benchmark contaminaria a atribuição de cada edição.<br><strong>Se perguntarem:</strong> “Serve para outros frameworks?” Só foi testado no NexAU; a portabilidade não foi avaliada.<div><b>Hooks</b>: ganchos determinístico: Em vez de depender de o modelo \"lembrar\" de seguir uma instrução do prompt, o sistema obriga o código do hook a rodar sempre que um evento acontece.</div>"
     },
     {
       "layout": "conteudo",
@@ -257,19 +257,10 @@
         ],
         [
           {
-            "tipo": "kpis",
-            "itens": [
-              {
-                "valor": "~1.000×",
-                "texto": "menos tokens no ponto de entrada (10M → 10K)"
-              }
-            ]
-          },
-          {
             "tipo": "card",
             "crescer": true,
             "titulo": "Divulgação progressiva",
-            "html": "<p style=\"margin:0\">Cada mensagem de trajetória vive em seu próprio arquivo, navegável por shell e scripts.</p>"
+            "html": "<p style=\"margin:0\">Cada mensagem de trajetória persiste em seu próprio arquivo, navegável por shell e scripts.</p>"
           },
           {
             "tipo": "card",
@@ -286,7 +277,7 @@
           "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 3.2; Agent Debugger: Lin (2026).</div>"
         }
       ],
-      "notas": "<strong>6:00 → 7:00 · 1 min.</strong> Para cada tarefa são gerados k traços: milhões de tokens. O Agent Debugger trata as trajetórias como um ambiente navegável (uma mensagem por arquivo, acesso por shell e scripts). Saída em três camadas: traços originais → relatório por tarefa (causa raiz ou padrão do sucesso, com pass/fail) → visão geral de ~10 mil tokens, ponto de entrada da iteração. O Evolve Agent começa pelo resumo e só desce ao detalhe quando precisa: economiza tokens e melhora a decisão.<br><strong>Se perguntarem:</strong> “O Debugger pode alucinar a causa?” Pode. Por isso os traços originais ficam disponíveis e a decisão é validada depois, pelo previsto × observado."
+      "notas": "<strong>6:00 → 7:00 · 1 min.</strong> Para cada tarefa são gerados k traços: milhões de tokens. O Agent Debugger trata as trajetórias como um ambiente navegável (uma mensagem por arquivo, acesso por shell e scripts). Saída em três camadas: traços originais → relatório por tarefa (causa raiz ou padrão do sucesso, com pass/fail) → visão geral de ~10 mil tokens, ponto de entrada da iteração. O Evolve Agent começa pelo resumo e só desce ao detalhe quando precisa: economiza tokens e melhora a decisão.<br><strong>Se perguntarem:</strong> “O Debugger pode alucinar a causa?” Pode. Por isso os traços originais ficam disponíveis e a decisão é validada depois, pelo previsto × observado.<br><b>Rollout:</b>&nbsp;Uma tentativa completa do agente em uma tarefa, do início ao veredito do verificador. O artigo executa k rollouts por tarefa.<div><br></div>"
     },
     {
       "layout": "conteudo",
@@ -300,8 +291,7 @@
             "titulo": "Controlabilidade",
             "itens": [
               "Escreve <strong>só no workspace</strong> do harness.",
-              "Somente leitura: runs, tracer, verificador e configuração do LLM.",
-              "Prompt semente não pode ser apagado."
+              "Somente leitura: runs, tracer, verificador e configuração do LLM."
             ]
           },
           {
@@ -311,7 +301,7 @@
             "titulo": "Baseada em evidência",
             "itens": [
               "Toda edição vem com uma <strong>entrada no manifesto</strong>.",
-              "A rodada seguinte compara previsto × observado e <strong>reverte o que falhou</strong>."
+              "A rodada seguinte compara previsto com observado e <strong>reverte o que falhou</strong>."
             ]
           }
         ],
@@ -340,12 +330,6 @@
                 "html": "correções esperadas + regressões em risco"
               }
             ]
-          },
-          {
-            "tipo": "destaque",
-            "estilo": "ca",
-            "titulo": "",
-            "html": "Impacto previsto = tarefas que devem passar + tarefas em risco de piorar. Substitui a justificativa por um <span class=\"mk\">contrato mensurável</span>."
           }
         ]
       ],
@@ -355,7 +339,7 @@
           "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 3.2; Agent Debugger: Lin (2026).</div>"
         }
       ],
-      "notas": "<strong>7:00 → 8:00 · 1 min.</strong> O Evolve Agent fecha o laço: lê a evidência, decide adicionar, modificar ou remover componentes, edita e registra o raciocínio. Duas restrições: (1) <strong>controlabilidade</strong>: só escreve no workspace, o que bloqueia atalhos como desligar o verificador, trocar o modelo ou aumentar o raciocínio, e mantém todo ganho atribuível ao harness; (2) <strong>evidência</strong>: cada edição traz uma entrada de manifesto. Na rodada seguinte, os conjuntos previstos são cruzados com os deltas observados e cada edição recebe um veredito.<br><strong>Se perguntarem:</strong> “O agente pode trapacear?” A controlabilidade limita onde ele escreve, mas os autores admitem que não há uma pilha completa de salvaguardas: é um protótipo."
+      "notas": "<strong>7:00 → 8:00 · 1 min.</strong> O Evolve Agent fecha o laço: lê a evidência, decide adicionar, modificar ou remover componentes, edita e registra o raciocínio. Duas restrições: (1) <strong>controlabilidade</strong>: só escreve no workspace, o que bloqueia atalhos como desligar o verificador, trocar o modelo ou aumentar o raciocínio, e mantém todo ganho atribuível ao harness; (2) <strong>evidência</strong>: cada edição traz uma entrada de manifesto. Na rodada seguinte, os conjuntos previstos são cruzados com os deltas observados e cada edição recebe um veredito.<br><strong>Se perguntarem:</strong> “O agente pode trapacear?” A controlabilidade limita onde ele escreve, mas os autores admitem que não há uma pilha completa de salvaguardas é um protótipo.<br><b>Trace / trajetória:</b>&nbsp;O registro de tudo que ocorreu num rollout: mensagens do modelo, chamadas de ferramenta e saídas."
     },
     {
       "layout": "conteudo",
@@ -370,7 +354,7 @@
             "tipo": "destaque",
             "estilo": "cd",
             "titulo": "",
-            "html": "<p>A atribuição vem antes da destilação: o veredito de cada edição já entra no corpus de evidência da rodada.</p>"
+            "html": "<p>A atribuição vem antes da destilação pois a decisão de cada edição já entra no corpus de evidência da rodada.</p>"
           }
         ]
       ],
@@ -380,7 +364,7 @@
           "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Algoritmo 1 (Seção 3.3).</div>"
         }
       ],
-      "notas": "<strong>8:00 → 9:00 · 1 min.</strong> Seis fases por iteração t: rollout (k execuções), limpeza, atribuição (a partir de t = 2: veredito do manifesto e rollback), destilação, evolução e commit. Com k ≥ 2, cada tarefa tem uma taxa de aprovação, o que estabiliza o pass@1. A atribuição vem antes da destilação para o veredito entrar na evidência. Na iteração 1, um agente de exploração semeia algumas skills reutilizáveis, que depois podem ser mantidas ou removidas.<br><strong>Guarde para a crítica:</strong> linha 14 do algoritmo, o harness final é o de <em>maior pass@1</em> entre as iterações, um máximo sobre medidas ruidosas.<br><strong>Se perguntarem:</strong> “Por que 10 iterações?” É o ponto de operação da campanha (T = 10, k = 2); não há estudo de sensibilidade a T ou k."
+      "notas": "<strong>8:00 → 9:00 · 1 min.</strong> Seis fases por iteração t: rollout (k execuções), limpeza, atribuição (a partir de t = 2: veredito do manifesto e rollback), destilação, evolução e commit. Com k ≥ 2, cada tarefa tem uma taxa de aprovação, o que estabiliza o pass@1. A <b>atribuição vem antes da destilaçã</b>o para a decisão entrar na evidência. Na iteração 1, um agente de exploração semeia algumas skills reutilizáveis, que depois podem ser mantidas ou removidas.<br><strong>Guarde para a crítica:</strong> linha 14 do algoritmo, o harness final é o de <em>maior pass@1</em> entre as iterações, um máximo sobre medidas ruidosas.<br><strong>Se perguntarem:</strong> “Por que 10 iterações?” É o ponto de operação da campanha (T = 10, k = 2); não há estudo de sensibilidade a T ou k.<br><b>Destilação:&nbsp;</b>é a síntese de logs e vereditos passados após atribuir suas causas exatas em contratos rígidos que guiam o agente sem poluir seu contexto.<br>"
     },
     {
       "layout": "conteudo",
@@ -457,7 +441,7 @@
           "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Seção 4.1 e Apêndice A (Tabela 4).</div>"
         }
       ],
-      "notas": "<strong>9:00 → 10:00 · 1 min.</strong> Evolução nas 89 tarefas do Terminal-Bench 2, com timeout de 1 h; transferência no SWE-bench-verified (500 tarefas, 7 repositórios). pass@1 = média de sucesso binário sobre os k rollouts; falha de infraestrutura conta como falha (convenção dura, igual ao leaderboard). Uma campanha de 10 iterações, k = 2, cerca de 32 h; ACE e TF-GRPO partem da mesma semente. Apresente as três RQs da direita: elas organizam os próximos cinco slides.<br><strong>Ponto de atenção:</strong> o texto principal não deixa claro qual modelo-base os harnesses humanos (Codex etc.) usaram.<br><strong>Se perguntarem:</strong> “Por que 89 tarefas e não 100?” É o subconjunto oficial do Terminal-Bench 2 usado no leaderboard."
+      "notas": "<strong>9:00 → 10:00 · 1 min.</strong> Evolução nas 89 tarefas do Terminal-Bench 2, com timeout de 1 h; transferência no SWE-bench-verified (500 tarefas, 7 repositórios). pass@1 = média de sucesso binário sobre os k rollouts; falha de infraestrutura conta como falha (convenção dura, igual ao leaderboard). Uma campanha de 10 iterações, k = 2, cerca de 32 h; ACE e TF-GRPO partem da mesma semente. Apresente as três RQs da direita: elas organizam os próximos cinco slides.<br><strong>Ponto de atenção:</strong> o texto principal não deixa claro qual modelo-base os harnesses humanos (Codex etc.) usaram.<br><strong>Se perguntarem:</strong> “Por que 89 tarefas e não 100?” É o subconjunto oficial do Terminal-Bench 2 usado no leaderboard.<br><b>ACE</b> [49] (Agentic Context Engineering) e <b>TF-GRPO</b> [4] (Training-Free Group Relative Policy Optimization). Dois métodos de autoevolução de agentes que servem de baselines. O ACE mantém um playbook em linguagem natural que é lido em contexto. O TF-GRPO reforça, sem treinar pesos, as sequências de ferramentas bem-sucedidas<br><b>Playbook</b>:&nbsp; um manual estruturado de estratégias, etapas e regras de decisão que guia o agente na resolução de tarefas complexas e evolui com o aprendizado destilado de execuções anteriores."
     },
     {
       "layout": "conteudo",
@@ -509,7 +493,7 @@
           "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Tabela 1 (pass@1, 89 tarefas).</div>"
         }
       ],
-      "notas": "<strong>10:00 → 11:30 · 1 min 30 s.</strong> Resultado principal: em 10 iterações o AHE leva o pass@1 de 69,7% para <strong>77,0%</strong>, acima do Codex (71,9%), do TF-GRPO (72,3%) e do ACE (68,9%, abaixo da semente). Por que os baselines perdem? <em>Descompasso de camada</em>: o ACE destila playbooks em texto; o TF-GRPO reforça sequências de ferramentas; nenhum edita o scaffolding. Ponto fraco: Difícil (53,3% contra 56,7% do Codex), atribuído à interferência entre componentes (slide 14).<br><strong>Se perguntarem:</strong> “7 pp é muito?” São cerca de 6 a 7 tarefas em 89; com k = 2, uma campanha e sem barras de erro, é sugestivo, não demonstrado. A faixa Fácil tem só 4 tarefas."
+      "notas": "<b>pass@1</b> é a métrica que calcula a porcentagem média de sucesso ao dividir o número de soluções aprovadas nos testes pelo total de tentativas geradas. Se um modelo gera 10 códigos para uma tarefa e 7 passam em todos os testes, seu pass@1 é de 70% (7 / 10).<br><b>10:00 → 11:30 · 1 min 30 s.</b> Resultado principal: em 10 iterações o AHE leva o pass@1 de 69,7% para <strong>77,0%</strong>, acima do Codex (71,9%), do TF-GRPO (72,3%) e do ACE (68,9%, abaixo da semente). Por que os baselines perdem? <em>Descompasso de camada</em>: o ACE destila playbooks em texto; o TF-GRPO reforça sequências de ferramentas; nenhum edita o scaffolding. Ponto fraco: Difícil (53,3% contra 56,7% do Codex), atribuído à interferência entre componentes (slide 14).<div><b>Scaffolding</b> é o código de infraestrutura que envolve o LLM gerenciando o loop de execução, ferramentas, memória, parsers e hooks para transformar o modelo em um agente funcional.<br>• <b>ACE (Agentic Context Engineering)</b>: É uma técnica que melhora o agente fazendo destilação de playbooks em texto. Ela resume erros passados e injeta novas instruções no prompt. Onde falha: Texto é probabilístico. Se o scaffolding tiver um bug (por exemplo, truncar logs importantes antes do modelo ver, ou não ter um hook de validação de sintaxe), nenhuma instrução escrita no playbook resolve o gargalo estrutural.<div>• <b>TF-GRPO (Tool-use / Trajectory-focused GRPO)</b>: É uma técnica de Aprendizado por Reforço (RL) que ajusta o modelo para reforçar sequências de ferramentas que deram certo no passado. Onde falha: Ela ensina o modelo a apertar os botões disponíveis na ordem certa, mas se a ferramenta estiver mal projetada ou o fluxo de execução do harness for rígido demais, o modelo continua preso às limitações da infraestrutura.<br><strong>Se perguntarem:</strong> “7 pp é muito?” São cerca de 6 a 7 tarefas em 89; com k = 2, uma campanha e sem barras de erro, é sugestivo, não demonstrado. A faixa Fácil tem só 4 tarefas.<br><br></div></div>"
     },
     {
       "layout": "conteudo",
@@ -518,7 +502,7 @@
         {
           "tipo": "pergunta",
           "rotulo": "Pergunta (RQ2)",
-          "html": "O AHE sofre overfitting ao alvo da otimização? Aqui: transfere para <b>tarefas não vistas</b> (SWE-bench-verified)?"
+          "html": "O AHE sofre overfitting ao alvo da otimização? Teste de transferência para <b>tarefas não vistas</b> (SWE-bench-verified)?"
         }
       ],
       "proporcao": "1.25fr 1fr",
@@ -560,13 +544,6 @@
               "",
               "hl"
             ]
-          },
-          {
-            "tipo": "card",
-            "titulo": "O ganho de custo:",
-            "html": "<p>Mesmo desempenho com menos tokens.</p>",
-            "destaque": "",
-            "variante": "az"
           }
         ],
         [
@@ -599,7 +576,7 @@
           "html": "<div class=\"fonte\">Fonte: Lin et al. (2026), Tabela 2 e Seção 4.3.</div>"
         }
       ],
-      "notas": "<strong>11:30 → 12:15 · 45 s.</strong> Para testar overfitting, o harness evoluído no Terminal-Bench 2 é congelado e avaliado no SWE-bench, sem reevolução. Sucesso: 75,6% contra 75,2% da semente, praticamente empate em 500 tarefas. O ganho real é o custo: 461 mil tokens por trial (−12% vs. semente). ACE e TF-GRPO caem abaixo da semente e gastam mais, porque o texto destilado viaja em toda chamada ao modelo.<br><strong>Cuidado:</strong> diga “mantém o desempenho com menos tokens”, não “melhora o SWE-bench”. <strong>Se atrasado:</strong> resuma em uma frase.<br><strong>Se perguntarem:</strong> “Isso prova que não há overfitting?” Não prova: mostra ausência de degradação e ganho de custo, não generalização de desempenho."
+      "notas": "<strong>11:30 → 12:15 · 45 s.</strong> Para testar overfitting, o harness evoluído no Terminal-Bench 2 é congelado e avaliado no SWE-bench, sem reevolução. Sucesso: 75,6% contra 75,2% da semente, praticamente empate em 500 tarefas. O ganho real é o custo: 461 mil tokens por trial (−12% vs. semente). ACE e TF-GRPO caem abaixo da semente e gastam mais, porque o texto destilado viaja em toda chamada ao modelo.<br><strong>Cuidado:</strong> diga “mantém o desempenho com menos tokens”, não “melhora o SWE-bench”.&nbsp;<br><strong>Se perguntarem:</strong> “Isso prova que não há overfitting?” Não prova: mostra ausência de degradação e ganho de custo, não generalização de desempenho."
     },
     {
       "layout": "conteudo",
@@ -608,7 +585,7 @@
         {
           "tipo": "pergunta",
           "rotulo": "Pergunta (RQ2)",
-          "html": "O AHE sofre overfitting ao alvo da otimização? Aqui: transfere para <b>outros modelos-base</b>?"
+          "html": "Transfere para <b>outros modelos-base</b>?"
         }
       ],
       "proporcao": "1.75fr 1fr",
@@ -705,7 +682,7 @@
         {
           "tipo": "pergunta",
           "rotulo": "Pergunta (RQ3b)",
-          "html": "As previsões de correção e de regressão do Evolve Agent batem com a realidade?"
+          "html": "As previsões de correção e de regressão do Evolve Agent condizem com a realidade?"
         }
       ],
       "proporcao": "1.45fr 1fr",
@@ -742,7 +719,7 @@
             "crescer": true,
             "titulo": "Análise",
             "itens": [
-              "O alvo de cada edição é real; o agente <strong>não vê o que vai quebrar</strong>.",
+              "O alvo de cada edição é real. O agente <strong>não vê o que vai quebrar</strong>.",
               "Em 9 rodadas: 43 regressões previstas, 5 acertaram; 40 ocorreram sem serem previstas."
             ]
           }
@@ -763,7 +740,7 @@
         [
           {
             "tipo": "html",
-            "html": "<div class=\"criticas\"><div class=\"cr\"><h4><span class=\"n-bola\">1</span>Evolução e avaliação no mesmo conjunto</h4><p>Evolui e reporta nas mesmas 89 tarefas do Terminal-Bench 2. O único teste fora da amostra é o SWE-bench.</p></div><div class=\"cr\"><h4><span class=\"n-bola\">2</span>Ganho pequeno fora do benchmark</h4><p>SWE-bench: +0,4 pp em sucesso (75,2% para 75,6%). O benefício é de custo (−12% de tokens).</p></div><div class=\"cr\"><h4><span class=\"n-bola\">3</span>Sem robustez a operação e modelo</h4><p>Ajustado ao GPT-5.4 high; três papéis com o mesmo modelo; uma única rodada de experimento.</p></div><div class=\"cr\"><h4><span class=\"n-bola\">4</span>Regressões imprevisíveis</h4><p>Precisão de ~11,8% ao prever regressões; componentes não se somam e o perfil é não monotônico.</p></div><div class=\"cr dec\"><h4><span class=\"n-bola\">5</span>Limites declarados</h4><p>Só 2 benchmarks; sem outras linguagens, repositórios grandes ou humano no laço; “protótipo de pesquisa”.</p></div></div>"
+            "html": "<div class=\"criticas\"><div class=\"cr\"><h4><span class=\"n-bola\">1</span>Evolução e avaliação no mesmo conjunto</h4><p>Evolui e reporta nas mesmas 89 tarefas do Terminal-Bench 2. O único teste fora da amostra é o SWE-bench.</p></div><div class=\"cr\"><h4><span class=\"n-bola\">2</span>Ganho pequeno fora do benchmark</h4><p>SWE-bench: +0,4 pp em sucesso (75,2% para 75,6%). O benefício é de custo (−12% de tokens).</p></div><div class=\"cr\"><h4><span class=\"n-bola\">3</span>Baixa generalização de modelo e replicabilidade</h4><p>Ajustado ao GPT-5.4 high; três papéis com o mesmo modelo; uma única rodada de experimento.</p></div><div class=\"cr\"><h4><span class=\"n-bola\">4</span>Regressões imprevisíveis</h4><p>Precisão de ~11,8% ao prever regressões; componentes não se somam e o perfil é não monotônico.</p></div><div class=\"cr dec\"><h4><span class=\"n-bola\">5</span>Limites declarados</h4><p>Só 2 benchmarks; sem outras linguagens, repositórios grandes ou humano no laço; “protótipo de pesquisa”.</p></div></div>"
           }
         ]
       ],
@@ -778,29 +755,7 @@
     {
       "layout": "conteudo",
       "titulo": "Conclusões",
-      "topo": [
-        {
-          "tipo": "kpis",
-          "itens": [
-            {
-              "valor": "69,7% → 77,0%",
-              "texto": "pass@1 no Terminal-Bench 2 em 10 iterações"
-            },
-            {
-              "valor": "−12%",
-              "texto": "tokens no SWE-bench, com sucesso estável"
-            },
-            {
-              "valor": "+2,3 a +10,1 pp",
-              "texto": "em cinco outras bases, sem reevolução"
-            },
-            {
-              "valor": "5× vs. 2×",
-              "texto": "acerto acima do acaso: correções vs. regressões"
-            }
-          ]
-        }
-      ],
+      "topo": [],
       "proporcao": "1fr",
       "colunas": [
         [
@@ -816,12 +771,12 @@
                 "html": "Torna a evolução autônoma auditável e reversível."
               },
               {
-                "titulo": "Onde está o ganho",
+                "titulo": "Mapeamento do ganho",
                 "html": "Ferramentas, middleware e memória, <strong>não no prompt</strong>."
               },
               {
                 "titulo": "Transferência",
-                "html": "Harness congelado transfere entre modelos; no SWE-bench, mais barato."
+                "html": "Harness congelado transfere entre modelos."
               }
             ]
           },
