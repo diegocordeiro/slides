@@ -1,0 +1,673 @@
+{
+  "versao": 1,
+  "motor": "editor",
+  "estado": "editor",
+  "meta": {
+    "titulo": "Predição de Diabetes com SVM — base Pima Indians",
+    "titulo_barra": "SVM — Predição de Diabetes (Pima)",
+    "arquivo": "apresentacao.html",
+    "cronometro_min": 10,
+    "rodape": "<strong>SVM — Predição de Diabetes (Pima)</strong> · Aprendizado de Máquina — PPGCC/UFPI",
+    "numerar": true,
+    "mostrar_pdf": true,
+    "lang": "pt-BR"
+  },
+  "tema": {
+    "base": "ppgcc",
+    "vars": {},
+    "logos": {
+      "barra": "img/logo.png",
+      "capa": null,
+      "rodape": "img/logo_full.png",
+      "marca": "img/marca.png"
+    }
+  },
+  "css_extra": "#s3 .tb2 td, #s3 .tb2 th { padding-top:6px; padding-bottom:6px }\n#s5 .tb2 td, #s5 .tb2 th { padding-top:5px; padding-bottom:5px }\n#s7 .kpi > div { padding:8px 12px }\n#s8 .card p { font-size:15px; line-height:1.34 }\nbody.notas .sl .nt { max-height:220px; overflow-y:auto }\nbody.notas .sl .grade { min-height:0; overflow-y:auto }\nbody.notas .sl .col { min-height:0 }",
+  "slides": [
+    {
+      "layout": "capa",
+      "rotulo": "Aprendizado de Máquina · PPGCC/UFPI",
+      "titulo": "Predição de Diabetes com<br>Máquinas de Vetores de Suporte",
+      "subtitulos": [
+        "Integrantes:\n            <ul>\n              <li>Arthur Fernando Elvas Bohn — 20261001997</li>\n              <li>Diego Cordeiro de Oliveira — 20261002180</li>\n              <li>Keoma de Sousa Coelho — 20261004952</li>\n            </ul>",
+        "Professor:\n            <ul>\n              <li>Dr. Vinicius Ponte Machado</li>\n            </ul>"
+      ],
+      "imagem": "img/logo_full.png",
+      "notas": "<strong>~20 s.</strong> Apresentar o grupo e a frase de abertura: “aplicamos SVM para prever diabetes a partir de oito exames clínicos — mas o trabalho é menos sobre o modelo e mais sobre o que descobrimos testando a preparação dos dados”."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "O problema e a base",
+      "topo_proporcao": "1.25fr 1fr",
+      "topo": [
+        {
+          "tipo": "pergunta",
+          "rotulo": "Pergunta de pesquisa",
+          "html": "A partir de <b>oito exames clínicos simples</b>, é possível indicar quais pacientes devem ser priorizadas para investigação de diabetes?"
+        },
+        {
+          "tipo": "chips",
+          "itens": [
+            "Classificação binária",
+            "768 pacientes",
+            "8 atributos",
+            "35% com diabetes",
+            "SVM (scikit-learn)"
+          ]
+        }
+      ],
+      "proporcao": "1.1fr 1.1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "A base",
+            "html": "<p>Mulheres de herança <strong>Pima</strong>, 21 anos ou mais, do instituto americano de diabetes.</p><p>Exames: glicose, pressão, insulina, IMC, prega cutânea, gestações, idade e histórico familiar.</p>",
+            "rodape": "<strong>Alvo:</strong> <code>Outcome</code>&nbsp;1 = diagnóstico de diabetes, 0 = sem diagnóstico."
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "az",
+            "crescer": true,
+            "titulo": "O que é um SVM",
+            "html": "<p>Traça a fronteira que separa as classes deixando a <strong>maior folga possível</strong> dos dois lados.</p><p>Os pontos que tocam essa folga são os <strong>vetores de suporte,</strong>&nbsp;só eles definem a fronteira.</p>",
+            "rodape": "Testamos 4 formas de desenhar essa fronteira (os <em>kernels</em>)."
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "titulo": "Erro mais grave",
+            "destaque": "Falso negativo",
+            "html": "<p>Paciente diabética classificada como saudável <strong>deixa de ser investigada</strong>.</p>",
+            "rodape": "Um falso positivo custa só um exame a mais. Por isso priorizamos <strong>revocação e F1 da classe 1</strong>."
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Acurácia engana: responder sempre “não tem diabetes” já acerta <b>65%</b>&nbsp;e não encontra <b>nenhuma</b> paciente doente."
+        }
+      ],
+      "notas": "<strong>~1 min.</strong> Público pode não conhecer a base: dizer que são exames de rotina. Explicar SVM com a analogia da rua mais larga possível entre dois bairros. Fechar com a faixa: é o argumento de por que não usamos acurácia."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Limpeza dos dados",
+      "proporcao": "1.05fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "preencher": true,
+            "cabecalho": [
+              "Atributo",
+              "Zeros",
+              "Zero é possível?"
+            ],
+            "linhas": [
+              [
+                "Insulina",
+                "374 <span style=\"opacity:.6\">· 48,7%</span>",
+                "não"
+              ],
+              [
+                "Prega cutânea",
+                "227 <span style=\"opacity:.6\">· 29,6%</span>",
+                "não"
+              ],
+              [
+                "Pressão arterial",
+                "35 <span style=\"opacity:.6\">· 4,6%</span>",
+                "não"
+              ],
+              [
+                "IMC",
+                "11 <span style=\"opacity:.6\">· 1,4%</span>",
+                "não"
+              ],
+              [
+                "Glicose",
+                "5 <span style=\"opacity:.6\">· 0,7%</span>",
+                "não"
+              ],
+              [
+                "<strong>Gestações</strong>",
+                "111 <span style=\"opacity:.6\">· 14,5%</span>",
+                "sim"
+              ]
+            ],
+            "linhas_classe": [
+              "hl",
+              "hl",
+              "",
+              "",
+              "",
+              "bs"
+            ],
+            "celulas_classe": {
+              "0,2": "ruim",
+              "1,2": "ruim",
+              "2,2": "ruim",
+              "3,2": "ruim",
+              "4,2": "ruim",
+              "5,2": "bom"
+            }
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "titulo": "A base “não tem valores ausentes”",
+            "html": "<p style=\"margin:0;\">Nenhum <code>NaN</code>, nenhuma duplicata. Mas os exames <strong>não realizados</strong> foram gravados como <strong>zero,</strong>&nbsp;glicose zero é impossível em alguém vivo.</p>"
+          },
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Observação",
+            "html": "<p style=\"margin:0;\"><strong>Zero gestações é real e sinaliza</strong>&nbsp;uma mulher que nunca engravidou. Limpar automaticamente corromperia <strong>111 registros</strong>.</p>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"stat\"><b>49%</b><span>das pacientes ficam com ao menos um exame faltando, só <strong>392 de 768</strong> estão completas</span></div>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Descartar as linhas incompletas custaria <b>metade da base</b>. Por isso investigamos a imputação como a decisão mais importante a ser&nbsp;<b>testada.</b>"
+        }
+      ],
+      "notas": "<strong>~1 min 10 s.</strong> Slide do “achado de dados”. Enfatizar a linha destacada no fim da tabela: gestações é a exceção, e perceber isso é o que separa limpeza criteriosa de limpeza automática. Terminar com os 49% — é o gancho para o próximo slide."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "O que testamos: 16.320 modelos",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"fluxo\">\n          <div class=\"et\"><span class=\"num\">1</span><div><strong>Imputação</strong><br>mediana · média · KNN · descarte</div></div>\n          <div class=\"st\">×</div>\n          <div class=\"et\"><span class=\"num\">2</span><div><strong>Escala</strong><br>nenhuma · padrão · min-max</div></div>\n          <div class=\"st\">×</div>\n          <div class=\"et\"><span class=\"num\">3</span><div><strong>Kernel</strong><br>linear · RBF · poly · sigmoide</div></div>\n          <div class=\"st\">×</div>\n          <div class=\"et\"><span class=\"num\">4</span><div><strong>Hiperparâmetros</strong><br>C · gamma · degree · peso</div></div>\n        </div>"
+        }
+      ],
+      "proporcao": "1fr 1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Busca em grade&nbsp;",
+            "blocos": [
+              {
+                "tipo": "html",
+                "html": "<table class=\"tb2\"><tr><th>Etapa</th><th>Qtd.</th></tr><tr><td>Cenários de preparo</td><td>12</td></tr><tr><td>Combinações por cenário</td><td>136</td></tr><tr><td>Validação cruzada</td><td>5 × 2</td></tr><tr class=\"hl\"><td><strong>Ajustes de modelo</strong></td><td><strong>16.320</strong></td></tr></table>"
+              }
+            ],
+            "rodape": "<code>GridSearchCV</code>, seleção por F1 da classe 1."
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "az",
+            "crescer": true,
+            "titulo": "Testes de protocolo",
+            "itens": [
+              "Proporção treino/teste: <strong>5 divisões</strong> (70/30 a 90/10)",
+              "<strong>30 partições</strong> aleatórias repetidas",
+              "<strong>10 reseleções</strong> completas de hiperparâmetros",
+              "Com e sem <strong>estratificação</strong>",
+              "<strong>3 esquemas</strong> de validação cruzada"
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Engenharia de atributos",
+            "html": "<p>5 razões clínicas, medidas de <strong>4 formas</strong> independentes:</p>",
+            "itens": [
+              "retreino sem × com",
+              "neutralização no teste",
+              "permutação no teste",
+              "ablação uma a uma"
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Registros no&nbsp;<b>MLflow:</b>&nbsp;60 execuções, reproduzíveis e comparáveis."
+        }
+      ],
+      "notas": "<strong>~1 min 15 s.</strong> Este slide mostra a extensão do trabalho. Ler o fluxo da esquerda para a direita e chegar nos 16.320 ajustes. Depois os três blocos: busca, protocolo, engenharia. Não detalhar números ainda — dizer “os resultados vêm a seguir”."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Resultados: preparação e kernels",
+      "proporcao": "1.1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "cabecalho": [
+              "Imputação",
+              "Escala",
+              "F1 c1",
+              "FN"
+            ],
+            "linhas": [
+              [
+                "KNN",
+                "Padrão",
+                "<strong>0,6777</strong>",
+                "<strong>13</strong>"
+              ],
+              [
+                "Mediana",
+                "Min-max",
+                "0,6772",
+                "11"
+              ],
+              [
+                "Mediana",
+                "Padrão",
+                "0,6500",
+                "15"
+              ],
+              [
+                "KNN",
+                "Nenhuma",
+                "0,6218",
+                "17"
+              ],
+              [
+                "Descarte",
+                "Padrão",
+                "0,6207",
+                "18"
+              ],
+              [
+                "Referência ingênua",
+                "—",
+                "0,0000",
+                "54"
+              ]
+            ],
+            "linhas_classe": [
+              "hl",
+              "",
+              "",
+              "",
+              "",
+              "bs"
+            ],
+            "celulas_classe": {
+              "3,1": "ruim",
+              "3,2": "ruim",
+              "4,0": "ruim",
+              "4,2": "ruim",
+              "5,2": "ruim",
+              "5,3": "ruim"
+            }
+          },
+          {
+            "tipo": "card",
+            "variante": "er",
+            "titulo": "Imputar ganha de descartar",
+            "itens": [
+              "Treinar só com as 322 pacientes completas é a <strong>pior estratégia</strong>.",
+              "Perder 48% do treino custa mais que o ruído da imputação."
+            ]
+          },
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "titulo": "Escala é importante, mas impacto menor que imputação",
+            "itens": [
+              "Sem padronizar: 0,6777 → <strong>0,6218</strong> (+4 falsos negativos).",
+              "O SVM piora, mas não colapsa."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "figura",
+            "src": "img/curva_roc_por_kernel.png",
+            "alt": "Curva ROC por kernel",
+            "legenda": "As três curvas de cima praticamente se sobrepõem"
+          },
+          {
+            "tipo": "card",
+            "titulo": "Qual kernel é melhor? Não dá para afirmar",
+            "itens": [
+              "RBF (0,678), linear (0,655) e sigmoide (0,649) têm intervalos de confiança sobrepostos.",
+              "Só o polinomial (0,554) fica claramente atrás."
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min 45 s — slide central.</strong> Ler a linha destacada (melhor modelo) e a última (referência ingênua: 54 falsos negativos, não acha ninguém). Depois os dois cartões: imputar vence descartar; escala ajuda mas não é catastrófica. À direita, o ponto honesto: o kernel vencedor não é estatisticamente distinguível dos outros dois.",
+      "topo": []
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Como chegamos à conclusão",
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "evo",
+            "titulo": "Decisão 1 — o que o descarte significa",
+            "verde": false,
+            "linhas": [
+              {
+                "rotulo": "Descartar incompletas afeta só o <strong>treino</strong>",
+                "valor": "322 de 614"
+              },
+              {
+                "rotulo": "Toda paciente do teste recebe predição",
+                "valor": "154 de 154"
+              }
+            ],
+            "obs": "Uma paciente nova pode chegar sem um exame e ainda assim precisa de resposta — por isso o imputador <strong>continua no pipeline</strong> e os doze cenários preveem sobre o <strong>mesmo teste</strong>."
+          },
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Quanto isso muda a leitura",
+            "itens": [
+              "Dar a cada cenário o seu próprio teste compararia <strong>populações diferentes</strong>.",
+              "Medimos o tamanho do efeito: os <strong>mesmos modelos</strong> restritos às 70 pacientes completas do teste mudam o F1 de <strong>−0,110 a +0,040</strong>, sem alterar nada no modelo."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "evo",
+            "titulo": "Decisão 2 — qual cenário leva as fases seguintes",
+            "verde": true,
+            "linhas": [
+              {
+                "rotulo": "Critério: melhor F1 na <strong>validação cruzada</strong>",
+                "valor": "não olha o teste"
+              },
+              {
+                "rotulo": "Maior F1 de validação dos doze: descarte",
+                "valor": "0,7060 ▲",
+                "tendencia": "up"
+              },
+              {
+                "rotulo": "O mesmo cenário no teste lacrado",
+                "valor": "0,5664 ▼",
+                "tendencia": "down"
+              }
+            ],
+            "obs": "Esse 0,7060 vem de <strong>322 pacientes</strong>, não dos 614 dos demais: não é comparável. A referência foi disputada só entre os cenários que treinam com a base inteira — venceu <strong>KNN + padronização</strong>."
+          },
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "titulo": "O que estava em jogo",
+            "itens": [
+              "A referência define todas as fases seguintes: kernels, partições e engenharia.",
+              "Escolher por um número não comparável levaria tudo isso para o cenário que <strong>mais erra no teste</strong>."
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "O mesmo princípio nas duas decisões: <b>só se compara o que foi medido sobre a mesma população</b> — e o teste de 154 pacientes ficou lacrado até o fim."
+        }
+      ],
+      "notas": "<strong>~1 min 30 s.</strong> <strong>Enquadramento (15 s):</strong> este slide responde \"como vocês sabem que essa comparação é justa?\". São duas decisões de protocolo que tomamos <strong>antes</strong> de olhar o teste, e cada uma tem uma medição que a sustenta.<br><br><strong>Decisão 1 (35 s):</strong> descartar as incompletas não é trocar de base — é treinar só com as <strong>322 pacientes</strong> que têm todos os exames. Mas a imputação continua no pipeline, porque na prática uma paciente nova pode chegar sem a insulina medida e mesmo assim precisa de uma resposta. A consequência é que os doze cenários preveem sobre as <strong>mesmas 154 pacientes</strong>. Se cada cenário tivesse o seu próprio teste, estaríamos comparando populações diferentes, e não o preparo dos dados. E esse efeito não é pequeno: pegamos os mesmos modelos e medimos só nas 70 pacientes completas do teste — o F1 se desloca de <strong>−0,110 a +0,040</strong> sem mudar nada no modelo. Só muda quem está sendo medido.<br><br><strong>Decisão 2 (30 s):</strong> faltava escolher o cenário de referência, o que leva as fases seguintes. O critério tinha de ser um que <strong>não olha o teste</strong> — senão a escolha já nasceria contaminada — então usamos o melhor F1 da validação cruzada. Só que o maior F1 de validação dos doze é o do descarte, 0,7060, calculado sobre 322 pacientes enquanto os demais usam 614: não é comparável. Restringimos a disputa aos cenários que treinam com a base inteira e a referência ficou <strong>KNN + padronização</strong>. <em>Apontar a terceira linha:</em> esse mesmo cenário de 0,7060 na validação é o que marca <strong>0,5664</strong> no teste lacrado, o pior dos doze — é a melhor ilustração de por que o critério precisava ser restrito.<br><br><strong>Fecho (10 s):</strong> ler a faixa — só se compara o que foi medido sobre a mesma população, e o teste ficou lacrado até o fim.<br><br><strong>Se perguntarem:</strong> <em>\"por que não escolher a referência pelo teste?\"</em> — seria selecionar sobre o teste, e o resultado final deixaria de ser uma estimativa honesta. <em>\"o descarte não ganharia com outra escala?\"</em> — não: na média das três escalas ele é a última das quatro estratégias (0,610 contra 0,646 a 0,663). <em>\"e se vocês não imputassem no teste?\"</em> — metade das pacientes ficaria sem predição, e a comparação voltaria a ser entre populações diferentes."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "O resultado é estável?&nbsp;",
+      "proporcao": "1fr 1.05fr",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/sensibilidade_particao.png",
+            "alt": "Distribuição entre partições e efeito da proporção",
+            "legenda": "Esq.: dispers&atilde;o de cada m&eacute;trica em 30 divis&otilde;es diferentes. Dir.: efeito da propor&ccedil;&atilde;o treino/teste &mdash; a linha de baixo &eacute; a incerteza da estimativa"
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "titulo": "O mesmo modelo oscila muito",
+            "blocos": [
+              {
+                "tipo": "kpis",
+                "itens": [
+                  {
+                    "valor": "0,624",
+                    "texto": "pior partição"
+                  },
+                  {
+                    "valor": "0,683",
+                    "texto": "média"
+                  },
+                  {
+                    "valor": "0,750",
+                    "texto": "melhor partição"
+                  }
+                ]
+              }
+            ],
+            "html": "<p style=\"margin:0;\">Mudando <strong>só quem cai no treino e no teste</strong>, o F1 varia <strong>0,126</strong> — cerca de 19% do valor médio. Falsos negativos vão de <strong>6 a 17</strong>.</p>"
+          },
+          {
+            "tipo": "card",
+            "crescer": false,
+            "titulo": "O kernel também muda",
+            "html": "<p style=\"margin:0;\">Refazendo a busca inteira em 10 partições: <strong>RBF venceu 7×</strong>, linear 2×, sigmoide 1×.</p>"
+          },
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Estratificação reduz o ruído",
+            "html": "<p style=\"margin:0;\">Desvio do F1 cai de <strong>0,051 → 0,034</strong>. A proporção de doentes no teste deixa de variar (0,299–0,409 → fixa).</p>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Consequência prática: diferenças menores que <b>~0,05</b> entre configurações <b>não são conclusivas</b> nesta base."
+        }
+      ],
+      "notas": "<strong>~1 min 30 s.</strong> <strong>Abertura (10 s):</strong> até aqui todos os números vieram de <strong>uma única divisão</strong> dos dados; este slide pergunta se eles se sustentam. Deixar explícito: variamos a partição para <strong>medir</strong> a incerteza, nunca para escolher a divisão mais favorável — escolher seria selecionar sobre o teste. <strong>Gráfico da esquerda (25 s):</strong> repetimos <strong>30 vezes</strong> o experimento, sorteando a cada vez quem fica nos 80% de treino e quem fica nos 20% de teste. Mesmo modelo, mesmos hiperparâmetros — a única coisa que muda é o sorteio. Cada <strong>caixa</strong> resume essas 30 execuções de uma métrica: a linha do meio é a <strong>mediana</strong>, a caixa contém os <strong>50% centrais</strong> e as hastes vão aos extremos. Os pontinhos sobre a primeira caixa são as 30 execuções individuais do F1. <em>Apontar a altura da primeira caixa:</em> “toda essa dispersão é só sorteio”. Ler então os três números do cartão: 0,624 na pior partição, 0,683 na média, 0,750 na melhor. <strong>Gráfico da direita (25 s):</strong> no eixo horizontal, a fatia usada em <strong>treino</strong>, de 70% a 90%. Três linhas — F1 (bolinha), ROC-AUC (quadrado) e <strong>largura do intervalo de confiança</strong> (triângulo). <em>O ponto a mostrar:</em> as duas de cima <strong>oscilam sem tendência</strong>, ou seja, treinar com mais dados não melhorou de forma clara; a de baixo <strong>sobe sempre</strong>, porque com teste menor a estimativa perde precisão. É o compromisso da divisão: mais treino, menos certeza sobre o resultado. Avisar que o aparente melhor F1 em 90/10 é justamente o de <strong>maior incerteza</strong> — não é vitória. <strong>Os outros dois cartões (20 s):</strong> o kernel vencedor muda conforme a partição (RBF 7×, linear 2×, sigmoide 1×) — por isso não afirmamos “o RBF é o melhor”. E a estratificação reduz o desvio de 0,051 para 0,034, fixando a proporção de doentes no teste. <strong>Fecho (10 s):</strong> a faixa é a <strong>régua do trabalho</strong> — diferenças abaixo de ~0,05 não são conclusivas nesta base. Convidar a usar essa régua para reler as comparações dos slides anteriores."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Engenharia de atributos e pesos das classes&nbsp;",
+      "proporcao": "1.15fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "cabecalho": [
+              "Medição",
+              "O que responde",
+              "Variação do F1"
+            ],
+            "linhas": [
+              [
+                "<strong>Retreino sem × com</strong>",
+                "Ganho <strong>real</strong>",
+                "−0,0054"
+              ],
+              [
+                "Neutralização no teste",
+                "Quanto o modelo se apoia",
+                "−0,0056"
+              ],
+              [
+                "Permutação no teste",
+                "<span style=\"background-color: rgb(255, 255, 255);\">Quanto o modelo se apoia</span>",
+                "−0,0536"
+              ],
+              [
+                "Ablação uma a uma",
+                "Qual derivada importa",
+                "nenhuma"
+              ]
+            ],
+            "linhas_classe": [
+              "hl",
+              "",
+              "",
+              ""
+            ],
+            "celulas_classe": {
+              "0,2": "ruim",
+              "2,2": "ruim"
+            }
+          },
+          {
+            "tipo": "card",
+            "variante": "er",
+            "titulo": "As 5 razões clínicas não ajudaram",
+            "html": "<p style=\"margin:0;\">São <strong>funções das variáveis originais,</strong>&nbsp;reapresentam a informação, não acrescentam. Remover duas delas até <em>melhora</em> o resultado.</p>"
+          },
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "titulo": "Por que divergem",
+            "html": "<p style=\"margin:0;\">Desligar um atributo no teste cria pacientes <strong>incoerentes</strong> (uma razão que não bate com os próprios exames) e <strong>superestima</strong> sua importância.&nbsp;</p>"
+          }
+        ],
+        [
+          {
+            "tipo": "titulo",
+            "texto": "Peso das classes: o maior efeito sobre o erro que buscamos otimizar"
+          },
+          {
+            "tipo": "evo",
+            "titulo": "class_weight: None → balanced",
+            "linhas": [
+              {
+                "rotulo": "Falsos negativos",
+                "valor": "25 → 13 ▼",
+                "tendencia": "up"
+              },
+              {
+                "rotulo": "Revocação da classe 1",
+                "valor": "0,537 → 0,759 ▲",
+                "tendencia": "up"
+              },
+              {
+                "rotulo": "Falsos positivos",
+                "valor": "17 → 26 ▲",
+                "tendencia": "down"
+              },
+              {
+                "rotulo": "ROC-AUC",
+                "valor": "0,798 → 0,814 ▲",
+                "tendencia": "up"
+              }
+            ],
+            "obs": "Metade dos diagnósticos perdidos foi recuperada, ao custo de 9 exames confirmatórios a mais."
+          },
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Troca favorável na triagem",
+            "html": "<p style=\"margin:0;\">Cada FN evitado é uma paciente que passa a ser investigada, cada FP é só um exame a mais.</p>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Quatro medições independentes concordam: a engenharia <b>não trouxe ganho</b>. Medir de um jeito só teria dado a resposta errada."
+        }
+      ],
+      "notas": "<strong>~1 min 20 s.</strong> <strong>Engenharia (35 s):</strong> resultado negativo — as 5 razões clínicas não ajudaram. O ponto interessante é que as quatro medições discordam em magnitude: retreino e neutralização dão ~−0,005, mas a permutação dá −0,054. Explicar: permutar embaralha o atributo e cria pacientes incoerentes (uma razão que não bate com os próprios exames), e isso superestima a importância. Só o retreino mede ganho real. <strong>Peso das classes (35 s):</strong> aqui é o oposto — efeito grande e na direção que nos interessa: 12 falsos negativos a menos ao custo de 9 exames confirmatórios a mais. <strong>Fecho (10 s):</strong> ler a faixa.<br><br><strong>Explicar o que é o peso (pergunta provável):</strong> o SVM escolhe a fronteira de maior margem pagando uma multa <code>C</code> por cada paciente que fica do lado errado. Com <code>class_weight='balanced'</code> essa multa deixa de ser igual para as duas classes: cada classe recebe peso inverso à sua frequência no treino — são 214 diabéticas contra 400 não diabéticas, então o peso fica <strong>1,43 contra 0,77</strong>, ou seja, <strong>errar numa diabética custa ~1,87× mais</strong> do que errar numa não diabética. Na prática a fronteira se desloca para o lado da classe maior e amplia a região classificada como \"tem diabetes\". <strong>Nenhuma paciente é duplicada ou descartada:</strong> continuam as mesmas 614 linhas de treino, muda só o preço do erro.<br><br><strong>Se perguntarem:</strong> <em>\"não é a mesma coisa que balancear a base?\"</em> — não; oversampling e SMOTE criam ou removem linhas, aqui os dados são idênticos e muda só o custo na função objetivo. <em>\"não bastaria ajustar o limiar?\"</em> — o limiar agiria depois, sobre o mesmo ranking; o peso age durante o treino e muda quais pontos viram vetores de suporte. Indício: o ROC-AUC subiu (0,798 → 0,814), e um deslocamento puro de limiar não mexeria no AUC — mas é um ganho pequeno, e ajustar o limiar segue como o próximo passo da conclusão. <em>\"vocês forçaram para melhorar a métrica?\"</em> — não; <code>None</code> e <code>balanced</code> estavam dentro da grade do GridSearchCV e o <code>balanced</code> venceu nos quatro kernels; esta tabela é a medição isolada, com todo o resto fixo (KNN + padronização, RBF, C=1, gamma=0,1). <em>\"e a precisão?\"</em> — cai pouco, 0,630 → 0,612, e o F1 macro sobe junto (0,689 → 0,735), então não é só trocar uma métrica por outra. <em>\"por que não um peso ainda maior?\"</em> — compraria mais revocação com mais falsos positivos; é decisão de política de triagem (quantos exames confirmatórios o serviço aguenta), não de modelo."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Conclusão",
+      "topo": [
+        {
+          "tipo": "kpis",
+          "itens": [
+            {
+              "valor": "0,6777",
+              "texto": "F1 da classe 1 (ingênuo: 0,000)"
+            },
+            {
+              "valor": "0,8137",
+              "texto": "ROC-AUC"
+            },
+            {
+              "valor": "13 de 54",
+              "texto": "diabéticas não identificadas"
+            },
+            {
+              "valor": "16.320",
+              "texto": "modelos ajustados, 60 runs"
+            }
+          ]
+        }
+      ],
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "lins",
+            "itens": [
+              {
+                "titulo": "Imputar contra descartar",
+                "html": "Perder 48% do treino é pior que o ruído da imputação. <strong>KNN + padronização</strong> foi a melhor combinação."
+              },
+              {
+                "titulo": "Peso das classes é o maior ganho",
+                "html": "Falsos negativos de <strong>25 → 13</strong>."
+              },
+              {
+                "titulo": "Engenharia não ajudou",
+                "html": "Confirmado por <strong>quatro medições</strong> independentes."
+              },
+              {
+                "titulo": "Cuidado com partição única",
+                "html": "O mesmo modelo entrega de <strong>0,62 a 0,75</strong> conforme a divisão."
+              }
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "fim": true,
+          "html": "Obrigado! Perguntas?"
+        }
+      ],
+      "notas": "<strong>~55 s.</strong> Ler os quatro números do topo e as quatro linhas. Encerrar admitindo a limitação principal (um quarto das diabéticas não é identificado) e o próximo passo mais promissor, que é o ajuste do limiar."
+    }
+  ]
+}
