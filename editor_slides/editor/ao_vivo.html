@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Prévia ao vivo</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #0B1922; overflow: hidden }
+    #fr { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #fff }
+    /* aviso ocupa a tela toda quando não há aula */
+    #aviso {
+      position: absolute; inset: 0; margin: 0; z-index: 6; display: none; place-content: center; text-align: center;
+      padding: 40px; color: #E5E7EB; background: #0B1922;
+      font: 500 15px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif
+    }
+    #aviso b { display: block; font-size: 18px; margin-bottom: 6px }
+    #aviso.on { display: grid }
+    /* fita que pisca quando chega uma versão nova */
+    #fita { position: absolute; left: 0; right: 0; top: 0; height: 3px; z-index: 7;
+      background: linear-gradient(90deg, #34D399, #60A5FA); opacity: 0; transition: opacity .3s }
+    #badge {
+      position: absolute; left: 50%; bottom: 92px; transform: translateX(-50%) translateY(6px); z-index: 7;
+      display: flex; align-items: center; gap: 8px; padding: 6px 8px 6px 12px; border-radius: 999px;
+      background: rgba(17, 24, 39, .88); color: #E5E7EB; box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+      font: 600 12px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s
+    }
+    #badge[hidden] { display: none }
+    #badge.mostra { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto }
+    #badge .pt { width: 8px; height: 8px; border-radius: 50%; background: #34D399; box-shadow: 0 0 0 3px rgba(52, 211, 153, .2) }
+    #badge.off .pt { background: #9CA3AF; box-shadow: none }
+    #badge.pausada .pt { background: #F59E0B; box-shadow: 0 0 0 3px rgba(245, 158, 11, .2) }
+    #badge .txt { white-space: nowrap; font-variant-numeric: tabular-nums; letter-spacing: .01em }
+    #badge button {
+      background: #1F2937; border: 1px solid #374151; color: #E5E7EB; border-radius: 7px;
+      padding: 4px 8px; font: inherit; cursor: pointer; line-height: 1
+    }
+    #badge button:hover { background: #374151 }
+    #badge button.on { background: #92400E; border-color: #B45309; color: #FEF3C7 }
+  </style>
+</head>
+
+<body>
+  <iframe id="fr" title="Aula (prévia ao vivo)"></iframe>
+  <p id="aviso"><span><b>Aguardando o editor…</b>Abra esta janela pelo botão <strong>Ao vivo</strong> do editor de
+      slides e edite a aula: ela aparece aqui a cada alteração.</span></p>
+  <div id="fita"></div>
+  <div id="badge" class="off" role="status" aria-live="polite">
+    <span class="pt" aria-hidden="true"></span>
+    <span class="txt" id="st">conectando…</span>
+    <button id="b-pausa" type="button" title="Congelar/retomar a atualização automática">⏸</button>
+    <button id="b-agora" type="button" title="Atualizar agora">↻</button>
+    <button id="b-cheia" type="button" title="Tela cheia">⤢</button>
+    <button id="b-nova" type="button" title="Abrir a aula em outra aba (sem atualização automática)">↗</button>
+  </div>
+
+  <script>
+    'use strict';
+    /* Janela "Ao vivo": mostra a aula renderizada pelo editor e recarrega quando chega versão nova.
+       O iframe aponta para <pasta da aula>/__ao_vivo__.html, então imagens e fontes da aula resolvem. */
+    const projeto = new URLSearchParams(location.search).get('c') || '';
+    const fr = document.getElementById('fr');
+    const aviso = document.getElementById('aviso');
+    const badge = document.getElementById('badge');
+    const st = document.getElementById('st');
+    const fita = document.getElementById('fita');
+    const bPausa = document.getElementById('b-pausa');
+    const pasta = projeto.replace(/\/?apresentacao\.json$/, '');
+    const base = '/r/' + pasta.split('/').map(encodeURIComponent).join('/') + '/';
+    const urlEstado = '/api/ao-vivo?c=' + encodeURIComponent(projeto);
+    let versao = 0, carregando = 0, pausado = false, slideAtual = 1, notasAbertas = false, falhas = 0, estadoAtual = '';
+
+    function mostrarBadge() {
+      badge.classList.add('mostra');
+      clearTimeout(mostrarBadge.t);
+      mostrarBadge.t = setTimeout(() => badge.classList.remove('mostra'), 4000);
+    }
+    function estado(txt, classe) {
+      if (txt === estadoAtual) return;           // não reexibe o selo a cada verificação
+      estadoAtual = txt;
+      st.textContent = txt;
+      badge.classList.remove('off', 'pausada');
+      if (classe) badge.classList.add(classe);
+      mostrarBadge();
+    }
+    function piscar() {
+      fita.style.opacity = '1';
+      clearTimeout(piscar.t);
+      piscar.t = setTimeout(() => { fita.style.opacity = '0'; }, 700);
+    }
+    function hora() { return new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
+
+    /* guarda slide e roteiro antes de trocar o conteúdo e devolve depois */
+    function lerEstado() {
+      try {
+        const d = fr.contentWindow.document;
+        const m = /(\d+)\s*\/\s*(\d+)/.exec((d.getElementById('ctr') || {}).textContent || '');
+        if (m) slideAtual = +m[1];
+        notasAbertas = d.body.classList.contains('notas');
+      } catch (e) { }
+    }
+    function restaurar() {
+      try {
+        const w = fr.contentWindow;
+        if (typeof w.go === 'function' && slideAtual > 1) w.go(slideAtual - 1);
+        if (notasAbertas && typeof w.toggleNotas === 'function' && !w.document.body.classList.contains('notas')) w.toggleNotas();
+      } catch (e) { }
+    }
+    function carregar(v) {
+      lerEstado();
+      carregando = v;
+      /* ?web=1 evita o desvio para o PDF em janelas estreitas */
+      fr.src = base + '__ao_vivo__.html?c=' + encodeURIComponent(projeto) + '&v=' + v + '&web=1';
+    }
+    fr.addEventListener('load', () => {
+      if (!carregando) return;
+      restaurar();
+      versao = carregando;
+      carregando = 0;
+      try { const t = fr.contentWindow.document.title; if (t) document.title = t + ' · ao vivo'; } catch (e) { }
+      piscar();
+      estado('ao vivo · slide ' + slideAtual + ' · ' + hora(), '');
+    });
+
+    async function checar(forcar) {
+      if (pausado && !forcar) return;
+      try {
+        const r = await fetch(urlEstado, { cache: 'no-store' });
+        const j = await r.json();
+        if (!r.ok || j.erro) throw new Error(j.erro || ('erro ' + r.status));
+        falhas = 0;
+        if (!j.versao) { estado('aguardando o editor…', 'off'); return; }
+        if (j.versao !== versao) carregar(j.versao);
+      } catch (e) {
+        falhas++;
+        estado(falhas > 2 ? 'sem conexão com o editor — tentando de novo…' : 'reconectando…', 'off');
+      }
+    }
+
+    bPausa.onclick = () => {
+      pausado = !pausado;
+      bPausa.classList.toggle('on', pausado);
+      bPausa.textContent = pausado ? '▶' : '⏸';
+      bPausa.title = pausado ? 'Voltar a acompanhar o editor' : 'Congelar a atualização automática';
+      estado(pausado ? 'congelado — esta janela não acompanha o editor' : 'ao vivo · ' + hora(), pausado ? 'pausada' : '');
+      if (!pausado) checar(true);
+    };
+    document.getElementById('b-agora').onclick = () => {
+      estadoAtual = ''; estado('atualizando…', '');
+      checar(true);
+    };
+    document.getElementById('b-cheia').onclick = () => {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+    };
+    document.getElementById('b-nova').onclick = () => {
+      if (!versao) return;
+      window.open(base + '__ao_vivo__.html?c=' + encodeURIComponent(projeto) + '&v=' + versao + '&web=1', '_blank');
+    };
+
+    document.addEventListener('mousemove', mostrarBadge);
+    if (!projeto) {
+      aviso.classList.add('on');
+      badge.hidden = true;
+    } else {
+      checar();
+      setInterval(() => { if (!document.hidden) checar(); }, 700);
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) checar(); });
+      mostrarBadge();
+    }
+  </script>
+</body>
+
+</html>
+

@@ -18,6 +18,7 @@ import re
 import subprocess
 import sys
 import threading
+import time
 import traceback
 import unicodedata
 import urllib.parse
@@ -39,6 +40,8 @@ IMG_EXT = (".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp")
 LLM_PADRAO = {"provedor": None}
 PREVIAS: dict = {}  # token → HTML da prévia (servido como <pasta da aula>/__previa__.html)
 NOME_PREVIA = "__previa__.html"
+AO_VIVO: dict = {}  # rel(apresentacao.json) → {"versao", "html", "ts"} (janela "Ao vivo")
+NOME_AO_VIVO = "__ao_vivo__.html"
 TRAVA_PUBLICAR = threading.Lock()
 
 
@@ -201,6 +204,21 @@ def salvar_tema(e: dict) -> str:
     return nome
 
 
+def publicar_ao_vivo(cj: str, dados: dict) -> int:
+    """Renderiza a aula com CSS e runtime embutidos e guarda a última versão da janela "Ao vivo".
+
+    Nada é gravado em disco: a janela separada mostra o estado em memória do editor.
+    Devolve o número da versão (a página acompanha por ele).
+    """
+    chave = rel(cj)
+    html = render.render_pagina(dados, inline=True)
+    versao = int((AO_VIVO.get(chave) or {}).get("versao", 0)) + 1
+    AO_VIVO[chave] = {"versao": versao, "html": html, "ts": time.time()}
+    while len(AO_VIVO) > 8:  # guarda só as últimas aulas abertas
+        AO_VIVO.pop(min(AO_VIVO, key=lambda k: AO_VIVO[k]["ts"]))
+    return versao
+
+
 def estado_git() -> dict:
     st = git("status", "--porcelain")
     return {"branch": git("branch", "--show-current"), "alteracoes": [l for l in st.splitlines() if l.strip()][:200],
@@ -240,6 +258,16 @@ class Handler(BaseHTTPRequestHandler):
         b = open(p, "rb").read()
         self.send_response(200)
         self.send_header("Content-Type", tipo)
+        self.send_header("Content-Length", str(len(b)))
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+        self.wfile.write(b)
+
+    def _html(self, texto: str):
+        """Responde HTML gerado na hora (prévia do palco e prévia ao vivo)."""
+        b = texto.encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
         self.send_header("Content-Length", str(len(b)))
         self.send_header("Cache-Control", "no-store")
         self.end_headers()
@@ -287,17 +315,16 @@ class Handler(BaseHTTPRequestHandler):
                     return self.send_error(403)
                 return self._arquivo(p)
             if caminho.startswith("/r/"):
+                if os.path.basename(caminho) == NOME_AO_VIVO:
+                    item = AO_VIVO.get(rel(caminho_json(q.get("c") or "")))
+                    if not item:
+                        return self.send_error(404, "prévia ao vivo ainda não publicada (clique em Ao vivo no editor)")
+                    return self._html(item["html"])
                 if os.path.basename(caminho) == NOME_PREVIA:
                     html = PREVIAS.get(q.get("t", ""))
                     if html is None:
                         return self.send_error(404, "prévia expirada")
-                    b = html.encode("utf-8")
-                    self.send_response(200)
-                    self.send_header("Content-Type", "text/html; charset=utf-8")
-                    self.send_header("Content-Length", str(len(b)))
-                    self.send_header("Cache-Control", "no-store")
-                    self.end_headers()
-                    return self.wfile.write(b)
+                    return self._html(html)
                 return self._arquivo(dentro_da_raiz(caminho[3:]))
             if caminho == "/api/estado":
                 cfg = provedores.config()
@@ -314,6 +341,9 @@ class Handler(BaseHTTPRequestHandler):
                 verif = render.verificar_legado(cj) if d.get("motor") == "legado" else (True, "")
                 return self._json({"dados": d, "verificacao": {"ok": verif[0], "msg": verif[1]},
                                    "tema_vars": vars_do_tema(cj, d), "imagens": listar_imagens(cj)})
+            if caminho == "/api/ao-vivo":
+                item = AO_VIVO.get(rel(caminho_json(q.get("c")))) or {}
+                return self._json({"versao": int(item.get("versao", 0)), "atualizado": item.get("ts", 0)})
             if caminho == "/api/imagens":
                 return self._json({"imagens": listar_imagens(caminho_json(q.get("c")))})
             if caminho == "/api/pdf/status":
@@ -350,6 +380,11 @@ class Handler(BaseHTTPRequestHandler):
                 while len(PREVIAS) > 40:
                     PREVIAS.pop(next(iter(PREVIAS)))
                 return self._json({"url": base_href(cj) + NOME_PREVIA + "?t=" + token})
+            if caminho == "/api/ao-vivo":
+                d = e.get("dados")
+                if not isinstance(d, dict) or "slides" not in d:
+                    raise ErroUsuario("dados inválidos")
+                return self._json({"versao": publicar_ao_vivo(caminho_json(e.get("c")), d)})
             if caminho == "/api/gerar":
                 cj = caminho_json(e.get("c"))
                 if e.get("dados"):

@@ -102,6 +102,12 @@ make editor            # abre http://127.0.0.1:8765 no navegador (Ctrl+C encerra
   escreve `aulaNN.html`, `aulaNN.css`, `aulaNN.js` e `fonts/` — o que o índice e o Pages já conhecem.
 - **Palco**: a prévia é o HTML real da aula (renderizado pelo mesmo código do gerador). Clique num texto
   para editar ali mesmo; clique num bloco para abrir suas propriedades; duplo clique numa imagem para trocá-la.
+- **Ao vivo** (na barra superior): abre uma **janela separada** com a aula de verdade (`runtime.js`: navegação,
+  A−/A+, roteiro, cronômetro, apresentador) que se atualiza sozinha a cada edição — sem **Salvar** e sem **Gerar**.
+  Ela mostra o estado em memória do editor, guarda o slide atual e o roteiro aberto e, em janelas estreitas,
+  continua sendo a versão web (não desvia para o PDF). O selo flutuante (⏸ congelar, ↻ atualizar agora,
+  ⤢ tela cheia, ↗ abrir em outra aba) aparece ao mexer o mouse; **⏸** para a atualização automática, útil
+  quando a janela vai ficar num projetor durante a aula. Fecha o editor, a janela mantém a última versão.
 - **Slides**: arraste para reordenar, duplique, exclua, adicione pelos modelos (capa, 1–3 colunas,
   imagem + texto, tabela, indicadores, seção/encerramento, imagem inteira, HTML livre).
 - **Blocos** (`editor_slides/componentes.json`): texto, lista, cartão, destaque, etiquetas, pergunta, tabela,
