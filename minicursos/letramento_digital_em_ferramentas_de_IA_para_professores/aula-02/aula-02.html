@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="generator" content="editor_slides">
+  <title>Encontro 2 · Ferramentas e prática: uma aula completa com IA</title>
+  <link rel="stylesheet" href="aula-02.css">
+  <script>try{var q=location.search;if(!/[?&](modo=apresentador|pdf=1)/.test(q)&&matchMedia('(max-width: 820px), (max-height: 500px) and (pointer: coarse)').matches)document.documentElement.classList.add(/[?&]web=1/.test(q)?'movel':'celular-pdf')}catch(e){}</script>
+</head>
+
+<body data-limite="120" data-pdf="aula-02.pdf">
+  <header class="tb">
+    <div class="tb-left">
+      <h2>Minicurso Letramento Digital em IA · IFPI — Campus Barras</h2>
+    </div>
+    <div class="tb-right">
+      <div class="fz" aria-label="Tamanho do texto">
+        <button onclick="fz(-1)" title="Diminuir tamanho da fonte">A−</button>
+        <span id="fzpct">100%</span>
+        <button onclick="fz(1)" title="Aumentar tamanho da fonte">A+</button>
+      </div>
+      <button class="bpb" id="bnt" onclick="toggleNotas()" title="Mostrar/ocultar roteiro de fala (tecla N)">Roteiro</button>
+      <button class="tmr" id="tmr" onclick="if(event.shiftKey){tmrDefinirLimite()}else{toggleTimer()}" ondblclick="resetTimer()" title="Iniciar/pausar (T) · duplo clique zera · Shift+clique define o limite">00:00 / 120:00</button>
+      <button class="bpb" id="bp" onclick="openPresenter()">Modo apresentador</button>
+      <span class="ct" id="ctr">1 / 27</span>
+      <span class="modo-tag">APRESENTAÇÃO</span>
+    </div>
+  </header>
+  <div class="fita"></div>
+  <div class="sc">
+
+    <!-- SLIDE 1 — Ferramentas e prática: uma aula completa com IA -->
+    <div class="sl" id="s1">
+      <div class="capa">
+        <div class="esq">
+          <div class="rot">Minicurso · Encontro 2 de 3</div>
+          <h1>Ferramentas e prática: uma aula completa com IA</h1>
+          <div class="faixa"></div>
+          <div class="sub">Plano, apresentação e atividades com Gemini, ChatGPT, Claude e DeepSeek</div>
+          <div class="sub">18/11/2026 · 19h às 21h · IFPI Campus Barras</div>
+          <div class="sub">Prof. Diego Cordeiro de Oliveira e equipe</div>
+          <div class="sub">Instituto Federal do Piauí — Letramento Digital em Ferramentas de IA para Professores</div>
+        </div>
+        <div class="dir"><img src="img/logo-ifpi-barras-vertical.png" alt=""></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 — Roteiro de hoje -->
+    <div class="sl" id="s2">
+      <div class="slhd"><span class="num">2</span><h2>Roteiro de hoje</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><table class="tb2"><tr><th>Horário</th><th>Momento</th></tr><tr><td>19h00</td><td><strong>Socialização da Atividade 1</strong> — “Semáforo dos dados” nas turmas</td></tr><tr><td>19h25</td><td><strong>Conversando bem com a IA</strong> — anatomia de um bom prompt</td></tr><tr><td>19h45</td><td><strong>As quatro ferramentas</strong> — o que cada uma faz e como proteger seus dados</td></tr><tr><td>19h55</td><td><strong>Uma aula completa</strong> — do plano à rubrica, com a biblioteca de prompts (mão na massa)</td></tr><tr><td>20h40</td><td><strong>Atividade 2</strong> — “Minha aula com IA” e encerramento</td></tr></table></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 — Socialização · Atividade 1 “Semáforo dos dados” -->
+    <div class="sl" id="s3">
+      <div class="slhd"><span class="num">3</span><h2>Socialização · Atividade 1 “Semáforo dos dados”</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div class="txt-bloco"><p><strong>3 minutos por professor.</strong> Use a ficha de registro como guia:</p></div><ol class="passos"><li>Em qual <strong>turma e ano</strong> você aplicou? Como foi a reação inicial?</li><li>Qual situação gerou <strong>mais debate</strong>?</li><li>O que os alunos <strong>já sabiam</strong> e o que os <strong>surpreendeu</strong>?</li><li>Que <strong>combinados</strong> a turma criou?</li><li>O que você <strong>ajustaria</strong> para aplicar de novo?</li></ol><div class="cd"><h3>Enquanto ouvimos</h3><div class="txt-bloco"><p>A equipe anota no quadro os <strong>padrões que se repetem</strong> entre as turmas: eles viram tema do Encontro 3, quando falaremos dos alunos usando IA.</p></div></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 — Conversando bem com a IA -->
+    <div class="sl" id="s4">
+      <div class="secao-slide"><div class="divisor"><div class="ov"></div><div class="in"><div class="rot">Parte 1</div><h1>Conversando bem com a IA</h1><div class="txt-bloco"><p>A qualidade da resposta depende da qualidade do pedido.</p></div></div></div></div>
+    </div>
+
+    <!-- SLIDE 5 — Por que o prompt importa -->
+    <div class="sl" id="s5">
+      <div class="slhd"><span class="num">5</span><h2>Por que o prompt importa</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div style="display:contents"><div class="bege"><h3>Pedido vago</h3><div class="prompt"><div class="pt">Prompt fraco</div><pre>Faça uma aula sobre frações.</pre></div><p>Resposta genérica: não sabe o ano, o tempo, os recursos nem o que a turma já sabe.</p></div></div></div>
+          <div class="col"><div style="display:contents"><div class="bege"><h3>Pedido estruturado</h3><div class="prompt"><div class="pt">Prompt forte</div><pre>Você é professor(a) de Matemática do 5º ano de uma escola pública do Piauí. Crie um plano de aula de 50 minutos sobre frações equivalentes para 30 estudantes que já conhecem metade e terço. Só temos quadro e papel. Entregue em tabela com etapas e tempo, e inclua 3 perguntas para verificar a aprendizagem.</pre></div></div></div></div></div>
+        <div class="cd"><div class="txt-bloco"><p><strong>Teste ao vivo:</strong> rode os dois prompts na mesma ferramenta e compare. O que mudou?</p></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 — Anatomia de um bom prompt: P · C · T · F · R -->
+    <div class="sl" id="s6">
+      <div class="slhd"><span class="num">6</span><h2>Anatomia de um bom prompt: P · C · T · F · R</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><table class="tb2 fill"><tr><th>Parte</th><th>Pergunta que responde</th><th>Exemplo</th></tr><tr><td><strong>P · Papel</strong></td><td>Quem a IA deve ser?</td><td>“Você é professor(a) de Ciências do 7º ano…”</td></tr><tr><td><strong>C · Contexto</strong></td><td>Para quem, onde e com quais recursos?</td><td>“Turma de 30 estudantes, escola pública em Barras-PI, aula de 50 min, sem internet”</td></tr><tr><td><strong>T · Tarefa</strong></td><td>O que exatamente deve ser feito?</td><td>“Crie um plano de aula sobre o ciclo da água”</td></tr><tr><td><strong>F · Formato</strong></td><td>Como a resposta deve vir?</td><td>“Em tabela: etapa, tempo, atividade, recurso”</td></tr><tr><td><strong>R · Restrições</strong></td><td>O que evitar ou respeitar?</td><td>“Linguagem simples; marque com VERIFICAR o que eu devo conferir; não invente referências”</td></tr></table><div class="cd"><div class="txt-bloco"><p><strong>Dica para memorizar:</strong> “<strong>P</strong>rofessor <strong>C</strong>onta a <strong>T</strong>arefa no <strong>F</strong>ormato com <strong>R</strong>egras”.</p></div></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 — Seis técnicas que fazem diferença -->
+    <div class="sl" id="s7">
+      <div class="slhd"><span class="num">7</span><h2>Seis técnicas que fazem diferença</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div class="grade" style="grid-template-columns:1fr 1fr 1fr"><div class="col"><div class="bege"><h3>1. Converse, não encomende</h3><div class="txt-bloco"><p>A primeira resposta é um <strong>rascunho</strong>. Peça ajustes: “mais curto”, “mais exemplos”, “troque a etapa 3”.</p></div></div><div class="bege"><h3>2. Peça perguntas antes</h3><div class="txt-bloco"><p>“Antes de responder, faça-me até 3 perguntas sobre o que falta.”</p></div></div></div><div class="col"><div class="bege"><h3>3. Dê um exemplo</h3><div class="txt-bloco"><p>Cole um modelo de atividade que você gosta e peça “no mesmo estilo”.</p></div></div><div class="bege"><h3>4. Divida em etapas</h3><div class="txt-bloco"><p>Plano → slides → atividades → rubrica, <strong>um pedido por vez</strong> no mesmo chat.</p></div></div></div><div class="col"><div class="bege"><h3>5. Defina o nível</h3><div class="txt-bloco"><p>“Linguagem para 10 anos”, “frases de até 15 palavras”, “vocabulário do 9º ano”.</p></div></div><div class="bege"><h3>6. Peça para marcar dúvidas</h3><div class="txt-bloco"><p>“Marque com VERIFICAR o que pode estar errado.” Facilita a sua revisão.</p></div></div></div></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8 — O contexto que só você tem (sem expor ninguém) -->
+    <div class="sl" id="s8">
+      <div class="slhd"><span class="num">8</span><h2>O contexto que só você tem (sem expor ninguém)</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr"><div class="col"><div class="card vd"><h3>🟢 Informe à IA</h3><ul><li>Ano/série, componente e <strong>habilidade da BNCC</strong>.</li><li>Tamanho da turma e <strong>tempo de aula</strong>.</li><li>Recursos reais: quadro, livro, projetor, internet.</li><li>O que a turma <strong>já sabe</strong> e onde costuma errar.</li><li>Necessidades pedagógicas descritas de forma geral.</li></ul></div></div><div class="col"><div class="card er"><h3>🔴 Não informe</h3><ul><li>Nomes, matrículas, fotos ou voz de estudantes.</li><li><strong>Laudos</strong>, diagnósticos e dados de saúde.</li><li>Notas individuais e situações familiares.</li><li>Casos que permitam <strong>identificar</strong> alguém na cidade.</li></ul></div></div></div>
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"></div></div>
+        <div class="cd"><div class="txt-bloco"><p>Em vez de “o João, que tem TDAH”, escreva: <strong>“1 estudante que se beneficia de tarefas curtas e instruções passo a passo”</strong>.</p></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 9 — As quatro ferramentas -->
+    <div class="sl" id="s9">
+      <div class="secao-slide"><div class="divisor"><div class="ov"></div><div class="in"><div class="rot">Parte 2</div><h1>As quatro ferramentas</h1><div class="txt-bloco"><p>Gemini · ChatGPT · Claude · DeepSeek</p></div></div></div></div>
+    </div>
+
+    <!-- SLIDE 10 — Visão geral das ferramentas (versões gratuitas) -->
+    <div class="sl" id="s10">
+      <div class="slhd"><span class="num">10</span><h2>Visão geral das ferramentas (versões gratuitas)</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><table class="tb2 fill"><tr><th>Ferramenta</th><th>Destaques para o professor</th><th>Atenção</th></tr><tr><td><strong>Gemini</strong><br><span class="mini">Google · gemini.google.com</span></td><td>Entra com a conta Google; integra Docs, Drive e Gmail; lê PDFs e imagens; Canvas para editar textos e criar páginas.</td><td>Em contas da escola, o administrador define o acesso. Desative a “Atividade nos apps Gemini” se não quiser guardar o histórico.</td></tr><tr><td><strong>ChatGPT</strong><br><span class="mini">OpenAI · chatgpt.com</span></td><td>Muito versátil; lê arquivos; gera imagens; Canvas para editar textos e códigos; organização por projetos.</td><td>Plano gratuito com limite de uso. Idade mínima 13 anos, com autorização dos responsáveis para menores de 18.</td></tr><tr><td><strong>Claude</strong><br><span class="mini">Anthropic · claude.ai</span></td><td>Bom com textos longos e documentos extensos; Artefatos criam páginas, quizzes e jogos interativos.</td><td>Plano gratuito com limite de mensagens. Uso pessoal só para <strong>maiores de 18 anos</strong>.</td></tr><tr><td><strong>DeepSeek</strong><br><span class="mini">DeepSeek · chat.deepseek.com</span></td><td>Gratuito; modo de raciocínio (DeepThink) bom para lógica e matemática; busca na web.</td><td>Dados processados e armazenados na <strong>China</strong> (transferência internacional, LGPD). Use só conteúdo 🟢.</td></tr></table><div class="txt-bloco"><p class="mini">Recursos, menus e limites dos planos gratuitos mudam com frequência (informações de meados de 2026). Confira os termos de uso antes de indicar a ferramenta aos alunos.</p></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 11 — Antes de usar: três ajustes de privacidade -->
+    <div class="sl" id="s11">
+      <div class="slhd"><span class="num">11</span><h2>Antes de usar: três ajustes de privacidade</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><ol class="passos"><li><strong>Desative o uso das conversas para treinar o modelo</strong>, quando houver a opção. ChatGPT: Configurações › Controles de dados. Claude: Configurações › Privacidade. Gemini: Atividade nos apps Gemini. DeepSeek: configurações de dados da conta.</li><li><strong>Use o chat temporário</strong> (ou anônimo) para assuntos que não quer guardar no histórico.</li><li><strong>Use uma conta só para o trabalho</strong>, com senha forte e verificação em duas etapas.</li></ol><div class="ca"><h3>Mesmo com tudo desativado</h3><div class="txt-bloco"><p>O serviço ainda recebe o que você digita. O <strong>semáforo do Encontro 1</strong> continua valendo: só 🟢 e 🟡, nunca 🔴.</p></div></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 12 — Uma aula completa, do plano à rubrica -->
+    <div class="sl" id="s12">
+      <div class="secao-slide"><div class="divisor"><div class="ov"></div><div class="in"><div class="rot">Parte 3 · Mão na massa</div><h1>Uma aula completa, do plano à rubrica</h1><div class="txt-bloco"><p>Biblioteca de prompts: clique em <strong>Copiar</strong>, cole na IA e troque os campos destacados.</p></div></div></div></div>
+    </div>
+
+    <!-- SLIDE 13 — O fluxo de trabalho em 7 passos (no mesmo chat) -->
+    <div class="sl" id="s13">
+      <div class="slhd"><span class="num">13</span><h2>O fluxo de trabalho em 7 passos (no mesmo chat)</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><ol class="passos"><li><strong>Contexto da turma</strong> — diga à IA quem são seus alunos e quais são os recursos.</li><li><strong>Plano de aula</strong> — objetivos, BNCC, etapas e tempo.</li><li><strong>Apresentação</strong> — roteiro de slides com falas e perguntas.</li><li><strong>Atividades</strong> — exercícios com gabarito e quiz.</li><li><strong>Avaliação</strong> — rubrica e autoavaliação.</li><li><strong>Inclusão</strong> — versões adaptadas para diferentes necessidades.</li><li><strong>Revisão crítica</strong> — a IA aponta problemas e <strong>você decide</strong> o que fica.</li></ol><div class="cd"><div class="txt-bloco"><p>Todos os prompts estão também no <strong>Caderno de prompts</strong> (arquivo para levar), prontos para Gemini, ChatGPT, Claude e DeepSeek.</p></div></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 14 — Passo 1 · O contexto da turma -->
+    <div class="sl" id="s14">
+      <div class="slhd"><span class="num">14</span><h2>Passo 1 · O contexto da turma</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="prompt"><div class="pt">Prompt 0 · Contexto da turma (cole primeiro, uma vez por conversa)</div><pre>Você é um(a) professor(a) experiente da educação básica pública brasileira e vai me ajudar a planejar aulas.
+Contexto que vale para toda esta conversa:
+- Componente curricular: <i>[ex.: Ciências]</i>
+- Ano/série e etapa: <i>[ex.: 7º ano do Ensino Fundamental]</i>
+- Turma: <i>[nº]</i> estudantes; perfil geral, sem nomes: <i>[ex.: leitura em níveis diferentes, 1 estudante com baixa visão]</i>
+- Duração da aula: <i>[ex.: 50 minutos]</i>
+- Recursos disponíveis: <i>[ex.: quadro, livro didático, projetor; internet instável]</i>
+- Realidade local: escola pública em <i>[município]</i>, Piauí.
+Regras: use linguagem adequada à idade; cite códigos da BNCC só se tiver certeza e marque com (VERIFICAR) tudo o que eu precisar conferir; não invente referências.
+Antes de começar, confirme que entendeu e me faça até 3 perguntas se faltar alguma informação.</pre></div></div><div class="txt-bloco"><p class="mini"><strong>Dica:</strong> Use o mesmo chat para os próximos prompts: a IA “lembra” do contexto dentro da conversa.</p></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 15 — Passo 2 · Plano de aula -->
+    <div class="sl" id="s15">
+      <div class="slhd"><span class="num">15</span><h2>Passo 2 · Plano de aula</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="prompt"><div class="pt">Prompt 1 · Plano de aula</div><pre>Com base no contexto, elabore um plano de aula sobre <i>[tema/conteúdo]</i>.
+Estrutura:
+1. Título e habilidade(s) da BNCC (código + descrição; marque VERIFICAR)
+2. Objetivos de aprendizagem (até 3, com verbos observáveis)
+3. Conhecimentos prévios necessários
+4. Sequência com o tempo de cada etapa: abertura/problematização, desenvolvimento, prática e fechamento
+5. Estratégias para quem tem mais dificuldade e para quem termina antes
+6. Avaliação: que evidências mostram que aprenderam
+7. Materiais e recursos
+Seja realista com o tempo de <i>[duração]</i> e com os recursos disponíveis.</pre></div></div><div class="txt-bloco"><p class="mini"><strong>Dica:</strong> Peça ajustes na sequência: “reduza a exposição para 10 minutos e aumente a prática”.</p></div><div class="ca"><h3>Atenção à BNCC</h3><div class="txt-bloco"><p>As IAs costumam <strong>inventar ou trocar códigos</strong> de habilidades. Confira sempre no documento oficial (basenacionalcomum.mec.gov.br).</p></div></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 16 — Passo 3 · Apresentação -->
+    <div class="sl" id="s16">
+      <div class="slhd"><span class="num">16</span><h2>Passo 3 · Apresentação</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="prompt"><div class="pt">Prompt 2 · Apresentação (roteiro de slides)</div><pre>Transforme o plano de aula em um roteiro de apresentação com <i>[8 a 10]</i> slides.
+Para cada slide, entregue:
+- Título curto
+- Texto do slide (no máximo 4 tópicos curtos, linguagem para <i>[ano/série]</i>)
+- Sugestão de imagem ou esquema (apenas descreva)
+- Fala do professor (2 a 3 frases) e uma pergunta para a turma
+Inclua 1 slide de abertura com uma situação do cotidiano dos estudantes e 1 slide final de síntese.
+Formate como tabela: Nº | Título | Texto | Imagem | Fala/pergunta.</pre></div></div><div class="txt-bloco"><p class="mini"><strong>Dica:</strong> Gemini: exporte a tabela para o Google Docs/Slides. ChatGPT (Canvas) e Claude (Artefatos): peça “crie a apresentação em HTML” para ver os slides prontos. Também dá para colar o roteiro no Canva.</p></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 17 — Passo 4 · Atividades: exercícios com gabarito -->
+    <div class="sl" id="s17">
+      <div class="slhd"><span class="num">17</span><h2>Passo 4 · Atividades: exercícios com gabarito</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="prompt"><div class="pt">Prompt 3 · Lista de exercícios com gabarito</div><pre>Crie uma lista de <i>[10]</i> exercícios sobre <i>[tema]</i> para <i>[ano/série]</i>, em ordem crescente de dificuldade:
+- <i>[4]</i> de compreensão (nível fácil)
+- <i>[4]</i> de aplicação em situações do cotidiano de <i>[município/região]</i>
+- <i>[2]</i> desafios que exijam explicar o raciocínio
+Misture formatos: múltipla escolha (4 alternativas), verdadeiro ou falso com justificativa e questões abertas.
+Depois da lista, em seção separada chamada GABARITO COMENTADO, traga a resposta e o erro mais comum em cada questão.</pre></div></div><div class="txt-bloco"><p class="mini"><strong>Dica:</strong> Resolva você mesmo as questões antes de aplicar: a IA erra contas e gabaritos.</p></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 18 — Passo 4 · Atividades: quiz e gamificação -->
+    <div class="sl" id="s18">
+      <div class="slhd"><span class="num">18</span><h2>Passo 4 · Atividades: quiz e gamificação</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="prompt"><div class="pt">Prompt 4 · Quiz / gamificação</div><pre>Crie um quiz de <i>[10]</i> perguntas de múltipla escolha sobre <i>[tema]</i> para <i>[ano/série]</i>, para usar em <i>[Kahoot / Google Forms / cartões de papel]</i>.
+Regras: 4 alternativas por pergunta, apenas 1 correta, distratores plausíveis baseados em erros comuns, enunciados com até 25 palavras.
+Entregue em tabela: Pergunta | A | B | C | D | Correta | Explicação curta (1 frase).
+Sugira também uma dinâmica de 10 minutos para aplicar o quiz sem internet.</pre></div></div><div class="txt-bloco"><p class="mini"><strong>Dica:</strong> A tabela pode ser copiada para uma planilha e importada em ferramentas de quiz.</p></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 19 — Passo 5 · Avaliação: rubrica -->
+    <div class="sl" id="s19">
+      <div class="slhd"><span class="num">19</span><h2>Passo 5 · Avaliação: rubrica</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="prompt"><div class="pt">Prompt 5 · Rubrica de avaliação</div><pre>Crie uma rubrica de avaliação para <i>[atividade/produto, ex.: cartaz em grupo sobre o ciclo da água]</i> do <i>[ano/série]</i>.
+Use <i>[4]</i> critérios e 4 níveis (Excelente, Bom, Em desenvolvimento, Inicial), com descrições observáveis e linguagem que os próprios estudantes entendam.
+Inclua a pontuação de cada nível (total de <i>[10]</i> pontos) e uma versão resumida em forma de lista de autoavaliação ("Eu consegui...").</pre></div></div><div class="txt-bloco"><p class="mini"><strong>Dica:</strong> Apresente a rubrica aos estudantes ANTES da atividade: ela orienta o que se espera.</p></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 20 — Passo 6 · Inclusão e diferentes níveis -->
+    <div class="sl" id="s20">
+      <div class="slhd"><span class="num">20</span><h2>Passo 6 · Inclusão e diferentes níveis</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="prompt"><div class="pt">Prompt 6 · Adaptação e inclusão</div><pre>Adapte a atividade abaixo em três versões, mantendo o mesmo objetivo de aprendizagem:
+- Versão 1: estudantes com dificuldade de leitura (frases curtas, apoio visual descrito, menos itens)
+- Versão 2: versão padrão
+- Versão 3: desafio para quem termina antes
+Considere também: <i>[necessidade descrita SEM identificar o estudante, ex.: estudante com baixa visão / que se beneficia de rotina visual]</i>.
+Explique em 3 linhas o que mudou em cada versão.
+Atividade: <i>[cole aqui a atividade]</i></pre></div></div><div class="txt-bloco"><p class="mini"><strong>Dica:</strong> Semáforo: descreva a NECESSIDADE pedagógica, nunca o nome, o laudo ou o diagnóstico do estudante.</p></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 21 — Passo 7 · Revisão crítica -->
+    <div class="sl" id="s21">
+      <div class="slhd"><span class="num">21</span><h2>Passo 7 · Revisão crítica</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="prompt"><div class="pt">Prompt 7 · Revisão crítica do material</div><pre>Agora atue como coordenador(a) pedagógico(a) exigente e revise todo o material produzido nesta conversa.
+Aponte, em lista:
+1. Erros de conteúdo ou afirmações duvidosas (e como verificar)
+2. Códigos da BNCC que podem estar incorretos
+3. Linguagem inadequada para <i>[ano/série]</i>
+4. Tempo irreal para <i>[duração]</i>
+5. Estereótipos, vieses ou exemplos distantes da realidade de <i>[município]</i>, Piauí
+6. Sugestões de melhoria
+Não reescreva tudo: liste os problemas e proponha correções pontuais.</pre></div></div><div class="txt-bloco"><p class="mini"><strong>Dica:</strong> A autorrevisão ajuda, mas NÃO substitui a sua: a IA também erra ao se revisar.</p></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 22 — Bônus: mais quatro prompts úteis -->
+    <div class="sl" id="s22">
+      <div class="slhd"><span class="num">22</span><h2>Bônus: mais quatro prompts úteis</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div style="display:contents"><div class="card"><div class="prompt"><div class="pt">Bônus · Texto de apoio nivelado</div><pre>Escreva um texto de apoio de <i>[250]</i> palavras sobre <i>[tema]</i> para <i>[ano/série]</i>, com título, 3 parágrafos curtos e um quadro "Palavras importantes" com 5 termos e seus significados.
+Depois, faça 3 perguntas de interpretação: 1 literal, 1 inferencial e 1 de opinião.
+Use somente informações consolidadas; se não tiver certeza de algum dado, não o inclua.</pre></div></div></div><div style="display:contents"><div class="card"><div class="prompt"><div class="pt">Bônus · Situação-problema com a cara da região</div><pre>Crie uma situação-problema sobre <i>[conteúdo]</i> ambientada no cotidiano de <i>[município]</i>, Piauí (ex.: feira, roça, rio, comércio local, festejos), para <i>[ano/série]</i>.
+A situação deve ter um desafio claro, dados suficientes para resolver e 3 perguntas que levem os estudantes a investigar, calcular ou argumentar.
+Evite estereótipos sobre o Nordeste e sobre o interior.</pre></div></div></div></div>
+          <div class="col"><div style="display:contents"><div class="card"><div class="prompt"><div class="pt">Bônus · Atividade desplugada (sem internet)</div><pre>Proponha uma atividade "desplugada" (sem computador nem internet) de <i>[30]</i> minutos para ensinar <i>[tema]</i> a <i>[ano/série]</i>, usando apenas <i>[materiais: papel, lápis, tampinhas, quadro]</i>.
+Inclua: objetivo, materiais, passo a passo, organização da turma e como verificar a aprendizagem.</pre></div></div></div><div style="display:contents"><div class="card"><div class="prompt"><div class="pt">Bônus · Comunicado para as famílias</div><pre>Escreva um comunicado curto (até 120 palavras), cordial e em linguagem simples, para as famílias dos estudantes do <i>[ano/série]</i>, explicando <i>[assunto, ex.: a atividade sobre uso seguro da internet que faremos em sala]</i>, o que os estudantes vão fazer e como a família pode ajudar em casa.
+Não inclua nomes de estudantes.</pre></div></div></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 23 — Checklist de revisão humana (antes de levar para a sala) -->
+    <div class="sl" id="s23">
+      <div class="slhd"><span class="num">23</span><h2>Checklist de revisão humana (antes de levar para a sala)</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div class="grade" style="grid-template-columns:1fr 1fr"><div class="col"><div class="bege"><h3>Conteúdo</h3><div class="txt-bloco"><ul><li>As informações estão <strong>corretas</strong>? Conferi no livro ou em fonte confiável?</li><li>Os <strong>códigos da BNCC</strong> existem e correspondem à habilidade?</li><li>Gabaritos e contas foram <strong>resolvidos por mim</strong>?</li></ul></div></div><div class="bege"><h3>Ética</h3><div class="txt-bloco"><ul><li>Há <strong>estereótipos</strong> ou exemplos preconceituosos?</li><li>Imagens e textos podem ser usados (direitos autorais)?</li></ul></div></div></div><div class="col"><div class="bege"><h3>Turma</h3><div class="txt-bloco"><ul><li>A linguagem é adequada à <strong>idade</strong>?</li><li>O <strong>tempo</strong> é realista?</li><li>Os recursos pedidos <strong>existem</strong> na minha escola?</li></ul></div></div><div class="bege"><h3>Autoria</h3><div class="txt-bloco"><ul><li>O material tem a <strong>minha cara</strong> e a da minha turma?</li><li>Sei explicar e defender <strong>cada parte</strong> do que vou aplicar?</li></ul></div></div></div></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 24 — Mão na massa (30 min): sua aula começa agora -->
+    <div class="sl" id="s24">
+      <div class="slhd"><span class="num">24</span><h2>Mão na massa (30 min): sua aula começa agora</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><ol class="passos"><li><strong>Em duplas</strong>, escolham um conteúdo que vocês vão ensinar <strong>nas próximas semanas</strong>.</li><li>Cada um usa uma <strong>ferramenta diferente</strong> e segue os passos 1 a 4 (contexto, plano, apresentação e uma atividade).</li><li>Comparem: qual resultado ficou <strong>melhor</strong>? Onde a IA <strong>errou</strong>?</li><li>Rodem o <strong>Passo 7 (revisão crítica)</strong> e o checklist de revisão humana.</li><li>Salvem o resultado: é o <strong>ponto de partida da Atividade 2</strong>.</li></ol><div class="cd"><div class="txt-bloco"><p>A equipe circula pelo laboratório para ajudar. <strong>Dúvida de ferramenta é bem-vinda!</strong></p></div></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 25 — Atividade 2 · “Minha aula com IA” -->
+    <div class="sl" id="s25">
+      <div class="slhd"><span class="num">25</span><h2>Atividade 2 · “Minha aula com IA”</h2></div>
+      <div class="slbd g" style="grid-template-rows:auto 1fr auto;">
+        <div class="cd"><div class="txt-bloco"><p class="ativ-rot">Para aplicar até 02/12 · apresentar no Encontro 3</p><p style="font-weight:700;margin:0">Planeje com IA, revise, aplique na sua turma e conte para os colegas como foi.</p></div></div>
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div class="grade" style="grid-template-columns:1fr 1fr"><div class="col"><div class="bege"><h3>O que entregar</h3><div class="txt-bloco"><ul><li><strong>Plano de aula</strong> revisado por você.</li><li><strong>Apresentação</strong> ou roteiro usado em sala.</li><li><strong>Atividade</strong> com gabarito ou rubrica.</li><li><strong>Ficha de relato</strong>, com os prompts usados e o que você corrigiu.</li></ul></div></div></div><div class="col"><div class="bege"><h3>Como apresentar (5 min)</h3><div class="txt-bloco"><ul><li>Qual aula, turma e <strong>ferramenta</strong>?</li><li>Um prompt que <strong>funcionou bem</strong>.</li><li>Algo que a IA <strong>errou</strong> e você corrigiu.</li><li>Como os <strong>alunos reagiram</strong>.</li></ul></div></div></div></div></div></div>
+        <div class="txt-bloco"><p class="mini">Orientações completas e ficha de relato: arquivo <strong>atividade-02_minha_aula_com_ia</strong> (pasta “atividades”).</p></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 26 — Para levar deste encontro -->
+    <div class="sl" id="s26">
+      <div class="slhd"><span class="num">26</span><h2>Para levar deste encontro</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><ol class="passos"><li><strong>Prompt bom tem estrutura:</strong> Papel, Contexto, Tarefa, Formato e Restrições.</li><li><strong>Converse em etapas</strong> no mesmo chat: contexto → plano → slides → atividades → rubrica.</li><li><strong>Escolha a ferramenta</strong> pela tarefa e proteja seus dados com os ajustes de privacidade.</li><li><strong>Revisão humana sempre:</strong> a IA faz o rascunho, a aula é sua.</li></ol><div class="cd"><h3>Próximo encontro · 02/12 · 19h</h3><div class="txt-bloco"><p><strong>A IA nas mãos dos alunos</strong>: como essa tecnologia funciona e como orientar o uso ético, como suporte e não como muleta. Traga a sua Atividade 2!</p></div></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 27 — Dúvidas? -->
+    <div class="sl" id="s27">
+      <div class="secao-slide"><div class="divisor"><div class="ov"></div><div class="in"><div class="rot">Encontro 2 · Ferramentas e prática</div><h1>Dúvidas?</h1><div class="txt-bloco"><p>Bom trabalho na Atividade 2! Até 02/12.</p><p>Prof. Diego Cordeiro de Oliveira — <a href="mailto:diego.cordeiro@ifpi.edu.br" style="color:#fff">diego.cordeiro@ifpi.edu.br</a></p></div></div></div></div>
+    </div>
+
+  </div>
+  <footer class="ft">
+    <span class="txt"><strong>Encontro 2 · Ferramentas e prática</strong> · Minicurso Letramento Digital em IA — IFPI Campus Barras</span>
+  </footer>
+  <nav class="ctr" aria-label="Navegação da apresentação">
+    <button class="bz" id="bprev" onclick="pv()">Anterior</button>
+    <div class="dots" id="dots" role="group" aria-label="Ir para o slide"></div>
+    <button class="bv" id="bnext" onclick="nx()">Próximo</button>
+    <button class="bp" id="bexp" onclick="exportarPDF()" title="Exportar os slides em PDF — na janela de impressão escolha 'Salvar como PDF', margens 'Nenhuma' e mantenha 'Gráficos de fundo'">Exportar PDF</button>
+  </nav>
+  <script src="aula-02.js"></script>
+</body>
+
+</html>

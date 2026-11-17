@@ -1,0 +1,711 @@
+{
+  "versao": 1,
+  "motor": "editor",
+  "estado": "editor",
+  "meta": {
+    "titulo": "Encontro 2 · Ferramentas e prática: uma aula completa com IA",
+    "titulo_barra": "Minicurso Letramento Digital em IA · IFPI — Campus Barras",
+    "arquivo": "aula-02.html",
+    "cronometro_min": 120,
+    "rodape": "<strong>Encontro 2 · Ferramentas e prática</strong> · Minicurso Letramento Digital em IA — IFPI Campus Barras",
+    "numerar": true,
+    "mostrar_pdf": true,
+    "lang": "pt-BR"
+  },
+  "tema": {
+    "base": "ifpi",
+    "vars": {},
+    "logos": {}
+  },
+  "css_extra": "/* ===== Componentes herdados da versão manual da aula ===== */\n.mini { font-size:.78em; color:var(--tx-apoio); line-height:1.35 }\n/* caixa de prompt (pre com campos destacados) */\n.prompt { background:var(--ves); border:2px dashed var(--ve); border-radius:12px; padding:10px 14px 12px; margin:8px 0 }\n.prompt .pt { font-family:var(--fonte-tit); font-weight:800; font-size:.74em; letter-spacing:.08em;\n  text-transform:uppercase; color:var(--ve); margin:0 0 6px }\n.prompt pre { white-space:pre-wrap; word-break:break-word; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;\n  font-size:.82em; line-height:1.5; color:var(--p); margin:0 }\n.prompt pre i { font-style:normal; background:var(--mk); border-radius:4px; padding:0 3px; font-weight:700 }\n.bege .prompt { background:#fff }\n.rev .resp .prompt { margin:8px 0 0; text-align:left }\n/* tabelas com texto corrido: alinhadas à esquerda (o base centraliza a partir da 2ª coluna) */\n#s2 .tb2 th, #s2 .tb2 td, #s6 .tb2 th, #s6 .tb2 td { text-align:left }\n#s2 .tb2 td { padding:14px 12px }\n#s2 .col { justify-content:center }\n#s2 .col > .tb2 { flex:0 0 auto }\n#s10 .tb2 th, #s10 .tb2 td { text-align:left }\n#s10 .tb2 { font-size:15px }\n#s10 .tb2 td, #s10 .tb2 th { padding:6px 10px }\n#s10 .tb2 td:first-child { white-space:nowrap }\n#s6 .tb2 td, #s6 .tb2 th { padding:7px 11px }\n/* ocupar a altura disponível em vez de deixar um vazio grande no meio */\n#s5 .bege { height:100% }\n#s7 .bege { flex:1 1 0; display:flex; flex-direction:column; justify-content:center }\n#s8 .slbd.g { grid-template-rows:minmax(0,1fr) auto !important }\n#s8 .card { justify-content:center }\n#s14 .col, #s15 .col, #s16 .col, #s17 .col, #s18 .col, #s19 .col, #s20 .col, #s21 .col { justify-content:center }\n#s7 .bege { padding:12px 15px; margin:0 }\n#s7 .bege p { font-size:var(--fs-corpo) }\n#s23 .bege { margin:0; padding:12px 15px; flex:1 1 0; display:flex; flex-direction:column; justify-content:center }\n#s3 .col, #s11 .col, #s13 .col, #s24 .col, #s26 .col { justify-content:center }\n#s25 .ativ-rot { font-family:var(--fonte-tit); font-weight:800; font-size:.74em; letter-spacing:.14em;\n  text-transform:uppercase; color:var(--ve) }\n/* bônus: quatro prompts visíveis (o PDF/celular não abre o \"revelar\") */\n#s22 .card { padding:9px 12px; flex:1 1 0; justify-content:center }\n#s22 .prompt { margin:0; padding:8px 11px 10px }\n#s22 .prompt .pt { font-size:.66em }\n#s22 .prompt pre { font-size:.64em; line-height:1.45 }\n",
+  "slides": [
+    {
+      "layout": "capa",
+      "rotulo": "Minicurso · Encontro 2 de 3",
+      "titulo": "Ferramentas e prática: uma aula completa com IA",
+      "subtitulos": [
+        "Plano, apresentação e atividades com Gemini, ChatGPT, Claude e DeepSeek",
+        "18/11/2026 · 19h às 21h · IFPI Campus Barras",
+        "Prof. Diego Cordeiro de Oliveira e equipe",
+        "Instituto Federal do Piauí — Letramento Digital em Ferramentas de IA para Professores"
+      ],
+      "imagem": "img/logo-ifpi-barras-vertical.png"
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Roteiro de hoje",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "cabecalho": [
+              "Horário",
+              "Momento"
+            ],
+            "linhas": [
+              [
+                "19h00",
+                "<strong>Socialização da Atividade 1</strong> — “Semáforo dos dados” nas turmas"
+              ],
+              [
+                "19h25",
+                "<strong>Conversando bem com a IA</strong> — anatomia de um bom prompt"
+              ],
+              [
+                "19h45",
+                "<strong>As quatro ferramentas</strong> — o que cada uma faz e como proteger seus dados"
+              ],
+              [
+                "19h55",
+                "<strong>Uma aula completa</strong> — do plano à rubrica, com a biblioteca de prompts (mão na massa)"
+              ],
+              [
+                "20h40",
+                "<strong>Atividade 2</strong> — “Minha aula com IA” e encerramento"
+              ]
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Socialização · Atividade 1 “Semáforo dos dados”",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "texto",
+            "html": "<p><strong>3 minutos por professor.</strong> Use a ficha de registro como guia:</p>"
+          },
+          {
+            "tipo": "lista",
+            "numerada": true,
+            "itens": [
+              "Em qual <strong>turma e ano</strong> você aplicou? Como foi a reação inicial?",
+              "Qual situação gerou <strong>mais debate</strong>?",
+              "O que os alunos <strong>já sabiam</strong> e o que os <strong>surpreendeu</strong>?",
+              "Que <strong>combinados</strong> a turma criou?",
+              "O que você <strong>ajustaria</strong> para aplicar de novo?"
+            ]
+          },
+          {
+            "tipo": "destaque",
+            "estilo": "cd",
+            "titulo": "Enquanto ouvimos",
+            "html": "<p>A equipe anota no quadro os <strong>padrões que se repetem</strong> entre as turmas: eles viram tema do Encontro 3, quando falaremos dos alunos usando IA.</p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "secao",
+      "rotulo": "Parte 1",
+      "titulo": "Conversando bem com a IA",
+      "texto": "<p>A qualidade da resposta depende da qualidade do pedido.</p>"
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Por que o prompt importa",
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"bege\"><h3>Pedido vago</h3><div class=\"prompt\"><div class=\"pt\">Prompt fraco</div><pre>Faça uma aula sobre frações.</pre></div><p>Resposta genérica: não sabe o ano, o tempo, os recursos nem o que a turma já sabe.</p></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"bege\"><h3>Pedido estruturado</h3><div class=\"prompt\"><div class=\"pt\">Prompt forte</div><pre>Você é professor(a) de Matemática do 5º ano de uma escola pública do Piauí. Crie um plano de aula de 50 minutos sobre frações equivalentes para 30 estudantes que já conhecem metade e terço. Só temos quadro e papel. Entregue em tabela com etapas e tempo, e inclua 3 perguntas para verificar a aprendizagem.</pre></div></div>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "destaque",
+          "estilo": "cd",
+          "html": "<p><strong>Teste ao vivo:</strong> rode os dois prompts na mesma ferramenta e compare. O que mudou?</p>"
+        }
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Anatomia de um bom prompt: P · C · T · F · R",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "preencher": true,
+            "cabecalho": [
+              "Parte",
+              "Pergunta que responde",
+              "Exemplo"
+            ],
+            "linhas": [
+              [
+                "<strong>P · Papel</strong>",
+                "Quem a IA deve ser?",
+                "“Você é professor(a) de Ciências do 7º ano…”"
+              ],
+              [
+                "<strong>C · Contexto</strong>",
+                "Para quem, onde e com quais recursos?",
+                "“Turma de 30 estudantes, escola pública em Barras-PI, aula de 50 min, sem internet”"
+              ],
+              [
+                "<strong>T · Tarefa</strong>",
+                "O que exatamente deve ser feito?",
+                "“Crie um plano de aula sobre o ciclo da água”"
+              ],
+              [
+                "<strong>F · Formato</strong>",
+                "Como a resposta deve vir?",
+                "“Em tabela: etapa, tempo, atividade, recurso”"
+              ],
+              [
+                "<strong>R · Restrições</strong>",
+                "O que evitar ou respeitar?",
+                "“Linguagem simples; marque com VERIFICAR o que eu devo conferir; não invente referências”"
+              ]
+            ]
+          },
+          {
+            "tipo": "destaque",
+            "estilo": "cd",
+            "html": "<p><strong>Dica para memorizar:</strong> “<strong>P</strong>rofessor <strong>C</strong>onta a <strong>T</strong>arefa no <strong>F</strong>ormato com <strong>R</strong>egras”.</p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Seis técnicas que fazem diferença",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "grade",
+            "proporcao": "1fr 1fr 1fr",
+            "colunas": [
+              [
+                {
+                  "tipo": "destaque",
+                  "estilo": "bege",
+                  "titulo": "1. Converse, não encomende",
+                  "html": "<p>A primeira resposta é um <strong>rascunho</strong>. Peça ajustes: “mais curto”, “mais exemplos”, “troque a etapa 3”.</p>"
+                },
+                {
+                  "tipo": "destaque",
+                  "estilo": "bege",
+                  "titulo": "2. Peça perguntas antes",
+                  "html": "<p>“Antes de responder, faça-me até 3 perguntas sobre o que falta.”</p>"
+                }
+              ],
+              [
+                {
+                  "tipo": "destaque",
+                  "estilo": "bege",
+                  "titulo": "3. Dê um exemplo",
+                  "html": "<p>Cole um modelo de atividade que você gosta e peça “no mesmo estilo”.</p>"
+                },
+                {
+                  "tipo": "destaque",
+                  "estilo": "bege",
+                  "titulo": "4. Divida em etapas",
+                  "html": "<p>Plano → slides → atividades → rubrica, <strong>um pedido por vez</strong> no mesmo chat.</p>"
+                }
+              ],
+              [
+                {
+                  "tipo": "destaque",
+                  "estilo": "bege",
+                  "titulo": "5. Defina o nível",
+                  "html": "<p>“Linguagem para 10 anos”, “frases de até 15 palavras”, “vocabulário do 9º ano”.</p>"
+                },
+                {
+                  "tipo": "destaque",
+                  "estilo": "bege",
+                  "titulo": "6. Peça para marcar dúvidas",
+                  "html": "<p>“Marque com VERIFICAR o que pode estar errado.” Facilita a sua revisão.</p>"
+                }
+              ]
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "O contexto que só você tem (sem expor ninguém)",
+      "topo_proporcao": "1fr 1fr",
+      "topo": [
+        {
+          "tipo": "grade",
+          "proporcao": "1fr 1fr",
+          "colunas": [
+            [
+              {
+                "tipo": "card",
+                "variante": "vd",
+                "titulo": "🟢 Informe à IA",
+                "itens": [
+                  "Ano/série, componente e <strong>habilidade da BNCC</strong>.",
+                  "Tamanho da turma e <strong>tempo de aula</strong>.",
+                  "Recursos reais: quadro, livro, projetor, internet.",
+                  "O que a turma <strong>já sabe</strong> e onde costuma errar.",
+                  "Necessidades pedagógicas descritas de forma geral."
+                ]
+              }
+            ],
+            [
+              {
+                "tipo": "card",
+                "variante": "er",
+                "titulo": "🔴 Não informe",
+                "itens": [
+                  "Nomes, matrículas, fotos ou voz de estudantes.",
+                  "<strong>Laudos</strong>, diagnósticos e dados de saúde.",
+                  "Notas individuais e situações familiares.",
+                  "Casos que permitam <strong>identificar</strong> alguém na cidade."
+                ]
+              }
+            ]
+          ]
+        }
+      ],
+      "colunas": [
+        []
+      ],
+      "rodape": [
+        {
+          "tipo": "destaque",
+          "estilo": "cd",
+          "html": "<p>Em vez de “o João, que tem TDAH”, escreva: <strong>“1 estudante que se beneficia de tarefas curtas e instruções passo a passo”</strong>.</p>"
+        }
+      ]
+    },
+    {
+      "layout": "secao",
+      "rotulo": "Parte 2",
+      "titulo": "As quatro ferramentas",
+      "texto": "<p>Gemini · ChatGPT · Claude · DeepSeek</p>"
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Visão geral das ferramentas (versões gratuitas)",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "preencher": true,
+            "cabecalho": [
+              "Ferramenta",
+              "Destaques para o professor",
+              "Atenção"
+            ],
+            "linhas": [
+              [
+                "<strong>Gemini</strong><br><span class=\"mini\">Google · gemini.google.com</span>",
+                "Entra com a conta Google; integra Docs, Drive e Gmail; lê PDFs e imagens; Canvas para editar textos e criar páginas.",
+                "Em contas da escola, o administrador define o acesso. Desative a “Atividade nos apps Gemini” se não quiser guardar o histórico."
+              ],
+              [
+                "<strong>ChatGPT</strong><br><span class=\"mini\">OpenAI · chatgpt.com</span>",
+                "Muito versátil; lê arquivos; gera imagens; Canvas para editar textos e códigos; organização por projetos.",
+                "Plano gratuito com limite de uso. Idade mínima 13 anos, com autorização dos responsáveis para menores de 18."
+              ],
+              [
+                "<strong>Claude</strong><br><span class=\"mini\">Anthropic · claude.ai</span>",
+                "Bom com textos longos e documentos extensos; Artefatos criam páginas, quizzes e jogos interativos.",
+                "Plano gratuito com limite de mensagens. Uso pessoal só para <strong>maiores de 18 anos</strong>."
+              ],
+              [
+                "<strong>DeepSeek</strong><br><span class=\"mini\">DeepSeek · chat.deepseek.com</span>",
+                "Gratuito; modo de raciocínio (DeepThink) bom para lógica e matemática; busca na web.",
+                "Dados processados e armazenados na <strong>China</strong> (transferência internacional, LGPD). Use só conteúdo 🟢."
+              ]
+            ]
+          },
+          {
+            "tipo": "texto",
+            "html": "<p class=\"mini\">Recursos, menus e limites dos planos gratuitos mudam com frequência (informações de meados de 2026). Confira os termos de uso antes de indicar a ferramenta aos alunos.</p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Antes de usar: três ajustes de privacidade",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "lista",
+            "numerada": true,
+            "itens": [
+              "<strong>Desative o uso das conversas para treinar o modelo</strong>, quando houver a opção. ChatGPT: Configurações › Controles de dados. Claude: Configurações › Privacidade. Gemini: Atividade nos apps Gemini. DeepSeek: configurações de dados da conta.",
+              "<strong>Use o chat temporário</strong> (ou anônimo) para assuntos que não quer guardar no histórico.",
+              "<strong>Use uma conta só para o trabalho</strong>, com senha forte e verificação em duas etapas."
+            ]
+          },
+          {
+            "tipo": "destaque",
+            "estilo": "ca",
+            "titulo": "Mesmo com tudo desativado",
+            "html": "<p>O serviço ainda recebe o que você digita. O <strong>semáforo do Encontro 1</strong> continua valendo: só 🟢 e 🟡, nunca 🔴.</p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "secao",
+      "rotulo": "Parte 3 · Mão na massa",
+      "titulo": "Uma aula completa, do plano à rubrica",
+      "texto": "<p>Biblioteca de prompts: clique em <strong>Copiar</strong>, cole na IA e troque os campos destacados.</p>"
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "O fluxo de trabalho em 7 passos (no mesmo chat)",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "lista",
+            "numerada": true,
+            "itens": [
+              "<strong>Contexto da turma</strong> — diga à IA quem são seus alunos e quais são os recursos.",
+              "<strong>Plano de aula</strong> — objetivos, BNCC, etapas e tempo.",
+              "<strong>Apresentação</strong> — roteiro de slides com falas e perguntas.",
+              "<strong>Atividades</strong> — exercícios com gabarito e quiz.",
+              "<strong>Avaliação</strong> — rubrica e autoavaliação.",
+              "<strong>Inclusão</strong> — versões adaptadas para diferentes necessidades.",
+              "<strong>Revisão crítica</strong> — a IA aponta problemas e <strong>você decide</strong> o que fica."
+            ]
+          },
+          {
+            "tipo": "destaque",
+            "estilo": "cd",
+            "html": "<p>Todos os prompts estão também no <strong>Caderno de prompts</strong> (arquivo para levar), prontos para Gemini, ChatGPT, Claude e DeepSeek.</p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Passo 1 · O contexto da turma",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"prompt\"><div class=\"pt\">Prompt 0 · Contexto da turma (cole primeiro, uma vez por conversa)</div><pre>Você é um(a) professor(a) experiente da educação básica pública brasileira e vai me ajudar a planejar aulas.\nContexto que vale para toda esta conversa:\n- Componente curricular: <i>[ex.: Ciências]</i>\n- Ano/série e etapa: <i>[ex.: 7º ano do Ensino Fundamental]</i>\n- Turma: <i>[nº]</i> estudantes; perfil geral, sem nomes: <i>[ex.: leitura em níveis diferentes, 1 estudante com baixa visão]</i>\n- Duração da aula: <i>[ex.: 50 minutos]</i>\n- Recursos disponíveis: <i>[ex.: quadro, livro didático, projetor; internet instável]</i>\n- Realidade local: escola pública em <i>[município]</i>, Piauí.\nRegras: use linguagem adequada à idade; cite códigos da BNCC só se tiver certeza e marque com (VERIFICAR) tudo o que eu precisar conferir; não invente referências.\nAntes de começar, confirme que entendeu e me faça até 3 perguntas se faltar alguma informação.</pre></div>"
+          },
+          {
+            "tipo": "texto",
+            "html": "<p class=\"mini\"><strong>Dica:</strong> Use o mesmo chat para os próximos prompts: a IA “lembra” do contexto dentro da conversa.</p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Passo 2 · Plano de aula",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"prompt\"><div class=\"pt\">Prompt 1 · Plano de aula</div><pre>Com base no contexto, elabore um plano de aula sobre <i>[tema/conteúdo]</i>.\nEstrutura:\n1. Título e habilidade(s) da BNCC (código + descrição; marque VERIFICAR)\n2. Objetivos de aprendizagem (até 3, com verbos observáveis)\n3. Conhecimentos prévios necessários\n4. Sequência com o tempo de cada etapa: abertura/problematização, desenvolvimento, prática e fechamento\n5. Estratégias para quem tem mais dificuldade e para quem termina antes\n6. Avaliação: que evidências mostram que aprenderam\n7. Materiais e recursos\nSeja realista com o tempo de <i>[duração]</i> e com os recursos disponíveis.</pre></div>"
+          },
+          {
+            "tipo": "texto",
+            "html": "<p class=\"mini\"><strong>Dica:</strong> Peça ajustes na sequência: “reduza a exposição para 10 minutos e aumente a prática”.</p>"
+          },
+          {
+            "tipo": "destaque",
+            "estilo": "ca",
+            "titulo": "Atenção à BNCC",
+            "html": "<p>As IAs costumam <strong>inventar ou trocar códigos</strong> de habilidades. Confira sempre no documento oficial (basenacionalcomum.mec.gov.br).</p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Passo 3 · Apresentação",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"prompt\"><div class=\"pt\">Prompt 2 · Apresentação (roteiro de slides)</div><pre>Transforme o plano de aula em um roteiro de apresentação com <i>[8 a 10]</i> slides.\nPara cada slide, entregue:\n- Título curto\n- Texto do slide (no máximo 4 tópicos curtos, linguagem para <i>[ano/série]</i>)\n- Sugestão de imagem ou esquema (apenas descreva)\n- Fala do professor (2 a 3 frases) e uma pergunta para a turma\nInclua 1 slide de abertura com uma situação do cotidiano dos estudantes e 1 slide final de síntese.\nFormate como tabela: Nº | Título | Texto | Imagem | Fala/pergunta.</pre></div>"
+          },
+          {
+            "tipo": "texto",
+            "html": "<p class=\"mini\"><strong>Dica:</strong> Gemini: exporte a tabela para o Google Docs/Slides. ChatGPT (Canvas) e Claude (Artefatos): peça “crie a apresentação em HTML” para ver os slides prontos. Também dá para colar o roteiro no Canva.</p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Passo 4 · Atividades: exercícios com gabarito",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"prompt\"><div class=\"pt\">Prompt 3 · Lista de exercícios com gabarito</div><pre>Crie uma lista de <i>[10]</i> exercícios sobre <i>[tema]</i> para <i>[ano/série]</i>, em ordem crescente de dificuldade:\n- <i>[4]</i> de compreensão (nível fácil)\n- <i>[4]</i> de aplicação em situações do cotidiano de <i>[município/região]</i>\n- <i>[2]</i> desafios que exijam explicar o raciocínio\nMisture formatos: múltipla escolha (4 alternativas), verdadeiro ou falso com justificativa e questões abertas.\nDepois da lista, em seção separada chamada GABARITO COMENTADO, traga a resposta e o erro mais comum em cada questão.</pre></div>"
+          },
+          {
+            "tipo": "texto",
+            "html": "<p class=\"mini\"><strong>Dica:</strong> Resolva você mesmo as questões antes de aplicar: a IA erra contas e gabaritos.</p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Passo 4 · Atividades: quiz e gamificação",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"prompt\"><div class=\"pt\">Prompt 4 · Quiz / gamificação</div><pre>Crie um quiz de <i>[10]</i> perguntas de múltipla escolha sobre <i>[tema]</i> para <i>[ano/série]</i>, para usar em <i>[Kahoot / Google Forms / cartões de papel]</i>.\nRegras: 4 alternativas por pergunta, apenas 1 correta, distratores plausíveis baseados em erros comuns, enunciados com até 25 palavras.\nEntregue em tabela: Pergunta | A | B | C | D | Correta | Explicação curta (1 frase).\nSugira também uma dinâmica de 10 minutos para aplicar o quiz sem internet.</pre></div>"
+          },
+          {
+            "tipo": "texto",
+            "html": "<p class=\"mini\"><strong>Dica:</strong> A tabela pode ser copiada para uma planilha e importada em ferramentas de quiz.</p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Passo 5 · Avaliação: rubrica",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"prompt\"><div class=\"pt\">Prompt 5 · Rubrica de avaliação</div><pre>Crie uma rubrica de avaliação para <i>[atividade/produto, ex.: cartaz em grupo sobre o ciclo da água]</i> do <i>[ano/série]</i>.\nUse <i>[4]</i> critérios e 4 níveis (Excelente, Bom, Em desenvolvimento, Inicial), com descrições observáveis e linguagem que os próprios estudantes entendam.\nInclua a pontuação de cada nível (total de <i>[10]</i> pontos) e uma versão resumida em forma de lista de autoavaliação (\"Eu consegui...\").</pre></div>"
+          },
+          {
+            "tipo": "texto",
+            "html": "<p class=\"mini\"><strong>Dica:</strong> Apresente a rubrica aos estudantes ANTES da atividade: ela orienta o que se espera.</p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Passo 6 · Inclusão e diferentes níveis",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"prompt\"><div class=\"pt\">Prompt 6 · Adaptação e inclusão</div><pre>Adapte a atividade abaixo em três versões, mantendo o mesmo objetivo de aprendizagem:\n- Versão 1: estudantes com dificuldade de leitura (frases curtas, apoio visual descrito, menos itens)\n- Versão 2: versão padrão\n- Versão 3: desafio para quem termina antes\nConsidere também: <i>[necessidade descrita SEM identificar o estudante, ex.: estudante com baixa visão / que se beneficia de rotina visual]</i>.\nExplique em 3 linhas o que mudou em cada versão.\nAtividade: <i>[cole aqui a atividade]</i></pre></div>"
+          },
+          {
+            "tipo": "texto",
+            "html": "<p class=\"mini\"><strong>Dica:</strong> Semáforo: descreva a NECESSIDADE pedagógica, nunca o nome, o laudo ou o diagnóstico do estudante.</p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Passo 7 · Revisão crítica",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"prompt\"><div class=\"pt\">Prompt 7 · Revisão crítica do material</div><pre>Agora atue como coordenador(a) pedagógico(a) exigente e revise todo o material produzido nesta conversa.\nAponte, em lista:\n1. Erros de conteúdo ou afirmações duvidosas (e como verificar)\n2. Códigos da BNCC que podem estar incorretos\n3. Linguagem inadequada para <i>[ano/série]</i>\n4. Tempo irreal para <i>[duração]</i>\n5. Estereótipos, vieses ou exemplos distantes da realidade de <i>[município]</i>, Piauí\n6. Sugestões de melhoria\nNão reescreva tudo: liste os problemas e proponha correções pontuais.</pre></div>"
+          },
+          {
+            "tipo": "texto",
+            "html": "<p class=\"mini\"><strong>Dica:</strong> A autorrevisão ajuda, mas NÃO substitui a sua: a IA também erra ao se revisar.</p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Bônus: mais quatro prompts úteis",
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card\"><div class=\"prompt\"><div class=\"pt\">Bônus · Texto de apoio nivelado</div><pre>Escreva um texto de apoio de <i>[250]</i> palavras sobre <i>[tema]</i> para <i>[ano/série]</i>, com título, 3 parágrafos curtos e um quadro \"Palavras importantes\" com 5 termos e seus significados.\nDepois, faça 3 perguntas de interpretação: 1 literal, 1 inferencial e 1 de opinião.\nUse somente informações consolidadas; se não tiver certeza de algum dado, não o inclua.</pre></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"card\"><div class=\"prompt\"><div class=\"pt\">Bônus · Situação-problema com a cara da região</div><pre>Crie uma situação-problema sobre <i>[conteúdo]</i> ambientada no cotidiano de <i>[município]</i>, Piauí (ex.: feira, roça, rio, comércio local, festejos), para <i>[ano/série]</i>.\nA situação deve ter um desafio claro, dados suficientes para resolver e 3 perguntas que levem os estudantes a investigar, calcular ou argumentar.\nEvite estereótipos sobre o Nordeste e sobre o interior.</pre></div></div>"
+          }
+        ],
+        [
+          {
+            "tipo": "html",
+            "html": "<div class=\"card\"><div class=\"prompt\"><div class=\"pt\">Bônus · Atividade desplugada (sem internet)</div><pre>Proponha uma atividade \"desplugada\" (sem computador nem internet) de <i>[30]</i> minutos para ensinar <i>[tema]</i> a <i>[ano/série]</i>, usando apenas <i>[materiais: papel, lápis, tampinhas, quadro]</i>.\nInclua: objetivo, materiais, passo a passo, organização da turma e como verificar a aprendizagem.</pre></div></div>"
+          },
+          {
+            "tipo": "html",
+            "html": "<div class=\"card\"><div class=\"prompt\"><div class=\"pt\">Bônus · Comunicado para as famílias</div><pre>Escreva um comunicado curto (até 120 palavras), cordial e em linguagem simples, para as famílias dos estudantes do <i>[ano/série]</i>, explicando <i>[assunto, ex.: a atividade sobre uso seguro da internet que faremos em sala]</i>, o que os estudantes vão fazer e como a família pode ajudar em casa.\nNão inclua nomes de estudantes.</pre></div></div>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Checklist de revisão humana (antes de levar para a sala)",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "grade",
+            "proporcao": "1fr 1fr",
+            "colunas": [
+              [
+                {
+                  "tipo": "destaque",
+                  "estilo": "bege",
+                  "titulo": "Conteúdo",
+                  "html": "<ul><li>As informações estão <strong>corretas</strong>? Conferi no livro ou em fonte confiável?</li><li>Os <strong>códigos da BNCC</strong> existem e correspondem à habilidade?</li><li>Gabaritos e contas foram <strong>resolvidos por mim</strong>?</li></ul>"
+                },
+                {
+                  "tipo": "destaque",
+                  "estilo": "bege",
+                  "titulo": "Ética",
+                  "html": "<ul><li>Há <strong>estereótipos</strong> ou exemplos preconceituosos?</li><li>Imagens e textos podem ser usados (direitos autorais)?</li></ul>"
+                }
+              ],
+              [
+                {
+                  "tipo": "destaque",
+                  "estilo": "bege",
+                  "titulo": "Turma",
+                  "html": "<ul><li>A linguagem é adequada à <strong>idade</strong>?</li><li>O <strong>tempo</strong> é realista?</li><li>Os recursos pedidos <strong>existem</strong> na minha escola?</li></ul>"
+                },
+                {
+                  "tipo": "destaque",
+                  "estilo": "bege",
+                  "titulo": "Autoria",
+                  "html": "<ul><li>O material tem a <strong>minha cara</strong> e a da minha turma?</li><li>Sei explicar e defender <strong>cada parte</strong> do que vou aplicar?</li></ul>"
+                }
+              ]
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Mão na massa (30 min): sua aula começa agora",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "lista",
+            "numerada": true,
+            "itens": [
+              "<strong>Em duplas</strong>, escolham um conteúdo que vocês vão ensinar <strong>nas próximas semanas</strong>.",
+              "Cada um usa uma <strong>ferramenta diferente</strong> e segue os passos 1 a 4 (contexto, plano, apresentação e uma atividade).",
+              "Comparem: qual resultado ficou <strong>melhor</strong>? Onde a IA <strong>errou</strong>?",
+              "Rodem o <strong>Passo 7 (revisão crítica)</strong> e o checklist de revisão humana.",
+              "Salvem o resultado: é o <strong>ponto de partida da Atividade 2</strong>."
+            ]
+          },
+          {
+            "tipo": "destaque",
+            "estilo": "cd",
+            "html": "<p>A equipe circula pelo laboratório para ajudar. <strong>Dúvida de ferramenta é bem-vinda!</strong></p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Atividade 2 · “Minha aula com IA”",
+      "topo": [
+        {
+          "tipo": "destaque",
+          "estilo": "cd",
+          "html": "<p class=\"ativ-rot\">Para aplicar até 02/12 · apresentar no Encontro 3</p><p style=\"font-weight:700;margin:0\">Planeje com IA, revise, aplique na sua turma e conte para os colegas como foi.</p>"
+        }
+      ],
+      "topo_proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "grade",
+            "proporcao": "1fr 1fr",
+            "colunas": [
+              [
+                {
+                  "tipo": "destaque",
+                  "estilo": "bege",
+                  "titulo": "O que entregar",
+                  "html": "<ul><li><strong>Plano de aula</strong> revisado por você.</li><li><strong>Apresentação</strong> ou roteiro usado em sala.</li><li><strong>Atividade</strong> com gabarito ou rubrica.</li><li><strong>Ficha de relato</strong>, com os prompts usados e o que você corrigiu.</li></ul>"
+                }
+              ],
+              [
+                {
+                  "tipo": "destaque",
+                  "estilo": "bege",
+                  "titulo": "Como apresentar (5 min)",
+                  "html": "<ul><li>Qual aula, turma e <strong>ferramenta</strong>?</li><li>Um prompt que <strong>funcionou bem</strong>.</li><li>Algo que a IA <strong>errou</strong> e você corrigiu.</li><li>Como os <strong>alunos reagiram</strong>.</li></ul>"
+                }
+              ]
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "texto",
+          "html": "<p class=\"mini\">Orientações completas e ficha de relato: arquivo <strong>atividade-02_minha_aula_com_ia</strong> (pasta “atividades”).</p>"
+        }
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Para levar deste encontro",
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "lista",
+            "numerada": true,
+            "itens": [
+              "<strong>Prompt bom tem estrutura:</strong> Papel, Contexto, Tarefa, Formato e Restrições.",
+              "<strong>Converse em etapas</strong> no mesmo chat: contexto → plano → slides → atividades → rubrica.",
+              "<strong>Escolha a ferramenta</strong> pela tarefa e proteja seus dados com os ajustes de privacidade.",
+              "<strong>Revisão humana sempre:</strong> a IA faz o rascunho, a aula é sua."
+            ]
+          },
+          {
+            "tipo": "destaque",
+            "estilo": "cd",
+            "titulo": "Próximo encontro · 02/12 · 19h",
+            "html": "<p><strong>A IA nas mãos dos alunos</strong>: como essa tecnologia funciona e como orientar o uso ético, como suporte e não como muleta. Traga a sua Atividade 2!</p>"
+          }
+        ]
+      ]
+    },
+    {
+      "layout": "secao",
+      "rotulo": "Encontro 2 · Ferramentas e prática",
+      "titulo": "Dúvidas?",
+      "texto": "<p>Bom trabalho na Atividade 2! Até 02/12.</p><p>Prof. Diego Cordeiro de Oliveira — <a href=\"mailto:diego.cordeiro@ifpi.edu.br\" style=\"color:#fff\">diego.cordeiro@ifpi.edu.br</a></p>"
+    }
+  ]
+}
