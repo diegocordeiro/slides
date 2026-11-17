@@ -1,0 +1,699 @@
+{
+  "versao": 1,
+  "motor": "editor",
+  "estado": "editor",
+  "meta": {
+    "titulo": "IFGuia — Plano do Piloto Controlado (F4.DO1)",
+    "titulo_barra": "IFGuia · Plano do Piloto Controlado",
+    "arquivo": "apresentacao.html",
+    "cronometro_min": 15,
+    "rodape": "<strong>IFGuia · Plano do Piloto Controlado (F4.DO1)</strong> · Eng. de Software para Sistemas Inteligentes — PPGCC/UFPI",
+    "numerar": true,
+    "mostrar_pdf": true,
+    "lang": "pt-BR"
+  },
+  "tema": {
+    "base": "ppgcc",
+    "vars": {},
+    "logos": {
+      "barra": "img/logo.png",
+      "capa": null,
+      "rodape": "img/logo_full.png",
+      "marca": "img/marca.png"
+    }
+  },
+  "css_extra": ".sl .tb2 tr.grp td { background:var(--azc) !important; box-shadow:inset 3px 0 0 var(--bem); font-size:14px; color:var(--aze) }\n.sl .tb2 td.meta { background:var(--vd-bg); color:var(--vd-tx); font-weight:700 }\n#s4 .fluxo { margin:0; gap:6px; flex-wrap:nowrap }\n#s4 .fluxo .et { flex:1 1 0; padding:9px 10px; display:flex; flex-direction:column; align-items:center; gap:2px }\n#s4 .fluxo .et .num { margin-bottom:2px }\n#s4 .fluxo .et b { color:var(--aze); font-size:16px }\n#s4 .fluxo .et small { font-size:13px; line-height:1.3; color:var(--tx2, #4a5560) }\n#s4 .fluxo .st { font-size:1.4em }\n#s5 .tb2, #s6 .tb2 { table-layout:fixed; margin:4px 0 0 }\n#s5 .tb2 th, #s6 .tb2 th { padding:6px 12px }\n#s5 .tb2 td, #s6 .tb2 td { padding:7px 12px }\n#s5 .tb2 th:first-child, #s6 .tb2 th:first-child { width:38% }\n#s5 .tb2 th:nth-child(2), #s6 .tb2 th:nth-child(2) { width:36% }\n#s5 .card, #s6 .card { padding:10px 14px }\n#s5 .card h3, #s6 .card h3 { margin-bottom:4px }\n#s8 .tb2 td, #s8 .tb2 th { padding:6px 10px; font-size:14.5px }\n#s8 .lins { gap:8px }\n#s8 .lin { padding:7px 12px }\n#s9 .lins { gap:10px }\n#s10 .tb2 td, #s10 .tb2 th { padding:11px 12px; font-size:15.5px }\n#s10 .tb2 td:first-child { width:17% } #s10 .tb2 td:nth-child(2) { width:14% } #s10 .tb2 td:nth-child(3) { width:19% }\n#s3 .kpi > div { padding:8px 12px } #s3 .kpi span { font-size:13.5px; line-height:1.3 }\n#s11 .fig img { max-height:128px }\n#s11 .col:last-child .cap { margin:2px 0 6px; font-size:12.5px }\n#s11 .col:last-child { justify-content:center }\n#s11 .faixa-az + .faixa-az { margin-top:0 }",
+  "slides": [
+    {
+      "layout": "capa",
+      "rotulo": "Eng. de Software para Sistemas Inteligentes · PPGCC/UFPI · Fase IV",
+      "titulo": "IFGuia: Plano do<br>Piloto Controlado",
+      "subtitulos": [
+        "Integrantes:\n<ul>\n<li>Sharon Wendy Feitosa Franca Rocha — Eng. de Dados</li>\n<li>Diego Cordeiro de Oliveira — Eng. de Machine Learning</li>\n<li>Guilherme Nonato de Sá Ribeiro — Eng. de Machine Learning</li>\n<li>Luis Felipe Ferreira de Castro — Eng. de Software</li>\n</ul>",
+        "Professor:\n<ul>\n<li>Guilherme Avelino</li>\n</ul>"
+      ],
+      "imagem": "img/logo_full.png",
+      "notas": "<strong>~20 s.</strong> Apresentar a equipe e os papéis. Entrega F4.DO1: o plano do piloto controlado do IFGuia, executado em sessão única nesta turma em 19/11."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "IFGuia: problema, demandante e versão do piloto",
+      "topo_proporcao": "1.25fr 1fr",
+      "topo": [
+        {
+          "tipo": "pergunta",
+          "rotulo": "Problema",
+          "html": "Dúvidas sobre as normas de ensino do IFPI são resolvidas hoje na <b>consulta manual aos PDFs do CONSUP</b>, estimada em <b>30% a 40%</b> do tempo dos servidores com essas demandas (M1)."
+        },
+        {
+          "tipo": "chips",
+          "itens": [
+            "Trilha FMware",
+            "RAG com citação",
+            "Sem treinamento próprio",
+            "1.446 normas no acervo",
+            "Sessão: 19/11/2026"
+          ]
+        }
+      ],
+      "proporcao": "1fr 1.1fr 1.15fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "titulo": "Demandante",
+            "crescer": true,
+            "itens": [
+              "<strong>PROEN/IFPI</strong>: Odimógenes Soares Lopes, Pró-Reitor de Ensino.",
+              "<strong>Ponto focal</strong>: Diego Mendes Pinheiro (Procuradoria Institucional).",
+              "<strong>Infraestrutura</strong>: Francisco Assunção Cardoso (DTI/IFPI)."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "titulo": "Versão do piloto",
+            "crescer": true,
+            "itens": [
+              "Entrega 3: tag <code>v1.0-mvp</code> (<code>b50a37b</code>).",
+              "Piloto: <code>main</code> em <code>78f57fa</code> (PR #48).",
+              "PostgreSQL, carga automática do acervo e proteções da interface (ADRs 0009–0011).",
+              "Consulta opcional em normas não vigentes (ADR 0012) e selo de vigência."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "titulo": "Modelo e ambiente",
+            "variante": "vd",
+            "crescer": true,
+            "itens": [
+              "Busca híbrida <strong>bge-m3 + BM25</strong> em índices versionados.",
+              "Geração <strong>DeepSeek</strong> (deepseek-flash, temp. 0), prompt v3; gate de ingestão com Jev.",
+              "Prompt, modelo e índice <strong>gravados em cada consulta</strong>.",
+              "Servidor 4 vCPU / 8 GB, sem GPU · Docker Compose, Nginx HTTPS, PostgreSQL 17."
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Consulta pública <b>sem login</b> em ifguia.professordiegocordeiro.com.br · painel da PROEN em <b>/admin/</b>, com login."
+        }
+      ],
+      "notas": "<strong>~1 min 15 s.</strong> Situar o problema (consulta manual aos PDFs) e quem demanda. Destacar que não há modelo treinado: é um RAG com citação, e cada consulta guarda prompt, modelo e versão do índice, o que torna o piloto rastreável. A versão do piloto já está na main, à frente da tag do MVP."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Objetivo e escopo",
+      "topo": [
+        {
+          "tipo": "pergunta",
+          "rotulo": "Hipótese testada",
+          "html": "Pessoas <b>sem conhecimento prévio</b> das normas do IFPI localizam a norma e o dispositivo, conferem a fonte e chegam à <b>resposta correta em menos tempo</b> que na consulta manual, e o IFGuia <b>recusa</b> quando não há base nas normas."
+        }
+      ],
+      "proporcao": "1fr 0.92fr 1.3fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "titulo": "Incluído",
+            "variante": "vd",
+            "crescer": true,
+            "itens": [
+              "Normas de ensino do CONSUP/IFPI: Organização Didática, colação de grau, trancamento, frequência, estágio, oferta de cursos, dentre outras.",
+              "Roteiro da equipe, com o <strong>dispositivo esperado</strong>, e perguntas livres.",
+              "Perguntas sem resposta e fora do escopo, para testar a <strong>recusa</strong>.",
+              "Bloco separado para normas <strong>não vigentes</strong>."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "titulo": "Excluído",
+            "variante": "er",
+            "crescer": true,
+            "itens": [
+              "Legislação federal e normas externas ao IFPI.",
+              "Casos individuais e dados de discentes (SUAP).",
+              "Parecer jurídico.",
+              "Uso das respostas em demandas reais do IFPI."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "titulo": "Participantes",
+            "crescer": true,
+            "html": "<p style=\"margin:0\"><strong>2 a 4 avaliadores</strong>: alunos do mestrado, de outros grupos da disciplina. Não conhecem o projeto nem as normas, o que os aproxima de um usuário novo. A equipe do IFGuia não avalia.</p>"
+          },
+          {
+            "tipo": "kpis",
+            "itens": [
+              {
+                "valor": "20",
+                "texto": "consultas (≥ 10 por avaliador)"
+              },
+              {
+                "valor": "15",
+                "texto": "com feedback registrado"
+              },
+              {
+                "valor": "12",
+                "texto": "do roteiro conferidas"
+              }
+            ]
+          }
+        ]
+      ],
+      "rodape": [],
+      "notas": "<strong>~1 min 30 s.</strong> Ler a hipótese: são duas partes, acertar mais rápido e recusar quando não há base. Os avaliadores são colegas de turma, não servidores do IFPI; por isso o piloto mede usabilidade, fidelidade ao texto citado e tempo. Volume mínimo: 20 consultas, 15 com feedback, 12 do roteiro conferidas contra o gabarito."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Estratégia: grupo focal com uso assistido",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"fluxo\"><div class=\"et\"><span class=\"num\">1</span><b>Abertura</b><small>orientação e demo · 10 min</small></div><span class=\"st\">→</span><div class=\"et\"><span class=\"num\">2</span><b>Linha de base</b><small>2 perguntas nos PDFs do CONSUP, cronometradas</small></div><span class=\"st\">→</span><div class=\"et\"><span class=\"num\">3</span><b>Uso do IFGuia</b><small>roteiro + livres; ficha: correta, parcial ou incorreta</small></div><span class=\"st\">→</span><div class=\"et\"><span class=\"num\">4</span><b>Questionário</b><small>escala 1–5 e discussão em grupo</small></div><span class=\"st\">→</span><div class=\"et\"><span class=\"num\">5</span><b>Conferência</b><small>equipe confere as fichas contra o gabarito</small></div></div>"
+        }
+      ],
+      "proporcao": "1fr 1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "titulo": "Por que grupo focal?",
+            "crescer": true,
+            "html": "<p style=\"margin:0\">Sessão única, com avaliadores da turma: <strong>não comporta</strong> a operação em paralelo nem a assistida, que exigem semanas no processo real do demandante.</p><p style=\"margin:10px 0 0\">Permite observar o uso por pessoas de fora, medir tempo e fidelidade com um <strong>roteiro comum</strong> e colher a avaliação qualitativa pendente desde o M3.</p>"
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "titulo": "Orientação e supervisão",
+            "crescer": true,
+            "itens": [
+              "Ficha com o roteiro.",
+              "Dois avisos: <strong>não informar dados pessoais</strong>; a resposta <strong>não substitui a norma</strong>.",
+              "Diego conduz; a equipe observa e tira dúvidas de uso, <strong>sem ajudar a responder</strong>; o professor acompanha."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "titulo": "Feedback coletado",
+            "variante": "vd",
+            "crescer": true,
+            "itens": [
+              "Botões por resposta: <strong>útil</strong>, <strong>não útil</strong>, <strong>erro na citação</strong>, <strong>esperava uma resposta</strong>, gravados no log.",
+              "Ficha de avaliação por pergunta (Google Forms).",
+              "Questionário final: utilidade e confiança de 1 a 5.",
+              "Notas dos observadores."
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min 30 s.</strong> Justificar a modalidade: em um dia, com a turma, paralelo e assistida não são viáveis. Percorrer o fluxo: a linha de base pelo método atual é o que permite comparar tempo. Na etapa 3 cada avaliador confere a fonte antes de julgar; depois da aula, a equipe confere as fichas contra o dispositivo esperado."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Indicadores: sistema e modelo",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "titulo": "Sistema · painel, log de consultas e Nginx · Luis Felipe",
+            "blocos": [
+              {
+                "tipo": "tabela",
+                "cabecalho": [
+                  "Indicador",
+                  "Linha de base",
+                  "Meta"
+                ],
+                "linhas": [
+                  [
+                    "Latência por consulta (p95)",
+                    "2,57 s (avaliação de 03/11/2026)",
+                    "≤ 15 s (M2)"
+                  ],
+                  [
+                    "Consultas com erro 503, “somente busca” ou sem busca semântica",
+                    "48% sem busca semântica no servidor, 27/10 a 15/11 (ADR 0011)",
+                    "nenhuma com erro; 100% com busca semântica"
+                  ]
+                ],
+                "celulas_classe": {
+                  "0,2": "meta",
+                  "1,2": "meta"
+                }
+              }
+            ]
+          },
+          {
+            "tipo": "card",
+            "titulo": "Modelo · fichas, gabarito do roteiro e log · Guilherme Nonato",
+            "crescer": true,
+            "blocos": [
+              {
+                "tipo": "tabela",
+                "cabecalho": [
+                  "Indicador",
+                  "Linha de base",
+                  "Meta"
+                ],
+                "linhas": [
+                  [
+                    "Respostas corretas e fiéis ao trecho citado",
+                    "golden set da Fase III (56 perguntas); Recall@5 de 0,65",
+                    "≥ 85% (fidelidade do M2)"
+                  ],
+                  [
+                    "Respostas com citação válida",
+                    "100%",
+                    "100%"
+                  ],
+                  [
+                    "Normas não vigentes citadas como vigentes",
+                    "nenhuma",
+                    "nenhuma"
+                  ],
+                  [
+                    "Recusa correta / falsa recusa",
+                    "100% (n = 10) / 8% (3 de 40)",
+                    "≥ 90% / ≤ 15%"
+                  ]
+                ],
+                "celulas_classe": {
+                  "0,2": "meta",
+                  "1,2": "meta",
+                  "2,2": "meta",
+                  "3,2": "meta"
+                },
+                "preencher": true
+              }
+            ],
+            "rodape": "Medição durante a sessão e consolidação até o encerramento.&nbsp;"
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min 30 s.</strong> Sistema: a latência já está folgada; o ponto de atenção é a busca semântica, que ficou fora em 48% das consultas no servidor; a meta é 100% na sessão. Modelo: as linhas de base vêm do golden set da Fase III. A meta de 85% de respostas corretas é a do M2; a citação de norma revogada como vigente é tolerância zero."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Indicadores: valor para o demandante, uso e confiança",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "titulo": "Valor para o demandante · planilha de cronometragem, 19/11 · Sharon",
+            "blocos": [
+              {
+                "tipo": "tabela",
+                "cabecalho": [
+                  "Indicador",
+                  "Linha de base",
+                  "Meta"
+                ],
+                "linhas": [
+                  [
+                    "Tempo mediano para localizar a norma e o dispositivo, com conferência da fonte (min/pergunta)",
+                    "medido na sessão pelo método atual (M1: 30–40% do tempo dos servidores)",
+                    "redução ≥ 30% (M2), como indício"
+                  ]
+                ],
+                "celulas_classe": {
+                  "0,2": "meta"
+                }
+              }
+            ]
+          },
+          {
+            "tipo": "card",
+            "titulo": "Uso e confiança · feedback do painel e questionário final · Diego",
+            "crescer": true,
+            "blocos": [
+              {
+                "tipo": "tabela",
+                "cabecalho": [
+                  "Indicador",
+                  "Linha de base",
+                  "Meta"
+                ],
+                "linhas": [
+                  [
+                    "Avaliações com nota 4 ou 5 em utilidade e confiança",
+                    "não medida",
+                    "≥ 70% (M2)"
+                  ],
+                  [
+                    "Respostas com feedback “útil”",
+                    "não medida",
+                    "≥ 70%"
+                  ],
+                  [
+                    "Consultas com feedback registrado",
+                    "82 consultas e só 3 feedbacks até 10/11, de testes da equipe",
+                    "≥ 75%"
+                  ],
+                  [
+                    "Relatos de erro na citação",
+                    "—",
+                    "contagem; cada um vira incidente"
+                  ]
+                ],
+                "celulas_classe": {
+                  "0,2": "meta",
+                  "1,2": "meta",
+                  "2,2": "meta",
+                  "3,2": "meta"
+                },
+                "preencher": true
+              }
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Os avaliadores <b>não são servidores</b> do IFPI: o ganho de tempo é indício, não medida do valor real para a PROEN."
+        }
+      ],
+      "notas": "<strong>~1 min 15 s.</strong> O indicador de valor é o tempo: cada avaliador faz duas perguntas pelo método atual e o restante com o IFGuia. Uso e confiança nunca foram medidos com usuários de fora: até 10/11 eram 82 consultas e 3 feedbacks, todos da equipe. Esta sessão produz a primeira linha de base real."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Salvaguardas: supervisão, transparência e dados",
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "titulo": "Supervisão humana",
+            "crescer": true,
+            "itens": [
+              "Avaliador confere o trecho e o documento original <strong>antes de julgar</strong>; a equipe confere as fichas contra o gabarito.",
+              "<strong>Fila de revisão</strong> automática: recusas, confiança média, extração pouco confiável, citações bloqueadas, suspeita de injeção e feedback negativo."
+            ]
+          },
+          {
+            "tipo": "card",
+            "titulo": "Transparência&nbsp;",
+            "variante": "vd",
+            "crescer": true,
+            "itens": [
+              "Citações com trecho, documento e artigo; <strong>selo de confiança</strong> e <strong>selo de vigência</strong> com a origem (inferida, nome do arquivo ou confirmada pela PROEN).",
+              "Aviso fixo: gerada por IA, não substitui a norma; faixa de alerta na consulta a normas não vigentes."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "titulo": "Limitações apresentadas aos avaliadores",
+            "variante": "er",
+            "crescer": true,
+            "itens": [
+              "Recall@5 de <strong>0,65</strong>, abaixo da meta de 0,70.",
+              "Vigência inferida em <strong>1.299 de 1.446</strong> normas.",
+              "Digitalizados com extração de baixa confiabilidade; respostas parciais em listas extensas."
+            ]
+          },
+          {
+            "tipo": "card",
+            "titulo": "Dados, acesso e viés",
+            "crescer": true,
+            "itens": [
+              "Sem login nem SUAP; CPF, matrícula e e-mail <strong>mascarados</strong> antes do envio ao DeepSeek e de qualquer registro.",
+              "Painel só da equipe, com bloqueio após 5 erros de senha; ficha e questionário anônimos.",
+              "Viés: resultados por tipo de pergunta, documento e tema; avaliadores de computação podem aceitar resposta só plausível → gabarito."
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min 30 s.</strong> Quatro camadas: o humano confere, a resposta mostra de onde veio e se a norma está vigente, as limitações são ditas antes do uso e os dados pessoais são mascarados antes de sair do servidor. O ponto honesto: o Recall@5 ainda está abaixo da meta e a vigência da maior parte do acervo é inferida, não confirmada pela PROEN."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Registro de evidências&nbsp;",
+      "proporcao": "1.12fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "titulo": "Registros do piloto",
+            "crescer": true,
+            "blocos": [
+              {
+                "tipo": "tabela",
+                "preencher": true,
+                "cabecalho": [
+                  "Registro",
+                  "Onde",
+                  "Guarda"
+                ],
+                "linhas": [
+                  [
+                    "Consultas e feedback",
+                    "PostgreSQL; exporta CSV pelo painel",
+                    "backup diário, 7 dias"
+                  ],
+                  [
+                    "Acessos",
+                    "log do Nginx",
+                    "30 dias"
+                  ],
+                  [
+                    "Fichas, cronometragem, questionário, notas",
+                    "pasta da Fase IV no repositório, sem dados pessoais",
+                    "até a decisão da Fase V"
+                  ],
+                  [
+                    "Incidentes",
+                    "issues no GitHub",
+                    "citados no relatório final"
+                  ]
+                ]
+              }
+            ],
+            "rodape": "<strong>Responsáveis:</strong> Luis Felipe (servidor, logs e backup) e Sharon (dados da sessão). Acesso: equipe e professor; a PROEN recebe o relatório."
+          }
+        ],
+        [
+          {
+            "tipo": "lins",
+            "itens": [
+              {
+                "titulo": "Roteiro",
+                "html": "As fichas mostram dispositivos ou respostas esperadas errados ou ambíguos."
+              },
+              {
+                "titulo": "Perguntas livres",
+                "html": "Conferidas contra a norma, entram como casos novos."
+              },
+              {
+                "titulo": "Citação incorreta",
+                "html": "Vira incidente e caso novo do conjunto."
+              }
+            ]
+          },
+          {
+            "tipo": "kpis",
+            "itens": [
+              {
+                "valor": "≥ 12",
+                "texto": "perguntas revisadas"
+              },
+              {
+                "valor": "≥ 6",
+                "texto": "perguntas novas · curadoria: Guilherme"
+              }
+            ]
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min 15 s.</strong> Tudo o que a sessão gera fica rastreável: banco com backup, log de acesso, fichas no repositório sem dados pessoais e incidentes como issues. O piloto também corrige o golden set, que hoje é um rascunho não validado pela PROEN: meta de 12 perguntas revisadas e 6 novas."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Critérios de pausa e retomada",
+      "proporcao": "1.15fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "titulo",
+            "texto": "Gatilhos de pausa"
+          },
+          {
+            "tipo": "lins",
+            "itens": [
+              {
+                "titulo": "Privacidade",
+                "html": "Dado pessoal gravado sem máscara ou exposição de registros."
+              },
+              {
+                "titulo": "Erro crítico",
+                "html": "Norma revogada ou cancelada citada como vigente na consulta padrão, ou <strong>3 incorretas</strong> com citação aparentemente válida entre as <strong>10 primeiras</strong> do roteiro."
+              },
+              {
+                "titulo": "Indisponibilidade",
+                "html": "Site fora do ar, erro 503 ou “somente busca” por <strong>mais de 15 min</strong>, ou busca semântica inativa."
+              },
+              {
+                "titulo": "Abuso ou custo",
+                "html": "Sinal de abuso externo ou teto diário de <strong>US$ 1</strong>: o sistema passa a devolver só os trechos."
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "titulo": "Retorno ao processo anterior",
+            "variante": "er",
+            "crescer": true,
+            "html": "<p style=\"margin:0\">O IFGuia não substitui sistema da PROEN: suspender é <strong>interromper o uso em sala</strong>. Os avaliadores concluem pela consulta manual (pasta do CONSUP no Drive) ou deixam em branco. No servidor: parar a aplicação ou voltar à versão anterior do código e do índice.</p>"
+          },
+          {
+            "tipo": "card",
+            "titulo": "Condições de retomada",
+            "variante": "vd",
+            "crescer": true,
+            "itens": [
+              "Causa corrigida, com <strong>teste automatizado</strong> e CI aprovada.",
+              "Nova rodada das avaliações e da avaliação de segurança; servidor sem pendências.",
+              "Caso incluído no golden set; em privacidade, registros afetados removidos."
+            ],
+            "rodape": "<strong>Decide:</strong> Diego (responsável técnico) com o professor."
+          }
+        ]
+      ],
+      "notas": "<strong>~1 min 30 s.</strong> Quatro gatilhos objetivos, todos verificáveis durante a sessão. O teto de US$ 1 já está implementado: o sistema degrada sozinho para devolver só os trechos. Como o piloto não atende demandas reais, o retorno ao processo anterior é simples. Para retomar, a correção precisa de teste automatizado e o caso entra no golden set."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Cronograma, responsáveis e condições para iniciar",
+      "topo": [
+        {
+          "tipo": "tabela",
+          "cabecalho": [
+            "Etapa",
+            "Período",
+            "Responsável",
+            "Registro previsto"
+          ],
+          "linhas": [
+            [
+              "<strong>Preparação e orientação</strong>",
+              "12 a 18/11/2026",
+              "Diego Cordeiro de Oliveira",
+              "Aceite do plano; roteiro com gabarito e ficha; versão do piloto publicada; diagnóstico e backup do servidor; limites de uso ajustados"
+            ],
+            [
+              "<strong>Execução e monitoramento</strong>",
+              "19/11/2026 (sessão única)",
+              "Diego (condução) e Luis Felipe (monitoramento)",
+              "Log de consultas e feedback; indicadores do painel; fichas e cronometragem; incidentes"
+            ],
+            [
+              "<strong>Validação e encerramento</strong>",
+              "20 a 24/11/2026",
+              "Sharon e Guilherme Nonato",
+              "Relatório de resultados; feedback consolidado; parecer da equipe e ciência do demandante"
+            ]
+          ],
+          "linhas_classe": [
+            "",
+            "hl",
+            ""
+          ],
+          "preencher": true
+        }
+      ],
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [],
+        []
+      ],
+      "notas": "<strong>~1 min 15 s.</strong> Três etapas, cada uma com responsável e registro. Chamar atenção para o detalhe operacional: como toda a turma sai pelo mesmo IP, o limite de 4 envios por minuto bloquearia a sessão; por isso ele é ampliado só para o dia 19."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Decisão ao final do piloto",
+      "proporcao": "1.15fr 0.9fr 1fr 0.62fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "titulo": "Avançar à Fase V",
+            "variante": "vd",
+            "crescer": true,
+            "itens": [
+              "Volume mínimo alcançado.",
+              "≥ 70% das respostas do roteiro corretas.",
+              "Nenhuma norma não vigente citada como vigente.",
+              "Recusa correta ≥ 80%.",
+              "Redução ≥ 30% no tempo.",
+              "Nenhum incidente de privacidade."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "titulo": "Novo ciclo de ajustes",
+            "crescer": true,
+            "itens": [
+              "Metas atingidas só em parte.",
+              "Volume mínimo não alcançado."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "titulo": "Encerrar ou reformular",
+            "variante": "er",
+            "crescer": true,
+            "itens": [
+              "Menos de 70% de respostas corretas.",
+              "Conferir a resposta custar mais tempo que a consulta manual (fracasso do M2).",
+              "Alternativa: só a <strong>busca com citação</strong>, sem resposta gerada."
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "figura",
+            "src": "img/qrcode_ifguia.png",
+            "alt": "QR code do IFGuia",
+            "legenda": "IFGuia: consulta pública"
+          },
+          {
+            "tipo": "figura",
+            "src": "img/qrcode_formulario.png",
+            "alt": "QR code da ficha de avaliação",
+            "legenda": "Ficha de avaliação (formulário)"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "fim": true,
+          "html": "Obrigado! Perguntas?"
+        }
+      ],
+      "notas": "<strong>~1 min 15 s.</strong> Fechar com os três desfechos possíveis e os critérios objetivos de cada um. Lembrar que há uma saída mesmo no pior caso: oferecer só a busca com citação. Mostrar os dois QR codes: o do IFGuia, para a consulta, e o da ficha de avaliação, que os avaliadores preenchem na sessão de 19/11."
+    }
+  ]
+}
