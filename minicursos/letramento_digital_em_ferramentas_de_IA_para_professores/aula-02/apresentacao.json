@@ -469,7 +469,7 @@
         [
           {
             "tipo": "html",
-            "html": "<div class=\"prompt\"><div class=\"pt\">Prompt 4 · Quiz / gamificação</div><pre>Crie um quiz de <i>[10]</i> perguntas de múltipla escolha sobre <i>[tema]</i> para <i>[ano/série]</i>, para usar em <i>[Kahoot / Google Forms / cartões de papel]</i>.\nRegras: 4 alternativas por pergunta, apenas 1 correta, distratores plausíveis baseados em erros comuns, enunciados com até 25 palavras.\nEntregue em tabela: Pergunta | A | B | C | D | Correta | Explicação curta (1 frase).\nSugira também uma dinâmica de 10 minutos para aplicar o quiz sem internet.</pre></div>"
+            "html": "<div class=\"prompt\"><div class=\"pt\">Prompt 4 · Quiz / gamificação</div><pre>Crie um quiz de <i>[10]</i> perguntas de múltipla escolha sobre <i>[tema]</i> para <i>[ano/série]</i>, para usar em <i>[Kahoot / Google Forms / cartões de papel]</i>.\nRegras: 4 alternativas por pergunta, apenas 1 correta, distratores plausíveis baseados em erros comuns, enunciados com até 25 palavras.\nEntregue em tabela: Pergunta | A | B | C | D | Correta | Explicação curta (1 frase).\nSugira também uma dinâmica de 10 minutos para aplicar o quiz sem internet.<br>Monte também em html o quiz caso consiga utilizar o laboratório.</pre></div>"
           },
           {
             "tipo": "texto",
