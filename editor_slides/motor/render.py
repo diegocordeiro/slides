@@ -366,8 +366,18 @@ html,body{width:1280px!important;height:720px!important;overflow:hidden!importan
 </style>"""
 
 
-def render_pagina(dados: dict, ed: bool = False, base_href: str | None = None) -> str:
-    """HTML completo da aula. ``ed`` = prévia do editor (sem scripts, com marcações)."""
+def runtime_js() -> str:
+    """Conteúdo de modelo/runtime.js (embutido na prévia ao vivo)."""
+    with open(os.path.join(MODELO, "runtime.js"), encoding="utf-8") as f:
+        return f.read()
+
+
+def render_pagina(dados: dict, ed: bool = False, base_href: str | None = None, inline: bool = False) -> str:
+    """HTML completo da aula.
+
+    ``ed``     = prévia do editor (palco): marcações ``data-slide``, sem scripts.
+    ``inline`` = prévia ao vivo (outra janela): CSS e runtime.js embutidos, sem gerar arquivos.
+    """
     if dados.get("motor") == "legado":
         return render_legado(dados, ed, base_href)
     c = Ctx(ed)
@@ -391,8 +401,14 @@ def render_pagina(dados: dict, ed: bool = False, base_href: str | None = None) -
     pdf = ('\n    <button class="bp" id="bexp" onclick="exportarPDF()" title="Exportar os slides em PDF — na janela de impressão '
            'escolha \'Salvar como PDF\', margens \'Nenhuma\' e mantenha \'Gráficos de fundo\'">Exportar PDF</button>') if meta.get("mostrar_pdf", True) else ""
     lim = meta.get("cronometro_min") or 10
-    script = "" if ed else '\n  <script src="%s.js"></script>' % esc(base)
-    estilo = '<style>%s</style>' % css_aula(dados) if ed else '<link rel="stylesheet" href="%s.css">' % esc(base)
+    if ed:
+        script = ""
+    elif inline:
+        script = "\n  <script>\n%s</script>" % runtime_js()
+    else:
+        script = '\n  <script src="%s.js"></script>' % esc(base)
+    estilo = ('<style>%s</style>' % css_aula(dados) if (ed or inline)
+              else '<link rel="stylesheet" href="%s.css">' % esc(base))
     # celular/tablet (mesma regra do runtime.js), decidido antes de desenhar:
     #   padrão → abre o PDF da aula ("celular-pdf"); ?web=1 → versão web em rolagem ("movel")
     movel = "" if ed else ("\n  <script>try{var q=location.search;if(!/[?&](modo=apresentador|pdf=1)/.test(q)&&matchMedia("

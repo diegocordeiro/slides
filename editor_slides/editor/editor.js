@@ -79,7 +79,7 @@ const agendarSalvar = debounce(() => salvar(true), 2000);
 function marcar(rerender = true) {
   st.sujo = true; $('#salvo').textContent = 'alterações não salvas';
   confirmarHist(); agendarSalvar();
-  if (rerender) agendarPrevia();
+  if (rerender) { agendarPrevia(); agendarAoVivo(); }
 }
 function desfazer() {
   confirmarHist.agora();
@@ -104,7 +104,7 @@ async function salvar(auto) {
 function atualizarBotoes() {
   const tem = !!st.dados;
   $('#b-desfazer').disabled = !st.hist.length; $('#b-refazer').disabled = !st.fut.length;
-  for (const id of ['#b-salvar', '#b-gerar', '#b-ver', '#b-pdf', '#b-celular', '#b-add']) $(id).disabled = !tem;
+  for (const id of ['#b-salvar', '#b-gerar', '#b-aovivo', '#b-ver', '#b-pdf', '#b-celular', '#b-add']) $(id).disabled = !tem;
   $('#b-gerar').disabled = !tem || (legado() && st.dados.estado !== 'editor');
 }
 
@@ -116,6 +116,7 @@ async function abrir(c) {
     hist: [], fut: [], ultimo: JSON.stringify(r.dados), sujo: false, foco: null, imgSel: null });
   st.fechados.clear();
   try { localStorage.setItem('editor_slides:ultimo', c); } catch (e) { }
+  if (janelaAoVivo && !janelaAoVivo.closed) { try { janelaAoVivo.location = urlAoVivo(c); } catch (e) { } }
   $('#salvo').textContent = '';
   renderTudo();
 }
@@ -166,7 +167,7 @@ function renderTudo() {
   est.title = d ? (d.estado === 'importada' ? 'Aula importada: o HTML publicado continua sendo a versão oficial' : d.motor === 'legado' ? 'Aula importada e assumida pelo editor: Gerar/Publicar usam o JSON' : 'Aula criada no editor') : '';
   est.className = 'selo ' + (d ? d.estado : '');
   renderAviso(); renderLista(); renderPainel(); renderNotas(); atualizarBotoes();
-  if (d) agendarPrevia.agora(); else $('#palco').srcdoc = '<p style="font:16px sans-serif;padding:40px;color:#666">Abra ou crie uma aula.</p>';
+  if (d) { agendarPrevia.agora(); agendarAoVivo.agora(); } else $('#palco').srcdoc = '<p style="font:16px sans-serif;padding:40px;color:#666">Abra ou crie uma aula.</p>';
 }
 function renderAviso() {
   const a = $('#aviso'); a.innerHTML = ''; a.hidden = true; a.className = '';
@@ -276,6 +277,26 @@ const agendarPrevia = debounce(async () => {
     fr.removeAttribute('srcdoc'); fr.src = r.url;
   } catch (e) { toast('Prévia: ' + e.message, true); }
 }, 250);
+
+/* ------------------------------------------------------------ janela "Ao vivo" (outra janela)
+   A página /editor/ao_vivo.html mostra a aula renderizada (CSS e runtime embutidos) e recarrega
+   sozinha quando este editor publica uma versão nova em /api/ao-vivo. Nada é gravado em disco. */
+let janelaAoVivo = null;
+let aoVivoSeq = 0;
+function urlAoVivo(c) { return '/editor/ao_vivo.html?c=' + encodeURIComponent(c); }
+function abrirAoVivo() {
+  if (!st.c) return;
+  if (janelaAoVivo && !janelaAoVivo.closed) { janelaAoVivo.focus(); agendarAoVivo.agora(); return; }
+  janelaAoVivo = window.open(urlAoVivo(st.c), 'slides_ao_vivo');
+  if (!janelaAoVivo) return toast('O navegador bloqueou a nova janela: permita pop-ups para este endereço.', true);
+  agendarAoVivo.agora();
+}
+const agendarAoVivo = debounce(async () => {
+  if (!st.dados || !janelaAoVivo || janelaAoVivo.closed) return;
+  const seq = ++aoVivoSeq;
+  try { await api('/api/ao-vivo', { c: st.c, dados: st.dados }); }
+  catch (e) { if (seq === aoVivoSeq) toast('Ao vivo: ' + e.message, true); }
+}, 400);
 
 function escalarPalco() {
   const w = $('#palco-wrap'); const s = Math.min(w.clientWidth / 1280, w.clientHeight / 720, 1.5);
@@ -1373,6 +1394,7 @@ function ligar() {
   $('#b-desfazer').onclick = desfazer; $('#b-refazer').onclick = refazer;
   $('#b-gerar').onclick = () => gerar().catch(e => toast(e.message, true));
   $('#b-ver').onclick = () => visualizar(false); $('#b-pdf').onclick = () => visualizar(true);
+  $('#b-aovivo').onclick = abrirAoVivo;
   $('#b-celular').onclick = () => visualizar('celular');
   $('#b-publicar').onclick = () => dialogoPublicar().catch(e => toast(e.message, true));
   $('#b-add').onclick = e => { e.stopPropagation(); menuAdicionar(); };

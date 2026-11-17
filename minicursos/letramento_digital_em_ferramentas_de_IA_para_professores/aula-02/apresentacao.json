@@ -58,13 +58,14 @@
               ],
               [
                 "19h55",
-                "<strong>Uma aula completa</strong> — do plano à rubrica, com a biblioteca de prompts (mão na massa)"
+                "<strong>Produzir uma aula completa</strong> — do plano à rubrica, com a biblioteca de prompts (mão na massa)"
               ],
               [
                 "20h40",
                 "<strong>Atividade 2</strong> — “Minha aula com IA” e encerramento"
               ]
-            ]
+            ],
+            "preencher": true
           }
         ]
       ]
@@ -75,10 +76,6 @@
       "proporcao": "1fr",
       "colunas": [
         [
-          {
-            "tipo": "texto",
-            "html": "<p><strong>3 minutos por professor.</strong> Use a ficha de registro como guia:</p>"
-          },
           {
             "tipo": "lista",
             "numerada": true,
@@ -107,19 +104,19 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "Por que o prompt importa",
+      "titulo": "Por que o prompt com contexto importa",
       "proporcao": "1fr 1fr",
       "colunas": [
         [
           {
             "tipo": "html",
-            "html": "<div class=\"bege\"><h3>Pedido vago</h3><div class=\"prompt\"><div class=\"pt\">Prompt fraco</div><pre>Faça uma aula sobre frações.</pre></div><p>Resposta genérica: não sabe o ano, o tempo, os recursos nem o que a turma já sabe.</p></div>"
+            "html": "<div class=\"bege\"><h3>Pedido vago</h3><div class=\"prompt\"><pre>Faça uma aula sobre frações.</pre></div><p>Resposta genérica: não sabe o ano, o tempo, os recursos nem o que a turma já sabe.</p></div>"
           }
         ],
         [
           {
             "tipo": "html",
-            "html": "<div class=\"bege\"><h3>Pedido estruturado</h3><div class=\"prompt\"><div class=\"pt\">Prompt forte</div><pre>Você é professor(a) de Matemática do 5º ano de uma escola pública do Piauí. Crie um plano de aula de 50 minutos sobre frações equivalentes para 30 estudantes que já conhecem metade e terço. Só temos quadro e papel. Entregue em tabela com etapas e tempo, e inclua 3 perguntas para verificar a aprendizagem.</pre></div></div>"
+            "html": "<div class=\"bege\"><h3>Pedido estruturado</h3><div class=\"prompt\"><pre>Você é professor(a) de Matemática do 5º ano de uma escola pública do Piauí. Crie um plano de aula de 50 minutos sobre frações equivalentes para 30 estudantes que já conhecem metade e terço. Só temos quadro e papel. Entregue em tabela com etapas e tempo, e inclua 3 perguntas para verificar a aprendizagem.</pre></div></div>"
           }
         ]
       ],
@@ -172,11 +169,6 @@
                 "“Linguagem simples; marque com VERIFICAR o que eu devo conferir; não invente referências”"
               ]
             ]
-          },
-          {
-            "tipo": "destaque",
-            "estilo": "cd",
-            "html": "<p><strong>Dica para memorizar:</strong> “<strong>P</strong>rofessor <strong>C</strong>onta a <strong>T</strong>arefa no <strong>F</strong>ormato com <strong>R</strong>egras”.</p>"
           }
         ]
       ]
@@ -202,7 +194,7 @@
                   "tipo": "destaque",
                   "estilo": "bege",
                   "titulo": "2. Peça perguntas antes",
-                  "html": "<p>“Antes de responder, faça-me até 3 perguntas sobre o que falta.”</p>"
+                  "html": "<p>“Antes de responder, me faça até 3 perguntas sobre o que falta.”</p>"
                 }
               ],
               [
@@ -240,7 +232,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "O contexto que só você tem (sem expor ninguém)",
+      "titulo": "O contexto, cuidado com as informações fornecidas!",
       "topo_proporcao": "1fr 1fr",
       "topo": [
         {
@@ -312,22 +304,22 @@
               [
                 "<strong>Gemini</strong><br><span class=\"mini\">Google · gemini.google.com</span>",
                 "Entra com a conta Google; integra Docs, Drive e Gmail; lê PDFs e imagens; Canvas para editar textos e criar páginas.",
-                "Em contas da escola, o administrador define o acesso. Desative a “Atividade nos apps Gemini” se não quiser guardar o histórico."
+                "Em contas da escola, o administrador define o acesso. Desative a “Atividade nos apps Gemini” se não quiser guardar o histórico. Dados processados e armazenados em outro País (transferência internacional, LGPD)."
               ],
               [
                 "<strong>ChatGPT</strong><br><span class=\"mini\">OpenAI · chatgpt.com</span>",
                 "Muito versátil; lê arquivos; gera imagens; Canvas para editar textos e códigos; organização por projetos.",
-                "Plano gratuito com limite de uso. Idade mínima 13 anos, com autorização dos responsáveis para menores de 18."
+                "Plano gratuito com limite de uso. Idade mínima 13 anos, com autorização dos responsáveis para menores de 18. Dados processados e armazenados em outro País (transferência internacional, LGPD)."
               ],
               [
                 "<strong>Claude</strong><br><span class=\"mini\">Anthropic · claude.ai</span>",
                 "Bom com textos longos e documentos extensos; Artefatos criam páginas, quizzes e jogos interativos.",
-                "Plano gratuito com limite de mensagens. Uso pessoal só para <strong>maiores de 18 anos</strong>."
+                "Plano gratuito com limite de mensagens. Uso pessoal só para <strong>maiores de 18 anos</strong>. Dados processados e armazenados em outro País (transferência internacional, LGPD)."
               ],
               [
                 "<strong>DeepSeek</strong><br><span class=\"mini\">DeepSeek · chat.deepseek.com</span>",
                 "Gratuito; modo de raciocínio (DeepThink) bom para lógica e matemática; busca na web.",
-                "Dados processados e armazenados na <strong>China</strong> (transferência internacional, LGPD). Use só conteúdo 🟢."
+                "Dados processados e armazenados em outro País (transferência internacional, LGPD)."
               ]
             ]
           },
@@ -403,7 +395,7 @@
         [
           {
             "tipo": "html",
-            "html": "<div class=\"prompt\"><div class=\"pt\">Prompt 0 · Contexto da turma (cole primeiro, uma vez por conversa)</div><pre>Você é um(a) professor(a) experiente da educação básica pública brasileira e vai me ajudar a planejar aulas.\nContexto que vale para toda esta conversa:\n- Componente curricular: <i>[ex.: Ciências]</i>\n- Ano/série e etapa: <i>[ex.: 7º ano do Ensino Fundamental]</i>\n- Turma: <i>[nº]</i> estudantes; perfil geral, sem nomes: <i>[ex.: leitura em níveis diferentes, 1 estudante com baixa visão]</i>\n- Duração da aula: <i>[ex.: 50 minutos]</i>\n- Recursos disponíveis: <i>[ex.: quadro, livro didático, projetor; internet instável]</i>\n- Realidade local: escola pública em <i>[município]</i>, Piauí.\nRegras: use linguagem adequada à idade; cite códigos da BNCC só se tiver certeza e marque com (VERIFICAR) tudo o que eu precisar conferir; não invente referências.\nAntes de começar, confirme que entendeu e me faça até 3 perguntas se faltar alguma informação.</pre></div>"
+            "html": "<div class=\"prompt\"><div class=\"pt\">Prompt 0 · Contexto da turma (cole primeiro, uma vez por conversa)</div><pre>Você é um(a) professor(a) experiente da educação básica pública brasileira e vai me ajudar a planejar aulas.\nContexto que vale para toda esta conversa:\n- Componente curricular: <i>[ex.: Ciências]</i>\n- Ano/série e etapa: <i>[ex.: 7º ano do Ensino Fundamental]</i>\n- Turma: <i>[nº]</i> estudantes; perfil geral, sem nomes: <i>[ex.: leitura em níveis diferentes, 1 estudante com baixa visão]</i>\n- Duração da aula: <i>[ex.: 50 minutos]</i>\n- Recursos disponíveis: <i>[ex.: quadro, livro didático, projetor; internet instável]</i>\n- Realidade local: escola pública em <i>[município]</i>, Piauí.\nRegras: use linguagem adequada à idade; cite códigos da BNCC só se tiver certeza e marque com (VERIFICAR) tudo o que eu precisar conferir; não invente referências.\nAntes de começar, confirme que entendeu e me faça até 3 perguntas se faltar alguma informação.<br>Depois das perguntas aguarde as próximas instruções.<br></pre></div>"
           },
           {
             "tipo": "texto",
@@ -481,7 +473,7 @@
           },
           {
             "tipo": "texto",
-            "html": "<p class=\"mini\"><strong>Dica:</strong> A tabela pode ser copiada para uma planilha e importada em ferramentas de quiz.</p>"
+            "html": "<p class=\"mini\"><strong>Dica:</strong> A tabela pode ser copiada para uma planilha e importada em ferramentas de quiz. Experimente pedir para criar o quiz em HTML.</p>"
           }
         ]
       ]
@@ -623,11 +615,6 @@
               "Rodem o <strong>Passo 7 (revisão crítica)</strong> e o checklist de revisão humana.",
               "Salvem o resultado: é o <strong>ponto de partida da Atividade 2</strong>."
             ]
-          },
-          {
-            "tipo": "destaque",
-            "estilo": "cd",
-            "html": "<p>A equipe circula pelo laboratório para ajudar. <strong>Dúvida de ferramenta é bem-vinda!</strong></p>"
           }
         ]
       ]
@@ -672,7 +659,7 @@
       "rodape": [
         {
           "tipo": "texto",
-          "html": "<p class=\"mini\">Orientações completas e ficha de relato: arquivo <strong>atividade-02_minha_aula_com_ia</strong> (pasta “atividades”).</p>"
+          "html": "<p class=\"mini\">Orientações completas e ficha de relato: https://professordiegocordeiro.com.br/tema/minicurso-letramento-digital-para-professores/ (Pasta Atividades)</p>"
         }
       ]
     },
