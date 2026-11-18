@@ -480,26 +480,14 @@
           },
           {
             "tipo": "card",
-            "crescer": false,
+            "crescer": true,
             "titulo": "O kernel também muda",
             "html": "<p style=\"margin:0;\">Refazendo a busca inteira em 10 partições: <strong>RBF venceu 7×</strong>, linear 2×, sigmoide 1×.</p>"
-          },
-          {
-            "tipo": "card",
-            "variante": "vd",
-            "crescer": true,
-            "titulo": "Estratificação reduz o ruído",
-            "html": "<p style=\"margin:0;\">Desvio do F1 cai de <strong>0,051 → 0,034</strong>. A proporção de doentes no teste deixa de variar (0,299–0,409 → fixa).</p>"
           }
         ]
       ],
-      "rodape": [
-        {
-          "tipo": "faixa",
-          "html": "Consequência prática: diferenças menores que <b>~0,05</b> entre configurações <b>não são conclusivas</b> nesta base."
-        }
-      ],
-      "notas": "<strong>~1 min 30 s.</strong> <strong>Abertura (10 s):</strong> até aqui todos os números vieram de <strong>uma única divisão</strong> dos dados; este slide pergunta se eles se sustentam. Deixar explícito: variamos a partição para <strong>medir</strong> a incerteza, nunca para escolher a divisão mais favorável — escolher seria selecionar sobre o teste. <strong>Gráfico da esquerda (25 s):</strong> repetimos <strong>30 vezes</strong> o experimento, sorteando a cada vez quem fica nos 80% de treino e quem fica nos 20% de teste. Mesmo modelo, mesmos hiperparâmetros — a única coisa que muda é o sorteio. Cada <strong>caixa</strong> resume essas 30 execuções de uma métrica: a linha do meio é a <strong>mediana</strong>, a caixa contém os <strong>50% centrais</strong> e as hastes vão aos extremos. Os pontinhos sobre a primeira caixa são as 30 execuções individuais do F1. <em>Apontar a altura da primeira caixa:</em> “toda essa dispersão é só sorteio”. Ler então os três números do cartão: 0,624 na pior partição, 0,683 na média, 0,750 na melhor. <strong>Gráfico da direita (25 s):</strong> no eixo horizontal, a fatia usada em <strong>treino</strong>, de 70% a 90%. Três linhas — F1 (bolinha), ROC-AUC (quadrado) e <strong>largura do intervalo de confiança</strong> (triângulo). <em>O ponto a mostrar:</em> as duas de cima <strong>oscilam sem tendência</strong>, ou seja, treinar com mais dados não melhorou de forma clara; a de baixo <strong>sobe sempre</strong>, porque com teste menor a estimativa perde precisão. É o compromisso da divisão: mais treino, menos certeza sobre o resultado. Avisar que o aparente melhor F1 em 90/10 é justamente o de <strong>maior incerteza</strong> — não é vitória. <strong>Os outros dois cartões (20 s):</strong> o kernel vencedor muda conforme a partição (RBF 7×, linear 2×, sigmoide 1×) — por isso não afirmamos “o RBF é o melhor”. E a estratificação reduz o desvio de 0,051 para 0,034, fixando a proporção de doentes no teste. <strong>Fecho (10 s):</strong> a faixa é a <strong>régua do trabalho</strong> — diferenças abaixo de ~0,05 não são conclusivas nesta base. Convidar a usar essa régua para reler as comparações dos slides anteriores."
+      "rodape": [],
+      "notas": "<strong>~1 min 30 s.</strong> <strong>Abertura (10 s):</strong> até aqui todos os números vieram de <strong>uma única divisão</strong> dos dados; este slide pergunta se eles se sustentam. Deixar explícito: variamos a partição para <strong>medir</strong> a incerteza, nunca para escolher a divisão mais favorável — escolher seria selecionar sobre o teste. <strong>Gráfico da esquerda (25 s):</strong> repetimos <strong>30 vezes</strong> o experimento, sorteando a cada vez quem fica nos 80% de treino e quem fica nos 20% de teste. Mesmo modelo, mesmos hiperparâmetros — a única coisa que muda é o sorteio. Cada <strong>caixa</strong> resume essas 30 execuções de uma métrica: a linha do meio é a <strong>mediana</strong>, a caixa contém os <strong>50% centrais</strong> e as hastes vão aos extremos. Os pontinhos sobre a primeira caixa são as 30 execuções individuais do F1. <em>Apontar a altura da primeira caixa:</em> “toda essa dispersão é só sorteio”. Ler então os três números do cartão: 0,624 na pior partição, 0,683 na média, 0,750 na melhor. <strong>Gráfico da direita (25 s):</strong> no eixo horizontal, a fatia usada em <strong>treino</strong>, de 70% a 90%. Três linhas — F1 (bolinha), ROC-AUC (quadrado) e <strong>largura do intervalo de confiança</strong> (triângulo). <em>O ponto a mostrar:</em> as duas de cima <strong>oscilam sem tendência</strong>, ou seja, treinar com mais dados não melhorou de forma clara; a de baixo <strong>sobe sempre</strong>, porque com teste menor a estimativa perde precisão. É o compromisso da divisão: mais treino, menos certeza sobre o resultado. Avisar que o aparente melhor F1 em 90/10 é justamente o de <strong>maior incerteza</strong> — não é vitória. <strong>Os outros dois cartões (20 s):</strong> o kernel vencedor muda conforme a partição (RBF 7×, linear 2×, sigmoide 1×) — por isso não afirmamos “o RBF é o melhor”."
     },
     {
       "layout": "conteudo",
@@ -603,7 +591,7 @@
       "rodape": [
         {
           "tipo": "faixa",
-          "html": "Quatro medições independentes concordam: a engenharia <b>não trouxe ganho</b>. Medir de um jeito só teria dado a resposta errada."
+          "html": "Quatro medições independentes: a engenharia <b>não trouxe ganho</b>."
         }
       ],
       "notas": "<strong>~1 min 20 s.</strong> <strong>Engenharia (35 s):</strong> resultado negativo — as 5 razões clínicas não ajudaram. O ponto interessante é que as quatro medições discordam em magnitude: retreino e neutralização dão ~−0,005, mas a permutação dá −0,054. Explicar: permutar embaralha o atributo e cria pacientes incoerentes (uma razão que não bate com os próprios exames), e isso superestima a importância. Só o retreino mede ganho real. <strong>Peso das classes (35 s):</strong> aqui é o oposto — efeito grande e na direção que nos interessa: 12 falsos negativos a menos ao custo de 9 exames confirmatórios a mais. <strong>Fecho (10 s):</strong> ler a faixa.<br><br><strong>Explicar o que é o peso (pergunta provável):</strong> o SVM escolhe a fronteira de maior margem pagando uma multa <code>C</code> por cada paciente que fica do lado errado. Com <code>class_weight='balanced'</code> essa multa deixa de ser igual para as duas classes: cada classe recebe peso inverso à sua frequência no treino — são 214 diabéticas contra 400 não diabéticas, então o peso fica <strong>1,43 contra 0,77</strong>, ou seja, <strong>errar numa diabética custa ~1,87× mais</strong> do que errar numa não diabética. Na prática a fronteira se desloca para o lado da classe maior e amplia a região classificada como \"tem diabetes\". <strong>Nenhuma paciente é duplicada ou descartada:</strong> continuam as mesmas 614 linhas de treino, muda só o preço do erro.<br><br><strong>Se perguntarem:</strong> <em>\"não é a mesma coisa que balancear a base?\"</em> — não; oversampling e SMOTE criam ou removem linhas, aqui os dados são idênticos e muda só o custo na função objetivo. <em>\"não bastaria ajustar o limiar?\"</em> — o limiar agiria depois, sobre o mesmo ranking; o peso age durante o treino e muda quais pontos viram vetores de suporte. Indício: o ROC-AUC subiu (0,798 → 0,814), e um deslocamento puro de limiar não mexeria no AUC — mas é um ganho pequeno, e ajustar o limiar segue como o próximo passo da conclusão. <em>\"vocês forçaram para melhorar a métrica?\"</em> — não; <code>None</code> e <code>balanced</code> estavam dentro da grade do GridSearchCV e o <code>balanced</code> venceu nos quatro kernels; esta tabela é a medição isolada, com todo o resto fixo (KNN + padronização, RBF, C=1, gamma=0,1). <em>\"e a precisão?\"</em> — cai pouco, 0,630 → 0,612, e o F1 macro sobe junto (0,689 → 0,735), então não é só trocar uma métrica por outra. <em>\"por que não um peso ainda maior?\"</em> — compraria mais revocação com mais falsos positivos; é decisão de política de triagem (quantos exames confirmatórios o serviço aguenta), não de modelo."
@@ -651,10 +639,6 @@
               {
                 "titulo": "Engenharia não ajudou",
                 "html": "Confirmado por <strong>quatro medições</strong> independentes."
-              },
-              {
-                "titulo": "Cuidado com partição única",
-                "html": "O mesmo modelo entrega de <strong>0,62 a 0,75</strong> conforme a divisão."
               }
             ]
           }
@@ -667,7 +651,7 @@
           "html": "Obrigado! Perguntas?"
         }
       ],
-      "notas": "<strong>~55 s.</strong> Ler os quatro números do topo e as quatro linhas. Encerrar admitindo a limitação principal (um quarto das diabéticas não é identificado) e o próximo passo mais promissor, que é o ajuste do limiar."
+      "notas": ""
     }
   ]
 }
