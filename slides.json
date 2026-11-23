@@ -1,0 +1,155 @@
+{
+  "versao_formato": 1,
+  "aulas": [
+    {
+      "secao": "Meio Ambiente · Informática Aplicada",
+      "area": "Meio Ambiente",
+      "disciplina": "Informática Aplicada",
+      "titulo": "Apresentação da Disciplina",
+      "curso": "Informática Aplicada · Aula 01",
+      "slides": 17,
+      "url": "meio_ambiente/informatica_aplicada/aula-01/aula01.html",
+      "versao": "06aedab0e921"
+    },
+    {
+      "secao": "Meio Ambiente · Informática Aplicada",
+      "area": "Meio Ambiente",
+      "disciplina": "Informática Aplicada",
+      "titulo": "Introdução à Informática",
+      "curso": "Informática Aplicada · Aula 02",
+      "slides": 15,
+      "url": "meio_ambiente/informatica_aplicada/aula-02/aula02.html",
+      "versao": "97059052743c"
+    },
+    {
+      "secao": "Meio Ambiente · Informática Aplicada",
+      "area": "Meio Ambiente",
+      "disciplina": "Informática Aplicada",
+      "titulo": "Hardware e Software",
+      "curso": "Informática Aplicada · Aula 03",
+      "slides": 18,
+      "url": "meio_ambiente/informatica_aplicada/aula-03/aula03.html",
+      "versao": "3b07122d2c37"
+    },
+    {
+      "secao": "Meio Ambiente · Informática Aplicada",
+      "area": "Meio Ambiente",
+      "disciplina": "Informática Aplicada",
+      "titulo": "Segurança da Informação e Sistemas Operacionais",
+      "curso": "Informática Aplicada · Aula 04",
+      "slides": 31,
+      "url": "meio_ambiente/informatica_aplicada/aula-04/aula04.html",
+      "versao": "6edb1222fb46"
+    },
+    {
+      "secao": "Meio Ambiente · Informática Aplicada",
+      "area": "Meio Ambiente",
+      "disciplina": "Informática Aplicada",
+      "titulo": "Prática de Digitação",
+      "curso": "Informática Aplicada · Aula 05",
+      "slides": 14,
+      "url": "meio_ambiente/informatica_aplicada/aula-05/aula05.html",
+      "versao": "db48c0178ef5"
+    },
+    {
+      "secao": "Meio Ambiente · Informática Aplicada",
+      "area": "Meio Ambiente",
+      "disciplina": "Informática Aplicada",
+      "titulo": "Internet: Histórico e fundamentos",
+      "curso": "Informática Aplicada · Aula 06",
+      "slides": 30,
+      "url": "meio_ambiente/informatica_aplicada/aula-06/apresentacao.html",
+      "versao": "6f25bca9019d"
+    },
+    {
+      "secao": "Mestrado · Disciplinas",
+      "area": "Mestrado",
+      "disciplina": "Disciplinas",
+      "titulo": "base ChEMBL",
+      "curso": "",
+      "slides": 13,
+      "url": "mestrado/disciplinas/aprendizado_maquina/redes_neurais/apresentacao.html",
+      "versao": "fd882b20c0e0"
+    },
+    {
+      "secao": "Mestrado · Disciplinas",
+      "area": "Mestrado",
+      "disciplina": "Disciplinas",
+      "titulo": "base Pima Indians",
+      "curso": "",
+      "slides": 9,
+      "url": "mestrado/disciplinas/aprendizado_maquina/svm/apresentacao.html",
+      "versao": "c513668a2344"
+    },
+    {
+      "secao": "Mestrado · Disciplinas",
+      "area": "Mestrado",
+      "disciplina": "Disciplinas",
+      "titulo": "Plano do Piloto Controlado (F4.DO1)",
+      "curso": "",
+      "slides": 11,
+      "url": "mestrado/disciplinas/topicos/piloto-ifguia/apresentacao.html",
+      "versao": "3176ce07a150"
+    },
+    {
+      "secao": "Mestrado · Disciplinas",
+      "area": "Mestrado",
+      "disciplina": "Disciplinas",
+      "titulo": "M3: Entrega Final do MVP",
+      "curso": "",
+      "slides": 17,
+      "url": "mestrado/disciplinas/topicos/apresentacao_m3/apresentacao.html",
+      "versao": "a9885882613b"
+    },
+    {
+      "secao": "Mestrado · Projeto Pesquisa",
+      "area": "Mestrado",
+      "disciplina": "Projeto Pesquisa",
+      "titulo": "Projeto de Pesquisa",
+      "curso": "",
+      "slides": 10,
+      "url": "mestrado/projeto_pesquisa/proposta/apresentacao.html",
+      "versao": "8ed9b0d0247c"
+    },
+    {
+      "secao": "Mestrado · Serg Ufpi",
+      "area": "Mestrado",
+      "disciplina": "Serg Ufpi",
+      "titulo": "Seminário PPGCC/UFPI",
+      "curso": "",
+      "slides": 18,
+      "url": "mestrado/serg_ufpi/apresentacao_AHE/apresentacao.html",
+      "versao": "0638069a4137"
+    },
+    {
+      "secao": "Minicursos · Letramento Digital Em Ferramentas De Ia Para Professores",
+      "area": "Minicursos",
+      "disciplina": "Letramento Digital Em Ferramentas De Ia Para Professores",
+      "titulo": "Encontro 1 · Fundamentos: letramento digital, IA e uso responsável de dados",
+      "curso": "Encontro 1 · Fundamentos: letramento digital, IA e uso responsável de dados",
+      "slides": 30,
+      "url": "minicursos/letramento_digital_em_ferramentas_de_IA_para_professores/aula-01/aula-01.html",
+      "versao": "e6eb66e9be4f"
+    },
+    {
+      "secao": "Minicursos · Letramento Digital Em Ferramentas De Ia Para Professores",
+      "area": "Minicursos",
+      "disciplina": "Letramento Digital Em Ferramentas De Ia Para Professores",
+      "titulo": "Encontro 2 · Ferramentas e prática: uma aula completa com IA",
+      "curso": "Encontro 2 · Ferramentas e prática: uma aula completa com IA",
+      "slides": 27,
+      "url": "minicursos/letramento_digital_em_ferramentas_de_IA_para_professores/aula-02/aula-02.html",
+      "versao": "96a4176ac815"
+    },
+    {
+      "secao": "Palestras · 2026",
+      "area": "Palestras",
+      "disciplina": "2026",
+      "titulo": "Palestra · ECA Digital, LGPD e o uso responsável de dados e imagem",
+      "curso": "Palestra · ECA Digital, LGPD e o uso responsável de dados e imagem",
+      "slides": 28,
+      "url": "palestras/2026/eca_digital_lgpd_ia_na_docencia/palestra.html",
+      "versao": "1192118f0279"
+    }
+  ]
+}
