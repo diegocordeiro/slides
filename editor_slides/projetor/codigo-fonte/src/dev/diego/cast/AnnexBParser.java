@@ -3,19 +3,24 @@ package dev.diego.cast;
 import java.util.Arrays;
 
 /**
- * Divide um fluxo H.264 "Annex B" (00 00 01 ...) em access units (quadros completos).
+ * Divide um fluxo "Annex B" (00 00 01 ...) em access units (quadros completos), para H.264 ou HEVC (H.265).
  * Java puro, sem dependências do Android, para poder ser testado no computador.
  */
 public final class AnnexBParser {
 
     public interface Listener {
-        /** data[0..len) contém o quadro inteiro, com start codes. */
-        void onAccessUnit(byte[] data, int len, boolean keyFrame, byte[] sps, byte[] pps);
+        /**
+         * data[0..len) contém o quadro inteiro, com start codes.
+         * params = conjuntos de parâmetros mais recentes, sem start code:
+         * H.264 → {SPS, PPS}; HEVC → {VPS, SPS, PPS}; null enquanto não chegaram todos.
+         */
+        void onAccessUnit(byte[] data, int len, boolean keyFrame, byte[][] params);
     }
 
     private static final byte[] START = {0, 0, 0, 1};
 
     private final Listener listener;
+    private final boolean hevc;
     private byte[] buf = new byte[1 << 20];
     private int len = 0;
 
@@ -23,9 +28,14 @@ public final class AnnexBParser {
     private int auLen = 0;
     private boolean auHasVcl = false, auKey = false;
 
-    private byte[] sps, pps;
+    private byte[] vps, sps, pps;
 
-    public AnnexBParser(Listener l) { this.listener = l; }
+    public AnnexBParser(Listener l) { this(l, false); }
+
+    public AnnexBParser(Listener l, boolean hevc) {
+        this.listener = l;
+        this.hevc = hevc;
+    }
 
     public void feed(byte[] d, int off, int n) {
         if (len + n > buf.length) buf = Arrays.copyOf(buf, Math.max(buf.length * 2, len + n));
@@ -43,7 +53,7 @@ public final class AnnexBParser {
             if (next < 0) break;
             emit(start + 3, next);
             // Próxima NAL é um delimitador (AUD): o quadro atual acabou, entrega já (menos atraso)
-            if (next + 3 < len && (buf[next + 3] & 0x1f) == 9) flushAu();
+            if (next + 3 < len && isAud(buf[next + 3])) flushAu();
             start = next;
         }
         // compacta: mantém a partir do último start code (NAL ainda incompleta)
@@ -58,6 +68,14 @@ public final class AnnexBParser {
         if (start >= 0) emit(start + 3, len);
         len = 0;
         flushAu();
+    }
+
+    private int type(byte first) {
+        return hevc ? (first >> 1) & 0x3f : first & 0x1f;
+    }
+
+    private boolean isAud(byte first) {
+        return type(first) == (hevc ? 35 : 9);
     }
 
     private int findStart(int from) {
@@ -75,14 +93,26 @@ public final class AnnexBParser {
     }
 
     private void onNal(byte[] b, int off, int n) {
-        int type = b[off] & 0x1f;
-        boolean vcl = type == 1 || type == 5;
-        boolean firstMb = vcl && n > 1 && (b[off + 1] & 0x80) != 0;
+        int t = type(b[off]);
+        boolean vcl, key, firstSlice, belongsToCurrent;
+        if (hevc) {
+            vcl = t <= 31;
+            key = t >= 16 && t <= 23;                                   // IRAP (IDR, CRA, BLA)
+            firstSlice = vcl && n > 2 && (b[off + 2] & 0x80) != 0;     // first_slice_segment_in_pic_flag
+            belongsToCurrent = t == 40;                                 // SEI de sufixo fica no quadro atual
+            if (t == 32) vps = Arrays.copyOfRange(b, off, off + n);
+            else if (t == 33) sps = Arrays.copyOfRange(b, off, off + n);
+            else if (t == 34) pps = Arrays.copyOfRange(b, off, off + n);
+        } else {
+            vcl = t == 1 || t == 5;
+            key = t == 5;
+            firstSlice = vcl && n > 1 && (b[off + 1] & 0x80) != 0;     // first_mb_in_slice == 0
+            belongsToCurrent = false;
+            if (t == 7) sps = Arrays.copyOfRange(b, off, off + n);
+            else if (t == 8) pps = Arrays.copyOfRange(b, off, off + n);
+        }
 
-        if (auHasVcl && (!vcl || firstMb)) flushAu();
-
-        if (type == 7) sps = Arrays.copyOfRange(b, off, off + n);
-        else if (type == 8) pps = Arrays.copyOfRange(b, off, off + n);
+        if (auHasVcl && ((!vcl && !belongsToCurrent) || firstSlice)) flushAu();
 
         if (auLen + n + 4 > au.length) au = Arrays.copyOf(au, Math.max(au.length * 2, auLen + n + 4));
         System.arraycopy(START, 0, au, auLen, 4);
@@ -91,12 +121,17 @@ public final class AnnexBParser {
         auLen += n;
         if (vcl) {
             auHasVcl = true;
-            if (type == 5) auKey = true;
+            if (key) auKey = true;
         }
     }
 
+    private byte[][] params() {
+        if (hevc) return (vps != null && sps != null && pps != null) ? new byte[][]{vps, sps, pps} : null;
+        return (sps != null && pps != null) ? new byte[][]{sps, pps} : null;
+    }
+
     private void flushAu() {
-        if (auHasVcl && auLen > 0) listener.onAccessUnit(au, auLen, auKey, sps, pps);
+        if (auHasVcl && auLen > 0) listener.onAccessUnit(au, auLen, auKey, params());
         auLen = 0;
         auHasVcl = false;
         auKey = false;

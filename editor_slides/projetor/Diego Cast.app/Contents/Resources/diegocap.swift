@@ -44,6 +44,8 @@ let verbose = CommandLine.arguments.contains("--verbose")
 func step(_ s: String) { if verbose { say("· " + s) } }
 let controlPort = UInt16(arg("--control-port", "0")) ?? 0
 let checkOnly = CommandLine.arguments.contains("--check")
+/// "--open URL --title T": pede para a TV abrir uma aula do site de slides e sai (sem projetar).
+let openURL: String? = { let v = arg("--open", ""); return v.isEmpty ? nil : v }()
 let ignoreSlideKeys = CommandLine.arguments.contains("--no-keys")
 /// HEVC (H.265): ~30–40% menos dados que H.264 na mesma qualidade (texto mais nítido). "--codec h264" volta ao anterior.
 let useHEVC = arg("--codec", "hevc").lowercased() != "h264"
@@ -490,6 +492,26 @@ struct DiegoCap {
             do { _ = try SecureLink(fd: fd, purpose: UInt8(ascii: "C")); close(fd); say("PAREAMENTO_OK"); exit(0) }
             catch LinkError.notPaired { close(fd); fail("NAO_PAREADO: a TV respondeu, mas o código não confere", 5) }
             catch { close(fd); fail("A TV não respondeu ao aperto de mão seguro (app da TV antigo?)", 6) }
+        }
+        if let url = openURL {
+            // Pede para a TV abrir uma aula do site de slides (pelo canal de controle cifrado) e sai.
+            if pairingCode.count < 20 { fail("NAO_PAREADO: este Mac ainda não foi pareado com a TV", 5) }
+            guard let fd = tcpConnect(host, controlPort == 0 ? 7002 : controlPort) else { fail("Não conectou na TV em \(host) (o Diego Cast está aberto nela?)", 2) }
+            let link: SecureLink
+            do { link = try SecureLink(fd: fd, purpose: UInt8(ascii: "C")) }
+            catch LinkError.notPaired { close(fd); fail("NAO_PAREADO: a TV não reconheceu o código (pareie de novo)", 5) }
+            catch { close(fd); fail("A TV não respondeu ao aperto de mão seguro (app da TV antigo?)", 6) }
+            let title = arg("--title", "Aula").replacingOccurrences(of: "\t", with: " ").replacingOccurrences(of: "\n", with: " ")
+            guard let rec = link.seal(Array("OPEN \(url)\t\(title)".utf8)), writeAll(fd, rec) else { close(fd); fail("A conexão com a TV caiu", 2) }
+            var tv = timeval(tv_sec: 4, tv_usec: 0)
+            setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &tv, socklen_t(MemoryLayout<timeval>.size))
+            // A TV responde KEY/teclas também neste canal; procura a confirmação.
+            while let r = link.readRecord(), let msg = String(bytes: r, encoding: .utf8) {
+                if msg == "OPEN_OK" { close(fd); say("✔ Abrindo \"\(title)\" na TV"); exit(0) }
+                if msg == "OPEN_NO" { close(fd); fail("A TV recusou o endereço (só aceita aulas de diegocordeiro.github.io/slides)", 8) }
+            }
+            close(fd)
+            fail("A TV não confirmou: atualize o app da TV para a versão 2.4 ou mais nova", 6)
         }
         step("pedindo a lista de telas ao macOS")
 

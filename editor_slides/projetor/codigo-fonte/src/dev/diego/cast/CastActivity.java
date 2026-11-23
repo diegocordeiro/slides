@@ -2,6 +2,7 @@ package dev.diego.cast;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -52,7 +53,7 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
     private SurfaceView surfaceView;
     private volatile android.view.Surface surface;
     private FrameLayout panel;
-    private TextView status, netInfo, howTo, hotspotBtn, hotspotInfo, hint;
+    private PanelUi dash;
 
     private volatile boolean running = false;
     private volatile boolean streaming = false;
@@ -65,30 +66,37 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
     private android.content.SharedPreferences prefs;
     private volatile byte[] master;          // chave derivada do código de pareamento
     private String pairCode;
-    private TextView pairBtn, pairInfo;
-    private final Runnable hidePair = new Runnable() { @Override public void run() { pairInfo.setText(""); } };
+
     private Thread videoThread, controlThread, discoveryThread;
 
     private volatile long bytesIn;
     private volatile VideoDecoder curDec;
     private volatile String curFrom;
+    private volatile boolean curFS;          // sessão com chaves temporárias (sigilo futuro)
+    private long lastShown = 0, lastBytes = 0;
     private final Runnable statsTick = new Runnable() {
         @Override public void run() {
             VideoDecoder d = curDec;
-            if (d != null && panel.getVisibility() == View.VISIBLE) {
-                String t = "Recebendo de " + curFrom + "\n" + (bytesIn / 1024) + " KB · quadros "
-                        + d.framesIn + " · decodificados " + d.framesQueued + " · exibidos " + d.framesShown
-                        + (d.framesDropped > 0 ? " · descartados " + d.framesDropped : "");
-                if (d.lastError != null) t += "\nErro: " + d.lastError;
-                status.setText(t);
+            if (d != null) {
+                int shown = d.framesShown;
+                long b = bytesIn;
+                int fps = (int) Math.max(0, shown - lastShown);
+                double mbps = Math.max(0, b - lastBytes) * 8 / 1_000_000.0;
+                lastShown = shown;
+                lastBytes = b;
+                if (panel.getVisibility() == View.VISIBLE) {
+                    dash.setStats(d.codecName() + (curFS ? " · ECDH" : ""), fps, mbps, d.framesLate,
+                            shown > 0 ? 100.0 * d.framesLate / shown : 0, d.bufferMs, shown, curFrom, d.lastError);
+                }
+            } else {
+                lastShown = 0;
+                lastBytes = 0;
+                dash.setIdle();
             }
+            refreshInfo();
             ui.postDelayed(this, 1000);
         }
     };
-    private boolean wifiDesligadoPorNos = false;
-
-    private Object hotspot; // WifiManager.LocalOnlyHotspotReservation (API 26+)
-    private String hsSsid, hsPass;
 
     // ------------------------------------------------------------ ciclo de vida
 
@@ -99,6 +107,9 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
                 | WindowManager.LayoutParams.FLAG_FULLSCREEN);
         u = getResources().getDisplayMetrics().widthPixels / 1920f;
         prefs = getSharedPreferences("seguranca", MODE_PRIVATE);
+        // Bloqueia capturas de tela e gravações da TV (ADB screencap, outros apps): saem pretas.
+        // Desligável na tela, porque projetores/divisores HDMI sem HDCP também ficariam pretos.
+        if (secureOn()) getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         pairCode = prefs.getString("codigo", null);
         if (pairCode == null) newPairCode();
         else setMaster(pairCode);
@@ -108,24 +119,27 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
     @Override
     protected void onStart() {
         super.onStart();
-        running = true;
-        try { if (!wifi().isWifiEnabled()) wifi().setWifiEnabled(true); } catch (Throwable ignored) { }
-        startServers();
+        if (!running) {
+            running = true;
+            try { if (!wifi().isWifiEnabled()) wifi().setWifiEnabled(true); } catch (Throwable ignored) { }
+            startServers();
+        }
         refreshInfo();
         ui.post(statsTick);
     }
 
     @Override
     protected void onStop() {
-        running = false;
+        // Os servidores continuam no ar enquanto o catálogo ou uma aula estão abertos por cima,
+        // para o Mac poder projetar ou mandar abrir outra aula. Só param quando o app é fechado.
         ui.removeCallbacks(statsTick);
-        stopServers();
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        stopHotspot();
+        running = false;
+        stopServers();
         super.onDestroy();
     }
 
@@ -148,112 +162,37 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
         root.setBackgroundColor(Color.BLACK);
 
         surfaceView = new SurfaceView(this);
+        surfaceView.setSecure(secureOn());          // a camada do vídeo também (precisa ser antes de anexar)
         surfaceView.getHolder().addCallback(this);
         root.addView(surfaceView, new FrameLayout.LayoutParams(-1, -1));
 
-        panel = new FrameLayout(this);
-        panel.setBackground(new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[]{0xFF14304A, 0xFF07090D}));
-
-        LinearLayout col = new LinearLayout(this);
-        col.setOrientation(LinearLayout.VERTICAL);
-        col.setGravity(Gravity.CENTER_HORIZONTAL);
-
-        TextView title = text(84, Color.WHITE, true);
-        title.setText("Diego Cast");
-        TextView name = text(30, 0x99FFFFFF, false);
-        name.setText(deviceName());
-        name.setPadding(0, px(10), 0, px(40));
-
-        status = text(34, 0xFF7FC4FF, true);
-        status.setText("Aguardando o Mac…");
-
-        netInfo = text(30, Color.WHITE, false);
-        netInfo.setPadding(0, px(30), 0, 0);
-
-        howTo = text(28, 0xB3FFFFFF, false);
-        howTo.setPadding(0, px(24), 0, px(40));
-
-        hotspotBtn = text(30, Color.WHITE, true);
-        hotspotBtn.setPadding(px(48), px(22), px(48), px(22));
-        hotspotBtn.setFocusable(true);
-        hotspotBtn.setClickable(true);
-        final GradientDrawable btnBg = new GradientDrawable();
-        btnBg.setCornerRadius(px(40));
-        btnBg.setColor(0x33FFFFFF);
-        hotspotBtn.setBackground(btnBg);
-        hotspotBtn.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override public void onFocusChange(View v, boolean f) {
-                btnBg.setColor(f ? Color.WHITE : 0x33FFFFFF);
-                hotspotBtn.setTextColor(f ? 0xFF0B0C10 : Color.WHITE);
-                v.animate().scaleX(f ? 1.08f : 1f).scaleY(f ? 1.08f : 1f).setDuration(150).start();
-            }
+        dash = new PanelUi(this, u);
+        dash.setDeviceName(deviceName());
+        dash.slidesButton.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) { startActivity(new android.content.Intent(CastActivity.this, CatalogActivity.class)); }
         });
-        hotspotBtn.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) { toggleHotspot(); }
-        });
-
-        hotspotInfo = text(30, Color.WHITE, false);
-        hotspotInfo.setPadding(0, px(30), 0, 0);
-
-        pairBtn = text(30, Color.WHITE, true);
-        pairBtn.setText("Parear um Mac");
-        pairBtn.setPadding(px(48), px(22), px(48), px(22));
-        pairBtn.setFocusable(true);
-        pairBtn.setClickable(true);
-        final GradientDrawable pairBg = new GradientDrawable();
-        pairBg.setCornerRadius(px(40));
-        pairBg.setColor(0x33FFFFFF);
-        pairBtn.setBackground(pairBg);
-        pairBtn.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override public void onFocusChange(View v, boolean f) {
-                pairBg.setColor(f ? Color.WHITE : 0x33FFFFFF);
-                pairBtn.setTextColor(f ? 0xFF0B0C10 : Color.WHITE);
-                v.animate().scaleX(f ? 1.08f : 1f).scaleY(f ? 1.08f : 1f).setDuration(150).start();
-            }
-        });
-        pairBtn.setOnClickListener(new View.OnClickListener() {
+        dash.pairButton.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) { showPairCode(false); }
         });
-        pairBtn.setOnLongClickListener(new View.OnLongClickListener() {
+        dash.pairButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override public boolean onLongClick(View v) { showPairCode(true); return true; }
         });
-        pairInfo = text(30, Color.WHITE, false);
-        pairInfo.setPadding(0, px(30), 0, 0);
-
-        col.addView(title);
-        col.addView(name);
-        col.addView(status);
-        col.addView(netInfo);
-        col.addView(howTo);
-        LinearLayout buttons = new LinearLayout(this);
-        buttons.setOrientation(LinearLayout.HORIZONTAL);
-        buttons.setGravity(Gravity.CENTER_HORIZONTAL);
-        LinearLayout.LayoutParams b1 = new LinearLayout.LayoutParams(-2, -2);
-        b1.rightMargin = px(32);
-        buttons.addView(pairBtn, b1);
-        buttons.addView(hotspotBtn, new LinearLayout.LayoutParams(-2, -2));
-        LinearLayout.LayoutParams bl = new LinearLayout.LayoutParams(-2, -2);
-        bl.gravity = Gravity.CENTER_HORIZONTAL;
-        col.addView(buttons, bl);
-        col.addView(pairInfo);
-        col.addView(hotspotInfo);
-
-        panel.addView(col, new FrameLayout.LayoutParams(-1, -2, Gravity.CENTER));
-
-        hint = text(24, 0x80FFFFFF, false);
-        hint.setText("Durante a projeção: ◀ ▶ / OK passam os slides  ·  ☰ mostra esta tela  ·  Voltar sai");
-        FrameLayout.LayoutParams hl = new FrameLayout.LayoutParams(-1, -2, Gravity.BOTTOM);
-        hl.bottomMargin = px(50);
-        panel.addView(hint, hl);
-
+        dash.setSecureState(secureOn());
+        dash.secureToggle.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                prefs.edit().putBoolean("bloquear_capturas", !secureOn()).apply();
+                recreate();                         // a superfície do vídeo só muda ao recriar a tela
+            }
+        });
+        panel = dash.root;
         root.addView(panel, new FrameLayout.LayoutParams(-1, -1));
         setContentView(root);
-        updateHotspotUi();
-        pairBtn.requestFocus();
+        dash.slidesButton.requestFocus();
     }
 
     // ------------------------------------------------------------ pareamento
+
+    private boolean secureOn() { return prefs.getBoolean("bloquear_capturas", true); }
 
     private void setMaster(String code) {
         try { master = SecureChannel.masterKey(code); } catch (Exception e) { master = null; }
@@ -273,12 +212,7 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
             for (Ctrl c : controls) closeQuietly(c.sock);
             controls.clear();
         }
-        ui.removeCallbacks(hidePair);
-        pairInfo.setText((regenerate ? "Código novo gerado: os Macs pareados antes foram desconectados.\n\n" : "")
-                + "Código de pareamento\n" + SecureChannel.pretty(pairCode) + "\n\n"
-                + "No Mac: menu Diego Cast → Parear com a TV…   ou   ./projetar.sh --parear\n"
-                + "Segure OK em \"Parear um Mac\" para gerar um código novo (revoga todos os Macs).");
-        ui.postDelayed(hidePair, 180_000);
+        dash.showPairCode(pairCode, regenerate, 180_000, null);
     }
 
     private String deviceName() {
@@ -288,15 +222,16 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
     }
 
     private void refreshInfo() {
-        StringBuilder sb = new StringBuilder();
-        String ssid = currentSsid();
         List<String[]> ips = localIps();
-        if (ssid != null) sb.append("Wi‑Fi: ").append(ssid).append("\n");
-        for (String[] ip : ips) sb.append(ip[1]).append(ips.size() > 1 ? "  (" + ip[0] + ")" : "").append("\n");
-        if (ips.isEmpty()) sb.append("Sem rede. Use a rede direta abaixo.\n");
-        netInfo.setText(sb.toString().trim());
-        String ip = ips.isEmpty() ? "IP" : ips.get(0)[1];
-        howTo.setText("No Mac (mesma rede, já pareado): menu Diego Cast → Espelhar tela   ·   IP " + ip);
+        String ip = null;
+        for (String[] i : ips) if (i[0].startsWith("wlan") || i[0].startsWith("eth")) { ip = i[1]; break; }
+        if (ip == null && !ips.isEmpty()) ip = ips.get(0)[1];
+        int freq = 0, speed = 0, rssi = 0;
+        try {
+            WifiInfo wi = wifi().getConnectionInfo();
+            if (wi != null && wi.getNetworkId() != -1) { freq = wi.getFrequency(); speed = wi.getLinkSpeed(); rssi = wi.getRssi(); }
+        } catch (Throwable ignored) { }
+        dash.setNetwork(ip, currentSsid(), freq, speed, rssi);
     }
 
     private String currentSsid() {
@@ -331,7 +266,7 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
                 if (show) {
                     panel.setVisibility(View.VISIBLE);
                     panel.animate().alpha(1f).setDuration(200).start();
-                    pairBtn.requestFocus();
+                    dash.slidesButton.requestFocus();
                 } else {
                     panel.animate().alpha(0f).setDuration(250).withEndAction(new Runnable() {
                         @Override public void run() { panel.setVisibility(View.GONE); }
@@ -341,8 +276,8 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
         });
     }
 
-    private void setStatus(final String s) {
-        ui.post(new Runnable() { @Override public void run() { status.setText(s); refreshInfo(); } });
+    private void setState(final int state, final String title, final String detail) {
+        ui.post(new Runnable() { @Override public void run() { dash.setState(state, title, detail); refreshInfo(); } });
     }
 
     // ------------------------------------------------------------ superfície
@@ -401,33 +336,57 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
         } catch (Exception e) {
             Log.w(TAG, "aperto de mão recusado de " + who + ": " + e);
             closeQuietly(s);
-            if (videoClient == null) setStatus("Conexão recusada de " + who + " (Mac não pareado)");
+            if (videoClient == null) setState(PanelUi.REFUSED, "Conexão recusada", who + " não está pareado com esta TV");
             try { Thread.sleep(1000); } catch (InterruptedException ignored) { }  // freia tentativas repetidas
             return;
         }
         closeQuietly(videoClient); // autenticado: assume o lugar da sessão anterior
         videoClient = s;
         try {
-            for (int i = 0; i < 50 && surface == null; i++) Thread.sleep(50);
+            if (surface == null) ui.post(new Runnable() {
+                @Override public void run() {
+                    Intent i = new Intent(CastActivity.this, CastActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                }
+            });
+            for (int i = 0; i < 100 && surface == null; i++) Thread.sleep(50);
             if (surface == null) return;
-            setStatus("Conectando a " + who + "…");
+            setState(PanelUi.CONNECTING, "Conectando…", "Mac em " + who);
             bytesIn = 0;
             curFrom = who;
+            final boolean hevc = ch.purpose == 'h';
+            curFS = ch.forwardSecret;
             dec = new VideoDecoder(surface, new VideoDecoder.Events() {
                 @Override public void onFirstFrame() {
                     streaming = true;
-                    setStatus("Projetando de " + s.getInetAddress().getHostAddress());
+                    setState(PanelUi.LIVE, "Projetando", "Mac em " + s.getInetAddress().getHostAddress());
                     showPanel(false);
                 }
-            });
+                @Override public void onNeedKeyFrame() { sendControl("KEY"); }
+                @Override public void onCodecUnsupported() {
+                    sendControl("NOHEVC");
+                    setState(PanelUi.WARN, "Ajustando o vídeo", "Esta TV não decodifica HEVC; o Mac volta para H.264");
+                }
+            }, hevc);
             curDec = dec;
-            AnnexBParser parser = new AnnexBParser(dec);
-            byte[] rec;
-            while ((rec = ch.readRecord()) != null && videoClient == s) {
-                bytesIn += rec.length;
+            AnnexBParser parser = new AnnexBParser(dec, hevc);
+            final boolean v2 = ch.purpose == 'v' || ch.purpose == 'h';   // Mac novo: cada registro traz o horário
+            int n;
+            while ((n = ch.readRecordInto()) >= 0 && videoClient == s) {
+                byte[] rec = ch.buffer();
+                bytesIn += n;
                 // Mais de ~0,4 s de vídeo esperando na fila: a TV ficou para trás, alcança o tempo real
                 if (ch.available() > 450 * 1024) dec.resync();
-                parser.feed(rec, 0, rec.length);
+                if (v2) {
+                    if (n < 8) continue;
+                    long pts = 0;
+                    for (int k = 0; k < 8; k++) pts = (pts << 8) | (rec[k] & 0xff);
+                    dec.nextPtsUs = pts;
+                    parser.feed(rec, 8, n - 8);
+                } else {
+                    parser.feed(rec, 0, n);
+                }
             }
         } catch (Exception e) {
             Log.i(TAG, "sessão encerrada: " + e);
@@ -438,7 +397,7 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
             if (videoClient == s) {
                 videoClient = null;
                 streaming = false;
-                setStatus("Mac desconectado. Aguardando…");
+                setState(PanelUi.WAITING, "Pronto para projetar", "O Mac desconectou · aguardando");
                 showPanel(true);
             }
         }
@@ -459,7 +418,22 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
                             SecureChannel ch = SecureChannel.serverHandshake(s.getInputStream(), s.getOutputStream(),
                                     master, (byte) 'C', rnd);
                             s.setSoTimeout(0);
-                            controls.add(new Ctrl(s, ch));
+                            Ctrl me = new Ctrl(s, ch);
+                            controls.add(me);
+                            try {
+                                byte[] r;
+                                while (running && (r = ch.readRecord()) != null) {
+                                    String cmd = new String(r, "UTF-8");
+                                    if (cmd.startsWith("OPEN ")) {
+                                        boolean ok = openDeckFromMac(cmd.substring(5));
+                                        ch.writeRecord((ok ? "OPEN_OK" : "OPEN_NO").getBytes("UTF-8"));
+                                    }
+                                }
+                            } catch (Exception ignored) {
+                            } finally {
+                                controls.remove(me);
+                                closeQuietly(s);
+                            }
                         } catch (Exception e) {
                             Log.w(TAG, "controle recusado: " + e);
                             closeQuietly(s);
@@ -470,6 +444,27 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
         } catch (Exception e) {
             if (running) Log.w(TAG, "servidor de controle", e);
         }
+    }
+
+    /** O Mac pareado pediu para abrir uma aula. Só endereços do site de slides são aceitos. */
+    private boolean openDeckFromMac(String payload) {
+        String[] parts = payload.split("\t", 2);
+        final String rel = parts[0].trim();
+        final String title = parts.length > 1 ? parts[1].trim() : "Aula";
+        final String full = rel.startsWith("https://") ? rel : SlidesCatalog.BASE + rel;
+        if (!SlidesCatalog.allowed(full)) { Log.w(TAG, "endereço recusado: " + full); return false; }
+        ui.post(new Runnable() {
+            @Override public void run() {
+                getSharedPreferences("aulas", MODE_PRIVATE).edit().putString("ultima", rel).apply();
+                Intent i = new Intent(CastActivity.this, DeckActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.putExtra(DeckActivity.EXTRA_URL, full);
+                i.putExtra(DeckActivity.EXTRA_TITLE, title);
+                i.putExtra(DeckActivity.EXTRA_KEY, rel);
+                startActivity(i);
+            }
+        });
+        return true;
     }
 
     private void sendControl(final String cmd) {
@@ -517,117 +512,6 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
         return (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
     }
 
-    /**
-     * O Fire TV Stick Lite não consegue criar rede própria (o Fire OS devolve erro 2 mesmo com o
-     * Wi‑Fi desligado). Em vez de tentar, o botão mostra como projetar sem internet.
-     */
-    private boolean offlineShown = false;
-
-    private void toggleHotspot() {
-        offlineShown = !offlineShown;
-        hotspotInfo.setText(offlineShown
-                ? "Sem internet, use uma rede local qualquer (não precisa ter internet):\n\n"
-                + "1) Hotspot do celular com os DADOS MÓVEIS DESLIGADOS: conecte o Mac e este Fire TV nele.\n"
-                + "2) Mac como roteador: Ajustes do Sistema → Geral → Compartilhamento →\n"
-                + "    Compartilhamento de Internet → compartilhar com Wi‑Fi; conecte este Fire TV na rede do Mac.\n"
-                + "3) Qualquer roteador, mesmo desligado da internet.\n\n"
-                + "Depois, no Mac:  ./projetar.sh"
-                : "");
-    }
-
-    /** Muitos Fire TV têm um único rádio: se falhar com o Wi‑Fi ligado, desliga o Wi‑Fi e tenta de novo. */
-    private void startLohs(final boolean retry) {
-        hotspotInfo.setText(retry ? "Liberando o rádio Wi‑Fi e tentando de novo…" : "Criando rede…");
-        try {
-            wifi().startLocalOnlyHotspot(new WifiManager.LocalOnlyHotspotCallback() {
-                @Override public void onStarted(WifiManager.LocalOnlyHotspotReservation r) {
-                    hotspot = r;
-                    WifiConfiguration c = r.getWifiConfiguration();
-                    hsSsid = c != null ? c.SSID : "?";
-                    hsPass = c != null ? c.preSharedKey : "?";
-                    updateHotspotUi();
-                    // a interface da rede direta demora um pouco para ganhar IP
-                    ui.postDelayed(new Runnable() { @Override public void run() { refreshInfo(); } }, 2500);
-                }
-                @Override public void onStopped() {
-                    hotspot = null;
-                    religarWifi();
-                    updateHotspotUi();
-                    hotspotInfo.setText("A rede direta foi encerrada pelo sistema.");
-                }
-                @Override public void onFailed(int reason) {
-                    hotspot = null;
-                    if (!retry && wifiLigado()) { desligarWifiETentar(); return; }
-                    religarWifi();
-                    updateHotspotUi();
-                    String why;
-                    switch (reason) {
-                        case 1: why = "sem canal Wi‑Fi disponível"; break;
-                        case 3: why = "modo incompatível (o rádio não suporta rede própria)"; break;
-                        case 4: why = "o Fire OS bloqueou o compartilhamento"; break;
-                        default: why = "erro do sistema";
-                    }
-                    hotspotInfo.setText("Não foi possível criar a rede: " + why + " [código " + reason + "]"
-                            + "\nAlternativa: roteador sem internet ou hotspot do celular com dados desligados.");
-                }
-            }, ui);
-        } catch (Throwable t) {
-            Log.w(TAG, "LOHS", t);
-            if (!retry && !(t instanceof SecurityException) && wifiLigado()) { desligarWifiETentar(); return; }
-            religarWifi();
-            updateHotspotUi();
-            hotspotInfo.setText((t instanceof SecurityException
-                    ? "Permissão negada pelo sistema.\nRode o instalar-cast.sh de novo no Mac.\n"
-                    : "Rede direta indisponível neste Fire OS.\n") + t);
-        }
-    }
-
-    private boolean wifiLigado() {
-        try { return wifi().isWifiEnabled(); } catch (Throwable t) { return false; }
-    }
-
-    private void desligarWifiETentar() {
-        try {
-            wifiDesligadoPorNos = wifi().setWifiEnabled(false);
-        } catch (Throwable t) {
-            hotspotInfo.setText("Não consegui desligar o Wi‑Fi: " + t);
-            return;
-        }
-        ui.postDelayed(new Runnable() { @Override public void run() { startLohs(true); } }, 3000);
-    }
-
-    private void religarWifi() {
-        if (!wifiDesligadoPorNos) return;
-        wifiDesligadoPorNos = false;
-        try { wifi().setWifiEnabled(true); } catch (Throwable ignored) { }
-    }
-
-    private void stopHotspot() {
-        if (hotspot != null) {
-            try { ((AutoCloseable) hotspot).close(); } catch (Exception ignored) { }
-            hotspot = null;
-        }
-        religarWifi();
-        updateHotspotUi();
-    }
-
-    private void updateHotspotUi() {
-        ui.post(new Runnable() {
-            @Override public void run() {
-                if (hotspot != null) {
-                    hotspotBtn.setText("Encerrar rede direta");
-                    hotspotInfo.setText("Rede direta ativa (não precisa de internet)\n"
-                            + "Nome: " + hsSsid + "     Senha: " + hsPass + "\n"
-                            + "No Mac:  ./projetar.sh --rede \"" + hsSsid + "\" \"" + hsPass + "\"");
-                } else {
-                    hotspotBtn.setText("Como projetar sem internet");
-                    if (hotspotInfo.getText().toString().startsWith("Rede direta ativa")) hotspotInfo.setText("");
-                }
-                refreshInfo();
-            }
-        });
-    }
-
     // ------------------------------------------------------------ controle remoto
 
     @Override
@@ -635,6 +519,10 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
         int k = e.getKeyCode();
         boolean panelShown = panel.getVisibility() == View.VISIBLE;
 
+        if (dash.pairShowing() && (k == KeyEvent.KEYCODE_BACK || k == KeyEvent.KEYCODE_MENU)) {
+            if (e.getAction() == KeyEvent.ACTION_UP) dash.hidePairCode();
+            return true;
+        }
         if (k == KeyEvent.KEYCODE_MENU) {
             if (e.getAction() == KeyEvent.ACTION_UP) showPanel(!panelShown);
             return true;
