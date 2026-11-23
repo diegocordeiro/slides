@@ -20,7 +20,7 @@ VPORT=7000; CPORT=7002
 CONF="$HOME/.diegocast"; [ -f "$CONF" ] || { [ -f "$HOME/.lumencast" ] && cp "$HOME/.lumencast" "$CONF"; }
 DIR="$(cd "$(dirname "$0")" && pwd)"
 SRC="$DIR/diegocap.swift"; BIN="$DIR/.bin/diegocap"
-CODEC=hevc; TELA=1; QUAL=normal; CONTROLE=1; IP=""; SSID=""; SENHA=""; TESTE=0; MODO=projetar
+CODEC=hevc; TELA=1; QUAL=normal; CONTROLE=1; IP=""; SSID=""; SENHA=""; TESTE=0; MODO=projetar; ABRIR=""; TITULO="Aula"
 
 ok()   { printf "\033[32m✔\033[0m %s\n" "$1"; }
 info() { printf "\033[36m→\033[0m %s\n" "$1"; }
@@ -41,6 +41,11 @@ mostrar_ajuda() {
     --esquecer-pareamento   apaga o código deste Mac (para parear de novo)
     --desligar-adb          desliga a depuração ADB da TV (feche a porta quando não for instalar nada)
     Vídeo e controle vão cifrados (AES-256-GCM); o Mac só transmite para a TV pareada.
+
+  AULAS DO SITE (sem projetar o Mac: a própria TV abre a aula)
+    --abrir aulas/aula01.html [--titulo "Aula 1"]
+                            manda a TV abrir uma aula de diegocordeiro.github.io/slides.
+                            Endereço relativo ao site ou completo. ◀ ▶ do controle passam os slides.
 
   ONDE PROJETAR
     (sem nada)              acha o Fire TV na rede sozinho (abre o app na TV pelo ADB)
@@ -105,6 +110,8 @@ while [ $# -gt 0 ]; do
     --parear) MODO=parear; shift ;;
     --esquecer-pareamento) MODO=esquecer; shift ;;
     --desligar-adb) MODO=adb; shift ;;
+    --abrir) MODO=abrir; ABRIR="$2"; shift 2 ;;
+    --titulo) TITULO="$2"; shift 2 ;;
     --tela) TELA="$2"; shift 2 ;;
     --codec) CODEC="$2"; shift 2 ;;
     --qualidade) QUAL="$2"; shift 2 ;;
@@ -318,6 +325,19 @@ if [ "$MODO" = "parear" ]; then
   [ "$(kc_get DiegoCast tv)" = "$CODIGO" ] || erro "Não consegui guardar o código no Chaveiro."
   ok "Mac pareado com a TV. O código ficou guardado no Chaveiro; não precisa digitar de novo."
   exit 0
+fi
+
+if [ "$MODO" = "abrir" ]; then
+  [ -n "$ABRIR" ] || erro "Diga qual aula: ./projetar.sh --abrir aulas/aula01.html"
+  [ -n "$CHAVE" ] || erro "Este Mac ainda não foi pareado. Rode: ./projetar.sh --parear"
+  printf '%s\n' "$CHAVE" | "$BIN" --host "$IP" --control-port "$CPORT" --open "$ABRIR" --title "$TITULO" --key-stdin
+  case $? in
+    0) exit 0 ;;
+    5) erro "A TV não reconheceu este Mac. Pareie de novo: ./projetar.sh --parear" ;;
+    6) erro "O app da TV não sabe abrir aulas ainda: atualize com ./instalar-cast.sh" ;;
+    8) erro "A TV só abre aulas de diegocordeiro.github.io/slides" ;;
+    *) erro "Não consegui falar com a TV em $IP." ;;
+  esac
 fi
 
 # ---------------------------------------------------------------- controle remoto → slides (cifrado)

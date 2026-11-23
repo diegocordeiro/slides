@@ -4,6 +4,52 @@
 import AppKit
 import ServiceManagement
 
+/// Uma aula do site diegocordeiro.github.io/slides (lida do slides.json ou, se ainda não existir, do index.html).
+struct Aula { let secao: String; let titulo: String; let url: String; let slides: Int }
+
+let siteSlides = "https://diegocordeiro.github.io/slides/"
+
+func parseAulasJSON(_ d: Data) -> [Aula] {
+    guard let o = (try? JSONSerialization.jsonObject(with: d)) as? [String: Any],
+          let arr = o["aulas"] as? [[String: Any]] else { return [] }
+    return arr.compactMap { a in
+        guard let t = a["titulo"] as? String, let u = a["url"] as? String else { return nil }
+        return Aula(secao: (a["secao"] as? String) ?? "Aulas", titulo: t, url: u, slides: (a["slides"] as? Int) ?? 0)
+    }
+}
+
+private func htmlText(_ h: String) -> String {
+    var t = h.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+    for (a, b) in [("&amp;", "&"), ("&lt;", "<"), ("&gt;", ">"), ("&quot;", "\""), ("&#x27;", "'"), ("&#39;", "'")] {
+        t = t.replacingOccurrences(of: a, with: b)
+    }
+    return t.trimmingCharacters(in: .whitespacesAndNewlines)
+}
+
+private func firstGroup(_ pattern: String, in s: String) -> String? {
+    guard let re = try? NSRegularExpression(pattern: pattern, options: [.dotMatchesLineSeparators]),
+          let m = re.firstMatch(in: s, range: NSRange(s.startIndex..., in: s)),
+          let r = Range(m.range(at: 1), in: s) else { return nil }
+    return String(s[r])
+}
+
+func parseAulasIndex(_ html: String) -> [Aula] {
+    guard let re = try? NSRegularExpression(pattern: "<h2>(.*?)</h2>|<a class=\"card\" href=\"([^\"]+)\">(.*?)</a>",
+                                            options: [.dotMatchesLineSeparators]) else { return [] }
+    var out: [Aula] = []
+    var secao = "Aulas"
+    for m in re.matches(in: html, range: NSRange(html.startIndex..., in: html)) {
+        if let r = Range(m.range(at: 1), in: html) { secao = htmlText(String(html[r])); continue }
+        guard let ru = Range(m.range(at: 2), in: html), let ri = Range(m.range(at: 3), in: html) else { continue }
+        let url = String(html[ru]), inner = String(html[ri])
+        if url.contains("..") || url.hasPrefix("http") || url.hasPrefix("/") { continue }
+        let titulo = firstGroup("<h3>(.*?)</h3>", in: inner).map(htmlText) ?? url
+        let n = firstGroup("<p class=\"info\">\\s*(\\d+) slides", in: inner).flatMap { Int($0) } ?? 0
+        out.append(Aula(secao: secao, titulo: titulo, url: url, slides: n))
+    }
+    return out
+}
+
 final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     private var statusItem: NSStatusItem!
@@ -16,6 +62,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var currentMode = 0          // 1 espelhar, 2 estendida
     private var buffer = ""
     private var lastOk: String?
+    private var aulas: [Aula] = []
+    private var aulasAt: Date?
+    private var aulasLoading = false
+    private var aulasError: String?
+    private var opener: Process?
     private let defaults = UserDefaults.standard
     private let res = Bundle.main.resourcePath!
     private let logURL = FileManager.default.homeDirectoryForCurrentUser
@@ -38,6 +89,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     // MARK: ciclo de vida
 
     func applicationDidFinishLaunching(_ n: Notification) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in self?.loadLessons(force: false) }
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         let menu = NSMenu()
         menu.delegate = self
@@ -64,7 +116,95 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         statusItem.button?.title = (running && procKind == "projetar") ? " Ao vivo" : ""
     }
 
-    func menuNeedsUpdate(_ menu: NSMenu) { rebuild(menu) }
+    func menuNeedsUpdate(_ menu: NSMenu) { loadLessons(force: false); rebuild(menu) }
+
+    // MARK: aulas do site
+
+    private func loadLessons(force: Bool) {
+        if aulasLoading { return }
+        if !force, let t = aulasAt, Date().timeIntervalSince(t) < 600, !aulas.isEmpty { return }
+        aulasLoading = true
+        let cfg = URLSessionConfiguration.ephemeral
+        cfg.timeoutIntervalForRequest = 10
+        cfg.requestCachePolicy = .reloadIgnoringLocalCacheData
+        let session = URLSession(configuration: cfg)
+        guard let jsonURL = URL(string: siteSlides + "slides.json"), let indexURL = URL(string: siteSlides) else { aulasLoading = false; return }
+        session.dataTask(with: jsonURL) { [weak self] data, resp, _ in
+            let ok = ((resp as? HTTPURLResponse)?.statusCode ?? 0) == 200
+            if ok, let d = data, !parseAulasJSON(d).isEmpty {
+                DispatchQueue.main.async { self?.lessonsLoaded(parseAulasJSON(d), error: nil) }
+                return
+            }
+            // slides.json ainda não publicado: lê os cartões da página principal
+            session.dataTask(with: indexURL) { data2, _, err in
+                let html = data2.flatMap { String(data: $0, encoding: .utf8) } ?? ""
+                let list = parseAulasIndex(html)
+                let msg = list.isEmpty ? "Sem acesso ao site (\(err?.localizedDescription ?? "lista vazia"))" : nil
+                DispatchQueue.main.async { self?.lessonsLoaded(list, error: msg) }
+            }.resume()
+        }.resume()
+    }
+
+    private func lessonsLoaded(_ list: [Aula], error: String?) {
+        aulasLoading = false
+        if !list.isEmpty { aulas = list; aulasAt = Date() }
+        aulasError = error
+        if let m = statusItem.menu, m.highlightedItem == nil { rebuild(m) }
+    }
+
+    @objc private func reloadLessons() { loadLessons(force: true) }
+
+    @objc private func openSite() {
+        if let u = URL(string: siteSlides) { NSWorkspace.shared.open(u) }
+    }
+
+    /// Manda a TV abrir a aula pelo canal de controle cifrado. Roda à parte: não interrompe uma projeção.
+    @objc private func openLesson(_ it: NSMenuItem) {
+        guard let url = it.representedObject as? String,
+              let a = aulas.first(where: { $0.url == url }) else { return }
+        if let o = opener, o.isRunning { return }
+        let p = Process()
+        p.executableURL = URL(fileURLWithPath: "/bin/bash")
+        var args = [res + "/projetar.sh"]
+        if !manualIP.isEmpty { args.append(manualIP) }
+        args += ["--abrir", a.url, "--titulo", a.titulo]
+        p.arguments = args
+        p.currentDirectoryURL = URL(fileURLWithPath: res)
+        var env = ProcessInfo.processInfo.environment
+        env["PATH"] = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:" + (env["PATH"] ?? "")
+        env["TERM"] = "dumb"
+        p.environment = env
+        p.standardInput = FileHandle.nullDevice
+        let pipe = Pipe()
+        p.standardOutput = pipe
+        p.standardError = pipe
+        let title = a.titulo
+        p.terminationHandler = { [weak self] pr in
+            let out = String(data: pipe.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? ""
+            let code = pr.terminationStatus
+            DispatchQueue.main.async { self?.lessonOpened(title: title, code: code, output: out) }
+        }
+        log("\n=== \(Date()) \(args.joined(separator: " "))\n")
+        do { try p.run(); opener = p; if !running { status = "Abrindo \"\(title)\" na TV…" } }
+        catch { alert("Diego Cast", "Não consegui iniciar: \(error.localizedDescription)") }
+    }
+
+    private func lessonOpened(title: String, code: Int32, output: String) {
+        opener = nil
+        log(output)
+        if code == 0 {
+            if !running { status = "Aula na TV: \(title)" }
+        } else {
+            if !running { status = "Pronto para projetar" }
+            let clean = output.replacingOccurrences(of: "\u{1B}\\[[0-9;]*m", with: "", options: .regularExpression)
+            let err = clean.components(separatedBy: "\n").last(where: { $0.hasPrefix("✘") })
+                .map { String($0.dropFirst()).trimmingCharacters(in: .whitespaces) } ?? "Veja o registro para detalhes."
+            alert("Não foi possível abrir a aula na TV",
+                  err.replacingOccurrences(of: "./projetar.sh --parear", with: "menu Segurança → Parear com a TV…")
+                     .replacingOccurrences(of: "./instalar-cast.sh", with: "menu Instalar/atualizar o app na TV"))
+        }
+        updateIcon()
+    }
 
     private func add(_ m: NSMenu, _ title: String, _ sel: Selector?, key: String = "",
                      on: Bool = false, enabled: Bool = true, obj: Any? = nil) -> NSMenuItem {
@@ -111,6 +251,38 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         _ = add(m, "Usar TV como monitor estendido", #selector(extend), key: "2", on: running && currentMode == 2)
         _ = add(m, "Projetar por outra rede Wi‑Fi…", #selector(otherNetwork))
         _ = add(m, "Parar", running ? #selector(stop) : nil, key: ".", enabled: running)
+        m.addItem(.separator())
+        let aMenu = NSMenu()
+        aMenu.autoenablesItems = false
+        if aulas.isEmpty {
+            let it = NSMenuItem(title: aulasLoading ? "Carregando as aulas do site…" : (aulasError ?? "Nenhuma aula encontrada"),
+                                action: nil, keyEquivalent: "")
+            it.isEnabled = false
+            aMenu.addItem(it)
+        } else {
+            var lastSec: String? = nil
+            for a in aulas {
+                if a.secao != lastSec {
+                    if lastSec != nil { aMenu.addItem(.separator()) }
+                    let h = NSMenuItem(title: a.secao.uppercased(), action: nil, keyEquivalent: "")
+                    h.attributedTitle = NSAttributedString(string: a.secao.uppercased(),
+                        attributes: [.font: NSFont.systemFont(ofSize: 11, weight: .semibold), .foregroundColor: NSColor.secondaryLabelColor])
+                    h.isEnabled = false
+                    aMenu.addItem(h)
+                    lastSec = a.secao
+                }
+                let it = add(aMenu, a.titulo + (a.slides > 0 ? "  ·  \(a.slides) slides" : ""),
+                             isPaired() ? #selector(openLesson(_:)) : nil, enabled: isPaired(), obj: a.url)
+                it.indentationLevel = 1
+            }
+        }
+        aMenu.addItem(.separator())
+        _ = add(aMenu, "Atualizar a lista", #selector(reloadLessons))
+        _ = add(aMenu, "Abrir o site no navegador", #selector(openSite))
+        let aItem = NSMenuItem(title: "Abrir aula na TV", action: nil, keyEquivalent: "")
+        aItem.image = NSImage(systemSymbolName: "play.rectangle", accessibilityDescription: nil)
+        aItem.submenu = aMenu
+        m.addItem(aItem)
         m.addItem(.separator())
 
         let qMenu = NSMenu()
