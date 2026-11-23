@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleName</key><string>Diego Cast</string>
+  <key>CFBundleDisplayName</key><string>Diego Cast</string>
+  <key>CFBundleIdentifier</key><string>dev.diego.cast.mac</string>
+  <key>CFBundleExecutable</key><string>DiegoCast</string>
+  <key>CFBundleIconFile</key><string>AppIcon</string>
+  <key>CFBundlePackageType</key><string>APPL</string>
+  <key>CFBundleShortVersionString</key><string>1.0</string>
+  <key>CFBundleVersion</key><string>1</string>
+  <key>LSMinimumSystemVersion</key><string>13.0</string>
+  <key>LSUIElement</key><true/>
+  <key>NSHighResolutionCapable</key><true/>
+  <key>NSLocalNetworkUsageDescription</key>
+  <string>O Diego Cast procura o seu Fire TV na rede local para projetar a tela.</string>
+  <key>NSAppleEventsUsageDescription</key>
+  <string>O Diego Cast usa os botões do controle do Fire TV para passar os slides no Mac.</string>
+  <key>NSScreenCaptureUsageDescription</key>
+  <string>O Diego Cast captura a tela para projetá-la no Fire TV.</string>
+</dict>
+</plist>
