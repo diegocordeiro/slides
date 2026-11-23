@@ -58,7 +58,15 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
     private volatile boolean streaming = false;
     private ServerSocket videoServer, controlServer;
     private volatile Socket videoClient;
-    private final List<OutputStream> controlOuts = new CopyOnWriteArrayList<>();
+    /** Canais de controle autenticados (um por Mac conectado). */
+    private static final class Ctrl { final Socket sock; final SecureChannel ch; Ctrl(Socket s, SecureChannel c) { sock = s; ch = c; } }
+    private final List<Ctrl> controls = new CopyOnWriteArrayList<>();
+    private final java.security.SecureRandom rnd = new java.security.SecureRandom();
+    private android.content.SharedPreferences prefs;
+    private volatile byte[] master;          // chave derivada do código de pareamento
+    private String pairCode;
+    private TextView pairBtn, pairInfo;
+    private final Runnable hidePair = new Runnable() { @Override public void run() { pairInfo.setText(""); } };
     private Thread videoThread, controlThread, discoveryThread;
 
     private volatile long bytesIn;
@@ -90,6 +98,10 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_FULLSCREEN);
         u = getResources().getDisplayMetrics().widthPixels / 1920f;
+        prefs = getSharedPreferences("seguranca", MODE_PRIVATE);
+        pairCode = prefs.getString("codigo", null);
+        if (pairCode == null) newPairCode();
+        else setMaster(pairCode);
         buildUi();
     }
 
@@ -184,14 +196,47 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
         hotspotInfo = text(30, Color.WHITE, false);
         hotspotInfo.setPadding(0, px(30), 0, 0);
 
+        pairBtn = text(30, Color.WHITE, true);
+        pairBtn.setText("Parear um Mac");
+        pairBtn.setPadding(px(48), px(22), px(48), px(22));
+        pairBtn.setFocusable(true);
+        pairBtn.setClickable(true);
+        final GradientDrawable pairBg = new GradientDrawable();
+        pairBg.setCornerRadius(px(40));
+        pairBg.setColor(0x33FFFFFF);
+        pairBtn.setBackground(pairBg);
+        pairBtn.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override public void onFocusChange(View v, boolean f) {
+                pairBg.setColor(f ? Color.WHITE : 0x33FFFFFF);
+                pairBtn.setTextColor(f ? 0xFF0B0C10 : Color.WHITE);
+                v.animate().scaleX(f ? 1.08f : 1f).scaleY(f ? 1.08f : 1f).setDuration(150).start();
+            }
+        });
+        pairBtn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) { showPairCode(false); }
+        });
+        pairBtn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override public boolean onLongClick(View v) { showPairCode(true); return true; }
+        });
+        pairInfo = text(30, Color.WHITE, false);
+        pairInfo.setPadding(0, px(30), 0, 0);
+
         col.addView(title);
         col.addView(name);
         col.addView(status);
         col.addView(netInfo);
         col.addView(howTo);
+        LinearLayout buttons = new LinearLayout(this);
+        buttons.setOrientation(LinearLayout.HORIZONTAL);
+        buttons.setGravity(Gravity.CENTER_HORIZONTAL);
+        LinearLayout.LayoutParams b1 = new LinearLayout.LayoutParams(-2, -2);
+        b1.rightMargin = px(32);
+        buttons.addView(pairBtn, b1);
+        buttons.addView(hotspotBtn, new LinearLayout.LayoutParams(-2, -2));
         LinearLayout.LayoutParams bl = new LinearLayout.LayoutParams(-2, -2);
         bl.gravity = Gravity.CENTER_HORIZONTAL;
-        col.addView(hotspotBtn, bl);
+        col.addView(buttons, bl);
+        col.addView(pairInfo);
         col.addView(hotspotInfo);
 
         panel.addView(col, new FrameLayout.LayoutParams(-1, -2, Gravity.CENTER));
@@ -205,7 +250,35 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
         root.addView(panel, new FrameLayout.LayoutParams(-1, -1));
         setContentView(root);
         updateHotspotUi();
-        hotspotBtn.requestFocus();
+        pairBtn.requestFocus();
+    }
+
+    // ------------------------------------------------------------ pareamento
+
+    private void setMaster(String code) {
+        try { master = SecureChannel.masterKey(code); } catch (Exception e) { master = null; }
+    }
+
+    private void newPairCode() {
+        pairCode = SecureChannel.newCode(rnd);
+        prefs.edit().putString("codigo", pairCode).apply();
+        setMaster(pairCode);
+    }
+
+    /** Mostra o código só quando pedido (alunos na sala não devem vê-lo o tempo todo). */
+    private void showPairCode(boolean regenerate) {
+        if (regenerate) {
+            newPairCode();
+            closeQuietly(videoClient);
+            for (Ctrl c : controls) closeQuietly(c.sock);
+            controls.clear();
+        }
+        ui.removeCallbacks(hidePair);
+        pairInfo.setText((regenerate ? "Código novo gerado: os Macs pareados antes foram desconectados.\n\n" : "")
+                + "Código de pareamento\n" + SecureChannel.pretty(pairCode) + "\n\n"
+                + "No Mac: menu Diego Cast → Parear com a TV…   ou   ./projetar.sh --parear\n"
+                + "Segure OK em \"Parear um Mac\" para gerar um código novo (revoga todos os Macs).");
+        ui.postDelayed(hidePair, 180_000);
     }
 
     private String deviceName() {
@@ -223,7 +296,7 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
         if (ips.isEmpty()) sb.append("Sem rede. Use a rede direta abaixo.\n");
         netInfo.setText(sb.toString().trim());
         String ip = ips.isEmpty() ? "IP" : ips.get(0)[1];
-        howTo.setText("No Mac (mesma rede):  ./projetar.sh   ou   ./projetar.sh " + ip);
+        howTo.setText("No Mac (mesma rede, já pareado): menu Diego Cast → Espelhar tela   ·   IP " + ip);
     }
 
     private String currentSsid() {
@@ -258,7 +331,7 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
                 if (show) {
                     panel.setVisibility(View.VISIBLE);
                     panel.animate().alpha(1f).setDuration(200).start();
-                    hotspotBtn.requestFocus();
+                    pairBtn.requestFocus();
                 } else {
                     panel.animate().alpha(0f).setDuration(250).withEndAction(new Runnable() {
                         @Override public void run() { panel.setVisibility(View.GONE); }
@@ -296,8 +369,8 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
         closeQuietly(videoClient);
         closeQuietly(videoServer);
         closeQuietly(controlServer);
-        for (OutputStream o : controlOuts) closeQuietly(o);
-        controlOuts.clear();
+        for (Ctrl c : controls) closeQuietly(c.sock);
+        controls.clear();
         if (discoveryThread != null) discoveryThread.interrupt();
     }
 
@@ -308,8 +381,6 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
             videoServer.bind(new java.net.InetSocketAddress(VIDEO_PORT));
             while (running) {
                 final Socket s = videoServer.accept();
-                closeQuietly(videoClient); // só um Mac por vez: o novo assume
-                videoClient = s;
                 new Thread(new Runnable() { @Override public void run() { handleVideo(s); } }, "cast-session").start();
             }
         } catch (Exception e) {
@@ -320,9 +391,23 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
     private void handleVideo(Socket s) {
         String who = s.getInetAddress().getHostAddress();
         VideoDecoder dec = null;
+        SecureChannel ch;
         try {
             s.setTcpNoDelay(true);
             s.setReceiveBufferSize(512 * 1024);
+            s.setSoTimeout(5000);
+            ch = SecureChannel.serverHandshake(s.getInputStream(), s.getOutputStream(), master, (byte) 'V', rnd);
+            s.setSoTimeout(0);
+        } catch (Exception e) {
+            Log.w(TAG, "aperto de mão recusado de " + who + ": " + e);
+            closeQuietly(s);
+            if (videoClient == null) setStatus("Conexão recusada de " + who + " (Mac não pareado)");
+            try { Thread.sleep(1000); } catch (InterruptedException ignored) { }  // freia tentativas repetidas
+            return;
+        }
+        closeQuietly(videoClient); // autenticado: assume o lugar da sessão anterior
+        videoClient = s;
+        try {
             for (int i = 0; i < 50 && surface == null; i++) Thread.sleep(50);
             if (surface == null) return;
             setStatus("Conectando a " + who + "…");
@@ -337,14 +422,12 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
             });
             curDec = dec;
             AnnexBParser parser = new AnnexBParser(dec);
-            InputStream in = s.getInputStream();
-            byte[] buf = new byte[64 * 1024];
-            int n;
-            while ((n = in.read(buf)) > 0 && videoClient == s) {
-                bytesIn += n;
+            byte[] rec;
+            while ((rec = ch.readRecord()) != null && videoClient == s) {
+                bytesIn += rec.length;
                 // Mais de ~0,4 s de vídeo esperando na fila: a TV ficou para trás, alcança o tempo real
-                if (in.available() > 450 * 1024) dec.resync();
-                parser.feed(buf, 0, n);
+                if (ch.available() > 450 * 1024) dec.resync();
+                parser.feed(rec, 0, rec.length);
             }
         } catch (Exception e) {
             Log.i(TAG, "sessão encerrada: " + e);
@@ -367,9 +450,22 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
             controlServer.setReuseAddress(true);
             controlServer.bind(new java.net.InetSocketAddress(CONTROL_PORT));
             while (running) {
-                Socket s = controlServer.accept();
-                s.setTcpNoDelay(true);
-                controlOuts.add(s.getOutputStream());
+                final Socket s = controlServer.accept();
+                new Thread(new Runnable() {
+                    @Override public void run() {
+                        try {
+                            s.setTcpNoDelay(true);
+                            s.setSoTimeout(5000);
+                            SecureChannel ch = SecureChannel.serverHandshake(s.getInputStream(), s.getOutputStream(),
+                                    master, (byte) 'C', rnd);
+                            s.setSoTimeout(0);
+                            controls.add(new Ctrl(s, ch));
+                        } catch (Exception e) {
+                            Log.w(TAG, "controle recusado: " + e);
+                            closeQuietly(s);
+                        }
+                    }
+                }, "cast-ctrl-hs").start();
             }
         } catch (Exception e) {
             if (running) Log.w(TAG, "servidor de controle", e);
@@ -379,9 +475,9 @@ public class CastActivity extends Activity implements SurfaceHolder.Callback {
     private void sendControl(final String cmd) {
         new Thread(new Runnable() {
             @Override public void run() {
-                byte[] b = (cmd + "\n").getBytes();
-                for (OutputStream o : controlOuts) {
-                    try { o.write(b); o.flush(); } catch (Exception e) { controlOuts.remove(o); }
+                byte[] b = cmd.getBytes();
+                for (Ctrl c : controls) {
+                    try { c.ch.writeRecord(b); } catch (Exception e) { controls.remove(c); closeQuietly(c.sock); }
                 }
             }
         }).start();

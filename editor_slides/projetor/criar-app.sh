@@ -44,6 +44,12 @@ pkill -x DiegoCast 2>/dev/null || true
 rm -rf "$DEST/Diego Cast.app"
 ditto "$APP" "$DEST/Diego Cast.app"
 ok "Instalado em $DEST"
+
+# A assinatura local muda a cada compilação: a autorização antiga do macOS deixa de valer, mas
+# continua aparecendo como ativada. Apaga para o macOS perguntar de novo na primeira projeção.
+tccutil reset ScreenCapture dev.diego.cast.mac >/dev/null 2>&1
+tccutil reset Accessibility dev.diego.cast.mac >/dev/null 2>&1
+ok "Permissões antigas limpas: na primeira projeção, autorize Gravação de Tela e Acessibilidade de novo"
 if ! open "$DEST/Diego Cast.app" 2>/dev/null; then
   printf "\033[33m!\033[0m O macOS não abriu o app. Diagnóstico:\n"
   vtool -show-build "$DEST/Diego Cast.app/Contents/MacOS/DiegoCast" 2>/dev/null | grep -E "minos|sdk"

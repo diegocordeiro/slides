@@ -1,5 +1,6 @@
 #!/bin/bash
 # Instala o Diego Cast no Fire TV.   Uso: ./instalar-cast.sh [IP]
+LIMPO=0; [ "$1" = "--limpo" ] && { LIMPO=1; shift; }
 IP="${1:-$(cat "$HOME/.diegocast" 2>/dev/null || cat "$HOME/.lumencast" 2>/dev/null)}"; IP="${IP:-192.168.1.22}"
 ALVO="$IP:5555"; PKG="dev.diego.cast"
 DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -17,9 +18,10 @@ A="adb -s $ALVO"
 # Remove a versão antiga com o nome "Lumen Cast", se existir
 $A shell pm list packages | grep -q "dev.lumen.cast" && $A uninstall dev.lumen.cast >/dev/null 2>&1 && ok "Versão antiga (Lumen Cast) removida"
 
-# Instalação limpa: o menu do Fire TV guarda o ícone antigo em cache se só atualizar
-$A uninstall $PKG >/dev/null 2>&1
-$A install -g "$DIR/DiegoCast.apk" | tail -1 | grep -q Success || erro "Falha ao instalar"
+# Atualiza mantendo os dados do app (o código de pareamento continua o mesmo).
+# Use "./instalar-cast.sh --limpo" para apagar tudo, inclusive o pareamento.
+if [ "$LIMPO" = "1" ]; then $A uninstall $PKG >/dev/null 2>&1; fi
+$A install -r -g "$DIR/DiegoCast.apk" | tail -1 | grep -q Success || erro "Falha ao instalar"
 ok "Diego Cast instalado"
 
 # Permissões e localização: exigidas pelo Android para criar a rede direta
@@ -33,4 +35,5 @@ ok "Permissões da rede direta concedidas"
 
 $A shell am start -n $PKG/.CastActivity >/dev/null 2>&1
 echo "$IP" > "$HOME/.diegocast"
-ok "Pronto! O Diego Cast está aberto na TV. No Mac: ./projetar.sh"
+ok "Pronto! O Diego Cast está aberto na TV."
+echo "   Primeira vez? Pareie: na TV escolha \"Parear um Mac\" e no Mac rode ./projetar.sh --parear"

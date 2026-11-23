@@ -15,6 +15,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var userStopped = false
     private var currentMode = 0          // 1 espelhar, 2 estendida
     private var buffer = ""
+    private var lastOk: String?
     private let defaults = UserDefaults.standard
     private let res = Bundle.main.resourcePath!
     private let logURL = FileManager.default.homeDirectoryForCurrentUser
@@ -99,6 +100,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         m.addItem(.separator())
 
+        if !isPaired() {
+            let np = NSMenuItem(title: "⚠︎ Este Mac ainda não está pareado com a TV", action: nil, keyEquivalent: "")
+            np.isEnabled = false
+            m.addItem(np)
+            _ = add(m, "Parear com a TV…", running ? nil : #selector(pair), key: "p", enabled: !running)
+            m.addItem(.separator())
+        }
         _ = add(m, "Espelhar tela", #selector(mirror), key: "1", on: running && currentMode == 1)
         _ = add(m, "Usar TV como monitor estendido", #selector(extend), key: "2", on: running && currentMode == 2)
         _ = add(m, "Projetar por outra rede Wi‑Fi…", #selector(otherNetwork))
@@ -116,6 +124,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         _ = add(m, manualIP.isEmpty ? "TV: encontrar automaticamente…" : "TV: \(manualIP)…", #selector(setIP))
         m.addItem(.separator())
 
+        let sec = NSMenu()
+        _ = add(sec, isPaired() ? "Parear de novo com a TV…" : "Parear com a TV…", running ? nil : #selector(pair), enabled: !running)
+        _ = add(sec, "Esquecer o pareamento deste Mac", (running || !isPaired()) ? nil : #selector(forgetPairing), enabled: !running && isPaired())
+        _ = add(sec, "Desligar a depuração ADB da TV", running ? nil : #selector(disableADB), enabled: !running)
+        sec.addItem(.separator())
+        let info = NSMenuItem(title: "Vídeo e controle cifrados (AES‑256‑GCM)", action: nil, keyEquivalent: "")
+        info.isEnabled = false
+        sec.addItem(info)
+        let secItem = NSMenuItem(title: "Segurança", action: nil, keyEquivalent: "")
+        secItem.submenu = sec
+        m.addItem(secItem)
         _ = add(m, "Instalar/atualizar o app na TV", running ? nil : #selector(installTV), enabled: !running)
         _ = add(m, "Abrir ao iniciar o Mac", #selector(toggleLogin), on: loginEnabled())
         _ = add(m, "Ajuda", #selector(help))
@@ -149,7 +168,48 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let r = a.runModal()
         let ssid = name.stringValue.trimmingCharacters(in: .whitespaces)
         if ssid.isEmpty || r == .alertThirdButtonReturn { return }
-        startProjection(mode: r == .alertFirstButtonReturn ? 1 : 2, extra: ["--rede", ssid, pass.stringValue])
+        pendingInput = pass.stringValue + "\n"   // senha pela entrada padrão; depois fica no Chaveiro
+        startProjection(mode: r == .alertFirstButtonReturn ? 1 : 2, extra: ["--rede", ssid])
+    }
+
+    @objc private func pair() {
+        let a = NSAlert()
+        a.messageText = "Parear com a TV"
+        a.informativeText = "Na TV, abra o Diego Cast e escolha “Parear um Mac”. Digite o código de 20 caracteres que aparece (os traços são opcionais). Ele fica guardado no Chaveiro deste Mac."
+        let f = NSTextField(frame: NSRect(x: 0, y: 0, width: 300, height: 24))
+        f.placeholderString = "XXXX-XXXX-XXXX-XXXX-XXXX"
+        a.accessoryView = f
+        a.addButton(withTitle: "Parear")
+        a.addButton(withTitle: "Cancelar")
+        NSApp.activate(ignoringOtherApps: true)
+        a.window.initialFirstResponder = f
+        guard a.runModal() == .alertFirstButtonReturn else { return }
+        let code = f.stringValue.trimmingCharacters(in: .whitespaces)
+        guard !code.isEmpty else { return }
+        var args = [res + "/projetar.sh", "--parear"]
+        if !manualIP.isEmpty { args.append(manualIP) }
+        status = "Pareando com a TV…"
+        launch(kind: "parear", args: args, input: code + "\n")   // código pela entrada padrão, nunca na linha de comando
+    }
+
+    @objc private func forgetPairing() {
+        launch(kind: "esquecer", args: [res + "/projetar.sh", "--esquecer-pareamento"])
+    }
+
+    @objc private func disableADB() {
+        var args = [res + "/projetar.sh", "--desligar-adb"]
+        if !manualIP.isEmpty { args.append(manualIP) }
+        status = "Desligando o ADB da TV…"
+        launch(kind: "adb", args: args)
+    }
+
+    private func isPaired() -> Bool {
+        let p = Process()
+        p.executableURL = URL(fileURLWithPath: "/usr/bin/security")
+        p.arguments = ["find-generic-password", "-s", "DiegoCast", "-a", "tv"]
+        p.standardOutput = FileHandle.nullDevice
+        p.standardError = FileHandle.nullDevice
+        do { try p.run(); p.waitUntilExit(); return p.terminationStatus == 0 } catch { return false }
     }
 
     @objc private func stop() {
@@ -206,6 +266,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     @objc private func help() {
         alert("Como usar o Diego Cast", """
+        Primeira vez: no Fire TV, abra o Diego Cast → “Parear um Mac”; aqui, Segurança → Parear com a TV… \
+        e digite o código. Vídeo e controle passam a ir cifrados, e o Mac só transmite para a sua TV.
+
         1. Abra o app Diego Cast no Fire TV (o Mac também tenta abrir sozinho).
         2. Aqui no menu: “Espelhar tela” ou “Usar TV como monitor estendido”.
 
@@ -233,6 +296,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     // MARK: processo
 
+    private var pendingInput: String?
     private var lastMode = 1
     private var lastExtra: [String] = []
 
@@ -244,6 +308,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
 
     private func startProjection(mode: Int, extra: [String]) {
+        if !CGPreflightScreenCaptureAccess() {
+            CGRequestScreenCaptureAccess()
+            permissionAlert(firstTime: true)
+            return
+        }
         if running {
             stopProcess()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { self.startProjection(mode: mode, extra: extra) }
@@ -257,11 +326,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         args += extra
         currentMode = mode
         status = "Preparando…"
-        launch(kind: "projetar", args: args)
+        let input = pendingInput
+        pendingInput = nil
+        launch(kind: "projetar", args: args, input: input)
     }
 
-    private func launch(kind: String, args: [String]) {
+    private func launch(kind: String, args: [String], input: String? = nil) {
         lastError = nil
+        lastOk = nil
         detail = ""
         userStopped = false
         buffer = ""
@@ -276,7 +348,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let pipe = Pipe()
         p.standardOutput = pipe
         p.standardError = pipe
-        p.standardInput = FileHandle.nullDevice
+        let inPipe = Pipe()
+        p.standardInput = input == nil ? FileHandle.nullDevice : inPipe
         pipe.fileHandleForReading.readabilityHandler = { [weak self] h in
             let d = h.availableData
             guard !d.isEmpty, let s = String(data: d, encoding: .utf8) else { return }
@@ -291,6 +364,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             try p.run()
             proc = p
             procKind = kind
+            if let text = input, let d = text.data(using: .utf8) {
+                inPipe.fileHandleForWriting.write(d)
+                try? inPipe.fileHandleForWriting.close()
+            }
         } catch {
             lastError = "Não consegui iniciar: \(error.localizedDescription)"
         }
@@ -306,7 +383,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func finished(_ code: Int32, kind: String) {
         proc = nil
         currentMode = 0
-        if kind == "instalar" {
+        if kind == "parear" || kind == "esquecer" || kind == "adb" {
+            status = code == 0 ? "Pronto para projetar" : "Falha"
+            if code == 0 { alert("Diego Cast", lastOk ?? "Concluído.") }
+            else { alert("Diego Cast", lastError ?? "Veja o registro para detalhes.") }
+            lastError = nil
+        } else if kind == "instalar" {
             if code == 0 {
                 status = "App instalado na TV"
                 alert("Pronto!", "O Diego Cast foi instalado/atualizado no Fire TV.")
@@ -319,7 +401,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             lastError = nil
         } else {
             status = "Projeção interrompida"
-            if let e = lastError { alert("Diego Cast", e) }
+            if let e = lastError {
+                if e.contains("Gravação de Tela") { lastError = nil; permissionAlert(firstTime: false) }
+                else { alert("Diego Cast", e) }
+            }
         }
         detail = ""
         updateIcon()
@@ -339,10 +424,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 status = "Ao vivo · " + bits.prefix(2).joined(separator: " · ")
             } else if line.hasPrefix("✘") {
                 lastError = String(line.dropFirst()).trimmingCharacters(in: .whitespaces)
+                    .replacingOccurrences(of: "./projetar.sh --parear", with: "menu Segurança → Parear com a TV…")
+            } else if line.hasPrefix("AVISO_ACESSIBILIDADE") {
+                detail = "Libere o Diego Cast em Acessibilidade para passar slides pelo controle"
             } else if line.contains("bloqueou a Gravação de Tela") || line.contains("SEM_PERMISSAO") {
                 lastError = "Libere o Diego Cast em Ajustes do Sistema → Privacidade e Segurança → Gravação de Tela, e projete de novo."
             } else if line.hasPrefix("✔") || line.hasPrefix("→") || line.hasPrefix("!") {
                 let text = String(line.dropFirst()).trimmingCharacters(in: .whitespaces)
+                if line.hasPrefix("✔") { lastOk = text }
                 if line.hasPrefix("✔") && text.hasPrefix("Encontrado") { detail = text }
                 else if !text.hasPrefix("Projetando") { status = text }
                 else { detail = text }
@@ -352,6 +441,44 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         if let m = statusItem.menu, m.highlightedItem == nil { rebuild(m) }
         updateIcon()
+    }
+
+    /// Cada compilação local muda a assinatura do app; o macOS mantém a autorização antiga "presa".
+    /// Redefinir apaga esse registro e faz o macOS perguntar de novo.
+    private func permissionAlert(firstTime: Bool) {
+        let a = NSAlert()
+        a.messageText = firstTime ? "Autorize a Gravação de Tela" : "O macOS bloqueou a Gravação de Tela"
+        a.informativeText = firstTime
+            ? "Na janela do macOS, escolha Permitir (ou ative o Diego Cast em Ajustes → Privacidade e Segurança → Gravação de Tela). Depois o Diego Cast precisa ser reaberto.\n\nSe o Diego Cast já aparece ativado e mesmo assim não funciona, use Redefinir."
+            : "Como o Diego Cast é compilado no seu Mac, cada nova versão precisa ser autorizada de novo e a autorização antiga fica presa (aparece ativada, mas não vale).\n\nClique em Redefinir: o Diego Cast reabre e o macOS pergunta de novo. Escolha Permitir."
+        a.addButton(withTitle: "Redefinir e reabrir")
+        a.addButton(withTitle: "Abrir Ajustes")
+        a.addButton(withTitle: firstTime ? "Já autorizei, reabrir" : "Cancelar")
+        NSApp.activate(ignoringOtherApps: true)
+        switch a.runModal() {
+        case .alertFirstButtonReturn:
+            for service in ["ScreenCapture", "Accessibility"] {
+                let p = Process()
+                p.executableURL = URL(fileURLWithPath: "/usr/bin/tccutil")
+                p.arguments = ["reset", service, Bundle.main.bundleIdentifier ?? "dev.diego.cast.mac"]
+                try? p.run(); p.waitUntilExit()
+            }
+            relaunch()
+        case .alertSecondButtonReturn:
+            NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture")!)
+        default:
+            if firstTime { relaunch() }
+        }
+    }
+
+    private func relaunch() {
+        let path = Bundle.main.bundlePath
+        let p = Process()
+        p.executableURL = URL(fileURLWithPath: "/bin/sh")
+        p.arguments = ["-c", "sleep 1; /usr/bin/open \"$0\"", path]
+        try? p.run()
+        stopProcess()
+        NSApp.terminate(nil)
     }
 
     private func log(_ s: String) {

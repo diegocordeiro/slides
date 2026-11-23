@@ -3,7 +3,8 @@
 #
 #   ./projetar.sh                          acha o Fire TV na rede sozinho
 #   ./projetar.sh 192.168.1.22             usa este IP
-#   ./projetar.sh --rede "NOME" "SENHA"    conecta o Mac a uma rede (ex.: hotspot do celular) e projeta
+#   ./projetar.sh --parear                 pareia este Mac com a TV (uma vez; código mostrado na TV)
+#   ./projetar.sh --rede "NOME"            conecta o Mac a uma rede (ex.: hotspot do celular) e projeta
 #   ./projetar.sh --help                   mostra todas as opções
 #   ./projetar.sh --teste                  grava 4s da tela num vídeo para conferir a captura
 #
@@ -19,7 +20,7 @@ VPORT=7000; CPORT=7002
 CONF="$HOME/.diegocast"; [ -f "$CONF" ] || { [ -f "$HOME/.lumencast" ] && cp "$HOME/.lumencast" "$CONF"; }
 DIR="$(cd "$(dirname "$0")" && pwd)"
 SRC="$DIR/diegocap.swift"; BIN="$DIR/.bin/diegocap"
-TELA=1; QUAL=normal; CONTROLE=1; IP=""; SSID=""; SENHA=""; TESTE=0
+CODEC=hevc; TELA=1; QUAL=normal; CONTROLE=1; IP=""; SSID=""; SENHA=""; TESTE=0; MODO=projetar
 
 ok()   { printf "\033[32m✔\033[0m %s\n" "$1"; }
 info() { printf "\033[36m→\033[0m %s\n" "$1"; }
@@ -34,11 +35,19 @@ mostrar_ajuda() {
   USO
     ./projetar.sh [IP] [opções]
 
+  SEGURANÇA (faça uma vez)
+    --parear                pareia este Mac com a TV: na TV, Diego Cast → "Parear um Mac";
+                            digite o código mostrado. Fica guardado no Chaveiro do Mac.
+    --esquecer-pareamento   apaga o código deste Mac (para parear de novo)
+    --desligar-adb          desliga a depuração ADB da TV (feche a porta quando não for instalar nada)
+    Vídeo e controle vão cifrados (AES-256-GCM); o Mac só transmite para a TV pareada.
+
   ONDE PROJETAR
     (sem nada)              acha o Fire TV na rede sozinho (abre o app na TV pelo ADB)
     192.168.1.22            usa este IP direto
-    --rede "NOME" "SENHA"   conecta o Mac a uma rede Wi‑Fi antes (ex.: hotspot do celular
+    --rede "NOME"           conecta o Mac a uma rede Wi‑Fi antes (ex.: hotspot do celular
                             com dados desligados, para projetar sem internet) e acha a TV nela.
+                            A senha é pedida uma vez e fica no Chaveiro do Mac.
                             Ao sair (Ctrl+C), o Mac volta para a rede de sempre.
 
   O QUE PROJETAR
@@ -52,6 +61,11 @@ mostrar_ajuda() {
     alta                    1080p · até 60 fps · 14 Mbit/s  (Wi‑Fi 5 GHz bom)
     slides                  1080p · até 30 fps · 6 Mbit/s   (texto nítido, economiza rede)
     leve                    720p  · até 30 fps · 4 Mbit/s   (Wi‑Fi fraco / hotspot do celular)
+
+  CODEC  (--codec ...)
+    hevc                    H.265: texto mais nítido com menos dados (padrão)
+    h264                    H.264: compatibilidade máxima. Se a TV não decodificar HEVC,
+                            o Diego Cast volta para H.264 sozinho.
 
   OUTRAS
     --sem-controle          não usa o controle do Fire TV para passar slides
@@ -67,7 +81,8 @@ mostrar_ajuda() {
   EXEMPLOS
     ./projetar.sh
     ./projetar.sh --tela 2 --qualidade slides
-    ./projetar.sh --rede "iPhone do Diego" "minhasenha" --qualidade leve
+    ./projetar.sh --parear
+    ./projetar.sh --rede "iPhone do Diego" --qualidade leve
     ./projetar.sh 192.168.1.22 --sem-controle
 
   OUTROS COMANDOS
@@ -76,14 +91,22 @@ mostrar_ajuda() {
   PRIMEIRA VEZ NO MAC
     Ajustes do Sistema → Privacidade e Segurança: libere o seu terminal em
     "Gravação de Tela" (captura) e "Acessibilidade" (passar slides pelo controle).
+    Depois pareie com a TV: ./projetar.sh --parear
 
 AJUDA
 }
 
 while [ $# -gt 0 ]; do
   case "$1" in
-    --rede) SSID="$2"; SENHA="$3"; shift 3 ;;
+    --rede)
+      SSID="$2"; shift 2
+      # compatibilidade: --rede NOME SENHA (a senha fica visível na lista de processos; prefira sem)
+      if [ $# -gt 0 ] && [ "${1#-}" = "$1" ] && ! printf '%s' "$1" | grep -Eq '^[0-9.]+$'; then SENHA="$1"; shift; fi ;;
+    --parear) MODO=parear; shift ;;
+    --esquecer-pareamento) MODO=esquecer; shift ;;
+    --desligar-adb) MODO=adb; shift ;;
     --tela) TELA="$2"; shift 2 ;;
+    --codec) CODEC="$2"; shift 2 ;;
     --qualidade) QUAL="$2"; shift 2 ;;
     --sem-controle) CONTROLE=0; shift ;;
     --teste) TESTE=1; shift ;;
@@ -99,6 +122,24 @@ case "$QUAL" in
   slides) W=1920; H=1080; FPS=30; BR=6000000 ;;   # texto nítido, economiza rede
   *)     W=1920; H=1080; FPS=60; BR=9000000  ;;   # padrão: 60 fps, fluido
 esac
+
+# Chaveiro do macOS: segredos nunca vão para a linha de comando (onde "ps" mostraria)
+kc_get() { security find-generic-password -s "$1" -a "$2" -w 2>/dev/null; }
+kc_put() {  # serviço conta segredo rótulo
+  local v; v=$(printf '%s' "$3" | sed 's/[\\"]/\\&/g')
+  printf 'add-generic-password -U -s "%s" -a "%s" -l "%s" -w "%s"\n' "$1" "$2" "$4" "$v" | security -i >/dev/null 2>&1
+}
+
+CODIGO=""
+if [ "$MODO" = "parear" ] && [ ! -t 0 ]; then IFS= read -r CODIGO; fi
+if [ -n "$SSID" ] && [ -z "$SENHA" ] && [ ! -t 0 ]; then IFS= read -r SENHA_STDIN; fi
+
+if [ "$MODO" = "esquecer" ]; then
+  security delete-generic-password -s DiegoCast -a tv >/dev/null 2>&1
+  printf "\033[32m✔\033[0m %s\n" "Pareamento apagado deste Mac. Para projetar de novo: ./projetar.sh --parear"
+  exit 0
+fi
+CHAVE=$(kc_get DiegoCast tv)
 
 PY=""
 python3 -c 1 >/dev/null 2>&1 && PY=python3
@@ -127,16 +168,16 @@ if [ ! -x "$BIN" ] || [ "$SRC" -nt "$BIN" ] || [ "$DIR/vdisplay.h" -nt "$BIN" ];
   info "Compilando o capturador de tela (só na primeira vez, ~30s)..."
   mkdir -p "$DIR/.bin"
   HDR="$DIR/vdisplay.h"
-  xcrun swiftc -O -swift-version 5 -parse-as-library -import-objc-header "$HDR" -o "$BIN" "$SRC" \
+  xcrun swiftc -O -swift-version 5 -target "$(uname -m)-apple-macos13.0" -parse-as-library -import-objc-header "$HDR" -o "$BIN" "$SRC" \
       2>"$DIR/.diegocap-erros.txt" \
-    || xcrun swiftc -O -swift-version 5 -parse-as-library -import-objc-header "$HDR" \
+    || xcrun swiftc -O -swift-version 5 -target "$(uname -m)-apple-macos13.0" -parse-as-library -import-objc-header "$HDR" \
       -Xlinker -undefined -Xlinker dynamic_lookup -o "$BIN" "$SRC" 2>>"$DIR/.diegocap-erros.txt" \
     || { cat "$DIR/.diegocap-erros.txt"; erro "Falha ao compilar o capturador (mande o erro acima)"; }
   ok "Capturador pronto"
 fi
 
 capturar() {  # argumentos extras vão para o diegocap
-  "$BIN" --display "$TELA" --width "$W" --height "$H" --fps "$FPS" --bitrate "$BR" "$@" &
+  printf '%s\n' "$CHAVE" | "$BIN" --display "$TELA" --width "$W" --height "$H" --fps "$FPS" --bitrate "$BR" --codec "$CODEC" "$@" --key-stdin &
   CAP_PID=$!
   wait $CAP_PID
   local rc=$?
@@ -155,24 +196,37 @@ permissao() {
 # ---------------------------------------------------------------- modo teste (não precisa da TV)
 if [ "$TESTE" = "1" ]; then
   info "Gravando 4s da tela $TELA..."
-  capturar --out /tmp/diegocast-teste.h264 --seconds 4 --verbose
+  capturar --out /tmp/diegocast-teste.raw --seconds 4 --verbose
   RC=$?
   echo
   [ "$RC" = "3" ] && { permissao; exit 1; }
   [ "$RC" = "4" ] && erro "Essa tela não existe (veja quantas há com: $BIN --list)"
   [ "$RC" = "0" ] || erro "A captura falhou (código $RC). Mande as linhas que começam com · acima."
   if command -v ffmpeg >/dev/null 2>&1; then
-    ffmpeg -loglevel error -y -f h264 -i /tmp/diegocast-teste.h264 -c copy /tmp/diegocast-teste.mp4 \
+    FMT=hevc; [ "$CODEC" = "h264" ] && FMT=h264
+    ffmpeg -loglevel error -y -f $FMT -i /tmp/diegocast-teste.raw -c copy -tag:v hvc1 /tmp/diegocast-teste.mp4 2>/dev/null \
+      || ffmpeg -loglevel error -y -f $FMT -i /tmp/diegocast-teste.raw -c copy /tmp/diegocast-teste.mp4 \
       && { ok "Captura funcionando. Abrindo o vídeo gravado..."; open /tmp/diegocast-teste.mp4; }
   else
-    ok "Captura funcionando ($(du -h /tmp/diegocast-teste.h264 | cut -f1) gravados)"
+    ok "Captura funcionando ($(du -h /tmp/diegocast-teste.raw | cut -f1) gravados)"
   fi
   exit 0
 fi
 
-# ---------------------------------------------------------------- rede direta
+if [ "$MODO" = "projetar" ] && [ -z "$CHAVE" ]; then
+  erro "Este Mac ainda não foi pareado com a TV. Na TV: Diego Cast → \"Parear um Mac\". Depois: ./projetar.sh --parear"
+fi
+
+# ---------------------------------------------------------------- rede escolhida
 if [ -n "$SSID" ]; then
   [ -n "$WIFI" ] || erro "Não achei a placa Wi‑Fi do Mac"
+  [ -n "$SENHA" ] && aviso "Senha passada na linha de comando: da próxima vez use só --rede \"$SSID\" (fica no Chaveiro)."
+  [ -z "$SENHA" ] && [ -n "$SENHA_STDIN" ] && SENHA="$SENHA_STDIN"     # digitada agora no app tem prioridade
+  [ -z "$SENHA" ] && SENHA=$(kc_get DiegoCast-wifi "$SSID")
+  if [ -z "$SENHA" ]; then
+    if [ -n "$SENHA_STDIN" ]; then SENHA="$SENHA_STDIN"
+    elif [ -t 0 ]; then read -r -s -p "Senha da rede \"$SSID\": " SENHA; echo; fi
+  fi
   info "Conectando o Mac à rede \"$SSID\"..."
   networksetup -setairportpower "$WIFI" on
   SAIDA=$(networksetup -setairportnetwork "$WIFI" "$SSID" "$SENHA" 2>&1)
@@ -186,6 +240,7 @@ if [ -n "$SSID" ]; then
   done
   [ -n "$MEU_IP" ] || erro "Não consegui entrar na rede \"$SSID\". Confira nome e senha."
   ok "Mac conectado à rede \"$SSID\" ($MEU_IP). O Fire TV precisa estar nesta mesma rede."
+  [ -n "$SENHA" ] && kc_put DiegoCast-wifi "$SSID" "$SENHA" "Diego Cast – Wi‑Fi $SSID"
 fi
 
 # ---------------------------------------------------------------- achar o Fire TV
@@ -208,8 +263,8 @@ EOF
 
 abrir_app_via_adb() {
   command -v adb >/dev/null 2>&1 || return
-  perl -e 'alarm 5; exec @ARGV' adb connect "$1:5555" >/dev/null 2>&1
-  perl -e 'alarm 5; exec @ARGV' adb -s "$1:5555" shell am start -n dev.diego.cast/.CastActivity >/dev/null 2>&1
+  perl -e 'alarm 5; exec @ARGV' adb connect "$1:5555" </dev/null >/dev/null 2>&1
+  perl -e 'alarm 5; exec @ARGV' adb -s "$1:5555" shell am start -n dev.diego.cast/.CastActivity </dev/null >/dev/null 2>&1
 }
 
 SALVO=""; [ -f "$CONF" ] && SALVO=$(cat "$CONF")
@@ -229,32 +284,49 @@ else
 fi
 echo "$IP" > "$CONF"
 
+if [ "$MODO" = "adb" ]; then
+  command -v adb >/dev/null 2>&1 || erro "adb não encontrado (brew install android-platform-tools)"
+  perl -e 'alarm 6; exec @ARGV' adb connect "$IP:5555" </dev/null >/dev/null 2>&1
+  if perl -e 'alarm 8; exec @ARGV' adb -s "$IP:5555" shell settings put global adb_enabled 0 </dev/null >/dev/null 2>&1; then
+    ok "Depuração ADB desligada na TV (porta 5555 fechada)."
+    echo "   Para instalar ou atualizar de novo: Configurações → Meu Fire TV → Opções do desenvolvedor → Depuração ADB."
+    exit 0
+  fi
+  erro "Não consegui falar com a TV pelo ADB (já está desligado?)"
+fi
+
 info "Verificando se o Diego Cast está aberto na TV..."
 for i in $(seq 1 10); do nc -z -G 2 "$IP" $VPORT >/dev/null 2>&1 && break; sleep 1; done
 nc -z -G 2 "$IP" $VPORT >/dev/null 2>&1 || erro "O Fire TV ($IP) não respondeu. Abra o app Diego Cast na TV."
 ok "Fire TV pronto"
 
-# ---------------------------------------------------------------- controle remoto → slides
-if [ "$CONTROLE" = "1" ] && [ -n "$PY" ]; then
-  $PY - "$IP" "$CPORT" <<'EOF' &
-import socket, subprocess, sys, time
-ip, port = sys.argv[1], int(sys.argv[2])
-# R/L = setas (Keynote, PowerPoint, Google Slides, PDF); U/D = cima/baixo; PLAY = espaço
-CODES = {"R": 124, "L": 123, "U": 126, "D": 125, "PLAY": 49}
-while True:
-    try:
-        s = socket.create_connection((ip, port), timeout=5); s.settimeout(None)
-        for line in s.makefile("r"):
-            c = CODES.get(line.strip())
-            if c is not None:
-                subprocess.run(["osascript", "-e",
-                    'tell application "System Events" to key code %d' % c],
-                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    except Exception:
-        time.sleep(1)
-EOF
-  CTRL_PID=$!
-  ok "Controle do Fire TV ligado: ◀ ▶ e OK passam os slides"
+if [ "$MODO" = "parear" ]; then
+  if [ -z "$CODIGO" ]; then
+    echo "   Na TV: abra o Diego Cast e escolha \"Parear um Mac\"."
+    read -r -p "   Código mostrado na TV: " CODIGO
+  fi
+  CODIGO=$(printf '%s' "$CODIGO" | tr '[:lower:]' '[:upper:]' | tr -cd 'A-Z0-9')
+  [ ${#CODIGO} -eq 20 ] || erro "O código tem 20 letras e números (os traços são opcionais)."
+  printf '%s\n' "$CODIGO" | "$BIN" --host "$IP" --control-port "$CPORT" --check --key-stdin
+  case $? in
+    0) ;;
+    5) erro "O código não confere com o mostrado na TV (confira as letras; o código muda se você segurar OK no botão)." ;;
+    6) erro "A TV em $IP não respondeu ao pareamento: o app da TV está desatualizado. Rode ./instalar-cast.sh" ;;
+    *) erro "Não consegui falar com a TV em $IP." ;;
+  esac
+  kc_put DiegoCast tv "$CODIGO" "Diego Cast (pareamento com a TV)"
+  [ "$(kc_get DiegoCast tv)" = "$CODIGO" ] || erro "Não consegui guardar o código no Chaveiro."
+  ok "Mac pareado com a TV. O código ficou guardado no Chaveiro; não precisa digitar de novo."
+  exit 0
+fi
+
+# ---------------------------------------------------------------- controle remoto → slides (cifrado)
+# O canal de controle fica sempre ligado: além das teclas, a TV pede por ele os quadros-chave
+CTRL_ARGS=(--control-port "$CPORT")
+if [ "$CONTROLE" = "1" ]; then
+  ok "Controle do Fire TV ligado (cifrado): ◀ ▶ e OK passam os slides"
+else
+  CTRL_ARGS+=(--no-keys)
 fi
 
 caffeinate -dimsu -w $$ >/dev/null 2>&1 &
@@ -262,16 +334,19 @@ CAF_PID=$!
 
 # ---------------------------------------------------------------- transmissão
 echo
-ok "Projetando a tela $TELA em $IP  (qualidade: $QUAL · ${W}x${H} · até ${FPS} fps)"
+ok "Projetando a tela $TELA em $IP  (qualidade: $QUAL · ${W}x${H} · até ${FPS} fps · $(echo $CODEC | tr a-z A-Z) · cifrado)"
 echo "   Ctrl+C para parar."
 echo
 while [ "$PAROU" = "0" ]; do
-  capturar --host "$IP" --port "$VPORT"
+  capturar --host "$IP" --port "$VPORT" "${CTRL_ARGS[@]}"
   RC=$?
   [ "$PAROU" = "1" ] && break
   case "$RC" in
     3) permissao; limpar; exit 1 ;;
     4) erro "Não foi possível usar a tela $TELA" ;;
+    7) aviso "A TV não decodifica HEVC: passando para H.264"; CODEC=h264; continue ;;
+    6) erro "O app da TV está desatualizado para esta versão do Mac. Rode ./instalar-cast.sh" ;;
+    5) erro "A TV não reconheceu este Mac (o código foi trocado na TV?). Pareie de novo: ./projetar.sh --parear" ;;
   esac
   echo
   aviso "Conexão caiu (a TV saiu do app?). Tentando de novo em 2s..."
