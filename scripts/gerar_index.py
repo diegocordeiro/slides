@@ -17,6 +17,8 @@ Uso:
 from __future__ import annotations
 
 import argparse
+import json
+import hashlib
 import html
 import os
 import re
@@ -329,6 +331,35 @@ def procurar_aulas(raiz: str) -> list:
     return aulas
 
 
+def gerar_json(aulas: list, raiz: str, gerado_em: datetime | None = None) -> str:
+    """Índice legível por programas (ex.: o app Diego Cast no Fire TV).
+
+    Usa os mesmos dados do index.html; não altera nenhuma aula. "versao" muda só quando
+    o HTML da aula muda, para o app saber o que atualizar.
+    """
+    itens = []
+    for a in aulas:
+        try:
+            with open(os.path.join(raiz, a["rel"]), "rb") as f:
+                versao = hashlib.sha1(f.read()).hexdigest()[:12]
+        except OSError:
+            versao = ""
+        itens.append({
+            "secao": "{} · {}".format(a["area"], a["disciplina"]),
+            "area": a["area"],
+            "disciplina": a["disciplina"],
+            "titulo": a["assunto"],
+            "curso": a["curso"],
+            "slides": a["slides"],
+            "url": a["rel"],
+            "versao": versao,
+        })
+    dados = {"versao_formato": 1, "aulas": itens}
+    if gerado_em is not None:
+        dados["gerado_em"] = gerado_em.isoformat(timespec="seconds")
+    return json.dumps(dados, ensure_ascii=False, indent=2) + "\n"
+
+
 def gerar_html(aulas: list, gerado_em: datetime | None = None) -> str:
     """Monta o HTML final do índice (sem `gerado_em`, o rodapé sai sem a data)."""
     grupos = {}
@@ -465,10 +496,15 @@ def main() -> None:
     carimbo = None if args.sem_data else datetime.now()
     with open(destino, "w", encoding="utf-8") as arquivo:
         arquivo.write(gerar_html(aulas, carimbo))
+    # slides.json ao lado do index.html (no Pages: https://diegocordeiro.github.io/slides/slides.json)
+    destino_json = os.path.join(pasta_saida, "slides.json")
+    with open(destino_json, "w", encoding="utf-8") as arquivo:
+        arquivo.write(gerar_json(aulas, raiz, carimbo))
 
     print("{} aula(s) encontrada(s):".format(len(aulas)))
     for aula in aulas:
         print("  - {} ({} slides) -> {}".format(aula["pasta"] or "aula", aula["slides"], aula["rel"]))
+    print("slides.json gerado em {}".format(os.path.relpath(destino_json, os.getcwd())))
     print("index gerado em {} {}".format(
         os.path.relpath(destino, os.getcwd()), "(sem data)" if args.sem_data else ""
     ).rstrip())
