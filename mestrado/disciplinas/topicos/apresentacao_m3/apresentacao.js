@@ -51,11 +51,7 @@ function sh(n,semRolar){
   alvo.classList.add('ac');
   if(movel()&&!semRolar){rolandoAte=n;clearTimeout(rolandoT);rolandoT=setTimeout(function(){rolandoAte=null},900);alvo.scrollIntoView({behavior:'smooth',block:'start'})}
   document.getElementById('ctr').textContent=(n+1)+' / '+t;
-  dots.forEach(function(b,i){
-    var on=i===n;
-    b.classList.toggle('ac',on);
-    if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
-  });
+  desenharDots('seguir');
   var bp=document.getElementById('bprev'),bn=document.getElementById('bnext');
   if(bp)bp.disabled=n<=0;
   if(bn)bn.disabled=n>=t-1;
@@ -84,19 +80,78 @@ function ajustarCelular(sl){
 function nx(){if(c<t-1){c++;sh(c);sync()}}
 function pv(){if(c>0){c--;sh(c);sync()}}
 function go(n){if(n<0||n>=t||n===c)return;c=n;sh(c);sync()}
-function buildDots(){
+/* ===== Números dos slides em carrossel =====
+   Se todos os números cabem, aparecem todos (centralizados). Senão:
+   ‹  1  …  [janela com o slide atual]  …  N  ›
+   O primeiro e o último ficam sempre visíveis; a janela desliza quando o slide atual
+   chega perto da borda. "…", ‹ ›, roda do mouse e arraste rolam os números sem trocar de slide. */
+var dotIni=1,dotK=0,dotLarg=34;
+function nomeSlide(i){var s=document.getElementById('s'+(i+1));var h=s&&(s.querySelector('.slhd h2')||s.querySelector('h1')||s.querySelector('h2'));return h?h.textContent.trim():'Slide '+(i+1)}
+function botaoDot(i){
+  var b=document.createElement('button');var nome=nomeSlide(i);
+  b.type='button';b.className='dot';b.textContent=i+1;b.title=(i+1)+' — '+nome;
+  b.setAttribute('aria-label','Ir para o slide '+(i+1)+': '+nome);
+  b.onclick=function(){go(i)};
+  if(i===c){b.classList.add('ac');b.setAttribute('aria-current','page')}
+  dots[i]=b;return b;
+}
+function botaoAux(txt,cls,rot,fn){var b=document.createElement('button');b.type='button';b.className='dot '+cls;b.textContent=txt;b.title=rot;b.setAttribute('aria-label',rot);b.onclick=fn;return b}
+function capacidadeDots(box){
+  var cs=getComputedStyle(box),gap=parseFloat(cs.columnGap||cs.gap)||5;
+  var tst=document.createElement('button');tst.className='dot';tst.textContent=t;tst.style.visibility='hidden';box.appendChild(tst);
+  dotLarg=tst.offsetWidth+gap;box.removeChild(tst);
+  var w=box.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+  return Math.max(1,Math.floor((w+gap)/dotLarg));
+}
+function rolarDots(d){if(!dotK)return;var a=dotIni;dotIni=Math.max(1,Math.min(t-2,dotIni+d));desenharDots('',dotIni-a)}
+function desenharDots(modo,anim){
   var box=document.getElementById('dots');if(!box)return;
-  dots=[];box.innerHTML='';
-  document.querySelectorAll('.sl').forEach(function(s,i){
-    var h=s.querySelector('.slhd h2')||s.querySelector('h1')||s.querySelector('h2');
-    var nome=h?h.textContent.trim():'Slide '+(i+1);
-    var b=document.createElement('button');
-    b.type='button';b.className='dot';b.textContent=i+1;
-    b.title=(i+1)+' — '+nome;
-    b.setAttribute('aria-label','Ir para o slide '+(i+1)+': '+nome);
-    b.onclick=function(){go(i)};
-    box.appendChild(b);dots.push(b);
-  });
+  dots=[];box.innerHTML='';box.classList.remove('car');
+  var cap=capacidadeDots(box);
+  if(t<=cap){dotK=0;for(var i=0;i<t;i++)box.appendChild(botaoDot(i));return}
+  box.classList.add('car');
+  var m=Math.max(3,cap-4); /* lugares entre "1" e "N" (‹ 1 … janela … N ›) */
+  function janela(a){
+    a=Math.max(1,Math.min(t-2,a));
+    var le=a>1,L=m-(le?1:0),re=a+L-1<t-2;
+    if(re)L--;else{L=m-(le?1:0);a=Math.max(1,t-1-L);le=a>1;L=m-(le?1:0);a=t-1-L}
+    return {a:a,L:L,le:le,re:re};
+  }
+  var antes=dotIni,J;
+  if(modo==='centrar')J=janela(c-Math.floor((m-2)/2));
+  else{
+    J=janela(dotIni);
+    if(modo==='seguir'){
+      if(c<J.a+1&&J.le)J=janela(c-1);
+      else if(c>J.a+J.L-2&&J.re){J=janela(c-J.L+2);if(c>J.a+J.L-2&&J.re)J=janela(J.a+(c-(J.a+J.L-2)))}
+      if(c<J.a||c>J.a+J.L-1)J=janela(c-Math.floor(J.L/2));
+    }
+  }
+  dotIni=J.a;dotK=J.L;
+  if(modo==='seguir'&&dotIni!==antes)anim=dotIni-antes;
+  box.appendChild(botaoAux('‹','dnav','Mostrar números anteriores',function(){rolarDots(-Math.max(1,dotK-1))}));
+  box.appendChild(botaoDot(0));
+  if(J.le)box.appendChild(botaoAux('…','dret','Mostrar slides anteriores',function(){rolarDots(-dotK)}));
+  var jan=document.createElement('span');jan.className='djan';
+  for(var k=J.a;k<J.a+J.L;k++)jan.appendChild(botaoDot(k));
+  box.appendChild(jan);
+  if(J.re)box.appendChild(botaoAux('…','dret','Mostrar slides seguintes',function(){rolarDots(dotK)}));
+  box.appendChild(botaoDot(t-1));
+  box.appendChild(botaoAux('›','dnav','Mostrar números seguintes',function(){rolarDots(Math.max(1,dotK-1))}));
+  if(anim&&jan.animate){var dx=Math.max(-3,Math.min(3,anim))*dotLarg;jan.animate([{transform:'translateX('+dx+'px)',opacity:.4},{transform:'none',opacity:1}],{duration:220,easing:'ease-out'})}
+}
+function buildDots(){
+  desenharDots('centrar');
+  var box=document.getElementById('dots');if(!box||box._car)return;box._car=1;
+  /* roda do mouse/touchpad sobre os números */
+  var acc=0;box.addEventListener('wheel',function(e){if(!dotK)return;e.preventDefault();acc+=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;
+    if(Math.abs(acc)>=40){rolarDots(acc>0?1:-1);acc=0}},{passive:false});
+  /* arrastar os números com o dedo */
+  var x0=null,ini0=0;
+  box.addEventListener('touchstart',function(e){if(!dotK||e.touches.length!==1)return;x0=e.touches[0].clientX;ini0=dotIni},{passive:true});
+  box.addEventListener('touchmove',function(e){if(x0===null)return;var d=Math.round((x0-e.touches[0].clientX)/dotLarg);var alvo=Math.max(1,Math.min(t-2,ini0+d));if(alvo!==dotIni){var a=dotIni;dotIni=alvo;desenharDots('',dotIni-a)}if(e.cancelable)e.preventDefault()},{passive:false});
+  box.addEventListener('touchend',function(){x0=null},{passive:true});
+  var rt=0;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){desenharDots('seguir')},80)});
 }
 
 let fzLevel=1,zoomManual=false;
