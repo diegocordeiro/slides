@@ -1950,6 +1950,7 @@ ul.chk li { margin:6px 0 }
 .slbd.g .cd .txt-bloco, .slbd.g .bege .txt-bloco { font-size:15px; line-height:1.42 }
 .slbd.g .fig { flex:1 1 auto; min-height:0 }
 .slbd.g .fig img { object-fit:contain }
+.mail-prof { font:700 22px/1.2 ui-monospace, Menlo, Consolas, monospace; color:var(--bem); background:#fff; border:1px solid var(--vd-bd); border-radius:10px; padding:10px 14px; align-self:flex-start; margin:0 !important }
 .slbd.g .col > .fig + .fig { margin-top:0 }
 .slbd.g > .card, .slbd.g > .grade > .card { padding:12px 18px }
 .slbd.g > .card ol.passos, .slbd.g > .grade > .card ol.passos, .slbd.g > .card ul, .slbd.g > .grade > .card ul { display:grid; grid-template-columns:1fr 1fr; column-gap:30px; align-items:start }
