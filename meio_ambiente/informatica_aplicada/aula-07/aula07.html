@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="generator" content="editor_slides">
+  <title>Informática Aplicada · Aula 07 — Google Documentos: textos na nuvem</title>
+  <link rel="stylesheet" href="aula07.css">
+  <script>try{var q=location.search;if(!/[?&](modo=apresentador|pdf=1)/.test(q)&&matchMedia('(max-width: 820px), (max-height: 500px) and (pointer: coarse)').matches)document.documentElement.classList.add(/[?&]web=1/.test(q)?'movel':'celular-pdf')}catch(e){}</script>
+</head>
+
+<body data-limite="100" data-pdf="aula07.pdf">
+  <header class="tb">
+    <div class="tb-left">
+      <img src="img/logo_aula.svg" class="tb-logo" alt="">
+      <h2>Informática Aplicada · Aula 07</h2>
+    </div>
+    <div class="tb-right">
+      <div class="fz" aria-label="Tamanho do texto">
+        <button onclick="fz(-1)" title="Diminuir tamanho da fonte">A−</button>
+        <span id="fzpct">100%</span>
+        <button onclick="fz(1)" title="Aumentar tamanho da fonte">A+</button>
+      </div>
+      <button class="bpb" id="bnt" onclick="toggleNotas()" title="Mostrar/ocultar roteiro de fala (tecla N)">Roteiro</button>
+      <button class="tmr" id="tmr" onclick="if(event.shiftKey){tmrDefinirLimite()}else{toggleTimer()}" ondblclick="resetTimer()" title="Iniciar/pausar (T) · duplo clique zera · Shift+clique define o limite">00:00 / 100:00</button>
+      <button class="bpb" id="bp" onclick="openPresenter()">Modo apresentador</button>
+      <span class="ct" id="ctr">1 / 55</span>
+      <span class="modo-tag">APRESENTAÇÃO</span>
+    </div>
+  </header>
+  <div class="fita"></div>
+  <div class="sc">
+
+    <!-- SLIDE 1 — Google Documentos: textos na nuvem -->
+    <div class="sl" id="s1">
+      <div class="capa">
+        <div class="esq">
+          <div class="rot">Informática Aplicada · Aula 07</div>
+          <h1>Google Documentos:<br>textos na nuvem</h1>
+          <div class="faixa"></div>
+          <div class="sub">Professor Diego Cordeiro de Oliveira</div>
+        </div>
+        <div class="dir"><img src="img/capa.svg" alt=""></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Apresentar o roteiro: criar a conta, digitar e formatar um trabalho segundo a ABNT, imagens, digitação por voz, colaboração e uso no celular. Cada aluno vai usar a própria Conta do Google.</div>
+    </div>
+
+    <!-- SLIDE 2 — O que vamos aprender? -->
+    <div class="sl" id="s2">
+      <div class="slhd"><span class="num">2</span><h2>O que vamos aprender?</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="card grow"><h3>Digitar trabalhos acadêmicos</h3><div class="txt-bloco"><p>Criar, nomear, salvar e baixar documentos no <strong>Google Documentos</strong>, com tudo guardado no <strong>Google Drive</strong>.</p></div></div><div class="card vd grow"><h3>Formatar segundo a ABNT</h3><div class="txt-bloco"><p>Página A4, margens, fonte, espaçamento, recuo de parágrafo e citação longa conforme a <strong>NBR 14724:2024</strong>.</p></div></div></div>
+          <div class="col"><div class="card grow"><h3>Imagens e revisão</h3><div class="txt-bloco"><p>Inserir e posicionar imagens, usar o corretor ortográfico e o <strong>histórico de versões</strong>.</p></div></div><div class="card vd grow"><h3>Voz, colaboração e celular</h3><div class="txt-bloco"><p>Ditar texto, <strong>compartilhar</strong>, comentar e sugerir em tempo real, e continuar o trabalho no <strong>celular</strong>.</p></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Objetivos da aula. Ao final, cada aluno terá um documento formatado e compartilhado com o professor.</div>
+    </div>
+
+    <!-- SLIDE 3 — Recursos básicos -->
+    <div class="sl" id="s3">
+      <div class="secao-slide"><div class="divisor"><img class="bg" src="img/secao_basico.svg" alt=""><div class="ov"></div><div class="in"><div class="rot">Bloco 1</div><h1>Recursos básicos</h1><div class="txt-bloco">Conta Google, criar, salvar e organizar no Drive</div></div></div></div>
+    </div>
+
+    <!-- SLIDE 4 — O que é o Google Documentos? -->
+    <div class="sl" id="s4">
+      <div class="slhd"><span class="num">4</span><h2>O que é o Google Documentos?</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1.1fr 1fr">
+          <div class="col"><div class="card grow"><div class="txt-bloco"><p class="lead">O <strong>Google Documentos</strong> (Google Docs) é o editor de textos on-line do Google, lançado em <strong>2006</strong>. Funciona no <strong>navegador</strong> do computador e em <strong>apps para Android e iOS</strong>.</p><p class="lead">Faz parte do pacote do Google com <strong>Planilhas, Apresentações e Formulários</strong>. Os arquivos ficam no <strong>Google Drive</strong> e podem ser editados por várias pessoas ao mesmo tempo.</p></div></div></div>
+          <div class="col"><div class="card vd grow"><h3>Por que usar?</h3><ul><li><strong>Gratuito</strong> com uma Conta do Google (15 GB no Drive, divididos com Gmail e Fotos).</li><li><strong>Salvamento automático</strong>: não há botão Salvar.</li><li><strong>Colaboração em tempo real</strong>, comentários e sugestões.</li><li>Abre e exporta <strong>Word (.docx)</strong>, <strong>PDF</strong>, <strong>ODT</strong>, RTF, TXT, EPUB e Markdown.</li><li>Pode funcionar <strong>off-line</strong> (Chrome/Edge e apps).</li></ul></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Contextualizar: o Docs substitui o editor instalado no computador por um editor na nuvem. Reforçar que o arquivo mora no Drive e que é possível baixar em Word ou PDF para entregar.</div>
+    </div>
+
+    <!-- SLIDE 5 — Crie sua Conta do Google -->
+    <div class="sl" id="s5">
+      <div class="slhd"><span class="num">5</span><h2>Crie sua Conta do Google</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1.25fr 1fr">
+          <div class="col"><div class="card grow"><h3>Passo a passo</h3><ol class="passos"><li>Acesse <strong>accounts.google.com/signup</strong> (ou “Criar conta” na tela de login) e escolha <strong>Para uso pessoal</strong>.</li><li>Informe <strong>nome e sobrenome</strong>.</li><li>Preencha <strong>data de nascimento</strong> e <strong>gênero</strong>.</li><li>Escolha um <strong>endereço do Gmail</strong>: ele será o seu login.</li><li>Crie uma <strong>senha forte</strong>: 8 ou mais caracteres, misturando letras, números e símbolos.</li><li>Adicione <strong>telefone e e-mail de recuperação</strong> (recomendado).</li><li>Revise e <strong>aceite os Termos</strong> de Serviço e a Política de Privacidade.</li></ol></div></div>
+          <div class="col"><div class="card vd grow"><h3>Dicas de segurança</h3><ul><li>Use um e-mail com o seu nome, por exemplo <code>nome.sobrenome</code>.</li><li>Não compartilhe a senha e não salve em computadores públicos.</li><li>Ative a <strong>verificação em duas etapas</strong> em <em>myaccount.google.com</em> &gt; Segurança.</li><li>Quem não tem idade mínima para conta própria usa uma conta <strong>supervisionada pelo responsável</strong> (Family Link).</li></ul></div><div class="bege"><h3>Atenção</h3><div class="txt-bloco">Já usa Android, Gmail ou YouTube? Então você <strong>já tem uma Conta do Google</strong>.</div></div></div></div>
+      </div>
+      <div class="nt"><strong>~8 min (prática).</strong> Cada aluno cria ou acessa a própria conta. Circular pela sala para ajudar com a verificação por telefone. Lembrar de sair da conta ao final se o computador for compartilhado.</div>
+    </div>
+
+    <!-- SLIDE 6 — Abrindo o Google Documentos -->
+    <div class="sl" id="s6">
+      <div class="slhd"><span class="num">6</span><h2>Abrindo o Google Documentos</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:2fr 1fr">
+          <div class="col"><div class="fig"><img src="img/google-apps.jpg" alt="Tela inicial do Documentos com o menu Google Apps aberto e o ícone Documentos destacado"></div></div>
+          <div class="col"><div class="card grow"><h3>No computador</h3><ol class="passos"><li>Entre na sua conta em <strong>google.com</strong> (de preferência no Chrome).</li><li>Clique no <strong>Google Apps</strong> (9 pontinhos, no canto superior direito).</li><li>Clique em <strong>Documentos</strong>.</li></ol><div class="cd"><div class="txt-bloco"><strong>Atalhos:</strong> <code>docs.google.com</code> abre a tela inicial e <code>doc.new</code> cria um documento em branco na hora.</div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Mostrar os dois caminhos: menu de apps e os atalhos doc.new / docs.google.com.</div>
+    </div>
+
+    <!-- SLIDE 7 — Novo documento: em branco ou modelo -->
+    <div class="sl" id="s7">
+      <div class="slhd"><span class="num">7</span><h2>Novo documento: em branco ou modelo</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:2fr 1fr">
+          <div class="col"><div class="fig"><img src="img/documento-em-branco.jpg" alt="Documento em branco no Google Documentos com o título Documento sem título e a barra de menus destacados"></div></div>
+          <div class="col"><div class="card grow"><ul><li>Clique em <strong>Em branco</strong> ou escolha um item da <strong>Galeria de modelos</strong> (currículos, cartas, relatórios).</li><li>Dê um nome clicando em <strong>Documento sem título</strong>, no canto superior esquerdo.</li><li>O arquivo é <strong>salvo automaticamente</strong> no Google Drive.</li><li><strong>Arquivo &gt; Baixar</strong>: Word (.docx), PDF, ODT, RTF, TXT, HTML, EPUB ou Markdown.</li></ul></div><div class="cd"><div class="txt-bloco">Os botões <strong>Ata da reunião</strong>, <strong>Rascunho de e-mail</strong> e <strong>Mais</strong> no documento vazio são <strong>blocos de criação</strong> prontos: basta começar a digitar para eles sumirem.</div></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Abrir um documento em branco junto com a turma e nomeá-lo “Artrópodes – Seu nome”.</div>
+    </div>
+
+    <!-- SLIDE 8 — Prática: digite o texto (1/5) -->
+    <div class="sl" id="s8">
+      <div class="slhd"><span class="num">8</span><h2>Prática: digite o texto (1/5)</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="pratica"><h3><strong>Os Artrópodes: O Reino dos Invertebrados e Sua Incrível Diversidade</strong></h3><p>Os artrópodes são, de fato, o grupo de animais mais diverso e numeroso do planeta, abrangendo mais de 80% de todas as espécies conhecidas. São caracterizados por três elementos-chave: um <strong>exoesqueleto de quitina</strong> que serve como armadura protetora e suporte estrutural, exigindo que eles passem por mudas (ecdises) para crescer; um <strong>corpo segmentado</strong>, frequentemente dividido em cabeça, tórax e abdômen; e <strong>apêndices articulados</strong>, como patas, antenas e peças bucais, que lhes conferem grande mobilidade e versatilidade para locomoção, alimentação e defesa. Sua capacidade de adaptação os permitiu colonizar virtualmente todos os <strong>habitats</strong> imagináveis – desde os picos de montanhas e desertos áridos até as profundezas oceânicas, rios de água doce e, claro, o ar.</p></div></div></div></div>
+      </div>
+      <div class="nt"><strong>Prática (~20 min nos 5 slides).</strong> Os alunos digitam o texto exatamente como está, com os negritos, os subtítulos e as listas com marcadores. A formatação ABNT vem no Bloco 2.</div>
+    </div>
+
+    <!-- SLIDE 9 — Prática: digite o texto (2/5) -->
+    <div class="sl" id="s9">
+      <div class="slhd"><span class="num">9</span><h2>Prática: digite o texto (2/5)</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="pratica"><p>Eles formam o maior grupo do reino animal, com milhões de espécies conhecidas e uma presença dominante em quase todos os ambientes do planeta, incluindo terra, água e ar. Sua <strong>importância ecológica</strong> é imensa, atuando como polinizadores essenciais, decompositores, controladores de pragas e como uma fonte vital de alimento em diversas cadeias alimentares.</p><h4><strong>Principais Grupos de Artrópodes:</strong></h4><ul><li><strong>Insetos:</strong> O grupo mais vasto, caracterizado por ter três pares de patas, um par de antenas e, frequentemente, asas. Exemplos incluem <strong>borboletas</strong> (polinizadores cruciais), <strong>abelhas</strong> (produtoras de mel e polinizadores), <strong>formigas</strong> (organizadas socialmente e importantes decompositores) e <strong>besouros</strong> (diversos em forma e função). Suas funções ecológicas incluem polinização, controle biológico de pragas e decomposição de matéria orgânica. Muitos passam por metamorfose completa ou incompleta.</li></ul></div></div></div></div>
+      </div>
+      <div class="nt">Continuação: subtítulo em negrito e início da lista com marcadores.</div>
+    </div>
+
+    <!-- SLIDE 10 — Prática: digite o texto (3/5) -->
+    <div class="sl" id="s10">
+      <div class="slhd"><span class="num">10</span><h2>Prática: digite o texto (3/5)</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="pratica"><ul><li><strong>Aracnídeos:</strong> Inclui as <strong>aranhas</strong> (predadoras habilidosas, produtoras de seda), <strong>escorpiões</strong> (predadores noturnos), <strong>ácaros</strong> (alguns parasitas, outros importantes decompositores) e <strong>carrapatos</strong> (vetores de doenças). Distinguem-se por possuírem quatro pares de patas e não terem antenas. Seu corpo geralmente é dividido em cefalotórax e abdômen. São predadores importantes que ajudam a controlar populações de insetos.</li><li><strong>Crustáceos:</strong> Principalmente aquáticos (marinhos e de água doce), possuem dois pares de antenas e brânquias para respiração. Os <strong>caranguejos</strong>, <strong>lagostas</strong> e <strong>camarões</strong> são conhecidos por sua carapaça robusta e são uma fonte alimentar crucial para humanos e outros animais marinhos. As <strong>cracas</strong> são crustáceos sésseis que se fixam em rochas e cascos de navios. Eles desempenham um papel vital na base da cadeia alimentar aquática e na reciclagem de nutrientes.</li></ul></div></div></div></div>
+      </div>
+      <div class="nt">Continuação da lista de grupos.</div>
+    </div>
+
+    <!-- SLIDE 11 — Prática: digite o texto (4/5) -->
+    <div class="sl" id="s11">
+      <div class="slhd"><span class="num">11</span><h2>Prática: digite o texto (4/5)</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="pratica"><ul><li><strong>Quilópodes e Diplópodes (Miriápodes):</strong> São artrópodes terrestres com corpos alongados e numerosos segmentos, cada um com um ou dois pares de pernas. Os <strong>quilópodes</strong> (como as centopeias) têm um par de pernas por segmento, são carnívoros e possuem glândulas de veneno. Já os <strong>diplópodes</strong> (como os milípedes) têm dois pares de pernas por segmento, são herbívoros ou detritívoros, contribuindo para a decomposição de matéria vegetal.</li></ul></div></div></div></div>
+      </div>
+      <div class="nt">Último item da lista de grupos.</div>
+    </div>
+
+    <!-- SLIDE 12 — Prática: digite o texto (5/5) -->
+    <div class="sl" id="s12">
+      <div class="slhd"><span class="num">12</span><h2>Prática: digite o texto (5/5)</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div style="display:contents"><div class="pratica"><h4><strong>Curiosidades:</strong></h4><ul><li>O exoesqueleto dos artrópodes não cresce, por isso eles precisam trocá-lo periodicamente num processo chamado muda ou ecdise, deixando para trás suas "armaduras" antigas.</li><li>Alguns insetos, como as formigas-cortadeiras, praticam a agricultura, cultivando fungos em folhas que elas mesmas cortam.</li><li>As aranhas não são insetos, elas pertencem à classe Arachnida e se distinguem pela ausência de antenas e pela divisão corporal diferente.</li><li>O camarão mantis possui os olhos mais complexos do reino animal, capazes de ver luz polarizada e com doze tipos de fotorreceptores.</li></ul></div></div></div></div>
+      </div>
+      <div class="nt">Quem terminar antes pode conferir os negritos e revisar a ortografia.</div>
+    </div>
+
+    <!-- SLIDE 13 — Documentos recentes e o Google Drive -->
+    <div class="sl" id="s13">
+      <div class="slhd"><span class="num">13</span><h2>Documentos recentes e o Google Drive</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/documentos-recentes.jpg" alt="Tela inicial do Documentos com o arquivo Artrópodes em Documentos recentes"></div></div>
+          <div class="col"><div class="fig"><img src="img/menu-drive.jpg" alt="Menu principal (☰) do Documentos com a opção Drive destacada"></div></div></div>
+        <div class="card"><ul><li>Na tela inicial, o arquivo aparece em <strong>Documentos recentes</strong>.</li><li>No menu <strong>☰</strong> (canto superior esquerdo), clique em <strong>Drive</strong> para ver todos os seus arquivos em <strong>Meu Drive</strong>.</li><li>Também é possível ir direto a <code>drive.google.com</code>.</li><li>Dentro do documento, o ícone de pasta ao lado do título (<strong>Mover</strong>) guarda o arquivo numa pasta do Drive.</li></ul></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Mostrar que o documento já está salvo no Drive sem ninguém clicar em Salvar.</div>
+    </div>
+
+    <!-- SLIDE 14 — Converter uma imagem em texto -->
+    <div class="sl" id="s14">
+      <div class="slhd"><span class="num">14</span><h2>Converter uma imagem em texto</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/drive-abrir-com-imagem.jpg" alt="Google Drive: botão direito na imagem pagina-livro.jpg com Abrir com e Documentos Google destacados"></div></div>
+          <div class="col"><div class="fig"><img src="img/ocr-resultado.jpg" alt="Documento gerado: a foto da página no alto e, abaixo, o texto reconhecido pronto para editar"></div></div></div>
+        <div class="grade" style="grid-template-columns:1.75fr 1fr;align-items:center"><div class="card"><h3>Reconhecimento de texto (OCR)</h3><ol class="passos"><li>No Drive, clique com o <strong>botão direito</strong> numa imagem (JPG, PNG) ou PDF.</li><li>Escolha <strong>Abrir com &gt; Documentos Google</strong>.</li><li>Uma <strong>cópia</strong> em documento é criada ao lado do original, com a imagem e o <strong>texto reconhecido</strong> para editar.</li></ol></div><div class="cd"><div class="txt-bloco">Funciona melhor com texto nítido, na horizontal e com boa iluminação.</div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Demonstrar com a foto de uma página de livro. Comentar que o resultado precisa ser revisado.</div>
+    </div>
+
+    <!-- SLIDE 15 — Enviar arquivos para o Drive (upload) -->
+    <div class="sl" id="s15">
+      <div class="slhd"><span class="num">15</span><h2>Enviar arquivos para o Drive (upload)</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/drive-novo.jpg" alt="Menu Novo do Google Drive com Upload de arquivo e Upload de pasta destacados"></div></div>
+          <div class="col"><div class="fig"><img src="img/drive-upload.jpg" alt="Meu Drive com os arquivos enviados e o aviso Upload concluído no canto inferior direito"></div></div></div>
+        <div class="card"><h3>Duas formas</h3><ol class="passos"><li><strong>Arraste</strong> o arquivo do computador e solte na janela do Drive.</li><li>Ou clique em <strong>Novo &gt; Upload de arquivo</strong> (ou Upload de pasta).</li><li>Acompanhe o andamento na janela do <strong>canto inferior direito</strong> até aparecer “Upload concluído”.</li></ol></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Enviar um arquivo do Word para usar no próximo slide.</div>
+    </div>
+
+    <!-- SLIDE 16 — Abrir um arquivo do Word no Docs -->
+    <div class="sl" id="s16">
+      <div class="slhd"><span class="num">16</span><h2>Abrir um arquivo do Word no Docs</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/drive-word-para-docs.jpg" alt="Drive: botão direito no arquivo dia-das-maes.docx com Abrir com e Documentos Google destacados"></div></div>
+          <div class="col"><div class="fig"><img src="img/word-salvar-como.jpg" alt="Arquivo do Word aberto no Docs com o selo .DOCX e o menu Arquivo com Salvar como Google Docs destacado"></div></div></div>
+        <div class="card"><h3>Editar ou converter</h3><ol class="passos"><li>Botão direito no arquivo .docx &gt; <strong>Abrir com &gt; Documentos Google</strong>.</li><li>O Docs edita o Word <strong>no próprio formato</strong> (aparece o selo <strong>.DOCX</strong> ao lado do título).</li><li>Para converter: <strong>Arquivo &gt; Salvar como Google Docs</strong>. Uma <strong>cópia</strong> é criada e o original em Word continua no Drive.</li></ol></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Diferença entre editar o .docx (compatibilidade) e converter (cópia em formato Google).</div>
+    </div>
+
+    <!-- SLIDE 17 — Os dois arquivos no Drive -->
+    <div class="sl" id="s17">
+      <div class="slhd"><span class="num">17</span><h2>Os dois arquivos no Drive</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:2fr 1fr">
+          <div class="col"><div class="fig"><img src="img/word-e-docs.jpg" alt="Documentos recentes com a cópia dia-das-maes (Docs) e o original dia-das-maes.docx (Word) destacados"></div></div>
+          <div class="col"><div class="card vd grow"><ul><li>O <strong>original em Word</strong> e a <strong>cópia em Documentos</strong> ficam disponíveis.</li><li>Ícone <strong>W azul</strong> = arquivo do Word; ícone de <strong>folha azul</strong> = documento Google.</li><li>Para entregar em Word ou PDF, use <strong>Arquivo &gt; Baixar</strong>.</li></ul></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 18 — Formatação ABNT -->
+    <div class="sl" id="s18">
+      <div class="secao-slide"><div class="divisor"><img class="bg" src="img/secao_abnt.svg" alt=""><div class="ov"></div><div class="in"><div class="rot">Bloco 2</div><h1>Formatação ABNT</h1><div class="txt-bloco">Página, fonte, espaçamento e parágrafos</div></div></div></div>
+      <div class="nt">Transição: agora o texto Artrópodes vai ganhar a formatação de trabalho acadêmico.</div>
+    </div>
+
+    <!-- SLIDE 19 — ABNT NBR 14724:2024 — o essencial -->
+    <div class="sl" id="s19">
+      <div class="slhd"><span class="num">19</span><h2>ABNT NBR 14724:2024 — o essencial</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:0.8fr 1.2fr">
+          <div class="col"><div class="fig"><img src="img/abnt-pagina.svg" alt="Esquema de uma folha A4 com margens de 3 cm em cima e à esquerda, 2 cm embaixo e à direita, recuo de parágrafo e citação longa recuada 4 cm"></div></div>
+          <div class="col"><table class="tb2 fill"><tr><th>Item</th><th>Regra</th></tr><tr><td>Papel</td><td>A4 (21 × 29,7 cm)</td></tr><tr class="hl"><td>Margens</td><td>superior e esquerda <strong>3 cm</strong>; inferior e direita <strong>2 cm</strong></td></tr><tr><td>Fonte</td><td>tamanho <strong>12</strong> (Arial ou Times New Roman, conforme a instituição)</td></tr><tr class="hl"><td>Entrelinhas</td><td><strong>1,5</strong> no texto</td></tr><tr><td>Citação &gt; 3 linhas</td><td>recuo de <strong>4 cm</strong>, fonte menor, espaço simples (NBR 10520:2023)</td></tr><tr><td>Notas e legendas</td><td>fonte menor e espaço simples</td></tr><tr><td>Paginação</td><td>canto superior direito, a partir da Introdução</td></tr></table><div class="bege"><h3>Importante</h3><div class="txt-bloco">Recuo de <strong>1,25 cm</strong> na primeira linha e texto <strong>justificado</strong> são práticas comuns das instituições: a norma não fixa esses valores. Siga o manual da sua instituição.</div></div></div></div>
+      </div>
+      <div class="nt"><strong>~4 min.</strong> A NBR 14724 teve nova edição em dezembro de 2024 (4ª edição). As regras de margem, fonte 12 e entrelinhas 1,5 continuam. Citações seguem a NBR 10520:2023.</div>
+    </div>
+
+    <!-- SLIDE 20 — Configuração da página -->
+    <div class="sl" id="s20">
+      <div class="slhd"><span class="num">20</span><h2>Configuração da página</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/arquivo-configuracao-pagina.jpg" alt="Menu Arquivo aberto com a opção Configuração da página destacada"></div></div>
+          <div class="col"><div class="fig"><img src="img/configuracao-pagina.jpg" alt="Janela Configuração da página, aba Páginas, com A4 e margens Início 3, Fim 2, Esquerda 3 e Direita 2"></div></div></div>
+        <div class="card"><h3>Arquivo &gt; Configuração da página</h3><ol class="passos"><li>Mantenha a aba <strong>Páginas</strong> (não “Sem páginas”).</li><li><strong>Orientação</strong>: Retrato · <strong>Tamanho</strong>: A4.</li><li><strong>Margens</strong> (cm): Início 3, Fim 2, Esquerda 3, Direita 2.</li><li><strong>Definir como padrão</strong> (opcional) e <strong>OK</strong>.</li></ol></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Na janela, “Início” e “Fim” são as margens superior e inferior.</div>
+    </div>
+
+    <!-- SLIDE 21 — Páginas ou Sem páginas? -->
+    <div class="sl" id="s21">
+      <div class="slhd"><span class="num">21</span><h2>Páginas ou Sem páginas?</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:2fr 1fr">
+          <div class="col"><div class="fig"><img src="img/sem-paginas.jpg" alt="Aba Sem páginas da Configuração da página com a explicação do formato contínuo"></div></div>
+          <div class="col"><div class="card grow"><ul><li><strong>Sem páginas</strong>: o texto corre sem quebras, bom para tabelas largas e leitura na tela.</li><li>Esse formato <strong>esconde margens, cabeçalhos, rodapés e números de página</strong>.</li><li>Também em <strong>Formatar &gt; Mudar para o formato sem páginas</strong>.</li></ul></div><div class="bege"><h3>Atenção</h3><div class="txt-bloco">Para trabalhos ABNT, use sempre <strong>Páginas</strong>.</div></div></div></div>
+      </div>
+      <div class="nt"><strong>~1 min.</strong> Alguns documentos novos já abrem sem páginas: conferir antes de formatar.</div>
+    </div>
+
+    <!-- SLIDE 22 — Fonte, tamanho e alinhamento -->
+    <div class="sl" id="s22">
+      <div class="slhd"><span class="num">22</span><h2>Fonte, tamanho e alinhamento</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:2fr 1fr">
+          <div class="col"><div class="fig"><img src="img/fonte-arial.jpg" alt="Barra de ferramentas com a lista de fontes aberta, Arial marcada e a caixa de tamanho em destaque"></div></div>
+          <div class="col"><div class="card grow"><h3>No texto todo</h3><ol class="passos"><li>Selecione tudo: <strong>Ctrl + A</strong>.</li><li>Fonte <strong>Arial</strong> ou <strong>Times New Roman</strong>, tamanho <strong>12</strong>.</li><li>Alinhamento <strong>Justificado</strong>: <strong>Ctrl + Shift + J</strong>.</li></ol><div class="cd"><div class="txt-bloco">Para virar padrão: <strong>Formatar &gt; Estilos de parágrafo &gt; Texto normal &gt; Atualizar “Texto normal” para corresponder</strong>.</div></div></div></div></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Mostrar os atalhos e o truque do estilo Texto normal, que evita formatar de novo cada parágrafo.</div>
+    </div>
+
+    <!-- SLIDE 23 — Espaçamento entre linhas -->
+    <div class="sl" id="s23">
+      <div class="slhd"><span class="num">23</span><h2>Espaçamento entre linhas</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/espacamento-menu.jpg" alt="Menu Formatar &gt; Espaçamento entre linhas e parágrafos com 1,5, Espaçamento personalizado e Evitar linhas únicas destacados"></div></div>
+          <div class="col"><div class="fig"><img src="img/espacamento-personalizado.jpg" alt="Janela Espaçamento personalizado com 1,5 entre linhas e 0 antes e depois"></div></div></div>
+        <div class="card"><h3>Formatar &gt; Espaçamento entre linhas e parágrafos</h3><ol class="passos"><li>Escolha <strong>1,5</strong>.</li><li>Em <strong>Espaçamento personalizado</strong>, coloque <strong>0</strong> em <em>Antes</em> e <em>Depois</em> do parágrafo.</li><li>Clique em <strong>Aplicar</strong>.</li><li>No mesmo menu, mantenha marcado <strong>Evitar linhas únicas</strong>.</li></ol></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Também há um ícone na barra de ferramentas (às vezes escondido no ⋮ quando a janela é estreita).</div>
+    </div>
+
+    <!-- SLIDE 24 — Recuo do parágrafo -->
+    <div class="sl" id="s24">
+      <div class="slhd"><span class="num">24</span><h2>Recuo do parágrafo</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/opcoes-recuo.jpg" alt="Janela Opções de recuo com Recuo especial Primeira linha e o valor 1.25"></div></div>
+          <div class="col"><div class="fig"><img src="img/recuo-paragrafo.jpg" alt="Texto justificado com a primeira linha de cada parágrafo recuada e o marcador na régua"></div></div></div>
+        <div class="grade" style="grid-template-columns:1.75fr 1fr;align-items:center"><div class="card"><h3>Recuo de 1,25 cm na primeira linha</h3><ol class="passos"><li>Selecione os parágrafos do texto.</li><li><strong>Formatar &gt; Alinhar e recuar &gt; Opções de recuo</strong>.</li><li>Em <strong>Recuo especial</strong>, escolha <strong>Primeira linha</strong> e digite <strong>1.25</strong> (com ponto: a vírgula dá erro).</li><li><strong>Aplicar</strong>.</li></ol></div><div class="cd"><div class="txt-bloco">A tecla <strong>Tab</strong> também recua, mas usa 1,27 cm por padrão e precisa ser repetida em cada parágrafo. A régua (marcador azul) permite ajustar com o mouse.</div></div></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> O PPTX original usava Tab; a opção de recuo especial é mais precisa e vale para todos os parágrafos selecionados.</div>
+    </div>
+
+    <!-- SLIDE 25 — Citação longa (mais de 3 linhas) -->
+    <div class="sl" id="s25">
+      <div class="slhd"><span class="num">25</span><h2>Citação longa (mais de 3 linhas)</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1.25fr 1fr">
+          <div class="col"><div style="display:contents"><div class="card grow" style="justify-content:center;gap:10px"><p class="lead">Os artrópodes formam o maior grupo do reino animal, como explica a autora:</p><div style="margin-left:34%;font-size:14px;line-height:1.25;border-left:3px solid var(--ve);padding:6px 0 6px 12px;color:var(--p)">Eles formam o maior grupo do reino animal, com milhões de espécies conhecidas e uma presença dominante em quase todos os ambientes do planeta, incluindo terra, água e ar. Sua importância ecológica é imensa, atuando como polinizadores essenciais, decompositores e controladores de pragas (Silva, 2024, p. 12).</div><p class="lead">Depois da citação, o texto volta ao normal, com fonte 12 e espaçamento 1,5.</p></div></div></div>
+          <div class="col"><div class="card grow"><h3>Como formatar</h3><ol class="passos"><li>Selecione a citação, em parágrafo próprio e <strong>sem aspas</strong>.</li><li><strong>Formatar &gt; Alinhar e recuar &gt; Opções de recuo</strong>: recuo à <strong>esquerda 4 cm</strong>; recuo especial <strong>Nenhum</strong>.</li><li>Tamanho de fonte <strong>menor</strong> (10 ou 11).</li><li>Espaçamento <strong>Simples</strong> (1,0).</li><li>Indique a fonte: (SOBRENOME, ano, p. X).</li></ol></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Exemplo fictício (Silva, 2024) só para mostrar o formato. Regra da NBR 10520:2023.</div>
+    </div>
+
+    <!-- SLIDE 26 — Revisão do texto -->
+    <div class="sl" id="s26">
+      <div class="secao-slide"><div class="divisor"><img class="bg" src="img/secao_revisao.svg" alt=""><div class="ov"></div><div class="in"><div class="rot">Bloco 3</div><h1>Revisão do texto</h1><div class="txt-bloco">Corretor ortográfico e histórico de versões</div></div></div></div>
+    </div>
+
+    <!-- SLIDE 27 — Corretor ortográfico -->
+    <div class="sl" id="s27">
+      <div class="slhd"><span class="num">27</span><h2>Corretor ortográfico</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:2fr 1fr">
+          <div class="col"><div class="fig"><img src="img/corretor-ortografico.jpg" alt="Palavra digitada com erro sublinhada e a sugestão de correção aparecendo logo abaixo"></div></div>
+          <div class="col"><div class="card grow"><ul><li><strong>Sublinhado vermelho</strong>: possível erro de ortografia. <strong>Azul</strong>: sugestão de gramática.</li><li>Clique na palavra e escolha a <strong>sugestão,</strong>&nbsp;ela é trocada na hora.</li><li>Revisão completa: <strong>Ferramentas &gt; Ortografia e gramática &gt; Verificar ortografia e gramática</strong> (<strong>Ctrl + Alt + X</strong>).</li><li>Nomes e termos técnicos: <strong>Adicionar ao dicionário</strong>.</li><li>Confira se o idioma está em <strong>Arquivo &gt; Idioma &gt; Português (Brasil)</strong>.</li></ul></div></div></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> O corretor não substitui a releitura: ele não percebe palavra certa no lugar errado.</div>
+    </div>
+
+    <!-- SLIDE 28 — Histórico de versões e comparação -->
+    <div class="sl" id="s28">
+      <div class="slhd"><span class="num">28</span><h2>Histórico de versões e comparação</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:2fr 1fr">
+          <div class="col"><div class="fig"><img src="img/historico-versoes.jpg" alt="Histórico de versões com as alterações destacadas em cor, a lista de versões à direita e a opção Destacar mudanças"></div></div>
+          <div class="col"><div class="card vd grow"><h3>Histórico de versões</h3><ul><li><strong>Arquivo &gt; Histórico de versões &gt; Ver histórico de versões</strong> (Ctrl + Alt + Shift + H).</li><li>Mostra <strong>quem alterou o quê e quando</strong>, com uma cor para cada pessoa.</li><li><strong>Restaurar esta versão</strong> volta o texto a qualquer ponto anterior.</li><li><strong>Nomear a versão atual</strong>: ex. “Entrega 1”.</li></ul></div><div class="cd"><div class="txt-bloco"><strong>Ferramentas &gt; Comparar documentos</strong> mostra as diferenças entre dois arquivos, inclusive <strong>Word (.docx)</strong>.</div></div></div></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Demonstrar restaurando uma versão anterior do texto Artrópodes.</div>
+    </div>
+
+    <!-- SLIDE 29 — Imagens no documento -->
+    <div class="sl" id="s29">
+      <div class="secao-slide"><div class="divisor"><img class="bg" src="img/secao_imagens.svg" alt=""><div class="ov"></div><div class="in"><div class="rot">Bloco 4</div><h1>Imagens no documento</h1><div class="txt-bloco">Inserir, redimensionar e posicionar</div></div></div></div>
+    </div>
+
+    <!-- SLIDE 30 — Inserir imagem pesquisada na web -->
+    <div class="sl" id="s30">
+      <div class="slhd"><span class="num">30</span><h2>Inserir imagem pesquisada na web</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/inserir-imagem-web.jpg" alt="Menu Inserir &gt; Imagem &gt; Pesquisar na Web destacado"></div></div>
+          <div class="col"><div class="fig"><img src="img/pesquisa-imagem.jpg" alt="Painel Imagens do Google com a pesquisa escorpião amarelo"></div></div></div>
+        <div class="grade" style="grid-template-columns:1.75fr 1fr;align-items:center"><div class="card"><h3>Inserir &gt; Imagem</h3><ol class="passos"><li>Escolha <strong>Pesquisar na Web</strong>.</li><li>Digite um termo <strong>específico</strong> (ex.: “escorpião amarelo” em vez de “artrópodes”).</li><li>Os resultados aparecem no <strong>painel lateral</strong>.</li></ol></div><div class="cd"><div class="txt-bloco">Outras origens: <strong>Fazer upload do computador</strong>, Drive, Fotos, Por URL e Câmera. Sempre informe a <strong>fonte</strong> da imagem.</div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Discutir direitos autorais: preferir imagens de bancos livres (Wikimedia Commons) e citar a fonte.</div>
+    </div>
+
+    <!-- SLIDE 31 — Selecionar e mover a imagem -->
+    <div class="sl" id="s31">
+      <div class="slhd"><span class="num">31</span><h2>Selecionar e mover a imagem</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:2fr 1fr">
+          <div class="col"><div class="fig"><img src="img/selecionar-imagem.jpg" alt="Imagem marcada no painel de pesquisa, 1 item selecionado e o botão Inserir destacado"></div></div>
+          <div class="col"><div class="card grow"><ul><li>Marque a imagem desejada e clique em <strong>Inserir</strong>.</li><li>Ela entra no ponto do cursor, em <strong>tamanho grande</strong>.</li><li>Para mudar o lugar, <strong>clique, segure e arraste</strong>.</li><li>Embaixo, escreva a <strong>legenda</strong> (Figura 1 – título) e a <strong>Fonte</strong>.</li></ul></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 32 — Redimensionar a imagem -->
+    <div class="sl" id="s32">
+      <div class="slhd"><span class="num">32</span><h2>Redimensionar a imagem</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:2fr 1fr">
+          <div class="col"><div class="fig"><img src="img/redimensionar-imagem.jpg" alt="Imagem selecionada com os quadradinhos azuis nos cantos para redimensionar"></div></div>
+          <div class="col"><div class="card grow"><ul><li>Clique na imagem: aparecem <strong>quadradinhos azuis</strong> nas bordas.</li><li>Arraste um <strong>canto</strong> em direção ao centro para reduzir mantendo a proporção.</li><li>Para medidas exatas: botão direito &gt; <strong>Opções de imagem &gt; Tamanho e rotação</strong>.</li><li>Use o botão <strong>Centralizar</strong> (Ctrl + Shift + E) para centralizar.</li></ul></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 33 — Posição da imagem em relação ao texto -->
+    <div class="sl" id="s33">
+      <div class="slhd"><span class="num">33</span><h2>Posição da imagem em relação ao texto</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:2fr 1fr">
+          <div class="col"><div class="fig"><img src="img/posicao-imagem.jpg" alt="Menu de posição da imagem aberto com as opções Inline, Ajustar texto, Quebrar texto, Atrás e Na frente do texto"></div></div>
+          <div class="col"><div class="card vd grow"><h3>Botão abaixo da imagem</h3><ul><li><strong>Inline</strong>: a imagem se comporta como uma letra do texto (mais segura para ABNT).</li><li><strong>Ajustar texto</strong>: o texto contorna a imagem.</li><li><strong>Quebrar texto</strong>: texto só acima e abaixo.</li><li><strong>Atrás do texto</strong> / <strong>Na frente do texto</strong>.</li></ul></div></div></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Para trabalhos acadêmicos, recomendar “Inline” com a imagem centralizada.</div>
+    </div>
+
+    <!-- SLIDE 34 — Digitação por voz -->
+    <div class="sl" id="s34">
+      <div class="secao-slide"><div class="divisor"><img class="bg" src="img/secao_voz.svg" alt=""><div class="ov"></div><div class="in"><div class="rot">Bloco 5</div><h1>Digitação por voz</h1><div class="txt-bloco">Acessibilidade: escreva falando</div></div></div></div>
+    </div>
+
+    <!-- SLIDE 35 — Digitação por voz -->
+    <div class="sl" id="s35">
+      <div class="slhd"><span class="num">35</span><h2>Digitação por voz</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/digitacao-voz-menu.jpg" alt="Menu Ferramentas aberto com a opção Digitação por Voz destacada"></div></div>
+          <div class="col"><div class="fig"><img src="img/digitacao-voz-microfone.jpg" alt="Quadro Digitação por Voz com o microfone e o idioma Port. (Brasil)"></div></div></div>
+        <div class="grade" style="grid-template-columns:1.75fr 1fr;align-items:center"><div class="card"><h3>Ferramentas &gt; Digitação por voz</h3><ol class="passos"><li>Atalho: <strong>Ctrl + Shift + S</strong>.</li><li>No quadro, confira o idioma <strong>Port. (Brasil)</strong>.</li><li>Clique no <strong>microfone</strong> (fica vermelho) e fale normalmente.</li><li>Dite a pontuação: “<strong>vírgula</strong>”, “<strong>ponto</strong>”, “<strong>ponto de interrogação</strong>”, “<strong>nova linha</strong>”, “<strong>novo parágrafo</strong>”.</li><li>Clique de novo no microfone para <strong>parar</strong>.</li></ol></div><div class="bege"><div class="txt-bloco">Funciona no <strong>Chrome</strong>, <strong>Edge</strong> e <strong>Safari</strong> atualizados, com o microfone liberado. Comandos de edição por voz (selecionar, negrito) só existem em inglês.</div></div></div>
+      </div>
+      <div class="nt"><strong>~5 min (prática).</strong> Cada aluno dita um parágrafo curto. Comentar o uso como recurso de acessibilidade.</div>
+    </div>
+
+    <!-- SLIDE 36 — Colaboração -->
+    <div class="sl" id="s36">
+      <div class="secao-slide"><div class="divisor"><img class="bg" src="img/secao_colaboracao.svg" alt=""><div class="ov"></div><div class="in"><div class="rot">Bloco 6</div><h1>Colaboração</h1><div class="txt-bloco">Trabalhe em tempo real com outras pessoas</div></div></div></div>
+    </div>
+
+    <!-- SLIDE 37 — Compartilhar com pessoas -->
+    <div class="sl" id="s37">
+      <div class="slhd"><span class="num">37</span><h2>Compartilhar com pessoas</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/compartilhar-pessoas.jpg" alt="Janela Compartilhar com o campo para adicionar participantes, Acesso geral, Copiar link e a engrenagem destacados"></div></div>
+          <div class="col"><div class="fig"><img src="img/compartilhar-mensagem.jpg" alt="E-mail adicionado, papel Editor, Notificar pessoas marcado, mensagem escrita e botão Enviar"></div></div></div>
+        <div class="card"><h3>Botão Compartilhar (canto superior direito)</h3><ol class="passos"><li>Digite o <strong>e-mail</strong> da pessoa ou do grupo.</li><li>Escolha o papel: <strong>Leitor</strong>, <strong>Comentador</strong> ou <strong>Editor</strong>.</li><li>Deixe <strong>Notificar pessoas</strong> marcado e escreva uma mensagem.</li><li>Clique em <strong>Enviar</strong>.</li></ol></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> O e-mail do exemplo é fictício. A janela mostra “Pessoas com acesso” e “Acesso geral”.</div>
+    </div>
+
+    <!-- SLIDE 38 — Acesso pelo link e permissões -->
+    <div class="sl" id="s38">
+      <div class="slhd"><span class="num">38</span><h2>Acesso pelo link e permissões</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/acesso-geral.jpg" alt="Menu Acesso geral aberto com as opções Restrito e Qualquer pessoa com o link"></div></div>
+          <div class="col"><div class="fig"><img src="img/configuracoes-compartilhar.jpg" alt="Configurações do compartilhamento: permitir que editores compartilhem e quem pode baixar, copiar e imprimir"></div></div></div>
+        <div class="grade" style="grid-template-columns:1.75fr 1fr;align-items:center"><div class="card"><h3>Acesso geral</h3><ul><li><strong>Restrito</strong>: só quem foi adicionado abre o link.</li><li><strong>Qualquer pessoa com o link</strong>: escolha Leitor, Comentador ou Editor.</li><li><strong>Copiar link</strong> e envie por e-mail, WhatsApp ou ambiente virtual.</li><li>Na <strong>engrenagem</strong>: quem pode compartilhar e quem pode baixar, copiar e imprimir.</li></ul></div><div class="bege"><h3>Cuidado</h3><div class="txt-bloco">Evite “Qualquer pessoa com o link” como <strong>Editor</strong>: qualquer um poderia apagar o trabalho.</div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 39 — Comentários -->
+    <div class="sl" id="s39">
+      <div class="slhd"><span class="num">39</span><h2>Comentários</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/comentario-selecionar.jpg" alt="Trecho selecionado e o botão de adicionar comentário que aparece ao lado"></div></div>
+          <div class="col"><div class="fig"><img src="img/comentario-inserir.jpg" alt="Caixa de comentário preenchida com o botão Comentário destacado"></div></div></div>
+        <div class="card"><h3>Comentar um trecho</h3><ol class="passos"><li>Selecione o trecho.</li><li>Clique em <strong>Adicionar comentário</strong> (<strong>Ctrl + Alt + M</strong>).</li><li>Escreva e clique em <strong>Comentário</strong>.</li><li>Digite <strong>@</strong> + nome para mencionar ou <strong>atribuir</strong> uma tarefa.</li><li>Quando resolvido, clique no <strong>✓</strong> (marcar como resolvido).</li></ol></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 40 — Edição em tempo real e respostas -->
+    <div class="sl" id="s40">
+      <div class="slhd"><span class="num">40</span><h2>Edição em tempo real e respostas</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1.2fr 1fr">
+          <div class="col"><div style="display:contents"><div class="trt" role="img" aria-label="Animação: Ana e Bruno editam o mesmo documento ao mesmo tempo; cada um tem um cursor colorido com o nome, o texto aparece enquanto digitam e um comentário recebe resposta">
+<style>
+.trt{--a:#F97316;--b:#7C3AED;--v:#0E9F6E;flex:1;min-height:0;display:flex;flex-direction:column;background:#EEF2F6;border:1px solid var(--linha);border-radius:14px;overflow:hidden;font-family:var(--fonte)}
+.trt-top{display:flex;align-items:center;gap:8px;background:#F8FAFD;padding:9px 12px;border-bottom:1px solid #DDE3EA}
+.trt-doc{width:20px;height:24px;border-radius:3px;background:#4285F4;position:relative;flex-shrink:0}
+.trt-doc::after{content:"";position:absolute;left:5px;right:5px;top:8px;height:8px;border-top:2px solid #fff;border-bottom:2px solid #fff}
+.trt-tit{font-size:15px;font-weight:600;color:#1F2937;flex:1}
+.trt-av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:12px;font-weight:800;border:2px solid #fff;margin-left:-6px;box-shadow:0 0 0 2px var(--c)}
+.trt-av.a{background:var(--a);--c:var(--a)}.trt-av.b{background:var(--b);--c:var(--b)}.trt-av.v{background:var(--v);--c:var(--v)}
+.trt-share{font-size:12px;font-weight:700;background:#C2E7FF;color:#0B57D0;border-radius:14px;padding:5px 12px;margin-left:6px}
+.trt-body{flex:1;display:flex;gap:10px;padding:14px;min-height:0}
+.trt-page{flex:1;background:#fff;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.12);padding:16px 18px;position:relative;display:flex;flex-direction:column;gap:9px}
+.trt-h{font-size:16px;font-weight:700;color:#111}
+.trt-l{height:8px;border-radius:4px;background:#E2E8F0}
+.trt-l.w9{width:92%}.trt-l.w8{width:80%}.trt-l.w7{width:70%}.trt-l.w6{width:60%}.trt-l.w5{width:50%}
+.trt-typ{position:relative;height:8px;display:flex;align-items:center}
+.trt-typ i{display:block;height:8px;border-radius:4px;width:0}
+.trt-typ.a i{background:color-mix(in srgb,var(--a) 45%,#fff);animation:trtA 9s infinite}
+.trt-typ.b i{background:color-mix(in srgb,var(--b) 40%,#fff);animation:trtB 9s infinite}
+.trt-cur{position:relative;width:2px;height:16px;flex-shrink:0}
+.trt-typ.a .trt-cur{background:var(--a)}.trt-typ.b .trt-cur{background:var(--b)}
+.trt-cur b{position:absolute;left:0;bottom:15px;font-size:10px;font-weight:700;color:#fff;padding:1px 6px;border-radius:4px 4px 4px 0;white-space:nowrap}
+.trt-typ.a .trt-cur b{background:var(--a)}.trt-typ.b .trt-cur b{background:var(--b)}
+.trt-img{height:60px;width:58%;align-self:center;border-radius:6px;background:linear-gradient(135deg,#FDE68A,#D97706);opacity:0;animation:trtImg 9s infinite;position:relative}
+.trt-img::after{content:"Figura 1";position:absolute;left:0;right:0;bottom:-15px;text-align:center;font-size:9px;color:#64748B}
+.trt-side{width:42%;display:flex;flex-direction:column;gap:8px}
+.trt-c{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.15);padding:9px 10px;font-size:11.5px;line-height:1.35;color:#334155;opacity:0}
+.trt-c .n{display:flex;align-items:center;gap:6px;font-weight:700;color:#111;font-size:11.5px;margin-bottom:3px}
+.trt-c .n span{width:18px;height:18px;border-radius:50%;display:inline-grid;place-items:center;color:#fff;font-size:10px}
+.trt-c.c1{animation:trtC1 9s infinite;border-left:3px solid var(--a)}.trt-c.c1 .n span{background:var(--a)}
+.trt-c.c2{animation:trtC2 9s infinite;border-left:3px solid var(--b);margin-left:12px}.trt-c.c2 .n span{background:var(--b)}
+.trt-hl{background:color-mix(in srgb,var(--a) 22%,#fff);border-radius:3px;animation:trtHl 9s infinite}
+.trt-leg{font-size:12.5px;color:var(--tx-apoio);text-align:center;padding:0 10px 10px}
+@keyframes trtA{0%,5%{width:0}35%,100%{width:58%}}
+@keyframes trtB{0%,30%{width:0}62%,100%{width:46%}}
+@keyframes trtImg{0%,55%{opacity:0;transform:scale(.9)}62%,100%{opacity:1;transform:none}}
+@keyframes trtC1{0%,15%{opacity:0;transform:translateY(-6px)}22%,94%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes trtC2{0%,66%{opacity:0;transform:translateY(-6px)}73%,94%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes trtHl{0%,15%{background:transparent}22%,100%{background:color-mix(in srgb,#F97316 22%,#fff)}}
+@media (prefers-reduced-motion:reduce){.trt *{animation:none!important}.trt-typ.a i{width:58%}.trt-typ.b i{width:46%}.trt-img,.trt-c{opacity:1}}
+@media print{.trt *{animation:none!important}.trt-typ.a i{width:58%}.trt-typ.b i{width:46%}.trt-img,.trt-c{opacity:1}}
+</style>
+<div class="trt-top"><span class="trt-doc"></span><span class="trt-tit">Artrópodes</span>
+<span class="trt-av a">A</span><span class="trt-av b">B</span><span class="trt-av v">D</span><span class="trt-share">Compartilhar</span></div>
+<div class="trt-body">
+<div class="trt-page">
+<div class="trt-h">Artrópodes</div>
+<div class="trt-l w9"></div><div class="trt-l w8"></div>
+<div class="trt-typ a"><i></i><span class="trt-cur"><b>Ana</b></span></div>
+<div class="trt-l w9"></div><div class="trt-l w6"></div>
+<div class="trt-img"></div>
+<div style="height:10px"></div>
+<div class="trt-l w8"></div>
+<div class="trt-typ b"><i></i><span class="trt-cur"><b>Bruno</b></span></div>
+<div class="trt-l w7"></div><div class="trt-l w5"></div>
+</div>
+<div class="trt-side">
+<div class="trt-c c1"><div class="n"><span>A</span>Ana</div>Bruno, coloca uma <span class="trt-hl">imagem</span> de inseto?</div>
+<div class="trt-c c2"><div class="n"><span>B</span>Bruno</div>Pronto! Inseri a Figura 1 com a fonte. ✓</div>
+</div>
+</div>
+<div class="trt-leg">Simulação: duas pessoas editando o mesmo documento ao mesmo tempo.</div>
+</div>
+</div></div>
+          <div class="col"><div class="fig"><img src="img/comentario-responder.jpg" alt="Comentário com a resposta sendo escrita e os botões Responder e marcar como resolvido destacados"></div><div class="card vd"><ul><li>Cada pessoa tem um <strong>cursor colorido</strong> com o nome; as fotos no topo mostram quem está no documento.</li><li>Responda no próprio comentário: <strong>Responder</strong>.</li></ul></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> A animação simula duas pessoas no mesmo documento. Fazer em duplas: um aluno comenta e o outro responde e edita.</div>
+    </div>
+
+    <!-- SLIDE 41 — Modo Sugestões -->
+    <div class="sl" id="s41">
+      <div class="slhd"><span class="num">41</span><h2>Modo Sugestões</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/modo-sugestao.jpg" alt="Menu do lápis no canto superior direito com Edição, Sugestões e Visualização"></div></div>
+          <div class="col"><div class="fig"><img src="img/sugestao-feita.jpg" alt="Palavra corrigida como sugestão, em verde, com o cartão Substituir e os botões aceitar e rejeitar"></div></div></div>
+        <div class="card vd"><ul><li>No <strong>lápis</strong> (canto superior direito), troque <strong>Edição</strong> por <strong>Sugestões</strong>.</li><li>O que você digita ou apaga vira <strong>sugestão colorida</strong>, sem alterar o original.</li><li>O dono <strong>aceita ✓</strong> ou <strong>rejeita ✕</strong> cada sugestão.</li><li><strong>Visualização</strong>: só leitura, sem marcas.</li></ul></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Ideal para a revisão do professor ou dos colegas.</div>
+    </div>
+
+    <!-- SLIDE 42 — Papéis de acesso -->
+    <div class="sl" id="s42">
+      <div class="slhd"><span class="num">42</span><h2>Papéis de acesso</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:2fr 1fr">
+          <div class="col"><div class="fig"><img src="img/papeis-compartilhar.jpg" alt="Lista de papéis ao compartilhar: Leitor, Comentador e Editor"></div></div>
+          <div class="col"><table class="tb2 fill"><tr><th>Papel</th><th>Pode fazer</th></tr><tr><td>Leitor</td><td>ler (e baixar, se permitido)</td></tr><tr><td>Comentador</td><td>ler, comentar e fazer sugestões</td></tr><tr><td>Editor</td><td>alterar tudo e compartilhar</td></tr><tr><td>Proprietário</td><td>tudo, inclusive excluir e transferir</td></tr></table></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 43 — Organizar e ir além -->
+    <div class="sl" id="s43">
+      <div class="secao-slide"><div class="divisor"><img class="bg" src="img/secao_organizacao.svg" alt=""><div class="ov"></div><div class="in"><div class="rot">Bloco 7</div><h1>Organizar e ir além</h1><div class="txt-bloco">Modelos, guias, sumário e inteligência artificial</div></div></div></div>
+    </div>
+
+    <!-- SLIDE 44 — Documentos a partir de modelos -->
+    <div class="sl" id="s44">
+      <div class="slhd"><span class="num">44</span><h2>Documentos a partir de modelos</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/galeria-modelos.jpg" alt="Galeria de modelos com o modelo Observações da aula – Divertido destacado"></div></div>
+          <div class="col"><div class="fig"><img src="img/modelo-editado.jpg" alt="Modelo Observações da aula editado com um resumo sobre artrópodes"></div></div></div>
+        <div class="card"><h3>Galeria de modelos</h3><ol class="passos"><li>Na tela inicial, abra a <strong>Galeria de modelos</strong> ou use <strong>Arquivo &gt; Novo &gt; A partir de um modelo</strong>.</li><li>Escolha um modelo, como <strong>Observações da aula</strong>.</li><li>Troque os textos de exemplo pelos seus.</li></ol></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Exemplo: relatório da aula sobre artrópodes feito a partir do modelo.</div>
+    </div>
+
+    <!-- SLIDE 45 — Guias e sumário -->
+    <div class="sl" id="s45">
+      <div class="slhd"><span class="num">45</span><h2>Guias e sumário</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/guias.jpg" alt="Painel Guias no documento com Guia 1 e Guia 2 e o botão + destacados"></div></div>
+          <div class="col"><div class="fig"><img src="img/inserir-sumario.jpg" alt="Menu Inserir &gt; Elementos de página &gt; Sumário com os três estilos de sumário"></div></div></div>
+        <div class="card vd"><ul><li><strong>Guias</strong>: divida o documento em abas (capítulos, anexos) pelo <strong>+</strong> do painel ou <strong>Inserir &gt; Guia</strong>.</li><li><strong>Sumário</strong>: use <strong>Título 1, Título 2</strong>… e depois <strong>Inserir &gt; Elementos de página &gt; Sumário</strong>.</li><li>Novidades: <strong>Legenda inline</strong> e <strong>Lista de legendas</strong> numeram figuras e tabelas.</li></ul></div>
+      </div>
+      <div class="nt"><strong>~3 min.</strong> Para o TCC, o sumário automático depende de usar os estilos de título.</div>
+    </div>
+
+    <!-- SLIDE 46 — Chips inteligentes e blocos (@) -->
+    <div class="sl" id="s46">
+      <div class="slhd"><span class="num">46</span><h2>Chips inteligentes e blocos (@)</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:2fr 1fr">
+          <div class="col"><div class="fig"><img src="img/chips-arroba.jpg" alt="Menu que aparece ao digitar @ no documento: pessoas, ícones inteligentes e elementos básicos"></div></div>
+          <div class="col"><div class="card grow"><ul><li>Digite <strong>@</strong> no texto para abrir o menu.</li><li><strong>Pessoas</strong>, <strong>datas</strong> e arquivos do Drive viram chips clicáveis.</li><li><strong>Elementos básicos</strong>: rascunho de e-mail, bloco de código, registro de decisões e outros modelos prontos.</li><li>Também em <strong>Inserir &gt; Ícones inteligentes</strong> e <strong>Inserir &gt; Elementos básicos</strong>.</li></ul></div></div></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Mostrar uma data e uma pessoa como chip.</div>
+    </div>
+
+    <!-- SLIDE 47 — Gemini no Documentos (IA) -->
+    <div class="sl" id="s47">
+      <div class="slhd"><span class="num">47</span><h2>Gemini no Documentos (IA)</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="card vd grow"><h3>O que faz</h3><ul><li><strong>Ajude-me a criar</strong>: gera um rascunho formatado a partir de um pedido.</li><li><strong>Ajude-me a escrever</strong>: reescreve, resume, muda o tom e sugere edições.</li><li>Painel lateral para perguntas sobre o documento e criação de diagramas.</li></ul></div><div class="bege"><h3>Disponibilidade</h3><div class="txt-bloco">Os recursos de escrita exigem plano pago: <strong>Google AI Pro/Ultra</strong> ou <strong>Google Workspace</strong> com IA. Na conta gratuita aparecem o ícone ✦ e o botão <strong>Fazer upgrade</strong>.</div></div></div>
+          <div class="col"><div class="card er grow"><h3>Use com responsabilidade</h3><ul><li>Revise tudo: a IA pode <strong>inventar fatos e referências</strong>.</li><li>Siga as regras da instituição sobre uso de IA e <strong>informe quando usar</strong>.</li><li>Não cole <strong>dados pessoais</strong> ou de colegas.</li><li>Use para aprender (explicar, revisar), não para entregar texto pronto.</li></ul></div></div></div>
+      </div>
+      <div class="nt"><strong>~3 min, informativo.</strong> Os recursos foram reorganizados em abril de 2026 e chegaram ao português ao longo do ano. Não há prática porque os alunos usam conta gratuita.</div>
+    </div>
+
+    <!-- SLIDE 48 — No celular -->
+    <div class="sl" id="s48">
+      <div class="secao-slide"><div class="divisor"><img class="bg" src="img/secao_celular.svg" alt=""><div class="ov"></div><div class="in"><div class="rot">Bloco 8</div><h1>No celular</h1><div class="txt-bloco">App Documentos Google para Android e iOS</div></div></div></div>
+    </div>
+
+    <!-- SLIDE 49 — Criar um documento no celular -->
+    <div class="sl" id="s49">
+      <div class="slhd"><span class="num">49</span><h2>Criar um documento no celular</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:2fr 1fr">
+          <div class="col"><div class="fig"><img src="img/celular-novo-documento.jpg" alt="Sequência no celular: ícone do app Documentos, lista de arquivos e botão Novo com as opções Novo documento e Escolher modelo"></div></div>
+          <div class="col"><div class="card grow"><h3>No app</h3><ol class="passos"><li>Instale <strong>Documentos Google</strong> (Play Store ou App Store) e entre com a sua conta.</li><li>A tela inicial mostra os <strong>mesmos arquivos</strong> do computador.</li><li>Toque em <strong>+</strong> e escolha <strong>Novo documento</strong> ou <strong>Escolher modelo</strong>.</li></ol></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 50 — Formatar no celular -->
+    <div class="sl" id="s50">
+      <div class="slhd"><span class="num">50</span><h2>Formatar no celular</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:2fr 1fr">
+          <div class="col"><div class="fig"><img src="img/celular-formatar.jpg" alt="Telas do app com o botão de formatação: aba Texto (fonte, tamanho) e aba Parágrafo (alinhamento, espaçamento) e o menu Inserir"></div></div>
+          <div class="col"><div class="card grow"><ul><li>O ícone <strong>A</strong> (Formatar) abre as abas <strong>Texto</strong> e <strong>Parágrafo</strong>: fonte, tamanho, cor, alinhamento e espaçamento.</li><li>O <strong>+</strong> insere imagem, tabela, link e outros elementos.</li><li>Toque no <strong>lápis</strong> para editar e no <strong>✓</strong> para concluir.</li></ul></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 51 — Mais recursos no celular -->
+    <div class="sl" id="s51">
+      <div class="slhd"><span class="num">51</span><h2>Mais recursos no celular</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1.8fr 1fr">
+          <div class="col"><div class="fig"><img src="img/celular-recursos.jpg" alt="Três telas do app: menu com Layout de impressão, verificação ortográfica e Compartilhar e exportar; barra de formatação; alinhamento"></div></div>
+          <div class="col"><div class="card vd grow"><ul><li>Menu <strong>⋮</strong>: <strong>Layout de impressão</strong>, sugerir alterações, verificação ortográfica, <strong>Compartilhar e exportar</strong>.</li><li>As barras <strong>superior e inferior</strong> reúnem os comandos mais usados.</li><li>Ative <strong>Disponibilizar off-line</strong> para editar sem internet.</li></ul></div></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 52 — Renomear e abrir o Drive no celular -->
+    <div class="sl" id="s52">
+      <div class="slhd"><span class="num">52</span><h2>Renomear e abrir o Drive no celular</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr auto;">
+        <div class="grade" style="grid-template-columns:1fr 1fr">
+          <div class="col"><div class="fig"><img src="img/celular-renomear.jpg" alt="Telas do app mostrando a janela Renomear documento e o arquivo salvo e marcado com estrela"></div></div>
+          <div class="col"><div class="fig"><img src="img/celular-drive.jpg" alt="Telas do app com o menu lateral e a opção Google Drive destacada"></div></div></div>
+        <div class="card"><ul><li>Para renomear: toque em <strong>Documento sem título</strong> (ou ⋮ &gt; <strong>Renomear</strong>), digite o nome e <strong>OK</strong>.</li><li>A <strong>estrela</strong> marca documentos importantes.</li><li>Menu <strong>☰</strong> &gt; <strong>Google Drive</strong> abre todos os seus arquivos.</li></ul></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 53 — Atividade prática -->
+    <div class="sl" id="s53">
+      <div class="slhd"><span class="num">53</span><h2>Atividade prática</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr 1.15fr">
+          <div class="col"><div style="display:contents"><div class="card vd grow ativ"><div class="tag-tempo">Atividade avaliativa</div><h3 class="ativ-tit">Entregue o trabalho “Artrópodes” formatado e compartilhado.</h3><p>Use a <strong>sua</strong> Conta do Google e siga a lista ao lado. No final, compartilhe com o professor:</p><p class="mail-prof">diego.cordeiro@ifpi.edu.br</p><p class="dica">Dica: confira tudo em Arquivo &gt; Configuração da página e no histórico de versões.</p><p class="dica"><b><span class="mk" style="">Encaminhe a versão em PDF no SUAP na atividade disponibilizada pelo professor.</span></b></p></div></div></div>
+          <div class="col"><div class="card grow"><h3>Lista de verificação</h3><ul><li>Documento “<strong>Artrópodes – Seu nome</strong>” com o texto completo.</li><li>Página A4, margens <strong>3/2/3/2 cm</strong>, formato Páginas.</li><li>Arial ou Times <strong>12</strong>, justificado, entrelinhas <strong>1,5</strong>, recuo <strong>1,25 cm</strong>.</li><li>Uma <strong>citação longa</strong> formatada (recuo 4 cm, fonte menor, simples).</li><li>Uma <strong>imagem</strong> centralizada, com legenda e fonte.</li><li>Um parágrafo ditado por <strong>voz</strong>.</li><li>Compartilhado com <strong>diego.cordeiro@ifpi.edu.br</strong> como <strong>Comentador</strong>.</li></ul></div></div></div>
+      </div>
+      <div class="nt"><strong>~30 min.</strong> Recolher os links. Na próxima aula, o professor devolve comentários e sugestões no próprio documento.</div>
+    </div>
+
+    <!-- SLIDE 54 — Referências -->
+    <div class="sl" id="s54">
+      <div class="slhd"><span class="num">54</span><h2>Referências</h2></div>
+      <div class="slbd g" style="grid-template-rows:1fr;">
+        <div class="grade" style="grid-template-columns:1fr">
+          <div class="col"><div class="card grow"><div class="txt-bloco"><p style="font-size:15.5px;line-height:1.45;margin:0 0 10px">ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. <strong>ABNT NBR 14724</strong>: informação e documentação: trabalhos acadêmicos: apresentação. 4. ed. Rio de Janeiro: ABNT, 2024.</p><p style="font-size:15.5px;line-height:1.45;margin:0 0 10px">ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. <strong>ABNT NBR 10520</strong>: informação e documentação: citações em documentos: apresentação. Rio de Janeiro: ABNT, 2023.</p><p style="font-size:15.5px;line-height:1.45;margin:0 0 10px">GOOGLE. <strong>Central de Ajuda do Editores de Documentos Google</strong>. Disponível em: https://support.google.com/docs. Acesso em: 24 nov. 2026.</p><p style="font-size:15.5px;line-height:1.45;margin:0 0 10px">GOOGLE. <strong>Digitar e editar com sua voz</strong>. Disponível em: https://support.google.com/docs/answer/4492226. Acesso em: 24 nov. 2026.</p><p style="font-size:15.5px;line-height:1.45;margin:0 0 10px">GOOGLE. <strong>Google Workspace Updates</strong>: new Gemini capabilities in Google Docs. 2026. Disponível em: https://workspaceupdates.googleblog.com. Acesso em: 24 nov. 2026.</p><p style="font-size:15.5px;line-height:1.45;margin:0">UNIVERSIDADE DE TAUBATÉ. <strong>Tutoriais UNITAU</strong>: Google Docs. Disponível em: https://ead.unitau.br/pluginfile.php/85247/mod_page/content/35/Google%20Docs.pdf. Acesso em: 2 jun. 2025.</p></div></div></div></div>
+      </div>
+      <div class="nt">Capturas de tela do computador feitas em nov/2026 com uma conta de demonstração; as do celular vêm do tutorial da UNITAU.</div>
+    </div>
+
+    <!-- SLIDE 55 — Alguma dúvida? -->
+    <div class="sl" id="s55">
+      <div class="capa">
+        <div class="esq">
+          <div class="rot">Encerramento</div>
+          <h1>Alguma dúvida?</h1>
+          <div class="faixa"></div>
+          <div class="sub">Este é o momento para esclarecer qualquer questão sobre o conteúdo que vimos.</div>
+          <div class="sub">Não tenha receio de perguntar: as dúvidas de hoje são o conhecimento de amanhã!</div>
+        </div>
+        <div class="dir"><img src="img/duvidas.svg" alt=""></div>
+      </div>
+      <div class="nt"><strong>~2 min.</strong> Recapitular: conta, ABNT, imagens, voz, colaboração e celular. Lembrar do prazo de entrega do link.</div>
+    </div>
+
+  </div>
+  <footer class="ft">
+    <img src="img/logo_aula.svg" alt=""><span class="txt"><strong>Aula 07 · Google Documentos</strong> · Informática Aplicada — Meio Ambiente · IFPI · Prof. Diego Cordeiro</span>
+  </footer>
+  <nav class="ctr" aria-label="Navegação da apresentação">
+    <button class="bz" id="bprev" onclick="pv()">Anterior</button>
+    <div class="dots" id="dots" role="group" aria-label="Ir para o slide"></div>
+    <button class="bv" id="bnext" onclick="nx()">Próximo</button>
+    <button class="bp" id="bexp" onclick="exportarPDF()" title="Exportar os slides em PDF — na janela de impressão escolha 'Salvar como PDF', margens 'Nenhuma' e mantenha 'Gráficos de fundo'">Exportar PDF</button>
+  </nav>
+  <script src="aula07.js"></script>
+</body>
+
+</html>

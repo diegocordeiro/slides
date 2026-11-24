@@ -486,6 +486,16 @@ body.modo-presenter .ctr .dot.ac {
     color: #fff
 }
 
+/* carrossel de números (muitos slides) */
+.dots { flex: 1 1 auto; overflow: hidden }
+.dots.car { justify-content: center }
+.dots .djan { display: flex; gap: inherit; flex: 0 0 auto }
+.dots .dot.dnav { background: transparent; border-color: transparent; font-size: 20px; color: var(--bem); padding: 0 4px }
+.dots .dot.dnav:hover { background: #E1E8EF }
+.dots .dot.dret { background: transparent; border-color: transparent; color: var(--c); letter-spacing: 1px }
+.dots .dot.dret:hover { background: #E1E8EF }
+body.modo-presenter .dots .dot.dnav, body.modo-presenter .dots .dot.dret { color: #fff }
+
 .abas {
     display: flex;
     gap: 8px;
