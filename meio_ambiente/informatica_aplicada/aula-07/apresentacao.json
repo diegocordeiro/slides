@@ -3,7 +3,7 @@
   "motor": "editor",
   "estado": "editor",
   "meta": {
-    "titulo": "Google Documentos: textos na nuvem",
+    "titulo": "Informática Aplicada · Aula 07 — Google Documentos: textos na nuvem",
     "titulo_barra": "Informática Aplicada · Aula 07",
     "arquivo": "aula07.html",
     "cronometro_min": 100,
@@ -59,17 +59,9 @@
       "rotulo": "Informática Aplicada · Aula 07",
       "titulo": "Google Documentos:<br>textos na nuvem",
       "subtitulos": [
-        "Professor Diego Cordeiro"
+        "Professor Diego Cordeiro de Oliveira"
       ],
-      "etiquetas": [
-        "Conta Google",
-        "Criar e salvar",
-        "ABNT",
-        "Imagens",
-        "Voz",
-        "Colaboração",
-        "Celular"
-      ],
+      "etiquetas": [],
       "imagem": "img/capa.svg",
       "notas": "<strong>~2 min.</strong> Apresentar o roteiro: criar a conta, digitar e formatar um trabalho segundo a ABNT, imagens, digitação por voz, colaboração e uso no celular. Cada aluno vai usar a própria Conta do Google."
     },
@@ -182,7 +174,7 @@
             "titulo": "Dicas de segurança",
             "itens": [
               "Use um e-mail com o seu nome, por exemplo <code>nome.sobrenome</code>.",
-              "Não compartilhe a senha e não salve em computadores da escola.",
+              "Não compartilhe a senha e não salve em computadores públicos.",
               "Ative a <strong>verificação em duas etapas</strong> em <em>myaccount.google.com</em> &gt; Segurança.",
               "Quem não tem idade mínima para conta própria usa uma conta <strong>supervisionada pelo responsável</strong> (Family Link)."
             ]
@@ -190,7 +182,7 @@
           {
             "tipo": "destaque",
             "estilo": "bege",
-            "html": "Já usa Gmail ou YouTube? Então você <strong>já tem uma Conta do Google</strong>: use a mesma.",
+            "html": "Já usa Android, Gmail ou YouTube? Então você <strong>já tem uma Conta do Google</strong>.",
             "titulo": "Atenção"
           }
         ]
@@ -206,7 +198,7 @@
           {
             "tipo": "figura",
             "src": "img/google-apps.jpg",
-            "alt": "Página do Google com o menu Google Apps aberto e o ícone Documentos destacado"
+            "alt": "Tela inicial do Documentos com o menu Google Apps aberto e o ícone Documentos destacado"
           }
         ],
         [
@@ -244,7 +236,7 @@
           {
             "tipo": "figura",
             "src": "img/documento-em-branco.jpg",
-            "alt": "Documento em branco no Google Documentos com a barra de menus e de ferramentas destacadas"
+            "alt": "Documento em branco no Google Documentos com o título Documento sem título e a barra de menus destacados"
           }
         ],
         [
@@ -255,14 +247,13 @@
               "Clique em <strong>Em branco</strong> ou escolha um item da <strong>Galeria de modelos</strong> (currículos, cartas, relatórios).",
               "Dê um nome clicando em <strong>Documento sem título</strong>, no canto superior esquerdo.",
               "O arquivo é <strong>salvo automaticamente</strong> no Google Drive.",
-              "<strong>Arquivo &gt; Fazer download</strong>: Word (.docx), PDF, ODT, RTF, TXT, HTML, EPUB ou Markdown."
+              "<strong>Arquivo &gt; Baixar</strong>: Word (.docx), PDF, ODT, RTF, TXT, HTML, EPUB ou Markdown."
             ]
           },
           {
             "tipo": "destaque",
-            "estilo": "bege",
-            "html": "As capturas desta aula mostram o menu <strong>Complementos</strong>; hoje ele se chama <strong>Extensões</strong>. Os demais menus são os mesmos.",
-            "titulo": "Versão atual"
+            "estilo": "cd",
+            "html": "Os botões <strong>Ata da reunião</strong>, <strong>Rascunho de e-mail</strong> e <strong>Mais</strong> no documento vazio são <strong>blocos de criação</strong> prontos: basta começar a digitar para eles sumirem."
           }
         ]
       ],
@@ -337,7 +328,7 @@
           {
             "tipo": "figura",
             "src": "img/menu-drive.jpg",
-            "alt": "Menu principal do Documentos com a opção Drive destacada"
+            "alt": "Menu principal (☰) do Documentos com a opção Drive destacada"
           }
         ]
       ],
@@ -364,35 +355,43 @@
           {
             "tipo": "figura",
             "src": "img/drive-abrir-com-imagem.jpg",
-            "alt": "Google Drive: menu do botão direito com Abrir com e Documentos Google destacados, e a cópia gerada ao lado do original"
+            "alt": "Google Drive: botão direito na imagem pagina-livro.jpg com Abrir com e Documentos Google destacados"
           }
         ],
         [
           {
-            "tipo": "card",
-            "crescer": true,
-            "titulo": "Reconhecimento de texto (OCR)",
-            "blocos": [
-              {
-                "tipo": "lista",
-                "numerada": true,
-                "itens": [
-                  "No Drive, clique com o <strong>botão direito</strong> numa imagem (JPG, PNG) ou PDF.",
-                  "Escolha <strong>Abrir com &gt; Documentos Google</strong>.",
-                  "Uma <strong>cópia</strong> em documento é criada ao lado do original, com a imagem e o <strong>texto reconhecido</strong> para editar."
-                ]
-              },
-              {
-                "tipo": "destaque",
-                "estilo": "cd",
-                "html": "Funciona melhor com texto nítido, na horizontal e com boa iluminação."
-              }
-            ]
+            "tipo": "figura",
+            "src": "img/ocr-resultado.jpg",
+            "alt": "Documento gerado: a foto da página no alto e, abaixo, o texto reconhecido pronto para editar"
           }
         ]
       ],
-      "proporcao": "2.4fr 1fr",
-      "notas": "<strong>~3 min.</strong> Demonstrar com a foto de uma página de livro. Comentar que o resultado precisa ser revisado."
+      "proporcao": "1fr 1fr",
+      "notas": "<strong>~3 min.</strong> Demonstrar com a foto de uma página de livro. Comentar que o resultado precisa ser revisado.",
+      "rodape": [
+        {
+          "tipo": "card",
+          "crescer": false,
+          "titulo": "Reconhecimento de texto (OCR)",
+          "blocos": [
+            {
+              "tipo": "lista",
+              "numerada": true,
+              "itens": [
+                "No Drive, clique com o <strong>botão direito</strong> numa imagem (JPG, PNG) ou PDF.",
+                "Escolha <strong>Abrir com &gt; Documentos Google</strong>.",
+                "Uma <strong>cópia</strong> em documento é criada ao lado do original, com a imagem e o <strong>texto reconhecido</strong> para editar."
+              ]
+            }
+          ]
+        },
+        {
+          "tipo": "destaque",
+          "estilo": "cd",
+          "html": "Funciona melhor com texto nítido, na horizontal e com boa iluminação."
+        }
+      ],
+      "rodape_proporcao": "1.75fr 1fr"
     },
     {
       "layout": "conteudo",
@@ -401,31 +400,38 @@
         [
           {
             "tipo": "figura",
-            "src": "img/drive-upload.jpg",
-            "alt": "Arquivo sendo arrastado do computador para a janela do Google Drive, com a mensagem de upload concluído"
+            "src": "img/drive-novo.jpg",
+            "alt": "Menu Novo do Google Drive com Upload de arquivo e Upload de pasta destacados"
           }
         ],
         [
           {
-            "tipo": "card",
-            "crescer": true,
-            "titulo": "Duas formas",
-            "blocos": [
-              {
-                "tipo": "lista",
-                "numerada": true,
-                "itens": [
-                  "<strong>Arraste</strong> o arquivo do computador e solte na janela do Drive.",
-                  "Ou clique em <strong>Novo &gt; Upload de arquivo</strong> (ou Upload de pasta).",
-                  "Acompanhe o andamento na janela do <strong>canto inferior direito</strong> até aparecer “Upload concluído”."
-                ]
-              }
-            ]
+            "tipo": "figura",
+            "src": "img/drive-upload.jpg",
+            "alt": "Meu Drive com os arquivos enviados e o aviso Upload concluído no canto inferior direito"
           }
         ]
       ],
-      "proporcao": "2.4fr 1fr",
-      "notas": "<strong>~2 min.</strong> Enviar um arquivo do Word para usar no próximo slide."
+      "proporcao": "1fr 1fr",
+      "notas": "<strong>~2 min.</strong> Enviar um arquivo do Word para usar no próximo slide.",
+      "rodape": [
+        {
+          "tipo": "card",
+          "crescer": false,
+          "titulo": "Duas formas",
+          "blocos": [
+            {
+              "tipo": "lista",
+              "numerada": true,
+              "itens": [
+                "<strong>Arraste</strong> o arquivo do computador e solte na janela do Drive.",
+                "Ou clique em <strong>Novo &gt; Upload de arquivo</strong> (ou Upload de pasta).",
+                "Acompanhe o andamento na janela do <strong>canto inferior direito</strong> até aparecer “Upload concluído”."
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "layout": "conteudo",
@@ -435,30 +441,37 @@
           {
             "tipo": "figura",
             "src": "img/drive-word-para-docs.jpg",
-            "alt": "Drive: Abrir com Documentos Google em um arquivo .docx e o resultado com as versões Docs e Word lado a lado"
+            "alt": "Drive: botão direito no arquivo dia-das-maes.docx com Abrir com e Documentos Google destacados"
           }
         ],
         [
           {
-            "tipo": "card",
-            "crescer": true,
-            "titulo": "Editar ou converter",
-            "blocos": [
-              {
-                "tipo": "lista",
-                "numerada": true,
-                "itens": [
-                  "Botão direito no arquivo .docx &gt; <strong>Abrir com &gt; Documentos Google</strong>.",
-                  "O Docs edita o Word <strong>no próprio formato</strong> (aparece o selo <strong>.DOCX</strong> ao lado do título).",
-                  "Para converter: <strong>Arquivo &gt; Salvar como Documentos Google</strong>. Uma <strong>cópia</strong> é criada e o original em Word continua no Drive."
-                ]
-              }
-            ]
+            "tipo": "figura",
+            "src": "img/word-salvar-como.jpg",
+            "alt": "Arquivo do Word aberto no Docs com o selo .DOCX e o menu Arquivo com Salvar como Google Docs destacado"
           }
         ]
       ],
-      "proporcao": "2.4fr 1fr",
-      "notas": "<strong>~3 min.</strong> Diferença entre editar o .docx (compatibilidade) e converter (cópia em formato Google)."
+      "proporcao": "1fr 1fr",
+      "notas": "<strong>~3 min.</strong> Diferença entre editar o .docx (compatibilidade) e converter (cópia em formato Google).",
+      "rodape": [
+        {
+          "tipo": "card",
+          "crescer": false,
+          "titulo": "Editar ou converter",
+          "blocos": [
+            {
+              "tipo": "lista",
+              "numerada": true,
+              "itens": [
+                "Botão direito no arquivo .docx &gt; <strong>Abrir com &gt; Documentos Google</strong>.",
+                "O Docs edita o Word <strong>no próprio formato</strong> (aparece o selo <strong>.DOCX</strong> ao lado do título).",
+                "Para converter: <strong>Arquivo &gt; Salvar como Google Docs</strong>. Uma <strong>cópia</strong> é criada e o original em Word continua no Drive."
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "layout": "conteudo",
@@ -468,7 +481,7 @@
           {
             "tipo": "figura",
             "src": "img/word-e-docs.jpg",
-            "alt": "Tela inicial do Documentos mostrando o arquivo original em Word e a cópia em Documentos Google"
+            "alt": "Documentos recentes com a cópia dia-das-maes (Docs) e o original dia-das-maes.docx (Word) destacados"
           }
         ],
         [
@@ -479,7 +492,7 @@
             "itens": [
               "O <strong>original em Word</strong> e a <strong>cópia em Documentos</strong> ficam disponíveis.",
               "Ícone <strong>W azul</strong> = arquivo do Word; ícone de <strong>folha azul</strong> = documento Google.",
-              "Para entregar em Word ou PDF, use <strong>Arquivo &gt; Fazer download</strong>."
+              "Para entregar em Word ou PDF, use <strong>Arquivo &gt; Baixar</strong>."
             ]
           }
         ]
@@ -580,12 +593,12 @@
           {
             "tipo": "figura",
             "src": "img/configuracao-pagina.jpg",
-            "alt": "Janela Configuração da página com retrato, A4, margens 3, 2, 3 e 2 cm e botões Definir como padrão e OK"
+            "alt": "Janela Configuração da página, aba Páginas, com A4 e margens Início 3, Fim 2, Esquerda 3 e Direita 2"
           }
         ]
       ],
       "proporcao": "1fr 1fr",
-      "notas": "<strong>~3 min.</strong> Mostrar a aba Páginas/Sem páginas que aparece no topo da janela na versão atual.",
+      "notas": "<strong>~3 min.</strong> Na janela, “Início” e “Fim” são as margens superior e inferior.",
       "rodape": [
         {
           "tipo": "card",
@@ -598,19 +611,45 @@
               "itens": [
                 "Mantenha a aba <strong>Páginas</strong> (não “Sem páginas”).",
                 "<strong>Orientação</strong>: Retrato · <strong>Tamanho</strong>: A4.",
-                "<strong>Margens</strong>: superior 3, inferior 2, esquerda 3, direita 2.",
+                "<strong>Margens</strong> (cm): Início 3, Fim 2, Esquerda 3, Direita 2.",
                 "<strong>Definir como padrão</strong> (opcional) e <strong>OK</strong>."
               ]
             }
           ]
-        },
-        {
-          "tipo": "destaque",
-          "estilo": "bege",
-          "html": "O formato <strong>Sem páginas</strong> esconde margens, cabeçalhos e números de página. Para trabalhos ABNT, use sempre <strong>Páginas</strong>."
         }
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Páginas ou Sem páginas?",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/sem-paginas.jpg",
+            "alt": "Aba Sem páginas da Configuração da página com a explicação do formato contínuo"
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "itens": [
+              "<strong>Sem páginas</strong>: o texto corre sem quebras, bom para tabelas largas e leitura na tela.",
+              "Esse formato <strong>esconde margens, cabeçalhos, rodapés e números de página</strong>.",
+              "Também em <strong>Formatar &gt; Mudar para o formato sem páginas</strong>."
+            ]
+          },
+          {
+            "tipo": "destaque",
+            "estilo": "bege",
+            "html": "Para trabalhos ABNT, use sempre <strong>Páginas</strong>.",
+            "titulo": "Atenção"
+          }
+        ]
       ],
-      "rodape_proporcao": "1.75fr 1fr"
+      "proporcao": "2fr 1fr",
+      "notas": "<strong>~1 min.</strong> Alguns documentos novos já abrem sem páginas: conferir antes de formatar."
     },
     {
       "layout": "conteudo",
@@ -620,7 +659,7 @@
           {
             "tipo": "figura",
             "src": "img/fonte-arial.jpg",
-            "alt": "Barra de ferramentas com a lista de fontes aberta e o tamanho 12 e o botão Justificar destacados"
+            "alt": "Barra de ferramentas com a lista de fontes aberta, Arial marcada e a caixa de tamanho em destaque"
           }
         ],
         [
@@ -658,7 +697,7 @@
           {
             "tipo": "figura",
             "src": "img/espacamento-menu.jpg",
-            "alt": "Menu Espaçamento entre linhas e parágrafos com 1,5 e Espaçamento personalizado destacados"
+            "alt": "Menu Formatar > Espaçamento entre linhas e parágrafos com 1,5, Espaçamento personalizado e Evitar linhas únicas destacados"
           }
         ],
         [
@@ -670,12 +709,12 @@
         ]
       ],
       "proporcao": "1fr 1fr",
-      "notas": "<strong>~2 min.</strong> O ícone fica na barra de ferramentas; também está em Formatar &gt; Espaçamento entre linhas e parágrafos.",
+      "notas": "<strong>~2 min.</strong> Também há um ícone na barra de ferramentas (às vezes escondido no ⋮ quando a janela é estreita).",
       "rodape": [
         {
           "tipo": "card",
           "crescer": false,
-          "titulo": "Ícone “Espaçamento entre linhas e parágrafos”",
+          "titulo": "Formatar &gt; Espaçamento entre linhas e parágrafos",
           "blocos": [
             {
               "tipo": "lista",
@@ -684,7 +723,7 @@
                 "Escolha <strong>1,5</strong>.",
                 "Em <strong>Espaçamento personalizado</strong>, coloque <strong>0</strong> em <em>Antes</em> e <em>Depois</em> do parágrafo.",
                 "Clique em <strong>Aplicar</strong>.",
-                "No mesmo menu, mantenha marcada a opção que <strong>evita linhas isoladas</strong> no início ou fim da página."
+                "No mesmo menu, mantenha marcado <strong>Evitar linhas únicas</strong>."
               ]
             }
           ]
@@ -698,37 +737,45 @@
         [
           {
             "tipo": "figura",
-            "src": "img/recuo-paragrafo.jpg",
-            "alt": "Texto com o início dos parágrafos recuado e a régua mostrando o marcador de recuo da primeira linha"
+            "src": "img/opcoes-recuo.jpg",
+            "alt": "Janela Opções de recuo com Recuo especial Primeira linha e o valor 1.25"
           }
         ],
         [
           {
-            "tipo": "card",
-            "crescer": true,
-            "titulo": "Recuo de 1,25 cm na primeira linha",
-            "blocos": [
-              {
-                "tipo": "lista",
-                "numerada": true,
-                "itens": [
-                  "Selecione os parágrafos do texto.",
-                  "<strong>Formatar &gt; Alinhar e recuar &gt; Opções de recuo</strong>.",
-                  "Em <strong>Recuo especial</strong>, escolha <strong>Primeira linha</strong> e digite <strong>1,25</strong>.",
-                  "<strong>Aplicar</strong>."
-                ]
-              },
-              {
-                "tipo": "destaque",
-                "estilo": "cd",
-                "html": "A tecla <strong>Tab</strong> também recua, mas usa 1,27 cm por padrão e precisa ser repetida em cada parágrafo. A régua (marcador azul) permite ajustar com o mouse."
-              }
-            ]
+            "tipo": "figura",
+            "src": "img/recuo-paragrafo.jpg",
+            "alt": "Texto justificado com a primeira linha de cada parágrafo recuada e o marcador na régua"
           }
         ]
       ],
-      "proporcao": "2fr 1fr",
-      "notas": "<strong>~2 min.</strong> O PPTX original usava Tab; a opção de recuo especial é mais precisa e vale para todos os parágrafos selecionados."
+      "proporcao": "1fr 1fr",
+      "notas": "<strong>~2 min.</strong> O PPTX original usava Tab; a opção de recuo especial é mais precisa e vale para todos os parágrafos selecionados.",
+      "rodape": [
+        {
+          "tipo": "card",
+          "crescer": false,
+          "titulo": "Recuo de 1,25 cm na primeira linha",
+          "blocos": [
+            {
+              "tipo": "lista",
+              "numerada": true,
+              "itens": [
+                "Selecione os parágrafos do texto.",
+                "<strong>Formatar &gt; Alinhar e recuar &gt; Opções de recuo</strong>.",
+                "Em <strong>Recuo especial</strong>, escolha <strong>Primeira linha</strong> e digite <strong>1.25</strong> (com ponto: a vírgula dá erro).",
+                "<strong>Aplicar</strong>."
+              ]
+            }
+          ]
+        },
+        {
+          "tipo": "destaque",
+          "estilo": "cd",
+          "html": "A tecla <strong>Tab</strong> também recua, mas usa 1,27 cm por padrão e precisa ser repetida em cada parágrafo. A régua (marcador azul) permite ajustar com o mouse."
+        }
+      ],
+      "rodape_proporcao": "1.75fr 1fr"
     },
     {
       "layout": "conteudo",
@@ -805,6 +852,13 @@
       "colunas": [
         [
           {
+            "tipo": "figura",
+            "src": "img/historico-versoes.jpg",
+            "alt": "Histórico de versões com as alterações destacadas em cor, a lista de versões à direita e a opção Destacar mudanças"
+          }
+        ],
+        [
+          {
             "tipo": "card",
             "crescer": true,
             "variante": "vd",
@@ -812,29 +866,18 @@
             "itens": [
               "<strong>Arquivo &gt; Histórico de versões &gt; Ver histórico de versões</strong> (Ctrl + Alt + Shift + H).",
               "Mostra <strong>quem alterou o quê e quando</strong>, com uma cor para cada pessoa.",
-              "<strong>Restaurar esta versão</strong> desfaz alterações depois de muito tempo.",
-              "<strong>Nomear versão atual</strong>: ex. “Entrega 1”."
-            ]
-          }
-        ],
-        [
-          {
-            "tipo": "card",
-            "crescer": true,
-            "titulo": "Comparar documentos",
-            "itens": [
-              "<strong>Ferramentas &gt; Comparar documentos</strong> mostra as diferenças entre duas versões como sugestões.",
-              "Desde <strong>nov/2026</strong>, também compara arquivos do <strong>Word (.docx)</strong> sem converter."
+              "<strong>Restaurar esta versão</strong> volta o texto a qualquer ponto anterior.",
+              "<strong>Nomear a versão atual</strong>: ex. “Entrega 1”."
             ]
           },
           {
             "tipo": "destaque",
             "estilo": "cd",
-            "html": "Em trabalhos em grupo, o histórico mostra a participação de cada colega."
+            "html": "<strong>Ferramentas &gt; Comparar documentos</strong> mostra as diferenças entre dois arquivos, inclusive <strong>Word (.docx)</strong>."
           }
         ]
       ],
-      "proporcao": "1fr 1fr",
+      "proporcao": "2fr 1fr",
       "notas": "<strong>~2 min.</strong> Demonstrar restaurando uma versão anterior do texto Artrópodes."
     },
     {
@@ -859,7 +902,7 @@
           {
             "tipo": "figura",
             "src": "img/pesquisa-imagem.jpg",
-            "alt": "Painel lateral de pesquisa de imagens com o termo Artrópodes digitado"
+            "alt": "Painel Imagens do Google com a pesquisa escorpião amarelo"
           }
         ]
       ],
@@ -898,7 +941,7 @@
           {
             "tipo": "figura",
             "src": "img/selecionar-imagem.jpg",
-            "alt": "Imagens selecionadas no painel de pesquisa e o botão Inserir destacado"
+            "alt": "Imagem marcada no painel de pesquisa, 1 item selecionado e o botão Inserir destacado"
           }
         ],
         [
@@ -924,7 +967,7 @@
           {
             "tipo": "figura",
             "src": "img/redimensionar-imagem.jpg",
-            "alt": "Imagem selecionada com os pontos azuis nos cantos para redimensionar"
+            "alt": "Imagem selecionada com os quadradinhos azuis nos cantos para redimensionar"
           }
         ],
         [
@@ -932,7 +975,7 @@
             "tipo": "card",
             "crescer": true,
             "itens": [
-              "Clique na imagem: aparecem <strong>pontos azuis</strong> nas bordas.",
+              "Clique na imagem: aparecem <strong>quadradinhos azuis</strong> nas bordas.",
               "Arraste um <strong>canto</strong> em direção ao centro para reduzir mantendo a proporção.",
               "Para medidas exatas: botão direito &gt; <strong>Opções de imagem &gt; Tamanho e rotação</strong>.",
               "Use o botão <strong>Centralizar</strong> (Ctrl + Shift + E) para centralizar."
@@ -950,7 +993,7 @@
           {
             "tipo": "figura",
             "src": "img/posicao-imagem.jpg",
-            "alt": "Barra de opções abaixo da imagem com os ícones de posição em relação ao texto"
+            "alt": "Menu de posição da imagem aberto com as opções Inline, Ajustar texto, Quebrar texto, Atrás e Na frente do texto"
           }
         ],
         [
@@ -958,9 +1001,9 @@
             "tipo": "card",
             "crescer": true,
             "variante": "vd",
-            "titulo": "Opções abaixo da imagem",
+            "titulo": "Botão abaixo da imagem",
             "itens": [
-              "<strong>Na linha</strong>: a imagem se comporta como uma letra do texto (mais segura para ABNT).",
+              "<strong>Inline</strong>: a imagem se comporta como uma letra do texto (mais segura para ABNT).",
               "<strong>Ajustar texto</strong>: o texto contorna a imagem.",
               "<strong>Quebrar texto</strong>: texto só acima e abaixo.",
               "<strong>Atrás do texto</strong> / <strong>Na frente do texto</strong>."
@@ -969,7 +1012,7 @@
         ]
       ],
       "proporcao": "2fr 1fr",
-      "notas": "<strong>~2 min.</strong> Para trabalhos acadêmicos, recomendar “Na linha” com a imagem centralizada."
+      "notas": "<strong>~2 min.</strong> Para trabalhos acadêmicos, recomendar “Inline” com a imagem centralizada."
     },
     {
       "layout": "secao",
@@ -986,14 +1029,14 @@
           {
             "tipo": "figura",
             "src": "img/digitacao-voz-menu.jpg",
-            "alt": "Menu Ferramentas aberto com a opção Digitação por voz destacada"
+            "alt": "Menu Ferramentas aberto com a opção Digitação por Voz destacada"
           }
         ],
         [
           {
             "tipo": "figura",
             "src": "img/digitacao-voz-microfone.jpg",
-            "alt": "Ícone do microfone vermelho ativo e o texto ditado aparecendo no documento"
+            "alt": "Quadro Digitação por Voz com o microfone e o idioma Port. (Brasil)"
           }
         ]
       ],
@@ -1009,8 +1052,8 @@
               "tipo": "lista",
               "numerada": true,
               "itens": [
-                "Atalho: <strong>Ctrl + Shift + S</strong>.",
-                "No quadro do microfone, escolha <strong>Português (Brasil)</strong>.",
+                "Atalho: <strong>Ctrl + Shift + S</strong> (no Mac, <strong>⌘ + Shift + S</strong>).",
+                "No quadro, confira o idioma <strong>Port. (Brasil)</strong>.",
                 "Clique no <strong>microfone</strong> (fica vermelho) e fale normalmente.",
                 "Dite a pontuação: “<strong>vírgula</strong>”, “<strong>ponto</strong>”, “<strong>ponto de interrogação</strong>”, “<strong>nova linha</strong>”, “<strong>novo parágrafo</strong>”.",
                 "Clique de novo no microfone para <strong>parar</strong>."
@@ -1041,19 +1084,19 @@
           {
             "tipo": "figura",
             "src": "img/compartilhar-pessoas.jpg",
-            "alt": "Janela Compartilhar com pessoas e grupos com o campo de e-mail, o botão Concluído e Copiar link"
+            "alt": "Janela Compartilhar com o campo para adicionar participantes, Acesso geral, Copiar link e a engrenagem destacados"
           }
         ],
         [
           {
             "tipo": "figura",
-            "src": "img/configuracoes-compartilhar.jpg",
-            "alt": "Configurações de compartilhamento com as opções de permissão para editores e leitores"
+            "src": "img/compartilhar-mensagem.jpg",
+            "alt": "E-mail adicionado, papel Editor, Notificar pessoas marcado, mensagem escrita e botão Enviar"
           }
         ]
       ],
       "proporcao": "1fr 1fr",
-      "notas": "<strong>~3 min.</strong> Na versão atual, a janela é única e mostra “Pessoas com acesso” e “Acesso geral”.",
+      "notas": "<strong>~3 min.</strong> O e-mail do exemplo é fictício. A janela mostra “Pessoas com acesso” e “Acesso geral”.",
       "rodape": [
         {
           "tipo": "card",
@@ -1071,46 +1114,49 @@
               ]
             }
           ]
-        },
-        {
-          "tipo": "destaque",
-          "estilo": "cd",
-          "html": "Na <strong>engrenagem</strong>: decidir se editores podem mudar permissões e se leitores/comentadores podem baixar, imprimir e copiar."
         }
-      ],
-      "rodape_proporcao": "1.75fr 1fr"
+      ]
     },
     {
       "layout": "conteudo",
-      "titulo": "Mensagem e acesso pelo link",
+      "titulo": "Acesso pelo link e permissões",
       "colunas": [
         [
           {
             "tipo": "figura",
-            "src": "img/compartilhar-mensagem.jpg",
-            "alt": "Compartilhamento com e-mail adicionado, papel Editor, mensagem escrita e botão Enviar"
+            "src": "img/acesso-geral.jpg",
+            "alt": "Menu Acesso geral aberto com as opções Restrito e Qualquer pessoa com o link"
           }
         ],
         [
           {
-            "tipo": "card",
-            "crescer": true,
-            "titulo": "Acesso geral",
-            "itens": [
-              "<strong>Restrito</strong>: só quem foi adicionado abre o link.",
-              "<strong>Qualquer pessoa com o link</strong>: escolha Leitor, Comentador ou Editor.",
-              "<strong>Copiar link</strong> e envie por e-mail, WhatsApp ou ambiente virtual."
-            ]
-          },
-          {
-            "tipo": "destaque",
-            "estilo": "bege",
-            "html": "Evite “Qualquer pessoa com o link” como <strong>Editor</strong>: qualquer um poderia apagar o trabalho.",
-            "titulo": "Cuidado"
+            "tipo": "figura",
+            "src": "img/configuracoes-compartilhar.jpg",
+            "alt": "Configurações do compartilhamento: permitir que editores compartilhem e quem pode baixar, copiar e imprimir"
           }
         ]
       ],
-      "proporcao": "2fr 1fr"
+      "proporcao": "1fr 1fr",
+      "rodape": [
+        {
+          "tipo": "card",
+          "crescer": false,
+          "titulo": "Acesso geral",
+          "itens": [
+            "<strong>Restrito</strong>: só quem foi adicionado abre o link.",
+            "<strong>Qualquer pessoa com o link</strong>: escolha Leitor, Comentador ou Editor.",
+            "<strong>Copiar link</strong> e envie por e-mail, WhatsApp ou ambiente virtual.",
+            "Na <strong>engrenagem</strong>: quem pode compartilhar e quem pode baixar, copiar e imprimir."
+          ]
+        },
+        {
+          "tipo": "destaque",
+          "estilo": "bege",
+          "html": "Evite “Qualquer pessoa com o link” como <strong>Editor</strong>: qualquer um poderia apagar o trabalho.",
+          "titulo": "Cuidado"
+        }
+      ],
+      "rodape_proporcao": "1.75fr 1fr"
     },
     {
       "layout": "conteudo",
@@ -1120,14 +1166,14 @@
           {
             "tipo": "figura",
             "src": "img/comentario-selecionar.jpg",
-            "alt": "Trecho de texto selecionado e o ícone de adicionar comentário na margem"
+            "alt": "Trecho selecionado e o botão de adicionar comentário que aparece ao lado"
           }
         ],
         [
           {
             "tipo": "figura",
             "src": "img/comentario-inserir.jpg",
-            "alt": "Caixa de comentário preenchida e o comentário salvo na margem do documento"
+            "alt": "Caixa de comentário preenchida com o botão Comentário destacado"
           }
         ]
       ],
@@ -1143,10 +1189,10 @@
               "numerada": true,
               "itens": [
                 "Selecione o trecho.",
-                "Clique em <strong>Adicionar comentário</strong> na margem (<strong>Ctrl + Alt + M</strong>).",
-                "Escreva e clique em <strong>Comentar</strong>.",
+                "Clique em <strong>Adicionar comentário</strong> (<strong>Ctrl + Alt + M</strong>).",
+                "Escreva e clique em <strong>Comentário</strong>.",
                 "Digite <strong>@</strong> + nome para mencionar ou <strong>atribuir</strong> uma tarefa.",
-                "Quando resolvido, clique em <strong>✓ Resolver</strong>."
+                "Quando resolvido, clique no <strong>✓</strong> (marcar como resolvido)."
               ]
             }
           ]
@@ -1159,51 +1205,74 @@
       "colunas": [
         [
           {
-            "tipo": "figura",
-            "src": "img/edicao-tempo-real.jpg",
-            "alt": "Documento com o cursor colorido de outra pessoa editando e o bate-papo aberto"
+            "tipo": "html",
+            "html": "<div class=\"trt\" role=\"img\" aria-label=\"Animação: Ana e Bruno editam o mesmo documento ao mesmo tempo; cada um tem um cursor colorido com o nome, o texto aparece enquanto digitam e um comentário recebe resposta\">\n<style>\n.trt{--a:#F97316;--b:#7C3AED;--v:#0E9F6E;flex:1;min-height:0;display:flex;flex-direction:column;background:#EEF2F6;border:1px solid var(--linha);border-radius:14px;overflow:hidden;font-family:var(--fonte)}\n.trt-top{display:flex;align-items:center;gap:8px;background:#F8FAFD;padding:9px 12px;border-bottom:1px solid #DDE3EA}\n.trt-doc{width:20px;height:24px;border-radius:3px;background:#4285F4;position:relative;flex-shrink:0}\n.trt-doc::after{content:\"\";position:absolute;left:5px;right:5px;top:8px;height:8px;border-top:2px solid #fff;border-bottom:2px solid #fff}\n.trt-tit{font-size:15px;font-weight:600;color:#1F2937;flex:1}\n.trt-av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:12px;font-weight:800;border:2px solid #fff;margin-left:-6px;box-shadow:0 0 0 2px var(--c)}\n.trt-av.a{background:var(--a);--c:var(--a)}.trt-av.b{background:var(--b);--c:var(--b)}.trt-av.v{background:var(--v);--c:var(--v)}\n.trt-share{font-size:12px;font-weight:700;background:#C2E7FF;color:#0B57D0;border-radius:14px;padding:5px 12px;margin-left:6px}\n.trt-body{flex:1;display:flex;gap:10px;padding:14px;min-height:0}\n.trt-page{flex:1;background:#fff;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.12);padding:16px 18px;position:relative;display:flex;flex-direction:column;gap:9px}\n.trt-h{font-size:16px;font-weight:700;color:#111}\n.trt-l{height:8px;border-radius:4px;background:#E2E8F0}\n.trt-l.w9{width:92%}.trt-l.w8{width:80%}.trt-l.w7{width:70%}.trt-l.w6{width:60%}.trt-l.w5{width:50%}\n.trt-typ{position:relative;height:8px;display:flex;align-items:center}\n.trt-typ i{display:block;height:8px;border-radius:4px;width:0}\n.trt-typ.a i{background:color-mix(in srgb,var(--a) 45%,#fff);animation:trtA 9s infinite}\n.trt-typ.b i{background:color-mix(in srgb,var(--b) 40%,#fff);animation:trtB 9s infinite}\n.trt-cur{position:relative;width:2px;height:16px;flex-shrink:0}\n.trt-typ.a .trt-cur{background:var(--a)}.trt-typ.b .trt-cur{background:var(--b)}\n.trt-cur b{position:absolute;left:0;bottom:15px;font-size:10px;font-weight:700;color:#fff;padding:1px 6px;border-radius:4px 4px 4px 0;white-space:nowrap}\n.trt-typ.a .trt-cur b{background:var(--a)}.trt-typ.b .trt-cur b{background:var(--b)}\n.trt-img{height:60px;width:58%;align-self:center;border-radius:6px;background:linear-gradient(135deg,#FDE68A,#D97706);opacity:0;animation:trtImg 9s infinite;position:relative}\n.trt-img::after{content:\"Figura 1\";position:absolute;left:0;right:0;bottom:-15px;text-align:center;font-size:9px;color:#64748B}\n.trt-side{width:42%;display:flex;flex-direction:column;gap:8px}\n.trt-c{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.15);padding:9px 10px;font-size:11.5px;line-height:1.35;color:#334155;opacity:0}\n.trt-c .n{display:flex;align-items:center;gap:6px;font-weight:700;color:#111;font-size:11.5px;margin-bottom:3px}\n.trt-c .n span{width:18px;height:18px;border-radius:50%;display:inline-grid;place-items:center;color:#fff;font-size:10px}\n.trt-c.c1{animation:trtC1 9s infinite;border-left:3px solid var(--a)}.trt-c.c1 .n span{background:var(--a)}\n.trt-c.c2{animation:trtC2 9s infinite;border-left:3px solid var(--b);margin-left:12px}.trt-c.c2 .n span{background:var(--b)}\n.trt-hl{background:color-mix(in srgb,var(--a) 22%,#fff);border-radius:3px;animation:trtHl 9s infinite}\n.trt-leg{font-size:12.5px;color:var(--tx-apoio);text-align:center;padding:0 10px 10px}\n@keyframes trtA{0%,5%{width:0}35%,100%{width:58%}}\n@keyframes trtB{0%,30%{width:0}62%,100%{width:46%}}\n@keyframes trtImg{0%,55%{opacity:0;transform:scale(.9)}62%,100%{opacity:1;transform:none}}\n@keyframes trtC1{0%,15%{opacity:0;transform:translateY(-6px)}22%,94%{opacity:1;transform:none}100%{opacity:0}}\n@keyframes trtC2{0%,66%{opacity:0;transform:translateY(-6px)}73%,94%{opacity:1;transform:none}100%{opacity:0}}\n@keyframes trtHl{0%,15%{background:transparent}22%,100%{background:color-mix(in srgb,#F97316 22%,#fff)}}\n@media (prefers-reduced-motion:reduce){.trt *{animation:none!important}.trt-typ.a i{width:58%}.trt-typ.b i{width:46%}.trt-img,.trt-c{opacity:1}}\n@media print{.trt *{animation:none!important}.trt-typ.a i{width:58%}.trt-typ.b i{width:46%}.trt-img,.trt-c{opacity:1}}\n</style>\n<div class=\"trt-top\"><span class=\"trt-doc\"></span><span class=\"trt-tit\">Artrópodes</span>\n<span class=\"trt-av a\">A</span><span class=\"trt-av b\">B</span><span class=\"trt-av v\">D</span><span class=\"trt-share\">Compartilhar</span></div>\n<div class=\"trt-body\">\n<div class=\"trt-page\">\n<div class=\"trt-h\">Artrópodes</div>\n<div class=\"trt-l w9\"></div><div class=\"trt-l w8\"></div>\n<div class=\"trt-typ a\"><i></i><span class=\"trt-cur\"><b>Ana</b></span></div>\n<div class=\"trt-l w9\"></div><div class=\"trt-l w6\"></div>\n<div class=\"trt-img\"></div>\n<div style=\"height:10px\"></div>\n<div class=\"trt-l w8\"></div>\n<div class=\"trt-typ b\"><i></i><span class=\"trt-cur\"><b>Bruno</b></span></div>\n<div class=\"trt-l w7\"></div><div class=\"trt-l w5\"></div>\n</div>\n<div class=\"trt-side\">\n<div class=\"trt-c c1\"><div class=\"n\"><span>A</span>Ana</div>Bruno, coloca uma <span class=\"trt-hl\">imagem</span> de inseto?</div>\n<div class=\"trt-c c2\"><div class=\"n\"><span>B</span>Bruno</div>Pronto! Inseri a Figura 1 com a fonte. ✓</div>\n</div>\n</div>\n<div class=\"trt-leg\">Simulação: duas pessoas editando o mesmo documento ao mesmo tempo.</div>\n</div>\n"
           }
         ],
         [
           {
             "tipo": "figura",
             "src": "img/comentario-responder.jpg",
-            "alt": "Comentário recebendo uma resposta no painel de comentários"
+            "alt": "Comentário com a resposta sendo escrita e os botões Responder e marcar como resolvido destacados"
+          },
+          {
+            "tipo": "card",
+            "crescer": false,
+            "variante": "vd",
+            "itens": [
+              "Cada pessoa tem um <strong>cursor colorido</strong> com o nome; as fotos no topo mostram quem está no documento.",
+              "Responda no próprio comentário: <strong>Responder</strong>."
+            ]
+          }
+        ]
+      ],
+      "proporcao": "1.2fr 1fr",
+      "notas": "<strong>~3 min.</strong> A animação simula duas pessoas no mesmo documento. Fazer em duplas: um aluno comenta e o outro responde e edita."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Modo Sugestões",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/modo-sugestao.jpg",
+            "alt": "Menu do lápis no canto superior direito com Edição, Sugestões e Visualização"
+          }
+        ],
+        [
+          {
+            "tipo": "figura",
+            "src": "img/sugestao-feita.jpg",
+            "alt": "Palavra corrigida como sugestão, em verde, com o cartão Substituir e os botões aceitar e rejeitar"
           }
         ]
       ],
       "proporcao": "1fr 1fr",
-      "notas": "<strong>~3 min.</strong> Fazer em duplas: um aluno comenta e o outro responde e edita.",
+      "notas": "<strong>~2 min.</strong> Ideal para a revisão do professor ou dos colegas.",
       "rodape": [
         {
           "tipo": "card",
           "crescer": false,
           "variante": "vd",
           "itens": [
-            "Cada pessoa aparece com um <strong>cursor colorido</strong> e o nome.",
-            "As fotos no topo mostram <strong>quem está no documento</strong>.",
-            "Responda na própria conversa do comentário: <strong>Responder</strong>.",
-            "Todas as mudanças vão para o <strong>histórico de versões</strong>."
+            "No <strong>lápis</strong> (canto superior direito), troque <strong>Edição</strong> por <strong>Sugestões</strong>.",
+            "O que você digita ou apaga vira <strong>sugestão colorida</strong>, sem alterar o original.",
+            "O dono <strong>aceita ✓</strong> ou <strong>rejeita ✕</strong> cada sugestão.",
+            "<strong>Visualização</strong>: só leitura, sem marcas."
           ]
         }
       ]
     },
     {
       "layout": "conteudo",
-      "titulo": "Modo Sugestão e papéis",
+      "titulo": "Papéis de acesso",
       "colunas": [
         [
           {
-            "tipo": "card",
-            "crescer": true,
-            "variante": "vd",
-            "titulo": "Modo Sugestão",
-            "itens": [
-              "No canto superior direito, troque <strong>Edição</strong> por <strong>Sugestão</strong>.",
-              "O que você digita ou apaga vira <strong>sugestão colorida</strong>, sem alterar o original.",
-              "O dono <strong>aceita ✓</strong> ou <strong>rejeita ✗</strong> cada sugestão.",
-              "Ideal para a <strong>revisão do professor</strong> ou dos colegas."
-            ]
+            "tipo": "figura",
+            "src": "img/papeis-compartilhar.jpg",
+            "alt": "Lista de papéis ao compartilhar: Leitor, Comentador e Editor"
           }
         ],
         [
@@ -1235,13 +1304,13 @@
           }
         ]
       ],
-      "proporcao": "1fr 1fr"
+      "proporcao": "2fr 1fr"
     },
     {
       "layout": "secao",
       "rotulo": "Bloco 7",
       "titulo": "Organizar e ir além",
-      "texto": "Modelos, guias, índice e inteligência artificial",
+      "texto": "Modelos, guias, sumário e inteligência artificial",
       "imagem": "img/secao_organizacao.svg"
     },
     {
@@ -1251,15 +1320,15 @@
         [
           {
             "tipo": "figura",
-            "src": "img/modelo-observacoes.jpg",
-            "alt": "Modelo Observações da aula aberto no Documentos"
+            "src": "img/galeria-modelos.jpg",
+            "alt": "Galeria de modelos com o modelo Observações da aula – Divertido destacado"
           }
         ],
         [
           {
             "tipo": "figura",
             "src": "img/modelo-editado.jpg",
-            "alt": "Modelo Observações da aula editado com conteúdo sobre artrópodes"
+            "alt": "Modelo Observações da aula editado com um resumo sobre artrópodes"
           }
         ]
       ],
@@ -1286,39 +1355,64 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "Recursos para documentos longos",
+      "titulo": "Guias e sumário",
       "colunas": [
         [
           {
-            "tipo": "card",
-            "crescer": true,
-            "titulo": "Guias",
-            "html": "<p>Divida o documento em <strong>abas</strong> (capítulos, versões, anexos): <strong>Inserir &gt; Guia</strong> ou o painel à esquerda.</p>"
-          },
+            "tipo": "figura",
+            "src": "img/guias.jpg",
+            "alt": "Painel Guias no documento com Guia 1 e Guia 2 e o botão + destacados"
+          }
+        ],
+        [
           {
-            "tipo": "card",
-            "crescer": true,
-            "titulo": "Índice (sumário)",
-            "html": "<p>Use <strong>Título 1, Título 2</strong>… nos títulos e depois <strong>Inserir &gt; Índice</strong>. Ele se atualiza com um clique.</p>"
+            "tipo": "figura",
+            "src": "img/inserir-sumario.jpg",
+            "alt": "Menu Inserir > Elementos de página > Sumário com os três estilos de sumário"
+          }
+        ]
+      ],
+      "proporcao": "1fr 1fr",
+      "notas": "<strong>~3 min.</strong> Para o TCC, o sumário automático depende de usar os estilos de título.",
+      "rodape": [
+        {
+          "tipo": "card",
+          "crescer": false,
+          "variante": "vd",
+          "itens": [
+            "<strong>Guias</strong>: divida o documento em abas (capítulos, anexos) pelo <strong>+</strong> do painel ou <strong>Inserir &gt; Guia</strong>.",
+            "<strong>Sumário</strong>: use <strong>Título 1, Título 2</strong>… e depois <strong>Inserir &gt; Elementos de página &gt; Sumário</strong>.",
+            "Novidades: <strong>Legenda inline</strong> e <strong>Lista de legendas</strong> numeram figuras e tabelas."
+          ]
+        }
+      ]
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Chips inteligentes e blocos (@)",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/chips-arroba.jpg",
+            "alt": "Menu que aparece ao digitar @ no documento: pessoas, ícones inteligentes e elementos básicos"
           }
         ],
         [
           {
             "tipo": "card",
             "crescer": true,
-            "titulo": "Chips inteligentes",
-            "html": "<p>Digite <strong>@</strong> para inserir pessoas, datas, arquivos do Drive e locais como “chips” clicáveis.</p>"
-          },
-          {
-            "tipo": "card",
-            "crescer": true,
-            "titulo": "Blocos de criação",
-            "html": "<p><strong>Inserir &gt; Blocos de criação</strong>: anotações de reunião, rascunho de e-mail, listas de tarefas prontas.</p>"
+            "itens": [
+              "Digite <strong>@</strong> no texto para abrir o menu.",
+              "<strong>Pessoas</strong>, <strong>datas</strong> e arquivos do Drive viram chips clicáveis.",
+              "<strong>Elementos básicos</strong>: rascunho de e-mail, bloco de código, registro de decisões e outros modelos prontos.",
+              "Também em <strong>Inserir &gt; Ícones inteligentes</strong> e <strong>Inserir &gt; Elementos básicos</strong>."
+            ]
           }
         ]
       ],
-      "proporcao": "1fr 1fr",
-      "notas": "<strong>~3 min.</strong> Para o TCC, o índice automático depende de usar os estilos de título."
+      "proporcao": "2fr 1fr",
+      "notas": "<strong>~2 min.</strong> Mostrar uma data e uma pessoa como chip."
     },
     {
       "layout": "conteudo",
@@ -1339,7 +1433,7 @@
           {
             "tipo": "destaque",
             "estilo": "bege",
-            "html": "Exige plano pago: <strong>Google AI Pro/Ultra</strong> ou <strong>Google Workspace</strong> com IA. Na conta gratuita os botões do Gemini <strong>não aparecem</strong>.",
+            "html": "Os recursos de escrita exigem plano pago: <strong>Google AI Pro/Ultra</strong> ou <strong>Google Workspace</strong> com IA. Na conta gratuita aparecem o ícone ✦ e o botão <strong>Fazer upgrade</strong>.",
             "titulo": "Disponibilidade"
           }
         ],
@@ -1525,7 +1619,7 @@
           }
         ]
       ],
-      "notas": "As capturas de tela desta aula vêm do tutorial da UNITAU."
+      "notas": "Capturas de tela do computador feitas em nov/2026 com uma conta de demonstração; as do celular vêm do tutorial da UNITAU."
     },
     {
       "layout": "capa",
