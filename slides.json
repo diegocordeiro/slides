@@ -65,6 +65,16 @@
       "secao": "Mestrado · Disciplinas",
       "area": "Mestrado",
       "disciplina": "Disciplinas",
+      "titulo": "base Pima Indians",
+      "curso": "",
+      "slides": 9,
+      "url": "mestrado/disciplinas/aprendizado_maquina/kmeans/apresentacao.html",
+      "versao": "5f0070f1d50f"
+    },
+    {
+      "secao": "Mestrado · Disciplinas",
+      "area": "Mestrado",
+      "disciplina": "Disciplinas",
       "titulo": "base ChEMBL",
       "curso": "",
       "slides": 13,
