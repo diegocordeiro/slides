@@ -1960,6 +1960,15 @@ ul.chk li { margin:6px 0 }
 .slbd.g .cd .txt-bloco, .slbd.g .bege .txt-bloco { font-size:15px; line-height:1.42 }
 .slbd.g .fig { flex:1 1 auto; min-height:0 }
 .slbd.g .fig img { object-fit:contain }
+/* prática de digitação: texto grande para a TV, formatação do original */
+.pratica { flex:1; background:#fff; border:1px solid var(--linha); border-radius:14px; padding:22px 34px; color:#111; font-family:Arial, Helvetica, sans-serif; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.05) }
+.pratica h3 { font-size:30px !important; line-height:1.25; margin:0 0 14px !important; color:#111 !important; font-weight:700 }
+.pratica h4 { font-size:27px; line-height:1.25; margin:2px 0 12px; color:#111; font-weight:700 }
+.pratica p { font-size:24px !important; line-height:1.55 !important; margin:0 0 14px !important; color:#111 !important; text-align:left }
+.pratica ul { margin:0; padding-left:30px }
+.pratica li { font-size:24px !important; line-height:1.55 !important; margin:0 0 12px !important; color:#111; list-style:disc; padding:0 !important }
+.pratica li::before { content:none !important }
+.pratica strong { color:#000; font-weight:700 }
 .mail-prof { font:700 22px/1.2 ui-monospace, Menlo, Consolas, monospace; color:var(--bem); background:#fff; border:1px solid var(--vd-bd); border-radius:10px; padding:10px 14px; align-self:flex-start; margin:0 !important }
 .slbd.g .col > .fig + .fig { margin-top:0 }
 .slbd.g > .card, .slbd.g > .grade > .card { padding:12px 18px }
