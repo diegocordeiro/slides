@@ -1,0 +1,690 @@
+{
+  "versao": 1,
+  "motor": "editor",
+  "estado": "editor",
+  "meta": {
+    "titulo": "Agrupamento de pacientes com k-means sem imputação — base Pima Indians",
+    "titulo_barra": "k-means — Agrupamento de Pacientes (Pima)",
+    "arquivo": "apresentacao.html",
+    "cronometro_min": 10,
+    "rodape": "<strong>k-means — Agrupamento de Pacientes (Pima)</strong> · Aprendizado de Máquina — PPGCC/UFPI",
+    "numerar": true,
+    "mostrar_pdf": true,
+    "lang": "pt-BR"
+  },
+  "tema": {
+    "base": "ppgcc",
+    "vars": {},
+    "logos": {
+      "barra": "img/logo.png",
+      "capa": null,
+      "rodape": "img/logo_full.png",
+      "marca": "img/marca.png"
+    }
+  },
+  "css_extra": "#s3 .tb2 td, #s3 .tb2 th { padding-top:5px; padding-bottom:5px }\n#s4 .tb2 td, #s4 .tb2 th { padding-top:5px; padding-bottom:5px }\n#s7 .tb2 td, #s7 .tb2 th { padding-top:5px; padding-bottom:5px }\n#s4 .card p { font-size:14.5px; line-height:1.3 }\n#s4 .card h3 { margin-bottom:6px !important }\n#s4 .tb2 td, #s4 .tb2 th { padding-top:4px; padding-bottom:4px }\n#s6 .evo .r { padding-top:5px; padding-bottom:5px }\n#s6 .card p { font-size:14px; line-height:1.3 }\n#s6 .card { padding:9px 12px }\n#s6 .card h3 { margin-bottom:5px !important }\n#s6 .card .big { font-size:1.9em; margin:2px 0 6px }\n#s8 .kpi > div { padding:8px 12px }\n#s9 .kpi > div { padding:8px 12px }\nbody.notas .sl .nt { max-height:220px; overflow-y:auto }\nbody.notas .sl .grade { min-height:0; overflow-y:auto }\nbody.notas .sl .col { min-height:0 }\n#s3 .col > .card:last-child { background:none; border:0; padding:0; box-shadow:none }\n#s6 .evo, #s7 .evo, #s8 .evo { flex:0 0 auto }\n#s5 .fluxo .et { padding-top:6px; padding-bottom:6px }\n#s5 .card li { font-size:14.5px; line-height:1.3; margin:3px 0 }\n#s5 .card p { font-size:14.5px }\n#s7 .card p { font-size:14.5px; line-height:1.32 }\n#s8 .card p { font-size:14.5px; line-height:1.32 }",
+  "slides": [
+    {
+      "layout": "capa",
+      "rotulo": "Aprendizado de Máquina · PPGCC/UFPI",
+      "titulo": "Agrupamento de Pacientes com k-means<br>",
+      "subtitulos": [
+        "Integrantes:<ul><li>Arthur Fernando Elvas Bohn — 20261001997</li><li>Diego Cordeiro de Oliveira — 20261002180</li><li>Keoma de Sousa Coelho — 20261004952</li></ul>",
+        "Professor:<ul><li>Dr. Vinicius Ponte Machado</li></ul>"
+      ],
+      "imagem": "img/logo_full.png",
+      "notas": ""
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "O problema: agrupar sem rótulo",
+      "topo_proporcao": "1.25fr 1fr",
+      "topo": [
+        {
+          "tipo": "pergunta",
+          "rotulo": "Pergunta de pesquisa",
+          "html": "Retirado o diagnóstico, <b>restam estruturas</b> que o algoritmo encontre sozinho? E essas estruturas têm relação com a doença que ninguém mostrou a ele?"
+        },
+        {
+          "tipo": "chips",
+          "itens": [
+            "768 pacientes",
+            "8 exames de rotina",
+            "<b>sem o diagnóstico</b>",
+            "k-means (scikit-learn)",
+            "210 agrupamentos testados"
+          ]
+        }
+      ],
+      "proporcao": "1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "variante": "az",
+            "crescer": true,
+            "titulo": "O que é o k-means",
+            "html": "<p style=\"margin:0;\">Escolhe <strong>k centros</strong> e repete dois passos até parar de mudar: cada paciente vai para o centro mais próximo, e cada centro vira a média do seu grupo.</p><p style=\"margin:0;\"><strong>k</strong> é quantos grupos queremos, não é descoberto, é escolhido e testamos de 2 a 8.</p><p style=\"margin:0;\">Mais próximo quer dizer <strong>menor distância</strong>.&nbsp;</p><p style=\"margin:0;\">Guardem isso: é por aí que a escala dos exames vai decidir o resultado.</p>",
+            "rodape": "Agrupar = juntar quem se parece, sem ninguém dizer com o quê."
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "O que muda do trabalho anterior",
+            "html": "<p style=\"margin:0;\">No SVM, o algoritmo&nbsp;<strong>via</strong> o diagnóstico e aprendia a prevê-lo. Aqui ele não sabe o target: a coluna sai logo na leitura dos dados e só volta no fim, para conferirmos o resultado.</p>",
+            "rodape": ""
+          },
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "titulo": "A decisão que organiza o trabalho",
+            "html": "<p style=\"margin:0;\">A insulina falta em <strong>48,7%</strong> das pacientes e o <code>KMeans</code> não aceita ausentes. Ou se <strong>elimina</strong>, ou se <strong>estima</strong>&nbsp;e medimos o custo de cada caminho.</p>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Duas perguntas, nesta ordem: <b>que perfis de paciente existem?</b> e <b>esses perfis recuperam o diagnóstico?</b>"
+        }
+      ],
+      "notas": "<strong>~55 s.</strong> <strong>Abertura (15 s):</strong> ler a pergunta de pesquisa. Deixar claro que o alvo sai na primeira célula de leitura e que nenhuma escolha do trabalho o enxergou.<br><br><strong>O algoritmo (20 s):</strong> explicar o k-means com o vaivém — escolhe k centros, cada paciente vai ao mais próximo, cada centro vira a média do grupo, repete até parar de mudar. A frase que prepara o slide 6: <em>ele minimiza distância euclidiana, então a escala dos exames decide o resultado</em>.<br><br><strong>A decisão central (15 s):</strong> não preenchemos nenhum valor ausente. Dizer o número: insulina falta em quase metade da base. Era a oportunidade de testar se o agrupamento se sustenta sem esses valores.<br><br><strong>Fecho (5 s):</strong> ler a faixa — são as duas perguntas que o resto da apresentação responde.<br><br><strong>Se perguntarem:</strong>&nbsp;<em>\"como se escolhe k sem rótulo?\"</em> — por métricas internas, e está no slide 5. <em>\"o trabalho anterior imputou; aqui também?\"</em> — aqui a imputação é um dos cinco cenários, e comparamos diretamente com o descarte. A resposta está no slide 8."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Limpeza",
+      "proporcao": "1.05fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "cabecalho": [
+              "Exame",
+              "Zeros",
+              "Zero é possível?"
+            ],
+            "linhas": [
+              [
+                "Insulina",
+                "374 <span style=\"opacity:.6\">· 48,7%</span>",
+                "não"
+              ],
+              [
+                "Prega cutânea",
+                "227 <span style=\"opacity:.6\">· 29,6%</span>",
+                "não"
+              ],
+              [
+                "Pressão arterial",
+                "35 <span style=\"opacity:.6\">· 4,6%</span>",
+                "não"
+              ],
+              [
+                "IMC",
+                "11 <span style=\"opacity:.6\">· 1,4%</span>",
+                "não"
+              ],
+              [
+                "Glicose",
+                "5 <span style=\"opacity:.6\">· 0,7%</span>",
+                "não"
+              ],
+              [
+                "<strong>Gestações</strong>",
+                "111 <span style=\"opacity:.6\">· 14,5%</span>",
+                "sim"
+              ]
+            ],
+            "linhas_classe": [
+              "hl",
+              "hl",
+              "",
+              "",
+              "",
+              "bs"
+            ],
+            "celulas_classe": {
+              "0,2": "ruim",
+              "1,2": "ruim",
+              "2,2": "ruim",
+              "3,2": "ruim",
+              "4,2": "ruim",
+              "5,2": "bom"
+            },
+            "preencher": true
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "titulo": "Nenhum NaN, nenhuma duplicata",
+            "html": "<p style=\"margin:0;\">Os exames <strong>não realizados</strong> foram gravados como <strong>zero</strong>. Glicose zero é impossível em alguém vivo.</p>"
+          },
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "A exceção",
+            "html": "<p style=\"margin:0;\"><strong>Zero gestações é real.</strong> Limpar todos os zeros corromperia <strong>111 registros</strong>.&nbsp;</p>"
+          },
+          {
+            "tipo": "card",
+            "stat_valor": "49%",
+            "stat_texto": "das pacientes ficam com ao menos um exame faltando, só <strong>392 de 768</strong> estão completas"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "A pergunta é se o k-means agrupa sem esses valores."
+        }
+      ],
+      "notas": "<strong>~1 min.</strong> <strong>A armadilha (20 s):</strong> começar pelo cartão de cima à direita — a base <strong>parece</strong> impecável, nenhum nulo, nenhuma duplicata. É a aparência que engana: exame não realizado virou zero.<br><br><strong>A tabela (20 s):</strong> ler as duas primeiras linhas, insulina com 374 zeros e prega com 227. Depois ir à <strong>linha destacada no fim</strong>: gestações. Zero gestações é real. <em>Frisar:</em> o critério não é \"zero é suspeito\", é \"zero é clinicamente impossível neste exame\" — é o que separa limpeza criteriosa de limpeza automática.<br><br><strong>Fecho (20 s):</strong> os 49% são o gancho. No SVM, essa perda levou à imputação; aqui ela levou à decisão oposta, e é o que o próximo slide organiza.<br><br><strong>Se perguntarem:</strong> <em>\"como sabem que o zero é exame não feito?\"</em> — por plausibilidade clínica. <em>\"e se fosse erro de digitação?\"</em> — o tratamento seria o mesmo: valor não confiável. <em>\"por que não remover a coluna insulina?\"</em> — é exatamente um dos cinco cenários do próximo slide."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Cinco cenários, um núcleo comum",
+      "proporcao": "1.3fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "tabela",
+            "cabecalho": [
+              "",
+              "O que faz com o exame que falta",
+              "Exames",
+              "Pacientes"
+            ],
+            "linhas": [
+              [
+                "<strong>D1</strong> completos",
+                "descarta a paciente",
+                "8",
+                "392"
+              ],
+              [
+                "<strong>D2</strong> sem insulina e prega",
+                "descarta 2 colunas",
+                "6",
+                "724"
+              ],
+              [
+                "<strong>D3</strong> sem insulina",
+                "descarta 1 coluna",
+                "7",
+                "<strong>532</strong>"
+              ],
+              [
+                "<strong>D4</strong> zeros crus",
+                "não limpa nada",
+                "8",
+                "768"
+              ],
+              [
+                "<strong>D5</strong> imputa por KNN",
+                "<strong>estima o valor</strong>",
+                "8",
+                "<strong>768</strong>"
+              ]
+            ],
+            "linhas_classe": [
+              "",
+              "",
+              "hl",
+              "",
+              "bs"
+            ],
+            "celulas_classe": {
+              "3,1": "ruim",
+              "4,1": "bom"
+            }
+          },
+          {
+            "tipo": "card",
+            "variante": "az",
+            "titulo": "O par controlado: D1 contra D5",
+            "html": "<p style=\"margin:0;\">Os <strong>mesmos 8 exames</strong>, a mesma escala, o mesmo k. Muda só uma coisa: jogar fora a paciente ou <strong>estimar</strong> o exame que falta, a partir das pacientes mais parecidas com ela (é o que o KNN faz).</p>",
+            "rodape": "A única comparação em que uma decisão de preparo varia sozinha."
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "titulo": "O problema que isso cria",
+            "html": "<p style=\"margin:0;\">Cada cenário agrupa um <strong>conjunto diferente de pacientes</strong>. Uma nota calculada sobre 392 pessoas não se compara com a mesma nota calculada sobre 768, seria comparar medidas em lugares diferentes.</p>"
+          },
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Como fizemos",
+            "destaque": "392 pacientes",
+            "html": "<p style=\"margin:0;\">existem nos <strong>cinco</strong> cenários. Toda métrica externa é medida <strong>só sobre elas</strong>.</p>",
+            "rodape": "Mesmo princípio do teste do SVM com grupos de teste com 154 pacientes."
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Os cenários agrupam populações diferentes, mas são <b>julgados sobre as mesmas pessoas</b>."
+        }
+      ],
+      "notas": "<strong>~1 min 10 s.</strong> <strong>A tabela (30 s):</strong> ler de cima para baixo como duas famílias de resposta. D1 a D4 <strong>eliminam</strong> — D1 guarda os oito exames e perde metade das pacientes; D2 guarda 94% das pacientes e perde dois exames; D4 é o errado de propósito, porque manter o zero é uma imputação implícita por um valor impossível. D5 <strong>estima</strong>, com KNN de 5 vizinhos, e não perde nada. <em>Apontar a linha destacada:</em> o D3 será o cenário de referência, pelo critério do slide seguinte.<br><br><strong>O par controlado (20 s):</strong> este é o cartão que prepara o slide 8. D1 e D5 usam os mesmos oito atributos, a mesma escala e o mesmo k — a única coisa que muda é descartar ou estimar. É a única comparação do trabalho em que uma decisão de preparação varia isoladamente, e é por isso que ela responde a pergunta \"a imputação vale a pena?\" sem ambiguidade.<br><br><strong>O núcleo comum (20 s):</strong> esta é a parte de método que o professor valoriza. Como cada cenário tem uma população, as métricas não se comparam direto. As 392 pacientes completas existem nos cinco, e toda a avaliação externa é feita só sobre elas — é o mesmo princípio do teste do trabalho anterior.<br><br><strong>Se perguntarem:</strong> <em>\"por que o KMeans não aceita ausente?\"</em> — porque minimiza distância euclidiana, e não há distância definida com uma coordenada faltando; o scikit-learn não oferece variante que os ignore. <em>\"por que 392 e não todas?\"</em> — porque só essas existem nos cinco cenários; usar mais quebraria a comparação."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "O que testamos: 210 agrupamentos",
+      "topo": [
+        {
+          "tipo": "html",
+          "html": "<div class=\"fluxo\"><div class=\"et\"><span class=\"num\">1</span><div><strong>Cenário</strong><br>D1 · D2 · D3 · D4 · D5</div></div><div class=\"st\">×</div><div class=\"et\"><span class=\"num\">2</span><div><strong>Escala</strong><br>nenhuma · padrão · min-max<br>robusta · Yeo-Johnson · quantis</div></div><div class=\"st\">×</div><div class=\"et\"><span class=\"num\">3</span><div><strong>Grupos</strong><br>k de 2 a 8</div></div></div>"
+        }
+      ],
+      "proporcao": "1fr 1fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "A busca",
+            "html": "<p style=\"margin:0;\">Para cada um deles calculamos as quatro métricas&nbsp;</p>",
+            "blocos": [
+              {
+                "tipo": "kpis",
+                "itens": [
+                  {
+                    "valor": "210",
+                    "texto": "agrupamentos"
+                  },
+                  {
+                    "valor": "30",
+                    "texto": "subamostras"
+                  }
+                ]
+              }
+            ],
+            "rodape": "As métricas que usam o diagnóstico foram registradas, mas <strong>não entraram em nenhuma escolha</strong>."
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "Regra definida antes do agrupamento",
+            "itens": [
+              "<strong>Escala:</strong> normalização",
+              "<strong>k:</strong> o de maior média de coeficiente de silhueta",
+              "<strong>Cenário:</strong> o mais estável; empate decide por quantas pacientes recebem grupo"
+            ],
+            "rodape": "Nenhum dos três passos olhou o diagnóstico."
+          }
+        ],
+        [
+          {
+            "tipo": "card",
+            "variante": "az",
+            "crescer": true,
+            "titulo": "As quatro métricas que usamos",
+            "itens": [
+              "<strong>Silhueta</strong> — os grupos ficam bem separados? Olha só o formato dos dados",
+              "<strong>Estabilidade</strong> — tirando 20% das pacientes e refazendo tudo, dá o mesmo agrupamento? 1 = idêntico",
+              "<strong>ARI</strong> — o agrupamento bate com o diagnóstico? 0 = acaso, 1 = perfeito",
+              "<strong>Homogeneidade</strong> — cada grupo tem só um tipo de paciente? É entropia, então o valor é baixo mesmo quando o agrupamento é bom"
+            ],
+            "rodape": "As <strong>duas primeiras escolhem</strong>; as duas últimas só avaliam no fim."
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Registrado no <b>MLflow</b>, semente 42, reproduzível."
+        }
+      ],
+      "notas": "<strong>~1 min.</strong> <strong>O fluxo (20 s):</strong> ler da esquerda para a direita e chegar nos 210 agrupamentos. Enfatizar que o eixo do meio, a escala, é o que vai dominar o próximo slide.<br><br><strong>A regra (25 s):</strong>&nbsp;A escolha foi feita por três critérios que <strong>não olham o diagnóstico</strong>, e a regra foi escrita antes de qualquer métrica externa ser consultada. Dizer por que: usar o ARI para escolher a preparação seria o equivalente, aqui, a selecionar sobre o conjunto de teste.<br><br><strong>As quatro notas (15 s):</strong> ler o cartão da direita devagar, porque todas as tabelas dos próximos slides usam esses nomes. Insistir na última linha: <strong>silhueta e estabilidade escolhem; ARI e homogeneidade só avaliam</strong> — elas precisam do diagnóstico, e usá-las para escolher seria o equivalente, aqui, a selecionar olhando o conjunto de teste.<br><br><strong>Fecho (5 s):</strong> MLflow e semente fixa, tudo reproduzível.<br><br><strong>Se perguntarem:</strong> <em>\"210 não é pouco?\"</em> — k-means é barato; o trabalho inteiro roda em segundos, e o que importa aqui não é a quantidade, é o desenho. <em>\"por que a escala foi fixada por argumento e não escolhida?\"</em> — é exatamente o que o próximo slide responde, e é o achado central."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Padronizar por argumento, não por métrica",
+      "proporcao": "1fr 1.05fr",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/silhueta_x_homogeneidade.png",
+            "alt": "Silhueta contra homogeneidade",
+            "legenda": "No eixo horizontal, a silhueta: o quanto os grupos ficam separados — não usa o diagnóstico. No vertical, a homogeneidade: o quanto cada grupo é de um tipo só. Cada ponto é um dos 210 agrupamentos, e a nuvem <strong>desce</strong>."
+          }
+        ],
+        [
+          {
+            "tipo": "evo",
+            "titulo": "Os mesmos dados, com e sem igualar as escalas",
+            "linhas": [
+              {
+                "rotulo": "Sem escala — silhueta (separação)",
+                "valor": "0,643 ▲",
+                "tendencia": "up"
+              },
+              {
+                "rotulo": "…e o acerto no diagnóstico (ARI)",
+                "valor": "0,065 ▼",
+                "tendencia": "down"
+              },
+              {
+                "rotulo": "Padronizado — silhueta",
+                "valor": "0,240",
+                "tendencia": "eq"
+              },
+              {
+                "rotulo": "…e o acerto no diagnóstico",
+                "valor": "0,224 ▲",
+                "tendencia": "up"
+              }
+            ],
+            "obs": "Padronizar <strong>piora</strong> a nota de separação e <strong>triplica</strong> o acerto."
+          },
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "titulo": "Por que isso acontece",
+            "html": "<p style=\"margin:0;\">A insulina vai a 846, o IMC a 67. Como o k-means mede distância, sem igualar as escalas <strong>a insulina decide quase sozinha</strong>&nbsp;, ela responde por 91% da variação total.</p><p style=\"margin:0;\">Conferimos: o agrupamento dos 8 exames é praticamente o mesmo que um feito <strong>só com a insulina</strong> (concordância de 0,973).</p>"
+          },
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "Nos 210 agrupamentos",
+            "destaque": "r = −0,72",
+            "html": "<p style=\"margin:0;\">Correlação <strong>negativa</strong>: quanto melhor a separação, <strong>pior</strong> o acerto no diagnóstico.</p>"
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Por isso escolhemos padronizar <b>pelo argumento,</b>&nbsp;o k-means mede distância, e <b>não pela metrica</b>&nbsp;que apontaria a pior preparação de todas."
+        }
+      ],
+      "notas": "<strong>~1 min 30 s — slide central.</strong> <strong>Enquadramento (10 s):</strong> este slide é o achado metodológico do trabalho. A pergunta que ele responde é: dá para escolher a preparação dos dados maximizando uma métrica interna? A resposta é não.<br><br><strong>O gráfico (25 s):</strong> explicar os eixos — horizontal é a silhueta, que mede se os grupos estão geometricamente bem separados e <strong>não usa o diagnóstico</strong>; vertical é a homogeneidade, que mede se cada grupo é de um tipo só. Cada ponto é um dos 210 agrupamentos, as cores são os cinco cenários. <em>Apontar a inclinação:</em> a nuvem <strong>desce</strong>. Era de se esperar que subisse.<br><br><strong>O quadro de números (25 s):</strong> ler as quatro linhas em voz alta, aos pares. Mesmo cenário, mesmos dados: sem padronizar, silhueta 0,643 e ARI 0,065; padronizando, silhueta cai para 0,240 e o ARI sobe para 0,224. <em>A frase:</em> \"a padronização piora a métrica interna e triplica a externa\".<br><br><strong>A explicação (20 s):</strong> sem escala, a insulina tem 91% da variância, então a distância euclidiana é praticamente a distância em insulina. Verificamos: o agrupamento dos oito atributos tem ARI de <strong>0,973</strong> contra um k-means feito só na insulina. Não é parecido — é o mesmo agrupamento. A silhueta alta é pontos bem separados ao longo de um eixo, não estrutura multivariada.<br><br><strong>Fecho (10 s):</strong> ler a faixa. A escala foi fixada por argumento sobre como o algoritmo funciona, e a correlação de −0,72 mostra o que teria acontecido se tivéssemos deixado a métrica escolher.<br><br><strong>Se perguntarem:</strong> <em>\"então a silhueta não serve?\"</em> — serve para o que ela mede, separação geométrica; o erro é usá-la como se medisse utilidade. <em>\"e se o diagnóstico não existisse para conferir?\"</em> — é o caso real, e por isso usamos estabilidade e a redundância contra agrupamentos de uma variável, que também não usam rótulo.&nbsp;<br><br><b>\"Escolha por argumento\"</b>: a padronização foi fixada por uma propriedade do k-means (ele mede distância), decidida antes de olhar qualquer resultado."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Imputar ou descartar?",
+      "proporcao": "1.08fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "evo",
+            "titulo": "Jogar fora → estimar (os mesmos 8 exames)",
+            "linhas": [
+              {
+                "rotulo": "Pacientes que recebem grupo",
+                "valor": "392 → 768 ▲",
+                "tendencia": "up"
+              },
+              {
+                "rotulo": "ARI com o diagnóstico",
+                "valor": "0,2235 → 0,2291",
+                "tendencia": "eq"
+              },
+              {
+                "rotulo": "Homogeneidade",
+                "valor": "0,1510 → 0,1583",
+                "tendencia": "eq"
+              },
+              {
+                "rotulo": "Estabilidade",
+                "valor": "0,9274 → 0,9213 ▼",
+                "tendencia": "down"
+              }
+            ],
+            "obs": "Tudo igual nos dois: mesmos exames, mesma escala, mesmo k. Muda só o que se faz com o exame que falta."
+          },
+          {
+            "tipo": "card",
+            "variante": "vd",
+            "crescer": true,
+            "titulo": "O que a imputação proporciona",
+            "destaque": "+376 pacientes",
+            "html": "<p style=\"margin:0;\">passam a receber um grupo. Em troca, o acerto no diagnóstico sobe apenas <strong>0,006, ou seja&nbsp;</strong><span style=\"font-size: 15px;\">ganha-se </span><strong style=\"font-size: 15px;\">alcance</strong><span style=\"font-size: 15px;\">, não qualidade</span>.</p>",
+            "rodape": ""
+          }
+        ],
+        [
+          {
+            "tipo": "tabela",
+            "cabecalho": [
+              "Vizinhos usados na estimativa",
+              "ARI",
+              "Homogen.",
+              "Mesmos grupos?"
+            ],
+            "linhas": [
+              [
+                "3",
+                "0,2103",
+                "0,1470",
+                "0,898"
+              ],
+              [
+                "<strong>5</strong>",
+                "<strong>0,2291</strong>",
+                "<strong>0,1583</strong>",
+                "—"
+              ],
+              [
+                "10",
+                "0,2291",
+                "0,1583",
+                "0,969"
+              ]
+            ],
+            "linhas_classe": [
+              "",
+              "hl",
+              ""
+            ],
+            "celulas_classe": {
+              "0,3": "ruim",
+              "2,3": "bom"
+            }
+          },
+          {
+            "tipo": "card",
+            "crescer": true,
+            "titulo": "A escolha do imputador muda a conclusão?",
+            "html": "<p style=\"margin:0;\">Para estimar um exame, o KNN olha as pacientes mais parecidas. Testamos olhar 3, 5 ou 10 delas.</p><p style=\"margin:0;\">O acerto varia só <strong>0,019</strong>. Mas a última coluna (1 = exatamente a mesma divisão) mostra que com <strong>3</strong> vizinhos cerca de <strong>10%</strong> das pacientes trocam de grupo.</p>",
+            "rodape": ""
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "Havia o receio de que estimar valores <b>criasse grupos artificiais</b>. Não aconteceu: o agrupamento com estimativa não ficou melhor, ficou igual."
+        }
+      ],
+      "notas": "<strong>~1 min 25 s.</strong> <strong>Enquadramento (10 s):</strong> este slide responde a pergunta prática do trabalho. Imputar vale a pena? Dá para responder sem ambiguidade porque D1 e D5 usam os mesmos oito atributos — a única coisa que muda é o tratamento do ausente.<br><br><strong>O quadro da esquerda (30 s):</strong> ler as quatro linhas de cima para baixo. A cobertura quase dobra, de 392 para 768 pacientes. O ARI sobe 0,006 e a homogeneidade 0,007 — <em>frisar que isso é quarta casa decimal</em>, menos do que o agrupamento varia entre subamostras. E a estabilidade cai 0,006, o que faz sentido: quando a amostra muda, mudam os vizinhos que servem de base para a estimativa, e com eles os valores imputados.<br><br><strong>A conclusão (15 s):</strong> o que a imputação compra é <strong>cobertura</strong>, não qualidade. Numa triagem, isso significa que uma paciente sem um exame não fica sem classificação de risco — e o preço é uma perda de estabilidade da mesma ordem do ganho.<br><br><strong>A tabela da direita (20 s):</strong> antecipa a pergunta \"e se vocês tivessem usado outro número de vizinhos?\". A amplitude do ARI é 0,019, dentro do ruído. <em>Ser preciso na última coluna:</em> de 5 para 10 vizinhos a partição é quase a mesma (0,969); com 3, a concordância cai para 0,898, ou seja, cerca de 10% das pacientes trocam de grupo. A afirmação honesta é que a escolha não altera a conclusão, e não que seja irrelevante.<br><br><strong>Fecho (10 s):</strong> ler a faixa — é a resposta ao receio teórico de que imputar criaria grupos artificiais.<br><br><strong>Se perguntarem:</strong> <em>\"a estabilidade do D5 não está inflada?\"</em> — não, e por construção: o imputador é refeito dentro de cada subamostra, então a instabilidade dos próprios valores estimados entra na conta. <em>\"por que o D5 não virou a referência, se cobre mais?\"</em> — porque a regra decide por estabilidade primeiro, e ele ficou abaixo do limiar de empate. <em>\"e se imputassem com a mediana?\"</em> — não testamos; o KNN foi escolhido por continuidade com o trabalho de SVM."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Os perfis e o diagnóstico",
+      "proporcao": "1.05fr 1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "figura",
+            "src": "img/projecao_grupos.png",
+            "alt": "Grupos e diagnóstico",
+            "legenda": "À esquerda, os grupos que o k-means encontrou. À direita, as mesmas pacientes coloridas pelo diagnóstico que ele nunca viu."
+          },
+          {
+            "tipo": "tabela",
+            "cabecalho": [
+              "",
+              "Grupo 0 (301)",
+              "Grupo 1 (231)"
+            ],
+            "linhas": [
+              [
+                "Idade",
+                "25,5",
+                "<strong>39,6</strong>"
+              ],
+              [
+                "Gestações",
+                "2,0",
+                "<strong>5,5</strong>"
+              ],
+              [
+                "Glicose",
+                "109",
+                "<strong>137</strong>"
+              ],
+              [
+                "IMC",
+                "30,3",
+                "<strong>36,2</strong>"
+              ]
+            ],
+            "linhas_classe": [
+              "hl",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          {
+            "tipo": "evo",
+            "verde": true,
+            "titulo": "Taxa de diabetes por grupo (nas 392)",
+            "linhas": [
+              {
+                "rotulo": "Grupo 0 — 232 pacientes",
+                "valor": "18,1%",
+                "tendencia": "eq"
+              },
+              {
+                "rotulo": "Grupo 1 — 160 pacientes",
+                "valor": "55,0% ▲",
+                "tendencia": "up"
+              },
+              {
+                "rotulo": "Base inteira",
+                "valor": "33,2%",
+                "tendencia": "eq"
+              }
+            ],
+            "obs": "Três vezes mais diabetes em um grupo que no outro, sem nunca ter visto um diagnóstico."
+          },
+          {
+            "tipo": "kpis",
+            "itens": [
+              {
+                "valor": "0,170",
+                "texto": "ARI"
+              },
+              {
+                "valor": "0,152",
+                "texto": "régua: cortar pela glicose"
+              },
+              {
+                "valor": "0,952",
+                "texto": "estabilidade"
+              }
+            ]
+          },
+          {
+            "tipo": "card",
+            "variante": "er",
+            "crescer": true,
+            "titulo": "Mas não é o diagnóstico",
+            "html": "<p style=\"margin:0;\">A vantagem sobre a regra de uma variável só é <strong>pequena</strong>: 0,170 contra 0,152.</p><p style=\"margin:0;\"><strong>42</strong> pacientes diabéticas caíram no grupo de baixo risco os dois grupos continuam misturando os dois tipos de paciente.</p>",
+            "rodape": "Recupera o <strong>eixo</strong> da doença, idade e carga metabólica, não a doença."
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "html": "A <b>idade sozinha</b> responde por 42% da diferença entre os grupos; o histórico familiar, por 2%. E a insulina, que nem entrou na conta, separa 124 contra 202."
+        }
+      ],
+      "notas": "<strong>~1 min 35 s.</strong> <strong>Enquadramento (10 s):</strong> até aqui o diagnóstico não existia. Agora ele entra, e <strong>só como régua</strong> — nada do que se vê aqui voltou atrás para mudar a escolha de cenário, escala ou k.<br><br><strong>A figura (20 s):</strong> os dois painéis têm as mesmas pacientes nas mesmas posições. À esquerda a cor é o grupo que o k-means achou — separação limpa. À direita a cor é o diagnóstico real. <em>O ponto:</em> as duas imagens se parecem, mas não coincidem; há vermelho do lado azul.<br><br><strong>Quem são os grupos (25 s):</strong> ler a tabela em pares — 25 contra 40 anos, 2 contra 5 gestações, glicose 109 contra 137, IMC 30 contra 36. Não é \"doente\" contra \"saudável\": é mais jovem e metabolicamente estável contra mais velha e com mais carga. A faixa fecha isso: a idade explica 42% da variância entre grupos e o histórico familiar só 2%. <em>Detalhe que vale citar:</em> a insulina nem entrou no agrupamento, porque o cenário de referência a descarta — e mesmo assim difere entre os grupos, 124 contra 202. O algoritmo reencontrou um eixo metabólico sem o exame que melhor o mede.<br><br><strong>Os números (20 s):</strong> taxa de diabetes de 18,1% a 55,0%, contra 33,2% na base — <em>é o número mais eloquente do slide, e não depende de métrica nenhuma</em>. Depois o ARI: 0,170 contra 0,152 do corte na mediana da glicose.<br><br><strong>A ressalva (20 s):</strong> ser explícito, porque é o ponto que o professor vai cobrar. A margem sobre a régua de uma variável é estreita — 0,018 de ARI. 42 diabéticas ficaram no grupo de baixo risco, e homogeneidade e completude em 0,12 mostram correspondência apenas parcial. São pacientes jovens e magras, cujo diabetes não aparece nos eixos que o k-means usa.<br><br><strong>Se perguntarem:</strong> <em>\"isso é pouco?\"</em> — para prever, sim; mas o objetivo era descobrir estrutura sem rótulo, e a estrutura existe e é estável. <em>\"e o SVM?\"</em> — acertava mais, como esperado: ele viu os rótulos. O interessante é quanto o não supervisionado chega perto sem nenhum. <em>\"os grupos não separam quem fez exame?\"</em> — testamos: V de Cramér de 0,08, p = 0,054, associação fraca e no limite da significância."
+    },
+    {
+      "layout": "conteudo",
+      "titulo": "Conclusão",
+      "topo": [
+        {
+          "tipo": "kpis",
+          "itens": [
+            {
+              "valor": "210",
+              "texto": "agrupamentos avaliados"
+            },
+            {
+              "valor": "3×",
+              "texto": "mais diabetes no grupo de risco"
+            },
+            {
+              "valor": "0,952",
+              "texto": "estabilidade"
+            },
+            {
+              "valor": "−0,72",
+              "texto": "quanto melhor a separação, pior o acerto"
+            }
+          ]
+        }
+      ],
+      "proporcao": "1fr",
+      "colunas": [
+        [
+          {
+            "tipo": "lins",
+            "itens": [
+              {
+                "titulo": "Igualar as escalas foi o que mais importou",
+                "html": "Acerto de <strong>0,065 → 0,224</strong>. Sem isso, o agrupamento vira um corte na insulina."
+              },
+              {
+                "titulo": "Deixar o zero como se fosse medida é a pior decisão",
+                "html": "Piores notas em tudo, e acerto igual ao de uma regra de uma variável só."
+              },
+              {
+                "titulo": "Estimar o exame que falta amplia o alcance, não a qualidade",
+                "html": "<strong>+376</strong> pacientes recebem grupo, e o acerto sobe só <strong>0,006</strong>."
+              },
+              {
+                "titulo": "Escolher pela nota de separação daria errado",
+                "html": "Silhueta e acerto andam em <strong>sentidos opostos</strong> (correlação de −0,72). Seguir a silhueta levaria à pior preparação do conjunto."
+              }
+            ]
+          }
+        ]
+      ],
+      "rodape": [
+        {
+          "tipo": "faixa",
+          "fim": true,
+          "html": "Obrigado! Perguntas?"
+        }
+      ],
+      "notas": "<strong>~55 s.</strong> Ler os quatro números do topo e depois as quatro linhas, uma por vez, sem repetir o que já foi dito — são os títulos que importam. A hierarquia é o resultado prático do trabalho: <strong>a escala decide</strong>, a limpeza decide, e o tratamento do ausente quase não decide a qualidade, só a cobertura.<br><br><strong>Se sobrar tempo:</strong> o contraste com o trabalho anterior é a melhor resposta final. No SVM, imputar vencia descartar com folga, porque perder metade do treino custava caro à fronteira de decisão. Aqui, deu empate técnico. A explicação é que o k-means estima apenas dois centros, enquanto um classificador de margem precisa localizar uma fronteira — <em>a imputação compra mais quando o modelo precisa de mais dados para ser estimado</em>."
+    }
+  ]
+}
