@@ -37,7 +37,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "O problema: agrupar sem rótulo",
+      "titulo": "Problema: agrupar sem rótulo",
       "topo_proporcao": "1.25fr 1fr",
       "topo": [
         {
@@ -189,7 +189,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "Cinco cenários, um núcleo comum",
+      "titulo": "Cinco cenários",
       "proporcao": "1.3fr 1fr",
       "colunas": [
         [
@@ -282,7 +282,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "O que testamos: 210 agrupamentos",
+      "titulo": "O que testamos",
       "topo": [
         {
           "tipo": "html",
@@ -355,7 +355,7 @@
     },
     {
       "layout": "conteudo",
-      "titulo": "Padronizar por argumento, não por métrica",
+      "titulo": "Normalização por argumento, não por métrica",
       "proporcao": "1fr 1.05fr",
       "colunas": [
         [
@@ -382,7 +382,7 @@
                 "tendencia": "down"
               },
               {
-                "rotulo": "Padronizado — silhueta",
+                "rotulo": "Normalização — silhueta",
                 "valor": "0,240",
                 "tendencia": "eq"
               },
@@ -392,7 +392,7 @@
                 "tendencia": "up"
               }
             ],
-            "obs": "Padronizar <strong>piora</strong> a nota de separação e <strong>triplica</strong> o acerto."
+            "obs": "Normalizar&nbsp;<strong>piora</strong> a nota de separação e <strong>triplica</strong> o acerto."
           },
           {
             "tipo": "card",
@@ -413,7 +413,7 @@
       "rodape": [
         {
           "tipo": "faixa",
-          "html": "Por isso escolhemos padronizar <b>pelo argumento,</b>&nbsp;o k-means mede distância, e <b>não pela metrica</b>&nbsp;que apontaria a pior preparação de todas."
+          "html": "Por isso escolhemos normalizar&nbsp;<b>pelo argumento,</b>&nbsp;o k-means mede distância, e <b>não pela metrica</b>&nbsp;que apontaria a pior preparação de todas."
         }
       ],
       "notas": "<strong>~1 min 30 s — slide central.</strong> <strong>Enquadramento (10 s):</strong> este slide é o achado metodológico do trabalho. A pergunta que ele responde é: dá para escolher a preparação dos dados maximizando uma métrica interna? A resposta é não.<br><br><strong>O gráfico (25 s):</strong> explicar os eixos — horizontal é a silhueta, que mede se os grupos estão geometricamente bem separados e <strong>não usa o diagnóstico</strong>; vertical é a homogeneidade, que mede se cada grupo é de um tipo só. Cada ponto é um dos 210 agrupamentos, as cores são os cinco cenários. <em>Apontar a inclinação:</em> a nuvem <strong>desce</strong>. Era de se esperar que subisse.<br><br><strong>O quadro de números (25 s):</strong> ler as quatro linhas em voz alta, aos pares. Mesmo cenário, mesmos dados: sem padronizar, silhueta 0,643 e ARI 0,065; padronizando, silhueta cai para 0,240 e o ARI sobe para 0,224. <em>A frase:</em> \"a padronização piora a métrica interna e triplica a externa\".<br><br><strong>A explicação (20 s):</strong> sem escala, a insulina tem 91% da variância, então a distância euclidiana é praticamente a distância em insulina. Verificamos: o agrupamento dos oito atributos tem ARI de <strong>0,973</strong> contra um k-means feito só na insulina. Não é parecido — é o mesmo agrupamento. A silhueta alta é pontos bem separados ao longo de um eixo, não estrutura multivariada.<br><br><strong>Fecho (10 s):</strong> ler a faixa. A escala foi fixada por argumento sobre como o algoritmo funciona, e a correlação de −0,72 mostra o que teria acontecido se tivéssemos deixado a métrica escolher.<br><br><strong>Se perguntarem:</strong> <em>\"então a silhueta não serve?\"</em> — serve para o que ela mede, separação geométrica; o erro é usá-la como se medisse utilidade. <em>\"e se o diagnóstico não existisse para conferir?\"</em> — é o caso real, e por isso usamos estabilidade e a redundância contra agrupamentos de uma variável, que também não usam rótulo.&nbsp;<br><br><b>\"Escolha por argumento\"</b>: a padronização foi fixada por uma propriedade do k-means (ele mede distância), decidida antes de olhar qualquer resultado."
@@ -670,7 +670,7 @@
                 "html": "<strong>+376</strong> pacientes recebem grupo, e o acerto sobe só <strong>0,006</strong>."
               },
               {
-                "titulo": "Escolher pela nota de separação daria errado",
+                "titulo": "Escolher pela metrica de separação daria errado",
                 "html": "Silhueta e acerto andam em <strong>sentidos opostos</strong> (correlação de −0,72). Seguir a silhueta levaria à pior preparação do conjunto."
               }
             ]
